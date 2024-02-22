@@ -21,29 +21,29 @@ function tep_href_link(
 ) {
     global $seo_urls;
     if (!is_object($seo_urls)) {
-        if (!class_exists('SEO_URL')) {
-            include_once('includes/classes/seo.class.php');
+        if (!class_exists('pure_seo')) {
+            include_once('includes/classes/pure_seo.class.php');
         }
         global $languages_id;
-        $seo_urls = new SEO_URL($languages_id);
+        $seo_urls = new pure_seo($languages_id);
     }
-//   return $seo_urls->href_link($page, $parameters, $connection, $add_session_id);
-//   return preg_replace('/-[c|p|t|a|au]-[0-9]*\.html/','', $seo_urls->href_link($page, $parameters, $connection, $add_session_id));
+   return $seo_urls->href_link($page, $parameters, $connection, $add_session_id);
+   //return preg_replace('/-[p|c|m|pi|a|au|by|f|fc|fri|fra|i|links|n|nc|nri|nra|pm|po|pr|pri|t]-[0-9|_]*\.html/','', $seo_urls->href_link($page, $parameters, $connection, $add_session_id));
 //   return str_replace('xslashx','/',preg_replace('/-[c|p|t|a|au]-[0-9]*.html/','', $seo_urls->href_link($page, $parameters, $connection, $add_session_id)));
-    return str_replace(
-        'xslashx',
-        '/',
-        preg_replace(
-            '/-[p|c|m|pi|a|au|by|f|fc|fri|fra|i|links|n|nc|nri|nra|pm|po|pr|pri|t]-[0-9|_]*\.html/',
-            '',
-            $seo_urls->href_link(
-                $page,
-                $parameters,
-                $connection,
-                $add_session_id
-            )
-        )
-    );
+//    return str_replace(
+//        'xslashx',
+//        '/',
+//        preg_replace(
+//            '/-[p|c|m|pi|a|au|by|f|fc|fri|fra|i|links|n|nc|nri|nra|pm|po|pr|pri|t]-[0-9|_]*\.html/',
+//            '',
+//            $seo_urls->href_link(
+//                $page,
+//                $parameters,
+//                $connection,
+//                $add_session_id
+//            )
+//        )
+//    );
 }
 
 // The HTML href link wrapper function orig

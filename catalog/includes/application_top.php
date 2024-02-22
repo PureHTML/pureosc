@@ -264,6 +264,16 @@ $_system_locale_numeric = setlocale(LC_NUMERIC, 0);
 require('includes/languages/' . $language . '.php');
 setlocale(LC_NUMERIC, $_system_locale_numeric); // Prevent LC_ALL from setting LC_NUMERIC to a locale with 1,0 float/decimal values instead of 1.0 (see bug #634)
 
+ // Ultimate SEO URLs v2.2d
+// if ((!defined('SEO_ENABLED')) || (SEO_ENABLED == 'true')) {
+//  include_once('includes/classes/seo.class.php');
+require_once('includes/classes/pure_seo.class.php'); 
+//  if ( ! (isset($seo_urls) && is_object($seo_urls)) ){  $seo_urls = new SEO_URL($languages_id); }
+   if(! is_object($pure_seo_urls)) $pure_seo_urls = new pure_seo;
+
+//}
+
+
 // currency
 if (!isset($_SESSION['currency']) || isset($_GET['currency']) || ((USE_DEFAULT_LANGUAGE_CURRENCY == 'true') && (LANGUAGE_CURRENCY != $currency))) {
   if (!isset($_SESSION['currency'])) tep_session_register('currency');
