@@ -267,9 +267,9 @@ setlocale(LC_NUMERIC, $_system_locale_numeric); // Prevent LC_ALL from setting L
  // Ultimate SEO URLs v2.2d
 // if ((!defined('SEO_ENABLED')) || (SEO_ENABLED == 'true')) {
 //  include_once('includes/classes/seo.class.php');
-require_once('includes/classes/pure_seo.class.php'); 
+//require_once('includes/classes/pure_seo.class.php'); 
 //  if ( ! (isset($seo_urls) && is_object($seo_urls)) ){  $seo_urls = new SEO_URL($languages_id); }
-   if(! is_object($pure_seo_urls)) $pure_seo_urls = new pure_seo;
+//   if(! is_object($pure_seo_urls)) $pure_seo_urls = new pure_seo;
 
 //}
 
