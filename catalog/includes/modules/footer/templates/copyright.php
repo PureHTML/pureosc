@@ -1,0 +1,1 @@
+<div class="text-center mb-3"><?php echo FOOTER_TEXT_BODY; ?></div>

@@ -1,0 +1,43 @@
+/*
+  $Id$
+
+  osCommerce, Open Source E-Commerce Solutions
+  http://www.oscommerce.com
+
+  Copyright (c) 2020 osCommerce
+
+  Released under the GNU General Public License
+*/
+
+* {
+  font-size: 14px;
+  line-height: 1.42857;
+}
+
+a {
+  text-decoration: unset;
+}
+
+h1 {
+  margin-bottom: 2rem;
+}
+
+h2 {
+  font-weight: 300;
+  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.svg-icon-heart, .svg-icon-shopping-cart, .svg-icon-user, .svg-icon-search {
+  fill: var(--bs-primary);
+  width: 2rem;
+  height: 2rem;
+}
+
+.svg-icon-search-form {
+  fill: var(--bs-white);
+  stroke: var(--bs-white);
+  width: 1.5rem;
+  height: 1.5rem;
+}

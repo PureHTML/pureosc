@@ -1,0 +1,824 @@
+[25-Feb-2024 19:42:01 Europe/Prague] PHP Fatal error:  Uncaught Error: Call to undefined function tep_href_link_original() in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:25
+Stack trace:
+#0 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(59): treeTouch('1', '1', '1')
+#1 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(82): treeTouch(0, '', '1')
+#2 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 25
+[25-Feb-2024 19:44:37 Europe/Prague] PHP Fatal error:  Uncaught Error: Call to undefined function tep_href_link_original() in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:25
+Stack trace:
+#0 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(59): treeTouch('1', '1', '1')
+#1 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(82): treeTouch(0, '', '1')
+#2 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 25
+[25-Feb-2024 19:44:50 Europe/Prague] PHP Fatal error:  Uncaught Error: Call to undefined function tep_href_link_original() in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:25
+Stack trace:
+#0 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(59): treeTouch('1', '1', '1')
+#1 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(82): treeTouch(0, '', '1')
+#2 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 25
+[25-Feb-2024 19:45:06 Europe/Prague] PHP Fatal error:  Uncaught Error: Call to undefined function tep_href_link_original() in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:25
+Stack trace:
+#0 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(59): treeTouch('1', '1', '1')
+#1 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(82): treeTouch(0, '', '1')
+#2 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 25
+[25-Feb-2024 19:46:38 Europe/Prague] PHP Fatal error:  Uncaught Error: Call to undefined function tep_href_link_original() in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:25
+Stack trace:
+#0 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(59): treeTouch('1', '1', '1')
+#1 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(82): treeTouch(0, '', '1')
+#2 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 25
+[25-Feb-2024 19:47:58 Europe/Prague] PHP Fatal error:  Uncaught Error: Call to undefined function tep_href_link_original() in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:25
+Stack trace:
+#0 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(59): treeTouch('1', '1', '1')
+#1 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(82): treeTouch(0, '', '1')
+#2 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 25
+[25-Feb-2024 19:48:46 Europe/Prague] PHP Fatal error:  Uncaught Error: Call to undefined function tep_href_link_original() in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:25
+Stack trace:
+#0 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(59): treeTouch('1', '1', '1')
+#1 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(82): treeTouch(0, '', '1')
+#2 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 25
+[25-Feb-2024 19:48:49 Europe/Prague] PHP Fatal error:  Uncaught Error: Call to undefined function tep_href_link_original() in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:25
+Stack trace:
+#0 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(59): treeTouch('1', '1', '1')
+#1 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(82): treeTouch(0, '', '1')
+#2 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 25
+[25-Feb-2024 19:49:00 Europe/Prague] PHP Fatal error:  Uncaught Error: Call to undefined function tep_href_link_original() in /home/f/git/vanilla-oscommerce/osc/bin/htaccess_generator_run_old.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/htaccess_generator_run_old.php on line 18
+[25-Feb-2024 19:49:45 Europe/Prague] PHP Fatal error:  Uncaught Error: Call to undefined function tep_href_link_original() in /home/f/git/vanilla-oscommerce/osc/bin/htaccess_generator_run_old.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/htaccess_generator_run_old.php on line 18
+[25-Feb-2024 19:49:49 Europe/Prague] PHP Fatal error:  Uncaught Error: Call to undefined function tep_href_link_original() in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:25
+Stack trace:
+#0 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(59): treeTouch('1', '1', '1')
+#1 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(82): treeTouch(0, '', '1')
+#2 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 25
+[25-Feb-2024 20:02:01 Europe/Prague] PHP Fatal error:  Uncaught Error: Call to undefined function tep_href_link_original() in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:25
+Stack trace:
+#0 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(59): treeTouch('1', '1', '1')
+#1 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(77): treeTouch(0, '', '1')
+#2 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 25
+[25-Feb-2024 20:02:31 Europe/Prague] PHP Fatal error:  Uncaught Error: Call to undefined function tep_href_link_original() in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:25
+Stack trace:
+#0 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(59): treeTouch('1', '1', '1')
+#1 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(77): treeTouch(0, '', '1')
+#2 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 25
+[25-Feb-2024 20:03:26 Europe/Prague] PHP Fatal error:  Uncaught Error: Call to undefined function tep_href_link_original() in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:96
+Stack trace:
+#0 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 96
+[25-Feb-2024 20:04:15 Europe/Prague] PHP Fatal error:  Uncaught Error: Call to undefined function tep_href_link_original() in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:96
+Stack trace:
+#0 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 96
+[25-Feb-2024 20:05:40 Europe/Prague] PHP Fatal error:  Uncaught Error: Call to undefined function tep_href_link_original() in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:25
+Stack trace:
+#0 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(59): treeTouch('1', '1', '1')
+#1 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(76): treeTouch(0, '', '1')
+#2 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 25
+[25-Feb-2024 20:06:35 Europe/Prague] PHP Fatal error:  Uncaught Error: Call to undefined function tep_href_link_original() in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:96
+Stack trace:
+#0 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 96
+[25-Feb-2024 20:07:00 Europe/Prague] PHP Fatal error:  Uncaught Error: Call to undefined function tep_href_link_original() in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:98
+Stack trace:
+#0 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 98
+[25-Feb-2024 20:08:15 Europe/Prague] PHP Fatal error:  Uncaught Error: Call to undefined function tep_href_link_original() in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:98
+Stack trace:
+#0 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 98
+[25-Feb-2024 20:08:52 Europe/Prague] PHP Fatal error:  Uncaught Error: Call to undefined function tep_href_link_original() in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:25
+Stack trace:
+#0 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(61): treeTouch('1', '1', '1')
+#1 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(78): treeTouch(0, '', '1')
+#2 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 25
+[25-Feb-2024 20:08:55 Europe/Prague] PHP Fatal error:  Uncaught Error: Call to undefined function tep_href_link_original() in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:25
+Stack trace:
+#0 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(61): treeTouch('1', '1', '1')
+#1 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(78): treeTouch(0, '', '1')
+#2 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 25
+[25-Feb-2024 20:09:34 Europe/Prague] PHP Fatal error:  Uncaught Error: Call to undefined function tep_href_link_original() in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:25
+Stack trace:
+#0 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(64): treeTouch('1', '1', '1')
+#1 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(81): treeTouch(0, '', '1')
+#2 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 25
+[25-Feb-2024 20:10:20 Europe/Prague] PHP Fatal error:  Uncaught Error: Call to undefined function tep_href_link_original() in /home/f/git/vanilla-oscommerce/osc/bin/htaccess_generator_run_old.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/htaccess_generator_run_old.php on line 18
+[25-Feb-2024 20:22:22 Europe/Prague] PHP Fatal error:  Uncaught Error: Call to undefined function tep_href_link_original() in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:25
+Stack trace:
+#0 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(62): treeTouch('1', '1', '1')
+#1 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(79): treeTouch(0, '', '1')
+#2 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 25
+[25-Feb-2024 20:26:44 Europe/Prague] PHP Warning:  Constant SESSION_WRITE_DIRECTORY already defined in /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php on line 70
+[25-Feb-2024 20:26:44 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 20:26:44 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 20:26:44 Europe/Prague] PHP   2. require() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:5
+[25-Feb-2024 20:26:44 Europe/Prague] PHP   3. define($constant_name = 'SESSION_WRITE_DIRECTORY', $value = '/home/f/git/vanilla-oscommerce/catalog/includes/work/') /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php:70
+[25-Feb-2024 20:26:44 Europe/Prague] PHP Fatal error:  Uncaught Error: Call to undefined function tep_href_link_original() in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:25
+Stack trace:
+#0 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(62): treeTouch('1', '1', '1')
+#1 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(79): treeTouch(0, '', '1')
+#2 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 25
+[25-Feb-2024 20:26:59 Europe/Prague] PHP Warning:  Constant SESSION_WRITE_DIRECTORY already defined in /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php on line 70
+[25-Feb-2024 20:26:59 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 20:26:59 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 20:26:59 Europe/Prague] PHP   2. require() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:5
+[25-Feb-2024 20:26:59 Europe/Prague] PHP   3. define($constant_name = 'SESSION_WRITE_DIRECTORY', $value = '/home/f/git/vanilla-oscommerce/catalog/includes/work/') /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php:70
+[25-Feb-2024 20:26:59 Europe/Prague] PHP Fatal error:  Uncaught Error: Call to undefined function tep_href_link_original() in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:25
+Stack trace:
+#0 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(62): treeTouch('1', '1', '1')
+#1 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(79): treeTouch(0, '', '1')
+#2 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 25
+[25-Feb-2024 20:27:46 Europe/Prague] PHP Warning:  Constant SESSION_WRITE_DIRECTORY already defined in /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php on line 70
+[25-Feb-2024 20:27:46 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 20:27:46 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 20:27:46 Europe/Prague] PHP   2. require() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:5
+[25-Feb-2024 20:27:46 Europe/Prague] PHP   3. define($constant_name = 'SESSION_WRITE_DIRECTORY', $value = '/home/f/git/vanilla-oscommerce/catalog/includes/work/') /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php:70
+[25-Feb-2024 20:27:54 Europe/Prague] PHP Fatal error:  Uncaught Error: Call to undefined function tep_href_link_original() in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:25
+Stack trace:
+#0 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(62): treeTouch('1', '1', '1')
+#1 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(79): treeTouch(0, '', '1')
+#2 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 25
+[25-Feb-2024 20:28:23 Europe/Prague] PHP Warning:  Constant SESSION_WRITE_DIRECTORY already defined in /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php on line 70
+[25-Feb-2024 20:28:23 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 20:28:23 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 20:28:23 Europe/Prague] PHP   2. require() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:5
+[25-Feb-2024 20:28:23 Europe/Prague] PHP   3. define($constant_name = 'SESSION_WRITE_DIRECTORY', $value = '/home/f/git/vanilla-oscommerce/catalog/includes/work/') /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php:70
+[25-Feb-2024 20:28:57 Europe/Prague] PHP Fatal error:  Uncaught Error: Call to undefined function tep_href_link_original() in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:25
+Stack trace:
+#0 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(62): treeTouch('1', '1', '1')
+#1 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(79): treeTouch(0, '', '1')
+#2 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 25
+[25-Feb-2024 20:29:15 Europe/Prague] PHP Warning:  Constant SESSION_WRITE_DIRECTORY already defined in /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php on line 70
+[25-Feb-2024 20:29:15 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 20:29:15 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 20:29:15 Europe/Prague] PHP   2. require() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:5
+[25-Feb-2024 20:29:15 Europe/Prague] PHP   3. define($constant_name = 'SESSION_WRITE_DIRECTORY', $value = '/home/f/git/vanilla-oscommerce/catalog/includes/work/') /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php:70
+[25-Feb-2024 20:29:45 Europe/Prague] PHP Fatal error:  Uncaught Error: Call to undefined function tep_href_link_original() in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:25
+Stack trace:
+#0 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(62): treeTouch('1', '1', '1')
+#1 /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php(79): treeTouch(0, '', '1')
+#2 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 25
+[25-Feb-2024 20:35:31 Europe/Prague] PHP Warning:  Constant SESSION_WRITE_DIRECTORY already defined in /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php on line 70
+[25-Feb-2024 20:35:31 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 20:35:31 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 20:35:31 Europe/Prague] PHP   2. require() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:5
+[25-Feb-2024 20:35:31 Europe/Prague] PHP   3. define($constant_name = 'SESSION_WRITE_DIRECTORY', $value = '/home/f/git/vanilla-oscommerce/catalog/includes/work/') /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php:70
+[25-Feb-2024 20:37:25 Europe/Prague] PHP Warning:  Constant SESSION_WRITE_DIRECTORY already defined in /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php on line 70
+[25-Feb-2024 20:37:25 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 20:37:25 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 20:37:25 Europe/Prague] PHP   2. require() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:5
+[25-Feb-2024 20:37:25 Europe/Prague] PHP   3. define($constant_name = 'SESSION_WRITE_DIRECTORY', $value = '/home/f/git/vanilla-oscommerce/catalog/includes/work/') /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php:70
+[25-Feb-2024 20:38:20 Europe/Prague] PHP Warning:  Constant SESSION_WRITE_DIRECTORY already defined in /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php on line 70
+[25-Feb-2024 20:38:20 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 20:38:20 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 20:38:20 Europe/Prague] PHP   2. require() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:5
+[25-Feb-2024 20:38:20 Europe/Prague] PHP   3. define($constant_name = 'SESSION_WRITE_DIRECTORY', $value = '/home/f/git/vanilla-oscommerce/catalog/includes/work/') /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php:70
+[25-Feb-2024 20:39:46 Europe/Prague] PHP Warning:  Constant SESSION_WRITE_DIRECTORY already defined in /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php on line 70
+[25-Feb-2024 20:39:46 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 20:39:46 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 20:39:46 Europe/Prague] PHP   2. require() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:5
+[25-Feb-2024 20:39:46 Europe/Prague] PHP   3. define($constant_name = 'SESSION_WRITE_DIRECTORY', $value = '/home/f/git/vanilla-oscommerce/catalog/includes/work/') /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php:70
+[25-Feb-2024 20:52:04 Europe/Prague] PHP Warning:  Constant SESSION_WRITE_DIRECTORY already defined in /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php on line 70
+[25-Feb-2024 20:52:04 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 20:52:04 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 20:52:04 Europe/Prague] PHP   2. require() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:5
+[25-Feb-2024 20:52:04 Europe/Prague] PHP   3. define($constant_name = 'SESSION_WRITE_DIRECTORY', $value = '/home/f/git/vanilla-oscommerce/catalog/includes/work/') /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php:70
+[25-Feb-2024 20:55:06 Europe/Prague] PHP Warning:  Constant SESSION_WRITE_DIRECTORY already defined in /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php on line 70
+[25-Feb-2024 20:55:06 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 20:55:06 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 20:55:06 Europe/Prague] PHP   2. require() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:5
+[25-Feb-2024 20:55:06 Europe/Prague] PHP   3. define($constant_name = 'SESSION_WRITE_DIRECTORY', $value = '/home/f/git/vanilla-oscommerce/catalog/includes/work/') /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php:70
+[25-Feb-2024 22:49:34 Europe/Prague] PHP Warning:  Constant SESSION_WRITE_DIRECTORY already defined in /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php on line 70
+[25-Feb-2024 22:49:34 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 22:49:34 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 22:49:34 Europe/Prague] PHP   2. require() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:5
+[25-Feb-2024 22:49:34 Europe/Prague] PHP   3. define($constant_name = 'SESSION_WRITE_DIRECTORY', $value = '/home/f/git/vanilla-oscommerce/catalog/includes/work/') /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php:70
+[25-Feb-2024 22:49:35 Europe/Prague] PHP Warning:  Undefined array key "information_id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 22:49:35 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 22:49:35 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 22:49:35 Europe/Prague] PHP Warning:  Undefined array key "information    _id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 104
+[25-Feb-2024 22:49:35 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 22:49:35 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 22:49:35 Europe/Prague] PHP Warning:  Undefined array key "information_id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 22:49:35 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 22:49:35 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 22:49:35 Europe/Prague] PHP Warning:  Undefined array key "information    _id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 104
+[25-Feb-2024 22:49:35 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 22:49:35 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 22:49:35 Europe/Prague] PHP Warning:  Undefined array key "information_id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 22:49:35 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 22:49:35 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 22:49:35 Europe/Prague] PHP Warning:  Undefined array key "information    _id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 104
+[25-Feb-2024 22:49:35 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 22:49:35 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 22:49:35 Europe/Prague] PHP Warning:  Undefined array key "information_id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 22:49:35 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 22:49:35 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 22:49:35 Europe/Prague] PHP Warning:  Undefined array key "information    _id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 104
+[25-Feb-2024 22:49:35 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 22:49:35 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 22:49:35 Europe/Prague] PHP Warning:  Undefined array key "information_id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 22:49:35 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 22:49:35 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 22:49:35 Europe/Prague] PHP Warning:  Undefined array key "information    _id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 104
+[25-Feb-2024 22:49:35 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 22:49:35 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:15:34 Europe/Prague] PHP Warning:  Constant SESSION_WRITE_DIRECTORY already defined in /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php on line 70
+[25-Feb-2024 23:15:34 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:15:34 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:15:34 Europe/Prague] PHP   2. require() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:5
+[25-Feb-2024 23:15:34 Europe/Prague] PHP   3. define($constant_name = 'SESSION_WRITE_DIRECTORY', $value = '/home/f/git/vanilla-oscommerce/catalog/includes/work/') /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php:70
+[25-Feb-2024 23:15:34 Europe/Prague] PHP Fatal error:  Uncaught Error: Undefined constant "FILENAME_INFORMATION" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:102
+Stack trace:
+#0 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 102
+[25-Feb-2024 23:17:14 Europe/Prague] PHP Warning:  Constant SESSION_WRITE_DIRECTORY already defined in /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php on line 70
+[25-Feb-2024 23:17:14 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:17:14 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:17:14 Europe/Prague] PHP   2. require() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:5
+[25-Feb-2024 23:17:14 Europe/Prague] PHP   3. define($constant_name = 'SESSION_WRITE_DIRECTORY', $value = '/home/f/git/vanilla-oscommerce/catalog/includes/work/') /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php:70
+[25-Feb-2024 23:18:15 Europe/Prague] PHP Fatal error:  Uncaught Error: Undefined constant "FILENAME_INFORMATION" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:102
+Stack trace:
+#0 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 102
+[25-Feb-2024 23:19:02 Europe/Prague] PHP Warning:  Constant SESSION_WRITE_DIRECTORY already defined in /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php on line 70
+[25-Feb-2024 23:19:02 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:19:02 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:19:02 Europe/Prague] PHP   2. require() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:5
+[25-Feb-2024 23:19:02 Europe/Prague] PHP   3. define($constant_name = 'SESSION_WRITE_DIRECTORY', $value = '/home/f/git/vanilla-oscommerce/catalog/includes/work/') /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php:70
+[25-Feb-2024 23:19:41 Europe/Prague] PHP Fatal error:  Uncaught Error: Undefined constant "FILENAME_INFORMATION" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:102
+Stack trace:
+#0 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 102
+[25-Feb-2024 23:22:59 Europe/Prague] PHP Warning:  Constant SESSION_WRITE_DIRECTORY already defined in /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php on line 70
+[25-Feb-2024 23:22:59 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:22:59 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:22:59 Europe/Prague] PHP   2. require() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:5
+[25-Feb-2024 23:22:59 Europe/Prague] PHP   3. define($constant_name = 'SESSION_WRITE_DIRECTORY', $value = '/home/f/git/vanilla-oscommerce/catalog/includes/work/') /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php:70
+[25-Feb-2024 23:22:59 Europe/Prague] PHP Fatal error:  Uncaught Error: Undefined constant "FILENAME_INFORMATION" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:102
+Stack trace:
+#0 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 102
+[25-Feb-2024 23:23:18 Europe/Prague] PHP Warning:  Constant SESSION_WRITE_DIRECTORY already defined in /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php on line 70
+[25-Feb-2024 23:23:18 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:23:18 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:23:18 Europe/Prague] PHP   2. require() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:5
+[25-Feb-2024 23:23:18 Europe/Prague] PHP   3. define($constant_name = 'SESSION_WRITE_DIRECTORY', $value = '/home/f/git/vanilla-oscommerce/catalog/includes/work/') /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php:70
+[25-Feb-2024 23:23:31 Europe/Prague] PHP Fatal error:  Uncaught Error: Undefined constant "FILENAME_INFORMATION" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:102
+Stack trace:
+#0 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 102
+[25-Feb-2024 23:23:57 Europe/Prague] PHP Warning:  Constant SESSION_WRITE_DIRECTORY already defined in /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php on line 70
+[25-Feb-2024 23:23:57 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:23:57 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:23:57 Europe/Prague] PHP   2. require() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:5
+[25-Feb-2024 23:23:57 Europe/Prague] PHP   3. define($constant_name = 'SESSION_WRITE_DIRECTORY', $value = '/home/f/git/vanilla-oscommerce/catalog/includes/work/') /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php:70
+[25-Feb-2024 23:24:29 Europe/Prague] PHP Fatal error:  Uncaught Error: Undefined constant "FILENAME_INFORMATION" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:102
+Stack trace:
+#0 {main}
+  thrown in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 102
+[25-Feb-2024 23:27:19 Europe/Prague] PHP Warning:  Constant SESSION_WRITE_DIRECTORY already defined in /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php on line 70
+[25-Feb-2024 23:27:19 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:27:19 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:27:19 Europe/Prague] PHP   2. require() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:5
+[25-Feb-2024 23:27:19 Europe/Prague] PHP   3. define($constant_name = 'SESSION_WRITE_DIRECTORY', $value = '/home/f/git/vanilla-oscommerce/catalog/includes/work/') /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php:70
+[25-Feb-2024 23:27:19 Europe/Prague] PHP Warning:  Undefined array key "information    _id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 23:27:19 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:27:19 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:27:19 Europe/Prague] PHP Warning:  Undefined array key "information    _id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 23:27:19 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:27:19 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:27:19 Europe/Prague] PHP Warning:  Undefined array key "information    _id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 23:27:19 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:27:19 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:27:19 Europe/Prague] PHP Warning:  Undefined array key "information    _id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 23:27:19 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:27:19 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:27:19 Europe/Prague] PHP Warning:  Undefined array key "information    _id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 23:27:19 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:27:19 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:33:02 Europe/Prague] PHP Warning:  Constant SESSION_WRITE_DIRECTORY already defined in /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php on line 70
+[25-Feb-2024 23:33:02 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:33:02 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:33:02 Europe/Prague] PHP   2. require() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:5
+[25-Feb-2024 23:33:02 Europe/Prague] PHP   3. define($constant_name = 'SESSION_WRITE_DIRECTORY', $value = '/home/f/git/vanilla-oscommerce/catalog/includes/work/') /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php:70
+[25-Feb-2024 23:33:02 Europe/Prague] PHP Warning:  Undefined array key "information    _id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 23:33:02 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:33:02 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:33:02 Europe/Prague] PHP Warning:  Undefined array key "information    _id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 23:33:02 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:33:02 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:33:02 Europe/Prague] PHP Warning:  Undefined array key "information    _id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 23:33:02 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:33:02 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:33:02 Europe/Prague] PHP Warning:  Undefined array key "information    _id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 23:33:02 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:33:02 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:33:02 Europe/Prague] PHP Warning:  Undefined array key "information    _id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 23:33:02 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:33:02 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:37:51 Europe/Prague] PHP Warning:  Constant SESSION_WRITE_DIRECTORY already defined in /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php on line 70
+[25-Feb-2024 23:37:51 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:37:51 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:37:51 Europe/Prague] PHP   2. require() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:5
+[25-Feb-2024 23:37:51 Europe/Prague] PHP   3. define($constant_name = 'SESSION_WRITE_DIRECTORY', $value = '/home/f/git/vanilla-oscommerce/catalog/includes/work/') /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php:70
+[25-Feb-2024 23:37:51 Europe/Prague] PHP Warning:  Undefined array key "information    _id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 23:37:51 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:37:51 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:37:51 Europe/Prague] PHP Warning:  Undefined array key "information    _id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 23:37:51 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:37:51 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:37:51 Europe/Prague] PHP Warning:  Undefined array key "information    _id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 23:37:51 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:37:51 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:37:51 Europe/Prague] PHP Warning:  Undefined array key "information    _id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 23:37:51 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:37:51 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:37:51 Europe/Prague] PHP Warning:  Undefined array key "information    _id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 23:37:51 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:37:51 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:39:36 Europe/Prague] PHP Warning:  Constant SESSION_WRITE_DIRECTORY already defined in /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php on line 70
+[25-Feb-2024 23:39:36 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:39:36 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:39:36 Europe/Prague] PHP   2. require() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:5
+[25-Feb-2024 23:39:36 Europe/Prague] PHP   3. define($constant_name = 'SESSION_WRITE_DIRECTORY', $value = '/home/f/git/vanilla-oscommerce/catalog/includes/work/') /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php:70
+[25-Feb-2024 23:39:36 Europe/Prague] PHP Warning:  Undefined array key "information    _id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 23:39:36 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:39:36 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:39:36 Europe/Prague] PHP Warning:  Undefined array key "information    _id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 23:39:36 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:39:36 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:39:36 Europe/Prague] PHP Warning:  Undefined array key "information    _id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 23:39:36 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:39:36 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:39:36 Europe/Prague] PHP Warning:  Undefined array key "information    _id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 23:39:36 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:39:36 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:39:36 Europe/Prague] PHP Warning:  Undefined array key "information    _id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 23:39:36 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:39:36 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:54:52 Europe/Prague] PHP Warning:  Constant SESSION_WRITE_DIRECTORY already defined in /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php on line 70
+[25-Feb-2024 23:54:52 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:54:52 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:54:52 Europe/Prague] PHP   2. require() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:5
+[25-Feb-2024 23:54:52 Europe/Prague] PHP   3. define($constant_name = 'SESSION_WRITE_DIRECTORY', $value = '/home/f/git/vanilla-oscommerce/catalog/includes/work/') /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php:70
+[25-Feb-2024 23:54:52 Europe/Prague] PHP Warning:  Undefined array key "information_id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 23:54:52 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:54:52 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:54:52 Europe/Prague] PHP Warning:  Undefined array key "information_id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 23:54:52 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:54:52 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:54:52 Europe/Prague] PHP Warning:  Undefined array key "information_id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 23:54:52 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:54:52 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:54:52 Europe/Prague] PHP Warning:  Undefined array key "information_id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 23:54:52 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:54:52 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:54:52 Europe/Prague] PHP Warning:  Undefined array key "information_id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 23:54:52 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:54:52 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:57:32 Europe/Prague] PHP Warning:  Constant SESSION_WRITE_DIRECTORY already defined in /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php on line 70
+[25-Feb-2024 23:57:32 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:57:32 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:57:32 Europe/Prague] PHP   2. require() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:5
+[25-Feb-2024 23:57:32 Europe/Prague] PHP   3. define($constant_name = 'SESSION_WRITE_DIRECTORY', $value = '/home/f/git/vanilla-oscommerce/catalog/includes/work/') /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php:70
+[25-Feb-2024 23:57:32 Europe/Prague] PHP Warning:  Undefined array key "information_id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 23:57:32 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:57:32 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:57:32 Europe/Prague] PHP Warning:  Undefined array key "information_id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 23:57:32 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:57:32 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:57:32 Europe/Prague] PHP Warning:  Undefined array key "information_id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 23:57:32 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:57:32 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:57:32 Europe/Prague] PHP Warning:  Undefined array key "information_id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 23:57:32 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:57:32 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:57:32 Europe/Prague] PHP Warning:  Undefined array key "information_id" in /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php on line 103
+[25-Feb-2024 23:57:32 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:57:32 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:59:14 Europe/Prague] PHP Warning:  Constant SESSION_WRITE_DIRECTORY already defined in /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php on line 70
+[25-Feb-2024 23:59:14 Europe/Prague] PHP Stack trace:
+[25-Feb-2024 23:59:14 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[25-Feb-2024 23:59:14 Europe/Prague] PHP   2. require() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:5
+[25-Feb-2024 23:59:14 Europe/Prague] PHP   3. define($constant_name = 'SESSION_WRITE_DIRECTORY', $value = '/home/f/git/vanilla-oscommerce/catalog/includes/work/') /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php:70
+[26-Feb-2024 00:01:13 Europe/Prague] PHP Warning:  Constant SESSION_WRITE_DIRECTORY already defined in /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php on line 70
+[26-Feb-2024 00:01:13 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:01:13 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:01:13 Europe/Prague] PHP   2. require() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:5
+[26-Feb-2024 00:01:13 Europe/Prague] PHP   3. define($constant_name = 'SESSION_WRITE_DIRECTORY', $value = '/home/f/git/vanilla-oscommerce/catalog/includes/work/') /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php:70
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Constant SESSION_WRITE_DIRECTORY already defined in /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php on line 70
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. require() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:5
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. define($constant_name = 'SESSION_WRITE_DIRECTORY', $value = '/home/f/git/vanilla-oscommerce/catalog/includes/work/') /home/f/git/vanilla-oscommerce/osc/catalog/includes/application_top.php:70
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '1', $cPath = '1', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. tep_href_link($page = 'index.php', $parameters = 'cPath=1', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:24
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. pure_seo->href_link($page = 'index.php', $params = 'cPath=1', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '1', $cPath = '1', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '4', $cPath = '1_4', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'index.php', $parameters = 'cPath=1_4', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:24
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'index.php', $params = 'cPath=1_4', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '1', $cPath = '1', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '4', $cPath = '1_4', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'product_info.php', $parameters = 'cPath=1_4&products_id=1', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:42
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'product_info.php', $params = 'cPath=1_4&products_id=1', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '1', $cPath = '1', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '4', $cPath = '1_4', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'product_info.php', $parameters = 'cPath=1_4&products_id=2', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:42
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'product_info.php', $params = 'cPath=1_4&products_id=2', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '1', $cPath = '1', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '5', $cPath = '1_5', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'index.php', $parameters = 'cPath=1_5', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:24
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'index.php', $params = 'cPath=1_5', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '1', $cPath = '1', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '5', $cPath = '1_5', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'product_info.php', $parameters = 'cPath=1_5&products_id=27', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:42
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'product_info.php', $params = 'cPath=1_5&products_id=27', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '1', $cPath = '1', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '6', $cPath = '1_6', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'index.php', $parameters = 'cPath=1_6', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:24
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'index.php', $params = 'cPath=1_6', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '1', $cPath = '1', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '7', $cPath = '1_7', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'index.php', $parameters = 'cPath=1_7', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:24
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'index.php', $params = 'cPath=1_7', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '1', $cPath = '1', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '8', $cPath = '1_8', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'index.php', $parameters = 'cPath=1_8', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:24
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'index.php', $params = 'cPath=1_8', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '1', $cPath = '1', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '8', $cPath = '1_8', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'product_info.php', $parameters = 'cPath=1_8&products_id=25', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:42
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'product_info.php', $params = 'cPath=1_8&products_id=25', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '1', $cPath = '1', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '9', $cPath = '1_9', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'index.php', $parameters = 'cPath=1_9', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:24
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'index.php', $params = 'cPath=1_9', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '1', $cPath = '1', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '9', $cPath = '1_9', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'product_info.php', $parameters = 'cPath=1_9&products_id=3', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:42
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'product_info.php', $params = 'cPath=1_9&products_id=3', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '1', $cPath = '1', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '9', $cPath = '1_9', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'product_info.php', $parameters = 'cPath=1_9&products_id=26', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:42
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'product_info.php', $params = 'cPath=1_9&products_id=26', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '1', $cPath = '1', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '16', $cPath = '1_16', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'index.php', $parameters = 'cPath=1_16', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:24
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'index.php', $params = 'cPath=1_16', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '1', $cPath = '1', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '17', $cPath = '1_17', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'index.php', $parameters = 'cPath=1_17', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:24
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'index.php', $params = 'cPath=1_17', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '2', $cPath = '2', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. tep_href_link($page = 'index.php', $parameters = 'cPath=2', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:24
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. pure_seo->href_link($page = 'index.php', $params = 'cPath=2', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '2', $cPath = '2', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '18', $cPath = '2_18', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'index.php', $parameters = 'cPath=2_18', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:24
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'index.php', $params = 'cPath=2_18', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '2', $cPath = '2', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '18', $cPath = '2_18', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'product_info.php', $parameters = 'cPath=2_18&products_id=21', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:42
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'product_info.php', $params = 'cPath=2_18&products_id=21', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '2', $cPath = '2', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '19', $cPath = '2_19', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'index.php', $parameters = 'cPath=2_19', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:24
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'index.php', $params = 'cPath=2_19', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '2', $cPath = '2', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '19', $cPath = '2_19', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'product_info.php', $parameters = 'cPath=2_19&products_id=22', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:42
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'product_info.php', $params = 'cPath=2_19&products_id=22', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '2', $cPath = '2', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '20', $cPath = '2_20', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'index.php', $parameters = 'cPath=2_20', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:24
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'index.php', $params = 'cPath=2_20', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '2', $cPath = '2', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '20', $cPath = '2_20', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'product_info.php', $parameters = 'cPath=2_20&products_id=23', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:42
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'product_info.php', $params = 'cPath=2_20&products_id=23', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '2', $cPath = '2', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '20', $cPath = '2_20', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'product_info.php', $parameters = 'cPath=2_20&products_id=24', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:42
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'product_info.php', $params = 'cPath=2_20&products_id=24', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '3', $cPath = '3', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. tep_href_link($page = 'index.php', $parameters = 'cPath=3', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:24
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. pure_seo->href_link($page = 'index.php', $params = 'cPath=3', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '3', $cPath = '3', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '10', $cPath = '3_10', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'index.php', $parameters = 'cPath=3_10', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:24
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'index.php', $params = 'cPath=3_10', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '3', $cPath = '3', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '10', $cPath = '3_10', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'product_info.php', $parameters = 'cPath=3_10&products_id=4', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:42
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'product_info.php', $params = 'cPath=3_10&products_id=4', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '3', $cPath = '3', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '10', $cPath = '3_10', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'product_info.php', $parameters = 'cPath=3_10&products_id=6', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:42
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'product_info.php', $params = 'cPath=3_10&products_id=6', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '3', $cPath = '3', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '10', $cPath = '3_10', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'product_info.php', $parameters = 'cPath=3_10&products_id=9', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:42
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'product_info.php', $params = 'cPath=3_10&products_id=9', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '3', $cPath = '3', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '10', $cPath = '3_10', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'product_info.php', $parameters = 'cPath=3_10&products_id=10', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:42
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'product_info.php', $params = 'cPath=3_10&products_id=10', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '3', $cPath = '3', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '10', $cPath = '3_10', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'product_info.php', $parameters = 'cPath=3_10&products_id=11', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:42
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'product_info.php', $params = 'cPath=3_10&products_id=11', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '3', $cPath = '3', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '10', $cPath = '3_10', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'product_info.php', $parameters = 'cPath=3_10&products_id=12', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:42
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'product_info.php', $params = 'cPath=3_10&products_id=12', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '3', $cPath = '3', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '10', $cPath = '3_10', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'product_info.php', $parameters = 'cPath=3_10&products_id=13', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:42
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'product_info.php', $params = 'cPath=3_10&products_id=13', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '3', $cPath = '3', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '10', $cPath = '3_10', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'product_info.php', $parameters = 'cPath=3_10&products_id=17', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:42
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'product_info.php', $params = 'cPath=3_10&products_id=17', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '3', $cPath = '3', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '10', $cPath = '3_10', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'product_info.php', $parameters = 'cPath=3_10&products_id=18', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:42
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'product_info.php', $params = 'cPath=3_10&products_id=18', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '3', $cPath = '3', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '11', $cPath = '3_11', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'index.php', $parameters = 'cPath=3_11', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:24
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'index.php', $params = 'cPath=3_11', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '3', $cPath = '3', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '11', $cPath = '3_11', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'product_info.php', $parameters = 'cPath=3_11&products_id=5', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:42
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'product_info.php', $params = 'cPath=3_11&products_id=5', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '3', $cPath = '3', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '12', $cPath = '3_12', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'index.php', $parameters = 'cPath=3_12', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:24
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'index.php', $params = 'cPath=3_12', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '3', $cPath = '3', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '12', $cPath = '3_12', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'product_info.php', $parameters = 'cPath=3_12&products_id=7', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:42
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'product_info.php', $params = 'cPath=3_12&products_id=7', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '3', $cPath = '3', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '12', $cPath = '3_12', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'product_info.php', $parameters = 'cPath=3_12&products_id=19', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:42
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'product_info.php', $params = 'cPath=3_12&products_id=19', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '3', $cPath = '3', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '13', $cPath = '3_13', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'index.php', $parameters = 'cPath=3_13', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:24
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'index.php', $params = 'cPath=3_13', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '3', $cPath = '3', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '13', $cPath = '3_13', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'product_info.php', $parameters = 'cPath=3_13&products_id=8', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:42
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'product_info.php', $params = 'cPath=3_13&products_id=8', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '3', $cPath = '3', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '14', $cPath = '3_14', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'index.php', $parameters = 'cPath=3_14', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:24
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'index.php', $params = 'cPath=3_14', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '3', $cPath = '3', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '14', $cPath = '3_14', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'product_info.php', $parameters = 'cPath=3_14&products_id=15', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:42
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'product_info.php', $params = 'cPath=3_14&products_id=15', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '3', $cPath = '3', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '15', $cPath = '3_15', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'index.php', $parameters = 'cPath=3_15', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:24
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'index.php', $params = 'cPath=3_15', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '3', $cPath = '3', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '15', $cPath = '3_15', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'product_info.php', $parameters = 'cPath=3_15&products_id=14', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:42
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'product_info.php', $params = 'cPath=3_15&products_id=14', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '3', $cPath = '3', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '15', $cPath = '3_15', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'product_info.php', $parameters = 'cPath=3_15&products_id=16', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:42
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'product_info.php', $params = 'cPath=3_15&products_id=16', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '3', $cPath = '3', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. treeTouch($parentId = '15', $cPath = '3_15', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. tep_href_link($page = 'product_info.php', $parameters = 'cPath=3_15&products_id=20', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:42
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   6. pure_seo->href_link($page = 'product_info.php', $params = 'cPath=3_15&products_id=20', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '21', $cPath = '21', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. tep_href_link($page = 'index.php', $parameters = 'cPath=21', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:24
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. pure_seo->href_link($page = 'index.php', $params = 'cPath=21', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Warning:  Undefined variable $_sid in /home/f/git/vanilla-oscommerce/osc/catalog/includes/classes/pure_seo.class.php on line 156
+[26-Feb-2024 00:34:24 Europe/Prague] PHP Stack trace:
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   1. {main}() /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:0
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   2. treeTouch($parentId = 0, $cPath = '', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:77
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   3. treeTouch($parentId = '21', $cPath = '21', $langId = '1') /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:60
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   4. tep_href_link($page = 'product_info.php', $parameters = 'cPath=21&products_id=28', $connection = 'NONSSL', $add_session_id = FALSE, $search_engine_safe = *uninitialized*) /home/f/git/vanilla-oscommerce/osc/bin/rewritegen.php:42
+[26-Feb-2024 00:34:24 Europe/Prague] PHP   5. pure_seo->href_link($page = 'product_info.php', $params = 'cPath=21&products_id=28', $connection = 'NONSSL', $add_session_id = FALSE) /home/f/git/vanilla-oscommerce/osc/catalog/includes/functions/html_output.php:32
