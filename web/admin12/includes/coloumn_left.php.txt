@@ -1,0 +1,1 @@
+require('includes/boxes/polls.php');

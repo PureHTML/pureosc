@@ -1,0 +1,281 @@
+h1 {
+font-size: 22px;
+color: #c30;
+margin: 10px;
+font-weight: normal;
+}
+h2 {
+font-size: 18px;
+color: #c00
+}
+h3 {
+font-size: 15px;
+}
+h4 {
+font-size: 13px;
+}
+/* new styles */
+
+#infoIcon {
+position: absolute;
+right: 10px;
+top: 0px;
+}
+.imagePM {
+text-align: center;
+}
+
+/* new styles */
+
+/* test and additional styles */
+body, div, td {
+font-family: Verdana, Arial, sans-serif;
+font-size: 11px;
+}
+a {
+text-decoration: none;
+}
+a:hover {
+text-decoration: underline;
+color: #e00;
+}
+form {
+display: inline;
+}
+#categoriesBox .infoBoxContentsFL, #informationBox .infoBoxContentsFL, #accountBox .infoBoxContentsFL {
+text-align: left;
+}
+/* ??? */
+div#product_notificationsBox table {
+text-align: center;
+}
+img#logo {
+position: absolute;
+left: 20px;
+bottom: 10px;
+}
+div#imageNav {
+position: absolute;
+right: 20px;
+bottom: 5px;
+}
+
+div.infoBoxFL {
+background: silver;
+border: 0px solid black;
+border-width: 1px;
+position: relative;
+margin-top: 1px;
+padding: 0px;
+}
+.infoBoxHeadingFL, .infoBoxHeading, .productListing-heading {
+background: #03c;
+padding: 5px;
+font-weight: bold;
+color: white;
+}
+.infoBoxHeadingFL {
+border-bottom: 1px solid #000080;
+}
+
+tr.productListing-even td.productListing-data {
+background: #f6f6f6;
+}
+
+div.navBarContent {
+border: 1px solid black;
+border-width: 1px;
+background: silver;
+height: 22px;
+}
+div.breadCrumb, div.date {
+float: left;
+margin: 4px;
+}
+div.navAcc, div.counter {
+float: right;
+margin:4px;
+}
+
+div#contentsContent {
+margin-top: 15px;
+margin-bottom: 15px;
+padding: 0px;
+text-align: left;
+border: 1px green dotted;
+}
+
+.productSpecialPrice, .greetUser, .errortext {
+color: #c30;
+font-weight: bold;
+}
+.productSpecialPrice, td.pageHeading {
+font-size: larger;
+}
+table.infoBox {
+border: 1px solid black;
+}
+
+
+
+/* hide corner gif's */
+td.infoBoxHeading img {
+display: none;
+}
+.boxLink img {
+display: block !important;
+position: absolute;
+right: 5px;
+top: 7px;
+}
+
+#copyRight {
+margin: 10px auto;
+padding: 0;
+}
+
+span.cBoxE {
+color: #e00;
+}
+#shopping_cartBox .infoboxHeadingFL {
+color: #ff9;
+}
+/* end test styles */
+
+/* import from osC */
+.inputRequirement {
+color: red;
+}
+
+  
+TD.headerError, TD.headerInfo, SPAN.markProductOutOfStock, TD.formAreaTitle {
+font-family: Tahoma, Verdana, Arial, sans-serif;
+font-size: 12px;
+background: #ff0000;
+color: #ffffff;
+font-weight : bold;
+text-align : center;
+}
+TD.headerInfo {
+background: #00ff00;
+color: #ffffff;
+}
+TD.formAreaTitle {
+}
+SPAN.markProductOutOfStock {
+color: #c76170;
+}
+TD.main, P.main {
+font-size: 11px;
+line-height: 1.5;
+}
+TD.footer {
+background: #bbc3d3;
+color: #ffffff;
+font-weight: bold;
+}
+TD.accountCategory {
+font-size: 13px;
+color: #aabbdd;
+}
+TD.fieldKey, TD.tableHeading {
+font-size: 12px;
+font-weight: bold;
+}
+TD.fieldValue {
+font-size: 12px;
+}
+SPAN.newItemInCart {
+color: #ff0000;
+}
+TEXTAREA {
+width: 100%;
+font-size: 11px;
+}
+/* ie text under pageheading */
+.smallText {
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+}
+.messageStackError, .messageStackWarning {
+font-family: Verdana, Arial, sans-serif; font-size: 10px; background-color: #ffb3b5;
+}
+/* end import from osC */
+
+/* prijs */
+#headingPricePM {
+white-space: nowrap;
+}
+h1 s {
+font-size: 14px;
+color: blue;
+}
+.productSpecialPrice {
+color: #c00;
+display: block;
+}
+#headingPricePM h1:first-letter {
+padding-right: 0.1em;
+}
+.productSpecialPrice:first-letter {
+padding-right: 0.1em;
+}
+s:first-letter {
+text-decoration: none !important; /* prevent euro sign strike through */
+/* padding-right: 0.1em !important;  does not work? */
+}
+/* end prijs */
+div.centerIE {
+text-align: center;
+}
+/* product info tabellen */
+table.pcDataPM td, table.pcDataPM th, table.prodDataPM td, table.prodDataPM th {
+font-size: 9px;
+border: 1px solid #ddd;
+padding: 1px 3px;
+}
+table.pcDataPM, table.prodDataPM {
+margin-right: auto;
+margin-left: auto;
+background-color: #ffe;
+border: 1px solid #666;
+}
+table.prodDataPM td {
+text-align: center;
+}
+table.pcDataPM th {
+text-align: right;
+}
+/* product info tabellen */
+span.osCPOWERED {
+font-size: 9px
+}
+span.osCPOWERED a {
+color: black;
+}
+span.osCPOWERED a:hover {
+color: black;
+text-decoration: none;
+}
+
+span.greetUser {
+color: #c00;
+font-weight: bold;
+}
+
+
+/* adding some new styles 2003-12 */
+#faqPM .tekstInfoPM {
+font-style: italic;
+}
+p.questionPM {
+color: blue;
+font-weight: bold;
+}
+div#welkomPM {
+border: 1px black solid;
+padding: 10px 4px;
+}
+
+.prijsPerPM {color: red;}
+

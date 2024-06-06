@@ -1,0 +1,540 @@
+
+
+<style title="default" type="text/css" media="all"><!--
+
+/**********instantnishop.cz special START *************************/
+
+table {
+border: 0px;
+}
+td {
+border: 1px dashed #cccccc;
+font-size: 10px;
+font-weight: bold;
+padding-left:5px;
+}
+/* price in product_listing.php */
+/*
+.ppr {
+  position:relative; 
+  clear:both;
+  float:left;
+  right: 0px;
+  width:250px;
+text-align:right;
+  top:21px;
+}
+*/
+.prod_desc {
+  padding-left:5px;
+  width:400px;
+  height:140px;
+  text-align:left;
+}
+h3 {
+/*  margin-top:0px; */
+}
+
+/**********instantnishop.cz special END *************************/
+#page {
+  margin-left:  -388px; 
+  width: 776px; 
+  position: absolute; 
+  top:10px; 
+  left: 50%; 
+}
+
+.productsNotifications { background: #f2fff7; color: #000000; }
+.orderEdit { color: #70d250; text-decoration: underline; background: transparent; }
+
+BODY {
+  font-family: Arial, sans-serif;
+  font-size: 100%;
+  text-align: center;
+  color: #000000;
+  margin: 0px;
+}
+
+A {
+  color: #000000;
+  text-decoration: none;
+  background: transparent;
+}
+
+A:hover {
+  color: #cccccc;
+  text-decoration: underline;
+}
+HR {
+  color: #dddddd; background: #dddddd;
+ height:1px;
+}
+.header {
+height:120px;
+width:100%;
+background:#FFFFFF;
+  color: #000000;
+}
+
+FORM {
+  display: inline;
+  background: transparent;
+  color: #000000;
+}
+
+.s {
+  text-decoration: line-through;
+  background: transparent;
+  color: #000000;
+}
+
+.b {
+  font-weight: bold;
+  background: transparent;
+  color: #000000;
+}
+h2.b {color:#dddddd;}
+.productListing-odd, .productListing-even {
+  background: #FFFFFF;
+  color: #000000;
+}
+
+.productListing-heading {
+  background: #323f47;
+  color: #fFFfff;
+  font-weight: bold;
+}
+
+A.pageResults {
+  color: #0000FF;
+  background: transparent;
+}
+
+A.pageResults:hover {
+  color: #0000FF;
+  background: #FFFF33;
+}
+
+.main {
+  font-size: 0.7em;
+  line-height: 1.5;
+  background: transparent;
+  color: #000000;
+}
+
+.smallText {
+  background: transparent;
+  color: #000000;
+}
+
+.tableHeading {
+  font-size: 1em;
+  font-weight: bold;
+  background: transparent;
+  color: #000000;
+}
+
+CHECKBOX, RADIO, SELECT {
+  font-size: 0.9em;
+  background: #ffffff;
+  color: #000000;
+}
+
+.input2ma {
+  font-size: 1em;
+/*  width:80px; */
+  background: #ffffff;
+  color: #000000;border:2px;border-color:#ffffff; border-bottom:1px;border-style:solid;border-bottom-color:#dddddd;
+}
+
+TEXTAREA.input2ma {
+  width: 99%;
+  font-size: 1.5em;
+  background: transparent;
+  color: #000000;
+}
+
+TEXTAREA {
+  width: 99%;
+  font-size: 1em;
+  background: transparent;
+  color: #000000;
+}
+
+SPAN.greetUser {
+  font-size: 1em;
+  color: #f0a480;
+  font-weight: bold;
+  background: transparent;
+}
+
+SPAN.markProductOutOfStock {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 0.75em;
+  color: #c76170;
+  font-weight: bold;
+  background: transparent;
+}
+
+.moduleRow { }
+.moduleRowOver { background-color: #D7E9F7; cursor: pointer; color: #000000; }
+.moduleRowSelected { background-color: #E9F4FC; color: #000000; }
+
+.checkoutBarFrom, .checkoutBarTo { color: #8c8c8c; background: transparent; }
+.checkoutBarCurrent { color: #000000; background: transparent; }
+
+/* message box */
+
+.messageBox { }
+.messageStackError, .messageStackWarning { background-color: #ffb3b5; color: #000000; }
+.messageStackSuccess { background-color: #99ff00; color: #000000; }
+
+/* input requirement */
+
+.inputRequirement { color: #ff0000; background: transparent; }
+
+/* TABLE FOR TEMPLATE */
+
+.Table_templateSx {
+  width: 15%;
+  float: left;
+}
+
+.Table_templateDx {
+  width: 22%;background:#d0c7e2;
+  float: right;position: absolute; top: 120px; right:4%;
+}
+.Table_templateDx2 {
+ background:transparent;
+
+}
+.Table_templateDx3 {
+ background:transparent;
+padding: 15px;
+}
+.Table_templateCentral {
+  width: 70%;background:#FFFFFF;
+  float: left;margin-top:0px;
+}
+.Table_templateCentral2 {
+ background:transparent;
+
+}
+.Table_templateCentral3 {
+ background:transparent;
+ padding: 1px;
+}
+.Retta {
+  width: 0%;
+  float: left;
+}
+
+.Table_templateClear {
+  font-size: 0.2em;
+  clear: both;
+}
+
+.TemplateSpazio {
+  font-size: 0.2em;
+  background: transparent;
+  color: #000000;
+}
+
+.AlignLeft {
+  text-align: left;
+  background: transparent;
+  color: #000000;
+  font-size:120%;
+}
+
+.Venticinque2 {
+/*  width: 24%; todo */
+  float: left;
+  background: transparent;
+  color: #000000;
+  font-size:100%; 
+}
+
+.CinquantaL {
+  padding-left: 1%;
+  text-align: left;
+  width: 49%;
+  float: left;
+  background: transparent;
+  color: #000000;
+}
+
+.CinquantaR {
+  text-align: right;
+  width: 49%;
+  float: left;
+  background: transparent;
+  color: #000000;
+}
+
+.Venticinque {
+  background: #323f47;
+  color: #FFFFFF;
+  font-weight: bold;
+  width: 24%;
+  float: left;
+}
+
+.Trenta {
+  width: 30%;
+  float: left;
+  background: transparent;
+  color: #000000;
+}
+
+.InfoBoxContenent2MA {
+/*
+  clear: both;
+  border-style:solid;
+  border-width:1px;
+  border-color: #323f47;
+  background: #FFFFFF;
+  color: #000000;
+  padding: 1%;
+*/
+}
+.ColorRed {
+  color: #ff0000;
+  background: transparent;
+}
+
+/*todo*/
+.Clear {
+  font-size: 0em;
+  clear:both; 
+  background: transparent;
+  color: #000000;
+  width:20%;
+}
+
+.HeaderLeft {
+  float: left;
+  background: transparent;
+  color: #000000;
+}
+
+.HeaderRight {
+  float: right;
+  background: transparent;
+  color: #000000;
+}
+
+.HeaderNavigationLeft {
+/*
+  float: left;text-align:left;
+  padding-left:32px;
+*/
+  background: #d6c5a0;
+  color: #795daa;
+  position:absolute; 
+  left:215px;
+  top:58px;
+  width:532px; 
+  height:29px;  
+/*  border-top:9px solid #d6c5a0; */
+}
+.HeaderNavigationLeft A{
+text-align:left;
+  background: transparent;
+  color: #795daa;
+}
+.HeaderNavigationLeft A:hover{
+
+  background: #d6c5a0;
+  color: #dddddd;
+}
+.HeaderNavigationRight {
+  float: left;
+  background: transparent;
+  color: #393d99;
+}
+
+.HeaderNavigation {
+  text-align: center;
+  width:95%;
+  background: transparent;
+  color: #795daa;
+  font-weight : bold;
+}
+
+.HeaderNavigationText {
+  text-align: center;
+  background: transparent;
+  color: #795daa;
+  font-weight : bold;
+  font-size:100%;
+}
+
+.HeaderError {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 1em;
+  background: #ff0000;
+  color: #FFFFFF;
+  font-weight : bold;
+  text-align : center;
+}
+
+.HeaderInfo {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 0.75em;
+  background: #00ff00;
+  color: #FFFFFF;
+  font-weight: bold;
+  text-align: center;
+}
+
+A.HeaderNavigation:hover {
+  background: #bbccdd;
+  color: #FFFFFF;
+}
+
+.img2ma {
+  background: transparent;
+  color: #000000;  
+  border:0px;
+}
+.img2cat {
+  background: transparent;
+  color: #000000;  
+  border:0px;
+  float: right;
+}
+.ie6balengo{display:block;
+  background: transparent;
+  color: #000000;  
+  border:0px;
+}
+
+.ColorSpan {
+  color: #0000ff;
+  text-decoration: underline;
+  background: transparent;
+}
+
+.ColorSpanRed {
+  color: #ff0000;
+  background: transparent;
+}
+
+.pageHeading {
+  font-size: 1.6em;
+  font-weight: bold;
+  color:#795DAA;
+  background: transparent;
+margin-top:0px;
+margin-bottom:0px;
+text-align:left;
+}
+h1 {
+margin-top:0px;
+margin-bottom:0px;
+}
+.TrentaTre {
+  float:left;
+  width: 33%;
+  background: transparent;
+  color: #000000;
+}
+
+/* inizio box.php */
+
+.fedora-corner-tl, .fedora-corner-tr {
+  background-color: #323f47;
+  position: relative;
+  width: 11px;
+  height: 14px;
+  /* The following line is to render PNGs with alpha transparency within IE/Win, using DirectX */
+  /* Work-around for IE6/Mac borkage (Part 1) */
+  display: none;
+}
+
+.fedora-corner-tl { float: left; left: 0px; }
+.fedora-corner-tr { float: right; right: 0px; }
+.fedora-corner-tl, .fedora-corner-tr { top: 0px; }
+
+.fedora-corner-tl { background: #323f47 url("templates/a_pligg/images/infobox/corner_left.png") no-repeat left top; }
+.fedora-corner-tr { background: #323f47 url("templates/a_pligg/images/infobox/corner_right.png") no-repeat right top; }
+
+
+/* \*/
+.fedora-corner-tl, .fedora-corner-tr {
+  /* Restore the view for everything but IE6/Mac (part 2 of the "IE/Mac fix") */
+  display: block;
+}
+/* */
+
+.BoxesInfoBoxHeadingCenterBoxRight {
+  background: transparent;
+  color: #ffffff;
+}
+
+.BoxesInfoBoxHeadingCenterBoxTitle {
+  font-size: 14px;
+  text-align: left;
+  font-weight: bold;
+  background: #795DAA;
+  color:#ffffff;border:0px; border-color:#dddddd;
+  font-variant:small-caps;
+}
+
+.InfoBoxContenent2MABox {
+  border-style:solid;
+  border-width:0px;
+  border-color: #323f47;
+  color: #393D99;
+  background: transparent;
+  padding: 0.3em;
+}
+
+.BoxesErrorBox { 
+  background: #ffb3b5; 
+  font-weight: bold; 
+  color: #000000;
+}
+
+.BoxesProductListing {
+  border: 1px;
+  border-style: solid;
+  border-color: #323f47;
+  background: #FFFFFF;
+  color: #000000;
+}
+
+/* fine box.php */
+
+.Product_listingProductListing-heading {
+  width: 24%;
+  float: left;
+  background: #323f47;
+  color: #FFFFFF;
+  font-weight: bold;
+}
+
+.de { color: #000000; background: transparent; background-image: url(includes/languages/german/images/icon.png);background-repeat:no-repeat;padding-top:1px; padding-left:2px; padding-right:2px;font-family: Tahoma, Verdana, Arial, sans-serif;  font-size: 1.5em; }
+.en { color: #000000; background: transparent; background-image: url(includes/languages/english/images/icon.png);background-repeat:no-repeat;padding-top:1px; padding-left:2px; padding-right:2px; font-family: Tahoma, Verdana, Arial, sans-serif; font-size: 1.5em; }
+.it { color: #000000; background: transparent; background-image: url(includes/languages/italian/images/icon.png);background-repeat:no-repeat;padding-top:1px;padding-left:2px; padding-right:2px;  font-family: Tahoma, Verdana, Arial, sans-serif;   font-size: 1.5em; }
+.es { color: #000000; background: transparent; background-image: url(includes/languages/espanol/images/icon.png);background-repeat:no-repeat;padding-top:1px; padding-left:2px; padding-right:2px; font-family: Tahoma, Verdana, Arial, sans-serif; font-size: 1.5em; }
+.fr { color: #000000; background: transparent; background-image: url(includes/languages/french/images/icon.png);background-repeat:no-repeat;padding-top:1px; padding-left:2px; padding-right:2px; font-family: Tahoma, Verdana, Arial, sans-serif; font-size: 1.5em; }
+.nl { color: #000000; background: transparent; background-image: url(includes/languages/dutch/images/icon.png);background-repeat:no-repeat;padding-top:1px; padding-left:2px; padding-right:2px; font-family: Tahoma, Verdana, Arial, sans-serif; font-size: 1.5em; }
+
+.EUR { color: #000000; background: transparent; background-image: url(images/currencies/eur.png);background-repeat:no-repeat;padding-top:1px; padding-left:2px; padding-right:2px; font-family: Tahoma, Verdana, Arial, sans-serif;font-size: 1.5em; }
+.USD { color: #000000; background: transparent; background-image: url(images/currencies/usd.png);background-repeat:no-repeat;padding-top:1px; padding-left:2px; padding-right:2px; font-family: Tahoma, Verdana, Arial, sans-serif;font-size: 1.5em; }
+
+.cssbutton {
+  background: #795daa; url("templates/a_pligg/images/buttoncss_bg.png")
+  color : #000000;
+  font-size: 12px; font-weight: bold; 
+  cursor: pointer;
+  text-align:center;
+  border: 0px;
+  border-style: outset;
+  border-color: #323f47;
+  border-spacing: 1px;
+}
+
+--></style>

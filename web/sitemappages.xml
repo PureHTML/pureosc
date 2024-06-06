@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="gss.xsl"?>
+<urlset xmlns="http://www.google.com/schemas/sitemap/0.84">
+	<url>
+		<loc>http://www.dvere.com/article_reviews.php</loc>
+		<lastmod>2008-07-24</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>.1</priority>
+	</url>
+	<url>
+		<loc>http://www.dvere.com/article_reviews_info.php</loc>
+		<lastmod>2008-07-24</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>.1</priority>
+	</url>
+	<url>
+		<loc>http://www.dvere.com/article_reviews_write.php</loc>
+		<lastmod>2008-07-24</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>.1</priority>
+	</url>
+	<url>
+		<loc>http://www.dvere.com/articles.php</loc>
+		<lastmod>2009-01-08</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>.1</priority>
+	</url>
+</urlset>

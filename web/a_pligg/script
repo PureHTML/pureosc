@@ -1,0 +1,11 @@
+<SCRIPT Language="JavaScript">
+<!--
+browName = navigator.appName;
+browVerze = parseInt(navigator.appVersion);
+if (browName=="Microsoft Internet Explorer"){
+document.write("<link rel=\"stylesheet\" media=\"all\" href=\"templates/a_pligg/iespecial.css\" title=\"IE CSS\" type=\"text/css\" />");
+} else {
+document.write("<link rel=\"stylesheet\" media=\"all\" href=\"templates/a_pligg/otherbrowsers.css\" title=\"IE CSS\" type=\"text/css\" />");
+}
+//-->
+</SCRIPT> 

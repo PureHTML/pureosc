@@ -1,0 +1,16 @@
+User-agent: *
+Disallow: /_DOCS_/
+Disallow: /admin/
+Disallow: /download/
+Disallow: /includes/
+Disallow: /pub/
+Disallow: /temp/
+Disallow: /tmp/
+Disallow: /cache/
+Disallow: /account.php
+Disallow: /checkout_shipping.php
+Disallow: /create_account.php
+Disallow: /login.php
+Disallow: /password_forgotten.php
+Disallow: /shopping_cart.php
+Disallow: /cookie_usage.php

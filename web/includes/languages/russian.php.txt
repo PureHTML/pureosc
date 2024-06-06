@@ -1,0 +1,10 @@
+//
+// Poll Box Text
+define('_RESULTS', 'Результаты');
+define('_POLLS','Опросы');
+define('_VOTE', 'ГОЛОСОВАТЬ');
+define('_VOTES', 'Голосов');
+define('_COMMENTS', 'Комментарии');
+define('_NOPOLLS','Нет опросов');
+define('_NOPOLLSCONTENT','Больше нет опросов, подходящих для вас. В любом случае вы можете просмотреть результаты других опросов<br><br><a href="pollbooth.php">['._POLLS.']');
+define('TEXT_DISPLAY_NUMBER_OF_COMMENTS', 'Показано с <b>%d</b> по <b>%d</b> (из <b>%d</b> комментариев)');

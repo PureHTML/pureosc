@@ -1,0 +1,30 @@
+/*
+- these stylesheet settings apply to the printer output only
+- for screen and other styles, edit templates/stylesheet.css
+- learn more about CSS printing styles at http://www.w3schools.com/css/css_ref_print.asp
+- if needed remove comment tags to activate style settings
+- 2003/11/23 PaulM PandA.nl
+*/
+
+/* example of things that you don't want to appear on the printer (i.e. navigation buttons) */
+/*
+div.doNotPrintThis {
+display: none
+}
+*/
+
+/* for printing it is wise to use absolute font-sizes (to make sure it always fits the paper) like pt or px, not em */
+/* for small printing use a standard serif font, beautifull/funny fonts can be difficult to read on the print */
+body {
+color: black;
+background: white;
+font-size: 7pt;
+}
+
+/* pagebreaks are supported by CSS2 browsers! */
+/*
+table
+{
+page-break-after: always
+}
+*/

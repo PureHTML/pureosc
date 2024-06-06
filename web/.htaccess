@@ -1,0 +1,47 @@
+#require valid-user
+AuthName dvere
+AuthType Basic
+AuthUserFile /etc/dverecom.htpasswd
+
+# Ultimate SEO URLs BEGIN
+<IfModule mod_rewrite.c>
+#  dont work option
+#  Options +FollowSymLinks
+  RewriteEngine On 
+  RewriteBase / 
+#  RewriteCond %{REQUEST_FILENAME} !-d
+
+#display images from database 1.0 by oscsecureserver.com
+ RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteRule .*\.(gif|jpg)$ display_image.php?image_name=$0  [R,NC,L]
+# RewriteRule .*\.(pdf|doc|xls|ppt)$ display_file.php?file_name=$0  [R,NC,L]
+
+  RewriteCond %{QUERY_STRING} ^options\=(.*)$
+  RewriteRule ^(.*)-p-(.*).html$ product_info.php?products_id=$2%1
+  RewriteRule ^(.*)-p-(.*).html$ product_info.php?products_id=$2&%{QUERY_STRING}
+  RewriteRule ^(.*)-c-(.*).html$ index.php?cPath=$2&%{QUERY_STRING}
+  RewriteRule ^(.*)-m-([0-9]+).html$ index.php?manufacturers_id=$2&%{QUERY_STRING}
+  RewriteRule ^(.*)-pi-([0-9]+).html$ popup_image.php?pID=$2&%{QUERY_STRING}
+  RewriteRule ^(.*)-t-([0-9]+).html$ articles.php?tPath=$2&%{QUERY_STRING}
+  RewriteRule ^(.*)-a-([0-9]+).html$ article_info.php?articles_id=$2&%{QUERY_STRING}
+  RewriteRule ^(.*)-pr-([0-9]+).html$ product_reviews.php?products_id=$2&%{QUERY_STRING}
+  RewriteRule ^(.*)-pri-([0-9]+).html$ product_reviews_info.php?products_id=$2&%{QUERY_STRING}
+  RewriteRule ^(.*)-i-([0-9]+).html$ information.php?info_id=$2&%{QUERY_STRING}
+#new:
+  RewriteRule ^(.*)-t-([0-9]+).html$ shopping_cart.php?tPath=$2&%{QUERY_STRING}
+  RewriteRule ^(.*)-t-([0-9]+).html$ checkout_payment.php?tPath=$2&%{QUERY_STRING}
+#automaticke vyhledavani
+#  RewriteRule ^advanced_search_result.php?keywords=$2&%{QUERY_STRING}
+# RewriteRule  ^login(.*)$ login.php?action=process [QSA]
+# RewriteCond %{REQUEST_URI} (/|\.htm|\.php|\.html|/[^.]*)$ [NC]
+
+#RewriteCond %{REQUEST_FILENAME}
+# Ultimate SEO URLs END
+# Added to fix article glitch on sub-articles (lonniew at gmail dot com)
+  RewriteRule ^(.*)-t-([0-9]+_[0-9]+).html$ articles.php?tPath=$2&%{QUERY_STRING}
+</IfModule>
+#redirect to error search page
+
+#ErrorDocument 404 /404.php
+#ErrorDocument 500 /404.php
+#ErrorDocument 401 /404.php

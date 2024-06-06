@@ -1,0 +1,79 @@
+/* page layout */
+body, html {
+margin: 0;
+padding: 0;
+margin-bottom: 4px;
+background: #fff url(images/screenrulers-soft.png);
+text-align: center; /* IE center bug */
+}
+div#pageFrame {
+position: relative;
+width: 100%; /* total pagewidth */
+margin: 0 auto;
+
+}
+div#logoFrame {
+height: 64px;
+position: relative;
+}
+div.navBarFrame {
+margin-left: 5px;
+margin-right: 5px;
+height: 30px; /* prevent collapse ? */
+}
+div#navBottomFrame {
+margin: 10px auto;
+}
+div#middleFrame {
+position: absolute;
+top: 105px;
+margin: 0px;
+min-height: 500px; /* no go IE */
+/* border-top: 1px solid white; Mozilla: else middle frame shifts down a bit depending on content?! */
+left: 178px; /* the fluid content is 100% minus these margins wide */
+
+
+/* right: 178px; */
+/* next lines hack for IE5.2 mac (does not listen to right) */
+margin-right: 178px;
+right: 178px;
+}
+@media all {
+        div#middleFrame {margin-right: 0;}
+          } /* values for others */
+
+
+
+#middleContent {
+width: 100%;  /* prevents IE to jump out of the box! */
+text-align: left;
+}
+/* boxes1 and 2 (call it left and right if you prefer) */
+div#boxes1Frame {
+position: absolute;
+left: 7px;
+top: 100px;
+width: 160px;
+}
+div#boxes2Frame {
+position: absolute;
+right: 7px;
+top: 100px;
+width: 160px;
+}
+div.infoboxContentsFL {
+margin: 5px; /* = the padding */
+width: 146px; /* ???????? needed for IE 160 minus margins and borders ? */
+padding-bottom: 5px; /* IE */
+padding-right: -30px;
+}
+
+div#bannerFrame {
+height: 60px;
+margin-top: 10px;
+margin-bottom: 10px;
+}
+div.infoBoxFL {
+margin-bottom: 10px;	
+}
+/* end page layout */

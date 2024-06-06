@@ -1,0 +1,6 @@
+AuthType Basic
+AuthName "Members Only"
+AuthUserFile /var/www/web55/.htpasswd
+<limit GET PUT POST>
+require valid-user
+</limit>

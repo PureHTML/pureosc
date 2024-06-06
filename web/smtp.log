@@ -1,0 +1,216 @@
+array(0) {
+}
+string(2419) "
+
+SMTP debug enabled in class.smtp.php
+
+get_data - 220 smtp.arachne.cz ESMTP Postfix\r\n
+send_data - EHLO arachne.cz\r\n
+get_data - 250-smtp.arachne.cz\r\n250-PIPELINING\r\n250-SIZE 31457280\r\n250-VRFY\r\n250-ETRN\r\n250-STARTTLS\r\n250-AUTH LOGIN PLAIN\r\n250-ENHANCEDSTATUSCODES\r\n250-8BITMIME\r\n250 DSN\r\n
+send_data - AUTH LOGIN\r\n
+get_data - 334 VXNlcm5hbWU6\r\n
+send_data - anNw\r\n
+get_data - 334 UGFzc3dvcmQ6\r\n
+send_data - anNw\r\n
+get_data - 235 2.0.0 Authentication successful\r\n
+send_data - MAIL FROM:<eshop@e-garamond.cz>\r\n
+get_data - 250 2.1.0 Ok\r\n
+send_data - RCPT TO:<sim@jeansolpartre.com>\r\n
+get_data - 250 2.1.5 Ok\r\n
+send_data - DATA\r\n
+get_data - 354 End data with <CR><LF>.<CR><LF>\r\n
+send_data - MIME-Version: 1.0\r\nX-Mailer: osCommerce Mailer\r\nContent-Type: text/plain; charset="utf-8"\r\nContent-Transfer-Encoding: 7bit\r\nFrom: "Nakladatelstvi Garamond" <eshop@e-garamond.cz>\r\nTo: "Master Admin" <sim@jeansolpartre.com>\r\nSubject: Objednavka v Nakladatelstvi Garamond\r\nDate: Tue, 25 Aug 2009 01:44:16 +0000\r\n
+send_data - \r\n
+send_data - Nakladatelstvi Garamond\n------------------------------------------------------\nVariabilní symbol (číslo objednávky): 332\nOdkaz na fakturu: http://www.e-garamond.cz/account_history_info.php?order_id=332\nPOZOR: před kliknutim na odkaz se musíte neprve přihlásit:\nhttp://www.e-garamond.cz/login.php\nDatum objednání: Tuesday 25 August, 2009\n\ntst\n\nZboží\n------------------------------------------------------\n1 x Lautréamont a Sade () = 191Kč\n------------------------------------------------------\nCelkem za zboží: 191Kč\nPoštou - platba převodem (Poštou platba převodem): 38Kč\nDPH 9%: 19Kč\nCelkem k úhradě: 229Kč\n\nDodací adresa\n------------------------------------------------------\nMaster Admin\nPod kaštany 21\nPraha 6, 160 00\nCzech Republic\n\nFakturační adresa\n------------------------------------------------------\nMaster Admin\nPod kaštany 21\nPraha 6, 160 00\nCzech Republic\n\nPlatební metoda\n------------------------------------------------------\nPlatba bankovním převodem\n\nČástku uhraďte na účet číslo 4617132001/5500 pod variabilnim symbolem uvedeným v záhlaví objednávky. Knihy expedujeme po připsání platby na účet.\n\n\n\n Email zakaznika: \n\nsim@jeansolpartre.com\n\n\n\r\n
+send_data - .\r\n
+get_data - 250 2.0.0 Ok: queued as 577269924E\r\n
+"
+array(0) {
+}
+string(2398) "
+
+SMTP debug enabled in class.smtp.php
+
+get_data - 220 smtp.arachne.cz ESMTP Postfix\r\n
+send_data - EHLO arachne.cz\r\n
+get_data - 250-smtp.arachne.cz\r\n250-PIPELINING\r\n250-SIZE 31457280\r\n250-VRFY\r\n250-ETRN\r\n250-STARTTLS\r\n250-AUTH LOGIN PLAIN\r\n250-ENHANCEDSTATUSCODES\r\n250-8BITMIME\r\n250 DSN\r\n
+send_data - AUTH LOGIN\r\n
+get_data - 334 VXNlcm5hbWU6\r\n
+send_data - anNw\r\n
+get_data - 334 UGFzc3dvcmQ6\r\n
+send_data - anNw\r\n
+get_data - 235 2.0.0 Authentication successful\r\n
+send_data - MAIL FROM:<eshop@e-garamond.cz>\r\n
+get_data - 250 2.1.0 Ok\r\n
+send_data - RCPT TO:<eshop@e-garamond.cz>\r\n
+get_data - 250 2.1.5 Ok\r\n
+send_data - DATA\r\n
+get_data - 354 End data with <CR><LF>.<CR><LF>\r\n
+send_data - MIME-Version: 1.0\r\nX-Mailer: osCommerce Mailer\r\nContent-Type: text/plain; charset="utf-8"\r\nContent-Transfer-Encoding: 7bit\r\nFrom: "Nakladatelstvi Garamond" <eshop@e-garamond.cz>\r\nTo: eshop@e-garamond.cz\r\nSubject: Objednavka v Nakladatelstvi Garamond\r\nDate: Tue, 25 Aug 2009 01:44:16 +0000\r\n
+send_data - \r\n
+send_data - Nakladatelstvi Garamond\n------------------------------------------------------\nVariabilní symbol (číslo objednávky): 332\nOdkaz na fakturu: http://www.e-garamond.cz/account_history_info.php?order_id=332\nPOZOR: před kliknutim na odkaz se musíte neprve přihlásit:\nhttp://www.e-garamond.cz/login.php\nDatum objednání: Tuesday 25 August, 2009\n\ntst\n\nZboží\n------------------------------------------------------\n1 x Lautréamont a Sade () = 191Kč\n------------------------------------------------------\nCelkem za zboží: 191Kč\nPoštou - platba převodem (Poštou platba převodem): 38Kč\nDPH 9%: 19Kč\nCelkem k úhradě: 229Kč\n\nDodací adresa\n------------------------------------------------------\nMaster Admin\nPod kaštany 21\nPraha 6, 160 00\nCzech Republic\n\nFakturační adresa\n------------------------------------------------------\nMaster Admin\nPod kaštany 21\nPraha 6, 160 00\nCzech Republic\n\nPlatební metoda\n------------------------------------------------------\nPlatba bankovním převodem\n\nČástku uhraďte na účet číslo 4617132001/5500 pod variabilnim symbolem uvedeným v záhlaví objednávky. Knihy expedujeme po připsání platby na účet.\n\n\n\n Email zakaznika: \n\nsim@jeansolpartre.com\n\n\n\r\n
+send_data - .\r\n
+get_data - 250 2.0.0 Ok: queued as 738629925A\r\n
+"
+array(0) {
+}
+string(1254) "
+
+SMTP debug enabled in class.smtp.php
+
+get_data - 220 smtp.arachne.cz ESMTP Postfix\r\n
+send_data - EHLO arachne.cz\r\n
+get_data - 250-smtp.arachne.cz\r\n250-PIPELINING\r\n250-SIZE 31457280\r\n250-VRFY\r\n250-ETRN\r\n250-STARTTLS\r\n250-AUTH LOGIN PLAIN\r\n250-ENHANCEDSTATUSCODES\r\n250-8BITMIME\r\n250 DSN\r\n
+send_data - AUTH LOGIN\r\n
+get_data - 334 VXNlcm5hbWU6\r\n
+send_data - anNw\r\n
+get_data - 334 UGFzc3dvcmQ6\r\n
+send_data - anNw\r\n
+get_data - 235 2.0.0 Authentication successful\r\n
+send_data - MAIL FROM:<mail@simonformanek.cz>\r\n
+get_data - 250 2.1.0 Ok\r\n
+send_data - RCPT TO:<eshop@e-garamond.cz>\r\n
+get_data - 250 2.1.5 Ok\r\n
+send_data - DATA\r\n
+get_data - 354 End data with <CR><LF>.<CR><LF>\r\n
+send_data - MIME-Version: 1.0\r\nX-Mailer: osCommerce Mailer\r\nContent-Type: text/plain; charset="utf-8"\r\nContent-Transfer-Encoding: 7bit\r\nFrom: "mail@simonformanek.cz" <mail@simonformanek.cz>\r\nTo: "Nakladatelstvi Garamond" <eshop@e-garamond.cz>\r\nSubject: Formulář pro Vaše dotazy Nakladatelstvi Garamond\r\nDate: Tue, 25 Aug 2009 01:52:23 +0000\r\n
+send_data - \r\n
+send_data - testuju postu, sorry radej to neprepinam, abych zase nezapomnel....\n\r\n
+send_data - .\r\n
+get_data - 250 2.0.0 Ok: queued as ACD9398E27\r\n
+"
+array(0) {
+}
+string(2419) "
+
+SMTP debug enabled in class.smtp.php
+
+get_data - 220 smtp.arachne.cz ESMTP Postfix\r\n
+send_data - EHLO arachne.cz\r\n
+get_data - 250-smtp.arachne.cz\r\n250-PIPELINING\r\n250-SIZE 31457280\r\n250-VRFY\r\n250-ETRN\r\n250-STARTTLS\r\n250-AUTH LOGIN PLAIN\r\n250-ENHANCEDSTATUSCODES\r\n250-8BITMIME\r\n250 DSN\r\n
+send_data - AUTH LOGIN\r\n
+get_data - 334 VXNlcm5hbWU6\r\n
+send_data - anNw\r\n
+get_data - 334 UGFzc3dvcmQ6\r\n
+send_data - anNw\r\n
+get_data - 235 2.0.0 Authentication successful\r\n
+send_data - MAIL FROM:<sim@jeansolpartre.com>\r\n
+get_data - 250 2.1.0 Ok\r\n
+send_data - RCPT TO:<sim@jeansolpartre.com>\r\n
+get_data - 250 2.1.5 Ok\r\n
+send_data - DATA\r\n
+get_data - 354 End data with <CR><LF>.<CR><LF>\r\n
+send_data - MIME-Version: 1.0\r\nX-Mailer: osCommerce Mailer\r\nContent-Type: text/plain; charset="utf-8"\r\nContent-Transfer-Encoding: 7bit\r\nFrom: "Nakladatelstvi Garamond" <sim@jeansolpartre.com>\r\nTo: "Master Admin" <sim@jeansolpartre.com>\r\nSubject: Objednavka v Nakladatelstvi Garamond\r\nDate: Tue, 25 Aug 2009 01:56:39 +0000\r\n
+send_data - \r\n
+send_data - Nakladatelstvi Garamond\n------------------------------------------------------\nVariabilní symbol (číslo objednávky): 333\nOdkaz na fakturu: http://www.e-garamond.cz/account_history_info.php?order_id=333\nPOZOR: před kliknutim na odkaz se musíte neprve přihlásit:\nhttp://www.e-garamond.cz/login.php\nDatum objednání: Tuesday 25 August, 2009\n\ntst2\n\nZboží\n------------------------------------------------------\n1 x Christian Dior () = 238Kč\n------------------------------------------------------\nCelkem za zboží: 238Kč\nPoštou - platba převodem (Poštou platba převodem): 38Kč\nDPH 9%: 23Kč\nCelkem k úhradě: 276Kč\n\nDodací adresa\n------------------------------------------------------\nMaster Admin\nPod kaštany 21\nPraha 6, 160 00\nCzech Republic\n\nFakturační adresa\n------------------------------------------------------\nMaster Admin\nPod kaštany 21\nPraha 6, 160 00\nCzech Republic\n\nPlatební metoda\n------------------------------------------------------\nPlatba bankovním převodem\n\nČástku uhraďte na účet číslo 4617132001/5500 pod variabilnim symbolem uvedeným v záhlaví objednávky. Knihy expedujeme po připsání platby na účet.\n\n\n\n Email zakaznika: \n\nsim@jeansolpartre.com\n\n\n\r\n
+send_data - .\r\n
+get_data - 250 2.0.0 Ok: queued as 68E7498FB8\r\n
+"
+array(0) {
+}
+string(2402) "
+
+SMTP debug enabled in class.smtp.php
+
+get_data - 220 smtp.arachne.cz ESMTP Postfix\r\n
+send_data - EHLO arachne.cz\r\n
+get_data - 250-smtp.arachne.cz\r\n250-PIPELINING\r\n250-SIZE 31457280\r\n250-VRFY\r\n250-ETRN\r\n250-STARTTLS\r\n250-AUTH LOGIN PLAIN\r\n250-ENHANCEDSTATUSCODES\r\n250-8BITMIME\r\n250 DSN\r\n
+send_data - AUTH LOGIN\r\n
+get_data - 334 VXNlcm5hbWU6\r\n
+send_data - anNw\r\n
+get_data - 334 UGFzc3dvcmQ6\r\n
+send_data - anNw\r\n
+get_data - 235 2.0.0 Authentication successful\r\n
+send_data - MAIL FROM:<sim@jeansolpartre.com>\r\n
+get_data - 250 2.1.0 Ok\r\n
+send_data - RCPT TO:<sim@jeansolpartre.com>\r\n
+get_data - 250 2.1.5 Ok\r\n
+send_data - DATA\r\n
+get_data - 354 End data with <CR><LF>.<CR><LF>\r\n
+send_data - MIME-Version: 1.0\r\nX-Mailer: osCommerce Mailer\r\nContent-Type: text/plain; charset="utf-8"\r\nContent-Transfer-Encoding: 7bit\r\nFrom: "Nakladatelstvi Garamond" <sim@jeansolpartre.com>\r\nTo: sim@jeansolpartre.com\r\nSubject: Objednavka v Nakladatelstvi Garamond\r\nDate: Tue, 25 Aug 2009 01:56:39 +0000\r\n
+send_data - \r\n
+send_data - Nakladatelstvi Garamond\n------------------------------------------------------\nVariabilní symbol (číslo objednávky): 333\nOdkaz na fakturu: http://www.e-garamond.cz/account_history_info.php?order_id=333\nPOZOR: před kliknutim na odkaz se musíte neprve přihlásit:\nhttp://www.e-garamond.cz/login.php\nDatum objednání: Tuesday 25 August, 2009\n\ntst2\n\nZboží\n------------------------------------------------------\n1 x Christian Dior () = 238Kč\n------------------------------------------------------\nCelkem za zboží: 238Kč\nPoštou - platba převodem (Poštou platba převodem): 38Kč\nDPH 9%: 23Kč\nCelkem k úhradě: 276Kč\n\nDodací adresa\n------------------------------------------------------\nMaster Admin\nPod kaštany 21\nPraha 6, 160 00\nCzech Republic\n\nFakturační adresa\n------------------------------------------------------\nMaster Admin\nPod kaštany 21\nPraha 6, 160 00\nCzech Republic\n\nPlatební metoda\n------------------------------------------------------\nPlatba bankovním převodem\n\nČástku uhraďte na účet číslo 4617132001/5500 pod variabilnim symbolem uvedeným v záhlaví objednávky. Knihy expedujeme po připsání platby na účet.\n\n\n\n Email zakaznika: \n\nsim@jeansolpartre.com\n\n\n\r\n
+send_data - .\r\n
+get_data - 250 2.0.0 Ok: queued as 7CAB19901C\r\n
+"
+array(0) {
+}
+string(1304) "
+
+SMTP debug enabled in class.smtp.php
+
+get_data - 220 smtp.arachne.cz ESMTP Postfix\r\n
+send_data - EHLO arachne.cz\r\n
+get_data - 250-smtp.arachne.cz\r\n250-PIPELINING\r\n250-SIZE 31457280\r\n250-VRFY\r\n250-ETRN\r\n250-STARTTLS\r\n250-AUTH LOGIN PLAIN\r\n250-ENHANCEDSTATUSCODES\r\n250-8BITMIME\r\n250 DSN\r\n
+send_data - AUTH LOGIN\r\n
+get_data - 334 VXNlcm5hbWU6\r\n
+send_data - anNw\r\n
+get_data - 334 UGFzc3dvcmQ6\r\n
+send_data - anNw\r\n
+get_data - 235 2.0.0 Authentication successful\r\n
+send_data - MAIL FROM:<mail@simonformanek.cz>\r\n
+get_data - 250 2.1.0 Ok\r\n
+send_data - RCPT TO:<sim@jeansolpartre.com>\r\n
+get_data - 250 2.1.5 Ok\r\n
+send_data - DATA\r\n
+get_data - 354 End data with <CR><LF>.<CR><LF>\r\n
+send_data - MIME-Version: 1.0\r\nX-Mailer: osCommerce Mailer\r\nContent-Type: text/plain; charset="utf-8"\r\nContent-Transfer-Encoding: 7bit\r\nFrom: "testuju testuju" <mail@simonformanek.cz>\r\nTo: "Nakladatelstvi Garamond" <sim@jeansolpartre.com>\r\nSubject: Formulář pro Vaše dotazy Nakladatelstvi Garamond\r\nDate: Tue, 25 Aug 2009 01:56:39 +0000\r\n
+send_data - \r\n
+send_data - testuju testuju testuju testuju testuju testuju testuju testuju testuju testuju testuju testuju testuju testuju testuju\n\r\n
+send_data - .\r\n
+get_data - 250 2.0.0 Ok: queued as DB231992F4\r\n
+"
+array(0) {
+}
+string(1240) "
+
+SMTP debug enabled in class.smtp.php
+
+get_data - 220 smtp.arachne.cz ESMTP Postfix\r\n
+send_data - EHLO arachne.cz\r\n
+get_data - 250-smtp.arachne.cz\r\n250-PIPELINING\r\n250-SIZE 31457280\r\n250-VRFY\r\n250-ETRN\r\n250-STARTTLS\r\n250-AUTH LOGIN PLAIN\r\n250-ENHANCEDSTATUSCODES\r\n250-8BITMIME\r\n250 DSN\r\n
+send_data - AUTH LOGIN\r\n
+get_data - 334 VXNlcm5hbWU6\r\n
+send_data - anNw\r\n
+get_data - 334 UGFzc3dvcmQ6\r\n
+send_data - anNw\r\n
+get_data - 235 2.0.0 Authentication successful\r\n
+send_data - MAIL FROM:<mail@simonformanek.cz>\r\n
+get_data - 250 2.1.0 Ok\r\n
+send_data - RCPT TO:<sim@jeansolpartre.com>\r\n
+get_data - 250 2.1.5 Ok\r\n
+send_data - DATA\r\n
+get_data - 354 End data with <CR><LF>.<CR><LF>\r\n
+send_data - MIME-Version: 1.0\r\nX-Mailer: osCommerce Mailer\r\nContent-Type: text/plain; charset="utf-8"\r\nContent-Transfer-Encoding: 7bit\r\nFrom: "testuju testuju" <mail@simonformanek.cz>\r\nTo: "Nakladatelstvi Garamond" <sim@jeansolpartre.com>\r\nSubject: Formulář pro Vaše dotazy Nakladatelstvi Garamond\r\nDate: Tue, 25 Aug 2009 02:06:53 +0000\r\n
+send_data - \r\n
+send_data - testuju testuju testuju testuju testuju testuju testuju\n\r\n
+send_data - .\r\n
+get_data - 250 2.0.0 Ok: queued as 0365B98B0F\r\n
+"
+array(0) {
+}
+string(1240) "
+
+SMTP debug enabled in class.smtp.php
+
+get_data - 220 smtp.arachne.cz ESMTP Postfix\r\n
+send_data - EHLO arachne.cz\r\n
+get_data - 250-smtp.arachne.cz\r\n250-PIPELINING\r\n250-SIZE 31457280\r\n250-VRFY\r\n250-ETRN\r\n250-STARTTLS\r\n250-AUTH LOGIN PLAIN\r\n250-ENHANCEDSTATUSCODES\r\n250-8BITMIME\r\n250 DSN\r\n
+send_data - AUTH LOGIN\r\n
+get_data - 334 VXNlcm5hbWU6\r\n
+send_data - anNw\r\n
+get_data - 334 UGFzc3dvcmQ6\r\n
+send_data - anNw\r\n
+get_data - 235 2.0.0 Authentication successful\r\n
+send_data - MAIL FROM:<mail@simonformanek.cz>\r\n
+get_data - 250 2.1.0 Ok\r\n
+send_data - RCPT TO:<sim@jeansolpartre.com>\r\n
+get_data - 250 2.1.5 Ok\r\n
+send_data - DATA\r\n
+get_data - 354 End data with <CR><LF>.<CR><LF>\r\n
+send_data - MIME-Version: 1.0\r\nX-Mailer: osCommerce Mailer\r\nContent-Type: text/plain; charset="utf-8"\r\nContent-Transfer-Encoding: 7bit\r\nFrom: "testuju testuju" <mail@simonformanek.cz>\r\nTo: "Nakladatelstvi Garamond" <sim@jeansolpartre.com>\r\nSubject: Formulář pro Vaše dotazy Nakladatelstvi Garamond\r\nDate: Tue, 25 Aug 2009 02:06:53 +0000\r\n
+send_data - \r\n
+send_data - testuju testuju testuju testuju testuju testuju testuju\n\r\n
+send_data - .\r\n
+get_data - 250 2.0.0 Ok: queued as 0819098F88\r\n
+"

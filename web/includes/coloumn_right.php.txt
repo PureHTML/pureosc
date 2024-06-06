@@ -1,0 +1,1 @@
+  require(DIR_WS_BOXES . 'polls.php');
