@@ -1,0 +1,29 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+
+override_dh_auto_test:
+	echo tests temporarly skipped for now in rules file
+
+override_dh_prep:
+	composer install --no-dev
+	cd tools; ./update_all.sh ; cd ..
+	phpdoc -d src
+	mkdir -p docs ; mv .phpdoc/build/* docs
+	dh_prep
+
+#override_dh_auto_test:
+#	composer update --no-ansi --no-interaction --no-progress --no-scripts --optimize-autoloader
+#	./vendor/bin/phpunit --bootstrap tests/Bootstrap.php 
+#	dh_auto_test
+
+
+
+override_dh_install:
+	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//' `'"'  debian/composer.json |sponge debian/composer.json
+	dh_install	
+	sed -i -e  "s/\/\.\.\/\.\.\//\//g" debian/php-spojenet-abraflexi/usr/share/php/AbraFlexi/RO.php
+	sed -i -e  "s/\.\.\/test\//\/usr\/share\/php\/AbraFlexi\/tools\//g" debian/php-spojenet-abraflexi/usr/share/php/AbraFlexi/tools/*.php
+	sed -i '/git/d' debian/php-spojenet-abraflexi/usr/share/php/AbraFlexi/tools/force_update_all.sh
+	sed -i -e  "s/src\/AbraFlexi\///g" debian/php-spojenet-abraflexi/usr/share/php/AbraFlexi/tools/force_update_all.sh

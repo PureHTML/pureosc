@@ -1,0 +1,33 @@
+{
+  "name": "deb/abraflexi",
+  "description": "Library for easy interaction with czech accounting system AbraFlexi.",
+  "homepage": "https://github.com/Spoje-NET/php-abraflexi",
+  "license": "GPL-2.0+",
+  "version": "2.24.1.81",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Vítězslav Dvořák",
+      "email": "vitex@arachne.cz"
+    }
+  ],
+  "require": {
+    "ext-json": "*",
+    "ext-curl": "*",
+    "deb/ease-core": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "AbraFlexi\\": "."
+    }
+  },
+  "config": {
+    "vendor-dir": "/var/lib/php-spojenet-abraflexi"
+  },
+  "repositories": [
+    {
+      "type": "path",
+      "url": "/usr/share/php/EaseCore"
+    }
+  ]
+}
