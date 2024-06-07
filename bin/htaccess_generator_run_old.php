@@ -17,8 +17,10 @@ while ($lang = tep_db_fetch_array($lang_query)) {
         $data .= 'RewriteCond %{REQUEST_URI} ' . str_replace(HTTPS_SERVER, '^', str_replace('/?', '/', preg_replace('/osCsid.*/', '', tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $products['products_id'])))) . '$' . "\n";
         $data .= 'RewriteRule ^(.*)$ ' . str_replace(HTTPS_SERVER, '', str_replace('&amp;', '&', preg_replace('/&amp;osCsid.*/', '', tep_href_link_original(FILENAME_PRODUCT_INFO, 'products_id=' . $products['products_id'] . '&language_id=' . $lang['languages_id'])))) . ' [PT,QSA]' . "\n\n";
     }
-//file_put_contents(DIR_FS_CATALOG . '.htaccess', $data);exit;
-
+echo $data;
+file_put_contents(DIR_FS_CATALOG . '.htaccess', $data);
+}
+exit;
     $categories_query = tep_db_query("SELECT categories.categories_id from categories, categories_description WHERE categories.categories_id=categories_description.categories_id AND categories_status=1 AND language_id=" . $lang['languages_id']);
     while ($categories = tep_db_fetch_array($categories_query)) {
         $data .= 'RewriteCond %{REQUEST_URI} ' . str_replace(HTTPS_SERVER, '^', str_replace('/?', '/', preg_replace('/osCsid.*/', '', tep_href_link(FILENAME_DEFAULT, 'cPath=' . tep_get_category_path($categories['categories_id']))))) . '$' . "\n";
@@ -30,7 +32,7 @@ while ($lang = tep_db_fetch_array($lang_query)) {
         $data .= 'RewriteCond %{REQUEST_URI} ' . str_replace(HTTPS_SERVER, '^', str_replace('/?', '/', preg_replace('/osCsid.*/', '', tep_href_link(FILENAME_DEFAULT, 'manufacturers_id=' . $manufacturers['manufacturers_id'])))) . '$' . "\n";
         $data .= 'RewriteRule ^(.*)$ ' . str_replace(HTTPS_SERVER, '', str_replace('&amp;', '&', preg_replace('/&amp;osCsid.*/', '', tep_href_link_original(FILENAME_DEFAULT, 'manufacturers_id=' . $manufacturers['manufacturers_id']) . '&language_id=' . $lang['languages_id']))) . ' [PT,QSA]' . "\n\n";
     }
-} //end lang loop
+//} //end lang loop
 file_put_contents(DIR_FS_CATALOG . '.htaccess', $data);
 exit;
 

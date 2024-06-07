@@ -70,7 +70,7 @@ while ($configuration = tep_db_fetch_array($configuration_query)) {
   define($configuration['cfgKey'], $configuration['cfgValue']);
 }
 
-require('includes/vendor/autoload.php');
+require('../vendor/autoload.php');
 
 // if gzip_compression is enabled
 if (GZIP_COMPRESSION == 'true' && extension_loaded('zlib') && !headers_sent()) {
