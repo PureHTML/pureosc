@@ -1,0 +1,5 @@
+#!/bin/bash
+# LongName: search for configuration_values FROM table 'configuration'
+source ./dbconnect.sh
+
+mysql -h${H} -u${RU} -p${RP} $D -e "SELECT configuration_key, configuration_value FROM configuration WHERE configuration_key like '%${1}%'"

@@ -1,0 +1,4 @@
+#!/bin/bash
+. ./dbconnect.sh
+
+mysql -h${H} -u${RU} -p${RP} $D -e "update configuration set configuration_value='$2' where configuration_key='${1}'"

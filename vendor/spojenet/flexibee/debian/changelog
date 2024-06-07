@@ -1,0 +1,126 @@
+php-spojenet-abraflexi (2.25.2) UNRELEASED; urgency=medium
+
+  [ Vítězslav Dvořák ]
+  * ease-core based
+  * package renamed
+  * new branch 
+
+  [ CyberVitexus ]
+  * SetMyKey Fix
+  * Update for 2020.1.0.9
+  * Ability to configure from ENV
+  * composer.json updated
+  * Update for FlexiBee 2020.2.2
+  * Better parsing error response for XSLT based imports
+  * Package renamed on Packagist
+  * More Uses
+  * Scrutinizer - new PHP Analysis
+  * Update fro AbraFlexi 2020.3.0.1
+  * Update for FlexiBee 2020.3.0.3
+  * Update for AbraFlexi 2020.3.0.10
+  * Attachment saving optimization
+  * Do not update apiUrl if no data taken
+  * Update for AbraFlexi 2021.5.1
+  * version up
+  * version up
+  * #13 Work with Relations fixed
+  * Release v2.7
+
+  [ vitex ]
+  * Total downloads moved
+  * Update .travis.yml
+  * Release v2.9
+  * v2.13 release
+  * v2.13 release
+  * v2.14 release
+  * Relation class introduced
+  * Relations recovered
+  * body stripper added
+  * banka can use subevidence
+  * v2.19 release
+  * trait begins lowercase
+  * fixes
+  * id of new record is int
+  * release v2.23 dueDays
+  * Attachment Downloader fixed
+  * Document interface added
+  * jenkins-Spoje.Net-php-spojenet-abraflexi-67
+  * jenkins-Spoje.Net-php-spojenet-abraflexi-81
+  * jenkins-Spoje.Net-php-spojenet-abraflexi-83
+  * jenkins-Spoje.Net-php-spojenet-abraflexi-84
+  * jenkins-Spoje.Net-php-spojenet-abraflexi-84
+  * jenkins-Spoje.Net-php-spojenet-abraflexi-86
+  * jenkins-Spoje.Net-php-spojenet-abraflexi-89
+  * Contact Roles support added
+
+  [  ]
+  * Deprecation
+  * JPG image support added
+
+ -- vitex <info@vitexsoftware.cz>  Sat, 30 Dec 2023 00:28:19 +0100
+
+flexipeehp (1.12) experimental; urgency=medium
+
+  * Static Files Update
+  * Tests & Fixes
+
+ -- Vítězslav Dvořák <vitex@develoid.jinonice.czf>  Thu, 07 Jun 2018 18:54:03 +0200
+
+flexipeehp (1.11) experimental; urgency=medium
+
+  * php5.3 - php7.2 
+
+ -- Vítězslav Dvořák <vitex@develoid.jinonice.czf>  Tue, 29 May 2018 13:33:35 +0200
+
+flexipeehp (1.9.7.1) experimental; urgency=low
+
+  [ Vítězslav Vitex Dvořák ]
+
+  [ Cybervitexus ]
+  * Debian package build update
+  * Přidán další parametr adresní řádky pro směr řazení výpisu Přidána
+    třída pro cenník
+  * Doplněna funkce pro získání GlobalVersion Přidána třída položky
+    faktury vydané
+
+
+  [ vitex ]
+  * TODOs
+  * Debian package buld update
+  * Debian package version fix Links to other libraries added to Readme
+  * added public $this->rowCount to hold @rowCount value if obtained
+  * Debian package v1.3
+  * Added class Structure that hold structure of all evidencies added
+    tool update_structure_clas.php for generating class Structure Added
+    class DodavatelskaSmlouva Version grow to 1.4
+  * Added methods for managing used company Unit tests for obtaining
+    evidence structure
+  * Added methods for managing used company Unit tests for obtaining
+    evidence structure
+  * Added methods for managing used company Unit tests for obtaining
+    evidence structure
+  * Fixed support for Evidence Actions
+  * Release 1.6 Evidence names moved from Structure to EvidenceList
+    class Class Structure renamed to Relations Class generating scripts
+    moved to "tools" folder Added generated class Relations
+  * Added method for generating invoices to Provider Contract class
+    Added login-logout URL prefix to list allowed prefixes
+  * Added method for generating invoices to Provider Contract class
+    Added login-logout URL prefix to list allowed prefixes
+
+  [ Vítězslav Dvořák ]
+  * UnitTest for FlexiBeeRW update Added missing PHPDoc comments
+  * Added debian package for ApiGen documentation Static version as
+    FlexiPeeHP::$libVersion
+  * Merge origin/master
+
+  [ vitex ]
+  * Additonal control for relations in debug mode
+  * __ToString returns allways string now
+  * Updated Generated classes
+
+
+  [ Vítězslav Dvořák ]
+  * 
+
+ -- Vítězslav Dvořák <vitex@develoid.jinonice.czf>  Tue, 29 May 2018 13:11:03 +0200

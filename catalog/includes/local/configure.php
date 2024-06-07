@@ -1,6 +1,6 @@
 <?php
-define('HTTP_SERVER', 'http://vanilla.local');
-define('HTTPS_SERVER', 'http://vanilla.local');
+define('HTTP_SERVER', 'http://dvere.local');
+define('HTTPS_SERVER', 'http://dvere.local');
 define('ENABLE_SSL', false);
 define('HTTP_COOKIE_DOMAIN', '');
 define('HTTPS_COOKIE_DOMAIN', '');
@@ -17,16 +17,16 @@ define('DIR_WS_MODULES', DIR_WS_INCLUDES . 'modules/');
 define('DIR_WS_LANGUAGES', DIR_WS_INCLUDES . 'languages/');
 
 define('DIR_WS_DOWNLOAD_PUBLIC', 'pub/');
-define('DIR_FS_CATALOG', '/home/f/git/vanilla-oscommerce/osc/catalog/');
+define('DIR_FS_CATALOG', '/home/f/git/dverecom/catalog/');
 define('DIR_FS_DOWNLOAD', DIR_FS_CATALOG . 'download/');
 define('DIR_FS_DOWNLOAD_PUBLIC', DIR_FS_CATALOG . 'pub/');
 
 define('DB_SERVER', 'localhost');
-define('DB_SERVER_USERNAME', 'vanilla');
-define('DB_SERVER_PASSWORD', 'osc');
-define('DB_DATABASE', 'vanilla');
+define('DB_SERVER_USERNAME', 'dvere');
+define('DB_SERVER_PASSWORD', 'dvere');
+define('DB_DATABASE', 'dvere');
 define('USE_PCONNECT', 'false');
-define('STORE_SESSIONS', 'file');
+define('STORE_SESSIONS', 'mysql');
 define('SESSION_WRITE_DIRECTORY', '/home/f/git/vanilla-oscommerce/.sessions/');
 define('CFG_TIME_ZONE', 'Europe/Prague');
 

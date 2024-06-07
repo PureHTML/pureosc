@@ -11,43 +11,8 @@
 */
 
 
-//seo
-function tep_href_link(
-    $page = '',
-    $parameters = '',
-    $connection = 'NONSSL',
-    $add_session_id = true,
-    $search_engine_safe = true
-) {
-    global $seo_urls;
-    if (!is_object($seo_urls)) {
-        if (!class_exists('pure_seo')) {
-            include_once('includes/classes/pure_seo.class.php');
-        }
-        global $languages_id;
-        $seo_urls = new pure_seo($languages_id);
-    }
-   return $seo_urls->href_link($page, $parameters, $connection, $add_session_id);
-   //return preg_replace('/-[p|c|m|pi|a|au|by|f|fc|fri|fra|i|links|n|nc|nri|nra|pm|po|pr|pri|t]-[0-9|_]*\.html/','', $seo_urls->href_link($page, $parameters, $connection, $add_session_id));
-//   return str_replace('xslashx','/',preg_replace('/-[c|p|t|a|au]-[0-9]*.html/','', $seo_urls->href_link($page, $parameters, $connection, $add_session_id)));
-//    return str_replace(
-//        'xslashx',
-//        '/',
-//        preg_replace(
-//            '/-[p|c|m|pi|a|au|by|f|fc|fri|fra|i|links|n|nc|nri|nra|pm|po|pr|pri|t]-[0-9|_]*\.html/',
-//            '',
-//            $seo_urls->href_link(
-//                $page,
-//                $parameters,
-//                $connection,
-//                $add_session_id
-//            )
-//        )
-//    );
-}
-
 // The HTML href link wrapper function orig
-function tep_href_link_original($page = '', $parameters = '', $connection = 'SSL', $add_session_id = true, $search_engine_safe = true) {
+function tep_href_link($page = '', $parameters = '', $connection = 'SSL', $add_session_id = true, $search_engine_safe = true) {
   global $request_type, $session_started, $SID;
 
   $page = tep_output_string($page);

@@ -1,0 +1,49 @@
+{
+    "name": "spojenet/flexibee",
+    "description": "Library for easy interaction with czech economic system AbraFlexi.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vítězslav Dvořák",
+            "email": "info@vitexsoftware.cz"
+        }
+    ],
+    "keywords": [
+        "AbraFlexi",
+        "FlexiBee",
+        "API-Client",
+        "FinTech"
+    ],    
+    "require": {
+        "ext-json": "*",
+        "ext-curl": "*",
+        "ext-gettext": "*",
+        "vitexsoftware/ease-core": ">=1.41"
+    },
+    "autoload": {
+        "psr-4": {
+            "AbraFlexi\\": "src/AbraFlexi/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Test\\Ease\\": "vendor/vitexsoftware/ease-core/tests/src/Ease",
+            "Test\\AbraFlexi\\": "test/src/AbraFlexi/",
+            "Test\\": "test/"
+        }
+    },
+    "require-dev": {
+	"ext-iconv": "*",
+        "phpunit/phpunit": "*",
+	"phing/phing": "*"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "cd tools/ ; ./update_all.sh ; cd .."
+        ],
+        "post-update-cmd": [
+            "cd tools/ ; ./update_all.sh ; cd .."
+        ]
+    }
+    
+}

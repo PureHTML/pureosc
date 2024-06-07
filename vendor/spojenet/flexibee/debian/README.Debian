@@ -1,0 +1,18 @@
+FlexiPeeHP Debian
+-------------------
+    
+Is installed by standard way in /usr/share/php/AbraFlexi
+You have to run refreshment script: 
+
+cd /usr/share/php/AbraFlexi/tools && ./update_all.sh
+
+When your AbaraFlexi server was updated
+
+It is configured by /etc/abraflexi/client.json file or environment variables by 
+default specified by in /etc/profile.d/abraflexi-client.sh
+
+Install abraflexi-client-config package to modify connection settings 
+
+
+ -- Vítězslav Dvořák <info@vitexsoftware.cz>  Ne říj 21 15:17:56 CEST 2021
+

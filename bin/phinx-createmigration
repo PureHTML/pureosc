@@ -1,0 +1,6 @@
+#!/bin/bash
+if [[ ! $1 ]];then
+#  exit
+read -p "no migration name specified: "1
+fi
+../vendor/bin/phinx create --configuration ./phinx-adaptor.php $1
