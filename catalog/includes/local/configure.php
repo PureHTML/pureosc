@@ -26,7 +26,7 @@ define('DB_SERVER_USERNAME', 'dvere');
 define('DB_SERVER_PASSWORD', 'dvere');
 define('DB_DATABASE', 'dvere');
 define('USE_PCONNECT', 'false');
-define('STORE_SESSIONS', 'mysql');
+define('STORE_SESSIONS', 'file');
 define('SESSION_WRITE_DIRECTORY', '/home/f/git/vanilla-oscommerce/.sessions/');
 define('CFG_TIME_ZONE', 'Europe/Prague');
 
