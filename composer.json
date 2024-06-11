@@ -19,7 +19,8 @@
     "symfony/polyfill-intl-idn": "v1.23.0",
     "symfony/polyfill-intl-normalizer": "v1.23.0",
     "symfony/polyfill-mbstring": "v1.23.0",
-    "symfony/polyfill-php72": "v1.23.0"
+    "symfony/polyfill-php72": "v1.23.0",
+    "robmorgan/phinx": "^0.16.1"
 
   }
 }
