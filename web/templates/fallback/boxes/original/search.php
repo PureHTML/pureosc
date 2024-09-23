@@ -60,7 +60,7 @@ function handlesearchsuggest() {
   $boxContent_attributes = ' align="left"';
   $box_base_name = 'search'; // for easy unique box template setup (added BTSv1.2)
   $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)
-  $boxContent = tep_draw_form('quick_find', tep_href_link(FILENAME_ADVANCED_SEARCH_RESULT, '', 'NONSSL', false), 'get');
+  $boxContent = tep_draw_form('quick_find', tep_href_link(FILENAME_ADVANCED_SEARCH_RESULT, '', 'SSL', false), 'get');
 //todo:error nekdy zustane   $boxContent .= tep_draw_input_field_label(BOX_HEADING_SEARCH, true, 'keywords', BOX_HEADING_SEARCH, ' onkeyup="searchsuggest();" size="10" maxlength="30" ') . '<br />' . tep_hide_session_id() ;
   $boxContent .= tep_draw_input_field_label('', true, 'keywords', '', ' onkeyup="searchsuggest();" size="16" maxlength="30" ') . '' . tep_hide_session_id() ;
   $boxContent .= '<label for="quick_find_lanch" accesskey="S">'
