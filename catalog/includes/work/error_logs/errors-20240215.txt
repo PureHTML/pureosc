@@ -1,6 +1,0 @@
-[15-Feb-2024 21:52:27 Europe/Prague] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'categories_status' in 'where clause' in /home/f/git/vanilla-oscommerce/catalog/includes/functions/database.php:52
-Stack trace:
-#0 /home/f/git/vanilla-oscommerce/catalog/includes/functions/database.php(52): mysqli_query(Object(mysqli), 'SELECT categori...')
-#1 /home/f/git/vanilla-oscommerce/bin/htaccess_generator_run.php(22): tep_db_query('SELECT categori...')
-#2 {main}
-  thrown in /home/f/git/vanilla-oscommerce/catalog/includes/functions/database.php on line 52
