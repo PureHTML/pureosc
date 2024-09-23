@@ -31,7 +31,7 @@ fullscreen wysiwyg editor for categories_description Copyright (c) 2008 shop2.0b
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <script type="text/javascript" src="/fckeditor/fckeditor.js"></script>
-<script type="text/javascript">
+<script>
   window.onload = function()
     {
     var oFCKeditor = new FCKeditor( 'kod' ) ;

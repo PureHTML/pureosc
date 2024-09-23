@@ -1,4 +1,4 @@
-<script type="text/javascript"><!--
+<script><!--
 var selected;
 <?php // #################### Added CGV ###################### ?>
 var submitter = null;

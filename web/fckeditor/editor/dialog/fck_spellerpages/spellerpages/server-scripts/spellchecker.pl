@@ -131,7 +131,7 @@ Content-type: text/html; charset=utf-8
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" type="text/css" href="$spellercss"/>
 <script src="$wordWindowSrc"></script>
-<script type="text/javascript">
+<script>
 var suggs = new Array();
 var words = new Array();
 var textinputs = new Array();
@@ -170,7 +170,7 @@ function init_spell() {
 </head>
 <body onLoad="init_spell();">
 
-<script type="text/javascript">
+<script>
 wordWindowObj.writeBody();
 </script>
 

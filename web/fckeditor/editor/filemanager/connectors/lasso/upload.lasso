@@ -76,7 +76,7 @@
 		-description='Sets the HTML response for the FCKEditor Quick Upload feature.'
 	);
 		$__html_reply__ = '\
-<script type="text/javascript">
+<script>
 	window.parent.OnUploadCompleted(' + #errorNumber + ',"'
 		+ string_replace(#fileUrl, -find='"', -replace='\\"') + '","'
 		+ string_replace(#fileName, -find='"', -replace='\\"') + '","'

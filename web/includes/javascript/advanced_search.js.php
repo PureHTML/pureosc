@@ -1,5 +1,5 @@
 <script src="includes/javascript/general.js" type="text/javascript"></script>
-<script type="text/javascript"><!--
+<script><!--
 function check_form() {
   var error_message = "<?php echo JS_ERROR; ?>";
   var error_found = false;

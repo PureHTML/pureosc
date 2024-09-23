@@ -135,14 +135,14 @@ function error_message($error) {
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css" />
 
 <?php if (WEB_EDITOR_LIST == 'htmlarea'){ ?>
-	<script type="text/javascript">
+	<script>
   		_editor_url = "includes/javascript/htmlarea/";
   		_editor_lang = "en";
 	</script>
 	<script type="text/javascript" src="includes/javascript/htmlarea/htmlarea.js"></script>
 <?php } elseif (WEB_EDITOR_LIST == 'tiny_mce') { ?>
 <script type="text/javascript" src="includes/javascript/tiny_mce/tiny_mce.js"></script>
-<script type="text/javascript">
+<script>
 tinyMCE.init({
 	mode : "textareas",
 	theme : "advanced",

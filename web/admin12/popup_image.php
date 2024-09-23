@@ -36,7 +36,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" <?php echo HTML_PARAMS; ?>>
 <head>
 <title><?php echo $page_title; ?></title>
-<script type="text/javascript"><!--
+<script><!--
 var i=0;
 
 function resize() {

@@ -253,14 +253,14 @@ $bID="";
 </script>
 
 <?php if (WEB_EDITOR_LIST == 'htmlarea'){ ?>
-	<script type="text/javascript">
+	<script>
   		_editor_url = "includes/javascript/htmlarea/";
   		_editor_lang = "en";
 	</script>
 	<script type="text/javascript" src="includes/javascript/htmlarea/htmlarea.js"></script>
 <?php } elseif (WEB_EDITOR_LIST == 'tiny_mce') { ?>
 <script type="text/javascript" src="includes/javascript/tiny_mce/tiny_mce.js"></script>
-<script type="text/javascript">
+<script>
 tinyMCE.init({
 	mode : "textareas",
 	theme : "advanced",
@@ -278,7 +278,7 @@ tinyMCE.init({
 </script>
 <?php } ?>
 
-<script type="text/javascript"><!--
+<script><!--
 var tax_rates = new Array();
 <?php
     for ($i=0, $n=sizeof($tax_class_array); $i<$n; $i++) {

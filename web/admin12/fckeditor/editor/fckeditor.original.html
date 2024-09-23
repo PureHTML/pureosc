@@ -29,7 +29,7 @@
 	<!-- @Packager.RemoveLine
 	<meta http-equiv="Cache-Control" content="public" />
 	@Packager.RemoveLine -->
-	<script type="text/javascript">
+	<script>
 
 // Instead of loading scripts and CSSs using inline tags, all scripts are
 // loaded by code. In this way we can guarantee the correct processing order,
@@ -156,7 +156,7 @@ LoadScript( '_source/internals/fckplugins.js' ) ;
 LoadScript( '../fckconfig.js' ) ;
 
 	</script>
-	<script type="text/javascript">
+	<script>
 
 if ( FCKBrowserInfo.IsIE )
 {
@@ -191,7 +191,7 @@ if ( FCKConfig.CustomConfigurationsPath.length > 0 )
 	LoadScript( FCKConfig.CustomConfigurationsPath ) ;
 
 	</script>
-	<script type="text/javascript">
+	<script>
 
 // Load configurations defined at page level.
 FCKConfig_LoadPageConfig() ;
@@ -206,7 +206,7 @@ FCKLanguageManager.Initialize() ;
 LoadScript( 'lang/' + FCKLanguageManager.ActiveLanguage.Code + '.js' ) ;
 
 	</script>
-	<script type="text/javascript">
+	<script>
 
 // Initialize the editing area context menu.
 FCK_ContextMenu_Init() ;
@@ -214,13 +214,13 @@ FCK_ContextMenu_Init() ;
 FCKPlugins.Load() ;
 
 	</script>
-	<script type="text/javascript">
+	<script>
 
 // Set the editor interface direction.
 window.document.dir = FCKLang.Dir ;
 
 	</script>
-	<script type="text/javascript">
+	<script>
 
 window.onload = function()
 {

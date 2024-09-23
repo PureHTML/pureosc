@@ -343,7 +343,7 @@
             <tr>
               <td class="pageHeading" align="center">
                 <font size="2" face="Arial" color="blue">
-                  <script type="text/javascript">
+                  <script>
                     <!-- Begin
                     Stamp = new Date();
                     document.write('<?php echo TEXT_LAST_REFRESH. '&nbsp;'; ?>');

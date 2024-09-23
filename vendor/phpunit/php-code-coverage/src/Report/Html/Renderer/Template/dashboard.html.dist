@@ -140,7 +140,7 @@
   <script src="{{path_to_root}}_js/jquery.min.js?v={{version}}" type="text/javascript"></script>
   <script src="{{path_to_root}}_js/d3.min.js?v={{version}}" type="text/javascript"></script>
   <script src="{{path_to_root}}_js/nv.d3.min.js?v={{version}}" type="text/javascript"></script>
-  <script type="text/javascript">
+  <script>
 $(document).ready(function() {
   nv.addGraph(function() {
     var chart = nv.models.multiBarChart();

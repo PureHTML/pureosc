@@ -101,7 +101,7 @@ class BaseHtmlMixin(object):
 	def sendUploadResults( self, errorNo = 0, fileUrl = '', fileName = '', customMsg = '' ):
 		self.setHttpHeaders("text/html")
 		"This is the function that sends the results of the uploading process"
-		return """<script type="text/javascript">
+		return """<script>
 			window.parent.OnUploadCompleted(%(errorNumber)s,"%(fileUrl)s","%(fileName)s","%(customMsg)s"); 
 			</script>""" % {
 			'errorNumber': errorNo,

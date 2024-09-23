@@ -654,7 +654,7 @@ updateGross();
 #piList li { margin: 5px 0; padding: 2px; }
 </style>
 
-<script type="text/javascript">
+<script>
 $('#piList').sortable({
   containment: 'parent'
 });
@@ -710,7 +710,7 @@ $(function() {
   <?php echo tep_draw_hidden_field('products_date_added', (!empty($pInfo->products_date_added) ? $pInfo->products_date_added : date('Y-m-d'))) . tep_draw_button(IMAGE_SAVE, 'disk', null, 'primary') . tep_draw_button(IMAGE_CANCEL, 'close', tep_href_link('categories.php', 'cPath=' . $cPath . (isset($_GET['pID']) ? '&pID=' . $_GET['pID'] : ''))); ?>
 </div>
 
-<script type="text/javascript">
+<script>
 $('#products_date_available').datepicker({
   dateFormat: 'yy-mm-dd'
 });

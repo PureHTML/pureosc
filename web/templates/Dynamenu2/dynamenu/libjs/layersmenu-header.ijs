@@ -1,6 +1,6 @@
 <!-- beginning of menu header - {packageName} {version} {copyright} {author} -->
 
-<script type="text/javascript">
+<script>
 <!--
 
 menuTopShift = {menuTopShift};

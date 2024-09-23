@@ -159,7 +159,7 @@ sub SendUploadResults
 	local($sErrorNumber, $sFileUrl, $sFileName, $customMsg) = @_;
 
 	print "Content-type: text/html\n\n";
-	print '<script type="text/javascript">';
+	print '<script>';
 	print 'window.parent.OnUploadCompleted(' . $sErrorNumber . ',"' . JS_cnv($sFileUrl) . '","' . JS_cnv($sFileName) . '","' . JS_cnv($customMsg) . '") ;';
 	print '</script>';
 	exit ;

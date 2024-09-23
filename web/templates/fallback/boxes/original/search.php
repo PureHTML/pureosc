@@ -13,7 +13,7 @@
 */
 ?>
 <!-- search //-->
-				<script type="text/javascript"><!--
+				<script><!--
 //Gets the browser specific XmlHttpRequest Object
 function getXmlHttpRequestObject() {
 	if (window.XMLHttpRequest) {

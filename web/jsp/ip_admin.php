@@ -47,7 +47,7 @@ echo 'Koncept?<input type="checkbox" id="products_status_new" name="products_sta
 
 //popis
 echo '<script type="text/javascript" src="/fckeditor/fckeditor.js"></script>
-<script type="text/javascript">
+<script>
   window.onload = function()
     {
     var oFCKeditor = new FCKeditor( "products_description_new" ) ;
@@ -65,7 +65,7 @@ echo '<br /><br />název kategorie: <input id="categories_name" name="categories
 
 //popis
 echo '<script type="text/javascript" src="/fckeditor/fckeditor.js"></script>
-<script type="text/javascript">
+<script>
   window.onload = function()
     {
     var oFCKeditor = new FCKeditor( "categories_description" ) ;

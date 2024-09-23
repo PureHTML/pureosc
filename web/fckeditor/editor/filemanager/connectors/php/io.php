@@ -262,7 +262,7 @@ function SanitizeFileName( $sNewFileName )
 // This is the function that sends the results of the uploading process.
 function SendUploadResults( $errorNumber, $fileUrl = '', $fileName = '', $customMsg = '' )
 {
-	echo '<script type="text/javascript">' ;
+	echo '<script>' ;
 	$rpl = array( '\\' => '\\\\', '"' => '\\"' ) ;
 	echo 'window.parent.OnUploadCompleted(' . $errorNumber . ',"' . strtr( $fileUrl, $rpl ) . '","' . strtr( $fileName, $rpl ) . '", "' . strtr( $customMsg, $rpl ) . '") ;' ;
 	echo '</script>' ;

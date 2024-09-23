@@ -16,7 +16,7 @@ if (GOOGLE_ANLYTICS_CODE_USE == 'true') {
     <!-- Google Analytics Code -->
     <script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
     </script>
-    <script type="text/javascript">
+    <script>
     _uacct = "<?php echo GOOGLE_ANLYTICS_CODE; ?>";
     urchinTracker();
     </script>
@@ -27,7 +27,7 @@ if (GOOGLE_ANLYTICS_CODE_USE == 'true') {
     <!-- Google Analytics Code -->
     <script src="https://ssl.google-analytics.com/urchin.js" type="text/javascript">
     </script>
-    <script type="text/javascript">
+    <script>
     _uacct = "<?php echo GOOGLE_ANLYTICS_CODE; ?>";
     urchinTracker();
     </script>

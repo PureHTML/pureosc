@@ -29,7 +29,7 @@
 		<meta name="robots" content="noindex, nofollow">
 		<link href="../sample.css" rel="stylesheet" type="text/css" />
 
-		<script type="text/javascript">
+		<script>
 		function FCKeditor_OnComplete( editorInstance )
 		{
 				var oCombo = document.getElementById( 'cmbLanguages' ) ;

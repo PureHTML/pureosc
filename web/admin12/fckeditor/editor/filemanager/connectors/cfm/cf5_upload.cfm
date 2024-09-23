@@ -46,7 +46,7 @@
 <cfscript>
 	function SendUploadResults(errorNumber, fileUrl, fileName, customMsg)
 	{
-		WriteOutput('<script type="text/javascript">');
+		WriteOutput('<script>');
 		WriteOutput('window.parent.OnUploadCompleted(' & errorNumber & ', "' & JSStringFormat(fileUrl) & '", "' & JSStringFormat(fileName) & '", "' & JSStringFormat(customMsg) & '");' );
 		WriteOutput('</script>');
 	}

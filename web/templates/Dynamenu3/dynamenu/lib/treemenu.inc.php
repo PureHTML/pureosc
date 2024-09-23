@@ -326,14 +326,14 @@ function newTreeMenu(
 	));
 	$toggle_function = $t->parse('out', 'tplfile');
 	$toggle_function =
-	'<script type="text/javascript">' . "\n" .
+	'<script>' . "\n" .
 	'<!--' . "\n" .
 	$toggle_function .
 	'// -->' . "\n" .
 	'</script>' . "\n";
 
 	$toggle =
-	'<script type="text/javascript">' . "\n" .
+	'<script>' . "\n" .
 	'<!--' . "\n" .
 	'if ((DOM && !Opera56 && !Konqueror22) || IE4) {' . "\n" .
 	$toggle .

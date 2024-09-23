@@ -266,7 +266,7 @@
 	<cfargument name="customMsg" required="false" type="String" default="">
 
 	<cfoutput>
-		<script type="text/javascript">
+		<script>
 			window.parent.OnUploadCompleted( #errorNumber#, "#JSStringFormat(fileUrl)#", "#JSStringFormat(fileName)#", "#JSStringFormat(customMsg)#" );
 		</script>
 	</cfoutput>

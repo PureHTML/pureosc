@@ -390,7 +390,7 @@ extract($_GET);
 //#CHAVEIRO6# Step order/customer end
 ) {
 ?>
-<script type="text/javascript"><!--
+<script><!--
 
 function check_form() {
   var error = 0;

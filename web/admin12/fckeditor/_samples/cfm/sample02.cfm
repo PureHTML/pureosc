@@ -30,7 +30,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="robots" content="noindex, nofollow">
 	<link href="../sample.css" rel="stylesheet" type="text/css" />
-		<script type="text/javascript">
+		<script>
 
 function FCKeditor_OnComplete( editorInstance )
 {

@@ -49,17 +49,17 @@ require_once (bts_select('column', 'dynamenu/lib/layersmenu-common.inc.php'));
 if ($menu_type < 2) { // Setup for DHTML style menus
 
     ?>
-        <script type="text/javascript">
+        <script>
             <!--
                 <?php require_once (bts_select('column', 'dynamenu/libjs/layersmenu-browser_detection.js')); ?>
             // -->
         </script>
-        <script type="text/javascript">
+        <script>
             <!--
                 <?php require_once (bts_select('column', 'dynamenu/libjs/layersmenu-library.js')); ?>
             // -->
         </script>
-        <script type="text/javascript">
+        <script>
             <!--
                 <?php require_once (bts_select('column', 'dynamenu/libjs/layersmenu.js')); ?>
             // -->
@@ -77,7 +77,7 @@ if ($menu_type < 2) { // Setup for DHTML style menus
 } else {  // Setup for tree style menus
 		
 		?>
-        <script type="text/javascript">
+        <script>
             <!--
                 <?php require_once (bts_select('column', 'dynamenu/libjs/layersmenu-browser_detection.js')); ?>
 								
@@ -92,7 +92,7 @@ if ($menu_type < 2) { // Setup for DHTML style menus
 								?>
         // -->
         </script>
-        <script type="text/javascript">
+        <script>
             <!--
                 <?php require_once (bts_select('column', 'dynamenu/libjs/layerstreemenu-cookies.js')); ?>
             // -->

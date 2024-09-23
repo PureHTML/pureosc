@@ -214,7 +214,7 @@
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
 <script type="text/javascript" src="includes/general.js"></script>
-<script type="text/javascript"><!--
+<script><!--
 function validate(field) {
   var valid = "0123456789."
   var ok = "yes";

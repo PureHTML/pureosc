@@ -79,7 +79,7 @@ print qq^<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" media="all" href="spell-check-style.css" />
-<script type="text/javascript">
+<script>
   var suggested_words = { $js_suggested_words };
   var spellcheck_info = { $js_spellcheck_info }; </script>
 </head>

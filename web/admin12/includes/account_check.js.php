@@ -20,7 +20,7 @@
 if (substr(basename($PHP_SELF), 0, 12) == 'admin_member') {
 ?>
 
-<script type="text/JavaScript">
+<script>
 <!--
 function validateForm() {
   var p,z,xEmail,errors='',dbEmail,result=0,i;
@@ -91,7 +91,7 @@ function checkSub(obj) {
 } else {
 ?>
 
-<script type="text/JavaScript">
+<script>
 <!--
 function validateForm() {
   var p,z,xEmail,errors='',dbEmail,result=0,i;

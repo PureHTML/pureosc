@@ -36,7 +36,7 @@ echo 'Publikovat?<input type="checkbox" id="products_status_new" name="products_
 
 //popis
 echo '<script type="text/javascript" src="/fckeditor/fckeditor.js"></script>
-<script type="text/javascript">
+<script>
   window.onload = function()
     {
     var oFCKeditor = new FCKeditor( "products_description_new" ) ;

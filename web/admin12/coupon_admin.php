@@ -178,7 +178,7 @@
 <script type="text/javascript" src="includes/general.js"></script>
 <link rel="stylesheet" type="text/css" href="includes/javascript/spiffyCal/spiffyCal_v2_1.css" />
 <script type="text/javascript" src="includes/javascript/spiffyCal/spiffyCal_v2_1.js"></script>
-<script type="text/javascript">
+<script>
   var dateAvailable = new ctlSpiffyCalendarBox("dateAvailable", "new_product", "products_date_available","btnDate1","<?php echo $pInfo->products_date_available; ?>",scBTNMODE_CUSTOMBLUE);
 </script>
 </head>

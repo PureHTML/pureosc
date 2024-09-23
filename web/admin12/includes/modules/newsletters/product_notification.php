@@ -29,7 +29,7 @@
                                   'text' => $products['products_name']);
       }
 
-$choose_audience_string = '<script type="text/javascript"><!--
+$choose_audience_string = '<script><!--
 function mover(move) {
   if (move == \'remove\') {
     for (x=0; x<(document.notifications.products.length); x++) {
@@ -73,11 +73,11 @@ function selectAll(FormName, SelectBox) {
 }
 //--></script>';
 
-      $global_button = '<script type="text/javascript"><!--' . "\n" .
+      $global_button = '<script><!--' . "\n" .
                        'document.write(\'<input type="button" value="' . BUTTON_GLOBAL . '" style="width: 8em;" onclick="document.location=\\\'' . tep_href_link(FILENAME_NEWSLETTERS, 'page=' . $_GET['page'] . '&amp;nID=' . $_GET['nID'] . '&amp;action=confirm&global=true') . '\\\'">\');' . "\n" .
                        '//--></script><noscript><a href="' . tep_href_link(FILENAME_NEWSLETTERS, 'page=' . $_GET['page'] . '&amp;nID=' . $_GET['nID'] . '&amp;action=confirm&global=true') . '"/>[ ' . BUTTON_GLOBAL . ' ]</a></noscript>';
 
-      $cancel_button = '<script type="text/javascript"><!--' . "\n" .
+      $cancel_button = '<script><!--' . "\n" .
                        'document.write(\'<input type="button" value="' . BUTTON_CANCEL . '" style="width: 8em;" onclick="document.location=\\\'' . tep_href_link(FILENAME_NEWSLETTERS, 'page=' . $_GET['page'] . '&amp;nID=' . $_GET['nID']) . '\\\'"/>\');' . "\n" .
                        '//--></script><noscript><a href="' . tep_href_link(FILENAME_NEWSLETTERS, 'page=' . $_GET['page'] . '&amp;nID=' . $_GET['nID']) . '">[ ' . BUTTON_CANCEL . ' ]</a></noscript>';
 

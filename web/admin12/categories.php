@@ -561,14 +561,14 @@ for($nb=1; $nb <= NB_IMAGE_EXTRA ; $nb++) {
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css" />
 <script type="text/javascript" src="includes/general.js"></script>
 <?php if (WEB_EDITOR_LIST == 'htmlarea'){ ?>
-    <script type="text/javascript">
+    <script>
           _editor_url = "includes/javascript/htmlarea/";
           _editor_lang = "en";
     </script>
     <script type="text/javascript" src="includes/javascript/htmlarea/htmlarea.js"></script>
 <?php } elseif (WEB_EDITOR_LIST == 'tiny_mce') { ?>
 <script type="text/javascript" src="includes/javascript/tiny_mce/tiny_mce.js"></script>
-<script type="text/javascript">
+<script>
 tinyMCE.init({
     mode : "textareas",
     theme : "advanced",
@@ -714,10 +714,10 @@ tinyMCE.init({
 ?>
 <link rel="stylesheet" type="text/css" href="includes/javascript/spiffyCal/spiffyCal_v2_1.css" />
 <script type="text/javascript" src="includes/javascript/spiffyCal/spiffyCal_v2_1.js"></script>
-<script type="text/javascript"><!--
+<script><!--
   var dateAvailable = new ctlSpiffyCalendarBox("dateAvailable", "new_product", "products_date_available","btnDate1","<?php echo $pInfo->products_date_available; ?>",scBTNMODE_CUSTOMBLUE);
 //--></script>
-<script type="text/javascript"><!--
+<script><!--
 var tax_rates = new Array();
 <?php
     for ($i=0, $n=sizeof($tax_class_array); $i<$n; $i++) {
@@ -794,7 +794,7 @@ function updateNet(products_price_t) {
           </tr>
           <tr>
             <td class="main"><?php echo TEXT_PRODUCTS_DATE_AVAILABLE; ?><br /><small>(YYYY-MM-DD)</small></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.png', '24', '15') . '&nbsp;'; ?><script type="text/javascript">dateAvailable.writeControl(); dateAvailable.dateFormat="yyyy-MM-dd";</script></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.png', '24', '15') . '&nbsp;'; ?><script>dateAvailable.writeControl(); dateAvailable.dateFormat="yyyy-MM-dd";</script></td>
           </tr>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.png', '1', '10'); ?></td>
@@ -883,7 +883,7 @@ function updateNet(products_price_t) {
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.png', '1', '10'); ?></td>
           </tr>
 
-<script type="text/javascript">
+<script>
 updateGross('products_price');
 <?php
   $prices_num = tep_xppp_getpricesnum();

@@ -137,7 +137,7 @@ function init_spell() {
 </head>
 <body onLoad="init_spell();">
 
-<script type="text/javascript">
+<script>
 wordWindowObj.writeBody();
 </script>
 

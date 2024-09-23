@@ -202,13 +202,13 @@
                 */
                 if($uploadResult == '0' || $uploadResult == '201');
 				$__html_reply__ = '\
-<script type="text/javascript">
+<script>
 	window.parent.frames[\'frmUpload\'].OnUploadCompleted(' + $uploadResult + ',\'' + $NewFilePath + '\',\'' + $NewFilePath->split('/')->last + '\');
 </script>
 				';
                 else;
 				$__html_reply__ = '\
-<script type="text/javascript">
+<script>
 	window.parent.frames[\'frmUpload\'].OnUploadCompleted(' + $uploadResult + ');
 </script>
 				';

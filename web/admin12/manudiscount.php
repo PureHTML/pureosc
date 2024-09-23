@@ -94,7 +94,7 @@
     $cInfo = new objectInfo($manudiscount);
 ?>
 
-<script type="text/javascript"><!--
+<script><!--
 function check_form() {
   var error = 0;
 
@@ -227,7 +227,7 @@ function check_form() {
   } else if($_GET['action'] == 'new') {
      
 ?>
-<script type="text/javascript"><!--
+<script><!--
 function check_form() {
   var error = 0;
 

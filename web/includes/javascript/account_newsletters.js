@@ -1,4 +1,4 @@
-<script type="text/javascript"><!--
+<script><!--
 function rowOverEffect(object) {
   if (object.className == 'moduleRow') object.className = 'moduleRowOver';
 }

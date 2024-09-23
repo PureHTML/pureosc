@@ -1,4 +1,4 @@
-<script type="text/javascript"><!--
+<script><!--
 var i=0;
 function resize() {
 #  if (navigator.appName == 'Netscape') i=40;

@@ -2,7 +2,7 @@
 
 {footer}
 
-<script type="text/javascript">
+<script>
 <!--
 loaded = 1;
 // -->

@@ -203,7 +203,7 @@ exit;
 </div>
 
 
-<script type="text/javascript">
+<script>
     var leady_track_key="jxgheBP6nx8U84nW";
     var leady_track_server=document.location.protocol+"//track.leady.cz/";
     (function(){

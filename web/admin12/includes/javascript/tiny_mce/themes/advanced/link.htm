@@ -30,7 +30,7 @@
 				</table></td>
           </tr>
 		  <!-- Link list -->
-		  <script type="text/javascript">
+		  <script>
 			if (typeof(tinyMCELinkList) != "undefined" && tinyMCELinkList.length > 0) {
 				var html = "";
 
@@ -52,7 +52,7 @@
             <td><select id="target" name="target" style="width: 200px">
                 <option value="_self">{$lang_insert_link_target_same}</option>
                 <option value="_blank">{$lang_insert_link_target_blank}</option>
-				<script type="text/javascript">
+				<script>
 					var html = "";
 					var targets = tinyMCE.getParam('theme_advanced_link_targets', '').split(';');
 

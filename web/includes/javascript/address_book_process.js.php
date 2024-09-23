@@ -3,7 +3,7 @@
     include('includes/javascript/form_check.js.php');
   } else {
 ?>
-<script type="text/javascript"><!--
+<script><!--
 function RemoveFormatString(TargetElement, FormatString) {
   if (TargetElement.value == FormatString) {
     TargetElement.value = "";

@@ -127,7 +127,7 @@
   </tr>
         <?php } ?>
 </table>
-<script type="text/javascript">
+<script>
 <!--
 function ShowPic() {
                                                 <?php for( $n=0; $n<$i; $n++ ) {

@@ -130,7 +130,7 @@ function setupIframe(doc) {
 	var nodes, i, x, name, value, tmp, l;
 
 	// Keep it from not loading/executing stuff
-	hc = hc.replace(/<script>/gi, '<script type="text/javascript">');
+	hc = hc.replace(/<script>/gi, '<script>');
 	hc = hc.replace(/\ssrc=/gi, " mce_src=");
 	hc = hc.replace(/\shref=/gi, " mce_href=");
 	hc = hc.replace(/\stype=/gi, " mce_type=");

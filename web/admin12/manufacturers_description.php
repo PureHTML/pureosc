@@ -33,7 +33,7 @@ require('includes/application_top.php');
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="/fckeditor/fckeditor.js"></script>
-<script type="text/javascript">
+<script>
   window.onload = function()
     {
     var oFCKeditor = new FCKeditor( 'kod' ) ;
