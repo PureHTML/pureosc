@@ -19,6 +19,7 @@ define('TABLE_HEADING_ACTION', 'Proveď');
 
 
 define('TEXT_INFO_EDIT_INTRO', 'Proveď potřebné změny');
+define('TEXT_INFO_COMMON_CURRENCIES', '-- Common Currencies --');
 define('TEXT_INFO_CURRENCY_TITLE', 'Název:');
 define('TEXT_INFO_CURRENCY_CODE', 'Kód:');
 define('TEXT_INFO_CURRENCY_SYMBOL_LEFT', 'Symbol před:');

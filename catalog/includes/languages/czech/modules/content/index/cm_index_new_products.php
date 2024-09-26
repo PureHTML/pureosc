@@ -10,6 +10,6 @@
   Released under the GNU General Public License
 */
 
-define('MODULE_CONTENT_INDEX_NEW_PRODUCTS_TITLE', 'New Products');
+define('MODULE_CONTENT_INDEX_NEW_PRODUCTS_TITLE', 'Novinky');
 define('MODULE_CONTENT_INDEX_NEW_PRODUCTS_DESCRIPTION', 'Add new products to index listing');
-define('MODULE_CONTENT_INDEX_NEW_PRODUCTS_BOX_TITLE', 'New Products For %s');
+define('MODULE_CONTENT_INDEX_NEW_PRODUCTS_BOX_TITLE', 'Novinky v nabídce');

@@ -1711,3 +1711,44 @@ function tep_resize_image($old_image, $new_image, $width = null, $height = null,
     imagedestroy($im);
   }
 }
+
+  /**
+  * ULTIMATE Seo Urls 5 PRO by FWR Media
+  * Reset the various cache systems
+  * @param string $action
+  */
+  function tep_reset_cache_data_usu5( $action = false ) {
+    if ( $action == 'reset' ) {
+      $usu5_path = realpath( dirname( __FILE__ ) . '/../../../' ) . '/' . DIR_WS_MODULES . 'ultimate_seo_urls5/';
+      switch( USU5_CACHE_SYSTEM ) {
+        case 'file': 
+          $path_to_cache = $usu5_path . 'cache_system/cache/';
+          $it = new DirectoryIterator( $path_to_cache );
+          while( $it->valid() ) {
+            if ( !$it->isDot() && is_readable( $path_to_cache . $it->getFilename() ) && ( substr( $it->getFilename(), -6 ) == '.cache' ) ) {
+              @unlink( $path_to_cache . $it->getFilename() );
+            }
+            $it->next();
+          }
+          break;
+        case 'mysql':
+          tep_db_query( 'TRUNCATE TABLE `usu_cache`' );
+          break;
+        case 'memcache':
+          if ( class_exists('Memcache') ){
+            include $usu5_path . 'interfaces/cache_interface.php';
+            include $usu5_path . 'cache_system/memcache.php';
+            Memcache_Cache_Module::iAdmin()->initiate()
+                                           ->flushOut();
+          }
+          break;
+        case 'sqlite':
+          include $usu5_path . 'interfaces/cache_interface.php';
+          include $usu5_path . 'cache_system/sqlite.php';
+          Sqlite_Cache_Module::admini()->gc(); 
+          break;
+      }
+      tep_db_query( "UPDATE " . TABLE_CONFIGURATION . " SET configuration_value='false' WHERE configuration_key='USU5_RESET_CACHE'" );
+    }       
+  } // end function
+  

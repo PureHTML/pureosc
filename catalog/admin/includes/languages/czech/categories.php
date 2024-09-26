@@ -10,92 +10,99 @@
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Kategorie / zboží');
-define('HEADING_TITLE_SEARCH', 'Vyhledat:');
-define('HEADING_TITLE_GOTO', 'Jdi na:');
+define('HEADING_TITLE', 'Categories / Products');
+define('HEADING_TITLE_SEARCH', 'Search:');
+define('HEADING_TITLE_GOTO', 'Go To:');
 
 define('TABLE_HEADING_ID', 'ID');
-define('TABLE_HEADING_CATEGORIES_PRODUCTS', 'Kategorie / zboží');
-define('TABLE_HEADING_ACTION', 'Proveď');
-define('TABLE_HEADING_STATUS', 'Karta');
+define('TABLE_HEADING_CATEGORIES_PRODUCTS', 'Categories / Products');
+define('TABLE_HEADING_ACTION', 'Action');
+define('TABLE_HEADING_STATUS', 'Status');
 
-define('TEXT_NEW_PRODUCT', 'Nové zboží v &quot;%s&quot;');
-define('TEXT_CATEGORIES', 'Kategorie:');
-define('TEXT_SUBCATEGORIES', 'Podkategorie:');
-define('TEXT_PRODUCTS', 'Zboží:');
-define('TEXT_PRODUCTS_PRICE_INFO', 'Cena s DPH:');
-define('TEXT_PRODUCTS_TAX_CLASS', 'Výše DPH:');
-define('TEXT_PRODUCTS_AVERAGE_RATING', 'Průměr hodnocení:');
-define('TEXT_PRODUCTS_QUANTITY_INFO', 'Množství:');
-define('TEXT_DATE_ADDED', 'Datum přidání:');
-define('TEXT_DATE_AVAILABLE', 'Datum uskladnění:');
-define('TEXT_LAST_MODIFIED', 'Posledni úprava:');
-define('TEXT_IMAGE_NONEXISTENT', 'Obrázek chybí');
-define('TEXT_NO_CHILD_CATEGORIES_OR_PRODUCTS', 'Vlož novou kategorii nebo zboží do<br>&nbsp;<br><b>%s</b>');
-define('TEXT_PRODUCT_MORE_INFORMATION', 'Pro více informací se na zboží podívej na <a href="http://%s" target="blank"><u>webpage</u></a>.');
-define('TEXT_PRODUCT_DATE_ADDED', 'Toto zboží bylo přidáno do obchodu %s.');
+define('TEXT_NEW_PRODUCT', 'New Product in &quot;%s&quot;');
+define('TEXT_CATEGORIES', 'Categories:');
+define('TEXT_SUBCATEGORIES', 'Subcategories:');
+define('TEXT_PRODUCTS', 'Products:');
+define('TEXT_PRODUCTS_PRICE_INFO', 'Price:');
+define('TEXT_PRODUCTS_TAX_CLASS', 'Tax Class:');
+define('TEXT_PRODUCTS_AVERAGE_RATING', 'Average Rating:');
+define('TEXT_PRODUCTS_QUANTITY_INFO', 'Quantity:');
+define('TEXT_DATE_ADDED', 'Date Added:');
+define('TEXT_DATE_AVAILABLE', 'Date Available:');
+define('TEXT_LAST_MODIFIED', 'Last Modified:');
+define('TEXT_NO_CHILD_CATEGORIES_OR_PRODUCTS', 'Please insert a new category or product in this level.');
+define('TEXT_PRODUCT_MORE_INFORMATION', 'For more information, please visit this products <a href="http://%s" target="blank"><u>webpage</u></a>.');
+define('TEXT_PRODUCT_DATE_ADDED', 'This product was added to our catalog on %s.');
+define('TEXT_PRODUCT_DATE_AVAILABLE', 'This product will be in stock on %s.');
 
-define('TEXT_PRODUCT_DATE_AVAILABLE', 'Teto zboží bude na skladu %s.');
+define('TEXT_EDIT_INTRO', 'Please make any necessary changes');
+define('TEXT_EDIT_CATEGORIES_ID', 'Category ID:');
+define('TEXT_EDIT_CATEGORIES_NAME', 'Category Name:');
+define('TEXT_EDIT_CATEGORIES_IMAGE', 'Category Image:');
+define('TEXT_EDIT_SORT_ORDER', 'Sort Order:');
 
-define('TEXT_EDIT_INTRO', 'Proveď potřebné změny');
-define('TEXT_EDIT_CATEGORIES_ID', 'ID kategorie:');
-define('TEXT_EDIT_CATEGORIES_NAME', 'Název kategorie:');
-define('TEXT_EDIT_CATEGORIES_IMAGE', 'Logo kategorie:');
-define('TEXT_EDIT_SORT_ORDER', 'Pořadí třídění:');
-//define('TEXT_EDIT_PARENT_ID', 'Nadřazené ID:');
+define('TEXT_INFO_COPY_TO_INTRO', 'Please choose a new category you wish to copy this product to');
+define('TEXT_INFO_CURRENT_CATEGORIES', 'Current Categories:');
 
-define('TEXT_INFO_COPY_TO_INTRO', 'Vyber kategorii do které chceš překopírovat zboží');
-define('TEXT_INFO_CURRENT_CATEGORIES', 'Aktuální kategorie:');
+define('TEXT_INFO_HEADING_NEW_CATEGORY', 'New Category');
+define('TEXT_INFO_HEADING_EDIT_CATEGORY', 'Edit Category');
+define('TEXT_INFO_HEADING_DELETE_CATEGORY', 'Delete Category');
+define('TEXT_INFO_HEADING_MOVE_CATEGORY', 'Move Category');
+define('TEXT_INFO_HEADING_DELETE_PRODUCT', 'Delete Product');
+define('TEXT_INFO_HEADING_MOVE_PRODUCT', 'Move Product');
+define('TEXT_INFO_HEADING_COPY_TO', 'Copy To');
 
-define('TEXT_INFO_HEADING_NEW_CATEGORY', 'Nová kategorie');
-define('TEXT_INFO_HEADING_EDIT_CATEGORY', 'Úprava kategorie');
-define('TEXT_INFO_HEADING_DELETE_CATEGORY', 'Vymazání kategorie');
-define('TEXT_INFO_HEADING_MOVE_CATEGORY', 'Vyber kategorii');
-define('TEXT_INFO_HEADING_DELETE_PRODUCT', 'Vymazání zboží');
-define('TEXT_INFO_HEADING_MOVE_PRODUCT', 'Vybrat zboží');
-define('TEXT_INFO_HEADING_COPY_TO', 'Kopírovat do');
+define('TEXT_DELETE_CATEGORY_INTRO', 'Are you sure you want to delete this category?');
+define('TEXT_DELETE_PRODUCT_INTRO', 'Are you sure you want to permanently delete this product?');
 
-define('TEXT_DELETE_CATEGORY_INTRO', 'Opravdu chceš smazat tuto kategorii?');
-define('TEXT_DELETE_PRODUCT_INTRO', 'Skutečně chceš smazat toto zboží?');
+define('TEXT_DELETE_WARNING_CHILDS', '<strong>WARNING:</strong> There are %s (child-)categories still linked to this category!');
+define('TEXT_DELETE_WARNING_PRODUCTS', '<strong>WARNING:</strong> There are %s products still linked to this category!');
 
-define('TEXT_DELETE_WARNING_CHILDS', '<b>Upozornění:</b> Zde je %s (pod-)kategorií připojených k této kategorii!');
-define('TEXT_DELETE_WARNING_PRODUCTS', '<b>Upozornění:</b> Zde je are %s zboží připojených k této kategorii!');
+define('TEXT_MOVE_PRODUCTS_INTRO', 'Please select which category you wish <strong>%s</strong> to reside in');
+define('TEXT_MOVE_CATEGORIES_INTRO', 'Please select which category you wish <strong>%s</strong> to reside in');
+define('TEXT_MOVE', 'Move <strong>%s</strong> to:');
 
-define('TEXT_MOVE_PRODUCTS_INTRO', 'Vyber nadřazenou kategorii pro přesun zboží <b>%s</b> to');
-define('TEXT_MOVE_CATEGORIES_INTRO', 'Vyber nadřazenou kategorii pro přesun <b>%s</b> to');
-define('TEXT_MOVE', 'Přesuň <b>%s</b> do:');
-define('TEXT_MOVE_NOTE', '<small><b>Poznámka:</b></small> Rozmysli si to!');
+define('TEXT_NEW_CATEGORY_INTRO', 'Please fill out the following information for the new category');
+define('TEXT_CATEGORIES_NAME', 'Category Name:');
+define('TEXT_CATEGORIES_IMAGE', 'Category Image:');
+define('TEXT_SORT_ORDER', 'Sort Order:');
 
-define('TEXT_NEW_CATEGORY_INTRO', 'Vyplň několik informací o nové kategorii');
-define('TEXT_CATEGORIES_NAME', 'Název kategorie:');
-define('TEXT_CATEGORIES_IMAGE', 'Logo kategorie:');
-define('TEXT_SORT_ORDER', 'Způsob třídění:');
+define('SECTION_HEADING_GENERAL', 'General');
+define('SECTION_HEADING_DATA', 'Data');
+define('SECTION_HEADING_IMAGES', 'Images');
 
-define('TEXT_PRODUCTS_STATUS', 'Karta zboží:');
-define('TEXT_PRODUCTS_DATE_AVAILABLE', 'Datum uskladnění:');
-define('TEXT_PRODUCT_AVAILABLE', 'Na skladu');
-define('TEXT_PRODUCT_NOT_AVAILABLE', 'Není skladem');
-define('TEXT_PRODUCTS_MANUFACTURER', 'Výrobce-značka tboží:');
-define('TEXT_PRODUCTS_NAME', 'Název zboží:');
-define('TEXT_PRODUCTS_DESCRIPTION', 'Popis zboží:');
-define('TEXT_PRODUCTS_QUANTITY', 'Množství zboží:');
-define('TEXT_PRODUCTS_MODEL', 'Model-typ:');
-define('TEXT_PRODUCTS_IMAGE', 'Obrázek zboží:');
-define('TEXT_PRODUCTS_URL', 'URL zboží:');
-define('TEXT_PRODUCTS_URL_WITHOUT_HTTP', '<small>(bez http://)</small>');
-define('TEXT_PRODUCTS_PRICE_NET', 'Cena zboží (bez DPH):');
-define('TEXT_PRODUCTS_PRICE_GROSS', 'Cena zboží (s DPH):');
-define('TEXT_PRODUCTS_PRICE', 'Cen s DPH:');
-define('TEXT_PRODUCTS_WEIGHT', 'Váha zboží:');
+define('TEXT_PRODUCTS_STATUS', 'Products Status:');
+define('TEXT_PRODUCTS_DATE_AVAILABLE', 'Date Available:');
+define('TEXT_PRODUCT_AVAILABLE', 'In Stock');
+define('TEXT_PRODUCT_NOT_AVAILABLE', 'Out of Stock');
+define('TEXT_PRODUCTS_MANUFACTURER', 'Products Manufacturer:');
+define('TEXT_PRODUCTS_NAME', 'Products Name:');
+define('TEXT_PRODUCTS_DESCRIPTION', 'Products Description:');
+define('TEXT_PRODUCTS_QUANTITY', 'Products Quantity:');
+define('TEXT_PRODUCTS_MODEL', 'Products Model:');
+define('TEXT_PRODUCTS_IMAGE', 'Products Image:');
+define('TEXT_PRODUCTS_MAIN_IMAGE', 'Main Image');
+define('TEXT_PRODUCTS_LARGE_IMAGE', 'Large Image');
+define('TEXT_PRODUCTS_LARGE_IMAGE_HTML_CONTENT', 'HTML Content (for popup)');
+define('TEXT_PRODUCTS_ADD_LARGE_IMAGE', 'Add Large Image');
+define('TEXT_PRODUCTS_LARGE_IMAGE_DELETE_TITLE', 'Delete Large Product Image?');
+define('TEXT_PRODUCTS_LARGE_IMAGE_CONFIRM_DELETE', 'Please confirm the removal of the large product image.');
+define('TEXT_PRODUCTS_URL', 'Products URL:');
+define('TEXT_PRODUCTS_URL_WITHOUT_HTTP', '<small>(without http://)</small>');
+define('TEXT_PRODUCTS_PRICE_NET', 'Products Price (Net):');
+define('TEXT_PRODUCTS_PRICE_GROSS', 'Products Price (Gross):');
+define('TEXT_PRODUCTS_WEIGHT', 'Products Weight:');
 
-define('EMPTY_CATEGORY', 'Prázdná kategorie');
+define('EMPTY_CATEGORY', 'Empty Category');
 
 define('TEXT_HOW_TO_COPY', 'Copy Method:');
-define('TEXT_COPY_AS_LINK', 'Link zboží');
-define('TEXT_COPY_AS_DUPLICATE', 'Duplikovat zboží');
+define('TEXT_COPY_AS_LINK', 'Link product');
+define('TEXT_COPY_AS_DUPLICATE', 'Duplicate product');
 
-define('ERROR_CANNOT_LINK_TO_SAME_CATEGORY', 'Chyba: Nelze spojit výrobky ve stejné kategorii.');
-define('ERROR_CATALOG_IMAGE_DIRECTORY_NOT_WRITEABLE', 'Chyba: Katalog obrazy adresáře nelze zapisovat: ' . DIR_FS_CATALOG_IMAGES);
-define('ERROR_CATALOG_IMAGE_DIRECTORY_DOES_NOT_EXIST', 'Chyba: Katalog obrazy adresář neexistuje: ' . DIR_FS_CATALOG_IMAGES);
-define('ERROR_CANNOT_MOVE_CATEGORY_TO_PARENT', 'Chyba: Kategorie nemohou být přesunuty do kategorie dětí.');
-?>
+define('ERROR_CANNOT_LINK_TO_SAME_CATEGORY', 'Error: Can not link products in the same category.');
+define('ERROR_CATALOG_IMAGE_DIRECTORY_NOT_WRITEABLE', 'Error: Catalog images directory is not writeable: ' . DIR_FS_CATALOG_IMAGES);
+define('ERROR_CATALOG_IMAGE_DIRECTORY_DOES_NOT_EXIST', 'Error: Catalog images directory does not exist: ' . DIR_FS_CATALOG_IMAGES);
+define('ERROR_CANNOT_MOVE_CATEGORY_TO_PARENT', 'Error: Category cannot be moved into child category.');
+
+define('TEXT_EDIT_CATEGORIES_DESCRIPTION', 'Category Description:');
+define('TEXT_CATEGORIES_DESCRIPTION', 'Category Description:');

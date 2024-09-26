@@ -69,7 +69,7 @@
     define($configuration['cfgKey'], $configuration['cfgValue']);
   }
 
-  require(DIR_FS_CATALOG . 'includes/vendor/autoload.php');
+  require(DIR_FS_CATALOG . '../vendor/autoload.php');
 
 // define our general functions used application-wide
   require('includes/functions/general.php');

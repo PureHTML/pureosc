@@ -11,64 +11,16 @@
 */
 
 
-// The HTML href link wrapper function orig
-function tep_href_link($page = '', $parameters = '', $connection = 'SSL', $add_session_id = true, $search_engine_safe = true) {
-  global $request_type, $session_started, $SID;
-
-  $page = tep_output_string($page);
-
-  if (empty($page)) {
-    die('</td></tr></table></td></tr></table><br /><br /><font color="#ff0000"><strong>Error!</strong></font><br /><br /><strong>Unable to determine the page link!<br /><br />');
+  /**
+  * ULTIMATE Seo Urls 5 PRO by FWR Media
+  * Replacement for osCommerce href link wrapper function
+  */
+  require_once DIR_WS_MODULES . 'ultimate_seo_urls5/main/usu5.php';
+  
+  function tep_href_link( $page = '', $parameters = '', $connection = 'NONSSL', $add_session_id = true, $search_engine_safe = true ) {
+    return Usu_Main::i()->hrefLink( $page, $parameters, $connection, $add_session_id, $search_engine_safe );
   }
-
-  if ($connection == 'NONSSL') {
-    $link = HTTP_SERVER . DIR_WS_HTTP_CATALOG;
-  } elseif ($connection == 'SSL') {
-    if (ENABLE_SSL == true) {
-      $link = HTTPS_SERVER . DIR_WS_HTTPS_CATALOG;
-    } else {
-      $link = HTTP_SERVER . DIR_WS_HTTP_CATALOG;
-    }
-  } else {
-    die('</td></tr></table></td></tr></table><br /><br /><font color="#ff0000"><strong>Error!</strong></font><br /><br /><strong>Unable to determine connection method on a link!<br /><br />Known methods: NONSSL SSL</strong><br /><br />');
-  }
-
-  if (!empty($parameters)) {
-    $link .= $page . '?' . tep_output_string($parameters);
-    $separator = '&';
-  } else {
-    $link .= $page;
-    $separator = '?';
-  }
-
-  while ((substr($link, -1) == '&') || (substr($link, -1) == '?')) {
-    $link = substr($link, 0, -1);
-  }
-
-  // Add the session ID when moving from different HTTP and HTTPS servers, or when SID is defined
-  if (($add_session_id == true) && ($session_started == true) && (SESSION_FORCE_COOKIE_USE == 'False')) {
-    if (!empty($SID)) {
-      $_sid = $SID;
-    } elseif ((($request_type == 'NONSSL') && ($connection == 'SSL') && (ENABLE_SSL == true)) || (($request_type == 'SSL') && ($connection == 'NONSSL'))) {
-      if (HTTP_COOKIE_DOMAIN != HTTPS_COOKIE_DOMAIN) {
-        $_sid = tep_session_name() . '=' . tep_session_id();
-      }
-    }
-  }
-
-  if (isset($_sid)) {
-    $link .= $separator . tep_output_string($_sid);
-  }
-
-  while (strstr($link, '&&')) {
-    $link = str_replace('&&', '&', $link);
-  }
-
-  $link = str_replace('&', '&amp;', $link);
-
-  return $link;
-}
-
+  
 // The HTML image wrapper function
 function tep_image($src, $alt = '', $width = '', $height = '', $parameters = '') {
   if ((empty($src) || ($src == DIR_WS_IMAGES)) && (IMAGE_REQUIRED == 'false')) {

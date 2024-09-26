@@ -29,28 +29,28 @@ function tep_exit() {
   exit();
 }
 
-////
-// Redirect to another page or site
-function tep_redirect($url) {
-  if ((strstr($url, "\n") != false) || (strstr($url, "\r") != false)) {
-    tep_redirect(tep_href_link('index.php', '', 'SSL', false));
-  }
-
-  if ((ENABLE_SSL == true) && (getenv('HTTPS') == 'on')) { // We are loading an SSL page
-    if (substr($url, 0, strlen(HTTP_SERVER . DIR_WS_HTTP_CATALOG)) == HTTP_SERVER . DIR_WS_HTTP_CATALOG) { // NONSSL url
-      $url = HTTPS_SERVER . DIR_WS_HTTPS_CATALOG . substr($url, strlen(HTTP_SERVER . DIR_WS_HTTP_CATALOG)); // Change it to SSL
+  /**
+  * ULTIMATE Seo Urls 5 PRO by FWR Media
+  * Redirect to another page or site
+  */
+  function tep_redirect($url) {
+    if ( (strstr($url, "\n") != false) || (strstr($url, "\r") != false) ) { 
+      tep_redirect(tep_href_link(FILENAME_DEFAULT, '', 'NONSSL', false));
     }
+
+    if ( (ENABLE_SSL == true) && (getenv('HTTPS') == 'on') ) { // We are loading an SSL page
+      if (substr($url, 0, strlen(HTTP_SERVER)) == HTTP_SERVER) { // NONSSL url
+        $url = HTTPS_SERVER . substr($url, strlen(HTTP_SERVER)); // Change it to SSL
+      }
+    }
+    if ( false !== strpos($url, '&amp;') ){
+      $url = str_replace('&amp;', '&', $url);
+    }
+    session_write_close();
+    header('Location: ' . $url);
+    exit;
   }
-
-  if (strpos($url, '&amp;') !== false) {
-    $url = str_replace('&amp;', '&', $url);
-  }
-
-  header('Location: ' . $url);
-
-  tep_exit();
-}
-
+  
 ////
 // Parse the data used in the html tags to ensure the tags will not break
 function tep_parse_input_field_data($data, $parse) {

@@ -1,0 +1,18 @@
+#!/bin/bash
+. dbconnect.sh
+if [[ ! $1 || ! $2 ]];then
+	echo 'Usage: ./confinsert configuration_key ($1) "configuration_value" ($2) "configuration_title"($3) "configuration_description"($4) configuration_group_id($5) SORT_ORDER($6)]
+	default CONFIGURATION_GROUP_ID=1, default SORT_ORDER=9999'
+	exit
+fi
+
+[[ $3 ]] && CT="$3" || CT=$1
+[[ $4 ]] && CD="$4" || CD=$1
+[[ $5 ]] && GID="$5" || GID=1
+[[ $6 ]] && ORD="$5" || ORD=9999
+
+mysql -h${H} -u${U} -p"${P}" $D -e "
+insert into configuration 
+			 (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function ) 
+values ('${CT}',              '${1}',            '${2}',              '${CD}',                     '${GID}',                    '${ORD}', NOW(), NOW(), NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
+"

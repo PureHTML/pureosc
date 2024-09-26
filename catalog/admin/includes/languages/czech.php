@@ -21,6 +21,8 @@ define('DATE_FORMAT_LONG', '%d. %m. %Y'); // this is used for strftime()
 define('DATE_FORMAT', 'd. m. Y'); // this is used for date()
 define('PHP_DATE_TIME_FORMAT', 'm/d/Y H:i:s'); // this is used for date()
 define('DATE_TIME_FORMAT', DATE_FORMAT_SHORT . ' %H:%M:%S');
+define('JQUERY_DATEPICKER_I18N_CODE', ''); // leave empty for en_US; see http://jqueryui.com/demos/datepicker/#localization
+define('JQUERY_DATEPICKER_FORMAT', 'mm/dd/yy'); // see http://docs.jquery.com/UI/Datepicker/formatDate
 
 // the CURRENCY_* constants will be used to format the currency to the selected locale..
 // this is used with the tep_currency_format() function..
@@ -302,4 +304,6 @@ define('ERROR_FILE_NOT_SAVED', 'Chyba: File upload not saved.');
 define('ERROR_FILETYPE_NOT_ALLOWED', 'Chyba: File upload type not allowed.');
 define('SUCCESS_FILE_SAVED_SUCCESSFULLY', 'Success: File upload saved successfully.');
 define('WARNING_NO_FILE_UPLOADED', 'Varování: No file uploaded.');
-?>
+
+define('TEXT_IMAGE_NONEXISTENT', 'IMAGE DOES NOT EXIST');
+

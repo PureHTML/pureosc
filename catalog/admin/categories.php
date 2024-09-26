@@ -17,6 +17,13 @@
 
   $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
+if (tep_not_null($action)) {
+    // ULTIMATE Seo Urls 5 PRO by FWR Media
+    // If the action will affect the cache entries
+    if ( $action == 'insert' || $action == 'update' || $action == 'setflag' ) {
+      tep_reset_cache_data_usu5( 'reset' );
+  }
+}
   $OSCOM_Hooks->call('categories', 'productPreAction');
 
   if (!empty($action)) {

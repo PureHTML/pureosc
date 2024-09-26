@@ -36,8 +36,39 @@ require('includes/functions/compatibility.php');
 $request_type = (getenv('HTTPS') == 'on') ? 'SSL' : 'NONSSL';
 
 // set php_self in the local scope
-$req = parse_url($_SERVER['SCRIPT_NAME']);
-$PHP_SELF = substr($req['path'], ($request_type == 'NONSSL') ? strlen(DIR_WS_HTTP_CATALOG) : strlen(DIR_WS_HTTPS_CATALOG));
+//orig: $req = parse_url($_SERVER['SCRIPT_NAME']);
+//orig: $PHP_SELF = substr($req['path'], ($request_type == 'NONSSL') ? strlen(DIR_WS_HTTP_CATALOG) : strlen(DIR_WS_HTTPS_CATALOG));
+/**
+  * ULTIMATE Seo Urls 5 PRO by FWR Media
+  * function to return the base filename 
+  */
+  function usu5_base_filename() {
+    // Probably won't get past SCRIPT_NAME unless this is reporting cgi location
+    $base = new ArrayIterator( array( 'SCRIPT_NAME', 'PHP_SELF', 'REQUEST_URI', 'ORIG_PATH_INFO', 'HTTP_X_ORIGINAL_URL', 'HTTP_X_REWRITE_URL' ) );
+    while ( $base->valid() ) {
+      if ( array_key_exists(  $base->current(), $_SERVER ) && !empty(  $_SERVER[$base->current()] ) ) {
+        if ( false !== strpos( $_SERVER[$base->current()], '.php' ) ) {
+          preg_match( '@[a-z0-9_]+\.php@i', $_SERVER[$base->current()], $matches );
+          if ( is_array( $matches ) && ( array_key_exists( 0, $matches ) )
+                                    && ( substr( $matches[0], -4, 4 ) == '.php' )
+                                    && ( is_readable( $matches[0] ) ) ) {
+            return $matches[0];
+          } 
+        } 
+      }
+      $base->next();
+    }
+    // Some odd server set ups return / for SCRIPT_NAME and PHP_SELF when accessed as mysite.com (no index.php) where they usually return /index.php
+    if ( ( $_SERVER['SCRIPT_NAME'] == '/' ) || ( $_SERVER['PHP_SELF'] == '/' ) ) {
+      return 'index.php';
+    }
+    // Return the standard RC3 code 
+    return ( ( ( strlen( ini_get( 'cgi.fix_pathinfo' ) ) > 0) && ( (bool)ini_get( 'cgi.fix_pathinfo' ) == false ) ) || !isset( $_SERVER['SCRIPT_NAME'] ) ) ? basename( $_SERVER['PHP_SELF'] ) : basename( $_SERVER['SCRIPT_NAME'] );
+  } // End function
+// set php_self in the local scope
+  $PHP_SELF = usu5_base_filename();
+  
+
 
 if ($request_type == 'NONSSL') {
   define('DIR_WS_CATALOG', DIR_WS_HTTP_CATALOG);
@@ -257,15 +288,16 @@ $_system_locale_numeric = setlocale(LC_NUMERIC, 0);
 require('includes/languages/' . $language . '.php');
 setlocale(LC_NUMERIC, $_system_locale_numeric); // Prevent LC_ALL from setting LC_NUMERIC to a locale with 1,0 float/decimal values instead of 1.0 (see bug #634)
 
- // Ultimate SEO URLs v2.2d
-// if ((!defined('SEO_ENABLED')) || (SEO_ENABLED == 'true')) {
-//  include_once('includes/classes/seo.class.php');
-//require_once('includes/classes/pure_seo.class.php'); 
-//  if ( ! (isset($seo_urls) && is_object($seo_urls)) ){  $seo_urls = new SEO_URL($languages_id); }
-//   if(! is_object($pure_seo_urls)) $pure_seo_urls = new pure_seo;
-
-//}
-
+  /**
+  * ULTIMATE Seo Urls 5 PRO by FWR Media
+  */
+  Usu_Main::i()->setVar( 'languages_id', $languages_id )
+               ->setVar( 'request_type', $request_type ) 
+               ->setVar( 'session_started', $session_started ) 
+               ->setVar( 'sid', $SID ) 
+               ->setVar( 'language', $language )
+               ->setVar( 'filename', $PHP_SELF )
+               ->initiate( ( isset( $lng ) && ( $lng instanceof language ) ) ? $lng : array(), $languages_id, $language );
 
 // currency
 if (!isset($_SESSION['currency']) || isset($_GET['currency']) || ((USE_DEFAULT_LANGUAGE_CURRENCY == 'true') && (LANGUAGE_CURRENCY != $currency))) {
