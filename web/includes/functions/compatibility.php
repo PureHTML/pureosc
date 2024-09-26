@@ -45,13 +45,6 @@
     if (!is_array($_COOKIE)) $_COOKIE = array();
   }
 
-// handle magic_quotes_gpc turned off.
-  if (!get_magic_quotes_gpc()) {
-    do_magic_quotes_gpc($_GET);
-    do_magic_quotes_gpc($_POST);
-    do_magic_quotes_gpc($_COOKIE);
-  }
-
   if (!function_exists('array_splice')) {
     function array_splice(&$array, $maximum) {
       if (sizeof($array) >= $maximum) {
