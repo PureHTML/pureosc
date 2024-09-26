@@ -15,7 +15,7 @@
 ////
 // Ultimate SEO URLs v2.1
 // The HTML href link wrapper function //shop2.0brain:new: (next line) conditions to NO rewrite some pages 
-if ((SEO_ENABLED == 'true') && ($GLOBALS['REQUEST_URI']!='/login.php') && ($GLOBALS['REQUEST_URI']!='/address_book.php')) { //run chemo's code + NO rewrite conditions
+if ((defined('SEO_ENABLED') && constant('SEO_ENABLED') == 'true') && ($GLOBALS['REQUEST_URI']!='/login.php') && ($GLOBALS['REQUEST_URI']!='/address_book.php')) { //run chemo's code + NO rewrite conditions
 //if (SEO_ENABLED == 'true' && $page!='/login.php') {
   function tep_href_link($page = '', $parameters = '', $connection = 'NONSSL', $add_session_id = true, $search_engine_safe = true) {
         global $seo_urls;
