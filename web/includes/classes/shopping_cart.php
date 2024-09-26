@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: shopping_cart.php,v 1.35 2003/06/25 21:14:33 hpdl Exp $
+  $Id$
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2008 osCommerce
+  Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
 */
