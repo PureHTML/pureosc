@@ -1,4 +1,4 @@
-/*M!999999\- enable the sandbox mode */ 
+/*!999999\- enable the sandbox mode */ 
 -- MariaDB dump 10.19-11.2.5-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: dvere
