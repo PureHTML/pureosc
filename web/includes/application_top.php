@@ -228,7 +228,7 @@ if (SESSION_FORCE_COOKIE_USE == 'True') {
 }
 
 if ($session_started == true) { // force register_globals
-  extract($_SESSION, EXTR_OVERWRITE + EXTR_REFS);
+  extract(is_array($_SESSION) ? $_SESSION : [] , EXTR_OVERWRITE + EXTR_REFS);
 }
 
 // initialize a session token
