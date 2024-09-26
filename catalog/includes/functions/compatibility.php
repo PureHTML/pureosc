@@ -53,10 +53,6 @@ $HTTP_SESSION_VARS =& $_SESSION;
 $HTTP_POST_FILES =& $_FILES;
 $HTTP_SERVER_VARS =& $_SERVER;
 
-// force magic_quotes_gpc
-do_magic_quotes_gpc($_GET);
-do_magic_quotes_gpc($_POST);
-do_magic_quotes_gpc($_COOKIE);
 
 // set default timezone if none exists (PHP 5.3 throws an E_WARNING)
 date_default_timezone_set(defined('CFG_TIME_ZONE') ? CFG_TIME_ZONE : date_default_timezone_get());
