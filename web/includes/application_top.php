@@ -1,49 +1,39 @@
 <?php
 /*
-  $Id: $
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+osCommerce, Open Source E-Commerce Solutions
+http://www.oscommerce.com
 
-  Copyright (c) 2008 osCommerce
+Copyright (c) 2020 osCommerce
 
-  Released under the GNU General Public License
+Released under the GNU General Public License
 */
 
 // start the timer for the page parse time log
-  define('PAGE_PARSE_START_TIME', microtime());
+define('PAGE_PARSE_START_TIME', microtime());
 
-// set the level of error reporting
-  error_reporting(E_ALL & ~E_NOTICE);
+// load server configuration parameters
+if (file_exists('includes/local/configure.php')) { // for developers
+  include('includes/local/configure.php');
+} else {
+  include('includes/configure.php');
+}
 
-// check if register_globals is enabled.
-// since this is a temporary measure this message is hardcoded. The requirement will be removed before 2.2 is finalized.
-// >>> BEGIN REGISTER_GLOBALS
-//  if (function_exists('ini_get')) {
-//    ini_get('register_globals') or exit('Server Requirement Error: register_globals is disabled in your PHP configuration. This can be enabled in your php.ini configuration file or in the .htaccess file in your catalog directory.');
-//  }
-// <<< END REGISTER_GLOBALS
-
-// Set the local configuration parameters - mainly for developers
-  if (file_exists('includes/local/configure.php')) include('includes/local/configure.php');
-
-// include server parameters
-  require('includes/configure.php');
-
-  if (strlen(DB_SERVER) < 1) {
-    if (is_dir('install')) {
-      header('Location: install/index.php');
-    }
+if (strlen(DB_SERVER) < 1) {
+  if (is_dir('install')) {
+    header('Location: install/index.php');
   }
+}
 
-// define the project version
-  define('PROJECT_VERSION', 'osCommerce Online Merchant v2.2 RC2a - Wai Version');
+// define the project version --- obsolete, now retrieved with tep_get_version()
+define('PROJECT_VERSION', 'osCommerce Online Merchant v2.3.5');
 
 // some code to solve compatibility issues
-  require(DIR_WS_FUNCTIONS . 'compatibility.php');
+require('includes/functions/compatibility.php');
 
 // set the type of request (secure or not)
-  $request_type = (getenv('HTTPS') == 'on') ? 'SSL' : 'NONSSL';
+$request_type = (getenv('HTTPS') == 'on') ? 'SSL' : 'NONSSL';
 
 // set php_self in the local scope
   if (!isset($PHP_SELF)) $PHP_SELF = $_SERVER['PHP_SELF'];
@@ -55,7 +45,7 @@
   }
 
 // include the list of project filenames
-  require(DIR_WS_INCLUDES . 'filenames.php');
+require('includes/filenames.php');
 
 // include the list of project database tables
   require(DIR_WS_INCLUDES . 'database_tables.php');
@@ -155,11 +145,11 @@ require(DIR_WS_CLASSES . 'calendar.php');
 
 
 // set the cookie domain
-  $cookie_domain = (($request_type == 'NONSSL') ? HTTP_COOKIE_DOMAIN : HTTPS_COOKIE_DOMAIN);
-  $cookie_path = (($request_type == 'NONSSL') ? HTTP_COOKIE_PATH : HTTPS_COOKIE_PATH);
+$cookie_domain = (($request_type == 'NONSSL') ? HTTP_COOKIE_DOMAIN : HTTPS_COOKIE_DOMAIN);
+$cookie_path = (($request_type == 'NONSSL') ? HTTP_COOKIE_PATH : HTTPS_COOKIE_PATH);
 
 // include cache functions if enabled
-  if (USE_CACHE == 'true') include(DIR_WS_FUNCTIONS . 'cache.php');
+if (USE_CACHE == 'true') include('includes/functions/cache.php');
 
 // include shopping cart class
   require(DIR_WS_CLASSES . 'shopping_cart.php');
@@ -178,73 +168,85 @@ require(DIR_WS_CLASSES . 'calendar.php');
   }
 
 // define how the session functions will be used
-  require(DIR_WS_FUNCTIONS . 'sessions.php');
+require('includes/functions/sessions.php');
 
 // set the session name and save path
-  tep_session_name('osCsid');
-  tep_session_save_path(SESSION_WRITE_DIRECTORY);
+//tep_session_name('osCsid');
+tep_session_save_path(SESSION_WRITE_DIRECTORY);
 
 // set the session cookie parameters
-   if (function_exists('session_set_cookie_params')) {
-    session_set_cookie_params(0, $cookie_path, $cookie_domain);
-  } elseif (function_exists('ini_set')) {
-    ini_set('session.cookie_lifetime', '0');
-    ini_set('session.cookie_path', $cookie_path);
-    ini_set('session.cookie_domain', $cookie_domain);
-  }
+session_set_cookie_params(0, $cookie_path, $cookie_domain, ($request_type == 'SSL'));
+
+@ini_set('session.use_only_cookies', (SESSION_FORCE_COOKIE_USE == 'True') ? 1 : 0);
+
+if (version_compare(PHP_VERSION, '7.3.0', '>=')) {
+  @ini_set('session.cookie_samesite', 'Lax');
+}
 
 // set the session ID if it exists
-   if (isset($_POST[tep_session_name()])) {
-     tep_session_id($_POST[tep_session_name()]);
-   } elseif ( ($request_type == 'SSL') && isset($_GET[tep_session_name()]) ) {
-     tep_session_id($_GET[tep_session_name()]);
-   }
+if (SESSION_FORCE_COOKIE_USE == 'False') {
+  if (isset($_GET[tep_session_name()]) && (!isset($_COOKIE[tep_session_name()]) || ($_COOKIE[tep_session_name()] != $_GET[tep_session_name()]))) {
+    tep_session_id($_GET[tep_session_name()]);
+  } elseif (isset($_POST[tep_session_name()]) && (!isset($_COOKIE[tep_session_name()]) || ($_COOKIE[tep_session_name()] != $_POST[tep_session_name()]))) {
+    tep_session_id($_POST[tep_session_name()]);
+  }
+}
 
 // start the session
-  $session_started = false;
-  if (SESSION_FORCE_COOKIE_USE == 'True') {
-    tep_setcookie('cookie_test', 'please_accept_for_session', time()+60*60*24*30, $cookie_path, $cookie_domain);
+$session_started = false;
+if (SESSION_FORCE_COOKIE_USE == 'True') {
+  tep_setcookie('cookie_test', 'please_accept_for_session', time() + 60 * 60 * 24 * 30, $cookie_path, $cookie_domain);
 
-    if (isset($_COOKIE['cookie_test'])) {
-      tep_session_start();
-      $session_started = true;
-    }
-  } elseif (SESSION_BLOCK_SPIDERS == 'True') {
-    $user_agent = strtolower(getenv('HTTP_USER_AGENT'));
-    $spider_flag = false;
-
-    if (tep_not_null($user_agent)) {
-      $spiders = file(DIR_WS_INCLUDES . 'spiders.txt');
-
-      for ($i=0, $n=sizeof($spiders); $i<$n; $i++) {
-        if (tep_not_null($spiders[$i])) {
-          if (is_integer(strpos($user_agent, trim($spiders[$i])))) {
-            $spider_flag = true;
-            break;
-          }
-        }
-      }
-    }
-
-    if ($spider_flag == false) {
-      tep_session_start();
-      $session_started = true;
-    }
-  } else {
+  if (isset($_COOKIE['cookie_test'])) {
     tep_session_start();
     $session_started = true;
   }
+} elseif (SESSION_BLOCK_SPIDERS == 'True') {
+  $user_agent = strtolower(getenv('HTTP_USER_AGENT'));
+  $spider_flag = false;
+
+  if (!empty($user_agent)) {
+    $spiders = file(DIR_WS_INCLUDES . 'spiders.txt');
+
+    for ($i = 0, $n = sizeof($spiders); $i < $n; $i++) {
+      if (!empty($spiders[$i])) {
+        if (is_integer(strpos($user_agent, trim($spiders[$i])))) {
+          $spider_flag = true;
+          break;
+        }
+      }
+    }
+  }
+
+  if ($spider_flag == false) {
+    tep_session_start();
+    $session_started = true;
+  }
+} else {
+  tep_session_start();
+  $session_started = true;
+}
+
+if ($session_started == true) { // force register_globals
+  extract($_SESSION, EXTR_OVERWRITE + EXTR_REFS);
+}
+
+// initialize a session token
+if (!isset($_SESSION['sessiontoken'])) {
+  $sessiontoken = md5(tep_rand() . tep_rand() . tep_rand() . tep_rand());
+  tep_session_register('sessiontoken');
+}
 
 // set SID once, even if empty
-  $SID = (defined('SID') ? SID : '');
+$SID = (defined('SID') ? SID : '');
 
 // verify the ssl_session_id if the feature is enabled
-  if ( ($request_type == 'SSL') && (SESSION_CHECK_SSL_SESSION_ID == 'True') && (ENABLE_SSL == true) && ($session_started == true) ) {
-    $ssl_session_id = getenv('SSL_SESSION_ID');
-    if (!tep_session_is_registered('SSL_SESSION_ID')) {
-      $SESSION_SSL_ID = $ssl_session_id;
-      tep_session_register('SESSION_SSL_ID');
-    }
+if (($request_type == 'SSL') && (SESSION_CHECK_SSL_SESSION_ID == 'True') && (ENABLE_SSL == true) && ($session_started == true)) {
+  $ssl_session_id = getenv('SSL_SESSION_ID');
+  if (!isset($_SESSION['SSL_SESSION_ID'])) {
+    $SESSION_SSL_ID = $ssl_session_id;
+    tep_session_register('SESSION_SSL_ID');
+  }
 
     if ($SESSION_SSL_ID != $ssl_session_id) {
       tep_session_destroy();
@@ -252,13 +254,14 @@ require(DIR_WS_CLASSES . 'calendar.php');
     }
   }
 
+
 // verify the browser user agent if the feature is enabled
-  if (SESSION_CHECK_USER_AGENT == 'True') {
-    $http_user_agent = getenv('HTTP_USER_AGENT');
-    if (!tep_session_is_registered('SESSION_USER_AGENT')) {
-      $SESSION_USER_AGENT = $http_user_agent;
-      tep_session_register('SESSION_USER_AGENT');
-    }
+if (SESSION_CHECK_USER_AGENT == 'True') {
+  $http_user_agent = getenv('HTTP_USER_AGENT');
+  if (!isset($_SESSION['SESSION_USER_AGENT'])) {
+    $SESSION_USER_AGENT = $http_user_agent;
+    tep_session_register('SESSION_USER_AGENT');
+  }
 
     if ($SESSION_USER_AGENT != $http_user_agent) {
       tep_session_destroy();
@@ -266,31 +269,36 @@ require(DIR_WS_CLASSES . 'calendar.php');
     }
   }
 
+
 // verify the IP address if the feature is enabled
-  if (SESSION_CHECK_IP_ADDRESS == 'True') {
-    $ip_address = tep_get_ip_address();
-    if (!tep_session_is_registered('SESSION_IP_ADDRESS')) {
-      $SESSION_IP_ADDRESS = $ip_address;
-      tep_session_register('SESSION_IP_ADDRESS');
-    }
-
-    if ($SESSION_IP_ADDRESS != $ip_address) {
-      tep_session_destroy();
-      tep_redirect(tep_href_link(FILENAME_LOGIN));
-    }
+if (SESSION_CHECK_IP_ADDRESS == 'True') {
+  $ip_address = tep_get_ip_address();
+  if (!isset($_SESSION['SESSION_IP_ADDRESS'])) {
+    $SESSION_IP_ADDRESS = $ip_address;
+    tep_session_register('SESSION_IP_ADDRESS');
   }
 
-// create the shopping cart & fix the cart if necesary
-  if (tep_session_is_registered('cart') && is_object($cart)) {
-    if (PHP_VERSION < 4) {
-      $broken_cart = $cart;
-      $cart = new shoppingCart;
-      $cart->unserialize($broken_cart);
-    }
-  } else {
-    tep_session_register('cart');
-    $cart = new shoppingCart;
+  if ($SESSION_IP_ADDRESS != $ip_address) {
+    tep_session_destroy();
+    tep_redirect(tep_href_link('login.php'));
   }
+}
+
+// create the shopping cart
+if (!isset($_SESSION['cart']) || !is_object($cart)) {
+  tep_session_register('cart');
+  $cart = new shoppingCart;
+}
+
+$cart->update_content();
+
+if (!isset($_SESSION['wishlist']) || !is_object($wishlist)) {
+  tep_session_register('wishlist');
+  $wishlist = new wishList;
+}
+
+$wishlist->update_list();
+$wishlist->add_products();
 
 // include currencies class and create an instance
   require(DIR_WS_CLASSES . 'currencies.php');
@@ -367,7 +375,7 @@ require(DIR_WS_CLASSES . 'calendar.php');
 
 
 // Shopping cart actions
-  if (isset($_GET['action'])) {
+if (isset($_GET['action'])) {
 // redirect the customer to a friendly cookie-must-be-enabled page if cookies are disabled
     if ($session_started == false) {
       tep_redirect(tep_href_link(FILENAME_COOKIE_USAGE));
@@ -587,13 +595,13 @@ if ( is_file( DIR_WS_BOX_TEMPLATES . 'boxes.php' )) {
 //################## End Enable / Disable Categories #################
     if (tep_db_num_rows($model_query)) {
       $model = tep_db_fetch_array($model_query);
-/* Michela non modello giovedì 10 maggio 2007*/
+/* Michela non modello gioved 10 maggio 2007*/
 //	  $breadcrumb->add($model['products_model'], tep_href_link(FILENAME_PRODUCT_INFO, 'cPath=' . $cPath . SEPARATOR_LINK . 'products_id=' . $_GET['products_id']));
     }
   }
 
 
-/* Michela venerdì 11 maggio 2007 
+/* Michela venerd 11 maggio 2007 
 inserisco il nome del prodotto nel breadcrumb
 */
 // add the products name and model to the breadcrumb trail
@@ -716,5 +724,3 @@ while ($configuration = tep_db_fetch_array($configuration_query)) {
      define($configuration['cfgKey'], $configuration['cfgValue']);
      }
 //poll end
-     
-?>
