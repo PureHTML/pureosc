@@ -38,9 +38,9 @@ while ($configuration = tep_db_fetch_array($configuration_query)) {
 
     $products_query = tep_db_query("SELECT products_id, products_image from products");
     while ($products = tep_db_fetch_array($products_query)) {
-//    $filename = 'images/all/' . $products['products_image'];
-//      if (! file_exists($filename)) {
-if(empty($products['products_image'])){
+    $filename = 'images/all/' . $products['products_image'];
+      if (! file_exists($filename)) {
+//    if(empty($products['products_image'])){
 //      echo "empty";
     tep_db_query("UPDATE products SET products_status = 0 WHERE products_id=" . $products['products_id']);
   } 

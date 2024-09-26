@@ -14,8 +14,14 @@
   line-height: 1.42857;
 }
 
+/*body redefine*/
+body {
+  background:#3f2424;
+  color:#c9c9c9;
+}
 a {
-  text-decoration: unset;
+  text-decoration: unset !important;
+  color: #ffffff !important;
 }
 
 h1 {
@@ -40,4 +46,19 @@ h2 {
   stroke: var(--bs-white);
   width: 1.5rem;
   height: 1.5rem;
+}
+
+/********************/
+.bg-light {
+  background:#3f2424 !important;
+}
+.btn-primary {
+  background: #f30000;
+  border: #d50000;
+}
+.btn-primary:hover {
+  background: #b31b07;
+}
+.form-control{
+  background: #ddd0bd;
 }

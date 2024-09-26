@@ -27,7 +27,7 @@ class breadcrumb {
 
   public function trail($separator = ' - ') {
     $trail_string = '';
-
+    if ($_SERVER['SCRIPT_NAME'] == 'index.php' && ! $cPath) {
     for ($i = 0, $n = sizeof($this->_trail); $i < $n; $i++) {
       if (isset($this->_trail[$i]['link']) && !empty($this->_trail[$i]['link'])) {
         if ($i == 0) {
@@ -43,7 +43,7 @@ class breadcrumb {
         $trail_string .= $separator;
       }
     }
-
+  }
     return $trail_string;
   }
 }

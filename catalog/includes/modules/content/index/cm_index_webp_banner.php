@@ -10,7 +10,7 @@
   Released under the GNU General Public License
 */
 
-class cm_carousel_rotator {
+class cm_index_webp_banner {
 
     var $code;
     var $group;
@@ -19,7 +19,11 @@ class cm_carousel_rotator {
     var $sort_order;
     var $enabled = false;
 
-    function cm_carousel_rotator() {
+    public function __construct() {
+      $this->cm_index_webp_banner();
+    }
+    
+    function cm_index_webp_banner() {
       $this->code = get_class($this);
       $this->group = basename(dirname(__FILE__));
       
@@ -43,12 +47,13 @@ class cm_carousel_rotator {
 
       if ($PHP_SELF == 'index.php' && $cPath == '') {
         // Set the Javascript to go in the header
-        $footer_scripts = '<script>' . '$(\'#carousel-example-generic.carousel\').carousel({ interval: ' . ( int ) MODULE_CAROUSEL_ROTATOR_HOLD_TIME . '})' . "\n" .'</script>';
-  
-        $oscTemplate->addBlock($footer_scripts, 'footer_scripts');
+//          $footer_scripts = '<script>' . '$(\'#carousel-example-generic.carousel\').carousel({ interval: ' . ( int ) MODULE_CAROUSEL_ROTATOR_HOLD_TIME . '})' . "\n" .'</script>';
+//
+//          $oscTemplate->addBlock($footer_scripts, 'footer_scripts');
 
 
 // Set the banner rotator code to display on the front page
+//$banner_count_query = tep_db_query("SELECT COUNT(advert_id) FROM advert WHERE advert_group = '" . MODULE_CAROUSEL_ROTATOR_GROUP . "' and status =1   order by advert_id " . MODULE_CAROUSEL_ROTATOR_BANNER_ORDER . " limit " . MODULE_CAROUSEL_ROTATOR_MAX_DISPLAY");
         $banner_query_raw = "
                   select
                     banners_id,
@@ -60,86 +65,27 @@ class cm_carousel_rotator {
                   where
                     banners_group = '" . MODULE_CAROUSEL_ROTATOR_GROUP . "'
                     and status
-                  order by banners_id " . MODULE_CAROUSEL_ROTATOR_BANNER_ORDER . "
+                  order by banners_title " . MODULE_CAROUSEL_ROTATOR_BANNER_ORDER . "
                   limit
                     " . MODULE_CAROUSEL_ROTATOR_MAX_DISPLAY;
 
 
         $banner_query = tep_db_query($banner_query_raw);
-        
-        if (tep_db_num_rows($banner_query) > 0) {
-          $body_text = '<!-- Banner Rotator BOF -->' . "\n";
-          $body_text .= '  <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">' . "\n";
-
-          $indicators = '<!-- Indicators -->
-          <ol class="carousel-indicators">';
-          $wrapper_slides = '<!-- Wrapper for slides -->' . "\n" .
-          '<div class="carousel-inner">';
-
-          $background = $this->createImage(544, 172, 118, 115, 115);
-
+          $body_text = '';
           $counter = 0;
-          while ($banner = tep_db_fetch_array($banner_query)) {
-            $indicators .= '  <li data-target="#carousel-example-generic" data-slide-to="' . $counter . '"' . ($counter == 0 ? 'class="active"' : '') . '></li>';
 
-            $wrapper_slides .= '      <div class="item' . ($counter == 0 ? ' active' : '') . '">';
-            if ($banner['banners_url'] != '') {
-              $wrapper_slides .= '<a href="' . tep_href_link('redirect.php', 'action=banner&goto=' . $banner['banners_id']) . '">';
-            }
-
-              //$wrapper_slides .= tep_image(DIR_WS_IMAGES . $banner['banners_image'], $banner['banners_html_text']);
-
-
-            if ($banner['banners_image'] !== '') {
-              //$wrapper_slides .= tep_image(DIR_WS_IMAGES . $banner['banners_image'], $banner['banners_html_text']);
-              $wrapper_slides .= tep_image('images/' . $banner['banners_image'], '', 1222, 300); //1800, 600 // 544, 172
-              $wrapper_slides .= '<div class="carousel-caption"> </div>';
-            } else {
-              //$wrapper_slides .= tep_image(DIR_WS_IMAGES . 'pixel_silver.gif', 'alt', 544, 172 );
-              $wrapper_slides .= '<img class="img-responsive" alt="544x172" src="' . $background . '" />';
-              $wrapper_slides .= '<div class="carousel-caption">' . $banner['banners_html_text'] . '</div>';
-            }
-
-            if ($banner['banners_url'] != '') {
-              $wrapper_slides .= '</a>';
-            }
-
-            $wrapper_slides .= ' </div>' . "\n";
-            $counter++;
-          }
-
-          $indicators .= '</ol>';  // close indicator
-
-          $wrapper_slides .= '</div>';  // wrapper close
-
-          $controls = '  <!-- Controls -->
-          <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-          <span class="glyphicon glyphicon-chevron-left"></span>
-          </a>
-          <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right"></span>
-          </a>';
-
-          // öszefuzés
-          $body_text .= $indicators . $wrapper_slides . $controls;
- 
-          $body_text .= '  </div>' . "\n";
-          $body_text .= '  <div class="clearfix"></div>' . "\n";
-          $body_text .= '<!-- Banner Rotator EOF -->' . "\n";
-          
-          $carousel = $body_text;
+        if (tep_db_num_rows($banner_query) > 0) {
+                   while ($banner = tep_db_fetch_array($banner_query)) {
+                     $body_text .= '<a href="' . tep_href_link($banner['banners_url']) . '"></a>'; 
+                    $counter++;
 
         }
-  
+           $carousel = $body_text;
+ }
 
       ob_start();
-      //include(DIR_WS_MODULES . 'content/' . $this->group . '/templates/tpl_cm_carousel.php');
-      include('includes/modules/content/' . $this->group . '/templates/tpl_' . basename(__FILE__));
-      $template = ob_get_clean();
-
-      $oscTemplate->addContent($template, $this->group);
-      
-      
+      include('includes/modules/content/' . $this->group . '/templates/cm_index_webp_banner.php');
+      $oscTemplate->addContent(ob_get_clean(), $this->group);
     }
 
 }
@@ -166,7 +112,7 @@ class cm_carousel_rotator {
     }
 
     function remove() {
-      tep_db_query("delete from " . TABLE_CONFIGURATION . " where configuration_key in ('" . implode("', '", $this->keys()) . "')");
+      tep_db_query("delete from configuration where configuration_key in ('" . implode("', '", $this->keys()) . "')");
     }
 
     function keys() {
