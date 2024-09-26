@@ -1,28 +1,15 @@
-/*!999999\- enable the sandbox mode */ 
 -- MariaDB dump 10.19-11.2.5-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: dvere
 -- ------------------------------------------------------
 -- Server version	11.2.5-MariaDB-deb12
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Table structure for table `action_recorder`
 --
 
 DROP TABLE IF EXISTS `action_recorder`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `action_recorder` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `module` varchar(255) NOT NULL,
@@ -37,17 +24,14 @@ CREATE TABLE `action_recorder` (
   KEY `idx_action_recorder_identifier` (`identifier`),
   KEY `idx_action_recorder_date_added` (`date_added`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `action_recorder`
 --
 
 LOCK TABLES `action_recorder` WRITE;
-/*!40000 ALTER TABLE `action_recorder` DISABLE KEYS */;
 INSERT INTO `action_recorder` VALUES
 (1,'ar_admin_login',1,'osc','127.0.0.1','1','2024-09-25 18:04:36');
-/*!40000 ALTER TABLE `action_recorder` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -55,8 +39,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `address_book`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `address_book` (
   `address_book_id` int(11) NOT NULL AUTO_INCREMENT,
   `customers_id` int(11) NOT NULL,
@@ -74,15 +56,12 @@ CREATE TABLE `address_book` (
   PRIMARY KEY (`address_book_id`),
   KEY `idx_address_book_customers_id` (`customers_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `address_book`
 --
 
 LOCK TABLES `address_book` WRITE;
-/*!40000 ALTER TABLE `address_book` DISABLE KEYS */;
-/*!40000 ALTER TABLE `address_book` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -90,29 +69,24 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `address_format`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `address_format` (
   `address_format_id` int(11) NOT NULL AUTO_INCREMENT,
   `address_format` varchar(128) NOT NULL,
   `address_summary` varchar(48) NOT NULL,
   PRIMARY KEY (`address_format_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `address_format`
 --
 
 LOCK TABLES `address_format` WRITE;
-/*!40000 ALTER TABLE `address_format` DISABLE KEYS */;
 INSERT INTO `address_format` VALUES
 (1,'$firstname $lastname$cr$streets$cr$city, $postcode$cr$statecomma$country','$city / $country'),
 (2,'$firstname $lastname$cr$streets$cr$city, $state    $postcode$cr$country','$city, $state / $country'),
 (3,'$firstname $lastname$cr$streets$cr$city$cr$postcode - $statecomma$country','$state / $country'),
 (4,'$firstname $lastname$cr$streets$cr$city ($postcode)$cr$country','$postcode / $country'),
 (5,'$firstname $lastname$cr$streets$cr$postcode $city$cr$country','$city / $country');
-/*!40000 ALTER TABLE `address_format` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -120,25 +94,20 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `administrators`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `administrators` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `user_password` varchar(60) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `administrators`
 --
 
 LOCK TABLES `administrators` WRITE;
-/*!40000 ALTER TABLE `administrators` DISABLE KEYS */;
 INSERT INTO `administrators` VALUES
 (1,'osc','$P$DcqTxhYzHci3C8MB5W67EeHGY2c8w7/');
-/*!40000 ALTER TABLE `administrators` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -146,8 +115,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `banners`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `banners` (
   `banners_id` int(11) NOT NULL AUTO_INCREMENT,
   `banners_title` varchar(64) NOT NULL,
@@ -164,18 +131,15 @@ CREATE TABLE `banners` (
   PRIMARY KEY (`banners_id`),
   KEY `idx_banners_group` (`banners_group`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `banners`
 --
 
 LOCK TABLES `banners` WRITE;
-/*!40000 ALTER TABLE `banners` DISABLE KEYS */;
 INSERT INTO `banners` VALUES
 (2,'1sapeli','index.php?cPath=362_243_32','IMG_1_sapeli_big.jpg','rotator','',0,NULL,NULL,'2024-09-25 22:21:33',NULL,1),
 (3,'2loprais','index.php?cPath=362_241_52','IMG_2_loprais-celek.jpg','rotator','',0,NULL,NULL,'2024-09-25 22:22:48',NULL,1);
-/*!40000 ALTER TABLE `banners` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -183,8 +147,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `banners_history`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `banners_history` (
   `banners_history_id` int(11) NOT NULL AUTO_INCREMENT,
   `banners_id` int(11) NOT NULL,
@@ -194,15 +156,12 @@ CREATE TABLE `banners_history` (
   PRIMARY KEY (`banners_history_id`),
   KEY `idx_banners_history_banners_id` (`banners_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `banners_history`
 --
 
 LOCK TABLES `banners_history` WRITE;
-/*!40000 ALTER TABLE `banners_history` DISABLE KEYS */;
-/*!40000 ALTER TABLE `banners_history` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -210,8 +169,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `categories`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `categories` (
   `categories_id` int(11) NOT NULL AUTO_INCREMENT,
   `categories_image` varchar(64) DEFAULT NULL,
@@ -223,14 +180,12 @@ CREATE TABLE `categories` (
   PRIMARY KEY (`categories_id`),
   KEY `idx_categories_parent_id` (`parent_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=363 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `categories`
 --
 
 LOCK TABLES `categories` WRITE;
-/*!40000 ALTER TABLE `categories` DISABLE KEYS */;
 INSERT INTO `categories` VALUES
 (344,NULL,39,1,'2013-10-10 20:35:14','2017-03-21 10:46:58',0),
 (346,'plechove dvere.jpg',344,0,'2013-10-28 18:42:13','2017-03-21 10:47:00',0),
@@ -441,7 +396,6 @@ INSERT INTO `categories` VALUES
 (360,NULL,0,91,'2024-09-21 02:43:26','2024-09-21 03:44:37',1),
 (361,NULL,0,99,'2024-09-21 03:29:18','2024-09-21 03:43:55',1),
 (362,NULL,0,0,'2024-09-21 03:32:06',NULL,1);
-/*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -449,8 +403,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `categories_description`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `categories_description` (
   `categories_id` int(11) NOT NULL DEFAULT 0,
   `language_id` int(11) NOT NULL DEFAULT 1,
@@ -463,14 +415,12 @@ CREATE TABLE `categories_description` (
   PRIMARY KEY (`categories_id`,`language_id`),
   KEY `idx_categories_name` (`categories_name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `categories_description`
 --
 
 LOCK TABLES `categories_description` WRITE;
-/*!40000 ALTER TABLE `categories_description` DISABLE KEYS */;
 INSERT INTO `categories_description` VALUES
 (48,1,'Sapeli klima dveře','klimatické dveře Sapeli','V rámci projektování budov jsou dveře osazovány do rozdílných klimatických podmínek a musí odolávat chladu, teplu, vlhkosti a slunečnímu záření. Volte tedy vždy vhodné osazení dveří a předejděte následným problémům s jejich používáním a funkčností. Klima dveře mají speciální konstrukci, která obsahuje Al vrstvu, jež zabraňuje pronikání vlhkosti do dveří.\r\n\r\n\r\nURČENÍ\r\n\r\n\r\nl. Standardní bytové interiérové mezipokojové dveře s minimálním rozdílem klima mezi dveřmi oddělujícími prostory.\r\n\r\nll. Dveře pro oddělení prostorů se středním rozdílem klima, jako jsou např. často užívané koupelny nebo vstupy z temperovaných chodeb a schodišť.\r\n\r\nlll. Dveře s oblastí určení pro přechod z nevytápěných prostorů (garáže, sklepy, schodiště, zádveří apod.) do prostorů vytápěných.\r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\nKLIMA I.  \r\n\r\ndveře\r\n	\r\n\r\nzárubně\r\n\r\nVeškeré dveře z naší nabídky SAPELI\r\n	\r\n\r\nVeškeré dveře z naší nabídky SAPELI\r\n\r\ncena bez příplatku\r\n	\r\n\r\ncena bez příplatku\r\n\r\n\r\n\r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\nKLIMA II.\r\n\r\ndveře\r\n	\r\n\r\nzárubně\r\n\r\nPlné otočné provedení modelů: NORA, RADKA, ESTER, EXKLUSIV, VENECIE, BERGAMO,\r\nVARIANT, MILÁNO, JANOV, ROMA, PALERMO, SOFTLINE,\r\nELEGANT, FEST, LIPNO, STANDART, DAMIER, TENGA,\r\nALEGRO, TARUGO\r\n	\r\n\r\nPouze otočné provedení obložkové zárubně dýhované nebo CPL.\r\n\r\nCena dveřního křídla\r\n+ příplatek 1 950 Kč\r\n	\r\n\r\nCena obložkové \r\n zárubně + příplatek\r\n 450 Kč\r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\n  \r\n\r\n \r\n\r\n \r\n\r\n  \r\n\r\n \r\n\r\nKLIMA III.\r\n\r\ndveře\r\n	\r\n\r\nzárubně\r\n\r\nOtočné provedení modelů: \r\nELEGANT 10, LIPNO 10, ALEGRO 10, 15, 20,\r\nTENGA 10, 15, 25, DAMIER 10, 15, VARIANT 10 &#8211; 15,\r\nNORA 10, STANDART 10, FEST 10, TARUGO 10 \r\nPozn.: lze osadit pouze do kovové zárubně.\r\n	\r\n\r\nObložková zárubeň NELZE.\r\nPozn.: lze osadit pouze do kovové zárubně.\r\n\r\nCena dveřního křídla\r\n+ příplatek 2 650 Kč\r\n	\r\n\r\nx\r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\n\r\n\r\n\r\n\r\nDoporučené ceny uvedeny bez DPH. Pozn.: zárubeň ke klima dveřím je osazena třemi závěsy. KLIMA II. a III. nelze bílá na pór. KLIMA DVEØE LZE DODAT I V PROTIPOŽÁRNÍM PROVEDENÍ EI 30 D3 S PØÍPLATKEM 1 950 Kč.','','',''),
 (49,1,'Sapeli RTG dveře','RTG dveře Sapeli','Dveře jsou určeny zejména pro zdravotnické provozy - na RTG pracoviště (nemocnice, zubní ordinace apod.) Lze vyrobit ve všech plných modelech, kde není zasahováno do plochy.Max. rozměr RTG dveří je 98/198,5 cm.','','',''),
@@ -822,11 +772,9 @@ INSERT INTO `categories_description` VALUES
 (333,1,'dveře Masonite','','Počátek výroby dveří v Jihlavě spadá do šedesátých let minulého století. Tradiční výrobce dveří v Jihlavě, Masonite CZ spol. s r.o., je od června 2004 začleněn do skupiny Masonite. Masonite je nadnárodní společnost, která vyrábí stavební komponenty (dveře, okna). Hlavní sídlo se nachází v Tampě na Floridě v USA. Společnost působí v 17 zemích světa, zaměstnává více jak 7000 zaměstnanců a prodává své produkty do více než 50 zemí světa. Firma Masonite CZ spol. s r.o. Jihlava se zabývá výrobou a prodejem především interiérových dveří a zárubní, má výhodnou polohu ve středu České republiky. Od vstupu do skupiny Masonite se společnost snaží vycházet vstříc stále náročnějším požadavkům trhu a přáním zákazníků a postupně rozšiřuje svůj výrobní sortiment.',NULL,'',''),
 (334,1,'Minikuchyně, studia, hotely','','<p>Výrobce Mobilspazio, kterého zastupujeme, se zabývá výrobou speciálního nábytku pro hotelové pokoje, malé či studiové byty. Jedná se o kompaktní řešení ložnic, pokojového nábytku, a minikuchyní, přestavitelný nábytek, který řeší nedostatek prostoru v bytě.</p>\r\n<p>&#160;</p>',NULL,'',''),
 (342,1,'Zárubně HSE','','<p>Výrobce HSE, Humpolecké stavební elementy, vyrábí moderní ocelové zárubně dle nejnovějších světových trendů. Všechny zárubně lze použít pro protipožární dveře, všechny jsou opatřené těsněním v drážce. Nabízí mnoho možností řešení a tvarů, polodrážkové i bezpolodrážkové, osazení mnoha typů závěsů atd. Povrchová úprava je standardně základová světle šedá, lze dodat i žárově pozinkované či stříkané komaxitem jakoukoliv barvou dle stupnice RAL i jiných stupnic. Všechny zárubně mají moderní ostré hrany s minimálním poloměrem ohybu.</p>\r\n<p>&#160;</p>\r\n<p>&#160;</p>\r\n<p>&#160;</p>',NULL,'',''),
-(359,1,'Akce Sapeli Novoroční','','<p><!--[if gte mso 9]><xml>\r\n<w:WordDocument>\r\n<w:View>Normal</w:View>\r\n<w:Zoom>0</w:Zoom>\r\n<w:TrackMoves />\r\n<w:TrackFormatting />\r\n<w:DoNotShowComments />\r\n<w:HyphenationZone>21</w:HyphenationZone>\r\n<w:PunctuationKerning />\r\n<w:ValidateAgainstSchemas />\r\n<w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>\r\n<w:IgnoreMixedContent>false</w:IgnoreMixedContent>\r\n<w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>\r\n<w:DoNotPromoteQF />\r\n<w:LidThemeOther>CS</w:LidThemeOther>\r\n<w:LidThemeAsian>X-NONE</w:LidThemeAsian>\r\n<w:LidThemeComplexScript>X-NONE</w:LidThemeComplexScript>\r\n<w:Compatibility>\r\n<w:BreakWrappedTables />\r\n<w:SnapToGridInCell />\r\n<w:WrapTextWithPunct />\r\n<w:UseAsianBreakRules />\r\n<w:DontGrowAutofit />\r\n<w:SplitPgBreakAndParaMark />\r\n<w:DontVertAlignCellWithSp />\r\n<w:DontBreakConstrainedForcedTables />\r\n<w:DontVertAlignInTxbx />\r\n<w:Word11KerningPairs />\r\n<w:CachedColBalance />\r\n</w:Compatibility>\r\n<w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>\r\n<m:mathPr>\r\n<m:mathFont m:val=\"Cambria Math\" />\r\n<m:brkBin m:val=\"before\" />\r\n<m:brkBinSub m:val=\"&#45;-\" />\r\n<m:smallFrac m:val=\"off\" />\r\n<m:dispDef />\r\n<m:lMargin m:val=\"0\" />\r\n<m:rMargin m:val=\"0\" />\r\n<m:defJc m:val=\"centerGroup\" />\r\n<m:wrapIndent m:val=\"1440\" />\r\n<m:intLim m:val=\"subSup\" />\r\n<m:naryLim m:val=\"undOvr\" />\r\n</m:mathPr></w:WordDocument>\r\n</xml><![endif]--></p>\r\n<p><!--[if gte mso 9]><xml>\r\n<w:LatentStyles DefLockedState=\"false\" DefUnhideWhenUsed=\"true\"\r\nDefSemiHidden=\"true\" DefQFormat=\"false\" DefPriority=\"99\"\r\nLatentStyleCount=\"267\">\r\n<w:LsdException Locked=\"false\" Priority=\"0\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" QFormat=\"true\" Name=\"Normal\" />\r\n<w:LsdException Locked=\"false\" Priority=\"9\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" QFormat=\"true\" Name=\"heading 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"9\" QFormat=\"true\" Name=\"heading 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"9\" QFormat=\"true\" Name=\"heading 3\" />\r\n<w:LsdException Locked=\"false\" Priority=\"9\" QFormat=\"true\" Name=\"heading 4\" />\r\n<w:LsdException Locked=\"false\" Priority=\"9\" QFormat=\"true\" Name=\"heading 5\" />\r\n<w:LsdException Locked=\"false\" Priority=\"9\" QFormat=\"true\" Name=\"heading 6\" />\r\n<w:LsdException Locked=\"false\" Priority=\"9\" QFormat=\"true\" Name=\"heading 7\" />\r\n<w:LsdException Locked=\"false\" Priority=\"9\" QFormat=\"true\" Name=\"heading 8\" />\r\n<w:LsdException Locked=\"false\" Priority=\"9\" QFormat=\"true\" Name=\"heading 9\" />\r\n<w:LsdException Locked=\"false\" Priority=\"39\" Name=\"toc 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"39\" Name=\"toc 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"39\" Name=\"toc 3\" />\r\n<w:LsdException Locked=\"false\" Priority=\"39\" Name=\"toc 4\" />\r\n<w:LsdException Locked=\"false\" Priority=\"39\" Name=\"toc 5\" />\r\n<w:LsdException Locked=\"false\" Priority=\"39\" Name=\"toc 6\" />\r\n<w:LsdException Locked=\"false\" Priority=\"39\" Name=\"toc 7\" />\r\n<w:LsdException Locked=\"false\" Priority=\"39\" Name=\"toc 8\" />\r\n<w:LsdException Locked=\"false\" Priority=\"39\" Name=\"toc 9\" />\r\n<w:LsdException Locked=\"false\" Priority=\"35\" QFormat=\"true\" Name=\"caption\" />\r\n<w:LsdException Locked=\"false\" Priority=\"10\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" QFormat=\"true\" Name=\"Title\" />\r\n<w:LsdException Locked=\"false\" Priority=\"1\" Name=\"Default Paragraph Font\" />\r\n<w:LsdException Locked=\"false\" Priority=\"11\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" QFormat=\"true\" Name=\"Subtitle\" />\r\n<w:LsdException Locked=\"false\" Priority=\"22\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" QFormat=\"true\" Name=\"Strong\" />\r\n<w:LsdException Locked=\"false\" Priority=\"20\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" QFormat=\"true\" Name=\"Emphasis\" />\r\n<w:LsdException Locked=\"false\" Priority=\"59\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Table Grid\" />\r\n<w:LsdException Locked=\"false\" UnhideWhenUsed=\"false\" Name=\"Placeholder Text\" />\r\n<w:LsdException Locked=\"false\" Priority=\"1\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" QFormat=\"true\" Name=\"No Spacing\" />\r\n<w:LsdException Locked=\"false\" Priority=\"60\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light Shading\" />\r\n<w:LsdException Locked=\"false\" Priority=\"61\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light List\" />\r\n<w:LsdException Locked=\"false\" Priority=\"62\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light Grid\" />\r\n<w:LsdException Locked=\"false\" Priority=\"63\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Shading 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"64\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Shading 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"65\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium List 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"66\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium List 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"67\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"68\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"69\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 3\" />\r\n<w:LsdException Locked=\"false\" Priority=\"70\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Dark List\" />\r\n<w:LsdException Locked=\"false\" Priority=\"71\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful Shading\" />\r\n<w:LsdException Locked=\"false\" Priority=\"72\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful List\" />\r\n<w:LsdException Locked=\"false\" Priority=\"73\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful Grid\" />\r\n<w:LsdException Locked=\"false\" Priority=\"60\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light Shading Accent 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"61\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light List Accent 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"62\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light Grid Accent 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"63\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Shading 1 Accent 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"64\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Shading 2 Accent 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"65\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium List 1 Accent 1\" />\r\n<w:LsdException Locked=\"false\" UnhideWhenUsed=\"false\" Name=\"Revision\" />\r\n<w:LsdException Locked=\"false\" Priority=\"34\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" QFormat=\"true\" Name=\"List Paragraph\" />\r\n<w:LsdException Locked=\"false\" Priority=\"29\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" QFormat=\"true\" Name=\"Quote\" />\r\n<w:LsdException Locked=\"false\" Priority=\"30\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" QFormat=\"true\" Name=\"Intense Quote\" />\r\n<w:LsdException Locked=\"false\" Priority=\"66\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium List 2 Accent 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"67\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 1 Accent 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"68\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 2 Accent 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"69\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 3 Accent 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"70\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Dark List Accent 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"71\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful Shading Accent 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"72\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful List Accent 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"73\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful Grid Accent 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"60\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light Shading Accent 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"61\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light List Accent 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"62\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light Grid Accent 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"63\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Shading 1 Accent 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"64\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Shading 2 Accent 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"65\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium List 1 Accent 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"66\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium List 2 Accent 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"67\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 1 Accent 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"68\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 2 Accent 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"69\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 3 Accent 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"70\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Dark List Accent 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"71\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful Shading Accent 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"72\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful List Accent 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"73\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful Grid Accent 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"60\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light Shading Accent 3\" />\r\n<w:LsdException Locked=\"false\" Priority=\"61\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light List Accent 3\" />\r\n<w:LsdException Locked=\"false\" Priority=\"62\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light Grid Accent 3\" />\r\n<w:LsdException Locked=\"false\" Priority=\"63\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Shading 1 Accent 3\" />\r\n<w:LsdException Locked=\"false\" Priority=\"64\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Shading 2 Accent 3\" />\r\n<w:LsdException Locked=\"false\" Priority=\"65\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium List 1 Accent 3\" />\r\n<w:LsdException Locked=\"false\" Priority=\"66\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium List 2 Accent 3\" />\r\n<w:LsdException Locked=\"false\" Priority=\"67\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 1 Accent 3\" />\r\n<w:LsdException Locked=\"false\" Priority=\"68\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 2 Accent 3\" />\r\n<w:LsdException Locked=\"false\" Priority=\"69\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 3 Accent 3\" />\r\n<w:LsdException Locked=\"false\" Priority=\"70\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Dark List Accent 3\" />\r\n<w:LsdException Locked=\"false\" Priority=\"71\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful Shading Accent 3\" />\r\n<w:LsdException Locked=\"false\" Priority=\"72\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful List Accent 3\" />\r\n<w:LsdException Locked=\"false\" Priority=\"73\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful Grid Accent 3\" />\r\n<w:LsdException Locked=\"false\" Priority=\"60\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light Shading Accent 4\" />\r\n<w:LsdException Locked=\"false\" Priority=\"61\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light List Accent 4\" />\r\n<w:LsdException Locked=\"false\" Priority=\"62\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light Grid Accent 4\" />\r\n<w:LsdException Locked=\"false\" Priority=\"63\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Shading 1 Accent 4\" />\r\n<w:LsdException Locked=\"false\" Priority=\"64\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Shading 2 Accent 4\" />\r\n<w:LsdException Locked=\"false\" Priority=\"65\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium List 1 Accent 4\" />\r\n<w:LsdException Locked=\"false\" Priority=\"66\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium List 2 Accent 4\" />\r\n<w:LsdException Locked=\"false\" Priority=\"67\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 1 Accent 4\" />\r\n<w:LsdException Locked=\"false\" Priority=\"68\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 2 Accent 4\" />\r\n<w:LsdException Locked=\"false\" Priority=\"69\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 3 Accent 4\" />\r\n<w:LsdException Locked=\"false\" Priority=\"70\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Dark List Accent 4\" />\r\n<w:LsdException Locked=\"false\" Priority=\"71\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful Shading Accent 4\" />\r\n<w:LsdException Locked=\"false\" Priority=\"72\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful List Accent 4\" />\r\n<w:LsdException Locked=\"false\" Priority=\"73\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful Grid Accent 4\" />\r\n<w:LsdException Locked=\"false\" Priority=\"60\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light Shading Accent 5\" />\r\n<w:LsdException Locked=\"false\" Priority=\"61\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light List Accent 5\" />\r\n<w:LsdException Locked=\"false\" Priority=\"62\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light Grid Accent 5\" />\r\n<w:LsdException Locked=\"false\" Priority=\"63\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Shading 1 Accent 5\" />\r\n<w:LsdException Locked=\"false\" Priority=\"64\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Shading 2 Accent 5\" />\r\n<w:LsdException Locked=\"false\" Priority=\"65\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium List 1 Accent 5\" />\r\n<w:LsdException Locked=\"false\" Priority=\"66\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium List 2 Accent 5\" />\r\n<w:LsdException Locked=\"false\" Priority=\"67\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 1 Accent 5\" />\r\n<w:LsdException Locked=\"false\" Priority=\"68\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 2 Accent 5\" />\r\n<w:LsdException Locked=\"false\" Priority=\"69\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 3 Accent 5\" />\r\n<w:LsdException Locked=\"false\" Priority=\"70\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Dark List Accent 5\" />\r\n<w:LsdException Locked=\"false\" Priority=\"71\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful Shading Accent 5\" />\r\n<w:LsdException Locked=\"false\" Priority=\"72\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful List Accent 5\" />\r\n<w:LsdException Locked=\"false\" Priority=\"73\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful Grid Accent 5\" />\r\n<w:LsdException Locked=\"false\" Priority=\"60\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light Shading Accent 6\" />\r\n<w:LsdException Locked=\"false\" Priority=\"61\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light List Accent 6\" />\r\n<w:LsdException Locked=\"false\" Priority=\"62\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light Grid Accent 6\" />\r\n<w:LsdException Locked=\"false\" Priority=\"63\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Shading 1 Accent 6\" />\r\n<w:LsdException Locked=\"false\" Priority=\"64\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Shading 2 Accent 6\" />\r\n<w:LsdException Locked=\"false\" Priority=\"65\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium List 1 Accent 6\" />\r\n<w:LsdException Locked=\"false\" Priority=\"66\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium List 2 Accent 6\" />\r\n<w:LsdException Locked=\"false\" Priority=\"67\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 1 Accent 6\" />\r\n<w:LsdException Locked=\"false\" Priority=\"68\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 2 Accent 6\" />\r\n<w:LsdException Locked=\"false\" Priority=\"69\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 3 Accent 6\" />\r\n<w:LsdException Locked=\"false\" Priority=\"70\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Dark List Accent 6\" />\r\n<w:LsdException Locked=\"false\" Priority=\"71\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful Shading Accent 6\" />\r\n<w:LsdException Locked=\"false\" Priority=\"72\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful List Accent 6\" />\r\n<w:LsdException Locked=\"false\" Priority=\"73\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful Grid Accent 6\" />\r\n<w:LsdException Locked=\"false\" Priority=\"19\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" QFormat=\"true\" Name=\"Subtle Emphasis\" />\r\n<w:LsdException Locked=\"false\" Priority=\"21\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" QFormat=\"true\" Name=\"Intense Emphasis\" />\r\n<w:LsdException Locked=\"false\" Priority=\"31\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" QFormat=\"true\" Name=\"Subtle Reference\" />\r\n<w:LsdException Locked=\"false\" Priority=\"32\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" QFormat=\"true\" Name=\"Intense Reference\" />\r\n<w:LsdException Locked=\"false\" Priority=\"33\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" QFormat=\"true\" Name=\"Book Title\" />\r\n<w:LsdException Locked=\"false\" Priority=\"37\" Name=\"Bibliography\" />\r\n<w:LsdException Locked=\"false\" Priority=\"39\" QFormat=\"true\" Name=\"TOC Heading\" />\r\n</w:LatentStyles>\r\n</xml><![endif]--><!--[if gte mso 10]>\r\n<style>\r\n/* Style Definitions */\r\ntable.MsoNormalTable\r\n{mso-style-name:\"Normální tabulka\";\r\nmso-tstyle-rowband-size:0;\r\nmso-tstyle-colband-size:0;\r\nmso-style-noshow:yes;\r\nmso-style-priority:99;\r\nmso-style-qformat:yes;\r\nmso-style-parent:\"\";\r\nmso-padding-alt:0cm 5.4pt 0cm 5.4pt;\r\nmso-para-margin:0cm;\r\nmso-para-margin-bottom:.0001pt;\r\nmso-pagination:widow-orphan;\r\nfont-size:11.0pt;\r\nfont-family:\"Calibri\",\"sans-serif\";\r\nmso-ascii-font-family:Calibri;\r\nmso-ascii-theme-font:minor-latin;\r\nmso-fareast-font-family:\"Times New Roman\";\r\nmso-fareast-theme-font:minor-fareast;\r\nmso-hansi-font-family:Calibri;\r\nmso-hansi-theme-font:minor-latin;\r\nmso-bidi-font-family:\"Times New Roman\";\r\nmso-bidi-theme-font:minor-bidi;}\r\n</style>\r\n<![endif]--></p>\r\n<h2 data-facebook=\"caption\">Novoroční sleva 12%</h2>\r\n<div data-facebook=\"text\" class=\"annotation\">\r\n<p>&#160;</p>\r\n<p>Dejte vašemu bytu nový moderní look, který vás bude denně těšit.  Interiérové dveře SAPELI vám nabízíme ve 20 modelových řadách a stovkách  přírodních i umělých povrchů. Užitnou hodnotu vašich dveří zvýší naše  speciální vlastosti - zvukově izolační, termo, klima, protipožární či  voděodolné.<strong> To vše můžete nyní pořídit s 12% slevou. A navíc na výrobky SAPELI máte 5letou záruku.&#160;</strong></p>\r\n</div>\r\n<p>&#160;</p>\r\n<p><img width=\"600\" height=\"147\" alt=\"\" src=\"http://cms.www.sapeli.cz/cs/goto/Image/88518382618832183-na-stranku-o-sleve-M_nOUZdn.png?_signature=A23CABBC04&amp;height=147&amp;width=600\" /></p>\r\n<p>&#160;</p>\r\n<p><strong>&#160;Proč SAPELI a proč právě nyní?</strong></p>\r\n<ul>\r\n    <li>Od roku 1993 jsem dodali do českých domácností přes 3 miliony dveří.</li>\r\n    <li>Naše dveře sami testujeme a neustále vylepšujeme. Kvalita je u nás na prvním místě.</li>\r\n    <li>Věnujeme pozornost současnýcm trendům v bytovém designu, každý rok přicházíme s top novinkami.</li>\r\n    <li>Máme dveře do každé místnosti, s různými funkčními vlastnostmi.</li>\r\n    <li>U nás si vyberete - 20 modelových řas, stovky přírodních i umělých povrchů, tisíce možných kombinací.</li>\r\n    <li><strong>A NYNÍ NAVÍC NOVOROČNÍ SLEVA 12 % !</strong></li>\r\n</ul>\r\n<p><strong>&#160;</strong></p>\r\n<table cellspacing=\"2\" border=\"0\">\r\n    <tbody>\r\n        <tr>\r\n            <td><img width=\"368\" height=\"300\" alt=\"\" src=\"http://cms.www.sapeli.cz/cs/goto/Image/88518382618832198-render-1-MPhd_Zdn.png?_signature=FC7014674B&amp;height=300&amp;width=368\" /></td>\r\n            <td><img width=\"290\" height=\"300\" alt=\"\" src=\"http://cms.www.sapeli.cz/cs/goto/Image/88518382618832200-render-2-MdNn_Zdn.png?_signature=9968C90165&amp;height=300&amp;width=290\" /></td>\r\n        </tr>\r\n    </tbody>\r\n</table>\r\n<p>&#160;</p>\r\n<p><em>Sleva se vztahuje na celý sortiment výrobků SAPELI, včetně jejich  provedení za příplatek a doplńků k nim, s výjimkou kategorie Praktik a  doplňků k nim. Sleva se rovněž nevztahuje na cenu montáže. Podmínkou  uplatnění slevy je zakoupení kompletu dveře + zárubeň a uzavření smlouvy  v termínu 4. 1. do 29. 2. 2016. SAPELI si vyhrazuje právo na předčasné  ukončení této akce dle kapacit výroby. Akce platí u všech smluvních  partnerů SAPELI. Nelze kombinovat s jinými akčními nabídkami a slevami.  Na zakoupené výrobky lze při splnění podmínek záručního programu  uplatnit 5letou záruku. Základní podmínkou pro nárokování 5leté záruky  je nákup kompletu vč. kování.</em> </p>\r\n<p>&#160;</p>',NULL,'',''),
-(360,1,'akce',NULL,'',NULL,'',''),
+(359,1,'Akce Sapeli Novoroční','','<p><!--[if gte mso 9]><xml>\r\n<w:WordDocument>\r\n<w:View>Normal</w:View>\r\n<w:Zoom>0</w:Zoom>\r\n<w:TrackMoves />\r\n<w:TrackFormatting />\r\n<w:DoNotShowComments />\r\n<w:HyphenationZone>21</w:HyphenationZone>\r\n<w:PunctuationKerning />\r\n<w:ValidateAgainstSchemas />\r\n<w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>\r\n<w:IgnoreMixedContent>false</w:IgnoreMixedContent>\r\n<w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>\r\n<w:DoNotPromoteQF />\r\n<w:LidThemeOther>CS</w:LidThemeOther>\r\n<w:LidThemeAsian>X-NONE</w:LidThemeAsian>\r\n<w:LidThemeComplexScript>X-NONE</w:LidThemeComplexScript>\r\n<w:Compatibility>\r\n<w:BreakWrappedTables />\r\n<w:SnapToGridInCell />\r\n<w:WrapTextWithPunct />\r\n<w:UseAsianBreakRules />\r\n<w:DontGrowAutofit />\r\n<w:SplitPgBreakAndParaMark />\r\n<w:DontVertAlignCellWithSp />\r\n<w:DontBreakConstrainedForcedTables />\r\n<w:DontVertAlignInTxbx />\r\n<w:Word11KerningPairs />\r\n<w:CachedColBalance />\r\n</w:Compatibility>\r\n<w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>\r\n<m:mathPr>\r\n<m:mathFont m:val=\"Cambria Math\" />\r\n<m:brkBin m:val=\"before\" />\r\n<m:brkBinSub m:val=\"&#45;-\" />\r\n<m:smallFrac m:val=\"off\" />\r\n<m:dispDef />\r\n<m:lMargin m:val=\"0\" />\r\n<m:rMargin m:val=\"0\" />\r\n<m:defJc m:val=\"centerGroup\" />\r\n<m:wrapIndent m:val=\"1440\" />\r\n<m:intLim m:val=\"subSup\" />\r\n<m:naryLim m:val=\"undOvr\" />\r\n</m:mathPr></w:WordDocument>\r\n</xml><![endif]--></p>\r\n<p><!--[if gte mso 9]><xml>\r\n<w:LatentStyles DefLockedState=\"false\" DefUnhideWhenUsed=\"true\"\r\nDefSemiHidden=\"true\" DefQFormat=\"false\" DefPriority=\"99\"\r\nLatentStyleCount=\"267\">\r\n<w:LsdException Locked=\"false\" Priority=\"0\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" QFormat=\"true\" Name=\"Normal\" />\r\n<w:LsdException Locked=\"false\" Priority=\"9\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" QFormat=\"true\" Name=\"heading 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"9\" QFormat=\"true\" Name=\"heading 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"9\" QFormat=\"true\" Name=\"heading 3\" />\r\n<w:LsdException Locked=\"false\" Priority=\"9\" QFormat=\"true\" Name=\"heading 4\" />\r\n<w:LsdException Locked=\"false\" Priority=\"9\" QFormat=\"true\" Name=\"heading 5\" />\r\n<w:LsdException Locked=\"false\" Priority=\"9\" QFormat=\"true\" Name=\"heading 6\" />\r\n<w:LsdException Locked=\"false\" Priority=\"9\" QFormat=\"true\" Name=\"heading 7\" />\r\n<w:LsdException Locked=\"false\" Priority=\"9\" QFormat=\"true\" Name=\"heading 8\" />\r\n<w:LsdException Locked=\"false\" Priority=\"9\" QFormat=\"true\" Name=\"heading 9\" />\r\n<w:LsdException Locked=\"false\" Priority=\"39\" Name=\"toc 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"39\" Name=\"toc 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"39\" Name=\"toc 3\" />\r\n<w:LsdException Locked=\"false\" Priority=\"39\" Name=\"toc 4\" />\r\n<w:LsdException Locked=\"false\" Priority=\"39\" Name=\"toc 5\" />\r\n<w:LsdException Locked=\"false\" Priority=\"39\" Name=\"toc 6\" />\r\n<w:LsdException Locked=\"false\" Priority=\"39\" Name=\"toc 7\" />\r\n<w:LsdException Locked=\"false\" Priority=\"39\" Name=\"toc 8\" />\r\n<w:LsdException Locked=\"false\" Priority=\"39\" Name=\"toc 9\" />\r\n<w:LsdException Locked=\"false\" Priority=\"35\" QFormat=\"true\" Name=\"caption\" />\r\n<w:LsdException Locked=\"false\" Priority=\"10\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" QFormat=\"true\" Name=\"Title\" />\r\n<w:LsdException Locked=\"false\" Priority=\"1\" Name=\"Default Paragraph Font\" />\r\n<w:LsdException Locked=\"false\" Priority=\"11\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" QFormat=\"true\" Name=\"Subtitle\" />\r\n<w:LsdException Locked=\"false\" Priority=\"22\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" QFormat=\"true\" Name=\"Strong\" />\r\n<w:LsdException Locked=\"false\" Priority=\"20\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" QFormat=\"true\" Name=\"Emphasis\" />\r\n<w:LsdException Locked=\"false\" Priority=\"59\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Table Grid\" />\r\n<w:LsdException Locked=\"false\" UnhideWhenUsed=\"false\" Name=\"Placeholder Text\" />\r\n<w:LsdException Locked=\"false\" Priority=\"1\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" QFormat=\"true\" Name=\"No Spacing\" />\r\n<w:LsdException Locked=\"false\" Priority=\"60\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light Shading\" />\r\n<w:LsdException Locked=\"false\" Priority=\"61\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light List\" />\r\n<w:LsdException Locked=\"false\" Priority=\"62\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light Grid\" />\r\n<w:LsdException Locked=\"false\" Priority=\"63\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Shading 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"64\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Shading 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"65\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium List 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"66\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium List 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"67\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"68\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"69\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 3\" />\r\n<w:LsdException Locked=\"false\" Priority=\"70\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Dark List\" />\r\n<w:LsdException Locked=\"false\" Priority=\"71\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful Shading\" />\r\n<w:LsdException Locked=\"false\" Priority=\"72\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful List\" />\r\n<w:LsdException Locked=\"false\" Priority=\"73\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful Grid\" />\r\n<w:LsdException Locked=\"false\" Priority=\"60\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light Shading Accent 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"61\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light List Accent 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"62\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light Grid Accent 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"63\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Shading 1 Accent 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"64\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Shading 2 Accent 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"65\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium List 1 Accent 1\" />\r\n<w:LsdException Locked=\"false\" UnhideWhenUsed=\"false\" Name=\"Revision\" />\r\n<w:LsdException Locked=\"false\" Priority=\"34\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" QFormat=\"true\" Name=\"List Paragraph\" />\r\n<w:LsdException Locked=\"false\" Priority=\"29\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" QFormat=\"true\" Name=\"Quote\" />\r\n<w:LsdException Locked=\"false\" Priority=\"30\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" QFormat=\"true\" Name=\"Intense Quote\" />\r\n<w:LsdException Locked=\"false\" Priority=\"66\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium List 2 Accent 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"67\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 1 Accent 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"68\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 2 Accent 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"69\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 3 Accent 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"70\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Dark List Accent 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"71\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful Shading Accent 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"72\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful List Accent 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"73\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful Grid Accent 1\" />\r\n<w:LsdException Locked=\"false\" Priority=\"60\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light Shading Accent 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"61\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light List Accent 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"62\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light Grid Accent 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"63\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Shading 1 Accent 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"64\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Shading 2 Accent 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"65\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium List 1 Accent 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"66\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium List 2 Accent 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"67\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 1 Accent 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"68\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 2 Accent 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"69\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 3 Accent 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"70\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Dark List Accent 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"71\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful Shading Accent 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"72\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful List Accent 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"73\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful Grid Accent 2\" />\r\n<w:LsdException Locked=\"false\" Priority=\"60\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light Shading Accent 3\" />\r\n<w:LsdException Locked=\"false\" Priority=\"61\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light List Accent 3\" />\r\n<w:LsdException Locked=\"false\" Priority=\"62\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light Grid Accent 3\" />\r\n<w:LsdException Locked=\"false\" Priority=\"63\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Shading 1 Accent 3\" />\r\n<w:LsdException Locked=\"false\" Priority=\"64\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Shading 2 Accent 3\" />\r\n<w:LsdException Locked=\"false\" Priority=\"65\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium List 1 Accent 3\" />\r\n<w:LsdException Locked=\"false\" Priority=\"66\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium List 2 Accent 3\" />\r\n<w:LsdException Locked=\"false\" Priority=\"67\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 1 Accent 3\" />\r\n<w:LsdException Locked=\"false\" Priority=\"68\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 2 Accent 3\" />\r\n<w:LsdException Locked=\"false\" Priority=\"69\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 3 Accent 3\" />\r\n<w:LsdException Locked=\"false\" Priority=\"70\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Dark List Accent 3\" />\r\n<w:LsdException Locked=\"false\" Priority=\"71\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful Shading Accent 3\" />\r\n<w:LsdException Locked=\"false\" Priority=\"72\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful List Accent 3\" />\r\n<w:LsdException Locked=\"false\" Priority=\"73\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful Grid Accent 3\" />\r\n<w:LsdException Locked=\"false\" Priority=\"60\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light Shading Accent 4\" />\r\n<w:LsdException Locked=\"false\" Priority=\"61\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light List Accent 4\" />\r\n<w:LsdException Locked=\"false\" Priority=\"62\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light Grid Accent 4\" />\r\n<w:LsdException Locked=\"false\" Priority=\"63\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Shading 1 Accent 4\" />\r\n<w:LsdException Locked=\"false\" Priority=\"64\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Shading 2 Accent 4\" />\r\n<w:LsdException Locked=\"false\" Priority=\"65\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium List 1 Accent 4\" />\r\n<w:LsdException Locked=\"false\" Priority=\"66\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium List 2 Accent 4\" />\r\n<w:LsdException Locked=\"false\" Priority=\"67\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 1 Accent 4\" />\r\n<w:LsdException Locked=\"false\" Priority=\"68\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 2 Accent 4\" />\r\n<w:LsdException Locked=\"false\" Priority=\"69\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 3 Accent 4\" />\r\n<w:LsdException Locked=\"false\" Priority=\"70\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Dark List Accent 4\" />\r\n<w:LsdException Locked=\"false\" Priority=\"71\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful Shading Accent 4\" />\r\n<w:LsdException Locked=\"false\" Priority=\"72\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful List Accent 4\" />\r\n<w:LsdException Locked=\"false\" Priority=\"73\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful Grid Accent 4\" />\r\n<w:LsdException Locked=\"false\" Priority=\"60\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light Shading Accent 5\" />\r\n<w:LsdException Locked=\"false\" Priority=\"61\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light List Accent 5\" />\r\n<w:LsdException Locked=\"false\" Priority=\"62\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light Grid Accent 5\" />\r\n<w:LsdException Locked=\"false\" Priority=\"63\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Shading 1 Accent 5\" />\r\n<w:LsdException Locked=\"false\" Priority=\"64\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Shading 2 Accent 5\" />\r\n<w:LsdException Locked=\"false\" Priority=\"65\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium List 1 Accent 5\" />\r\n<w:LsdException Locked=\"false\" Priority=\"66\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium List 2 Accent 5\" />\r\n<w:LsdException Locked=\"false\" Priority=\"67\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 1 Accent 5\" />\r\n<w:LsdException Locked=\"false\" Priority=\"68\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 2 Accent 5\" />\r\n<w:LsdException Locked=\"false\" Priority=\"69\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 3 Accent 5\" />\r\n<w:LsdException Locked=\"false\" Priority=\"70\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Dark List Accent 5\" />\r\n<w:LsdException Locked=\"false\" Priority=\"71\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful Shading Accent 5\" />\r\n<w:LsdException Locked=\"false\" Priority=\"72\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful List Accent 5\" />\r\n<w:LsdException Locked=\"false\" Priority=\"73\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful Grid Accent 5\" />\r\n<w:LsdException Locked=\"false\" Priority=\"60\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light Shading Accent 6\" />\r\n<w:LsdException Locked=\"false\" Priority=\"61\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light List Accent 6\" />\r\n<w:LsdException Locked=\"false\" Priority=\"62\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Light Grid Accent 6\" />\r\n<w:LsdException Locked=\"false\" Priority=\"63\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Shading 1 Accent 6\" />\r\n<w:LsdException Locked=\"false\" Priority=\"64\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Shading 2 Accent 6\" />\r\n<w:LsdException Locked=\"false\" Priority=\"65\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium List 1 Accent 6\" />\r\n<w:LsdException Locked=\"false\" Priority=\"66\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium List 2 Accent 6\" />\r\n<w:LsdException Locked=\"false\" Priority=\"67\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 1 Accent 6\" />\r\n<w:LsdException Locked=\"false\" Priority=\"68\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 2 Accent 6\" />\r\n<w:LsdException Locked=\"false\" Priority=\"69\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Medium Grid 3 Accent 6\" />\r\n<w:LsdException Locked=\"false\" Priority=\"70\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Dark List Accent 6\" />\r\n<w:LsdException Locked=\"false\" Priority=\"71\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful Shading Accent 6\" />\r\n<w:LsdException Locked=\"false\" Priority=\"72\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful List Accent 6\" />\r\n<w:LsdException Locked=\"false\" Priority=\"73\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" Name=\"Colorful Grid Accent 6\" />\r\n<w:LsdException Locked=\"false\" Priority=\"19\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" QFormat=\"true\" Name=\"Subtle Emphasis\" />\r\n<w:LsdException Locked=\"false\" Priority=\"21\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" QFormat=\"true\" Name=\"Intense Emphasis\" />\r\n<w:LsdException Locked=\"false\" Priority=\"31\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" QFormat=\"true\" Name=\"Subtle Reference\" />\r\n<w:LsdException Locked=\"false\" Priority=\"32\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" QFormat=\"true\" Name=\"Intense Reference\" />\r\n<w:LsdException Locked=\"false\" Priority=\"33\" SemiHidden=\"false\"\r\nUnhideWhenUsed=\"false\" QFormat=\"true\" Name=\"Book Title\" />\r\n<w:LsdException Locked=\"false\" Priority=\"37\" Name=\"Bibliography\" />\r\n<w:LsdException Locked=\"false\" Priority=\"39\" QFormat=\"true\" Name=\"TOC Heading\" />\r\n</w:LatentStyles>\r\n</xml><![endif]--><!--[if gte mso 10]>\r\n<style>\r\n(360,1,'akce',NULL,'',NULL,'',''),
 (361,1,'info',NULL,'',NULL,'',''),
 (362,1,'dveře',NULL,'',NULL,'','');
-/*!40000 ALTER TABLE `categories_description` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -834,8 +782,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `configuration`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `configuration` (
   `configuration_id` int(11) NOT NULL AUTO_INCREMENT,
   `configuration_title` varchar(255) NOT NULL,
@@ -850,14 +796,12 @@ CREATE TABLE `configuration` (
   `set_function` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`configuration_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=405 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `configuration`
 --
 
 LOCK TABLES `configuration` WRITE;
-/*!40000 ALTER TABLE `configuration` DISABLE KEYS */;
 INSERT INTO `configuration` VALUES
 (1,'Store Name','STORE_NAME','osCommerce','The name of my store',1,1,NULL,'2024-06-07 04:52:42',NULL,NULL),
 (2,'Store Owner','STORE_OWNER','Harald Ponce de Leon','The name of my store owner',1,2,NULL,'2024-06-07 04:52:42',NULL,NULL),
@@ -1160,7 +1104,6 @@ INSERT INTO `configuration` VALUES
 (402,'Banner Order','MODULE_CAROUSEL_ROTATOR_BANNER_ORDER','Asc','Order that the Banner Rotator uses to show the banners.',6,0,NULL,'2024-09-26 04:12:14',NULL,'tep_cfg_select_option(array(\'Asc\', \'Desc\'), '),
 (403,'Banner Rotator Group','MODULE_CAROUSEL_ROTATOR_GROUP','rotator','Name of the banner group that the Banner Rotator uses to show the banners.',6,0,NULL,'2024-09-26 04:12:14',NULL,NULL),
 (404,'Banner Rotator Max Banners','MODULE_CAROUSEL_ROTATOR_MAX_DISPLAY','4','Maximum number of banners that the Banner Rotator will show',6,0,NULL,'2024-09-26 04:12:14',NULL,NULL);
-/*!40000 ALTER TABLE `configuration` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1168,8 +1111,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `configuration_group`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `configuration_group` (
   `configuration_group_id` int(11) NOT NULL AUTO_INCREMENT,
   `configuration_group_title` varchar(64) NOT NULL,
@@ -1178,14 +1119,12 @@ CREATE TABLE `configuration_group` (
   `visible` int(1) DEFAULT 1,
   PRIMARY KEY (`configuration_group_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `configuration_group`
 --
 
 LOCK TABLES `configuration_group` WRITE;
-/*!40000 ALTER TABLE `configuration_group` DISABLE KEYS */;
 INSERT INTO `configuration_group` VALUES
 (1,'My Store','General information about my store',1,1),
 (2,'Minimum Values','The minimum values for functions / data',2,1),
@@ -1202,7 +1141,6 @@ INSERT INTO `configuration_group` VALUES
 (13,'Download','Downloadable products options',13,1),
 (14,'GZip Compression','GZip compression options',14,1),
 (15,'Sessions','Session options',15,1);
-/*!40000 ALTER TABLE `configuration_group` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1210,8 +1148,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `countries`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `countries` (
   `countries_id` int(11) NOT NULL AUTO_INCREMENT,
   `countries_name` varchar(255) NOT NULL,
@@ -1221,14 +1157,12 @@ CREATE TABLE `countries` (
   PRIMARY KEY (`countries_id`),
   KEY `IDX_COUNTRIES_NAME` (`countries_name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=240 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `countries`
 --
 
 LOCK TABLES `countries` WRITE;
-/*!40000 ALTER TABLE `countries` DISABLE KEYS */;
 INSERT INTO `countries` VALUES
 (1,'Afghanistan','AF','AFG',1),
 (2,'Albania','AL','ALB',1),
@@ -1469,7 +1403,6 @@ INSERT INTO `countries` VALUES
 (237,'Zaire','ZR','ZAR',1),
 (238,'Zambia','ZM','ZMB',1),
 (239,'Zimbabwe','ZW','ZWE',1);
-/*!40000 ALTER TABLE `countries` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1477,8 +1410,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `currencies`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `currencies` (
   `currencies_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(32) NOT NULL,
@@ -1493,18 +1424,15 @@ CREATE TABLE `currencies` (
   PRIMARY KEY (`currencies_id`),
   KEY `idx_currencies_code` (`code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `currencies`
 --
 
 LOCK TABLES `currencies` WRITE;
-/*!40000 ALTER TABLE `currencies` DISABLE KEYS */;
 INSERT INTO `currencies` VALUES
 (1,'U.S. Dollar','USD','$','','.',',','2',1.00000000,'2024-06-07 04:52:43'),
 (2,'Euro','EUR','','€','.',',','2',1.00000000,'2024-06-07 04:52:43');
-/*!40000 ALTER TABLE `currencies` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1512,8 +1440,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `customers`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `customers` (
   `customers_id` int(11) NOT NULL AUTO_INCREMENT,
   `customers_gender` char(1) DEFAULT NULL,
@@ -1529,15 +1455,12 @@ CREATE TABLE `customers` (
   PRIMARY KEY (`customers_id`),
   KEY `idx_customers_email_address` (`customers_email_address`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `customers`
 --
 
 LOCK TABLES `customers` WRITE;
-/*!40000 ALTER TABLE `customers` DISABLE KEYS */;
-/*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1545,8 +1468,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `customers_basket`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `customers_basket` (
   `customers_basket_id` int(11) NOT NULL AUTO_INCREMENT,
   `customers_id` int(11) NOT NULL,
@@ -1557,15 +1478,12 @@ CREATE TABLE `customers_basket` (
   PRIMARY KEY (`customers_basket_id`),
   KEY `idx_customers_basket_customers_id` (`customers_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `customers_basket`
 --
 
 LOCK TABLES `customers_basket` WRITE;
-/*!40000 ALTER TABLE `customers_basket` DISABLE KEYS */;
-/*!40000 ALTER TABLE `customers_basket` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1573,8 +1491,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `customers_basket_attributes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `customers_basket_attributes` (
   `customers_basket_attributes_id` int(11) NOT NULL AUTO_INCREMENT,
   `customers_id` int(11) NOT NULL,
@@ -1584,15 +1500,12 @@ CREATE TABLE `customers_basket_attributes` (
   PRIMARY KEY (`customers_basket_attributes_id`),
   KEY `idx_customers_basket_att_customers_id` (`customers_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `customers_basket_attributes`
 --
 
 LOCK TABLES `customers_basket_attributes` WRITE;
-/*!40000 ALTER TABLE `customers_basket_attributes` DISABLE KEYS */;
-/*!40000 ALTER TABLE `customers_basket_attributes` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1600,8 +1513,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `customers_braintree_tokens`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `customers_braintree_tokens` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `customers_id` int(11) NOT NULL,
@@ -1614,15 +1525,12 @@ CREATE TABLE `customers_braintree_tokens` (
   KEY `idx_cbraintreet_customers_id` (`customers_id`),
   KEY `idx_cbraintreet_token` (`braintree_token`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `customers_braintree_tokens`
 --
 
 LOCK TABLES `customers_braintree_tokens` WRITE;
-/*!40000 ALTER TABLE `customers_braintree_tokens` DISABLE KEYS */;
-/*!40000 ALTER TABLE `customers_braintree_tokens` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1630,8 +1538,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `customers_info`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `customers_info` (
   `customers_info_id` int(11) NOT NULL,
   `customers_info_date_of_last_logon` datetime DEFAULT NULL,
@@ -1643,15 +1549,12 @@ CREATE TABLE `customers_info` (
   `password_reset_date` datetime DEFAULT NULL,
   PRIMARY KEY (`customers_info_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `customers_info`
 --
 
 LOCK TABLES `customers_info` WRITE;
-/*!40000 ALTER TABLE `customers_info` DISABLE KEYS */;
-/*!40000 ALTER TABLE `customers_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1659,8 +1562,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `customers_wishlist`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `customers_wishlist` (
   `customers_wishlist_id` int(11) NOT NULL AUTO_INCREMENT,
   `customers_id` int(11) NOT NULL DEFAULT 0,
@@ -1669,15 +1570,12 @@ CREATE TABLE `customers_wishlist` (
   PRIMARY KEY (`customers_wishlist_id`),
   KEY `idx_wishlist_customers_id` (`customers_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `customers_wishlist`
 --
 
 LOCK TABLES `customers_wishlist` WRITE;
-/*!40000 ALTER TABLE `customers_wishlist` DISABLE KEYS */;
-/*!40000 ALTER TABLE `customers_wishlist` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1685,8 +1583,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `customers_wishlist_attributes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `customers_wishlist_attributes` (
   `customers_wishlist_attributes_id` int(11) NOT NULL AUTO_INCREMENT,
   `customers_id` int(11) NOT NULL,
@@ -1696,15 +1592,12 @@ CREATE TABLE `customers_wishlist_attributes` (
   PRIMARY KEY (`customers_wishlist_attributes_id`),
   KEY `idx_wishlist_att_customers_id` (`customers_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `customers_wishlist_attributes`
 --
 
 LOCK TABLES `customers_wishlist_attributes` WRITE;
-/*!40000 ALTER TABLE `customers_wishlist_attributes` DISABLE KEYS */;
-/*!40000 ALTER TABLE `customers_wishlist_attributes` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1712,8 +1605,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `geo_zones`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `geo_zones` (
   `geo_zone_id` int(11) NOT NULL AUTO_INCREMENT,
   `geo_zone_name` varchar(32) NOT NULL,
@@ -1722,17 +1613,14 @@ CREATE TABLE `geo_zones` (
   `date_added` datetime NOT NULL,
   PRIMARY KEY (`geo_zone_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `geo_zones`
 --
 
 LOCK TABLES `geo_zones` WRITE;
-/*!40000 ALTER TABLE `geo_zones` DISABLE KEYS */;
 INSERT INTO `geo_zones` VALUES
 (1,'Florida','Florida local sales tax zone',NULL,'2024-06-07 04:52:43');
-/*!40000 ALTER TABLE `geo_zones` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1740,8 +1628,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `information_pages`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `information_pages` (
   `pages_id` int(11) NOT NULL AUTO_INCREMENT,
   `pages_date_added` datetime DEFAULT NULL,
@@ -1750,21 +1636,18 @@ CREATE TABLE `information_pages` (
   `sort_order` int(3) DEFAULT NULL,
   PRIMARY KEY (`pages_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `information_pages`
 --
 
 LOCK TABLES `information_pages` WRITE;
-/*!40000 ALTER TABLE `information_pages` DISABLE KEYS */;
 INSERT INTO `information_pages` VALUES
 (1,'2024-06-07 04:52:43',NULL,1,3),
 (2,'2024-06-07 04:52:43',NULL,1,2),
 (3,'2024-06-07 04:52:43',NULL,1,1),
 (4,'2024-06-07 04:52:43',NULL,0,1),
 (5,'2024-06-07 04:52:43',NULL,1,1);
-/*!40000 ALTER TABLE `information_pages` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1772,8 +1655,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `information_pages_content`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `information_pages_content` (
   `pages_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` tinyint(1) NOT NULL DEFAULT 1,
@@ -1782,21 +1663,18 @@ CREATE TABLE `information_pages_content` (
   PRIMARY KEY (`pages_id`,`language_id`),
   KEY `pages_name` (`pages_name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `information_pages_content`
 --
 
 LOCK TABLES `information_pages_content` WRITE;
-/*!40000 ALTER TABLE `information_pages_content` DISABLE KEYS */;
 INSERT INTO `information_pages_content` VALUES
 (1,1,'Shipping & Returns','Put here your Shipping & Returns information.'),
 (2,1,'Privacy Notice','Put here your Privacy Notice information. '),
 (3,1,'Conditions of Use','Put here your Conditions of Use information.'),
 (4,1,'Returns & Refunds','Put here your Returns & Refunds information.'),
 (5,1,'Cookie Policy','Put here your Cookie Policy information.');
-/*!40000 ALTER TABLE `information_pages_content` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1804,8 +1682,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `languages`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `languages` (
   `languages_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL,
@@ -1816,17 +1692,14 @@ CREATE TABLE `languages` (
   PRIMARY KEY (`languages_id`),
   KEY `IDX_LANGUAGES_NAME` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `languages`
 --
 
 LOCK TABLES `languages` WRITE;
-/*!40000 ALTER TABLE `languages` DISABLE KEYS */;
 INSERT INTO `languages` VALUES
 (1,'Czech','cs','icon.gif','czech',1);
-/*!40000 ALTER TABLE `languages` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1834,8 +1707,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `manufacturers`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `manufacturers` (
   `manufacturers_id` int(11) NOT NULL AUTO_INCREMENT,
   `manufacturers_name` varchar(64) NOT NULL,
@@ -1845,15 +1716,12 @@ CREATE TABLE `manufacturers` (
   PRIMARY KEY (`manufacturers_id`),
   KEY `IDX_MANUFACTURERS_NAME` (`manufacturers_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `manufacturers`
 --
 
 LOCK TABLES `manufacturers` WRITE;
-/*!40000 ALTER TABLE `manufacturers` DISABLE KEYS */;
-/*!40000 ALTER TABLE `manufacturers` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1861,8 +1729,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `manufacturers_info`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `manufacturers_info` (
   `manufacturers_id` int(11) NOT NULL,
   `languages_id` int(11) NOT NULL,
@@ -1871,15 +1737,12 @@ CREATE TABLE `manufacturers_info` (
   `date_last_click` datetime DEFAULT NULL,
   PRIMARY KEY (`manufacturers_id`,`languages_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `manufacturers_info`
 --
 
 LOCK TABLES `manufacturers_info` WRITE;
-/*!40000 ALTER TABLE `manufacturers_info` DISABLE KEYS */;
-/*!40000 ALTER TABLE `manufacturers_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1887,8 +1750,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `newsletters`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `newsletters` (
   `newsletters_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
@@ -1900,15 +1761,12 @@ CREATE TABLE `newsletters` (
   `locked` int(1) DEFAULT 0,
   PRIMARY KEY (`newsletters_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `newsletters`
 --
 
 LOCK TABLES `newsletters` WRITE;
-/*!40000 ALTER TABLE `newsletters` DISABLE KEYS */;
-/*!40000 ALTER TABLE `newsletters` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1916,8 +1774,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `orders`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `orders` (
   `orders_id` int(11) NOT NULL AUTO_INCREMENT,
   `customers_id` int(11) NOT NULL,
@@ -1964,15 +1820,12 @@ CREATE TABLE `orders` (
   PRIMARY KEY (`orders_id`),
   KEY `idx_orders_customers_id` (`customers_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `orders`
 --
 
 LOCK TABLES `orders` WRITE;
-/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1980,8 +1833,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `orders_products`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `orders_products` (
   `orders_products_id` int(11) NOT NULL AUTO_INCREMENT,
   `orders_id` int(11) NOT NULL,
@@ -1996,15 +1847,12 @@ CREATE TABLE `orders_products` (
   KEY `idx_orders_products_orders_id` (`orders_id`),
   KEY `idx_orders_products_products_id` (`products_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `orders_products`
 --
 
 LOCK TABLES `orders_products` WRITE;
-/*!40000 ALTER TABLE `orders_products` DISABLE KEYS */;
-/*!40000 ALTER TABLE `orders_products` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -2012,8 +1860,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `orders_products_attributes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `orders_products_attributes` (
   `orders_products_attributes_id` int(11) NOT NULL AUTO_INCREMENT,
   `orders_id` int(11) NOT NULL,
@@ -2025,15 +1871,12 @@ CREATE TABLE `orders_products_attributes` (
   PRIMARY KEY (`orders_products_attributes_id`),
   KEY `idx_orders_products_att_orders_id` (`orders_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `orders_products_attributes`
 --
 
 LOCK TABLES `orders_products_attributes` WRITE;
-/*!40000 ALTER TABLE `orders_products_attributes` DISABLE KEYS */;
-/*!40000 ALTER TABLE `orders_products_attributes` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -2041,8 +1884,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `orders_products_download`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `orders_products_download` (
   `orders_products_download_id` int(11) NOT NULL AUTO_INCREMENT,
   `orders_id` int(11) NOT NULL DEFAULT 0,
@@ -2053,15 +1894,12 @@ CREATE TABLE `orders_products_download` (
   PRIMARY KEY (`orders_products_download_id`),
   KEY `idx_orders_products_download_orders_id` (`orders_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `orders_products_download`
 --
 
 LOCK TABLES `orders_products_download` WRITE;
-/*!40000 ALTER TABLE `orders_products_download` DISABLE KEYS */;
-/*!40000 ALTER TABLE `orders_products_download` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -2069,8 +1907,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `orders_status`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `orders_status` (
   `orders_status_id` int(11) NOT NULL DEFAULT 0,
   `language_id` int(11) NOT NULL DEFAULT 1,
@@ -2080,21 +1916,18 @@ CREATE TABLE `orders_status` (
   PRIMARY KEY (`orders_status_id`,`language_id`),
   KEY `idx_orders_status_name` (`orders_status_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `orders_status`
 --
 
 LOCK TABLES `orders_status` WRITE;
-/*!40000 ALTER TABLE `orders_status` DISABLE KEYS */;
 INSERT INTO `orders_status` VALUES
 (1,1,'Pending',1,0),
 (2,1,'Processing',1,1),
 (3,1,'Delivered',1,1),
 (4,1,'PayPal [Transactions]',0,0),
 (5,1,'Braintree [Transactions]',0,0);
-/*!40000 ALTER TABLE `orders_status` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -2102,8 +1935,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `orders_status_history`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `orders_status_history` (
   `orders_status_history_id` int(11) NOT NULL AUTO_INCREMENT,
   `orders_id` int(11) NOT NULL,
@@ -2114,15 +1945,12 @@ CREATE TABLE `orders_status_history` (
   PRIMARY KEY (`orders_status_history_id`),
   KEY `idx_orders_status_history_orders_id` (`orders_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `orders_status_history`
 --
 
 LOCK TABLES `orders_status_history` WRITE;
-/*!40000 ALTER TABLE `orders_status_history` DISABLE KEYS */;
-/*!40000 ALTER TABLE `orders_status_history` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -2130,8 +1958,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `orders_total`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `orders_total` (
   `orders_total_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `orders_id` int(11) NOT NULL,
@@ -2143,15 +1969,12 @@ CREATE TABLE `orders_total` (
   PRIMARY KEY (`orders_total_id`),
   KEY `idx_orders_total_orders_id` (`orders_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `orders_total`
 --
 
 LOCK TABLES `orders_total` WRITE;
-/*!40000 ALTER TABLE `orders_total` DISABLE KEYS */;
-/*!40000 ALTER TABLE `orders_total` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -2159,8 +1982,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `products`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `products` (
   `products_id` int(11) NOT NULL AUTO_INCREMENT,
   `products_listing_order` int(8) NOT NULL DEFAULT 99999999,
@@ -2206,14 +2027,12 @@ CREATE TABLE `products` (
   PRIMARY KEY (`products_id`),
   KEY `idx_products_date_added` (`products_date_added`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1867 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `products`
 --
 
 LOCK TABLES `products` WRITE;
-/*!40000 ALTER TABLE `products` DISABLE KEYS */;
 INSERT INTO `products` VALUES
 (40,99999999,0,100000,'','Pop2','','','','','','','','','','','','','','',0.0000,0.0000,'2005-01-01 00:00:00','2005-09-16 00:57:56','0000-00-00 00:00:00',0.00,0,4,0,0,'0',0.00,0.00,0.00,0,1,'2024-09-24 05:41:14',0,0,0,5029),
 (372,99999999,0,100000,'','jihlava.jpg',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0.0000,0.0000,'2006-08-01 18:30:42',NULL,NULL,0.00,1,4,34,0,'0',0.00,0.00,0.00,0,1,'2011-03-04 20:05:22',0,0,0,5030),
@@ -3435,7 +3254,6 @@ INSERT INTO `products` VALUES
 (1864,99999999,0,1,'','perla bila.jpg',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,2000.0000,0.0000,'2018-11-15 14:43:05','2018-11-15 15:07:35',NULL,0.00,0,4,31,0,'',0.00,0.00,0.00,0,1,'2024-09-24 05:41:14',0,0,0,NULL),
 (1865,99999999,0,1,'','Sima.jpg',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,2000.0000,0.0000,'2018-11-15 14:47:04','2018-11-15 15:05:42',NULL,0.00,0,4,39,0,'',0.00,0.00,0.00,0,1,'2024-09-24 05:41:14',0,0,0,NULL),
 (1866,99999999,0,1,'','Klasik 1.jpg',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,4000.0000,0.0000,'2018-11-15 14:52:19','2018-11-15 15:06:42',NULL,0.00,0,4,39,0,'',0.00,0.00,0.00,0,1,'2024-09-24 05:41:14',0,0,0,NULL);
-/*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -3443,8 +3261,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `products_attributes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `products_attributes` (
   `products_attributes_id` int(11) NOT NULL AUTO_INCREMENT,
   `products_id` int(11) NOT NULL DEFAULT 0,
@@ -3455,14 +3271,12 @@ CREATE TABLE `products_attributes` (
   PRIMARY KEY (`products_attributes_id`),
   KEY `idx_products_attributes_products_id` (`products_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=422 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_czech_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `products_attributes`
 --
 
 LOCK TABLES `products_attributes` WRITE;
-/*!40000 ALTER TABLE `products_attributes` DISABLE KEYS */;
 INSERT INTO `products_attributes` VALUES
 (10,837,11,26,0.0000,'+'),
 (11,837,11,19,360.0000,'+'),
@@ -3875,7 +3689,6 @@ INSERT INTO `products_attributes` VALUES
 (419,824,11,46,1260.0000,'+'),
 (420,824,11,47,1260.0000,'+'),
 (421,824,11,48,1090.0000,'+');
-/*!40000 ALTER TABLE `products_attributes` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -3883,8 +3696,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `products_attributes_download`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `products_attributes_download` (
   `products_attributes_id` int(11) NOT NULL DEFAULT 0,
   `products_attributes_filename` varchar(255) NOT NULL,
@@ -3892,15 +3703,12 @@ CREATE TABLE `products_attributes_download` (
   `products_attributes_maxcount` int(2) DEFAULT 0,
   PRIMARY KEY (`products_attributes_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_czech_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `products_attributes_download`
 --
 
 LOCK TABLES `products_attributes_download` WRITE;
-/*!40000 ALTER TABLE `products_attributes_download` DISABLE KEYS */;
-/*!40000 ALTER TABLE `products_attributes_download` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -3908,8 +3716,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `products_description`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `products_description` (
   `products_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` int(11) NOT NULL DEFAULT 1,
@@ -3925,14 +3731,12 @@ CREATE TABLE `products_description` (
   PRIMARY KEY (`products_id`,`language_id`),
   KEY `products_name` (`products_name`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1867 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `products_description`
 --
 
 LOCK TABLES `products_description` WRITE;
-/*!40000 ALTER TABLE `products_description` DISABLE KEYS */;
 INSERT INTO `products_description` VALUES
 (818,1,'Entero madlo','<p>&#160;</p>',NULL,NULL,'',762,'','',''),
 (797,1,'BEDEX Vario V3 dvoukřídlové','<p>Bezpečnostní dveře BEDEX Vario V3 dvoukřídlové <br />\r\n<br />\r\n<br />\r\nPopis a užití Bezpečnostní dveře vhodné do stávajících i nových zárubní k ochraně domů, bytů, kanceláří a jiných prostor v domech, vyrábí se jako dveře otevírané VEN z chráněného prostoru <br />\r\nStandardní rozměry Š. 1 200 - 2 400 mm, v. 1 970 - 2 500 <br />\r\nBezpečnostní třída 3 dle ENV 1627 <br />\r\nStupeň utajení Tajné <br />\r\nPožární odolnost <br />\r\nVzduchová neprůzvučnost Rw 33 dB <br />\r\nCertifikáty výrobku Centrum stavebního inženýrství a. s. Praha <br />\r\nTREZOR TEST s. r. o. <br />\r\nNárodní bezpečnostní úřad ČR <br />\r\nKonstrukce Oboustranně ocelová konstrukce s jeklovým rámem, 4 aktivní, 2 pasivní čepy a zámek MUL-T-LOCK 235 na pohyblivé části, 2 aktivní a 2 pasivní čepy a páka METALUX na pevné části, povrchy z výběrů 17 odstínů nebo základní nástřik, izolační výplň, obvodové těsnění <br />\r\nSoučinitel prostupu tepla k &lt; 2, 8 W. m-2K -1 <br />\r\nPovrch Speciální dveřní fólie d-c-fix dle výběru ze vzorníku , případně čalounění , nástřik dvousložkovým polyuretanovým emailem nebo kazetový obklad <br />\r\nVnitřní výbava Vnitřní antikorozní nátěr, pětibodový aktivní rozvorový mechanismus a 2 pevné čepy proti vysazení v aktivním křídle, dvoubodový aktivní pákový mechanismus a 2 pevné čepy proti vysazení v pasivním křídle, minerální vata <br />\r\nZárubeň Možnost montáže i do stávající ocelové zárubně nebo se zárubní MRB <br />\r\nDoporučená výbava Individuální výběr z aktuální nabídky bezpečnostního kování, zámků a vložek <br />\r\nVýroba Zakázková <br />\r\nCena od 21 650,- bez DPH (včetně rozvorového zámku, páky ovládající neaktivní křídlo, obvodového těsnění, bez zárubně)</p>',NULL,NULL,'',1628,'','',''),
@@ -4065,8 +3869,7 @@ INSERT INTO `products_description` VALUES
 (991,1,'Nabídka práce','<p>&#160;</p>',NULL,NULL,'',3050,'','',''),
 (955,1,'Mušle Open','',NULL,NULL,'',615,'','',''),
 (956,1,'Mušle Slide chrom','',NULL,NULL,'',449,'','',''),
-(467,1,'O nás','<p>Společnost Antrea, s.r.o. je společností s mnohaletou zkušeností na trhu v oblasti prodeje a montáží výplní otvorů - dveří, oken.<br />\r\n<br />\r\nDoufáme, že naši odbornost a přístup k zákazníkovi budete mít příležitost ocenit i Vy.<br />\r\n<br />\r\nDveře, zárubně, okna a příslušné kování dodáváme od mnoha výrobců. Naleznete u nás dveře dřevěné z masivního dřeva, dýhované, foliované, laminované, ocelové, plechové, hliníkové, plastové, celoskleněné.<br />\r\n<br />\r\nDle způsobu otevírání nabízíme dveře otočné, posuvné, skládací, oboustranně otevíravé, harmonikové, kyvné.<br />\r\n<br />\r\nDle užití a speciálních požadavků nabízíme <a href=\"javascript:void(0);/*1228169526711*/\">dveře vstupní</a> do bytových domů, rodinných domů či bytů buď jako dřevěné, plastové, hliníkové nebo <a href=\"javascript:void(0);/*1228169667466*/\">bezpečnostní</a>, <a href=\"javascript:void(0);/*1228169769833*/\">vnitřní dveře</a>, <a href=\"javascript:void(0);/*1228169981437*/\">protipožární</a>, <a href=\"javascript:void(0);/*1228170303066*/\">protihlukové</a>, kouřotěsné, rentgenové garážová vrata.<br />\r\n<br />\r\n<a href=\"javascript:void(0);/*1228169475999*/\">Posuvné dveře</a> se mohou posouvat do stavebních pouzder nebo po stěně.<br />\r\n<br />\r\nSpolečnost ANTREA, s.r.o. má smlouvy o obchodním zastoupení nebo spolupracuje s výrobci SAPELI, Barausse, Loprais, MRB (Bedex), Cobra, Colombo, MaT, Holar, Rostex, FAB – ASSA Abloy, Mito, Dierre, GEZE, Dorma, Jakov, Lualdi, Cociff, Gardessa, EP-Porte, 2000, Chiuserre, Hapines, FSB, Olivari, JaP, Eclisse, Cooplegno, Mul-t-lock, EVVA, Guard, Bera, Entrysystems, Richter, Martinelli, Mandelli, Hope, Metalia a dalšími.<br />\r\n<br />\r\nV menší míře dodáváme a montujeme take dřevěná, hliníková a plastová okna PKS, plovoucí podlahy Egger a kancelářský nábytek Exner.</p>',NULL,NULL,'',8392,'','',''),
-(1734,1,'Pouzdro dvoukřídlé zdivo 700+700/1970 tl. zdi 125','<p><b>Stavební pouzdro pro dvoukřídlé posuvné dveře</b></p>\r\n<p>pro zděnou příčku tloušťky 125 mm</p>',NULL,NULL,'',0,NULL,'',''),
+(467,1,'O nás','<p>Společnost Antrea, s.r.o. je společností s mnohaletou zkušeností na trhu v oblasti prodeje a montáží výplní otvorů - dveří, oken.<br />\r\n<br />\r\nDoufáme, že naši odbornost a přístup k zákazníkovi budete mít příležitost ocenit i Vy.<br />\r\n<br />\r\nDveře, zárubně, okna a příslušné kování dodáváme od mnoha výrobců. Naleznete u nás dveře dřevěné z masivního dřeva, dýhované, foliované, laminované, ocelové, plechové, hliníkové, plastové, celoskleněné.<br />\r\n<br />\r\nDle způsobu otevírání nabízíme dveře otočné, posuvné, skládací, oboustranně otevíravé, harmonikové, kyvné.<br />\r\n<br />\r\nDle užití a speciálních požadavků nabízíme <a href=\"javascript:void(0);(1734,1,'Pouzdro dvoukřídlé zdivo 700+700/1970 tl. zdi 125','<p><b>Stavební pouzdro pro dvoukřídlé posuvné dveře</b></p>\r\n<p>pro zděnou příčku tloušťky 125 mm</p>',NULL,NULL,'',0,NULL,'',''),
 (1735,1,'Pouzdro dvoukřídlé zdivo 700+700/1970 tl. zdi 108','<p><b>Stavební pouzdro pro dvoukřídlé posuvné dveře</b></p>\r\n<p>pro zděnou příčku tloušťky 108 mm</p>',NULL,NULL,'',0,NULL,'',''),
 (1668,1,'Pouzdro dvoukřídlé zdivo 900+900/1970 tl. zdi nebo 125','<p><b>Stavební pouzdro pro dvoukřídlé posuvné dveře</b></p>\r\n<p>pro zděnou příčku tloušťky 125 mm</p>',NULL,NULL,'',65,NULL,'',''),
 (1741,1,'Madla pro celoskleněné dveře','<div style=\"padding: 10px 0px 10px 20px; \">\r\n<h1>Madla pro celoskleněné dveře</h1>\r\n<img width=\"726\" height=\"819\" align=\"left\" alt=\"\" class=\"obsahovy\" src=\"http://www.sapeli.cz/soubory/Image/AKCE%202011/kovani%20stylus/madla_stylus.jpg\" /></div>',NULL,NULL,'',0,NULL,'',''),
@@ -6112,7 +5915,6 @@ INSERT INTO `products_description` VALUES
 (1849,1,'Otava','<p>&#160;</p>\r\n<div class=\"left\">\r\n<h1>Řada OTAVA</h1>\r\n<p>Vyberte si konkrétní model dveří z modelové  řady OTAVA. V následujících  krocích budete moci libovolně měnit barvu  dezénu i typ skla. Kdykoliv se  můžete vrátit zpět do tohoto kroku a  uvidíte všechny modely ve Vámi  vybraném nastavení.</p>\r\n</div>\r\n<div class=\"mini\">&#160;</div>\r\n<p><a href=\"http://www.sestavsidvere.cz/cs/otava/otava-iv/\">                                     <strong>OTAVA IV</strong>                                                                             <img src=\"http://www.sestavsidvere.cz/foto/12/b12004003_2300005.jpg\" alt=\"\" />                                                                                                         </a>                                                                                                                                                                    <a href=\"http://www.sestavsidvere.cz/cs/otava/otava-v/\">                                     <strong>OTAVA V</strong>                                                                             <img src=\"http://www.sestavsidvere.cz/foto/12/b12005003_2300005.jpg\" alt=\"\" />                                                                                                         </a>                                                                                                                                                                    <a href=\"http://www.sestavsidvere.cz/cs/otava/otava-vi/\">                                     <strong>OTAVA VI</strong>                                                                             <img src=\"http://www.sestavsidvere.cz/foto/12/b12006003_2300005.jpg\" alt=\"\" />                                                                                                         </a>                                                                                                                                                                    <a href=\"http://www.sestavsidvere.cz/cs/otava/otava-vii/\">                                     <strong>OTAVA VII</strong>                                                                             <img src=\"http://www.sestavsidvere.cz/foto/12/b12007003_2300005.jpg\" alt=\"\" />                                                                                                         </a>                                                                                                                                                                    <a href=\"http://www.sestavsidvere.cz/cs/otava/otava-xv/\">                                     <strong>OTAVA XV</strong>                                                                             <img src=\"http://www.sestavsidvere.cz/foto/12/b12015003.jpg\" alt=\"\" />                                                                                                         </a>                                                                                                                                                                    <a href=\"http://www.sestavsidvere.cz/cs/otava/otava-xxv/\">                                     <strong>OTAVA XXV</strong>                                                                             <img src=\"http://www.sestavsidvere.cz/foto/12/b12025003.jpg\" alt=\"\" /></a></p>',NULL,NULL,'',0,NULL,'',''),
 (1850,1,'Solo','<div class=\"left\">\r\n<h1>Řada SOLO</h1>\r\n<p>Rámečky u dveří SOLO jsou vyrobeny z masívu. Vadou není rozdílná barevnost rámečků. Jedná se o přírodní materiál.</p>\r\n</div>\r\n<div class=\"mini\">&#160;</div>\r\n<p><a href=\"http://www.sestavsidvere.cz/cs/solo/solo-i/\">                                     <strong>SOLO I</strong>                                                                             <img src=\"http://www.sestavsidvere.cz/foto/10/b10001003.jpg\" alt=\"\" />                                                                                                         </a>                                                                                                                                                                    <a href=\"http://www.sestavsidvere.cz/cs/solo/solo-iii/\">                                     <strong>SOLO III</strong>                                                                             <img src=\"http://www.sestavsidvere.cz/foto/10/b10003003_2300022.jpg\" alt=\"\" />                                                                                                         </a>                                                                                                                                                                    <a href=\"http://www.sestavsidvere.cz/cs/solo/solo-iv/\">                                     <strong>SOLO IV</strong>                                                                             <img src=\"http://www.sestavsidvere.cz/foto/10/b10004003_2300022.jpg\" alt=\"\" />                                                                                                         </a>                                                                                                                                                                    <a href=\"http://www.sestavsidvere.cz/cs/solo/solo-xiv/\">                                     <strong>SOLO XIV</strong>                                                                             <img src=\"http://www.sestavsidvere.cz/foto/10/b10014003.jpg\" alt=\"\" />                                                                                                         </a>                                                                                                                                                                    <a href=\"http://www.sestavsidvere.cz/cs/solo/solo-xvi/\">                                     <strong>SOLO XVI</strong>                                                                             <img src=\"http://www.sestavsidvere.cz/foto/10/b10016003_2300022.jpg\" alt=\"\" />                                                                                                         </a>                                                                                                                                                                    <a href=\"http://www.sestavsidvere.cz/cs/solo/solo-xvii/\">                                     <strong>SOLO XVII</strong>                                                                             <img src=\"http://www.sestavsidvere.cz/foto/10/b10017003.jpg\" alt=\"\" /></a></p>',NULL,NULL,'',0,NULL,'',''),
 (1851,1,'Klasik','<p>&#160;</p>\r\n<div id=\"inner_left\">\r\n<div class=\"left\">\r\n<h1>Řada KLASIK plné a prosklené</h1>\r\n<div>\r\n<div>\r\n<p>Sestavte si hladké dveře přesně dle Vašich přání. Sestavování dveří  začněte výběrem některé z modelových řad. Vyberete tím styl pro  následující kroky jednotlivých úprav dveří. Pod každou modelovou řadou  se skrývají jednotlivé konkrétní modely, které můžete dále upravit  výměnou dezénu povrchu, typem skla nebo dalších příplatků.</p>\r\n</div>\r\n</div>\r\n</div>\r\n<div class=\"mini\">&#160;</div>\r\n<div class=\"vypis\"><a href=\"http://www.sestavsidvere.cz/cs/klasik-plne-a-prosklene/klasik-plne/\">                                     <strong>KLASIK PLNÉ</strong>                                                                             <img src=\"http://www.sestavsidvere.cz/foto/1/b01000003.jpg\" alt=\"\" />                                                                                                         </a>                                                                                                                                                                    <a href=\"http://www.sestavsidvere.cz/cs/klasik-plne-a-prosklene/klasik-13-sklo/\">                                     <strong>KLASIK 1/3 SKLO</strong>                                                                             <img src=\"http://www.sestavsidvere.cz/foto/1/b01001003_2300005.jpg\" alt=\"\" />                                                                                                         </a>                                                                                                                                                                    <a href=\"http://www.sestavsidvere.cz/cs/klasik-plne-a-prosklene/klasik-23-sklo/\">                                     <strong>KLASIK 2/3 SKLO</strong>                                                                             <img src=\"http://www.sestavsidvere.cz/foto/1/b01002003_2300005.jpg\" alt=\"\" />                                                                                                         </a>                                                                                                                                                                    <a href=\"http://www.sestavsidvere.cz/cs/klasik-plne-a-prosklene/klasik-33-sklo/\">                                     <strong>KLASIK 3/3 SKLO</strong>                                                                             <img src=\"http://www.sestavsidvere.cz/foto/1/b01003003_2300005.jpg\" alt=\"\" />                                                                                                         </a>                                                                                                                                                                    <a href=\"http://www.sestavsidvere.cz/cs/klasik-plne-a-prosklene/klasik-l2-sklo/\">                                     <strong>KLASIK L2 SKLO</strong>                                                                             <img src=\"http://www.sestavsidvere.cz/foto/1/b01004003_2300005.jpg\" alt=\"\" />                                                                                                         </a></div>\r\n</div>',NULL,NULL,'',0,NULL,'','');
-/*!40000 ALTER TABLE `products_description` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -6120,8 +5922,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `products_images`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `products_images` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `products_id` int(11) NOT NULL,
@@ -6131,15 +5931,12 @@ CREATE TABLE `products_images` (
   PRIMARY KEY (`id`),
   KEY `products_images_prodid` (`products_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `products_images`
 --
 
 LOCK TABLES `products_images` WRITE;
-/*!40000 ALTER TABLE `products_images` DISABLE KEYS */;
-/*!40000 ALTER TABLE `products_images` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -6147,23 +5944,18 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `products_notifications`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `products_notifications` (
   `products_id` int(11) NOT NULL,
   `customers_id` int(11) NOT NULL,
   `date_added` datetime NOT NULL,
   PRIMARY KEY (`products_id`,`customers_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `products_notifications`
 --
 
 LOCK TABLES `products_notifications` WRITE;
-/*!40000 ALTER TABLE `products_notifications` DISABLE KEYS */;
-/*!40000 ALTER TABLE `products_notifications` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -6171,23 +5963,18 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `products_options`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `products_options` (
   `products_options_id` int(11) NOT NULL DEFAULT 0,
   `language_id` int(11) NOT NULL DEFAULT 1,
   `products_options_name` varchar(32) NOT NULL DEFAULT '',
   PRIMARY KEY (`products_options_id`,`language_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `products_options`
 --
 
 LOCK TABLES `products_options` WRITE;
-/*!40000 ALTER TABLE `products_options` DISABLE KEYS */;
-/*!40000 ALTER TABLE `products_options` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -6195,23 +5982,18 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `products_options_values`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `products_options_values` (
   `products_options_values_id` int(11) NOT NULL DEFAULT 0,
   `language_id` int(11) NOT NULL DEFAULT 1,
   `products_options_values_name` varchar(64) NOT NULL DEFAULT '',
   PRIMARY KEY (`products_options_values_id`,`language_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `products_options_values`
 --
 
 LOCK TABLES `products_options_values` WRITE;
-/*!40000 ALTER TABLE `products_options_values` DISABLE KEYS */;
-/*!40000 ALTER TABLE `products_options_values` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -6219,23 +6001,18 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `products_options_values_to_products_options`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `products_options_values_to_products_options` (
   `products_options_values_to_products_options_id` int(11) NOT NULL AUTO_INCREMENT,
   `products_options_id` int(11) NOT NULL,
   `products_options_values_id` int(11) NOT NULL,
   PRIMARY KEY (`products_options_values_to_products_options_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `products_options_values_to_products_options`
 --
 
 LOCK TABLES `products_options_values_to_products_options` WRITE;
-/*!40000 ALTER TABLE `products_options_values_to_products_options` DISABLE KEYS */;
-/*!40000 ALTER TABLE `products_options_values_to_products_options` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -6243,21 +6020,17 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `products_to_categories`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `products_to_categories` (
   `products_id` int(11) NOT NULL DEFAULT 0,
   `categories_id` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`products_id`,`categories_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `products_to_categories`
 --
 
 LOCK TABLES `products_to_categories` WRITE;
-/*!40000 ALTER TABLE `products_to_categories` DISABLE KEYS */;
 INSERT INTO `products_to_categories` VALUES
 (40,0),
 (83,0),
@@ -7479,7 +7252,6 @@ INSERT INTO `products_to_categories` VALUES
 (1864,223),
 (1865,223),
 (1866,223);
-/*!40000 ALTER TABLE `products_to_categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -7487,8 +7259,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `reviews`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `reviews` (
   `reviews_id` int(11) NOT NULL AUTO_INCREMENT,
   `products_id` int(11) NOT NULL,
@@ -7503,15 +7273,12 @@ CREATE TABLE `reviews` (
   KEY `idx_reviews_products_id` (`products_id`),
   KEY `idx_reviews_customers_id` (`customers_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `reviews`
 --
 
 LOCK TABLES `reviews` WRITE;
-/*!40000 ALTER TABLE `reviews` DISABLE KEYS */;
-/*!40000 ALTER TABLE `reviews` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -7519,21 +7286,17 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `sec_directory_whitelist`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sec_directory_whitelist` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `directory` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `sec_directory_whitelist`
 --
 
 LOCK TABLES `sec_directory_whitelist` WRITE;
-/*!40000 ALTER TABLE `sec_directory_whitelist` DISABLE KEYS */;
 INSERT INTO `sec_directory_whitelist` VALUES
 (1,'admin/backups'),
 (2,'images'),
@@ -7546,7 +7309,6 @@ INSERT INTO `sec_directory_whitelist` VALUES
 (9,'images/sierra'),
 (10,'includes/work'),
 (11,'pub');
-/*!40000 ALTER TABLE `sec_directory_whitelist` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -7554,22 +7316,18 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `sessions`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sessions` (
   `sesskey` varchar(128) NOT NULL,
   `expiry` int(11) unsigned NOT NULL,
   `value` text NOT NULL,
   PRIMARY KEY (`sesskey`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `sessions`
 --
 
 LOCK TABLES `sessions` WRITE;
-/*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
 INSERT INTO `sessions` VALUES
 ('avq67n8do0vl46mp6hqgme1tgs',1718058972,'sessiontoken|s:32:\"14c9ec8a7ffe6ecbebc04ba8738fea82\";SESSION_USER_AGENT|s:86:\"Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0 SeaMonkey/2.53.18\";SESSION_IP_ADDRESS|s:9:\"127.0.0.1\";cart|O:12:\"shoppingCart\":5:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:6:\"cartID\";N;s:12:\"content_type\";b:0;}wishlist|O:8:\"wishList\":1:{s:4:\"list\";a:0:{}}language|s:5:\"czech\";languages_id|s:1:\"1\";currency|s:3:\"USD\";navigation|O:17:\"navigationHistory\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:1:{s:5:\"cPath\";s:3:\"329\";}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}'),
 ('bf8m0nd5jc501o6nd1sljbiueb',1727161723,'sessiontoken|s:32:\"ac05a983cb8cc0a1f08e1ff5c86e52e5\";SESSION_USER_AGENT|s:86:\"Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0 SeaMonkey/2.53.18\";SESSION_IP_ADDRESS|s:9:\"127.0.0.1\";cart|O:12:\"shoppingCart\":5:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:6:\"cartID\";N;s:12:\"content_type\";b:0;}wishlist|O:8:\"wishList\":1:{s:4:\"list\";a:0:{}}language|s:5:\"czech\";languages_id|s:1:\"1\";currency|s:3:\"USD\";navigation|O:17:\"navigationHistory\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}recently_viewed_products|a:18:{i:0;i:375;i:1;i:1864;i:2;i:1866;i:3;i:1462;i:4;i:800;i:5;i:374;i:6;i:640;i:7;i:371;i:8;i:366;i:9;i:1648;i:10;i:1856;i:11;i:390;i:12;i:394;i:13;i:1673;i:14;i:392;i:15;i:391;i:16;i:1639;i:17;i:1777;}'),
@@ -7577,7 +7335,6 @@ INSERT INTO `sessions` VALUES
 ('eulr6nteulj8kbfu9cistrri3h',1717731953,'sessiontoken|s:32:\"61759b25d709f5ab1600db37dde15ac0\";SESSION_USER_AGENT|s:86:\"Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0 SeaMonkey/2.53.18\";SESSION_IP_ADDRESS|s:9:\"127.0.0.1\";cart|O:12:\"shoppingCart\":5:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:6:\"cartID\";N;s:12:\"content_type\";b:0;}wishlist|O:8:\"wishList\":1:{s:4:\"list\";a:0:{}}language|s:7:\"english\";languages_id|s:1:\"1\";currency|s:3:\"USD\";navigation|O:17:\"navigationHistory\":2:{s:4:\"path\";a:2:{i:0;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:1:{s:5:\"cPath\";s:19:\"243_268_319_317_318\";}s:4:\"post\";a:0:{}}i:1;a:4:{s:4:\"page\";s:16:\"product_info.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:1:{s:11:\"products_id\";s:4:\"1748\";}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}recently_viewed_products|a:1:{i:0;i:1748;}'),
 ('fspfor6s2b3ci1pdpgkc2ncqk0',1727316747,'language|s:5:\"czech\";languages_id|s:1:\"1\";admin|a:2:{s:2:\"id\";s:1:\"1\";s:8:\"username\";s:3:\"osc\";}'),
 ('gm211sn0de7ug6no8lupd9t2m7',1727320267,'sessiontoken|s:32:\"4c0dc8e85d4bc47c376c39fc69990b14\";SESSION_USER_AGENT|s:86:\"Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0 SeaMonkey/2.53.18\";SESSION_IP_ADDRESS|s:9:\"127.0.0.1\";cart|O:12:\"shoppingCart\":5:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:6:\"cartID\";N;s:12:\"content_type\";b:0;}wishlist|O:8:\"wishList\":1:{s:4:\"list\";a:0:{}}language|s:5:\"czech\";languages_id|s:1:\"1\";currency|s:3:\"USD\";navigation|O:17:\"navigationHistory\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}');
-/*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -7585,8 +7342,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `specials`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `specials` (
   `specials_id` int(11) NOT NULL AUTO_INCREMENT,
   `products_id` int(11) NOT NULL,
@@ -7599,15 +7354,12 @@ CREATE TABLE `specials` (
   PRIMARY KEY (`specials_id`),
   KEY `idx_specials_products_id` (`products_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `specials`
 --
 
 LOCK TABLES `specials` WRITE;
-/*!40000 ALTER TABLE `specials` DISABLE KEYS */;
-/*!40000 ALTER TABLE `specials` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -7615,8 +7367,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `tax_class`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tax_class` (
   `tax_class_id` int(11) NOT NULL AUTO_INCREMENT,
   `tax_class_title` varchar(32) NOT NULL,
@@ -7625,17 +7375,14 @@ CREATE TABLE `tax_class` (
   `date_added` datetime NOT NULL,
   PRIMARY KEY (`tax_class_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `tax_class`
 --
 
 LOCK TABLES `tax_class` WRITE;
-/*!40000 ALTER TABLE `tax_class` DISABLE KEYS */;
 INSERT INTO `tax_class` VALUES
 (1,'Taxable Goods','The following types of products are included non-food, services, etc','2024-06-07 04:52:43','2024-06-07 04:52:43');
-/*!40000 ALTER TABLE `tax_class` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -7643,8 +7390,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `tax_rates`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tax_rates` (
   `tax_rates_id` int(11) NOT NULL AUTO_INCREMENT,
   `tax_zone_id` int(11) NOT NULL,
@@ -7656,17 +7401,14 @@ CREATE TABLE `tax_rates` (
   `date_added` datetime NOT NULL,
   PRIMARY KEY (`tax_rates_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `tax_rates`
 --
 
 LOCK TABLES `tax_rates` WRITE;
-/*!40000 ALTER TABLE `tax_rates` DISABLE KEYS */;
 INSERT INTO `tax_rates` VALUES
 (1,1,1,1,7.0000,'FL TAX 7.0%','2024-06-07 04:52:43','2024-06-07 04:52:43');
-/*!40000 ALTER TABLE `tax_rates` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -7674,25 +7416,20 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `usu_cache`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usu_cache` (
   `cache_name` varchar(64) NOT NULL,
   `cache_data` mediumtext NOT NULL,
   `cache_date` datetime NOT NULL,
   UNIQUE KEY `cache_name` (`cache_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `usu_cache`
 --
 
 LOCK TABLES `usu_cache` WRITE;
-/*!40000 ALTER TABLE `usu_cache` DISABLE KEYS */;
 INSERT INTO `usu_cache` VALUES
 ('4d623115888bda1a05903d5995cef887','tc5BDoIwEAXQq5CegFJAGXYuXHkH07QTaURKCnRDehCPwDmI97IiRhITWLmb/Pw/eRwo9A1QCqQ2Wnaibc5KkpxDDL0Clqb+ZFOFLSoVvyHJ36G0+LhjcDBdg+UUJkAEb/GijcJvN4qBnHRtuGqCeWNFoaW24/D5tZi9FH4EJIlI7jwlCzcph04UpbZKYEDDNcr+h6KqFo0aB7PJYTMnXuVkQI5dWeE1YPS/EprumKeE0Dvnng==','2024-09-21 03:13:38');
-/*!40000 ALTER TABLE `usu_cache` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -7700,8 +7437,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `zones`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `zones` (
   `zone_id` int(11) NOT NULL AUTO_INCREMENT,
   `zone_country_id` int(11) NOT NULL,
@@ -7710,14 +7445,12 @@ CREATE TABLE `zones` (
   PRIMARY KEY (`zone_id`),
   KEY `idx_zones_country_id` (`zone_country_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=182 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `zones`
 --
 
 LOCK TABLES `zones` WRITE;
-/*!40000 ALTER TABLE `zones` DISABLE KEYS */;
 INSERT INTO `zones` VALUES
 (1,223,'AL','Alabama'),
 (2,223,'AK','Alaska'),
@@ -7900,7 +7633,6 @@ INSERT INTO `zones` VALUES
 (179,195,'Vizcaya','Vizcaya'),
 (180,195,'Zamora','Zamora'),
 (181,195,'Zaragoza','Zaragoza');
-/*!40000 ALTER TABLE `zones` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -7908,8 +7640,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `zones_to_geo_zones`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `zones_to_geo_zones` (
   `association_id` int(11) NOT NULL AUTO_INCREMENT,
   `zone_country_id` int(11) NOT NULL,
@@ -7920,26 +7650,15 @@ CREATE TABLE `zones_to_geo_zones` (
   PRIMARY KEY (`association_id`),
   KEY `idx_zones_to_geo_zones_country_id` (`zone_country_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `zones_to_geo_zones`
 --
 
 LOCK TABLES `zones_to_geo_zones` WRITE;
-/*!40000 ALTER TABLE `zones_to_geo_zones` DISABLE KEYS */;
 INSERT INTO `zones_to_geo_zones` VALUES
 (1,223,18,1,NULL,'2024-06-07 04:52:43');
-/*!40000 ALTER TABLE `zones_to_geo_zones` ENABLE KEYS */;
 UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2024-09-26  5:13:19
