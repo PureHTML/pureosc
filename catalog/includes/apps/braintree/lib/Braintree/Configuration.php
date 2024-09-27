@@ -1,79 +1,97 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree;
 
 /**
- *
- * Configuration registry
- *
- * @package    Braintree
- * @subpackage Utility
+ * Configuration registry.
  */
-
 class Configuration
 {
-    public static $global;
-
-    private $_environment = null;
-    private $_merchantId = null;
-    private $_publicKey = null;
-    private $_privateKey = null;
-    private $_clientId = null;
-    private $_clientSecret = null;
-    private $_accessToken = null;
-    private $_proxyHost = null;
-    private $_proxyPort = null;
-    private $_proxyType = null;
-    private $_proxyUser = null;
-    private $_proxyPassword = null;
-    private $_timeout = 60;
-    private $_sslVersion = null;
-    private $_acceptGzipEncoding = true;
-
     /**
-     * Braintree API version to use
-     * @access public
+     * Braintree API version to use.
      */
-    const API_VERSION =  6;
-    const GRAPHQL_API_VERSION = '2018-09-10';
+    public const API_VERSION = 6;
+    public const GRAPHQL_API_VERSION = '2018-09-10';
+    public static $global;
+    private $_environment;
+    private $_merchantId;
+    private $_publicKey;
+    private $_privateKey;
+    private $_clientId;
+    private $_clientSecret;
+    private $_accessToken;
+    private $_proxyHost;
+    private $_proxyPort;
+    private $_proxyType;
+    private $_proxyUser;
+    private $_proxyPassword;
+    private $_timeout = 60;
+    private $_sslVersion;
+    private $_acceptGzipEncoding = true;
 
     public function __construct($attribs = [])
     {
         foreach ($attribs as $kind => $value) {
-            if ($kind == 'environment') {
+            if ($kind === 'environment') {
                 CredentialsParser::assertValidEnvironment($value);
                 $this->_environment = $value;
             }
-            if ($kind == 'merchantId') {
+
+            if ($kind === 'merchantId') {
                 $this->_merchantId = $value;
             }
-            if ($kind == 'publicKey') {
+
+            if ($kind === 'publicKey') {
                 $this->_publicKey = $value;
             }
-            if ($kind == 'privateKey') {
+
+            if ($kind === 'privateKey') {
                 $this->_privateKey = $value;
             }
-            if ($kind == 'proxyHost') {
+
+            if ($kind === 'proxyHost') {
                 $this->_proxyHost = $value;
             }
-            if ($kind == 'proxyPort') {
+
+            if ($kind === 'proxyPort') {
                 $this->_proxyPort = $value;
             }
-            if ($kind == 'proxyType') {
+
+            if ($kind === 'proxyType') {
                 $this->_proxyType = $value;
             }
-            if ($kind == 'proxyUser') {
+
+            if ($kind === 'proxyUser') {
                 $this->_proxyUser = $value;
             }
-            if ($kind == 'proxyPassword') {
+
+            if ($kind === 'proxyPassword') {
                 $this->_proxyPassword = $value;
             }
-            if ($kind == 'timeout') {
+
+            if ($kind === 'timeout') {
                 $this->_timeout = $value;
             }
-            if ($kind == 'sslVersion') {
+
+            if ($kind === 'sslVersion') {
                 $this->_sslVersion = $value;
             }
-            if ($kind == 'acceptGzipEncoding') {
+
+            if ($kind === 'acceptGzipEncoding') {
                 $this->_acceptGzipEncoding = $value;
             }
         }
@@ -82,6 +100,7 @@ class Configuration
             if (isset($attribs['environment']) || isset($attribs['merchantId']) || isset($attribs['publicKey']) || isset($attribs['privateKey'])) {
                 throw new Exception\Configuration('Cannot mix OAuth credentials (clientId, clientSecret, accessToken) with key credentials (publicKey, privateKey, environment, merchantId).');
             }
+
             $parsedCredentials = new CredentialsParser($attribs);
 
             $this->_environment = $parsedCredentials->getEnvironment();
@@ -93,12 +112,11 @@ class Configuration
     }
 
     /**
-     * resets configuration to default
-     * @access public
+     * resets configuration to default.
      */
-    public static function reset()
+    public static function reset(): void
     {
-        self::$global = new Configuration();
+        self::$global = new self();
     }
 
     public static function gateway()
@@ -106,50 +124,56 @@ class Configuration
         return new Gateway(self::$global);
     }
 
-    public static function environment($value=null)
+    public static function environment($value = null)
     {
         if (empty($value)) {
             return self::$global->getEnvironment();
         }
+
         CredentialsParser::assertValidEnvironment($value);
         self::$global->setEnvironment($value);
     }
 
-    public static function merchantId($value=null)
+    public static function merchantId($value = null)
     {
         if (empty($value)) {
             return self::$global->getMerchantId();
         }
+
         self::$global->setMerchantId($value);
     }
 
-    public static function publicKey($value=null)
+    public static function publicKey($value = null)
     {
         if (empty($value)) {
             return self::$global->getPublicKey();
         }
+
         self::$global->setPublicKey($value);
     }
 
-    public static function privateKey($value=null)
+    public static function privateKey($value = null)
     {
         if (empty($value)) {
             return self::$global->getPrivateKey();
         }
+
         self::$global->setPrivateKey($value);
     }
 
     /**
      * Sets or gets the read timeout to use for making requests.
      *
-     * @param integer $value If provided, sets the read timeout
-     * @return integer The read timeout used for connecting to Braintree
+     * @param int $value If provided, sets the read timeout
+     *
+     * @return int The read timeout used for connecting to Braintree
      */
-    public static function timeout($value=null)
+    public static function timeout($value = null)
     {
         if (empty($value)) {
             return self::$global->getTimeout();
         }
+
         self::$global->setTimeout($value);
     }
 
@@ -158,21 +182,24 @@ class Configuration
      * https://php.net/manual/en/function.curl-setopt.php for possible
      * CURLOPT_SSLVERSION values.
      *
-     * @param integer $value If provided, sets the SSL version
-     * @return integer The SSL version used for connecting to Braintree
+     * @param int $value If provided, sets the SSL version
+     *
+     * @return int The SSL version used for connecting to Braintree
      */
-    public static function sslVersion($value=null)
+    public static function sslVersion($value = null)
     {
         if (empty($value)) {
             return self::$global->getSslVersion();
         }
+
         self::$global->setSslVersion($value);
     }
 
     /**
-     * Sets or gets the proxy host to use for connecting to Braintree
+     * Sets or gets the proxy host to use for connecting to Braintree.
      *
      * @param string $value If provided, sets the proxy host
+     *
      * @return string The proxy host used for connecting to Braintree
      */
     public static function proxyHost($value = null)
@@ -180,13 +207,15 @@ class Configuration
         if (empty($value)) {
             return self::$global->getProxyHost();
         }
+
         self::$global->setProxyHost($value);
     }
 
     /**
-     * Sets or gets the port of the proxy to use for connecting to Braintree
+     * Sets or gets the port of the proxy to use for connecting to Braintree.
      *
      * @param string $value If provided, sets the port of the proxy
+     *
      * @return string The port of the proxy used for connecting to Braintree
      */
     public static function proxyPort($value = null)
@@ -194,6 +223,7 @@ class Configuration
         if (empty($value)) {
             return self::$global->getProxyPort();
         }
+
         self::$global->setProxyPort($value);
     }
 
@@ -202,6 +232,7 @@ class Configuration
      * can be any of the CURLOPT_PROXYTYPE options in PHP cURL.
      *
      * @param string $value If provided, sets the proxy type
+     *
      * @return string The proxy type used for connecting to Braintree
      */
     public static function proxyType($value = null)
@@ -209,6 +240,7 @@ class Configuration
         if (empty($value)) {
             return self::$global->getProxyType();
         }
+
         self::$global->setProxyType($value);
     }
 
@@ -221,9 +253,10 @@ class Configuration
     public static function isUsingProxy()
     {
         // NEXT_MAJOR_VERSION Remove this method and rename isUsingInstanceProxy to isUsingProxy
-        trigger_error('DEPRECATED: Use isUsingInstanceProxy instead.', E_USER_DEPRECATED);
+        trigger_error('DEPRECATED: Use isUsingInstanceProxy instead.', \E_USER_DEPRECATED);
         $proxyHost = self::$global->getProxyHost();
         $proxyPort = self::$global->getProxyPort();
+
         return !empty($proxyHost) && !empty($proxyPort);
     }
 
@@ -232,6 +265,7 @@ class Configuration
         if (empty($value)) {
             return self::$global->getProxyUser();
         }
+
         self::$global->setProxyUser($value);
     }
 
@@ -240,6 +274,7 @@ class Configuration
         if (empty($value)) {
             return self::$global->getProxyPassword();
         }
+
         self::$global->setProxyPassword($value);
     }
 
@@ -253,9 +288,10 @@ class Configuration
     public static function isAuthenticatedProxy()
     {
         // NEXT_MAJOR_VERSION Remove this method and rename isAuthenticatedInstanceProxy to isAuthenticatedProxy
-        trigger_error('DEPRECATED: Use isAuthenticatedInstanceProxy instead.', E_USER_DEPRECATED);
+        trigger_error('DEPRECATED: Use isAuthenticatedInstanceProxy instead.', \E_USER_DEPRECATED);
         $proxyUser = self::$global->getProxyUser();
         $proxyPwd = self::$global->getProxyPassword();
+
         return !empty($proxyUser) && !empty($proxyPwd);
     }
 
@@ -263,50 +299,58 @@ class Configuration
      * Specify if the HTTP client is able to decode gzipped responses.
      *
      * @param bool $value If true, will send an Accept-Encoding header with a gzip value. If false, will not send an Accept-Encoding header with a gzip value.
+     *
      * @return bool true if an Accept-Encoding header with a gzip value will be sent, false if not
      */
     public static function acceptGzipEncoding($value = null)
     {
-        if (is_null($value)) {
+        if (null === $value) {
             return self::$global->getAcceptGzipEncoding();
         }
+
         self::$global->setAcceptGzipEncoding($value);
     }
 
-    public static function assertGlobalHasAccessTokenOrKeys()
+    public static function assertGlobalHasAccessTokenOrKeys(): void
     {
         self::$global->assertHasAccessTokenOrKeys();
     }
 
-    public function assertHasAccessTokenOrKeys()
+    public function assertHasAccessTokenOrKeys(): void
     {
         if (empty($this->_accessToken)) {
             if (empty($this->_merchantId)) {
                 throw new Exception\Configuration('Braintree\\Configuration::merchantId needs to be set (or accessToken needs to be passed to Braintree\\Gateway).');
-            } else if (empty($this->_environment)) {
+            }
+
+            if (empty($this->_environment)) {
                 throw new Exception\Configuration('Braintree\\Configuration::environment needs to be set.');
-            } else if (empty($this->_publicKey)) {
+            }
+
+            if (empty($this->_publicKey)) {
                 throw new Exception\Configuration('Braintree\\Configuration::publicKey needs to be set.');
-            } else if (empty($this->_privateKey)) {
+            }
+
+            if (empty($this->_privateKey)) {
                 throw new Exception\Configuration('Braintree\\Configuration::privateKey needs to be set.');
             }
         }
     }
 
-    public function assertHasClientCredentials()
+    public function assertHasClientCredentials(): void
     {
         $this->assertHasClientId();
         $this->assertHasClientSecret();
     }
 
-    public function assertHasClientId()
+    public function assertHasClientId(): void
     {
         if (empty($this->_clientId)) {
             throw new Exception\Configuration('clientId needs to be passed to Braintree\\Gateway.');
         }
     }
 
-    public function assertHasClientSecret()
+    public function assertHasClientSecret(): void
     {
         if (empty($this->_clientSecret)) {
             throw new Exception\Configuration('clientSecret needs to be passed to Braintree\\Gateway.');
@@ -320,8 +364,10 @@ class Configuration
 
     /**
      * Do not use this method directly. Pass in the environment to the constructor.
+     *
+     * @param mixed $value
      */
-    public function setEnvironment($value)
+    public function setEnvironment($value): void
     {
         $this->_environment = $value;
     }
@@ -333,8 +379,10 @@ class Configuration
 
     /**
      * Do not use this method directly. Pass in the merchantId to the constructor.
+     *
+     * @param mixed $value
      */
-    public function setMerchantId($value)
+    public function setMerchantId($value): void
     {
         $this->_merchantId = $value;
     }
@@ -351,8 +399,10 @@ class Configuration
 
     /**
      * Do not use this method directly. Pass in the publicKey to the constructor.
+     *
+     * @param mixed $value
      */
-    public function setPublicKey($value)
+    public function setPublicKey($value): void
     {
         $this->_publicKey = $value;
     }
@@ -369,15 +419,12 @@ class Configuration
 
     /**
      * Do not use this method directly. Pass in the privateKey to the constructor.
+     *
+     * @param mixed $value
      */
-    public function setPrivateKey($value)
+    public function setPrivateKey($value): void
     {
         $this->_privateKey = $value;
-    }
-
-    private function setProxyHost($value)
-    {
-        $this->_proxyHost = $value;
     }
 
     public function getProxyHost()
@@ -385,19 +432,9 @@ class Configuration
         return $this->_proxyHost;
     }
 
-    private function setProxyPort($value)
-    {
-        $this->_proxyPort = $value;
-    }
-
     public function getProxyPort()
     {
         return $this->_proxyPort;
-    }
-
-    private function setProxyType($value)
-    {
-        $this->_proxyType = $value;
     }
 
     public function getProxyType()
@@ -405,19 +442,9 @@ class Configuration
         return $this->_proxyType;
     }
 
-    private function setProxyUser($value)
-    {
-        $this->_proxyUser = $value;
-    }
-
     public function getProxyUser()
     {
         return $this->_proxyUser;
-    }
-
-    private function setProxyPassword($value)
-    {
-        $this->_proxyPassword = $value;
     }
 
     public function getProxyPassword()
@@ -425,19 +452,9 @@ class Configuration
         return $this->_proxyPassword;
     }
 
-    private function setTimeout($value)
-    {
-        $this->_timeout = $value;
-    }
-
     public function getTimeout()
     {
         return $this->_timeout;
-    }
-
-    private function setSslVersion($value)
-    {
-        $this->_sslVersion = $value;
     }
 
     public function getSslVersion()
@@ -448,11 +465,6 @@ class Configuration
     public function getAcceptGzipEncoding()
     {
         return $this->_acceptGzipEncoding;
-    }
-
-    private function setAcceptGzipEncoding($value)
-    {
-        $this->_acceptGzipEncoding = $value;
     }
 
     public function getAccessToken()
@@ -470,10 +482,10 @@ class Configuration
         return !empty($this->_clientId);
     }
     /**
-     * returns the base braintree gateway URL based on config values
+     * returns the base braintree gateway URL based on config values.
      *
-     * @access public
      * @param none
+     *
      * @return string braintree gateway URL
      */
     public function baseUrl()
@@ -482,44 +494,44 @@ class Configuration
     }
 
     /**
-     * returns the base URL for Braintree's GraphQL endpoint based on config values
+     * returns the base URL for Braintree's GraphQL endpoint based on config values.
      *
-     * @access public
      * @param none
+     *
      * @return string Braintree GraphQL URL
      */
-     public function graphQLBaseUrl()
-     {
+    public function graphQLBaseUrl()
+    {
         return sprintf('%s://%s:%d/graphql', $this->protocol(), $this->graphQLServerName(), $this->graphQLPortNumber());
-     }
+    }
 
     /**
-     * sets the merchant path based on merchant ID
+     * sets the merchant path based on merchant ID.
      *
-     * @access protected
      * @param none
+     *
      * @return string merchant path uri
      */
     public function merchantPath()
     {
-        return '/merchants/' . $this->_merchantId;
+        return '/merchants/'.$this->_merchantId;
     }
 
     /**
-     * sets the physical path for the location of the CA certs
+     * sets the physical path for the location of the CA certs.
      *
-     * @access public
+     * @param null|mixed $sslPath
      * @param none
+     *
      * @return string filepath
      */
-    public function caFile($sslPath = NULL)
+    public function caFile($sslPath = null)
     {
-        $sslPath = $sslPath ? $sslPath : DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR .
-                   'ssl' . DIRECTORY_SEPARATOR;
-        $caPath = __DIR__ . $sslPath . 'api_braintreegateway_com.ca.crt';
+        $sslPath = $sslPath ?: \DIRECTORY_SEPARATOR.'..'.\DIRECTORY_SEPARATOR.
+                   'ssl'.\DIRECTORY_SEPARATOR;
+        $caPath = __DIR__.$sslPath.'api_braintreegateway_com.ca.crt';
 
-        if (!file_exists($caPath))
-        {
+        if (!file_exists($caPath)) {
             throw new Exception\SSLCaFileNotFound();
         }
 
@@ -527,10 +539,10 @@ class Configuration
     }
 
     /**
-     * returns the port number depending on environment
+     * returns the port number depending on environment.
      *
-     * @access public
      * @param none
+     *
      * @return int portnumber
      */
     public function portNumber()
@@ -538,14 +550,15 @@ class Configuration
         if ($this->sslOn()) {
             return 443;
         }
-        return getenv("GATEWAY_PORT") ? getenv("GATEWAY_PORT") : 3000;
+
+        return getenv('GATEWAY_PORT') ? getenv('GATEWAY_PORT') : 3000;
     }
 
     /**
-     * returns the graphql port number depending on environment
+     * returns the graphql port number depending on environment.
      *
-     * @access public
      * @param none
+     *
      * @return int graphql portnumber
      */
     public function graphQLPortNumber()
@@ -553,13 +566,15 @@ class Configuration
         if ($this->sslOn()) {
             return 443;
         }
-        return getenv("GRAPHQL_PORT") ?: 8080;
+
+        return getenv('GRAPHQL_PORT') ?: 8080;
     }
 
     public function isUsingInstanceProxy()
     {
         $proxyHost = $this->getProxyHost();
         $proxyPort = $this->getProxyPort();
+
         return !empty($proxyHost) && !empty($proxyPort);
     }
 
@@ -567,14 +582,15 @@ class Configuration
     {
         $proxyUser = $this->getProxyUser();
         $proxyPwd = $this->getProxyPassword();
+
         return !empty($proxyUser) && !empty($proxyPwd);
     }
 
     /**
-     * returns http protocol depending on environment
+     * returns http protocol depending on environment.
      *
-     * @access public
      * @param none
+     *
      * @return string http || https
      */
     public function protocol()
@@ -583,58 +599,66 @@ class Configuration
     }
 
     /**
-     * returns gateway server name depending on environment
+     * returns gateway server name depending on environment.
      *
-     * @access public
      * @param none
+     *
      * @return string server domain name
      */
     public function serverName()
     {
-        switch($this->_environment) {
-         case 'production':
-             $serverName = 'api.braintreegateway.com';
-             break;
-         case 'qa':
-             $serverName = 'gateway.qa.braintreepayments.com';
-             break;
-         case 'sandbox':
-             $serverName = 'api.sandbox.braintreegateway.com';
-             break;
-         case 'development':
-         case 'integration':
-         default:
-             $serverName = 'localhost';
-             break;
+        switch ($this->_environment) {
+            case 'production':
+                $serverName = 'api.braintreegateway.com';
+
+                break;
+            case 'qa':
+                $serverName = 'gateway.qa.braintreepayments.com';
+
+                break;
+            case 'sandbox':
+                $serverName = 'api.sandbox.braintreegateway.com';
+
+                break;
+            case 'development':
+            case 'integration':
+            default:
+                $serverName = 'localhost';
+
+                break;
         }
 
         return $serverName;
     }
 
     /**
-     * returns Braintree GraphQL server name depending on environment
+     * returns Braintree GraphQL server name depending on environment.
      *
-     * @access public
      * @param none
+     *
      * @return string graphql domain name
      */
     public function graphQLServerName()
     {
-        switch($this->_environment) {
-         case 'production':
-             $graphQLServerName = 'payments.braintree-api.com';
-             break;
-         case 'qa':
-             $graphQLServerName = 'payments-qa.dev.braintree-api.com';
-             break;
-         case 'sandbox':
-             $graphQLServerName = 'payments.sandbox.braintree-api.com';
-             break;
-         case 'development':
-         case 'integration':
-         default:
-             $graphQLServerName = 'graphql.bt.local';
-             break;
+        switch ($this->_environment) {
+            case 'production':
+                $graphQLServerName = 'payments.braintree-api.com';
+
+                break;
+            case 'qa':
+                $graphQLServerName = 'payments-qa.dev.braintree-api.com';
+
+                break;
+            case 'sandbox':
+                $graphQLServerName = 'payments.sandbox.braintree-api.com';
+
+                break;
+            case 'development':
+            case 'integration':
+            default:
+                $graphQLServerName = 'graphql.bt.local';
+
+                break;
         }
 
         return $graphQLServerName;
@@ -642,39 +666,80 @@ class Configuration
 
     /**
      * returns boolean indicating SSL is on or off for this session,
-     * depending on environment
+     * depending on environment.
      *
-     * @access public
      * @param none
-     * @return boolean
+     *
+     * @return bool
      */
     public function sslOn()
     {
-        switch($this->_environment) {
-         case 'integration':
-         case 'development':
-             $ssl = false;
-             break;
-         case 'production':
-         case 'qa':
-         case 'sandbox':
-         default:
-             $ssl = true;
-             break;
+        switch ($this->_environment) {
+            case 'integration':
+            case 'development':
+                $ssl = false;
+
+                break;
+            case 'production':
+            case 'qa':
+            case 'sandbox':
+            default:
+                $ssl = true;
+
+                break;
         }
 
-       return $ssl;
+        return $ssl;
     }
 
     /**
-     * log message to default logger
+     * log message to default logger.
      *
      * @param string $message
-     *
      */
-    public function logMessage($message)
+    public function logMessage($message): void
     {
-        error_log('[Braintree] ' . $message);
+        error_log('[Braintree] '.$message);
+    }
+
+    private function setProxyHost($value): void
+    {
+        $this->_proxyHost = $value;
+    }
+
+    private function setProxyPort($value): void
+    {
+        $this->_proxyPort = $value;
+    }
+
+    private function setProxyType($value): void
+    {
+        $this->_proxyType = $value;
+    }
+
+    private function setProxyUser($value): void
+    {
+        $this->_proxyUser = $value;
+    }
+
+    private function setProxyPassword($value): void
+    {
+        $this->_proxyPassword = $value;
+    }
+
+    private function setTimeout($value): void
+    {
+        $this->_timeout = $value;
+    }
+
+    private function setSslVersion($value): void
+    {
+        $this->_sslVersion = $value;
+    }
+
+    private function setAcceptGzipEncoding($value): void
+    {
+        $this->_acceptGzipEncoding = $value;
     }
 }
 Configuration::reset();

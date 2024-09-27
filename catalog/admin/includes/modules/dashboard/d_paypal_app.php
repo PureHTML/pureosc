@@ -1,56 +1,63 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2020 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
+if (!class_exists('OSCOM_PayPal')) {
+    include DIR_FS_CATALOG.'includes/apps/paypal/OSCOM_PayPal.php';
+}
 
-  if ( !class_exists('OSCOM_PayPal') ) {
-    include(DIR_FS_CATALOG . 'includes/apps/paypal/OSCOM_PayPal.php');
-  }
+class d_paypal_app
+{
+    public $code = 'd_paypal_app';
+    public $title;
+    public $description;
+    public $sort_order;
+    public $enabled = false;
 
-  class d_paypal_app {
-    var $code = 'd_paypal_app';
-    var $title;
-    var $description;
-    var $sort_order;
-    var $enabled = false;
+    public function __construct()
+    {
+        $this->_app = new OSCOM_PayPal();
+        $this->_app->loadLanguageFile('admin/balance.php');
+        $this->_app->loadLanguageFile('admin/modules/dashboard/d_paypal_app.php');
 
-    function __construct() {
-      $this->_app = new OSCOM_PayPal();
-      $this->_app->loadLanguageFile('admin/balance.php');
-      $this->_app->loadLanguageFile('admin/modules/dashboard/d_paypal_app.php');
+        $this->title = $this->_app->getDef('module_admin_dashboard_title');
+        $this->description = $this->_app->getDef('module_admin_dashboard_description');
 
-      $this->title = $this->_app->getDef('module_admin_dashboard_title');
-      $this->description = $this->_app->getDef('module_admin_dashboard_description');
-
-      if ( defined('MODULE_ADMIN_DASHBOARD_PAYPAL_APP_SORT_ORDER') ) {
-        $this->sort_order = MODULE_ADMIN_DASHBOARD_PAYPAL_APP_SORT_ORDER;
-        $this->enabled = true;
-      }
+        if (\defined('MODULE_ADMIN_DASHBOARD_PAYPAL_APP_SORT_ORDER')) {
+            $this->sort_order = MODULE_ADMIN_DASHBOARD_PAYPAL_APP_SORT_ORDER;
+            $this->enabled = true;
+        }
     }
 
-    function getOutput() {
-      $version = $this->_app->getVersion();
-      $version_check_result = defined('OSCOM_APP_PAYPAL_VERSION_CHECK') ? '"' . OSCOM_APP_PAYPAL_VERSION_CHECK . '"' : 'undefined';
-      $can_apply_online_updates = class_exists('ZipArchive') && function_exists('json_encode') && function_exists('openssl_verify') ? 'true' : 'false';
-      $has_live_account = ($this->_app->hasApiCredentials('live') === true) ? 'true' : 'false';
-      $has_sandbox_account = ($this->_app->hasApiCredentials('sandbox') === true) ? 'true' : 'false';
-      $version_check_url = tep_href_link('paypal.php', 'action=checkVersion');
-      $new_update_notice = $this->_app->getDef('update_available_body', array('button_view_update' => $this->_app->drawButton($this->_app->getDef('button_view_update'), tep_href_link('paypal.php', 'action=update'), 'success', null, true)));
-      $heading_live_account = $this->_app->getDef('heading_live_account', array('account' => str_replace('_api1.', '@', $this->_app->getApiCredentials('live', 'username'))));
-      $heading_sandbox_account = $this->_app->getDef('heading_sandbox_account', array('account' => str_replace('_api1.', '@', $this->_app->getApiCredentials('sandbox', 'username'))));
-      $receiving_balance_progress = $this->_app->getDef('retrieving_balance_progress');
-      $app_get_started = $this->_app->drawButton($this->_app->getDef('button_app_get_started'), tep_href_link('paypal.php'), 'warning', null, true);
-      $error_balance_retrieval = addslashes($this->_app->getDef('error_balance_retrieval'));
-      $get_balance_url = tep_href_link('paypal.php', 'action=balance&subaction=retrieve&type=PPTYPE');
+    public function getOutput()
+    {
+        $version = $this->_app->getVersion();
+        $version_check_result = \defined('OSCOM_APP_PAYPAL_VERSION_CHECK') ? '"'.OSCOM_APP_PAYPAL_VERSION_CHECK.'"' : 'undefined';
+        $can_apply_online_updates = class_exists('ZipArchive') && \function_exists('json_encode') && \function_exists('openssl_verify') ? 'true' : 'false';
+        $has_live_account = ($this->_app->hasApiCredentials('live') === true) ? 'true' : 'false';
+        $has_sandbox_account = ($this->_app->hasApiCredentials('sandbox') === true) ? 'true' : 'false';
+        $version_check_url = tep_href_link('paypal.php', 'action=checkVersion');
+        $new_update_notice = $this->_app->getDef('update_available_body', ['button_view_update' => $this->_app->drawButton($this->_app->getDef('button_view_update'), tep_href_link('paypal.php', 'action=update'), 'success', null, true)]);
+        $heading_live_account = $this->_app->getDef('heading_live_account', ['account' => str_replace('_api1.', '@', $this->_app->getApiCredentials('live', 'username'))]);
+        $heading_sandbox_account = $this->_app->getDef('heading_sandbox_account', ['account' => str_replace('_api1.', '@', $this->_app->getApiCredentials('sandbox', 'username'))]);
+        $receiving_balance_progress = $this->_app->getDef('retrieving_balance_progress');
+        $app_get_started = $this->_app->drawButton($this->_app->getDef('button_app_get_started'), tep_href_link('paypal.php'), 'warning', null, true);
+        $error_balance_retrieval = addslashes($this->_app->getDef('error_balance_retrieval'));
+        $get_balance_url = tep_href_link('paypal.php', 'action=balance&subaction=retrieve&type=PPTYPE');
 
-      $output = <<<EOD
+        return <<<EOD
 <style>
 .pp-container {
   font-size: 12px;
@@ -310,28 +317,30 @@ $(function() {
 </script>
 
 EOD;
-
-      return $output;
     }
 
-    function isEnabled() {
-      return $this->enabled;
+    public function isEnabled()
+    {
+        return $this->enabled;
     }
 
-    function check() {
-      return defined('MODULE_ADMIN_DASHBOARD_PAYPAL_APP_SORT_ORDER');
+    public function check()
+    {
+        return \defined('MODULE_ADMIN_DASHBOARD_PAYPAL_APP_SORT_ORDER');
     }
 
-    function install() {
-      tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Sort Order', 'MODULE_ADMIN_DASHBOARD_PAYPAL_APP_SORT_ORDER', '0', 'Sort order of display. Lowest is displayed first.', '6', '0', now())");
+    public function install(): void
+    {
+        tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Sort Order', 'MODULE_ADMIN_DASHBOARD_PAYPAL_APP_SORT_ORDER', '0', 'Sort order of display. Lowest is displayed first.', '6', '0', now())");
     }
 
-    function remove() {
-      tep_db_query("delete from configuration where configuration_key in ('" . implode("', '", $this->keys()) . "')");
+    public function remove(): void
+    {
+        tep_db_query("delete from configuration where configuration_key in ('".implode("', '", $this->keys())."')");
     }
 
-    function keys() {
-      return array('MODULE_ADMIN_DASHBOARD_PAYPAL_APP_SORT_ORDER');
+    public function keys()
+    {
+        return ['MODULE_ADMIN_DASHBOARD_PAYPAL_APP_SORT_ORDER'];
     }
-  }
-?>
+}

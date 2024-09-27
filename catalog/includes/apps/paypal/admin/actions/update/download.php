@@ -1,41 +1,45 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2020 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
-
-$ppUpdateDownloadResult = array('rpcStatus' => -1);
+$ppUpdateDownloadResult = ['rpcStatus' => -1];
 
 if (isset($_GET['v']) && is_numeric($_GET['v']) && ($_GET['v'] > $OSCOM_PayPal->getVersion())) {
-  if ($OSCOM_PayPal->isWritable(DIR_FS_CATALOG . 'includes/apps/paypal/work')) {
-    if (!file_exists(DIR_FS_CATALOG . 'includes/apps/paypal/work')) {
-      mkdir(DIR_FS_CATALOG . 'includes/apps/paypal/work', 0777, true);
-    }
+    if ($OSCOM_PayPal->isWritable(DIR_FS_CATALOG.'includes/apps/paypal/work')) {
+        if (!file_exists(DIR_FS_CATALOG.'includes/apps/paypal/work')) {
+            mkdir(DIR_FS_CATALOG.'includes/apps/paypal/work', 0777, true);
+        }
 
-    $filepath = DIR_FS_CATALOG . 'includes/apps/paypal/work/update.zip';
+        $filepath = DIR_FS_CATALOG.'includes/apps/paypal/work/update.zip';
 
-    if (file_exists($filepath) && is_writable($filepath)) {
-      unlink($filepath);
-    }
+        if (file_exists($filepath) && is_writable($filepath)) {
+            unlink($filepath);
+        }
 
-    $ppUpdateDownloadFile = $OSCOM_PayPal->makeApiCall('https://apps.oscommerce.com/index.php?Download&paypal&app&2_300&' . str_replace('.', '_', $_GET['v']) . '&update');
+        $ppUpdateDownloadFile = $OSCOM_PayPal->makeApiCall('https://apps.oscommerce.com/index.php?Download&paypal&app&2_300&'.str_replace('.', '_', $_GET['v']).'&update');
 
-    $save_result = @file_put_contents($filepath, $ppUpdateDownloadFile);
+        $save_result = @file_put_contents($filepath, $ppUpdateDownloadFile);
 
-    if (($save_result !== false) && ($save_result > 0)) {
-      $ppUpdateDownloadResult['rpcStatus'] = 1;
+        if (($save_result !== false) && ($save_result > 0)) {
+            $ppUpdateDownloadResult['rpcStatus'] = 1;
+        } else {
+            $ppUpdateDownloadResult['error'] = $OSCOM_PayPal->getDef('error_saving_download', ['filepath' => $OSCOM_PayPal->displayPath($filepath)]);
+        }
     } else {
-      $ppUpdateDownloadResult['error'] = $OSCOM_PayPal->getDef('error_saving_download', array('filepath' => $OSCOM_PayPal->displayPath($filepath)));
+        $ppUpdateDownloadResult['error'] = $OSCOM_PayPal->getDef('error_download_directory_permissions', ['filepath' => $OSCOM_PayPal->displayPath(DIR_FS_CATALOG.'includes/apps/paypal/work')]);
     }
-  } else {
-    $ppUpdateDownloadResult['error'] = $OSCOM_PayPal->getDef('error_download_directory_permissions', array('filepath' => $OSCOM_PayPal->displayPath(DIR_FS_CATALOG . 'includes/apps/paypal/work')));
-  }
 }
 
 echo json_encode($ppUpdateDownloadResult);

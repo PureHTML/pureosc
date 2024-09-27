@@ -1,61 +1,97 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree;
 
 /**
- * Braintree Subscription module
+ * Braintree Subscription module.
  *
  * <b>== More information ==</b>
  *
  * For more detailed information on Subscriptions, see {@link https://developers.braintreepayments.com/reference/response/subscription/php https://developers.braintreepayments.com/reference/response/subscription/php}
  *
- * @package   Braintree
- * 
- * @property-read \Braintree\Addon[] $addOns
- * @property-read string $balance
- * @property-read int $billingDayOfMonth
- * @property-read \DateTime $billingPeriodEndDate
- * @property-read \DateTime $billingPeriodStartDate
- * @property-read \DateTime $createdAt
- * @property-read int $currentBillingCycle
- * @property-read int|null $daysPastDue
- * @property-read string|null $description
- * @property-read \Braintree\Descriptor|null $descriptor
- * @property-read \Braintree\Discount[] $discounts
- * @property-read int $failureCount
- * @property-read \DateTime $firstBillingDate
- * @property-read string $id
- * @property-read string $merchantAccountId
- * @property-read boolean $neverExpires
- * @property-read string $nextBillingPeriodAmount
- * @property-read \DateTime $nextBillingDate
- * @property-read int|null $numberOfBillingCycles
- * @property-read \DateTime|null $paidThroughDate
- * @property-read string $paymentMethodToken
- * @property-read string $planId
- * @property-read string $price
- * @property-read string $status
- * @property-read \Braintree\Subscription\StatusDetails[] $statusHistory
- * @property-read \Braintree\Transaction[] $transactions
- * @property-read int $trialDuration
- * @property-read string $trialDurationUnit
- * @property-read boolean $trialPeriod
- * @property-read \DateTime $updatedAt
+ * @property \Braintree\Addon[]                      $addOns
+ * @property string                                  $balance
+ * @property int                                     $billingDayOfMonth
+ * @property \DateTime                               $billingPeriodEndDate
+ * @property \DateTime                               $billingPeriodStartDate
+ * @property \DateTime                               $createdAt
+ * @property int                                     $currentBillingCycle
+ * @property null|int                                $daysPastDue
+ * @property null|string                             $description
+ * @property null|\Braintree\Descriptor              $descriptor
+ * @property \Braintree\Discount[]                   $discounts
+ * @property int                                     $failureCount
+ * @property \DateTime                               $firstBillingDate
+ * @property string                                  $id
+ * @property string                                  $merchantAccountId
+ * @property bool                                    $neverExpires
+ * @property \DateTime                               $nextBillingDate
+ * @property string                                  $nextBillingPeriodAmount
+ * @property null|int                                $numberOfBillingCycles
+ * @property null|\DateTime                          $paidThroughDate
+ * @property string                                  $paymentMethodToken
+ * @property string                                  $planId
+ * @property string                                  $price
+ * @property string                                  $status
+ * @property \Braintree\Subscription\StatusDetails[] $statusHistory
+ * @property \Braintree\Transaction[]                $transactions
+ * @property int                                     $trialDuration
+ * @property string                                  $trialDurationUnit
+ * @property bool                                    $trialPeriod
+ * @property \DateTime                               $updatedAt
  */
 class Subscription extends Base
 {
-    const ACTIVE = 'Active';
-    const CANCELED = 'Canceled';
-    const EXPIRED = 'Expired';
-    const PAST_DUE = 'Past Due';
-    const PENDING = 'Pending';
+    public const ACTIVE = 'Active';
+    public const CANCELED = 'Canceled';
+    public const EXPIRED = 'Expired';
+    public const PAST_DUE = 'Past Due';
+    public const PENDING = 'Pending';
 
     // Subscription Sources
-    const API           = 'api';
-    const CONTROL_PANEL = 'control_panel';
-    const RECURRING     = 'recurring';
+    public const API = 'api';
+    public const CONTROL_PANEL = 'control_panel';
+    public const RECURRING = 'recurring';
+
+    /**
+     * returns a string representation of the customer.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        $excludedAttributes = ['statusHistory'];
+
+        $displayAttributes = [];
+
+        foreach ($this->_attributes as $key => $val) {
+            if (!\in_array($key, $excludedAttributes, true)) {
+                $displayAttributes[$key] = $val;
+            }
+        }
+
+        return __CLASS__.'['.
+                Util::attributesToString($displayAttributes).']';
+    }
 
     /**
      * @ignore
+     *
+     * @param mixed $attributes
      */
     public static function factory($attributes)
     {
@@ -64,74 +100,6 @@ class Subscription extends Base
 
         return $instance;
     }
-
-    /**
-     * @ignore
-     */
-    protected function _initialize($attributes)
-    {
-        $this->_attributes = $attributes;
-
-        $addOnArray = [];
-        if (isset($attributes['addOns'])) {
-            foreach ($attributes['addOns'] AS $addOn) {
-                $addOnArray[] = AddOn::factory($addOn);
-            }
-        }
-        $this->_attributes['addOns'] = $addOnArray;
-
-        $discountArray = [];
-        if (isset($attributes['discounts'])) {
-            foreach ($attributes['discounts'] AS $discount) {
-                $discountArray[] = Discount::factory($discount);
-            }
-        }
-        $this->_attributes['discounts'] = $discountArray;
-
-        if (isset($attributes['descriptor'])) {
-            $this->_set('descriptor', new Descriptor($attributes['descriptor']));
-        }
-
-        if (isset($attributes['description'])) {
-            $this->_set('description', $attributes['description']);
-        }
-
-        $statusHistory = [];
-        if (isset($attributes['statusHistory'])) {
-            foreach ($attributes['statusHistory'] AS $history) {
-                $statusHistory[] = new Subscription\StatusDetails($history);
-            }
-        }
-        $this->_attributes['statusHistory'] = $statusHistory;
-
-        $transactionArray = [];
-        if (isset($attributes['transactions'])) {
-            foreach ($attributes['transactions'] AS $transaction) {
-                $transactionArray[] = Transaction::factory($transaction);
-            }
-        }
-        $this->_attributes['transactions'] = $transactionArray;
-    }
-
-    /**
-     * returns a string representation of the customer
-     * @return string
-     */
-    public function  __toString()
-    {
-        $excludedAttributes = ['statusHistory'];
-
-        $displayAttributes = [];
-        foreach($this->_attributes as $key => $val) {
-            if (!in_array($key, $excludedAttributes)) {
-                $displayAttributes[$key] = $val;
-            }
-        }
-
-        return __CLASS__ . '[' .
-                Util::attributesToString($displayAttributes) .']';
-    }
-
 
     // static methods redirecting to gateway
 
@@ -168,5 +136,63 @@ class Subscription extends Base
     public static function cancel($subscriptionId)
     {
         return Configuration::gateway()->subscription()->cancel($subscriptionId);
+    }
+
+    /**
+     * @ignore
+     *
+     * @param mixed $attributes
+     */
+    protected function _initialize($attributes): void
+    {
+        $this->_attributes = $attributes;
+
+        $addOnArray = [];
+
+        if (isset($attributes['addOns'])) {
+            foreach ($attributes['addOns'] as $addOn) {
+                $addOnArray[] = AddOn::factory($addOn);
+            }
+        }
+
+        $this->_attributes['addOns'] = $addOnArray;
+
+        $discountArray = [];
+
+        if (isset($attributes['discounts'])) {
+            foreach ($attributes['discounts'] as $discount) {
+                $discountArray[] = Discount::factory($discount);
+            }
+        }
+
+        $this->_attributes['discounts'] = $discountArray;
+
+        if (isset($attributes['descriptor'])) {
+            $this->_set('descriptor', new Descriptor($attributes['descriptor']));
+        }
+
+        if (isset($attributes['description'])) {
+            $this->_set('description', $attributes['description']);
+        }
+
+        $statusHistory = [];
+
+        if (isset($attributes['statusHistory'])) {
+            foreach ($attributes['statusHistory'] as $history) {
+                $statusHistory[] = new Subscription\StatusDetails($history);
+            }
+        }
+
+        $this->_attributes['statusHistory'] = $statusHistory;
+
+        $transactionArray = [];
+
+        if (isset($attributes['transactions'])) {
+            foreach ($attributes['transactions'] as $transaction) {
+                $transactionArray[] = Transaction::factory($transaction);
+            }
+        }
+
+        $this->_attributes['transactions'] = $transactionArray;
     }
 }

@@ -1,27 +1,39 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree;
 
 /**
- * Braintree PaymentMethodNonce module
+ * Braintree PaymentMethodNonce module.
  *
- * @package    Braintree
  * @category   Resources
  */
 
 /**
- * Creates and manages Braintree PaymentMethodNonces
+ * Creates and manages Braintree PaymentMethodNonces.
  *
  * <b>== More information ==</b>
  *
- *
- * @package    Braintree
  * @category   Resources
- * 
- * @property-read \Braintree\BinData $binData
- * @property-read boolean $default
- * @property-read string $nonce
- * @property-read \Braintree\ThreeDSecureInfo $threeDSecureInfo
- * @property-read string $type
+ *
+ * @property \Braintree\BinData          $binData
+ * @property bool                        $default
+ * @property string                      $nonce
+ * @property \Braintree\ThreeDSecureInfo $threeDSecureInfo
+ * @property string                      $type
  */
 class PaymentMethodNonce extends Base
 {
@@ -41,24 +53,25 @@ class PaymentMethodNonce extends Base
     {
         $instance = new self();
         $instance->_initialize($attributes);
+
         return $instance;
     }
 
-    protected function _initialize($nonceAttributes)
+    protected function _initialize($nonceAttributes): void
     {
         $this->_attributes = $nonceAttributes;
         $this->_set('nonce', $nonceAttributes['nonce']);
         $this->_set('type', $nonceAttributes['type']);
 
-        if(isset($nonceAttributes['authenticationInsight'])) {
+        if (isset($nonceAttributes['authenticationInsight'])) {
             $this->_set('authenticationInsight', $nonceAttributes['authenticationInsight']);
         }
 
-        if(isset($nonceAttributes['binData'])) {
+        if (isset($nonceAttributes['binData'])) {
             $this->_set('binData', BinData::factory($nonceAttributes['binData']));
         }
-        
-        if(isset($nonceAttributes['threeDSecureInfo'])) {
+
+        if (isset($nonceAttributes['threeDSecureInfo'])) {
             $this->_set('threeDSecureInfo', ThreeDSecureInfo::factory($nonceAttributes['threeDSecureInfo']));
         }
     }

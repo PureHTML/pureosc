@@ -1,76 +1,90 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2020 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
-
-////
+// //
 // Class to handle currencies
 // TABLES: currencies
-  class currencies {
-    var $currencies;
+class currencies
+{
+    public $currencies;
 
-// class constructor
-    function __construct() {
-      $this->currencies = array();
-      $currencies_query = tep_db_query("select code, title, symbol_left, symbol_right, decimal_point, thousands_point, decimal_places, value from currencies");
-      while ($currencies = tep_db_fetch_array($currencies_query)) {
-        $this->currencies[$currencies['code']] = array('title' => $currencies['title'],
-                                                       'symbol_left' => $currencies['symbol_left'],
-                                                       'symbol_right' => $currencies['symbol_right'],
-                                                       'decimal_point' => $currencies['decimal_point'],
-                                                       'thousands_point' => $currencies['thousands_point'],
-                                                       'decimal_places' => (int)$currencies['decimal_places'],
-                                                       'value' => $currencies['value']);
-      }
+    // class constructor
+    public function __construct()
+    {
+        $this->currencies = [];
+        $currencies_query = tep_db_query('select code, title, symbol_left, symbol_right, decimal_point, thousands_point, decimal_places, value from currencies');
+
+        while ($currencies = tep_db_fetch_array($currencies_query)) {
+            $this->currencies[$currencies['code']] = ['title' => $currencies['title'],
+                'symbol_left' => $currencies['symbol_left'],
+                'symbol_right' => $currencies['symbol_right'],
+                'decimal_point' => $currencies['decimal_point'],
+                'thousands_point' => $currencies['thousands_point'],
+                'decimal_places' => (int) $currencies['decimal_places'],
+                'value' => $currencies['value']];
+        }
     }
 
-// class methods
-    function format($number, $calculate_currency_value = true, $currency_type = '', $currency_value = '') {
-      global $currency;
+    // class methods
+    public function format($number, $calculate_currency_value = true, $currency_type = '', $currency_value = '')
+    {
+        global $currency;
 
-      if (empty($currency_type)) $currency_type = $currency;
+        if (empty($currency_type)) {
+            $currency_type = $currency;
+        }
 
-      if ($calculate_currency_value == true) {
-        $rate = (!empty($currency_value)) ? $currency_value : $this->currencies[$currency_type]['value'];
-        $format_string = $this->currencies[$currency_type]['symbol_left'] . number_format(tep_round($number * $rate, $this->currencies[$currency_type]['decimal_places']), $this->currencies[$currency_type]['decimal_places'], $this->currencies[$currency_type]['decimal_point'], $this->currencies[$currency_type]['thousands_point']) . $this->currencies[$currency_type]['symbol_right'];
-      } else {
-        $format_string = $this->currencies[$currency_type]['symbol_left'] . number_format(tep_round($number, $this->currencies[$currency_type]['decimal_places']), $this->currencies[$currency_type]['decimal_places'], $this->currencies[$currency_type]['decimal_point'], $this->currencies[$currency_type]['thousands_point']) . $this->currencies[$currency_type]['symbol_right'];
-      }
+        if ($calculate_currency_value === true) {
+            $rate = (!empty($currency_value)) ? $currency_value : $this->currencies[$currency_type]['value'];
+            $format_string = $this->currencies[$currency_type]['symbol_left'].number_format(tep_round($number * $rate, $this->currencies[$currency_type]['decimal_places']), $this->currencies[$currency_type]['decimal_places'], $this->currencies[$currency_type]['decimal_point'], $this->currencies[$currency_type]['thousands_point']).$this->currencies[$currency_type]['symbol_right'];
+        } else {
+            $format_string = $this->currencies[$currency_type]['symbol_left'].number_format(tep_round($number, $this->currencies[$currency_type]['decimal_places']), $this->currencies[$currency_type]['decimal_places'], $this->currencies[$currency_type]['decimal_point'], $this->currencies[$currency_type]['thousands_point']).$this->currencies[$currency_type]['symbol_right'];
+        }
 
-      return $format_string;
+        return $format_string;
     }
 
-    function calculate_price($products_price, $products_tax, $quantity = 1) {
-      global $currency;
+    public function calculate_price($products_price, $products_tax, $quantity = 1)
+    {
+        global $currency;
 
-      return tep_round(tep_add_tax($products_price, $products_tax), $this->currencies[$currency]['decimal_places']) * $quantity;
+        return tep_round(tep_add_tax($products_price, $products_tax), $this->currencies[$currency]['decimal_places']) * $quantity;
     }
 
-    function is_set($code) {
-      if (isset($this->currencies[$code]) && !empty($this->currencies[$code])) {
-        return true;
-      } else {
+    public function is_set($code)
+    {
+        if (isset($this->currencies[$code]) && !empty($this->currencies[$code])) {
+            return true;
+        }
+
         return false;
-      }
     }
 
-    function get_value($code) {
-      return $this->currencies[$code]['value'];
+    public function get_value($code)
+    {
+        return $this->currencies[$code]['value'];
     }
 
-    function get_decimal_places($code) {
-      return $this->currencies[$code]['decimal_places'];
+    public function get_decimal_places($code)
+    {
+        return $this->currencies[$code]['decimal_places'];
     }
 
-    function display_price($products_price, $products_tax, $quantity = 1) {
-      return $this->format($this->calculate_price($products_price, $products_tax, $quantity));
+    public function display_price($products_price, $products_tax, $quantity = 1)
+    {
+        return $this->format($this->calculate_price($products_price, $products_tax, $quantity));
     }
-  }
-?>
+}

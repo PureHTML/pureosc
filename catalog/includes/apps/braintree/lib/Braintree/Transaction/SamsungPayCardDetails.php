@@ -1,38 +1,50 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree\Transaction;
 
 use Braintree\Instance;
 
 /**
  * SamsungPayCard details from a transaction
- * creates an instance of SamsungPayCardDetails
+ * creates an instance of SamsungPayCardDetails.
  *
- * @package    Braintree
- * @subpackage Transaction
- *
- * @property-read string $bin
- * @property-read string $cardType
- * @property-read string $cardholderName
- * @property-read string $commercial
- * @property-read string $countryOfIssuance
- * @property-read string $customerId
- * @property-read string $customerLocation
- * @property-read string $debit
- * @property-read string $durbinRegulated
- * @property-read string $expirationDate
- * @property-read string $expirationMonth
- * @property-read string $expirationYear
- * @property-read string $healthcare
- * @property-read string $imageUrl
- * @property-read string $issuingBank
- * @property-read string $last4
- * @property-read string $maskedNumber
- * @property-read string $payroll
- * @property-read string $prepaid
- * @property-read string $productId
- * @property-read string $sourceCardLast4
- * @property-read string $token
- * @property-read string $updatedAt
+ * @property string $bin
+ * @property string $cardholderName
+ * @property string $cardType
+ * @property string $commercial
+ * @property string $countryOfIssuance
+ * @property string $customerId
+ * @property string $customerLocation
+ * @property string $debit
+ * @property string $durbinRegulated
+ * @property string $expirationDate
+ * @property string $expirationMonth
+ * @property string $expirationYear
+ * @property string $healthcare
+ * @property string $imageUrl
+ * @property string $issuingBank
+ * @property string $last4
+ * @property string $maskedNumber
+ * @property string $payroll
+ * @property string $prepaid
+ * @property string $productId
+ * @property string $sourceCardLast4
+ * @property string $token
+ * @property string $updatedAt
  */
 class SamsungPayCardDetails extends Instance
 {
@@ -40,12 +52,13 @@ class SamsungPayCardDetails extends Instance
 
     /**
      * @ignore
+     *
+     * @param mixed $attributes
      */
     public function __construct($attributes)
     {
         parent::__construct($attributes);
-        $this->_attributes['expirationDate'] = $this->expirationMonth . '/' . $this->expirationYear;
-        $this->_attributes['maskedNumber'] = $this->bin . '******' . $this->last4;
-
+        $this->_attributes['expirationDate'] = $this->expirationMonth.'/'.$this->expirationYear;
+        $this->_attributes['maskedNumber'] = $this->bin.'******'.$this->last4;
     }
 }

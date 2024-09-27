@@ -1,24 +1,27 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2003 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
+\define('NAVBAR_TITLE_1', 'Můj účet');
+\define('NAVBAR_TITLE_2', 'Adresář');
 
-define('NAVBAR_TITLE_1', 'Můj účet');
-define('NAVBAR_TITLE_2', 'Adresář');
+\define('HEADING_TITLE', 'Můj osobní adresář');
 
-define('HEADING_TITLE', 'Můj osobní adresář');
+\define('PRIMARY_ADDRESS_TITLE', 'Primární adresa');
+\define('PRIMARY_ADDRESS_DESCRIPTION', 'Tato adresa slouží jako pre-vybraný lodní a fakturační adresa pro objednávek na tomto obchodu.<br /> <br />Tato adresa je také používán jako základna pro produkty a službami výpočty daně.');
+\define('ADDRESS_BOOK_TITLE', 'Adresář záznamy');
+\define('PRIMARY_ADDRESS', '(primární adresa)');
 
-define('PRIMARY_ADDRESS_TITLE', 'Primární adresa');
-define('PRIMARY_ADDRESS_DESCRIPTION', 'Tato adresa slouží jako pre-vybraný lodní a fakturační adresa pro objednávek na tomto obchodu.<br /> <br />Tato adresa je také používán jako základna pro produkty a službami výpočty daně.');
-define('ADDRESS_BOOK_TITLE', 'Adresář záznamy');
-define('PRIMARY_ADDRESS', '(primární adresa)');
-
-define('TEXT_MAXIMUM_ENTRIES', '<font color="#ff0000"><b>Poznámka:</b></font>Maximálně %s položek adresáře povoleno.');
-?>
+\define('TEXT_MAXIMUM_ENTRIES', '<font color="#ff0000"><b>Poznámka:</b></font>Maximálně %s položek adresáře povoleno.');

@@ -8,11 +8,11 @@
   Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
-*/
+ */
 ?>
 
 <div style="text-align: right; padding-bottom: 15px;">
-  <?php echo $OSCOM_PayPal->drawButton($OSCOM_PayPal->getDef('button_back'), tep_href_link('paypal.php', 'action=log&page=' . $_GET['page']), 'info'); ?>
+  <?php echo $OSCOM_PayPal->drawButton($OSCOM_PayPal->getDef('button_back'), tep_href_link('paypal.php', 'action=log&page='.$_GET['page']), 'info'); ?>
 </div>
 
 <table class="pp-table pp-table-hover" width="100%">
@@ -25,7 +25,7 @@
 
   <?php
   foreach ($log_request as $key => $value) {
-    ?>
+      ?>
 
     <tr>
       <td width="25%"><?php echo tep_output_string_protected($key); ?></td>
@@ -34,7 +34,8 @@
 
     <?php
   }
-  ?>
+
+?>
 
   </tbody>
 </table>
@@ -48,7 +49,7 @@
   <tbody>
 
   <?php
-  foreach ($log_response as $key => $value) {
+foreach ($log_response as $key => $value) {
     ?>
 
     <tr>
@@ -57,8 +58,9 @@
     </tr>
 
     <?php
-  }
-  ?>
+}
+
+?>
 
   </tbody>
 </table>

@@ -1,30 +1,37 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2020 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
+class install_directory
+{
+    public $type = 'warning';
 
-  class securityCheck_install_directory {
-    var $type = 'warning';
+    public function __construct()
+    {
+        global $language;
 
-    function __construct() {
-      global $language;
-
-      include(DIR_FS_ADMIN . 'includes/languages/' . $language . '/modules/security_check/install_directory.php');
+        include DIR_FS_ADMIN.'includes/languages/'.$language.'/modules/security_check/install_directory.php';
     }
 
-    function pass() {
-      return !file_exists(DIR_FS_CATALOG . 'install');
+    public function pass()
+    {
+        return !file_exists(DIR_FS_CATALOG.'install');
     }
 
-    function getMessage() {
-      return WARNING_INSTALL_DIRECTORY_EXISTS;
+    public function getMessage()
+    {
+        return WARNING_INSTALL_DIRECTORY_EXISTS;
     }
-  }
-?>
+}

@@ -5,13 +5,14 @@
 
     <?php
     foreach ($categories_array as $cPath) {
-      ?>
+        ?>
 
       <a href="<?php echo tep_href_link('index.php', $cPath); ?>"><?php echo $cPath; ?></a><br/>
 
     <?php
     }
-    ?>
+
+  ?>
 
   </div>
 </div>

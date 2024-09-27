@@ -1,46 +1,89 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree;
 
 /**
  * Braintree Customer module
- * Creates and manages Customers
+ * Creates and manages Customers.
  *
  * <b>== More information ==</b>
  *
  * For more detailed information on Customers, see {@link https://developers.braintreepayments.com/reference/response/customer/php https://developers.braintreepayments.com/reference/response/customer/php}
  *
- * @package    Braintree
  * @category   Resources
  *
- * @property-read \Braintree\Address[] $addresses
- * @property-read \Braintree\AndroidPayCard[] $androidPayCards
- * @property-read \Braintree\AmexExpressCheckoutCard[] $amexExpressCheckoutCards DEPRECATED
- * @property-read \Braintree\ApplePayCard[] $applePayCards
- * @property-read string $company
- * @property-read \DateTime $createdAt
- * @property-read \Braintree\CreditCard[] $creditCards
- * @property-read array  $customFields custom fields passed with the request
- * @property-read string $email
- * @property-read string $fax
- * @property-read string $firstName
- * @property-read string $graphQLId
- * @property-read string $id
- * @property-read string $lastName
- * @property-read \Braintree\MasterpassCard[] $masterpassCards DEPRECATED
- * @property-read \Braintree\PaymentMethod[] $paymentMethods
- * @property-read \Braintree\PayPalAccount[] $paypalAccounts
- * @property-read string $phone
- * @property-read \Braintree\SamsungPayCard[] $samsungPayCards
- * @property-read \DateTime $updatedAt
- * @property-read \Braintree\UsBankAccount[] $usBankAccounts
- * @property-read \Braintree\VenmoAccount[] $venmoAccounts
- * @property-read \Braintree\VisaCheckoutCard[] $visaCheckoutCards
- * @property-read string $website
+ * @property \Braintree\Address[]                 $addresses
+ * @property \Braintree\AmexExpressCheckoutCard[] $amexExpressCheckoutCards DEPRECATED
+ * @property \Braintree\AndroidPayCard[]          $androidPayCards
+ * @property \Braintree\ApplePayCard[]            $applePayCards
+ * @property string                               $company
+ * @property \DateTime                            $createdAt
+ * @property \Braintree\CreditCard[]              $creditCards
+ * @property array                                $customFields             custom fields passed with the request
+ * @property string                               $email
+ * @property string                               $fax
+ * @property string                               $firstName
+ * @property string                               $graphQLId
+ * @property string                               $id
+ * @property string                               $lastName
+ * @property \Braintree\MasterpassCard[]          $masterpassCards          DEPRECATED
+ * @property \Braintree\PaymentMethod[]           $paymentMethods
+ * @property \Braintree\PayPalAccount[]           $paypalAccounts
+ * @property string                               $phone
+ * @property \Braintree\SamsungPayCard[]          $samsungPayCards
+ * @property \DateTime                            $updatedAt
+ * @property \Braintree\UsBankAccount[]           $usBankAccounts
+ * @property \Braintree\VenmoAccount[]            $venmoAccounts
+ * @property \Braintree\VisaCheckoutCard[]        $visaCheckoutCards
+ * @property string                               $website
  */
 class Customer extends Base
 {
+    /* private class properties */
+
     /**
+     * @var array registry of customer data
+     */
+    protected array $_attributes = [
+        'addresses' => '',
+        'company' => '',
+        'creditCards' => '',
+        'email' => '',
+        'fax' => '',
+        'firstName' => '',
+        'id' => '',
+        'lastName' => '',
+        'phone' => '',
+        'createdAt' => '',
+        'updatedAt' => '',
+        'website' => '',
+    ];
+
+    /**
+     * returns a string representation of the customer.
      *
+     * @return string
+     */
+    public function __toString()
+    {
+        return __CLASS__.'['.
+                Util::attributesToString($this->_attributes).']';
+    }
+    /**
      * @return Customer[]
      */
     public static function all()
@@ -49,9 +92,9 @@ class Customer extends Base
     }
 
     /**
-     *
      * @param array $query
      * @param int[] $ids
+     *
      * @return Customer|Customer[]
      */
     public static function fetch($query, $ids)
@@ -60,9 +103,9 @@ class Customer extends Base
     }
 
     /**
-     *
      * @param array $attribs
-     * @return Result\Successful|Result\Error
+     *
+     * @return Result\Error|Result\Successful
      */
     public static function create($attribs = [])
     {
@@ -70,8 +113,8 @@ class Customer extends Base
     }
 
     /**
-     *
      * @param array $attribs
+     *
      * @return Customer
      */
     public static function createNoValidate($attribs = [])
@@ -80,9 +123,11 @@ class Customer extends Base
     }
 
     /**
+     * @param string     $id                  customer id
+     * @param null|mixed $associationFilterId
      *
      * @throws Exception\NotFound
-     * @param string $id customer id
+     *
      * @return Customer
      */
     public static function find($id, $associationFilterId = null)
@@ -91,10 +136,10 @@ class Customer extends Base
     }
 
     /**
-     *
-     * @param int $customerId
+     * @param int   $customerId
      * @param array $transactionAttribs
-     * @return Result\Successful|Result\Error
+     *
+     * @return Result\Error|Result\Successful
      */
     public static function credit($customerId, $transactionAttribs)
     {
@@ -102,10 +147,11 @@ class Customer extends Base
     }
 
     /**
-     *
-     * @throws Exception\ValidationError
      * @param type $customerId
      * @param type $transactionAttribs
+     *
+     * @throws Exception\ValidationError
+     *
      * @return Transaction
      */
     public static function creditNoValidate($customerId, $transactionAttribs)
@@ -114,9 +160,10 @@ class Customer extends Base
     }
 
     /**
+     * @param int $customerId
      *
      * @throws Exception on invalid id or non-200 http response code
-     * @param int $customerId
+     *
      * @return Result\Successful
      */
     public static function delete($customerId)
@@ -125,9 +172,9 @@ class Customer extends Base
     }
 
     /**
-     *
-     * @param int $customerId
+     * @param int   $customerId
      * @param array $transactionAttribs
+     *
      * @return Transaction
      */
     public static function sale($customerId, $transactionAttribs)
@@ -136,9 +183,9 @@ class Customer extends Base
     }
 
     /**
-     *
-     * @param int $customerId
+     * @param int   $customerId
      * @param array $transactionAttribs
+     *
      * @return Transaction
      */
     public static function saleNoValidate($customerId, $transactionAttribs)
@@ -147,9 +194,10 @@ class Customer extends Base
     }
 
     /**
+     * @param array $query
      *
      * @throws InvalidArgumentException
-     * @param array $query
+     *
      * @return ResourceCollection
      */
     public static function search($query)
@@ -158,11 +206,12 @@ class Customer extends Base
     }
 
     /**
+     * @param int   $customerId
+     * @param array $attributes
      *
      * @throws Exception\Unexpected
-     * @param int $customerId
-     * @param array $attributes
-     * @return Result\Successful|Result\Error
+     *
+     * @return Result\Error|Result\Successful
      */
     public static function update($customerId, $attributes)
     {
@@ -170,10 +219,11 @@ class Customer extends Base
     }
 
     /**
+     * @param int   $customerId
+     * @param array $attributes
      *
      * @throws Exception\Unexpected
-     * @param int $customerId
-     * @param array $attributes
+     *
      * @return CustomerGateway
      */
     public static function updateNoValidate($customerId, $attributes)
@@ -181,109 +231,178 @@ class Customer extends Base
         return Configuration::gateway()->customer()->updateNoValidate($customerId, $attributes);
     }
 
+    /**
+     * returns false if comparing object is not a Customer,
+     * or is a Customer with a different id.
+     *
+     * @param object $otherCust customer to compare against
+     *
+     * @return bool
+     */
+    public function isEqual($otherCust)
+    {
+        return !($otherCust instanceof self) ? false : $this->id === $otherCust->id;
+    }
+
+    /**
+     * returns the customer's default payment method.
+     *
+     * @return CreditCard|PayPalAccount
+     */
+    public function defaultPaymentMethod()
+    {
+        $defaultPaymentMethods = array_filter($this->paymentMethods, 'Braintree\Customer::_defaultPaymentMethodFilter');
+
+        return current($defaultPaymentMethods);
+    }
+
+    public static function _defaultPaymentMethodFilter($paymentMethod)
+    {
+        return $paymentMethod->isDefault();
+    }
+
+    /**
+     *  factory method: returns an instance of Customer
+     *  to the requesting method, with populated properties.
+     *
+     * @ignore
+     *
+     * @param array $attributes
+     *
+     * @return Customer
+     */
+    public static function factory($attributes)
+    {
+        $instance = new self();
+        $instance->_initialize($attributes);
+
+        return $instance;
+    }
+
     /* instance methods */
 
     /**
-     * sets instance properties from an array of values
+     * sets instance properties from an array of values.
      *
      * @ignore
-     * @access protected
+     *
      * @param array $customerAttribs array of customer data
      */
-    protected function _initialize($customerAttribs)
+    protected function _initialize($customerAttribs): void
     {
         $this->_attributes = $customerAttribs;
 
         $addressArray = [];
-        if (isset($customerAttribs['addresses'])) {
 
-            foreach ($customerAttribs['addresses'] AS $address) {
+        if (isset($customerAttribs['addresses'])) {
+            foreach ($customerAttribs['addresses'] as $address) {
                 $addressArray[] = Address::factory($address);
             }
         }
+
         $this->_set('addresses', $addressArray);
 
         $creditCardArray = [];
+
         if (isset($customerAttribs['creditCards'])) {
-            foreach ($customerAttribs['creditCards'] AS $creditCard) {
+            foreach ($customerAttribs['creditCards'] as $creditCard) {
                 $creditCardArray[] = CreditCard::factory($creditCard);
             }
         }
+
         $this->_set('creditCards', $creditCardArray);
 
         $paypalAccountArray = [];
+
         if (isset($customerAttribs['paypalAccounts'])) {
-            foreach ($customerAttribs['paypalAccounts'] AS $paypalAccount) {
+            foreach ($customerAttribs['paypalAccounts'] as $paypalAccount) {
                 $paypalAccountArray[] = PayPalAccount::factory($paypalAccount);
             }
         }
+
         $this->_set('paypalAccounts', $paypalAccountArray);
 
         $applePayCardArray = [];
+
         if (isset($customerAttribs['applePayCards'])) {
-            foreach ($customerAttribs['applePayCards'] AS $applePayCard) {
+            foreach ($customerAttribs['applePayCards'] as $applePayCard) {
                 $applePayCardArray[] = ApplePayCard::factory($applePayCard);
             }
         }
+
         $this->_set('applePayCards', $applePayCardArray);
 
         // NEXT_MAJOR_VERSION rename Android Pay to Google Pay
         $androidPayCardArray = [];
+
         if (isset($customerAttribs['androidPayCards'])) {
-            foreach ($customerAttribs['androidPayCards'] AS $androidPayCard) {
+            foreach ($customerAttribs['androidPayCards'] as $androidPayCard) {
                 $androidPayCardArray[] = AndroidPayCard::factory($androidPayCard);
             }
         }
+
         $this->_set('androidPayCards', $androidPayCardArray);
 
         // NEXT_MAJOR_VERSION remove deprecated AmexExpressCheckout
         $amexExpressCheckoutCardArray = [];
+
         if (isset($customerAttribs['amexExpressCheckoutCards'])) {
-            foreach ($customerAttribs['amexExpressCheckoutCards'] AS $amexExpressCheckoutCard) {
+            foreach ($customerAttribs['amexExpressCheckoutCards'] as $amexExpressCheckoutCard) {
                 $amexExpressCheckoutCardArray[] = AmexExpressCheckoutCard::factory($amexExpressCheckoutCard);
             }
         }
+
         $this->_set('amexExpressCheckoutCards', $amexExpressCheckoutCardArray);
 
-        $venmoAccountArray = array();
+        $venmoAccountArray = [];
+
         if (isset($customerAttribs['venmoAccounts'])) {
-            foreach ($customerAttribs['venmoAccounts'] AS $venmoAccount) {
+            foreach ($customerAttribs['venmoAccounts'] as $venmoAccount) {
                 $venmoAccountArray[] = VenmoAccount::factory($venmoAccount);
             }
         }
+
         $this->_set('venmoAccounts', $venmoAccountArray);
 
         $visaCheckoutCardArray = [];
+
         if (isset($customerAttribs['visaCheckoutCards'])) {
-            foreach ($customerAttribs['visaCheckoutCards'] AS $visaCheckoutCard) {
+            foreach ($customerAttribs['visaCheckoutCards'] as $visaCheckoutCard) {
                 $visaCheckoutCardArray[] = VisaCheckoutCard::factory($visaCheckoutCard);
             }
         }
+
         $this->_set('visaCheckoutCards', $visaCheckoutCardArray);
 
         // NEXT_MAJOR_VERSION remove deprecated Masterpass
         $masterpassCardArray = [];
+
         if (isset($customerAttribs['masterpassCards'])) {
-            foreach ($customerAttribs['masterpassCards'] AS $masterpassCard) {
+            foreach ($customerAttribs['masterpassCards'] as $masterpassCard) {
                 $masterpassCardArray[] = MasterpassCard::factory($masterpassCard);
             }
         }
+
         $this->_set('masterpassCards', $masterpassCardArray);
 
         $samsungPayCardArray = [];
+
         if (isset($customerAttribs['samsungPayCards'])) {
-            foreach ($customerAttribs['samsungPayCards'] AS $samsungPayCard) {
+            foreach ($customerAttribs['samsungPayCards'] as $samsungPayCard) {
                 $samsungPayCardArray[] = SamsungPayCard::factory($samsungPayCard);
             }
         }
+
         $this->_set('samsungPayCards', $samsungPayCardArray);
 
-        $usBankAccountArray = array();
+        $usBankAccountArray = [];
+
         if (isset($customerAttribs['usBankAccounts'])) {
-            foreach ($customerAttribs['usBankAccounts'] AS $usBankAccount) {
+            foreach ($customerAttribs['usBankAccounts'] as $usBankAccount) {
                 $usBankAccountArray[] = UsBankAccount::factory($usBankAccount);
             }
         }
+
         $this->_set('usBankAccounts', $usBankAccountArray);
 
         $this->_set('paymentMethods', array_merge(
@@ -296,87 +415,15 @@ class Customer extends Base
             $this->visaCheckoutCards,
             $this->masterpassCards,
             $this->samsungPayCards,
-            $this->usBankAccounts
+            $this->usBankAccounts,
         ));
 
         $customFields = [];
+
         if (isset($customerAttribs['customFields'])) {
             $customFields = $customerAttribs['customFields'];
         }
+
         $this->_set('customFields', $customFields);
-    }
-
-    /**
-     * returns a string representation of the customer
-     * @return string
-     */
-    public function  __toString()
-    {
-        return __CLASS__ . '[' .
-                Util::attributesToString($this->_attributes) .']';
-    }
-
-    /**
-     * returns false if comparing object is not a Customer,
-     * or is a Customer with a different id
-     *
-     * @param object $otherCust customer to compare against
-     * @return boolean
-     */
-    public function isEqual($otherCust)
-    {
-        return !($otherCust instanceof Customer) ? false : $this->id === $otherCust->id;
-    }
-
-    /**
-     * returns the customer's default payment method
-     *
-     * @return CreditCard|PayPalAccount
-     */
-    public function defaultPaymentMethod()
-    {
-        $defaultPaymentMethods = array_filter($this->paymentMethods, 'Braintree\Customer::_defaultPaymentMethodFilter');
-        return current($defaultPaymentMethods);
-    }
-
-    public static function _defaultPaymentMethodFilter($paymentMethod)
-    {
-        return $paymentMethod->isDefault();
-    }
-
-    /* private class properties  */
-
-    /**
-     * @access protected
-     * @var array registry of customer data
-     */
-    protected $_attributes = [
-        'addresses'   => '',
-        'company'     => '',
-        'creditCards' => '',
-        'email'       => '',
-        'fax'         => '',
-        'firstName'   => '',
-        'id'          => '',
-        'lastName'    => '',
-        'phone'       => '',
-        'createdAt'   => '',
-        'updatedAt'   => '',
-        'website'     => '',
-        ];
-
-    /**
-     *  factory method: returns an instance of Customer
-     *  to the requesting method, with populated properties
-     *
-     * @ignore
-     * @param array $attributes
-     * @return Customer
-     */
-    public static function factory($attributes)
-    {
-        $instance = new Customer();
-        $instance->_initialize($attributes);
-        return $instance;
     }
 }

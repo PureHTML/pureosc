@@ -8,18 +8,18 @@
   Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
-*/
+ */
 ?>
 
 <div id="ppAccountBalanceLive">
-  <h3 class="pp-panel-header-success"><?php echo $OSCOM_PayPal->getDef('heading_live_account', array('account' => str_replace('_api1.', '@', $OSCOM_PayPal->getApiCredentials('live', 'username')))); ?></h3>
+  <h3 class="pp-panel-header-success"><?php echo $OSCOM_PayPal->getDef('heading_live_account', ['account' => str_replace('_api1.', '@', $OSCOM_PayPal->getApiCredentials('live', 'username'))]); ?></h3>
   <div id="ppBalanceLiveInfo" class="pp-panel pp-panel-success">
     <p><?php echo $OSCOM_PayPal->getDef('retrieving_balance_progress'); ?></p>
   </div>
 </div>
 
 <div id="ppAccountBalanceSandbox">
-  <h3 class="pp-panel-header-warning"><?php echo $OSCOM_PayPal->getDef('heading_sandbox_account', array('account' => str_replace('_api1.', '@', $OSCOM_PayPal->getApiCredentials('sandbox', 'username')))); ?></h3>
+  <h3 class="pp-panel-header-warning"><?php echo $OSCOM_PayPal->getDef('heading_sandbox_account', ['account' => str_replace('_api1.', '@', $OSCOM_PayPal->getApiCredentials('sandbox', 'username'))]); ?></h3>
   <div id="ppBalanceSandboxInfo" class="pp-panel pp-panel-warning">
     <p><?php echo $OSCOM_PayPal->getDef('retrieving_balance_progress'); ?></p>
   </div>

@@ -8,7 +8,7 @@
   Copyright (c) 2021 osCommerce
 
   Released under the GNU General Public License
-*/
+ */
 ?>
 
 <div style="padding-bottom: 15px;">

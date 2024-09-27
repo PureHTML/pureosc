@@ -1,36 +1,43 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2021 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
+class status
+{
+    public $default = '-1';
+    public $title;
+    public $description;
+    public $sort_order = 100;
 
-class OSCOM_Braintree_CC_Cfg_status {
-  public $default = '-1';
-  public $title;
-  public $description;
-  public $sort_order = 100;
+    public function __construct()
+    {
+        global $OSCOM_Braintree;
 
-  public function __construct() {
-    global $OSCOM_Braintree;
+        $this->title = $OSCOM_Braintree->getDef('cfg_cc_status_title');
+        $this->description = $OSCOM_Braintree->getDef('cfg_cc_status_desc');
+    }
 
-    $this->title = $OSCOM_Braintree->getDef('cfg_cc_status_title');
-    $this->description = $OSCOM_Braintree->getDef('cfg_cc_status_desc');
-  }
+    public function getSetField()
+    {
+        global $OSCOM_Braintree;
 
-  public function getSetField() {
-    global $OSCOM_Braintree;
+        $input = '<input type="radio" id="statusSelectionLive" name="status" value="1"'.(OSCOM_APP_PAYPAL_BRAINTREE_CC_STATUS === '1' ? ' checked="checked"' : '').'><label for="statusSelectionLive">'.$OSCOM_Braintree->getDef('cfg_cc_status_live').'</label>'.
+                 '<input type="radio" id="statusSelectionSandbox" name="status" value="0"'.(OSCOM_APP_PAYPAL_BRAINTREE_CC_STATUS === '0' ? ' checked="checked"' : '').'><label for="statusSelectionSandbox">'.$OSCOM_Braintree->getDef('cfg_cc_status_sandbox').'</label>'.
+                 '<input type="radio" id="statusSelectionDisabled" name="status" value="-1"'.(OSCOM_APP_PAYPAL_BRAINTREE_CC_STATUS === '-1' ? ' checked="checked"' : '').'><label for="statusSelectionDisabled">'.$OSCOM_Braintree->getDef('cfg_cc_status_disabled').'</label>';
 
-    $input = '<input type="radio" id="statusSelectionLive" name="status" value="1"' . (OSCOM_APP_PAYPAL_BRAINTREE_CC_STATUS == '1' ? ' checked="checked"' : '') . '><label for="statusSelectionLive">' . $OSCOM_Braintree->getDef('cfg_cc_status_live') . '</label>' .
-             '<input type="radio" id="statusSelectionSandbox" name="status" value="0"' . (OSCOM_APP_PAYPAL_BRAINTREE_CC_STATUS == '0' ? ' checked="checked"' : '') . '><label for="statusSelectionSandbox">' . $OSCOM_Braintree->getDef('cfg_cc_status_sandbox') . '</label>' .
-             '<input type="radio" id="statusSelectionDisabled" name="status" value="-1"' . (OSCOM_APP_PAYPAL_BRAINTREE_CC_STATUS == '-1' ? ' checked="checked"' : '') . '><label for="statusSelectionDisabled">' . $OSCOM_Braintree->getDef('cfg_cc_status_disabled') . '</label>';
-
-    $result = <<<EOT
+        $result = <<<EOT
 <div>
   <p>
     <label>{$this->title}</label>
@@ -50,6 +57,6 @@ $(function() {
 </script>
 EOT;
 
-    return $result;
-  }
+        return $result;
+    }
 }

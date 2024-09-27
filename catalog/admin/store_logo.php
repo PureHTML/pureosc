@@ -8,62 +8,64 @@
   Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
-*/
+ */
 
-  require('includes/application_top.php');
+require 'includes/application_top.php';
 
-  $action = (isset($_GET['action']) ? $_GET['action'] : '');
+$action = ($_GET['action'] ?? '');
 
-  if (!empty($action)) {
+if (!empty($action)) {
     $error = false;
 
     switch ($action) {
-      case 'save_logo':
-        $store_logo = new upload('store_logo');
-        $store_logo->set_extensions(array('png', 'jpg', 'jpeg', 'gif', 'svg'));
-        $store_logo->set_destination(DIR_FS_CATALOG_IMAGES);
+        case 'save_logo':
+            $store_logo = new upload('store_logo');
+            $store_logo->set_extensions(['png', 'jpg', 'jpeg', 'gif', 'svg']);
+            $store_logo->set_destination(DIR_FS_CATALOG_IMAGES);
 
-        if ($store_logo->parse()) {
-          $store_logo->set_filename('store_logo.png');
+            if ($store_logo->parse()) {
+                $store_logo->set_filename('store_logo.png');
 
-          if ($store_logo->save()) {
-            $messageStack->add_session(SUCCESS_LOGO_UPDATED, 'success');
-          } else {
-            $error = true;
-          }
-        } else {
-          $error = true;
-        }
-        break;
-      case 'save_favicon':
-        $store_favicon = new upload('store_favicon');
-        $store_favicon->set_extensions('ico');
-        $store_favicon->set_destination(DIR_FS_CATALOG);
+                if ($store_logo->save()) {
+                    $messageStack->add_session(SUCCESS_LOGO_UPDATED, 'success');
+                } else {
+                    $error = true;
+                }
+            } else {
+                $error = true;
+            }
 
-        if ($store_favicon->parse()) {
-          $store_favicon->set_filename('favicon.ico');
+            break;
+        case 'save_favicon':
+            $store_favicon = new upload('store_favicon');
+            $store_favicon->set_extensions('ico');
+            $store_favicon->set_destination(DIR_FS_CATALOG);
 
-          if ($store_favicon->save()) {
-            $messageStack->add_session(SUCCESS_FAVICON_UPDATED, 'success');
-          } else {
-            $error = true;
-          }
-        } else {
-          $error = true;
-        }
-        break;
+            if ($store_favicon->parse()) {
+                $store_favicon->set_filename('favicon.ico');
+
+                if ($store_favicon->save()) {
+                    $messageStack->add_session(SUCCESS_FAVICON_UPDATED, 'success');
+                } else {
+                    $error = true;
+                }
+            } else {
+                $error = true;
+            }
+
+            break;
     }
 
-    if ($error == false) {
-      tep_redirect(tep_href_link('store_logo.php'));
+    if ($error === false) {
+        tep_redirect(tep_href_link('store_logo.php'));
     }
-  }
+}
 
-  if (!tep_is_writable(DIR_FS_CATALOG_IMAGES)) {
+if (!tep_is_writable(DIR_FS_CATALOG_IMAGES)) {
     $messageStack->add(sprintf(ERROR_IMAGES_DIRECTORY_NOT_WRITEABLE, tep_href_link('sec_dir_permissions.php')), 'error');
-  }
+}
 
-  require('includes/template_top.php');
+require 'includes/template_top.php';
 ?>
 
     <table border="0" width="100%" cellspacing="0" cellpadding="2">
@@ -102,7 +104,7 @@
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
       <tr>
-        <td class="main"><?php echo DIR_FS_CATALOG . 'images/' . 'store_logo.png'; ?></td>
+        <td class="main"><?php echo DIR_FS_CATALOG.'images/store_logo.png'; ?></td>
       </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
@@ -134,11 +136,12 @@
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
       <tr>
-        <td class="main"><?php echo DIR_FS_CATALOG . 'favicon.ico'; ?></td>
+        <td class="main"><?php echo DIR_FS_CATALOG.'favicon.ico'; ?></td>
       </tr>
     </table>
 
 <?php
-  require('includes/template_bottom.php');
-  require('includes/application_bottom.php');
+  require 'includes/template_bottom.php';
+
+require 'includes/application_bottom.php';
 ?>

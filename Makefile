@@ -9,11 +9,11 @@ static-code-analysis: vendor ## Runs a static code analysis with phpstan/phpstan
 
 .PHONY: static-code-analysis-baseline
 static-code-analysis-baseline: check-symfony vendor ## Generates a baseline for static code analysis with phpstan/phpstan
-	vendor/bin/phpstan analyze --configuration=phpstan-default.neon.dist --generate-baseline=phpstan-default-baseline.neon --memory-limit=-1
+	includes/vendor/bin/phpstan analyze --configuration=phpstan-default.neon.dist --generate-baseline=phpstan-default-baseline.neon --memory-limit=-1
 
 .PHONY: tests
 tests: vendor
-	vendor/bin/phpunit tests
+	includes/vendor/bin/phpunit tests
 
 .PHONY: vendor
 vendor: composer.json composer.lock ## Installs composer dependencies
@@ -21,7 +21,7 @@ vendor: composer.json composer.lock ## Installs composer dependencies
 
 .PHONY: cs
 cs: ## Update Coding Standards
-	vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --diff --verbose
+	includes/vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --diff --verbose
 
 clean:
 	rm -rf vendor composer.lock db/cephoenix.sqlite src/*/*dataTables*

@@ -1,19 +1,34 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree;
 
 /**
  * Digest encryption module
- * Digest creates an HMAC-SHA1 hash for encrypting messages
+ * Digest creates an HMAC-SHA1 hash for encrypting messages.
  */
 class Digest
 {
     public static function hexDigestSha1($key, $string)
     {
-        if(function_exists('hash_hmac')) {
+        if (\function_exists('hash_hmac')) {
             return self::_builtInHmacSha1($string, $key);
-        } else {
-            return self::_hmacSha1($string, $key);
         }
+
+        return self::_hmacSha1($string, $key);
     }
 
     public static function hexDigestSha256($key, $string)
@@ -23,18 +38,20 @@ class Digest
 
     public static function secureCompare($left, $right)
     {
-        if (strlen($left) != strlen($right)) {
+        if (\strlen($left) !== \strlen($right)) {
             return false;
         }
 
-        $leftBytes = unpack("C*", $left);
-        $rightBytes = unpack("C*", $right);
+        $leftBytes = unpack('C*', $left);
+        $rightBytes = unpack('C*', $right);
 
         $result = 0;
-        for ($i = 1; $i <= count($leftBytes); $i++) {
-            $result = $result | ($leftBytes[$i] ^ $rightBytes[$i]);
+
+        for ($i = 1; $i <= \count($leftBytes); ++$i) {
+            $result |= ($leftBytes[$i] ^ $rightBytes[$i]);
         }
-        return $result == 0;
+
+        return $result === 0;
     }
 
     public static function _builtInHmacSha1($message, $key)
@@ -45,13 +62,13 @@ class Digest
     public static function _hmacSha1($message, $key)
     {
         $pack = 'H40';
-        $keyDigest = sha1($key,true);
-        $innerPad = str_repeat(chr(0x36), 64);
-        $outerPad = str_repeat(chr(0x5C), 64);
+        $keyDigest = sha1($key, true);
+        $innerPad = str_repeat(\chr(0x36), 64);
+        $outerPad = str_repeat(\chr(0x5C), 64);
 
-        for ($i = 0; $i < 20; $i++) {
-            $innerPad[$i] = $keyDigest[$i] ^ $innerPad[$i];
-            $outerPad[$i] = $keyDigest[$i] ^ $outerPad[$i];
+        for ($i = 0; $i < 20; ++$i) {
+            $innerPad[$i] ^= $keyDigest[$i];
+            $outerPad[$i] ^= $keyDigest[$i];
         }
 
         return sha1($outerPad.pack($pack, sha1($innerPad.$message)));

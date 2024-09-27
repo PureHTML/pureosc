@@ -1,47 +1,64 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree;
 
 class WebhookNotification extends Base
 {
-    const SUBSCRIPTION_CANCELED = 'subscription_canceled';
-    const SUBSCRIPTION_CHARGED_SUCCESSFULLY = 'subscription_charged_successfully';
-    const SUBSCRIPTION_CHARGED_UNSUCCESSFULLY = 'subscription_charged_unsuccessfully';
-    const SUBSCRIPTION_EXPIRED = 'subscription_expired';
-    const SUBSCRIPTION_TRIAL_ENDED = 'subscription_trial_ended';
-    const SUBSCRIPTION_WENT_ACTIVE = 'subscription_went_active';
-    const SUBSCRIPTION_WENT_PAST_DUE = 'subscription_went_past_due';
-    const SUB_MERCHANT_ACCOUNT_APPROVED = 'sub_merchant_account_approved';
-    const SUB_MERCHANT_ACCOUNT_DECLINED = 'sub_merchant_account_declined';
-    const TRANSACTION_DISBURSED = 'transaction_disbursed';
-    const TRANSACTION_SETTLED = 'transaction_settled';
-    const TRANSACTION_SETTLEMENT_DECLINED = 'transaction_settlement_declined';
-    const DISBURSEMENT_EXCEPTION = 'disbursement_exception';
-    const DISBURSEMENT = 'disbursement';
-    const DISPUTE_OPENED = 'dispute_opened';
-    const DISPUTE_LOST = 'dispute_lost';
-    const DISPUTE_WON = 'dispute_won';
-    const DISPUTE_ACCEPTED = 'dispute_accepted';
-    const DISPUTE_DISPUTED = 'dispute_disputed';
-    const DISPUTE_EXPIRED = 'dispute_expired';
-    const PARTNER_MERCHANT_CONNECTED = 'partner_merchant_connected';
-    const PARTNER_MERCHANT_DISCONNECTED = 'partner_merchant_disconnected';
-    const PARTNER_MERCHANT_DECLINED = 'partner_merchant_declined';
-    const OAUTH_ACCESS_REVOKED = 'oauth_access_revoked';
-    const CHECK = 'check';
-    const ACCOUNT_UPDATER_DAILY_REPORT = 'account_updater_daily_report';
-    const CONNECTED_MERCHANT_STATUS_TRANSITIONED = 'connected_merchant_status_transitioned';
-    const CONNECTED_MERCHANT_PAYPAL_STATUS_CHANGED = 'connected_merchant_paypal_status_changed';
-    const GRANTOR_UPDATED_GRANTED_PAYMENT_METHOD = 'grantor_updated_granted_payment_method';
-    const RECIPIENT_UPDATED_GRANTED_PAYMENT_METHOD = 'recipient_updated_granted_payment_method';
-    const GRANTED_PAYMENT_METHOD_REVOKED = 'granted_payment_method_revoked';
-    const PAYMENT_METHOD_REVOKED_BY_CUSTOMER = 'payment_method_revoked_by_customer';
-    const LOCAL_PAYMENT_COMPLETED = "local_payment_completed";
+    public const SUBSCRIPTION_CANCELED = 'subscription_canceled';
+    public const SUBSCRIPTION_CHARGED_SUCCESSFULLY = 'subscription_charged_successfully';
+    public const SUBSCRIPTION_CHARGED_UNSUCCESSFULLY = 'subscription_charged_unsuccessfully';
+    public const SUBSCRIPTION_EXPIRED = 'subscription_expired';
+    public const SUBSCRIPTION_TRIAL_ENDED = 'subscription_trial_ended';
+    public const SUBSCRIPTION_WENT_ACTIVE = 'subscription_went_active';
+    public const SUBSCRIPTION_WENT_PAST_DUE = 'subscription_went_past_due';
+    public const SUB_MERCHANT_ACCOUNT_APPROVED = 'sub_merchant_account_approved';
+    public const SUB_MERCHANT_ACCOUNT_DECLINED = 'sub_merchant_account_declined';
+    public const TRANSACTION_DISBURSED = 'transaction_disbursed';
+    public const TRANSACTION_SETTLED = 'transaction_settled';
+    public const TRANSACTION_SETTLEMENT_DECLINED = 'transaction_settlement_declined';
+    public const DISBURSEMENT_EXCEPTION = 'disbursement_exception';
+    public const DISBURSEMENT = 'disbursement';
+    public const DISPUTE_OPENED = 'dispute_opened';
+    public const DISPUTE_LOST = 'dispute_lost';
+    public const DISPUTE_WON = 'dispute_won';
+    public const DISPUTE_ACCEPTED = 'dispute_accepted';
+    public const DISPUTE_DISPUTED = 'dispute_disputed';
+    public const DISPUTE_EXPIRED = 'dispute_expired';
+    public const PARTNER_MERCHANT_CONNECTED = 'partner_merchant_connected';
+    public const PARTNER_MERCHANT_DISCONNECTED = 'partner_merchant_disconnected';
+    public const PARTNER_MERCHANT_DECLINED = 'partner_merchant_declined';
+    public const OAUTH_ACCESS_REVOKED = 'oauth_access_revoked';
+    public const CHECK = 'check';
+    public const ACCOUNT_UPDATER_DAILY_REPORT = 'account_updater_daily_report';
+    public const CONNECTED_MERCHANT_STATUS_TRANSITIONED = 'connected_merchant_status_transitioned';
+    public const CONNECTED_MERCHANT_PAYPAL_STATUS_CHANGED = 'connected_merchant_paypal_status_changed';
+    public const GRANTOR_UPDATED_GRANTED_PAYMENT_METHOD = 'grantor_updated_granted_payment_method';
+    public const RECIPIENT_UPDATED_GRANTED_PAYMENT_METHOD = 'recipient_updated_granted_payment_method';
+    public const GRANTED_PAYMENT_METHOD_REVOKED = 'granted_payment_method_revoked';
+    public const PAYMENT_METHOD_REVOKED_BY_CUSTOMER = 'payment_method_revoked_by_customer';
+    public const LOCAL_PAYMENT_COMPLETED = 'local_payment_completed';
 
-    public static function parse($signature, $payload) {
+    public static function parse($signature, $payload)
+    {
         return Configuration::gateway()->webhookNotification()->parse($signature, $payload);
     }
 
-    public static function verify($challenge) {
+    public static function verify($challenge)
+    {
         return Configuration::gateway()->webhookNotification()->verify($challenge);
     }
 
@@ -49,10 +66,11 @@ class WebhookNotification extends Base
     {
         $instance = new self();
         $instance->_initialize($attributes);
+
         return $instance;
     }
 
-    protected function _initialize($attributes)
+    protected function _initialize($attributes): void
     {
         $this->_attributes = $attributes;
 
@@ -110,7 +128,7 @@ class WebhookNotification extends Base
             $this->_set('grantedPaymentInstrumentUpdate', GrantedPaymentInstrumentUpdate::factory($wrapperNode['grantedPaymentInstrumentUpdate']));
         }
 
-        if (in_array($attributes['kind'], [self::GRANTED_PAYMENT_METHOD_REVOKED, self::PAYMENT_METHOD_REVOKED_BY_CUSTOMER])) {
+        if (\in_array($attributes['kind'], [self::GRANTED_PAYMENT_METHOD_REVOKED, self::PAYMENT_METHOD_REVOKED_BY_CUSTOMER], true)) {
             $this->_set('revokedPaymentMethodMetadata', RevokedPaymentMethodMetadata::factory($wrapperNode));
         }
 

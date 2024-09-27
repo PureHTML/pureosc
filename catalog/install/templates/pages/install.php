@@ -8,13 +8,15 @@
   Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
-*/
+ */
 
-if (isset($_POST['HTTPS']) && $_POST['HTTPS'] == 'on' && getenv('HTTPS') != 'on') {
-  $redirect_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-  header("Location: $redirect_url");
-  exit();
+if (isset($_POST['HTTPS']) && $_POST['HTTPS'] === 'on' && getenv('HTTPS') !== 'on') {
+    $redirect_url = 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+    header("Location: {$redirect_url}");
+
+    exit;
 }
+
 ?>
 
 <script>
@@ -134,23 +136,23 @@ if (isset($_POST['HTTPS']) && $_POST['HTTPS'] == 'on' && getenv('HTTPS') != 'on'
 
       <table border="0" width="99%" cellspacing="0" cellpadding="5" class="inputForm">
         <tr>
-          <td class="inputField"><?php echo 'Database Server<br />' . osc_draw_input_field('DB_SERVER', 'localhost', 'class="text"'); ?></td>
+          <td class="inputField"><?php echo 'Database Server<br />'.osc_draw_input_field('DB_SERVER', 'localhost', 'class="text"'); ?></td>
           <td class="inputDescription">The address of the database server in the form of a hostname or IP address.</td>
         </tr>
         <tr>
-          <td class="inputField"><?php echo 'Username<br />' . osc_draw_input_field('DB_SERVER_USERNAME', null, 'class="text"'); ?></td>
+          <td class="inputField"><?php echo 'Username<br />'.osc_draw_input_field('DB_SERVER_USERNAME', null, 'class="text"'); ?></td>
           <td class="inputDescription">The username used to connect to the database server.</td>
         </tr>
         <tr>
-          <td class="inputField"><?php echo 'Password<br />' . osc_draw_password_field('DB_SERVER_PASSWORD', 'class="text"'); ?></td>
+          <td class="inputField"><?php echo 'Password<br />'.osc_draw_password_field('DB_SERVER_PASSWORD', 'class="text"'); ?></td>
           <td class="inputDescription">The password that is used together with the username to connect to the database server.</td>
         </tr>
         <tr>
-          <td class="inputField"><?php echo 'Database Name<br />' . osc_draw_input_field('DB_DATABASE', null, 'class="text"'); ?></td>
+          <td class="inputField"><?php echo 'Database Name<br />'.osc_draw_input_field('DB_DATABASE', null, 'class="text"'); ?></td>
           <td class="inputDescription">The name of the database to hold the data in.</td>
         </tr>
         <tr>
-          <td class="inputField"><?php echo 'Import Sample Data<br />' . osc_draw_select_menu('DB_IMPORT_SAMPLE', array(array('id' => '0', 'text' => 'Skip sample data'), array('id' => '1', 'text' => 'Import sample data')), '1'); ?></td>
+          <td class="inputField"><?php echo 'Import Sample Data<br />'.osc_draw_select_menu('DB_IMPORT_SAMPLE', [['id' => '0', 'text' => 'Skip sample data'], ['id' => '1', 'text' => 'Import sample data']], '1'); ?></td>
           <td class="inputDescription">Import sample product and category data?</td>
         </tr>
       </table>
@@ -159,11 +161,12 @@ if (isset($_POST['HTTPS']) && $_POST['HTTPS'] == 'on' && getenv('HTTPS') != 'on'
 
       <?php
       foreach ($_POST as $key => $value) {
-        if (($key != 'x') && ($key != 'y')) {
-          echo osc_draw_hidden_field($key, $value);
-        }
+          if (($key !== 'x') && ($key !== 'y')) {
+              echo osc_draw_hidden_field($key, $value);
+          }
       }
-      ?>
+
+?>
 
     </form>
   </div>

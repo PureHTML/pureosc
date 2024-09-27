@@ -1,4 +1,19 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree;
 
 use JsonSerializable;
@@ -8,9 +23,8 @@ use JsonSerializable;
  *
  * Braintree base class and initialization
  * Provides methods to child classes. This class cannot be instantiated.
- *
  */
-abstract class Base implements JsonSerializable
+abstract class Base implements \JsonSerializable
 {
     protected $_attributes = [];
 
@@ -24,7 +38,7 @@ abstract class Base implements JsonSerializable
     }
 
     /**
-     * Disable cloning of objects
+     * Disable cloning of objects.
      *
      * @ignore
      */
@@ -33,10 +47,12 @@ abstract class Base implements JsonSerializable
     }
 
     /**
-     * Accessor for instance properties stored in the private $_attributes property
+     * Accessor for instance properties stored in the private $_attributes property.
      *
      * @ignore
+     *
      * @param string $name
+     *
      * @return mixed
      */
     public function __get($name)
@@ -44,47 +60,52 @@ abstract class Base implements JsonSerializable
         if (isset($this->_attributes['globalId'])) {
             $this->_attributes['graphQLId'] = $this->_attributes['globalId'];
         }
-        if (array_key_exists($name, $this->_attributes)) {
+
+        if (\array_key_exists($name, $this->_attributes)) {
             return $this->_attributes[$name];
         }
-        else {
-            trigger_error('Undefined property on ' . get_class($this) . ': ' . $name, E_USER_NOTICE);
-            return null;
-        }
+
+        trigger_error('Undefined property on '.\get_class($this).': '.$name, \E_USER_NOTICE);
+
+        return null;
     }
 
     /**
-     * Checks for the existence of a property stored in the private $_attributes property
+     * Checks for the existence of a property stored in the private $_attributes property.
      *
      * @ignore
+     *
      * @param string $name
-     * @return boolean
+     *
+     * @return bool
      */
     public function __isset($name)
     {
-        return array_key_exists($name, $this->_attributes);
+        return \array_key_exists($name, $this->_attributes);
     }
 
     /**
-     * Mutator for instance properties stored in the private $_attributes property
+     * Mutator for instance properties stored in the private $_attributes property.
      *
      * @ignore
+     *
      * @param string $key
-     * @param mixed $value
+     * @param mixed  $value
      */
-    public function _set($key, $value)
+    public function _set($key, $value): void
     {
         $this->_attributes[$key] = $value;
     }
-    
+
     /**
-     * Implementation of JsonSerializable 
-     * 
+     * Implementation of JsonSerializable.
+     *
      * @ignore
+     *
      * @return array
      */
     public function jsonSerialize()
     {
-	return $this->_attributes;
+        return $this->_attributes;
     }
 }

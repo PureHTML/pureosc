@@ -1,22 +1,27 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2013 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
+\define('MODULE_HEADER_TAGS_TWITTER_PRODUCT_CARD_TITLE', <<<'EOD'
+Twitter Karta výrobku
 
-  define('MODULE_HEADER_TAGS_TWITTER_PRODUCT_CARD_TITLE', 'Twitter Karta výrobku
-');
-  define('MODULE_HEADER_TAGS_TWITTER_PRODUCT_CARD_DESCRIPTION', 'Přidat Twitter kartu výrobku tagy na vaše informace o produktu stránkách.');
+EOD);
+\define('MODULE_HEADER_TAGS_TWITTER_PRODUCT_CARD_DESCRIPTION', 'Přidat Twitter kartu výrobku tagy na vaše informace o produktu stránkách.');
 
-  define('MODULE_HEADER_TAGS_TWITTER_PRODUCT_CARD_TEXT_PRE_ORDER', 'Předobjednávka');
-  define('MODULE_HEADER_TAGS_TWITTER_PRODUCT_CARD_TEXT_IN_STOCK', 'Na skladě');
-  define('MODULE_HEADER_TAGS_TWITTER_PRODUCT_CARD_TEXT_OUT_OF_STOCK', 'Není skladem');
-  define('MODULE_HEADER_TAGS_TWITTER_PRODUCT_CARD_TEXT_BUY_NOW', 'KOUPIT NYNÍ');
-  define('MODULE_HEADER_TAGS_TWITTER_PRODUCT_CARD_TEXT_CONTACT_US', 'KONTAKTUJTE NÁS');
-?>
+\define('MODULE_HEADER_TAGS_TWITTER_PRODUCT_CARD_TEXT_PRE_ORDER', 'Předobjednávka');
+\define('MODULE_HEADER_TAGS_TWITTER_PRODUCT_CARD_TEXT_IN_STOCK', 'Na skladě');
+\define('MODULE_HEADER_TAGS_TWITTER_PRODUCT_CARD_TEXT_OUT_OF_STOCK', 'Není skladem');
+\define('MODULE_HEADER_TAGS_TWITTER_PRODUCT_CARD_TEXT_BUY_NOW', 'KOUPIT NYNÍ');
+\define('MODULE_HEADER_TAGS_TWITTER_PRODUCT_CARD_TEXT_CONTACT_US', 'KONTAKTUJTE NÁS');

@@ -1,39 +1,46 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2020 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
+class download_directory
+{
+    public $type = 'warning';
 
-  class securityCheck_download_directory {
-    var $type = 'warning';
+    public function __construct()
+    {
+        global $language;
 
-    function __construct() {
-      global $language;
-
-      include(DIR_FS_ADMIN . 'includes/languages/' . $language . '/modules/security_check/download_directory.php');
+        include DIR_FS_ADMIN.'includes/languages/'.$language.'/modules/security_check/download_directory.php';
     }
 
-    function pass() {
-      if (DOWNLOAD_ENABLED != 'true') {
-        return true;
-      }
+    public function pass()
+    {
+        if (DOWNLOAD_ENABLED !== 'true') {
+            return true;
+        }
 
-//backwards compatibility <2.2RC3; DIR_FS_DOWNLOAD not in configure.php
-      if (!defined('DIR_FS_DOWNLOAD')) {
-        return true;
-      }
+        // backwards compatibility <2.2RC3; DIR_FS_DOWNLOAD not in configure.php
+        if (!\defined('DIR_FS_DOWNLOAD')) {
+            return true;
+        }
 
-      return is_dir(DIR_FS_DOWNLOAD);
+        return is_dir(DIR_FS_DOWNLOAD);
     }
 
-    function getMessage() {
-      return WARNING_DOWNLOAD_DIRECTORY_NON_EXISTENT;
+    public function getMessage()
+    {
+        return WARNING_DOWNLOAD_DIRECTORY_NON_EXISTENT;
     }
-  }
-?>
+}

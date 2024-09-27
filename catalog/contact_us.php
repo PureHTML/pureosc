@@ -8,57 +8,58 @@
   Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
-*/
+ */
 
-require('includes/application_top.php');
+require 'includes/application_top.php';
 
-require('includes/languages/' . $language . '/contact_us.php');
+require 'includes/languages/'.$language.'/contact_us.php';
 
-if (isset($_GET['action']) && ($_GET['action'] == 'send') && isset($_POST['formid']) && ($_POST['formid'] == $sessiontoken)) {
-  $error = false;
+if (isset($_GET['action']) && ($_GET['action'] === 'send') && isset($_POST['formid']) && ($_POST['formid'] === $sessiontoken)) {
+    $error = false;
 
-  $name = tep_db_prepare_input($_POST['name']);
-  $email_address = tep_db_prepare_input($_POST['email']);
-  $enquiry = tep_db_prepare_input($_POST['enquiry']);
+    $name = tep_db_prepare_input($_POST['name']);
+    $email_address = tep_db_prepare_input($_POST['email']);
+    $enquiry = tep_db_prepare_input($_POST['enquiry']);
 
-  if (!tep_validate_email($email_address)) {
-    $error = true;
+    if (!tep_validate_email($email_address)) {
+        $error = true;
 
-    $messageStack->add('contact', ENTRY_EMAIL_ADDRESS_CHECK_ERROR);
-  }
+        $messageStack->add('contact', ENTRY_EMAIL_ADDRESS_CHECK_ERROR);
+    }
 
-  $actionRecorder = new actionRecorder('ar_contact_us', (isset($_SESSION['customer_id']) ? $customer_id : null), $name);
-  if (!$actionRecorder->canPerform()) {
-    $error = true;
+    $actionRecorder = new actionRecorder('ar_contact_us', isset($_SESSION['customer_id']) ? $customer_id : null, $name);
 
-    $actionRecorder->record(false);
+    if (!$actionRecorder->canPerform()) {
+        $error = true;
 
-    $messageStack->add('contact', sprintf(ERROR_ACTION_RECORDER, (defined('MODULE_ACTION_RECORDER_CONTACT_US_EMAIL_MINUTES') ? (int)MODULE_ACTION_RECORDER_CONTACT_US_EMAIL_MINUTES : 15)));
-  }
+        $actionRecorder->record(false);
 
-  if ($error == false) {
-    tep_mail(STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS, EMAIL_SUBJECT, $enquiry, $name, $email_address);
+        $messageStack->add('contact', sprintf(ERROR_ACTION_RECORDER, \defined('MODULE_ACTION_RECORDER_CONTACT_US_EMAIL_MINUTES') ? (int) MODULE_ACTION_RECORDER_CONTACT_US_EMAIL_MINUTES : 15));
+    }
 
-    $actionRecorder->record();
+    if ($error === false) {
+        tep_mail(STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS, EMAIL_SUBJECT, $enquiry, $name, $email_address);
 
-    tep_redirect(tep_href_link('contact_us.php', 'action=success'));
-  }
+        $actionRecorder->record();
+
+        tep_redirect(tep_href_link('contact_us.php', 'action=success'));
+    }
 }
 
 $breadcrumb->add(NAVBAR_TITLE, tep_href_link('contact_us.php'));
 
-require('includes/template_top.php');
+require 'includes/template_top.php';
 ?>
 
   <h1><?php echo HEADING_TITLE; ?></h1>
 
 <?php
 if ($messageStack->size('contact') > 0) {
-  echo $messageStack->output('contact');
+    echo $messageStack->output('contact');
 }
 
-if (isset($_GET['action']) && ($_GET['action'] == 'success')) {
-  ?>
+if (isset($_GET['action']) && ($_GET['action'] === 'success')) {
+    ?>
 
   <p><?php echo TEXT_SUCCESS; ?></p>
 
@@ -68,7 +69,7 @@ if (isset($_GET['action']) && ($_GET['action'] == 'success')) {
 
   <?php
 } else {
-  ?>
+    ?>
 
   <?php echo tep_draw_form('contact_us', tep_href_link('contact_us.php', 'action=send'), 'post', '', true); ?>
 
@@ -97,5 +98,6 @@ if (isset($_GET['action']) && ($_GET['action'] == 'success')) {
   <?php
 }
 
-require('includes/template_bottom.php');
-require('includes/application_bottom.php');
+require 'includes/template_bottom.php';
+
+require 'includes/application_bottom.php';

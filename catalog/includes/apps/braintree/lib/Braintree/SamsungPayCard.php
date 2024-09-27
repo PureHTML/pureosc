@@ -1,50 +1,75 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree;
 
 /**
  * Braintree SamsungPayCard module
- * Creates and manages Braintree SamsungPayCards
+ * Creates and manages Braintree SamsungPayCards.
  *
- * @package    Braintree
  * @category   Resources
  *
- * @property-read \Braintree\Address $billingAddress
- * @property-read string $bin
- * @property-read string $cardType
- * @property-read string $cardholderName
- * @property-read string $commercial
- * @property-read string $countryOfIssuance
- * @property-read \DateTime $createdAt
- * @property-read string $customerId
- * @property-read string $customerLocation
- * @property-read string $debit
- * @property-read boolean $default
- * @property-read string $durbinRegulated
- * @property-read string $expirationDate
- * @property-read string $expirationMonth
- * @property-read string $expirationYear
- * @property-read boolean $expired
- * @property-read string $healthcare
- * @property-read string $imageUrl
- * @property-read string $issuingBank
- * @property-read string $last4
- * @property-read string $maskedNumber
- * @property-read string $payroll
- * @property-read string $prepaid
- * @property-read string $productId
- * @property-read string $sourceCardLast4
- * @property-read \Braintree\Subscription[] $subscriptions
- * @property-read string $token
- * @property-read string $uniqueNumberIdentifier
- * @property-read \DateTime $updatedAt
+ * @property \Braintree\Address        $billingAddress
+ * @property string                    $bin
+ * @property string                    $cardholderName
+ * @property string                    $cardType
+ * @property string                    $commercial
+ * @property string                    $countryOfIssuance
+ * @property \DateTime                 $createdAt
+ * @property string                    $customerId
+ * @property string                    $customerLocation
+ * @property string                    $debit
+ * @property bool                      $default
+ * @property string                    $durbinRegulated
+ * @property string                    $expirationDate
+ * @property string                    $expirationMonth
+ * @property string                    $expirationYear
+ * @property bool                      $expired
+ * @property string                    $healthcare
+ * @property string                    $imageUrl
+ * @property string                    $issuingBank
+ * @property string                    $last4
+ * @property string                    $maskedNumber
+ * @property string                    $payroll
+ * @property string                    $prepaid
+ * @property string                    $productId
+ * @property string                    $sourceCardLast4
+ * @property \Braintree\Subscription[] $subscriptions
+ * @property string                    $token
+ * @property string                    $uniqueNumberIdentifier
+ * @property \DateTime                 $updatedAt
  */
 class SamsungPayCard extends Base
 {
+    /**
+     * create a printable representation of the object as:
+     * ClassName[property=value, property=value]
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return __CLASS__.'['.
+                Util::attributesToString($this->_attributes).']';
+    }
     /* instance methods */
     /**
-     * returns false if default is null or false
+     * returns false if default is null or false.
      *
-     * @return boolean
+     * @return bool
      */
     public function isDefault()
     {
@@ -52,9 +77,9 @@ class SamsungPayCard extends Base
     }
 
     /**
-     * checks whether the card is expired based on the current date
+     * checks whether the card is expired based on the current date.
      *
-     * @return boolean
+     * @return bool
      */
     public function isExpired()
     {
@@ -62,13 +87,49 @@ class SamsungPayCard extends Base
     }
 
     /**
-     * sets instance properties from an array of values
+     * returns false if comparing object is not a SamsungPayCard,
+     * or is a SamsungPayCard with a different id.
      *
-     * @access protected
-     * @param array $creditCardAttribs array of creditcard data
-     * @return void
+     * @param object $otherSamsungPayCard customer to compare against
+     *
+     * @return bool
      */
-    protected function _initialize($creditCardAttribs)
+    public function isEqual($otherSamsungPayCard)
+    {
+        return !($otherSamsungPayCard instanceof self) ? false : $this->token === $otherSamsungPayCard->token;
+    }
+
+    /**
+     *  factory method: returns an instance of SamsungPayCard
+     *  to the requesting method, with populated properties.
+     *
+     * @ignore
+     *
+     * @param mixed $attributes
+     *
+     * @return SamsungPayCard
+     */
+    public static function factory($attributes)
+    {
+        $defaultAttributes = [
+            'bin' => '',
+            'expirationMonth' => '',
+            'expirationYear' => '',
+            'last4' => '',
+        ];
+
+        $instance = new self();
+        $instance->_initialize(array_merge($defaultAttributes, $attributes));
+
+        return $instance;
+    }
+
+    /**
+     * sets instance properties from an array of values.
+     *
+     * @param array $creditCardAttribs array of creditcard data
+     */
+    protected function _initialize($creditCardAttribs): void
     {
         // set the attributes
         $this->_attributes = $creditCardAttribs;
@@ -79,59 +140,16 @@ class SamsungPayCard extends Base
             null;
 
         $subscriptionArray = [];
+
         if (isset($creditCardAttribs['subscriptions'])) {
-            foreach ($creditCardAttribs['subscriptions'] AS $subscription) {
+            foreach ($creditCardAttribs['subscriptions'] as $subscription) {
                 $subscriptionArray[] = Subscription::factory($subscription);
             }
         }
 
         $this->_set('subscriptions', $subscriptionArray);
         $this->_set('billingAddress', $billingAddress);
-        $this->_set('expirationDate', $this->expirationMonth . '/' . $this->expirationYear);
-        $this->_set('maskedNumber', $this->bin . '******' . $this->last4);
-    }
-
-    /**
-     * returns false if comparing object is not a SamsungPayCard,
-     * or is a SamsungPayCard with a different id
-     *
-     * @param object $otherSamsungPayCard customer to compare against
-     * @return boolean
-     */
-    public function isEqual($otherSamsungPayCard)
-    {
-        return !($otherSamsungPayCard instanceof self) ? false : $this->token === $otherSamsungPayCard->token;
-    }
-
-    /**
-     * create a printable representation of the object as:
-     * ClassName[property=value, property=value]
-     * @return string
-     */
-    public function  __toString()
-    {
-        return __CLASS__ . '[' .
-                Util::attributesToString($this->_attributes) .']';
-    }
-
-    /**
-     *  factory method: returns an instance of SamsungPayCard
-     *  to the requesting method, with populated properties
-     *
-     * @ignore
-     * @return SamsungPayCard
-     */
-    public static function factory($attributes)
-    {
-        $defaultAttributes = [
-            'bin' => '',
-            'expirationMonth'    => '',
-            'expirationYear'    => '',
-            'last4'  => '',
-        ];
-
-        $instance = new self();
-        $instance->_initialize(array_merge($defaultAttributes, $attributes));
-        return $instance;
+        $this->_set('expirationDate', $this->expirationMonth.'/'.$this->expirationYear);
+        $this->_set('maskedNumber', $this->bin.'******'.$this->last4);
     }
 }

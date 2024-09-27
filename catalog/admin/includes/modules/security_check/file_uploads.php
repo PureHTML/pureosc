@@ -1,30 +1,37 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2020 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
+class file_uploads
+{
+    public $type = 'warning';
 
-  class securityCheck_file_uploads {
-    var $type = 'warning';
+    public function __construct()
+    {
+        global $language;
 
-    function __construct() {
-      global $language;
-
-      include(DIR_FS_ADMIN . 'includes/languages/' . $language . '/modules/security_check/file_uploads.php');
+        include DIR_FS_ADMIN.'includes/languages/'.$language.'/modules/security_check/file_uploads.php';
     }
 
-    function pass() {
-      return (bool)ini_get('file_uploads');
+    public function pass()
+    {
+        return (bool) \ini_get('file_uploads');
     }
 
-    function getMessage() {
-      return WARNING_FILE_UPLOADS_DISABLED;
+    public function getMessage()
+    {
+        return WARNING_FILE_UPLOADS_DISABLED;
     }
-  }
-?>
+}

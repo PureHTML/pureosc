@@ -1,37 +1,43 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree;
 
 /**
- * Braintree Gateway module
+ * Braintree Gateway module.
  *
- * @package    Braintree
  * @category   Resources
  */
 class Gateway
 {
-    /**
-     *
-     * @var Configuration
-     */
-    public $config;
+    public Configuration $config;
 
-    /**
-     *
-     * @var GraphQLClient
-     */
-    public $graphQLClient;
+    public GraphQLClient $graphQLClient;
 
     public function __construct($config)
     {
-        if (is_array($config)) {
+        if (\is_array($config)) {
             $config = new Configuration($config);
         }
+
         $this->config = $config;
         $this->graphQLClient = new GraphQLClient($config);
     }
 
     /**
-     *
      * @return AddOnGateway
      */
     public function addOn()
@@ -40,7 +46,6 @@ class Gateway
     }
 
     /**
-     *
      * @return AddressGateway
      */
     public function address()
@@ -49,7 +54,6 @@ class Gateway
     }
 
     /**
-     *
      * @return ApplePayGateway
      */
     public function applePay()
@@ -58,7 +62,6 @@ class Gateway
     }
 
     /**
-     *
      * @return ClientTokenGateway
      */
     public function clientToken()
@@ -67,7 +70,6 @@ class Gateway
     }
 
     /**
-     *
      * @return CreditCardGateway
      */
     public function creditCard()
@@ -76,7 +78,6 @@ class Gateway
     }
 
     /**
-     *
      * @return CreditCardVerificationGateway
      */
     public function creditCardVerification()
@@ -85,7 +86,6 @@ class Gateway
     }
 
     /**
-     *
      * @return CustomerGateway
      */
     public function customer()
@@ -94,7 +94,6 @@ class Gateway
     }
 
     /**
-     *
      * @return DiscountGateway
      */
     public function discount()
@@ -103,7 +102,6 @@ class Gateway
     }
 
     /**
-     *
      * @return DisputeGateway
      */
     public function dispute()
@@ -112,7 +110,6 @@ class Gateway
     }
 
     /**
-     *
      * @return DocumentUploadGateway
      */
     public function documentUpload()
@@ -121,7 +118,6 @@ class Gateway
     }
 
     /**
-     *
      * @return MerchantGateway
      */
     public function merchant()
@@ -130,7 +126,6 @@ class Gateway
     }
 
     /**
-     *
      * @return MerchantAccountGateway
      */
     public function merchantAccount()
@@ -139,7 +134,6 @@ class Gateway
     }
 
     /**
-     *
      * @return OAuthGateway
      */
     public function oauth()
@@ -148,7 +142,6 @@ class Gateway
     }
 
     /**
-     *
      * @return PaymentMethodGateway
      */
     public function paymentMethod()
@@ -157,7 +150,6 @@ class Gateway
     }
 
     /**
-     *
      * @return PaymentMethodNonceGateway
      */
     public function paymentMethodNonce()
@@ -166,7 +158,6 @@ class Gateway
     }
 
     /**
-     *
      * @return PayPalAccountGateway
      */
     public function payPalAccount()
@@ -175,7 +166,6 @@ class Gateway
     }
 
     /**
-     *
      * @return PlanGateway
      */
     public function plan()
@@ -184,7 +174,6 @@ class Gateway
     }
 
     /**
-     *
      * @return SettlementBatchSummaryGateway
      */
     public function settlementBatchSummary()
@@ -193,7 +182,6 @@ class Gateway
     }
 
     /**
-     *
      * @return SubscriptionGateway
      */
     public function subscription()
@@ -202,7 +190,6 @@ class Gateway
     }
 
     /**
-     *
      * @return TestingGateway
      */
     public function testing()
@@ -211,7 +198,6 @@ class Gateway
     }
 
     /**
-     *
      * @return TransactionGateway
      */
     public function transaction()
@@ -220,7 +206,6 @@ class Gateway
     }
 
     /**
-     *
      * @return TransactionLineItemGateway
      */
     public function transactionLineItem()
@@ -229,7 +214,6 @@ class Gateway
     }
 
     /**
-     *
      * @return UsBankAccountGateway
      */
     public function usBankAccount()
@@ -238,7 +222,6 @@ class Gateway
     }
 
     /**
-     *
      * @return UsBankAccountVerificationGateway
      */
     public function usBankAccountVerification()
@@ -247,7 +230,6 @@ class Gateway
     }
 
     /**
-     *
      * @return WebhookNotificationGateway
      */
     public function webhookNotification()
@@ -256,7 +238,6 @@ class Gateway
     }
 
     /**
-     *
      * @return WebhookTestingGateway
      */
     public function webhookTesting()

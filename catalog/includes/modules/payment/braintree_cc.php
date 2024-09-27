@@ -1,184 +1,197 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2021 osCommerce
-
-  Released under the GNU General Public License
-*/
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 if (!class_exists('OSCOM_Braintree')) {
-  include(DIR_FS_CATALOG . 'includes/apps/braintree/OSCOM_Braintree.php');
+    include DIR_FS_CATALOG.'includes/apps/braintree/OSCOM_Braintree.php';
 }
 
-class braintree_cc {
-  public $code;
-  public $title;
-  public $description;
-  public $enabled;
-  public $_app;
-  public $payment_types = array();
+class braintree_cc
+{
+    public $code;
+    public $title;
+    public $description;
+    public $enabled;
+    public $_app;
+    public $payment_types = [];
 
-  public function __construct() {
-    global $PHP_SELF, $order, $appBraintreeCcRightTurn, $payment;
+    public function __construct()
+    {
+        global $PHP_SELF, $order, $appBraintreeCcRightTurn, $payment;
 
-    $this->_app = new OSCOM_Braintree();
-    $this->_app->loadLanguageFile('modules/CC/CC.php');
+        $this->_app = new OSCOM_Braintree();
+        $this->_app->loadLanguageFile('modules/CC/CC.php');
 
-    $this->signature = 'braintree|braintree_cc|' . $this->_app->getVersion() . '|2.3';
-    $this->api_version = '3';
+        $this->signature = 'braintree|braintree_cc|'.$this->_app->getVersion().'|2.3';
+        $this->api_version = '3';
 
-    $this->code = 'braintree_cc';
-    $this->title = $this->_app->getDef('module_cc_title');
-    $this->public_title = $this->_app->getDef('module_cc_public_title');
-    $this->description = '<div align="center">' . $this->_app->drawButton($this->_app->getDef('module_cc_legacy_admin_app_button'), tep_href_link('braintree.php', 'action=configure&module=CC'), 'primary', null, true) . '</div>';
-    $this->sort_order = defined('OSCOM_APP_PAYPAL_BRAINTREE_CC_SORT_ORDER') ? OSCOM_APP_PAYPAL_BRAINTREE_CC_SORT_ORDER : 0;
-    $this->enabled = defined('OSCOM_APP_PAYPAL_BRAINTREE_CC_STATUS') && in_array(OSCOM_APP_PAYPAL_BRAINTREE_CC_STATUS, array('1', '0')) ? true : false;
-    $this->order_status = defined('OSCOM_APP_PAYPAL_BRAINTREE_CC_ORDER_STATUS_ID') && ((int)OSCOM_APP_PAYPAL_BRAINTREE_CC_ORDER_STATUS_ID > 0) ? (int)OSCOM_APP_PAYPAL_BRAINTREE_CC_ORDER_STATUS_ID : 0;
+        $this->code = 'braintree_cc';
+        $this->title = $this->_app->getDef('module_cc_title');
+        $this->public_title = $this->_app->getDef('module_cc_public_title');
+        $this->description = '<div align="center">'.$this->_app->drawButton($this->_app->getDef('module_cc_legacy_admin_app_button'), tep_href_link('braintree.php', 'action=configure&module=CC'), 'primary', null, true).'</div>';
+        $this->sort_order = \defined('OSCOM_APP_PAYPAL_BRAINTREE_CC_SORT_ORDER') ? OSCOM_APP_PAYPAL_BRAINTREE_CC_SORT_ORDER : 0;
+        $this->enabled = \defined('OSCOM_APP_PAYPAL_BRAINTREE_CC_STATUS') && \in_array(OSCOM_APP_PAYPAL_BRAINTREE_CC_STATUS, ['1', '0'], true) ? true : false;
+        $this->order_status = \defined('OSCOM_APP_PAYPAL_BRAINTREE_CC_ORDER_STATUS_ID') && ((int) OSCOM_APP_PAYPAL_BRAINTREE_CC_ORDER_STATUS_ID > 0) ? (int) OSCOM_APP_PAYPAL_BRAINTREE_CC_ORDER_STATUS_ID : 0;
 
-    if (defined('OSCOM_APP_PAYPAL_BRAINTREE_CC_STATUS')) {
-      if (OSCOM_APP_PAYPAL_BRAINTREE_CC_STATUS == '0') {
-        $this->title .= ' [Sandbox]';
-        $this->public_title .= ' (' . $this->code . '; Sandbox)';
-      }
-    }
-
-    $braintree_error = null;
-
-    if (version_compare(PHP_VERSION, '5.4.0', '<')) {
-      $braintree_error = true;
-    }
-
-    if (!isset($braintree_error)) {
-      $requiredExtensions = array('xmlwriter', 'openssl', 'dom', 'hash', 'curl');
-
-      $exts = array();
-
-      foreach ($requiredExtensions as $ext) {
-        if (!extension_loaded($ext)) {
-          $exts[] = $ext;
+        if (\defined('OSCOM_APP_PAYPAL_BRAINTREE_CC_STATUS')) {
+            if (OSCOM_APP_PAYPAL_BRAINTREE_CC_STATUS === '0') {
+                $this->title .= ' [Sandbox]';
+                $this->public_title .= ' ('.$this->code.'; Sandbox)';
+            }
         }
-      }
 
-      if (!empty($exts)) {
-        $braintree_error = true;
-      }
-    }
+        $braintree_error = null;
 
-    if (!isset($braintree_error)) {
-      $this->api_version .= ' [SDK v' . Braintree\Version::get() . ']';
-    } else {
-      $this->enabled = false;
-    }
-
-    if (defined('OSCOM_APP_PAYPAL_BRAINTREE_CC_PAYMENT_TYPES') && !empty(OSCOM_APP_PAYPAL_BRAINTREE_CC_PAYMENT_TYPES)) {
-      $this->payment_types = explode(';', OSCOM_APP_PAYPAL_BRAINTREE_CC_PAYMENT_TYPES);
-    }
-
-    if ($this->enabled === true) {
-      if (isset($order) && is_object($order)) {
-        $this->update_status();
-      }
-    }
-
-    // When changing the shipping address due to no shipping rates being available, head straight to the checkout confirmation page
-    if ((basename($PHP_SELF) == 'checkout_payment.php') && isset($appBraintreeCcRightTurn)) {
-      unset($_SESSION['appBraintreeCcRightTurn']);
-
-      if (isset($payment) && ($payment == 'braintree_cc')) {
-        tep_redirect(tep_href_link('checkout_confirmation.php'));
-      }
-    }
-  }
-
-  public function update_status() {
-    global $order;
-
-    if (($this->enabled == true) && ((int)OSCOM_APP_PAYPAL_DP_ZONE > 0)) {
-      $check_flag = false;
-      $check_query = tep_db_query("select zone_id from zones_to_geo_zones where geo_zone_id = '" . OSCOM_APP_PAYPAL_DP_ZONE . "' and zone_country_id = '" . (int)$order->delivery['country']['id'] . "' order by zone_id");
-      while ($check = tep_db_fetch_array($check_query)) {
-        if ($check['zone_id'] < 1) {
-          $check_flag = true;
-          break;
-        } elseif ($check['zone_id'] == $order->delivery['zone_id']) {
-          $check_flag = true;
-          break;
+        if (version_compare(\PHP_VERSION, '5.4.0', '<')) {
+            $braintree_error = true;
         }
-      }
 
-      if ($check_flag == false) {
-        $this->enabled = false;
-      }
+        if (!isset($braintree_error)) {
+            $requiredExtensions = ['xmlwriter', 'openssl', 'dom', 'hash', 'curl'];
+
+            $exts = [];
+
+            foreach ($requiredExtensions as $ext) {
+                if (!\extension_loaded($ext)) {
+                    $exts[] = $ext;
+                }
+            }
+
+            if (!empty($exts)) {
+                $braintree_error = true;
+            }
+        }
+
+        if (!isset($braintree_error)) {
+            $this->api_version .= ' [SDK v'.Braintree\Version::get().']';
+        } else {
+            $this->enabled = false;
+        }
+
+        if (\defined('OSCOM_APP_PAYPAL_BRAINTREE_CC_PAYMENT_TYPES') && !empty(OSCOM_APP_PAYPAL_BRAINTREE_CC_PAYMENT_TYPES)) {
+            $this->payment_types = explode(';', OSCOM_APP_PAYPAL_BRAINTREE_CC_PAYMENT_TYPES);
+        }
+
+        if ($this->enabled === true) {
+            if (isset($order) && \is_object($order)) {
+                $this->update_status();
+            }
+        }
+
+        // When changing the shipping address due to no shipping rates being available, head straight to the checkout confirmation page
+        if ((basename($PHP_SELF) === 'checkout_payment.php') && isset($appBraintreeCcRightTurn)) {
+            unset($_SESSION['appBraintreeCcRightTurn']);
+
+            if (isset($payment) && ($payment === 'braintree_cc')) {
+                tep_redirect(tep_href_link('checkout_confirmation.php'));
+            }
+        }
     }
-  }
 
-  public function checkout_initialization_method() {
-    global $cart, $appBraintreeCcFormHash;
+    public function update_status(): void
+    {
+        global $order;
 
-    $content = '';
+        if (($this->enabled === true) && ((int) OSCOM_APP_PAYPAL_DP_ZONE > 0)) {
+            $check_flag = false;
+            $check_query = tep_db_query("select zone_id from zones_to_geo_zones where geo_zone_id = '".OSCOM_APP_PAYPAL_DP_ZONE."' and zone_country_id = '".(int) $order->delivery['country']['id']."' order by zone_id");
 
-    if ($this->isPaymentTypeAccepted('paypal')) {
-      $this->_app->setupCredentials();
+            while ($check = tep_db_fetch_array($check_query)) {
+                if ($check['zone_id'] < 1) {
+                    $check_flag = true;
 
-      $transaction_currency = $this->getTransactionCurrency();
+                    break;
+                }
 
-      $clientToken = Braintree\ClientToken::generate(array(
-        'merchantAccountId' => $this->getMerchantAccountId($transaction_currency)
-      ));
+                if ($check['zone_id'] === $order->delivery['zone_id']) {
+                    $check_flag = true;
 
-      $amount = $this->_app->formatCurrencyRaw($cart->show_total(), $transaction_currency);
+                    break;
+                }
+            }
 
-      $formUrl = tep_href_link('ext/modules/payment/braintree_cc/rpc.php', 'action=paypal', 'SSL');
-      $formHash = $appBraintreeCcFormHash = $this->_app->createRandomValue(16);
-      tep_session_register('appBraintreeCcFormHash');
+            if ($check_flag === false) {
+                $this->enabled = false;
+            }
+        }
+    }
 
-      $intent = (OSCOM_APP_PAYPAL_BRAINTREE_CC_TRANSACTION_METHOD == '1') ? 'sale' : 'authorize';
+    public function checkout_initialization_method()
+    {
+        global $cart, $appBraintreeCcFormHash;
 
-      $enableShippingAddress = in_array($cart->get_content_type(), array('physical', 'mixed')) ? 'true' : 'false';
+        $content = '';
 
-      switch (OSCOM_APP_PAYPAL_BRAINTREE_CC_PAYPAL_BUTTON_COLOR) {
-        case '2':
-          $button_color = 'blue';
-          break;
+        if ($this->isPaymentTypeAccepted('paypal')) {
+            $this->_app->setupCredentials();
 
-        case '3':
-          $button_color = 'silver';
-          break;
+            $transaction_currency = $this->getTransactionCurrency();
 
-        case '1':
-        default:
-          $button_color = 'gold';
-      }
+            $clientToken = Braintree\ClientToken::generate([
+                'merchantAccountId' => $this->getMerchantAccountId($transaction_currency),
+            ]);
 
-      switch (OSCOM_APP_PAYPAL_BRAINTREE_CC_PAYPAL_BUTTON_SIZE) {
-        case '2':
-          $button_size = 'small';
-          break;
+            $amount = $this->_app->formatCurrencyRaw($cart->show_total(), $transaction_currency);
 
-        case '3':
-          $button_size = 'medium';
-          break;
+            $formUrl = tep_href_link('ext/modules/payment/braintree_cc/rpc.php', 'action=paypal', 'SSL');
+            $formHash = $appBraintreeCcFormHash = $this->_app->createRandomValue(16);
+            tep_session_register('appBraintreeCcFormHash');
 
-        case '1':
-        default:
-          $button_size = 'tiny';
-      }
+            $intent = (OSCOM_APP_PAYPAL_BRAINTREE_CC_TRANSACTION_METHOD === '1') ? 'sale' : 'authorize';
 
-      switch (OSCOM_APP_PAYPAL_BRAINTREE_CC_PAYPAL_BUTTON_SHAPE) {
-        case '2':
-          $button_shape = 'rect';
-          break;
+            $enableShippingAddress = \in_array($cart->get_content_type(), ['physical', 'mixed'], true) ? 'true' : 'false';
 
-        case '1':
-        default:
-          $button_shape = 'pill';
-      }
+            switch (OSCOM_APP_PAYPAL_BRAINTREE_CC_PAYPAL_BUTTON_COLOR) {
+                case '2':
+                    $button_color = 'blue';
 
-      $content = <<<EOD
+                    break;
+                case '3':
+                    $button_color = 'silver';
+
+                    break;
+                case '1':
+                default:
+                    $button_color = 'gold';
+            }
+
+            switch (OSCOM_APP_PAYPAL_BRAINTREE_CC_PAYPAL_BUTTON_SIZE) {
+                case '2':
+                    $button_size = 'small';
+
+                    break;
+                case '3':
+                    $button_size = 'medium';
+
+                    break;
+                case '1':
+                default:
+                    $button_size = 'tiny';
+            }
+
+            switch (OSCOM_APP_PAYPAL_BRAINTREE_CC_PAYPAL_BUTTON_SHAPE) {
+                case '2':
+                    $button_shape = 'rect';
+
+                    break;
+                case '1':
+                default:
+                    $button_shape = 'pill';
+            }
+
+            $content = <<<EOD
 <script>
 if ( typeof jQuery == 'undefined' ) {
   document.write('<scr' + 'ipt src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></scr' + 'ipt>');
@@ -260,156 +273,181 @@ $(function() {
 </script>
 EOD;
 
-      $ext_scripts = '<script src="https://js.braintreegateway.com/web/3.73.1/js/client.min.js"></script><script src="https://js.braintreegateway.com/web/3.73.1/js/paypal.min.js"></script>';
+            $ext_scripts = '<script src="https://js.braintreegateway.com/web/3.73.1/js/client.min.js"></script><script src="https://js.braintreegateway.com/web/3.73.1/js/paypal.min.js"></script>';
 
-      if ($this->templateClassExists()) {
-        $GLOBALS['oscTemplate']->addBlock($ext_scripts, 'footer_scripts');
-      } else {
-        $content .= $ext_scripts;
-      }
-    }
-
-    return $content;
-  }
-
-  public function javascript_validation() {
-    return false;
-  }
-
-  public function selection() {
-    if (isset($_SESSION['appBraintreeCcNonce'])) {
-      unset($_SESSION['appBraintreeCcNonce']);
-    }
-
-    return array('id' => $this->code,
-                 'module' => $this->public_title);
-  }
-
-  public function pre_confirmation_check() {
-    global $order, $request_type;
-
-    if (!isset($_SESSION['appBraintreeCcNonce']) && (OSCOM_APP_PAYPAL_BRAINTREE_CC_ENTRY_FORM == '3')) {
-      if (($request_type == 'NONSSL') && ((OSCOM_APP_PAYPAL_BRAINTREE_CC_THREE_D_SECURE === '1') || (OSCOM_APP_PAYPAL_BRAINTREE_CC_THREE_D_SECURE === '2'))) {
-        if (ENABLE_SSL == true) {
-          // prevent redirect loop for incorrectly configured servers
-          if (!isset($_SESSION['bt_3ds_ssl_check'])) {
-            $bt_3ds_ssl_check = true;
-            tep_session_register('bt_3ds_ssl_check');
-
-            tep_redirect(tep_href_link('checkout_confirmation.php'));
-          }
+            if ($this->templateClassExists()) {
+                $GLOBALS['oscTemplate']->addBlock($ext_scripts, 'footer_scripts');
+            } else {
+                $content .= $ext_scripts;
+            }
         }
-      }
 
-      if (isset($_SESSION['bt_3ds_ssl_check'])) {
-        unset($_SESSION['bt_3ds_ssl_check']);
-      }
-
-      if ($this->templateClassExists()) {
-        $GLOBALS['oscTemplate']->addBlock($this->getSubmitCardDetailsJavascript(), 'footer_scripts');
-      }
+        return $content;
     }
 
-    if ($this->isPaymentTypeAccepted('paypal') && isset($_SESSION['appBraintreeCcNonce'])) {
-      $order->info['payment_method'] = '<img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png" border="0" alt="PayPal Logo" style="padding: 3px;" />';
-    }
-  }
-
-  public function confirmation() {
-    global $customer_id, $order, $currencies, $currency;
-
-    if (isset($_SESSION['appBraintreeCcNonce'])) {
-      return false;
+    public function javascript_validation()
+    {
+        return false;
     }
 
-    if (OSCOM_APP_PAYPAL_BRAINTREE_CC_ENTRY_FORM == '3') {
-      $content = '<div id="btCardStatus" class="alert alert-danger" style="display: none;"></div>';
+    public function selection()
+    {
+        if (isset($_SESSION['appBraintreeCcNonce'])) {
+            unset($_SESSION['appBraintreeCcNonce']);
+        }
 
-      if (!$this->templateClassExists()) {
-        $content .= $this->getSubmitCardDetailsJavascript();
-      }
+        return ['id' => $this->code,
+            'module' => $this->public_title];
+    }
 
-      if (!$this->isValidCurrency($currency)) {
-        $content .= '<div class="alert alert-info">' .
-                    $this->_app->getDef('module_cc_notice_currency_charge', array(
-                      'currency_total' => $currencies->format($order->info['total'], true, DEFAULT_CURRENCY),
-                      'currency' => DEFAULT_CURRENCY,
-                      'current_currency' => $currency
-                    )) .
-                    '</div>';
-      }
+    public function pre_confirmation_check(): void
+    {
+        global $order, $request_type;
 
-      $default_token = null;
+        if (!isset($_SESSION['appBraintreeCcNonce']) && (OSCOM_APP_PAYPAL_BRAINTREE_CC_ENTRY_FORM === '3')) {
+            if (($request_type === 'NONSSL') && ((OSCOM_APP_PAYPAL_BRAINTREE_CC_THREE_D_SECURE === '1') || (OSCOM_APP_PAYPAL_BRAINTREE_CC_THREE_D_SECURE === '2'))) {
+                if (ENABLE_SSL === true) {
+                    // prevent redirect loop for incorrectly configured servers
+                    if (!isset($_SESSION['bt_3ds_ssl_check'])) {
+                        $bt_3ds_ssl_check = true;
+                        tep_session_register('bt_3ds_ssl_check');
 
-      if ((OSCOM_APP_PAYPAL_BRAINTREE_CC_CC_TOKENS == '1') || (OSCOM_APP_PAYPAL_BRAINTREE_CC_CC_TOKENS == '2')) {
-        $tokens_query = tep_db_query('select id, card_type, number_filtered, expiry_date from customers_braintree_tokens where customers_id = "' . (int)$customer_id . '" order by date_added');
-        if (tep_db_num_rows($tokens_query)) {
-          $t = array();
+                        tep_redirect(tep_href_link('checkout_confirmation.php'));
+                    }
+                }
+            }
 
-          while ($tokens = tep_db_fetch_array($tokens_query)) {
-            $default_token = (int)$tokens['id'];
+            if (isset($_SESSION['bt_3ds_ssl_check'])) {
+                unset($_SESSION['bt_3ds_ssl_check']);
+            }
 
-            $t[] = array(
-              'id' => (int)$tokens['id'],
-              'text' => $this->_app->getDef('module_cc_stored_card_selection_title', array(
-                'card_type' => $tokens['card_type'],
-                'card_number' => $tokens['number_filtered'],
-                'card_expiry_date_month' => substr($tokens['expiry_date'], 0, 2),
-                'card_expiry_date_year' => substr($tokens['expiry_date'], 2)
-              ))
-            );
-          }
+            if ($this->templateClassExists()) {
+                $GLOBALS['oscTemplate']->addBlock($this->getSubmitCardDetailsJavascript(), 'footer_scripts');
+            }
+        }
 
-          $t[] = array(
-            'id' => '0',
-            'text' => $this->_app->getDef('module_cc_new_card')
-          );
+        if ($this->isPaymentTypeAccepted('paypal') && isset($_SESSION['appBraintreeCcNonce'])) {
+            $order->info['payment_method'] = '<img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png" border="0" alt="PayPal Logo" style="padding: 3px;" />';
+        }
+    }
 
-          $content .= '<div style="margin-bottom: 10px;">
-                           <label class="hosted-fields--label" for="braintree_cards">' . $this->_app->getDef('module_cc_payment_cards_title') . '</label>' .
-                      tep_draw_pull_down_menu('braintree_cards', $t, $default_token, 'id="braintree_cards" class="hosted-field"') . '
-                         </div>';
+    public function confirmation()
+    {
+        global $customer_id, $order, $currencies, $currency;
 
-          if (OSCOM_APP_PAYPAL_BRAINTREE_CC_VERIFY_CVV == '1') {
-            $content .= '<div id="braintree_stored_card_cvv">
-                             <label class="hosted-fields--label" for="card-token-cvv">' . $this->_app->getDef('module_cc_card_cvv') . ' <span class="float-end" title="' . addslashes($this->_app->getDef('module_cc_card_cvv_info')) . '" id="btCvvTokenInfoIcon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+        if (isset($_SESSION['appBraintreeCcNonce'])) {
+            return false;
+        }
+
+        if (OSCOM_APP_PAYPAL_BRAINTREE_CC_ENTRY_FORM === '3') {
+            $content = '<div id="btCardStatus" class="alert alert-danger" style="display: none;"></div>';
+
+            if (!$this->templateClassExists()) {
+                $content .= $this->getSubmitCardDetailsJavascript();
+            }
+
+            if (!$this->isValidCurrency($currency)) {
+                $content .= '<div class="alert alert-info">'.
+                            $this->_app->getDef('module_cc_notice_currency_charge', [
+                                'currency_total' => $currencies->format($order->info['total'], true, DEFAULT_CURRENCY),
+                                'currency' => DEFAULT_CURRENCY,
+                                'current_currency' => $currency,
+                            ]).
+                            '</div>';
+            }
+
+            $default_token = null;
+
+            if ((OSCOM_APP_PAYPAL_BRAINTREE_CC_CC_TOKENS === '1') || (OSCOM_APP_PAYPAL_BRAINTREE_CC_CC_TOKENS === '2')) {
+                $tokens_query = tep_db_query('select id, card_type, number_filtered, expiry_date from customers_braintree_tokens where customers_id = "'.(int) $customer_id.'" order by date_added');
+
+                if (tep_db_num_rows($tokens_query)) {
+                    $t = [];
+
+                    while ($tokens = tep_db_fetch_array($tokens_query)) {
+                        $default_token = (int) $tokens['id'];
+
+                        $t[] = [
+                            'id' => (int) $tokens['id'],
+                            'text' => $this->_app->getDef('module_cc_stored_card_selection_title', [
+                                'card_type' => $tokens['card_type'],
+                                'card_number' => $tokens['number_filtered'],
+                                'card_expiry_date_month' => substr($tokens['expiry_date'], 0, 2),
+                                'card_expiry_date_year' => substr($tokens['expiry_date'], 2),
+                            ]),
+                        ];
+                    }
+
+                    $t[] = [
+                        'id' => '0',
+                        'text' => $this->_app->getDef('module_cc_new_card'),
+                    ];
+
+                    $content .= <<<'EOD'
+<div style="margin-bottom: 10px;">
+                           <label class="hosted-fields--label" for="braintree_cards">
+EOD.$this->_app->getDef('module_cc_payment_cards_title').'</label>'.
+                                tep_draw_pull_down_menu('braintree_cards', $t, $default_token, 'id="braintree_cards" class="hosted-field"').<<<'EOD'
+
+                         </div>
+EOD;
+
+                    if (OSCOM_APP_PAYPAL_BRAINTREE_CC_VERIFY_CVV === '1') {
+                        $content .= <<<'EOD'
+<div id="braintree_stored_card_cvv">
+                             <label class="hosted-fields--label" for="card-token-cvv">
+EOD.$this->_app->getDef('module_cc_card_cvv').' <span class="float-end" title="'.addslashes($this->_app->getDef('module_cc_card_cvv_info')).<<<'EOD'
+" id="btCvvTokenInfoIcon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
   <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
   <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
 </svg></span></label>
                              <div id="card-token-cvv" class="hosted-field"></div>
-                           </div>';
-          }
+                           </div>
+EOD;
+                    }
 
-          $content .= '</div>';
-        }
-      }
+                    $content .= '</div>';
+                }
+            }
 
-      $content .= '<div id="braintree_new_card">
-                       <label class="hosted-fields--label" for="card-number">' . $this->_app->getDef('module_cc_card_number') . '</label>
+            $content .= <<<'EOD'
+<div id="braintree_new_card">
+                       <label class="hosted-fields--label" for="card-number">
+EOD.$this->_app->getDef('module_cc_card_number').<<<'EOD'
+</label>
                        <div id="card-number" class="hosted-field"></div>
 
-                       <label class="hosted-fields--label" for="card-exp">' . $this->_app->getDef('module_cc_card_expiration_date') . '</label>
-                       <div id="card-exp" class="hosted-field"></div>';
+                       <label class="hosted-fields--label" for="card-exp">
+EOD.$this->_app->getDef('module_cc_card_expiration_date').<<<'EOD'
+</label>
+                       <div id="card-exp" class="hosted-field"></div>
+EOD;
 
-      if ((OSCOM_APP_PAYPAL_BRAINTREE_CC_VERIFY_CVV == '1') || (OSCOM_APP_PAYPAL_BRAINTREE_CC_VERIFY_CVV == '2')) {
-        $content .= '<label class="hosted-fields--label" for="card-cvv">' . $this->_app->getDef('module_cc_card_cvv') . ' <span class="float-end" title="' . addslashes($this->_app->getDef('module_cc_card_cvv_info')) . '" id="btCvvInfoIcon">
+            if ((OSCOM_APP_PAYPAL_BRAINTREE_CC_VERIFY_CVV === '1') || (OSCOM_APP_PAYPAL_BRAINTREE_CC_VERIFY_CVV === '2')) {
+                $content .= '<label class="hosted-fields--label" for="card-cvv">'.$this->_app->getDef('module_cc_card_cvv').' <span class="float-end" title="'.addslashes($this->_app->getDef('module_cc_card_cvv_info')).<<<'EOD'
+" id="btCvvInfoIcon">
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
   <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
   <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
 </svg>
 </span></label>
-                       <div id="card-cvv" class="hosted-field"></div>';
-      }
+                       <div id="card-cvv" class="hosted-field"></div>
+EOD;
+            }
 
-      if (OSCOM_APP_PAYPAL_BRAINTREE_CC_CC_TOKENS == '1') {
-        $content .= '<div>
-                         <label>' . tep_draw_checkbox_field('cc_save', 'true', true) . ' ' . $this->_app->getDef('module_cc_save_new_card') . '</label>
-                       </div>';
-      }
+            if (OSCOM_APP_PAYPAL_BRAINTREE_CC_CC_TOKENS === '1') {
+                $content .= <<<'EOD'
+<div>
+                         <label>
+EOD.tep_draw_checkbox_field('cc_save', 'true', true).' '.$this->_app->getDef('module_cc_save_new_card').<<<'EOD'
+</label>
+                       </div>
+EOD;
+            }
 
-      $content .= '</div>';
+            $content .= '</div>';
 
-      $content .= <<<EOD
+            $content .= <<<'EOD'
 <script>
 if ( typeof jQuery == 'undefined' ) {
   document.write('<scr' + 'ipt src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></scr' + 'ipt>');
@@ -425,27 +463,27 @@ if ($('#braintree_cards').length > 0) {
 </script>
 EOD;
 
-      if ((OSCOM_APP_PAYPAL_BRAINTREE_CC_VERIFY_CVV == '1') || (OSCOM_APP_PAYPAL_BRAINTREE_CC_VERIFY_CVV == '2')) {
-        $content .= <<<EOD
+            if ((OSCOM_APP_PAYPAL_BRAINTREE_CC_VERIFY_CVV === '1') || (OSCOM_APP_PAYPAL_BRAINTREE_CC_VERIFY_CVV === '2')) {
+                $content .= <<<'EOD'
 <script>
 $(function() {
   //$('#btCvvTokenInfoIcon, #btCvvInfoIcon').tooltip();
 });
 </script>
 EOD;
-      }
-    } else {
-      $this->_app->setupCredentials();
+            }
+        } else {
+            $this->_app->setupCredentials();
 
-      $transaction_currency = $this->getTransactionCurrency();
+            $transaction_currency = $this->getTransactionCurrency();
 
-      $clientToken = Braintree\ClientToken::generate(array(
-        'merchantAccountId' => $this->getMerchantAccountId($transaction_currency)
-      ));
+            $clientToken = Braintree\ClientToken::generate([
+                'merchantAccountId' => $this->getMerchantAccountId($transaction_currency),
+            ]);
 
-      $amount = $this->_app->formatCurrencyRaw($order->info['total'], $transaction_currency);
+            $amount = $this->_app->formatCurrencyRaw($order->info['total'], $transaction_currency);
 
-      $content = <<<EOD
+            $content = <<<EOD
 <script>
 if ( typeof jQuery == 'undefined' ) {
   document.write('<scr' + 'ipt src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></scr' + 'ipt>');
@@ -468,336 +506,354 @@ $(function() {
 <div id="checkout_bt"></div>
 EOD;
 
-      $ext_script = '<script src="https://js.braintreegateway.com/v2/braintree.js"></script>';
+            $ext_script = '<script src="https://js.braintreegateway.com/v2/braintree.js"></script>';
 
-      if ($this->templateClassExists()) {
-        $GLOBALS['oscTemplate']->addBlock($ext_script, 'footer_scripts');
-      } else {
-        $content .= $ext_script;
-      }
-    }
-
-    if (isset($content)) {
-      $confirmation = array(
-        'title' => $content
-      );
-
-      return $confirmation;
-    }
-
-    return false;
-  }
-
-  public function process_button() {
-    return false;
-  }
-
-  public function before_process() {
-    global $customer_id, $order, $braintree_result, $braintree_token, $messageStack, $appBraintreeCcNonce;
-
-    $braintree_token = null;
-    $braintree_error = null;
-
-    if (!isset($_SESSION['appBraintreeCcNonce']) && ((OSCOM_APP_PAYPAL_BRAINTREE_CC_CC_TOKENS == '1') || (OSCOM_APP_PAYPAL_BRAINTREE_CC_CC_TOKENS == '2'))) {
-      if (isset($_POST['braintree_cards']) && is_numeric($_POST['braintree_cards']) && ($_POST['braintree_cards'] > 0)) {
-        $token_query = tep_db_query('select braintree_token from customers_braintree_tokens where id = "' . (int)$_POST['braintree_cards'] . '" and customers_id = "' . (int)$customer_id . '"');
-        if (tep_db_num_rows($token_query)) {
-          $token = tep_db_fetch_array($token_query);
-
-          $braintree_token = $token['braintree_token'];
+            if ($this->templateClassExists()) {
+                $GLOBALS['oscTemplate']->addBlock($ext_script, 'footer_scripts');
+            } else {
+                $content .= $ext_script;
+            }
         }
-      }
-    }
 
-    $braintree_result = null;
+        if (isset($content)) {
+            $confirmation = [
+                'title' => $content,
+            ];
 
-    $this->_app->setupCredentials();
-
-    $transaction_currency = $this->getTransactionCurrency();
-
-    if (isset($_SESSION['appBraintreeCcNonce'])) {
-      $data = array(
-        'amount' => $this->_app->formatCurrencyRaw($order->info['total'], $transaction_currency),
-        'paymentMethodNonce' => $appBraintreeCcNonce,
-        'merchantAccountId' => $this->getMerchantAccountId($transaction_currency)
-      );
-    } else {
-      $data = array(
-        'paymentMethodNonce' => $_POST['payment_method_nonce'],
-        'amount' => $this->_app->formatCurrencyRaw($order->info['total'], $transaction_currency),
-        'merchantAccountId' => $this->getMerchantAccountId($transaction_currency),
-        'customer' => array(
-          'firstName' => $order->customer['firstname'],
-          'lastName' => $order->customer['lastname'],
-          'company' => $order->customer['company'],
-          'phone' => $order->customer['telephone'],
-          'email' => $order->customer['email_address']
-        ),
-        'billing' => array(
-          'firstName' => $order->billing['firstname'],
-          'lastName' => $order->billing['lastname'],
-          'company' => $order->billing['company'],
-          'streetAddress' => $order->billing['street_address'],
-          'extendedAddress' => $order->billing['suburb'],
-          'locality' => $order->billing['city'],
-          'region' => tep_get_zone_code($order->billing['country']['id'], $order->billing['zone_id'], $order->billing['state']),
-          'postalCode' => $order->billing['postcode'],
-          'countryCodeAlpha2' => $order->billing['country']['iso_code_2']
-        ),
-        'options' => array()
-      );
-
-      if (OSCOM_APP_PAYPAL_BRAINTREE_CC_TRANSACTION_METHOD == '1') {
-        $data['options']['submitForSettlement'] = true;
-      }
-
-      if (!isset($braintree_token)) {
-        if (((OSCOM_APP_PAYPAL_BRAINTREE_CC_CC_TOKENS == '1') && isset($_POST['cc_save']) && ($_POST['cc_save'] == 'true')) || (OSCOM_APP_PAYPAL_BRAINTREE_CC_CC_TOKENS === '2')) {
-          $data['options']['storeInVaultOnSuccess'] = true;
+            return $confirmation;
         }
-      }
+
+        return false;
     }
 
-    if ($order->content_type != 'virtual') {
-      $data['shipping'] = array(
-        'firstName' => $order->delivery['firstname'],
-        'lastName' => $order->delivery['lastname'],
-        'company' => $order->delivery['company'],
-        'streetAddress' => $order->delivery['street_address'],
-        'extendedAddress' => $order->delivery['suburb'],
-        'locality' => $order->delivery['city'],
-        'region' => tep_get_zone_code($order->delivery['country']['id'], $order->delivery['zone_id'], $order->delivery['state']),
-        'postalCode' => $order->delivery['postcode'],
-        'countryCodeAlpha2' => $order->delivery['country']['iso_code_2']
-      );
+    public function process_button()
+    {
+        return false;
     }
 
-    $data['channel'] = $this->_app->getIdentifier();
+    public function before_process()
+    {
+        global $customer_id, $order, $braintree_result, $braintree_token, $messageStack, $appBraintreeCcNonce;
 
-    $error = false;
+        $braintree_token = null;
+        $braintree_error = null;
 
-    try {
-      $braintree_result = Braintree\Transaction::sale($data);
-    } catch (Exception $e) {
-      $error = true;
-    }
+        if (!isset($_SESSION['appBraintreeCcNonce']) && ((OSCOM_APP_PAYPAL_BRAINTREE_CC_CC_TOKENS === '1') || (OSCOM_APP_PAYPAL_BRAINTREE_CC_CC_TOKENS === '2'))) {
+            if (isset($_POST['braintree_cards']) && is_numeric($_POST['braintree_cards']) && ($_POST['braintree_cards'] > 0)) {
+                $token_query = tep_db_query('select braintree_token from customers_braintree_tokens where id = "'.(int) $_POST['braintree_cards'].'" and customers_id = "'.(int) $customer_id.'"');
 
-    if (($error === false) && ($braintree_result->success === true)) {
-      return true;
-    }
+                if (tep_db_num_rows($token_query)) {
+                    $token = tep_db_fetch_array($token_query);
 
-    $message = $this->_app->getDef('module_cc_error_general');
-
-    if (isset($braintree_result->transaction)) {
-      if (isset($braintree_result->transaction->gatewayRejectionReason)) {
-        switch ($braintree_result->transaction->gatewayRejectionReason) {
-          case 'cvv':
-            $message = $this->_app->getDef('module_cc_error_cvv');
-            break;
-
-          case 'avs':
-            $message = $this->_app->getDef('module_cc_error_avs');
-            break;
-
-          case 'avs_and_cvv':
-            $message = $this->_app->getDef('module_cc_error_avs_and_cvv');
-            break;
+                    $braintree_token = $token['braintree_token'];
+                }
+            }
         }
-      }
+
+        $braintree_result = null;
+
+        $this->_app->setupCredentials();
+
+        $transaction_currency = $this->getTransactionCurrency();
+
+        if (isset($_SESSION['appBraintreeCcNonce'])) {
+            $data = [
+                'amount' => $this->_app->formatCurrencyRaw($order->info['total'], $transaction_currency),
+                'paymentMethodNonce' => $appBraintreeCcNonce,
+                'merchantAccountId' => $this->getMerchantAccountId($transaction_currency),
+            ];
+        } else {
+            $data = [
+                'paymentMethodNonce' => $_POST['payment_method_nonce'],
+                'amount' => $this->_app->formatCurrencyRaw($order->info['total'], $transaction_currency),
+                'merchantAccountId' => $this->getMerchantAccountId($transaction_currency),
+                'customer' => [
+                    'firstName' => $order->customer['firstname'],
+                    'lastName' => $order->customer['lastname'],
+                    'company' => $order->customer['company'],
+                    'phone' => $order->customer['telephone'],
+                    'email' => $order->customer['email_address'],
+                ],
+                'billing' => [
+                    'firstName' => $order->billing['firstname'],
+                    'lastName' => $order->billing['lastname'],
+                    'company' => $order->billing['company'],
+                    'streetAddress' => $order->billing['street_address'],
+                    'extendedAddress' => $order->billing['suburb'],
+                    'locality' => $order->billing['city'],
+                    'region' => tep_get_zone_code($order->billing['country']['id'], $order->billing['zone_id'], $order->billing['state']),
+                    'postalCode' => $order->billing['postcode'],
+                    'countryCodeAlpha2' => $order->billing['country']['iso_code_2'],
+                ],
+                'options' => [],
+            ];
+
+            if (OSCOM_APP_PAYPAL_BRAINTREE_CC_TRANSACTION_METHOD === '1') {
+                $data['options']['submitForSettlement'] = true;
+            }
+
+            if (!isset($braintree_token)) {
+                if (((OSCOM_APP_PAYPAL_BRAINTREE_CC_CC_TOKENS === '1') && isset($_POST['cc_save']) && ($_POST['cc_save'] === 'true')) || (OSCOM_APP_PAYPAL_BRAINTREE_CC_CC_TOKENS === '2')) {
+                    $data['options']['storeInVaultOnSuccess'] = true;
+                }
+            }
+        }
+
+        if ($order->content_type !== 'virtual') {
+            $data['shipping'] = [
+                'firstName' => $order->delivery['firstname'],
+                'lastName' => $order->delivery['lastname'],
+                'company' => $order->delivery['company'],
+                'streetAddress' => $order->delivery['street_address'],
+                'extendedAddress' => $order->delivery['suburb'],
+                'locality' => $order->delivery['city'],
+                'region' => tep_get_zone_code($order->delivery['country']['id'], $order->delivery['zone_id'], $order->delivery['state']),
+                'postalCode' => $order->delivery['postcode'],
+                'countryCodeAlpha2' => $order->delivery['country']['iso_code_2'],
+            ];
+        }
+
+        $data['channel'] = $this->_app->getIdentifier();
+
+        $error = false;
+
+        try {
+            $braintree_result = Braintree\Transaction::sale($data);
+        } catch (Exception $e) {
+            $error = true;
+        }
+
+        if (($error === false) && ($braintree_result->success === true)) {
+            return true;
+        }
+
+        $message = $this->_app->getDef('module_cc_error_general');
+
+        if (isset($braintree_result->transaction)) {
+            if (isset($braintree_result->transaction->gatewayRejectionReason)) {
+                switch ($braintree_result->transaction->gatewayRejectionReason) {
+                    case 'cvv':
+                        $message = $this->_app->getDef('module_cc_error_cvv');
+
+                        break;
+                    case 'avs':
+                        $message = $this->_app->getDef('module_cc_error_avs');
+
+                        break;
+                    case 'avs_and_cvv':
+                        $message = $this->_app->getDef('module_cc_error_avs_and_cvv');
+
+                        break;
+                }
+            }
+        }
+
+        $messageStack->add_session('checkout_confirmation', $message);
+
+        tep_redirect(tep_href_link('checkout_confirmation.php', null, 'SSL'));
     }
 
-    $messageStack->add_session('checkout_confirmation', $message);
+    public function after_process(): void
+    {
+        global $customer_id, $insert_id, $braintree_result, $braintree_token;
 
-    tep_redirect(tep_href_link('checkout_confirmation.php', null, 'SSL'));
-  }
+        $status_comment = [
+            'Transaction ID: '.tep_db_prepare_input($braintree_result->transaction->id),
+        ];
 
-  public function after_process() {
-    global $customer_id, $insert_id, $braintree_result, $braintree_token;
+        if (($braintree_result->transaction->paymentInstrumentType === 'credit_card') && ((OSCOM_APP_PAYPAL_BRAINTREE_CC_THREE_D_SECURE === '1') || ((OSCOM_APP_PAYPAL_BRAINTREE_CC_THREE_D_SECURE === '2') && !isset($braintree_token)))) {
+            if (isset($braintree_result->transaction->threeDSecureInfo) && \is_object($braintree_result->transaction->threeDSecureInfo)) {
+                $status_comment[] = '3D Secure: '.tep_db_prepare_input($braintree_result->transaction->threeDSecureInfo->status.' (Liability Shifted: '.($braintree_result->transaction->threeDSecureInfo->liabilityShifted === true ? 'true' : 'false').')');
+            } else {
+                $status_comment[] = '3D Secure: ** MISSING **';
+            }
+        }
 
-    $status_comment = array(
-      'Transaction ID: ' . tep_db_prepare_input($braintree_result->transaction->id)
-    );
+        $status_comment[] = 'Payment Status: '.tep_db_prepare_input($braintree_result->transaction->status);
+        $status_comment[] = 'Payment Type: '.tep_db_prepare_input($braintree_result->transaction->paymentInstrumentType);
 
-    if (($braintree_result->transaction->paymentInstrumentType == 'credit_card') && ((OSCOM_APP_PAYPAL_BRAINTREE_CC_THREE_D_SECURE === '1') || ((OSCOM_APP_PAYPAL_BRAINTREE_CC_THREE_D_SECURE === '2') && !isset($braintree_token)))) {
-      if (isset($braintree_result->transaction->threeDSecureInfo) && is_object($braintree_result->transaction->threeDSecureInfo)) {
-        $status_comment[] = '3D Secure: ' . tep_db_prepare_input($braintree_result->transaction->threeDSecureInfo->status . ' (Liability Shifted: ' . ($braintree_result->transaction->threeDSecureInfo->liabilityShifted === true ? 'true' : 'false') . ')');
-      } else {
-        $status_comment[] = '3D Secure: ** MISSING **';
-      }
+        if (Braintree\Configuration::environment() !== 'production') {
+            $status_comment[] = 'Server: '.tep_db_prepare_input(Braintree\Configuration::environment());
+        }
+
+        if (!isset($_SESSION['appBraintreeCcNonce']) && (((OSCOM_APP_PAYPAL_BRAINTREE_CC_CC_TOKENS === '1') && isset($_POST['cc_save']) && ($_POST['cc_save'] === 'true')) || (OSCOM_APP_PAYPAL_BRAINTREE_CC_CC_TOKENS === '2')) && !isset($braintree_token) && isset($braintree_result->transaction->creditCard['token'])) {
+            $token = $braintree_result->transaction->creditCard['token'];
+            $type = $braintree_result->transaction->creditCard['cardType'];
+            $number = $braintree_result->transaction->creditCard['last4'];
+            $expiry = $braintree_result->transaction->creditCard['expirationMonth'].$braintree_result->transaction->creditCard['expirationYear'];
+
+            $check_query = tep_db_query('select id from customers_braintree_tokens where customers_id = "'.(int) $customer_id.'" and braintree_token = "'.tep_db_input(tep_db_prepare_input($token)).'"');
+
+            if (!tep_db_num_rows($check_query)) {
+                $sql_data_array = [
+                    'customers_id' => (int) $customer_id,
+                    'braintree_token' => $token,
+                    'card_type' => $type,
+                    'number_filtered' => $number,
+                    'expiry_date' => $expiry,
+                    'date_added' => 'now()',
+                ];
+
+                tep_db_perform('customers_braintree_tokens', $sql_data_array);
+            }
+
+            $status_comment[] = 'Token Created: Yes';
+        } elseif (isset($braintree_token)) {
+            $status_comment[] = 'Token Used: Yes';
+        }
+
+        $sql_data_array = [
+            'orders_id' => $insert_id,
+            'orders_status_id' => OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID,
+            'date_added' => 'now()',
+            'customer_notified' => '0',
+            'comments' => implode("\n", $status_comment),
+        ];
+
+        tep_db_perform('orders_status_history', $sql_data_array);
+
+        if (isset($_SESSION['appBraintreeCcNonce'])) {
+            unset($_SESSION['appBraintreeCcNonce']);
+        }
+
+        if (isset($_SESSION['appBraintreeCcFormHash'])) {
+            unset($_SESSION['appBraintreeCcFormHash']);
+        }
     }
 
-    $status_comment[] = 'Payment Status: ' . tep_db_prepare_input($braintree_result->transaction->status);
-    $status_comment[] = 'Payment Type: ' . tep_db_prepare_input($braintree_result->transaction->paymentInstrumentType);
+    public function get_error()
+    {
+        $error_message = $this->_app->getDef('module_cc_error_general');
 
-    if (Braintree\Configuration::environment() !== 'production') {
-      $status_comment[] = 'Server: ' . tep_db_prepare_input(Braintree\Configuration::environment());
+        switch ($_GET['error']) {
+            case 'not_available':
+                $error_message = $this->_app->getDef('module_cc_error_unavailable');
+
+                break;
+        }
+
+        $error = ['title' => $this->_app->getDef('module_cc_error_title'),
+            'error' => $error_message];
+
+        return $error;
     }
 
-    if (!isset($_SESSION['appBraintreeCcNonce']) && (((OSCOM_APP_PAYPAL_BRAINTREE_CC_CC_TOKENS == '1') && isset($_POST['cc_save']) && ($_POST['cc_save'] == 'true')) || (OSCOM_APP_PAYPAL_BRAINTREE_CC_CC_TOKENS === '2')) && !isset($braintree_token) && isset($braintree_result->transaction->creditCard['token'])) {
-      $token = $braintree_result->transaction->creditCard['token'];
-      $type = $braintree_result->transaction->creditCard['cardType'];
-      $number = $braintree_result->transaction->creditCard['last4'];
-      $expiry = $braintree_result->transaction->creditCard['expirationMonth'] . $braintree_result->transaction->creditCard['expirationYear'];
-
-      $check_query = tep_db_query('select id from customers_braintree_tokens where customers_id = "' . (int)$customer_id . '" and braintree_token = "' . tep_db_input(tep_db_prepare_input($token)) . '"');
-      if (!tep_db_num_rows($check_query)) {
-        $sql_data_array = array(
-          'customers_id' => (int)$customer_id,
-          'braintree_token' => $token,
-          'card_type' => $type,
-          'number_filtered' => $number,
-          'expiry_date' => $expiry,
-          'date_added' => 'now()'
-        );
-
-        tep_db_perform('customers_braintree_tokens', $sql_data_array);
-      }
-
-      $status_comment[] = 'Token Created: Yes';
-    } elseif (isset($braintree_token)) {
-      $status_comment[] = 'Token Used: Yes';
+    public function check()
+    {
+        return tep_db_num_rows(tep_db_query("SELECT configuration_value FROM configuration WHERE configuration_key = 'OSCOM_APP_PAYPAL_BRAINTREE_CC_STATUS'"));
     }
 
-    $sql_data_array = array(
-      'orders_id' => $insert_id,
-      'orders_status_id' => OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID,
-      'date_added' => 'now()',
-      'customer_notified' => '0',
-      'comments' => implode("\n", $status_comment)
-    );
-
-    tep_db_perform('orders_status_history', $sql_data_array);
-
-    if (isset($_SESSION['appBraintreeCcNonce'])) {
-      unset($_SESSION['appBraintreeCcNonce']);
+    public function install(): void
+    {
+        tep_redirect(tep_href_link('braintree.php', 'action=configure'));
     }
 
-    if (isset($_SESSION['appBraintreeCcFormHash'])) {
-      unset($_SESSION['appBraintreeCcFormHash']);
-    }
-  }
-
-  public function get_error() {
-    $error_message = $this->_app->getDef('module_cc_error_general');
-
-    switch ($_GET['error']) {
-      case 'not_available':
-        $error_message = $this->_app->getDef('module_cc_error_unavailable');
-        break;
+    public function remove(): void
+    {
+        tep_redirect(tep_href_link('braintree.php', 'action=configure'));
     }
 
-    $error = array('title' => $this->_app->getDef('module_cc_error_title'),
-                   'error' => $error_message);
-
-    return $error;
-  }
-
-  public function check() {
-    return tep_db_num_rows(tep_db_query("SELECT configuration_value FROM configuration WHERE configuration_key = 'OSCOM_APP_PAYPAL_BRAINTREE_CC_STATUS'"));
-  }
-
-  public function install() {
-    tep_redirect(tep_href_link('braintree.php', 'action=configure'));
-  }
-
-  public function remove() {
-    tep_redirect(tep_href_link('braintree.php', 'action=configure'));
-  }
-
-  public function keys() {
-    return array('OSCOM_APP_PAYPAL_BRAINTREE_CC_SORT_ORDER');
-  }
-
-  public function getTransactionCurrency() {
-    global $currency;
-
-    return $this->isValidCurrency($currency) ? $currency : DEFAULT_CURRENCY;
-  }
-
-  public function getMerchantAccountId($currency) {
-    $currencies_ma = (OSCOM_APP_PAYPAL_BRAINTREE_CC_STATUS === '1') ? OSCOM_APP_PAYPAL_BRAINTREE_CURRENCIES_MA : OSCOM_APP_PAYPAL_BRAINTREE_SANDBOX_CURRENCIES_MA;
-
-    foreach (explode(';', $currencies_ma) as $ma) {
-      list($a, $c) = explode(':', $ma);
-
-      if ($c == $currency) {
-        return $a;
-      }
+    public function keys()
+    {
+        return ['OSCOM_APP_PAYPAL_BRAINTREE_CC_SORT_ORDER'];
     }
 
-    return '';
-  }
+    public function getTransactionCurrency()
+    {
+        global $currency;
 
-  public function isValidCurrency($currency) {
-    global $currencies;
-
-    $currencies_ma = (OSCOM_APP_PAYPAL_BRAINTREE_CC_STATUS === '1') ? OSCOM_APP_PAYPAL_BRAINTREE_CURRENCIES_MA : OSCOM_APP_PAYPAL_BRAINTREE_SANDBOX_CURRENCIES_MA;
-
-    foreach (explode(';', $currencies_ma) as $combo) {
-      list($id, $c) = explode(':', $combo);
-
-      if ($c == $currency) {
-        return $currencies->is_set($c);
-      }
+        return $this->isValidCurrency($currency) ? $currency : DEFAULT_CURRENCY;
     }
 
-    return false;
-  }
+    public function getMerchantAccountId($currency)
+    {
+        $currencies_ma = (OSCOM_APP_PAYPAL_BRAINTREE_CC_STATUS === '1') ? OSCOM_APP_PAYPAL_BRAINTREE_CURRENCIES_MA : OSCOM_APP_PAYPAL_BRAINTREE_SANDBOX_CURRENCIES_MA;
 
-  public function templateClassExists() {
-    return class_exists('oscTemplate') && isset($GLOBALS['oscTemplate']) && is_object($GLOBALS['oscTemplate']) && (get_class($GLOBALS['oscTemplate']) == 'oscTemplate');
-  }
+        foreach (explode(';', $currencies_ma) as $ma) {
+            [$a, $c] = explode(':', $ma);
 
-  public function deleteCard($token, $token_id) {
-    global $customer_id;
+            if ($c === $currency) {
+                return $a;
+            }
+        }
 
-    $result = false;
-
-    try {
-      $this->_app->setupCredentials();
-
-      Braintree\CreditCard::delete($token);
-
-      tep_db_query('delete from customers_braintree_tokens where id = "' . (int)$token_id . '" and customers_id = "' . (int)$customer_id . '" and braintree_token = "' . tep_db_input($token) . '"');
-
-      $result = true;
-    } catch (Exception $e) {
+        return '';
     }
 
-    return $result === true;
-  }
+    public function isValidCurrency($currency)
+    {
+        global $currencies;
 
-  public function getSubmitCardDetailsJavascript() {
-    global $order, $request_type;
+        $currencies_ma = (OSCOM_APP_PAYPAL_BRAINTREE_CC_STATUS === '1') ? OSCOM_APP_PAYPAL_BRAINTREE_CURRENCIES_MA : OSCOM_APP_PAYPAL_BRAINTREE_SANDBOX_CURRENCIES_MA;
 
-    $this->_app->setupCredentials();
+        foreach (explode(';', $currencies_ma) as $combo) {
+            [$id, $c] = explode(':', $combo);
 
-    $transaction_currency = $this->getTransactionCurrency();
+            if ($c === $currency) {
+                return $currencies->is_set($c);
+            }
+        }
 
-    $clientToken = Braintree\ClientToken::generate(array(
-      'merchantAccountId' => $this->getMerchantAccountId($transaction_currency)
-    ));
-
-    $order_total = $this->_app->formatCurrencyRaw($order->info['total'], $transaction_currency);
-
-    $getCardTokenRpcUrl = tep_href_link('ext/modules/payment/braintree_cc/rpc.php', 'action=getCardToken', 'SSL');
-
-    if ((OSCOM_APP_PAYPAL_BRAINTREE_CC_THREE_D_SECURE === '1') && ($request_type == 'SSL')) {
-      $has3ds = 'all';
-    } elseif ((OSCOM_APP_PAYPAL_BRAINTREE_CC_THREE_D_SECURE === '2') && ($request_type == 'SSL')) {
-      $has3ds = 'new';
-    } else {
-      $has3ds = 'none';
+        return false;
     }
 
-    $url_not_available = addslashes(str_replace('&amp;', '&', tep_href_link('checkout_payment.php', 'payment_error=braintree_cc&error=not_available', 'SSL')));
+    public function templateClassExists()
+    {
+        return class_exists('oscTemplate') && isset($GLOBALS['oscTemplate']) && \is_object($GLOBALS['oscTemplate']) && (\get_class($GLOBALS['oscTemplate']) === 'oscTemplate');
+    }
 
-    $error_unavailable = addslashes($this->_app->getDef('module_cc_error_unavailable'));
-    $error_all_fields_required = addslashes($this->_app->getDef('module_cc_error_all_fields_required'));
-    $error_fields_required = addslashes($this->_app->getDef('module_cc_error_fields_required'));
-    $error_tmp_processing_problem = addslashes($this->_app->getDef('module_cc_error_tmp_processing_problem'));
+    public function deleteCard($token, $token_id)
+    {
+        global $customer_id;
 
-    $js = <<<EOD
+        $result = false;
+
+        try {
+            $this->_app->setupCredentials();
+
+            Braintree\CreditCard::delete($token);
+
+            tep_db_query('delete from customers_braintree_tokens where id = "'.(int) $token_id.'" and customers_id = "'.(int) $customer_id.'" and braintree_token = "'.tep_db_input($token).'"');
+
+            $result = true;
+        } catch (Exception $e) {
+        }
+
+        return $result === true;
+    }
+
+    public function getSubmitCardDetailsJavascript()
+    {
+        global $order, $request_type;
+
+        $this->_app->setupCredentials();
+
+        $transaction_currency = $this->getTransactionCurrency();
+
+        $clientToken = Braintree\ClientToken::generate([
+            'merchantAccountId' => $this->getMerchantAccountId($transaction_currency),
+        ]);
+
+        $order_total = $this->_app->formatCurrencyRaw($order->info['total'], $transaction_currency);
+
+        $getCardTokenRpcUrl = tep_href_link('ext/modules/payment/braintree_cc/rpc.php', 'action=getCardToken', 'SSL');
+
+        if ((OSCOM_APP_PAYPAL_BRAINTREE_CC_THREE_D_SECURE === '1') && ($request_type === 'SSL')) {
+            $has3ds = 'all';
+        } elseif ((OSCOM_APP_PAYPAL_BRAINTREE_CC_THREE_D_SECURE === '2') && ($request_type === 'SSL')) {
+            $has3ds = 'new';
+        } else {
+            $has3ds = 'none';
+        }
+
+        $url_not_available = addslashes(str_replace('&amp;', '&', tep_href_link('checkout_payment.php', 'payment_error=braintree_cc&error=not_available', 'SSL')));
+
+        $error_unavailable = addslashes($this->_app->getDef('module_cc_error_unavailable'));
+        $error_all_fields_required = addslashes($this->_app->getDef('module_cc_error_all_fields_required'));
+        $error_fields_required = addslashes($this->_app->getDef('module_cc_error_fields_required'));
+        $error_tmp_processing_problem = addslashes($this->_app->getDef('module_cc_error_tmp_processing_problem'));
+
+        $js = <<<EOD
 <style>
 .hosted-field {
   height: 40px;
@@ -1267,23 +1323,24 @@ $(function() {
 </script>
 EOD;
 
-    $js_scripts = '<script src="https://js.braintreegateway.com/web/3.73.1/js/client.min.js"></script>' .
-                  '<script src="https://js.braintreegateway.com/web/3.73.1/js/hosted-fields.min.js"></script>';
+        $js_scripts = '<script src="https://js.braintreegateway.com/web/3.73.1/js/client.min.js"></script>'.
+                      '<script src="https://js.braintreegateway.com/web/3.73.1/js/hosted-fields.min.js"></script>';
 
-    if ((OSCOM_APP_PAYPAL_BRAINTREE_CC_THREE_D_SECURE === '1') || (OSCOM_APP_PAYPAL_BRAINTREE_CC_THREE_D_SECURE === '2')) {
-      $js_scripts .= '<script src="https://js.braintreegateway.com/web/3.73.1/js/three-d-secure.min.js"></script>';
+        if ((OSCOM_APP_PAYPAL_BRAINTREE_CC_THREE_D_SECURE === '1') || (OSCOM_APP_PAYPAL_BRAINTREE_CC_THREE_D_SECURE === '2')) {
+            $js_scripts .= '<script src="https://js.braintreegateway.com/web/3.73.1/js/three-d-secure.min.js"></script>';
+        }
+
+        if ($this->templateClassExists()) {
+            $GLOBALS['oscTemplate']->addBlock($js_scripts, 'footer_scripts');
+        } else {
+            $js .= $js_scripts;
+        }
+
+        return $js;
     }
 
-    if ($this->templateClassExists()) {
-      $GLOBALS['oscTemplate']->addBlock($js_scripts, 'footer_scripts');
-    } else {
-      $js .= $js_scripts;
+    public function isPaymentTypeAccepted($type)
+    {
+        return \in_array($type, $this->payment_types, true);
     }
-
-    return $js;
-  }
-
-  public function isPaymentTypeAccepted($type) {
-    return in_array($type, $this->payment_types);
-  }
 }

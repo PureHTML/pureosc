@@ -8,10 +8,10 @@
   Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
-*/
+ */
 
 if ($oscTemplate->hasBlocks('header_top')) {
-  ?>
+    ?>
 
   <div class="bg-light">
     <div class="container py-1 d-none d-lg-block">
@@ -23,6 +23,7 @@ if ($oscTemplate->hasBlocks('header_top')) {
 
   <?php
 }
+
 ?>
 
   <div class="container d-none d-lg-block">
@@ -33,7 +34,7 @@ if ($oscTemplate->hasBlocks('header_top')) {
 
 <?php
 if ($oscTemplate->hasBlocks('header_menu')) {
-  ?>
+    ?>
 
   <div class="bg-light">
     <div class="container">

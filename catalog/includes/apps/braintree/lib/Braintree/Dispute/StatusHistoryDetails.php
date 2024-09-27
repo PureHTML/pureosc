@@ -1,17 +1,30 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree\Dispute;
 
 use Braintree\Instance;
 
 /**
- * Status History for a dispute
+ * Status History for a dispute.
  *
- * @package    Braintree
- *
- * @property-read \DateTime $disbursementDate
- * @property-read \DateTime $effectiveDate
- * @property-read string $status
- * @property-read \DateTime $timestamp
+ * @property \DateTime $disbursementDate
+ * @property \DateTime $effectiveDate
+ * @property string    $status
+ * @property \DateTime $timestamp
  */
 class StatusHistoryDetails extends Instance
 {

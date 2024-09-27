@@ -1,17 +1,21 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2021 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
+\define('HEADING_TITLE', 'Fabricantes');
+\define('NAVBAR_TITLE', 'Fabricantes');
 
-define('HEADING_TITLE', 'Fabricantes');
-define('NAVBAR_TITLE', 'Fabricantes');
-
-define('TEXT_NO_PRODUCTS', 'No hay productos disponibles en esta fabricante.');
-define('TEXT_MANUFACTURER_NOT_FOUND', 'Fabricante no encontrado!');
+\define('TEXT_NO_PRODUCTS', 'No hay productos disponibles en esta fabricante.');
+\define('TEXT_MANUFACTURER_NOT_FOUND', 'Fabricante no encontrado!');

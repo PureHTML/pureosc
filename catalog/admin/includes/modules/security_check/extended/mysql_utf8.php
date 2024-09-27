@@ -1,43 +1,50 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2020 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
+class extended_mysql_utf8
+{
+    public $type = 'warning';
+    public $has_doc = true;
 
-  class securityCheckExtended_mysql_utf8 {
-    var $type = 'warning';
-    var $has_doc = true;
+    public function __construct()
+    {
+        global $language;
 
-    function __construct() {
-      global $language;
+        include DIR_FS_ADMIN.'includes/languages/'.$language.'/modules/security_check/extended/mysql_utf8.php';
 
-      include(DIR_FS_ADMIN . 'includes/languages/' . $language . '/modules/security_check/extended/mysql_utf8.php');
-
-      $this->title = MODULE_SECURITY_CHECK_EXTENDED_MYSQL_UTF8_TITLE;
+        $this->title = MODULE_SECURITY_CHECK_EXTENDED_MYSQL_UTF8_TITLE;
     }
 
-    function pass() {
-      $check_query = tep_db_query('show table status');
+    public function pass()
+    {
+        $check_query = tep_db_query('show table status');
 
-      if ( tep_db_num_rows($check_query) > 0 ) {
-        while ( $check = tep_db_fetch_array($check_query) ) {
-          if ( isset($check['Collation']) && ($check['Collation'] != 'utf8mb4_unicode_ci') ) {
-            return false;
-          }
+        if (tep_db_num_rows($check_query) > 0) {
+            while ($check = tep_db_fetch_array($check_query)) {
+                if (isset($check['Collation']) && ($check['Collation'] !== 'utf8mb4_unicode_ci')) {
+                    return false;
+                }
+            }
         }
-      }
 
-      return true;
+        return true;
     }
 
-    function getMessage() {
-      return '<a href="' . tep_href_link('database_tables.php') . '">' . MODULE_SECURITY_CHECK_EXTENDED_MYSQL_UTF8_ERROR . '</a>';
+    public function getMessage()
+    {
+        return '<a href="'.tep_href_link('database_tables.php').'">'.MODULE_SECURITY_CHECK_EXTENDED_MYSQL_UTF8_ERROR.'</a>';
     }
-  }
-?>
+}

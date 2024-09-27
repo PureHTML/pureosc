@@ -3,12 +3,13 @@
 
   <?php
   foreach (explode(';', MODULE_FOOTER_CARD_ACCEPTANCE_LOGOS) as $logo) {
-    ?>
+      ?>
 
-    <?php echo tep_image('images/card_acceptance/' . basename($logo)); ?>
+    <?php echo tep_image('images/card_acceptance/'.basename($logo)); ?>
 
     <?php
   }
+
   ?>
 
 </div>

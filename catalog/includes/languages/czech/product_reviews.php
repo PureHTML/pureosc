@@ -1,18 +1,21 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2002 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
+\define('NAVBAR_TITLE', 'Recenze');
 
-define('NAVBAR_TITLE', 'Recenze');
+\define('TEXT_CLICK_TO_ENLARGE', 'Kliknutím zvětšíte!');
 
-define('TEXT_CLICK_TO_ENLARGE', 'Kliknutím zvětšíte!');
-
-define('TEXT_OF_5_STARS', '%s z 5 hvězdiček!');
-?>
+\define('TEXT_OF_5_STARS', '%s z 5 hvězdiček!');

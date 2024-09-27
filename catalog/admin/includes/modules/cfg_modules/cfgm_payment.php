@@ -1,26 +1,31 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2020 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
+class cfgm_payment
+{
+    public $code = 'payment';
+    public $directory;
+    public $language_directory = DIR_FS_CATALOG_LANGUAGES;
+    public $key = 'MODULE_PAYMENT_INSTALLED';
+    public $title;
+    public $template_integration = false;
 
-  class cfgm_payment {
-    var $code = 'payment';
-    var $directory;
-    var $language_directory = DIR_FS_CATALOG_LANGUAGES;
-    var $key = 'MODULE_PAYMENT_INSTALLED';
-    var $title;
-    var $template_integration = false;
-
-    function __construct() {
-      $this->directory = DIR_FS_CATALOG_MODULES . 'payment/';
-      $this->title = MODULE_CFG_MODULE_PAYMENT_TITLE;
+    public function __construct()
+    {
+        $this->directory = DIR_FS_CATALOG_MODULES.'payment/';
+        $this->title = MODULE_CFG_MODULE_PAYMENT_TITLE;
     }
-  }
-?>
+}

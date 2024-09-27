@@ -1,18 +1,21 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2020 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
-
-define('MODULE_SHIPPING_TABLE_TEXT_TITLE', 'Tabla de Tarifas');
-define('MODULE_SHIPPING_TABLE_TEXT_DESCRIPTION', 'Tabla de Tarifas');
-define('MODULE_SHIPPING_TABLE_TEXT_WAY', 'Mejor manera');
-define('MODULE_SHIPPING_TABLE_TEXT_WEIGHT', 'Peso');
-define('MODULE_SHIPPING_TABLE_TEXT_AMOUNT', 'Cantidad');
-?>
+\define('MODULE_SHIPPING_TABLE_TEXT_TITLE', 'Tabla de Tarifas');
+\define('MODULE_SHIPPING_TABLE_TEXT_DESCRIPTION', 'Tabla de Tarifas');
+\define('MODULE_SHIPPING_TABLE_TEXT_WAY', 'Mejor manera');
+\define('MODULE_SHIPPING_TABLE_TEXT_WEIGHT', 'Peso');
+\define('MODULE_SHIPPING_TABLE_TEXT_AMOUNT', 'Cantidad');

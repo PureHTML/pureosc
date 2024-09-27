@@ -1,34 +1,37 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2002 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
+\define('TOP_BAR_TITLE', 'Zákaznící');
+\define('HEADING_TITLE', 'Zákazníci');
+\define('HEADING_TITLE_SEARCH', 'Zadej klíčové slovo (Jméno / Příjmení):');
 
-define('TOP_BAR_TITLE', 'Zákaznící');
-define('HEADING_TITLE', 'Zákazníci');
-define('HEADING_TITLE_SEARCH', 'Zadej klíčové slovo (Jméno / Příjmení):');
+\define('TABLE_HEADING_ID', 'ID');
+\define('TABLE_HEADING_FIRSTNAME', 'Jméno');
+\define('TABLE_HEADING_LASTNAME', 'Příjmení');
+\define('TABLE_HEADING_ACCOUNT_CREATED', 'Účet vytvořen');
+\define('TABLE_HEADING_ACTION', 'Proveď');
 
-define('TABLE_HEADING_ID', 'ID');
-define('TABLE_HEADING_FIRSTNAME', 'Jméno');
-define('TABLE_HEADING_LASTNAME', 'Příjmení');
-define('TABLE_HEADING_ACCOUNT_CREATED', 'Účet vytvořen');
-define('TABLE_HEADING_ACTION', 'Proveď');
-
-define('TEXT_DATE_ACCOUNT_CREATED', 'Vznik účtu:');
-define('TEXT_DATE_ACCOUNT_LAST_MODIFIED', 'Změna:');
-define('TEXT_INFO_DATE_LAST_LOGON', 'Naposled připojen:');
-define('TEXT_INFO_NUMBER_OF_LOGONS', 'Počet připojení:');
-define('TEXT_INFO_COUNTRY', 'Země:');
-define('TEXT_INFO_NUMBER_OF_REVIEWS', 'Počet hodnocení:');
-define('TEXT_DELETE_INTRO', 'Opravdu chceš vymazat tohoto klienta?');
-define('TEXT_DELETE_REVIEWS', 'Vymazat %s review(s)');
-define('TEXT_INFO_HEADING_DELETE_CUSTOMER', 'Vymazat klienta');
-define('TYPE_BELOW', 'Vyber všechny');
-define('PLEASE_SELECT', 'Vyber jednoho');
-?>
+\define('TEXT_DATE_ACCOUNT_CREATED', 'Vznik účtu:');
+\define('TEXT_DATE_ACCOUNT_LAST_MODIFIED', 'Změna:');
+\define('TEXT_INFO_DATE_LAST_LOGON', 'Naposled připojen:');
+\define('TEXT_INFO_NUMBER_OF_LOGONS', 'Počet připojení:');
+\define('TEXT_INFO_COUNTRY', 'Země:');
+\define('TEXT_INFO_NUMBER_OF_REVIEWS', 'Počet hodnocení:');
+\define('TEXT_DELETE_INTRO', 'Opravdu chceš vymazat tohoto klienta?');
+\define('TEXT_DELETE_REVIEWS', 'Vymazat %s review(s)');
+\define('TEXT_INFO_HEADING_DELETE_CUSTOMER', 'Vymazat klienta');
+\define('TYPE_BELOW', 'Vyber všechny');
+\define('PLEASE_SELECT', 'Vyber jednoho');

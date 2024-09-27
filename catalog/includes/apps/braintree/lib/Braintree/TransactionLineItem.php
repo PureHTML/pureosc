@@ -1,44 +1,53 @@
 <?php
-namespace Braintree;
 
-use Braintree\Instance;
+declare(strict_types=1);
 
 /**
- * Line item associated with a transaction
+ * This file is part of the DvereCOM package
  *
- * @package    Braintree
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Braintree;
+
+/**
+ * Line item associated with a transaction.
  */
 
 /**
- * creates an instance of TransactionLineItem
+ * creates an instance of TransactionLineItem.
  *
- *
- * @package    Braintree
- *
- * @property-read string $commodityCode
- * @property-read string $description
- * @property-read string $discountAmount
- * @property-read string $kind
- * @property-read string $name
- * @property-read string $productCode
- * @property-read string $quantity
- * @property-read string $taxAmount
- * @property-read string $totalAmount
- * @property-read string $unitAmount
- * @property-read string $unitOfMeasure
- * @property-read string $unitTaxAmount
- * @property-read string $url
+ * @property string $commodityCode
+ * @property string $description
+ * @property string $discountAmount
+ * @property string $kind
+ * @property string $name
+ * @property string $productCode
+ * @property string $quantity
+ * @property string $taxAmount
+ * @property string $totalAmount
+ * @property string $unitAmount
+ * @property string $unitOfMeasure
+ * @property string $unitTaxAmount
+ * @property string $url
  */
 class TransactionLineItem extends Instance
 {
     // TransactionLineItem Kinds
-    const CREDIT = 'credit';
-    const DEBIT = 'debit';
-
+    public const CREDIT = 'credit';
+    public const DEBIT = 'debit';
     protected $_attributes = [];
 
     /**
      * @ignore
+     *
+     * @param mixed $attributes
      */
     public function __construct($attributes)
     {

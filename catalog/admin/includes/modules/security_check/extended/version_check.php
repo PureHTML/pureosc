@@ -1,35 +1,42 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2020 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
+class extended_version_check
+{
+    public $type = 'warning';
+    public $has_doc = true;
 
-  class securityCheckExtended_version_check {
-    var $type = 'warning';
-    var $has_doc = true;
+    public function __construct()
+    {
+        global $language;
 
-    function __construct() {
-      global $language;
+        include DIR_FS_ADMIN.'includes/languages/'.$language.'/modules/security_check/extended/version_check.php';
 
-      include(DIR_FS_ADMIN . 'includes/languages/' . $language . '/modules/security_check/extended/version_check.php');
-
-      $this->title = MODULE_SECURITY_CHECK_EXTENDED_VERSION_CHECK_TITLE;
+        $this->title = MODULE_SECURITY_CHECK_EXTENDED_VERSION_CHECK_TITLE;
     }
 
-    function pass() {
-      $cache_file = DIR_FS_CACHE . 'oscommerce_version_check.cache';
+    public function pass()
+    {
+        $cache_file = DIR_FS_CACHE.'oscommerce_version_check.cache';
 
-      return file_exists($cache_file) && (filemtime($cache_file) > strtotime('-30 days'));
+        return file_exists($cache_file) && (filemtime($cache_file) > strtotime('-30 days'));
     }
 
-    function getMessage() {
-      return '<a href="' . tep_href_link('version_check.php') . '">' . MODULE_SECURITY_CHECK_EXTENDED_VERSION_CHECK_ERROR . '</a>';
+    public function getMessage()
+    {
+        return '<a href="'.tep_href_link('version_check.php').'">'.MODULE_SECURITY_CHECK_EXTENDED_VERSION_CHECK_ERROR.'</a>';
     }
-  }
-?>
+}

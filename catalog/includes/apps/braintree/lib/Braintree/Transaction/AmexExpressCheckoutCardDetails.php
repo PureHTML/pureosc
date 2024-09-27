@@ -1,33 +1,44 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree\Transaction;
 
 use Braintree\Instance;
+
 /**
- * Amex Express Checkout card details from a transaction
+ * Amex Express Checkout card details from a transaction.
  *
- * @package    Braintree
- * @subpackage Transaction
  * @deprecated
  */
 
 /**
- * creates an instance of AmexExpressCheckoutCardDetails
+ * creates an instance of AmexExpressCheckoutCardDetails.
  *
- *
- * @package    Braintree
- * @subpackage Transaction
  * @deprecated
  *
- * @property-read string $cardType
- * @property-read string $bin
- * @property-read string $cardMemberExpiryDate
- * @property-read string $cardMemberNumber
- * @property-read string $cardType
- * @property-read string $sourceDescription
- * @property-read string $token
- * @property-read string $imageUrl
- * @property-read string $expirationMonth
- * @property-read string $expirationYear
+ * @property string $bin
+ * @property string $cardMemberExpiryDate
+ * @property string $cardMemberNumber
+ * @property string $cardType
+ * @property string $expirationMonth
+ * @property string $expirationYear
+ * @property string $imageUrl
+ * @property string $sourceDescription
+ * @property string $token
+ *
  * @uses Instance inherits methods
  */
 class AmexExpressCheckoutCardDetails extends Instance
@@ -36,6 +47,8 @@ class AmexExpressCheckoutCardDetails extends Instance
 
     /**
      * @ignore
+     *
+     * @param mixed $attributes
      */
     public function __construct($attributes)
     {

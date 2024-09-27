@@ -1,21 +1,23 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2020 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-  versión
-*/
+\define('HEADING_TITLE', 'Seguridad en los Permisos de directorios');
 
-define('HEADING_TITLE', 'Seguridad en los Permisos de directorios');
+\define('TABLE_HEADING_DIRECTORIES', 'Directorios');
+\define('TABLE_HEADING_WRITABLE', 'Modificable');
+\define('TABLE_HEADING_RECOMMENDED', 'Recomendado');
 
-define('TABLE_HEADING_DIRECTORIES', 'Directorios');
-define('TABLE_HEADING_WRITABLE', 'Modificable');
-define('TABLE_HEADING_RECOMMENDED', 'Recomendado');
-
-define('TEXT_DIRECTORY', 'Directorio:');
-?>
+\define('TEXT_DIRECTORY', 'Directorio:');

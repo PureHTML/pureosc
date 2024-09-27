@@ -8,7 +8,7 @@
   Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
-*/
+ */
 ?>
 
 <h2><?php echo $OSCOM_PayPal->getDef('privacy_title'); ?></h2>

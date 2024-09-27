@@ -1,71 +1,79 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2021 osCommerce
-
-  Released under the GNU General Public License
-*/
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 if (!class_exists('OSCOM_Braintree')) {
-  include(DIR_FS_CATALOG . 'includes/apps/braintree/OSCOM_Braintree.php');
+    include DIR_FS_CATALOG.'includes/apps/braintree/OSCOM_Braintree.php';
 }
 
-class braintree_hook_admin_orders_tab {
-  public function braintree_hook_admin_orders_tab() {
-    global $OSCOM_Braintree;
+class admin_orders_tab
+{
+    public function braintree_hook_admin_orders_tab(): void
+    {
+        global $OSCOM_Braintree;
 
-    if (!isset($OSCOM_Braintree) || !is_object($OSCOM_Braintree) || (get_class($OSCOM_Braintree) != 'OSCOM_Braintree')) {
-      $OSCOM_Braintree = new OSCOM_Braintree();
-    }
-
-    $this->_app = $OSCOM_Braintree;
-
-    $this->_app->loadLanguageFile('hooks/admin/orders/tab.php');
-  }
-
-  public function execute() {
-    global $oID, $base_url;
-
-    if (!defined('OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID')) {
-      return false;
-    }
-
-    $output = '';
-
-    $status = array();
-
-    $btstatus_query = tep_db_query("select comments from orders_status_history where orders_id = '" . (int)$oID . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID . "' and comments like 'Transaction ID:%' order by date_added desc limit 1");
-    if (tep_db_num_rows($btstatus_query)) {
-      $btstatus = tep_db_fetch_array($btstatus_query);
-
-      foreach (explode("\n", $btstatus['comments']) as $s) {
-        if (!empty($s) && (strpos($s, ':') !== false)) {
-          $entry = explode(':', $s, 2);
-
-          $status[trim($entry[0])] = trim($entry[1]);
+        if (!isset($OSCOM_Braintree) || !\is_object($OSCOM_Braintree) || (\get_class($OSCOM_Braintree) !== 'OSCOM_Braintree')) {
+            $OSCOM_Braintree = new OSCOM_Braintree();
         }
-      }
 
-      if (isset($status['Transaction ID'])) {
-        $order_query = tep_db_query("select o.orders_id, o.payment_method, o.currency, o.currency_value, ot.value as total from orders o, orders_total ot where o.orders_id = '" . (int)$oID . "' and o.orders_id = ot.orders_id and ot.class = 'ot_total'");
-        $order = tep_db_fetch_array($order_query);
+        $this->_app = $OSCOM_Braintree;
 
-        $bt_server = (strpos(strtolower($order['payment_method']), 'sandbox') !== false) ? 'sandbox' : 'live';
+        $this->_app->loadLanguageFile('hooks/admin/orders/tab.php');
+    }
 
-        $info_button = $this->_app->drawButton($this->_app->getDef('button_details'), tep_href_link('orders.php', 'page=' . $_GET['page'] . '&oID=' . $oID . '&action=edit&tabaction=getTransactionDetails'), 'primary', null, true);
-        $capture_button = $this->getCaptureButton($status, $order);
-        $void_button = $this->getVoidButton($status, $order);
-        $refund_button = $this->getRefundButton($status, $order);
-        $braintree_button = $this->_app->drawButton($this->_app->getDef('button_view_at_braintree'), 'https://www.' . ($bt_server == 'sandbox' ? 'sandbox.' : '') . 'braintreegateway.com/merchants/' . ($bt_server == 'sandbox' ? OSCOM_APP_PAYPAL_BRAINTREE_SANDBOX_MERCHANT_ID : OSCOM_APP_PAYPAL_BRAINTREE_MERCHANT_ID) . '/transactions/' . $status['Transaction ID'], 'info', 'target="_blank"', true);
+    public function execute()
+    {
+        global $oID, $base_url;
 
-        $tab_title = addslashes($this->_app->getDef('tab_title'));
-        $tab_link = substr(tep_href_link('orders.php', tep_get_all_get_params()), strlen($base_url)) . '#section_braintree_content';
+        if (!\defined('OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID')) {
+            return false;
+        }
 
-        $output = <<<EOD
+        $output = '';
+
+        $status = [];
+
+        $btstatus_query = tep_db_query("select comments from orders_status_history where orders_id = '".(int) $oID."' and orders_status_id = '".(int) OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID."' and comments like 'Transaction ID:%' order by date_added desc limit 1");
+
+        if (tep_db_num_rows($btstatus_query)) {
+            $btstatus = tep_db_fetch_array($btstatus_query);
+
+            foreach (explode("\n", $btstatus['comments']) as $s) {
+                if (!empty($s) && (strpos($s, ':') !== false)) {
+                    $entry = explode(':', $s, 2);
+
+                    $status[trim($entry[0])] = trim($entry[1]);
+                }
+            }
+
+            if (isset($status['Transaction ID'])) {
+                $order_query = tep_db_query("select o.orders_id, o.payment_method, o.currency, o.currency_value, ot.value as total from orders o, orders_total ot where o.orders_id = '".(int) $oID."' and o.orders_id = ot.orders_id and ot.class = 'ot_total'");
+                $order = tep_db_fetch_array($order_query);
+
+                $bt_server = (strpos(strtolower($order['payment_method']), 'sandbox') !== false) ? 'sandbox' : 'live';
+
+                $info_button = $this->_app->drawButton($this->_app->getDef('button_details'), tep_href_link('orders.php', 'page='.$_GET['page'].'&oID='.$oID.'&action=edit&tabaction=getTransactionDetails'), 'primary', null, true);
+                $capture_button = $this->getCaptureButton($status, $order);
+                $void_button = $this->getVoidButton($status, $order);
+                $refund_button = $this->getRefundButton($status, $order);
+                $braintree_button = $this->_app->drawButton($this->_app->getDef('button_view_at_braintree'), 'https://www.'.($bt_server === 'sandbox' ? 'sandbox.' : '').'braintreegateway.com/merchants/'.($bt_server === 'sandbox' ? OSCOM_APP_PAYPAL_BRAINTREE_SANDBOX_MERCHANT_ID : OSCOM_APP_PAYPAL_BRAINTREE_MERCHANT_ID).'/transactions/'.$status['Transaction ID'], 'info', 'target="_blank"', true);
+
+                $tab_title = addslashes($this->_app->getDef('tab_title'));
+                $tab_link = substr(tep_href_link('orders.php', tep_get_all_get_params()), \strlen($base_url)).'#section_braintree_content';
+
+                $output = <<<EOD
 <script>
 $(function() {
   $('#orderTabs ul').append('<li><a href="{$tab_link}">{$tab_title}</a></li>');
@@ -76,34 +84,35 @@ $(function() {
   {$info_button} {$capture_button} {$void_button} {$refund_button} {$braintree_button}
 </div>
 EOD;
-      }
+            }
+        }
+
+        return $output;
     }
 
-    return $output;
-  }
+    public function getCaptureButton($status, $order)
+    {
+        $output = '';
 
-  public function getCaptureButton($status, $order) {
-    $output = '';
+        if ($status['Payment Status'] === 'authorized') {
+            $v_query = tep_db_query("select comments from orders_status_history where orders_id = '".(int) $order['orders_id']."' and orders_status_id = '".(int) OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID."' and comments like 'Braintree App: Void (%' limit 1");
 
-    if ($status['Payment Status'] == 'authorized') {
-      $v_query = tep_db_query("select comments from orders_status_history where orders_id = '" . (int)$order['orders_id'] . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID . "' and comments like 'Braintree App: Void (%' limit 1");
+            if (!tep_db_num_rows($v_query)) {
+                $c_query = tep_db_query("select comments from orders_status_history where orders_id = '".(int) $order['orders_id']."' and orders_status_id = '".(int) OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID."' and comments like 'Braintree App: Capture (%' limit 1");
 
-      if (!tep_db_num_rows($v_query)) {
-        $c_query = tep_db_query("select comments from orders_status_history where orders_id = '" . (int)$order['orders_id'] . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID . "' and comments like 'Braintree App: Capture (%' limit 1");
+                if (!tep_db_num_rows($c_query)) {
+                    $output .= $this->_app->drawButton($this->_app->getDef('button_dialog_capture'), '#', 'success', 'data-button="braintreeButtonDoCapture"', true);
 
-        if (!tep_db_num_rows($c_query)) {
-          $output .= $this->_app->drawButton($this->_app->getDef('button_dialog_capture'), '#', 'success', 'data-button="braintreeButtonDoCapture"', true);
+                    $dialog_title = tep_output_string_protected($this->_app->getDef('dialog_capture_title'));
+                    $dialog_body = $this->_app->getDef('dialog_capture_body');
+                    $field_amount_title = $this->_app->getDef('dialog_capture_amount_field_title');
+                    $capture_link = tep_href_link('orders.php', 'page='.$_GET['page'].'&oID='.$order['orders_id'].'&action=edit&tabaction=doCapture');
+                    $capture_currency = $order['currency'];
+                    $capture_total = $this->_app->formatCurrencyRaw($order['total'], $order['currency'], $order['currency_value']);
+                    $dialog_button_capture = addslashes($this->_app->getDef('dialog_capture_button_capture'));
+                    $dialog_button_cancel = addslashes($this->_app->getDef('dialog_capture_button_cancel'));
 
-          $dialog_title = tep_output_string_protected($this->_app->getDef('dialog_capture_title'));
-          $dialog_body = $this->_app->getDef('dialog_capture_body');
-          $field_amount_title = $this->_app->getDef('dialog_capture_amount_field_title');
-          $capture_link = tep_href_link('orders.php', 'page=' . $_GET['page'] . '&oID=' . $order['orders_id'] . '&action=edit&tabaction=doCapture');
-          $capture_currency = $order['currency'];
-          $capture_total = $this->_app->formatCurrencyRaw($order['total'], $order['currency'], $order['currency_value']);
-          $dialog_button_capture = addslashes($this->_app->getDef('dialog_capture_button_capture'));
-          $dialog_button_cancel = addslashes($this->_app->getDef('dialog_capture_button_cancel'));
-
-          $output .= <<<EOD
+                    $output .= <<<EOD
 <div id="braintree-dialog-capture" title="{$dialog_title}">
   <form id="btCaptureForm" action="{$capture_link}" method="post">
     <p>{$dialog_body}</p>
@@ -140,49 +149,50 @@ $(function() {
 });
 </script>
 EOD;
+                }
+            }
         }
-      }
+
+        return $output;
     }
 
-    return $output;
-  }
+    public function getVoidButton($status, $order)
+    {
+        $output = '';
 
-  public function getVoidButton($status, $order) {
-    $output = '';
+        $s_query = tep_db_query("select comments from orders_status_history where orders_id = '".(int) $order['orders_id']."' and orders_status_id = '".(int) OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID."' and comments like '%Payment Status:%' order by date_added desc limit 1");
 
-    $s_query = tep_db_query("select comments from orders_status_history where orders_id = '" . (int)$order['orders_id'] . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID . "' and comments like '%Payment Status:%' order by date_added desc limit 1");
+        if (tep_db_num_rows($s_query)) {
+            $s = tep_db_fetch_array($s_query);
 
-    if (tep_db_num_rows($s_query)) {
-      $s = tep_db_fetch_array($s_query);
+            $last_status = [];
 
-      $last_status = array();
+            foreach (explode("\n", $s['comments']) as $status) {
+                if (!empty($status) && (strpos($status, ':') !== false) && (substr($status, 0, 1) !== '[')) {
+                    $entry = explode(':', $status, 2);
 
-      foreach (explode("\n", $s['comments']) as $status) {
-        if (!empty($status) && (strpos($status, ':') !== false) && (substr($status, 0, 1) !== '[')) {
-          $entry = explode(':', $status, 2);
+                    $key = trim($entry[0]);
+                    $value = trim($entry[1]);
 
-          $key = trim($entry[0]);
-          $value = trim($entry[1]);
+                    if (($key !== '') && ($value !== '')) {
+                        $last_status[$key] = $value;
+                    }
+                }
+            }
 
-          if ((strlen($key) > 0) && (strlen($value) > 0)) {
-            $last_status[$key] = $value;
-          }
-        }
-      }
+            if (($last_status['Payment Status'] === 'authorized') || ($last_status['Payment Status'] === 'submitted_for_settlement')) {
+                $v_query = tep_db_query("select comments from orders_status_history where orders_id = '".(int) $order['orders_id']."' and orders_status_id = '".(int) OSCOM_APP_PAYPAL_TRANSACTIONS_ORDER_STATUS_ID."' and (comments like 'Braintree App: Void (%' or comments like 'Braintree App: Refund (%') limit 1");
 
-      if (($last_status['Payment Status'] == 'authorized') || ($last_status['Payment Status'] == 'submitted_for_settlement')) {
-        $v_query = tep_db_query("select comments from orders_status_history where orders_id = '" . (int)$order['orders_id'] . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_TRANSACTIONS_ORDER_STATUS_ID . "' and (comments like 'Braintree App: Void (%' or comments like 'Braintree App: Refund (%') limit 1");
+                if (!tep_db_num_rows($v_query)) {
+                    $output .= $this->_app->drawButton($this->_app->getDef('button_dialog_void'), '#', 'warning', 'data-button="braintreeButtonDoVoid"', true);
 
-        if (!tep_db_num_rows($v_query)) {
-          $output .= $this->_app->drawButton($this->_app->getDef('button_dialog_void'), '#', 'warning', 'data-button="braintreeButtonDoVoid"', true);
+                    $dialog_title = tep_output_string_protected($this->_app->getDef('dialog_void_title'));
+                    $dialog_body = $this->_app->getDef('dialog_void_body');
+                    $void_link = tep_href_link('orders.php', 'page='.$_GET['page'].'&oID='.$order['orders_id'].'&action=edit&tabaction=doVoid');
+                    $dialog_button_void = addslashes($this->_app->getDef('dialog_void_button_void'));
+                    $dialog_button_cancel = addslashes($this->_app->getDef('dialog_void_button_cancel'));
 
-          $dialog_title = tep_output_string_protected($this->_app->getDef('dialog_void_title'));
-          $dialog_body = $this->_app->getDef('dialog_void_body');
-          $void_link = tep_href_link('orders.php', 'page=' . $_GET['page'] . '&oID=' . $order['orders_id'] . '&action=edit&tabaction=doVoid');
-          $dialog_button_void = addslashes($this->_app->getDef('dialog_void_button_void'));
-          $dialog_button_cancel = addslashes($this->_app->getDef('dialog_void_button_cancel'));
-
-          $output .= <<<EOD
+                    $output .= <<<EOD
 <div id="braintree-dialog-void" title="{$dialog_title}">
   <p>{$dialog_body}</p>
 </div>
@@ -211,59 +221,60 @@ $(function() {
 });
 </script>
 EOD;
+                }
+            }
         }
-      }
+
+        return $output;
     }
 
-    return $output;
-  }
+    public function getRefundButton($status, $order)
+    {
+        $output = '';
 
-  public function getRefundButton($status, $order) {
-    $output = '';
+        $s_query = tep_db_query("select comments from orders_status_history where orders_id = '".(int) $order['orders_id']."' and orders_status_id = '".(int) OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID."' and comments not like 'Braintree App: Refund (%' and comments like '%Payment Status:%' order by date_added desc limit 1");
 
-    $s_query = tep_db_query("select comments from orders_status_history where orders_id = '" . (int)$order['orders_id'] . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID . "' and comments not like 'Braintree App: Refund (%' and comments like '%Payment Status:%' order by date_added desc limit 1");
+        if (tep_db_num_rows($s_query)) {
+            $s = tep_db_fetch_array($s_query);
 
-    if (tep_db_num_rows($s_query)) {
-      $s = tep_db_fetch_array($s_query);
+            $last_status = [];
 
-      $last_status = array();
+            foreach (explode("\n", $s['comments']) as $status) {
+                if (!empty($status) && (strpos($status, ':') !== false) && (substr($status, 0, 1) !== '[')) {
+                    $entry = explode(':', $status, 2);
 
-      foreach (explode("\n", $s['comments']) as $status) {
-        if (!empty($status) && (strpos($status, ':') !== false) && (substr($status, 0, 1) !== '[')) {
-          $entry = explode(':', $status, 2);
+                    $key = trim($entry[0]);
+                    $value = trim($entry[1]);
 
-          $key = trim($entry[0]);
-          $value = trim($entry[1]);
+                    if (($key !== '') && ($value !== '')) {
+                        $last_status[$key] = $value;
+                    }
+                }
+            }
 
-          if ((strlen($key) > 0) && (strlen($value) > 0)) {
-            $last_status[$key] = $value;
-          }
-        }
-      }
+            if (($last_status['Payment Status'] === 'settled') || ($last_status['Payment Status'] === 'settling')) {
+                $refund_total = $this->_app->formatCurrencyRaw($order['total'], $order['currency'], $order['currency_value']);
 
-      if (($last_status['Payment Status'] == 'settled') || ($last_status['Payment Status'] == 'settling')) {
-        $refund_total = $this->_app->formatCurrencyRaw($order['total'], $order['currency'], $order['currency_value']);
+                $r_query = tep_db_query("select comments from orders_status_history where orders_id = '".(int) $order['orders_id']."' and orders_status_id = '".(int) OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID."' and comments like 'Braintree App: Refund (%'");
 
-        $r_query = tep_db_query("select comments from orders_status_history where orders_id = '" . (int)$order['orders_id'] . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID . "' and comments like 'Braintree App: Refund (%'");
+                while ($r = tep_db_fetch_array($r_query)) {
+                    if (preg_match('/^Braintree App\: Refund \(([0-9\.]+)\)\n/', $r['comments'], $r_matches)) {
+                        $refund_total = $this->_app->formatCurrencyRaw($refund_total - $r_matches[1], $order['currency'], 1);
+                    }
+                }
 
-        while ($r = tep_db_fetch_array($r_query)) {
-          if (preg_match('/^Braintree App\: Refund \(([0-9\.]+)\)\n/', $r['comments'], $r_matches)) {
-            $refund_total = $this->_app->formatCurrencyRaw($refund_total - $r_matches[1], $order['currency'], 1);
-          }
-        }
+                if ($refund_total > 0) {
+                    $output .= $this->_app->drawButton($this->_app->getDef('button_dialog_refund'), '#', 'error', 'data-button="braintreeButtonRefundTransaction"', true);
 
-        if ($refund_total > 0) {
-          $output .= $this->_app->drawButton($this->_app->getDef('button_dialog_refund'), '#', 'error', 'data-button="braintreeButtonRefundTransaction"', true);
+                    $dialog_title = tep_output_string_protected($this->_app->getDef('dialog_refund_title'));
+                    $dialog_body = $this->_app->getDef('dialog_refund_body');
+                    $field_amount_title = $this->_app->getDef('dialog_refund_amount_field_title');
+                    $refund_link = tep_href_link('orders.php', 'page='.$_GET['page'].'&oID='.$order['orders_id'].'&action=edit&tabaction=refundTransaction');
+                    $refund_currency = $order['currency'];
+                    $dialog_button_refund = addslashes($this->_app->getDef('dialog_refund_button_refund'));
+                    $dialog_button_cancel = addslashes($this->_app->getDef('dialog_refund_button_cancel'));
 
-          $dialog_title = tep_output_string_protected($this->_app->getDef('dialog_refund_title'));
-          $dialog_body = $this->_app->getDef('dialog_refund_body');
-          $field_amount_title = $this->_app->getDef('dialog_refund_amount_field_title');
-          $refund_link = tep_href_link('orders.php', 'page=' . $_GET['page'] . '&oID=' . $order['orders_id'] . '&action=edit&tabaction=refundTransaction');
-          $refund_currency = $order['currency'];
-          $dialog_button_refund = addslashes($this->_app->getDef('dialog_refund_button_refund'));
-          $dialog_button_cancel = addslashes($this->_app->getDef('dialog_refund_button_cancel'));
-
-          $output .= <<<EOD
+                    $output .= <<<EOD
 <div id="braintree-dialog-refund" title="{$dialog_title}">
   <form id="btRefundForm" action="{$refund_link}" method="post">
     <p>{$dialog_body}</p>
@@ -300,10 +311,10 @@ $(function() {
 });
 </script>
 EOD;
+                }
+            }
         }
-      }
-    }
 
-    return $output;
-  }
+        return $output;
+    }
 }

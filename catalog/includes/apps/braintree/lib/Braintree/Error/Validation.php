@@ -1,22 +1,34 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree\Error;
 
 use Braintree\Util;
 
 /**
  * error object returned as part of a validation error collection
- * provides read-only access to $attribute, $code, and $message
+ * provides read-only access to $attribute, $code, and $message.
  *
  * <b>== More information ==</b>
  *
  * For more detailed information on Validation errors, see {@link https://developers.braintreepayments.com/reference/general/validation-errors/overview/php https://developers.braintreepayments.com/reference/general/validation-errors/overview/php}
  *
- * @package    Braintree
- * @subpackage Error
- *
- * @property-read string $attribute
- * @property-read string $code
- * @property-read string $message
+ * @property string $attribute
+ * @property string $code
+ * @property string $message
  */
 class Validation
 {
@@ -26,34 +38,37 @@ class Validation
 
     /**
      * @ignore
+     *
      * @param array $attributes
      */
-    public function  __construct($attributes)
+    public function __construct($attributes)
     {
         $this->_initializeFromArray($attributes);
     }
-    /**
-     * initializes instance properties from the keys/values of an array
-     * @ignore
-     * @access protected
-     * @param array $attributes array of properties to set - single level
-     * @return void
-     */
-    private function _initializeFromArray($attributes)
-    {
-        foreach($attributes AS $name => $value) {
-            $varName = "_$name";
-            $this->$varName = Util::delimiterToCamelCase($value, '_');
-        }
-    }
 
     /**
+     * @ignore
+     *
+     * @param mixed $name
+     */
+    public function __get($name)
+    {
+        $varName = "_{$name}";
+
+        return $this->{$varName} ?? null;
+    }
+    /**
+     * initializes instance properties from the keys/values of an array.
      *
      * @ignore
+     *
+     * @param array $attributes array of properties to set - single level
      */
-    public function  __get($name)
+    private function _initializeFromArray($attributes): void
     {
-        $varName = "_$name";
-        return isset($this->$varName) ? $this->$varName : null;
+        foreach ($attributes as $name => $value) {
+            $varName = "_{$name}";
+            $this->{$varName} = Util::delimiterToCamelCase($value, '_');
+        }
     }
 }

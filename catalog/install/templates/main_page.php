@@ -8,7 +8,7 @@
   Copyright (c) 2021 osCommerce
 
   Released under the GNU General Public License
-*/
+ */
 ?>
 <!DOCTYPE html>
 
@@ -41,7 +41,7 @@
 </div>
 
 <div id="pageContent">
-  <?php require('templates/pages/' . $page_contents); ?>
+  <?php require 'templates/pages/'.$page_contents; ?>
 </div>
 
 <div id="pageFooter">

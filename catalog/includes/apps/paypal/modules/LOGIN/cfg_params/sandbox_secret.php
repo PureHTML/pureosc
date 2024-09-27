@@ -1,30 +1,37 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2020 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
+class sandbox_secret
+{
+    public $default = '';
+    public $sort_order = 500;
 
-class OSCOM_PayPal_LOGIN_Cfg_sandbox_secret {
-  public $default = '';
-  public $sort_order = 500;
+    public function __construct()
+    {
+        global $OSCOM_PayPal;
 
-  public function __construct() {
-    global $OSCOM_PayPal;
+        $this->title = $OSCOM_PayPal->getDef('cfg_login_sandbox_secret_title');
+        $this->description = $OSCOM_PayPal->getDef('cfg_login_sandbox_secret_desc');
+    }
 
-    $this->title = $OSCOM_PayPal->getDef('cfg_login_sandbox_secret_title');
-    $this->description = $OSCOM_PayPal->getDef('cfg_login_sandbox_secret_desc');
-  }
+    public function getSetField()
+    {
+        $input = tep_draw_input_field('sandbox_secret', OSCOM_APP_PAYPAL_LOGIN_SANDBOX_SECRET, 'id="inputLogInSandboxSecret"');
 
-  public function getSetField() {
-    $input = tep_draw_input_field('sandbox_secret', OSCOM_APP_PAYPAL_LOGIN_SANDBOX_SECRET, 'id="inputLogInSandboxSecret"');
-
-    $result = <<<EOT
+        return <<<EOT
 <div>
   <p>
     <label for="inputLogInSandboxSecret">{$this->title}</label>
@@ -37,7 +44,5 @@ class OSCOM_PayPal_LOGIN_Cfg_sandbox_secret {
   </div>
 </div>
 EOT;
-
-    return $result;
-  }
+    }
 }

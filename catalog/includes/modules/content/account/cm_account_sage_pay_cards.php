@@ -1,92 +1,105 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2020 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
+class cm_account_sage_pay_cards
+{
+    public $code;
+    public $group;
+    public $title;
+    public $description;
+    public $sort_order;
+    public $enabled = false;
 
-class cm_account_sage_pay_cards {
-  var $code;
-  var $group;
-  var $title;
-  var $description;
-  var $sort_order;
-  var $enabled = false;
+    public function __construct()
+    {
+        global $language;
 
-  function __construct() {
-    global $language;
+        $this->code = \get_class($this);
+        $this->group = basename(__DIR__);
 
-    $this->code = get_class($this);
-    $this->group = basename(dirname(__FILE__));
+        $this->title = MODULE_CONTENT_ACCOUNT_SAGE_PAY_CARDS_TITLE;
+        $this->description = MODULE_CONTENT_ACCOUNT_SAGE_PAY_CARDS_DESCRIPTION;
 
-    $this->title = MODULE_CONTENT_ACCOUNT_SAGE_PAY_CARDS_TITLE;
-    $this->description = MODULE_CONTENT_ACCOUNT_SAGE_PAY_CARDS_DESCRIPTION;
-
-    if (defined('MODULE_CONTENT_ACCOUNT_SAGE_PAY_CARDS_STATUS')) {
-      $this->sort_order = MODULE_CONTENT_ACCOUNT_SAGE_PAY_CARDS_SORT_ORDER;
-      $this->enabled = (MODULE_CONTENT_ACCOUNT_SAGE_PAY_CARDS_STATUS == 'True');
-    }
-
-    $this->public_title = MODULE_CONTENT_ACCOUNT_SAGE_PAY_CARDS_LINK_TITLE;
-
-    $sage_pay_enabled = false;
-
-    if (defined('MODULE_PAYMENT_INSTALLED') && !empty(MODULE_PAYMENT_INSTALLED) && in_array('sage_pay_direct.php', explode(';', MODULE_PAYMENT_INSTALLED))) {
-      if (!class_exists('sage_pay_direct')) {
-        include(DIR_FS_CATALOG . 'includes/languages/' . $language . '/modules/payment/sage_pay_direct.php');
-        include(DIR_FS_CATALOG . 'includes/modules/payment/sage_pay_direct.php');
-      }
-
-      $sage_pay_direct = new sage_pay_direct();
-
-      if ($sage_pay_direct->enabled) {
-        $sage_pay_enabled = true;
-
-        if (MODULE_PAYMENT_SAGE_PAY_DIRECT_TRANSACTION_SERVER == 'Test') {
-          $this->title .= ' [Test]';
-          $this->public_title .= ' (' . $sage_pay_direct->code . '; Test)';
+        if (\defined('MODULE_CONTENT_ACCOUNT_SAGE_PAY_CARDS_STATUS')) {
+            $this->sort_order = MODULE_CONTENT_ACCOUNT_SAGE_PAY_CARDS_SORT_ORDER;
+            $this->enabled = (MODULE_CONTENT_ACCOUNT_SAGE_PAY_CARDS_STATUS === 'True');
         }
-      }
+
+        $this->public_title = MODULE_CONTENT_ACCOUNT_SAGE_PAY_CARDS_LINK_TITLE;
+
+        $sage_pay_enabled = false;
+
+        if (\defined('MODULE_PAYMENT_INSTALLED') && !empty(MODULE_PAYMENT_INSTALLED) && \in_array('sage_pay_direct.php', explode(';', MODULE_PAYMENT_INSTALLED), true)) {
+            if (!class_exists('sage_pay_direct')) {
+                include DIR_FS_CATALOG.'includes/languages/'.$language.'/modules/payment/sage_pay_direct.php';
+
+                include DIR_FS_CATALOG.'includes/modules/payment/sage_pay_direct.php';
+            }
+
+            $sage_pay_direct = new sage_pay_direct();
+
+            if ($sage_pay_direct->enabled) {
+                $sage_pay_enabled = true;
+
+                if (MODULE_PAYMENT_SAGE_PAY_DIRECT_TRANSACTION_SERVER === 'Test') {
+                    $this->title .= ' [Test]';
+                    $this->public_title .= ' ('.$sage_pay_direct->code.'; Test)';
+                }
+            }
+        }
+
+        if ($sage_pay_enabled !== true) {
+            $this->enabled = false;
+
+            $this->description = '<div class="secWarning">'.MODULE_CONTENT_ACCOUNT_SAGE_PAY_CARDS_ERROR_MAIN_MODULE.'</div>'.$this->description;
+        }
     }
 
-    if ($sage_pay_enabled !== true) {
-      $this->enabled = false;
+    public function execute(): void
+    {
+        global $oscTemplate;
 
-      $this->description = '<div class="secWarning">' . MODULE_CONTENT_ACCOUNT_SAGE_PAY_CARDS_ERROR_MAIN_MODULE . '</div>' . $this->description;
+        $oscTemplate->_data['account']['account']['links']['sage_pay_cards'] = ['title' => $this->public_title,
+            'link' => tep_href_link('ext/modules/content/account/sage_pay/cards.php'),
+            'icon' => 'newwin'];
     }
-  }
 
-  function execute() {
-    global $oscTemplate;
+    public function isEnabled()
+    {
+        return $this->enabled;
+    }
 
-    $oscTemplate->_data['account']['account']['links']['sage_pay_cards'] = array('title' => $this->public_title,
-                                                                                 'link' => tep_href_link('ext/modules/content/account/sage_pay/cards.php'),
-                                                                                 'icon' => 'newwin');
-  }
+    public function check()
+    {
+        return \defined('MODULE_CONTENT_ACCOUNT_SAGE_PAY_CARDS_STATUS');
+    }
 
-  function isEnabled() {
-    return $this->enabled;
-  }
+    public function install(): void
+    {
+        tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Enable Sage Pay Card Management', 'MODULE_CONTENT_ACCOUNT_SAGE_PAY_CARDS_STATUS', 'True', 'Do you want to enable the Sage Pay Card Management module?', '6', '1', 'tep_cfg_select_option(array(\\'True\\', \\'False\\'), ', now())");
+        tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Sort Order', 'MODULE_CONTENT_ACCOUNT_SAGE_PAY_CARDS_SORT_ORDER', '0', 'Sort order of display. Lowest is displayed first.', '6', '0', now())");
+    }
 
-  function check() {
-    return defined('MODULE_CONTENT_ACCOUNT_SAGE_PAY_CARDS_STATUS');
-  }
+    public function remove(): void
+    {
+        tep_db_query("delete from configuration where configuration_key in ('".implode("', '", $this->keys())."')");
+    }
 
-  function install() {
-    tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Enable Sage Pay Card Management', 'MODULE_CONTENT_ACCOUNT_SAGE_PAY_CARDS_STATUS', 'True', 'Do you want to enable the Sage Pay Card Management module?', '6', '1', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now())");
-    tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Sort Order', 'MODULE_CONTENT_ACCOUNT_SAGE_PAY_CARDS_SORT_ORDER', '0', 'Sort order of display. Lowest is displayed first.', '6', '0', now())");
-  }
-
-  function remove() {
-    tep_db_query("delete from configuration where configuration_key in ('" . implode("', '", $this->keys()) . "')");
-  }
-
-  function keys() {
-    return array('MODULE_CONTENT_ACCOUNT_SAGE_PAY_CARDS_STATUS', 'MODULE_CONTENT_ACCOUNT_SAGE_PAY_CARDS_SORT_ORDER');
-  }
+    public function keys()
+    {
+        return ['MODULE_CONTENT_ACCOUNT_SAGE_PAY_CARDS_STATUS', 'MODULE_CONTENT_ACCOUNT_SAGE_PAY_CARDS_SORT_ORDER'];
+    }
 }

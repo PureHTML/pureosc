@@ -1,39 +1,66 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree;
 
 /**
  * Braintree Address module
- * Creates and manages Braintree Addresses
+ * Creates and manages Braintree Addresses.
  *
  * An Address belongs to a Customer. It can be associated to a
  * CreditCard as the billing address. It can also be used
  * as the shipping address when creating a Transaction.
  *
- * @package   Braintree
- *
- * @property-read string $company
- * @property-read string $countryName
- * @property-read \DateTime $createdAt
- * @property-read string $customerId
- * @property-read string $extendedAddress
- * @property-read string $firstName
- * @property-read string $id
- * @property-read string $lastName
- * @property-read string $locality
- * @property-read string $phoneNumber
- * @property-read string $postalCode
- * @property-read string $region
- * @property-read string $streetAddress
- * @property-read \DateTime $updatedAt
+ * @property string    $company
+ * @property string    $countryName
+ * @property \DateTime $createdAt
+ * @property string    $customerId
+ * @property string    $extendedAddress
+ * @property string    $firstName
+ * @property string    $id
+ * @property string    $lastName
+ * @property string    $locality
+ * @property string    $phoneNumber
+ * @property string    $postalCode
+ * @property string    $region
+ * @property string    $streetAddress
+ * @property \DateTime $updatedAt
  */
 class Address extends Base
 {
     /**
+     * create a printable representation of the object as:
+     * ClassName[property=value, property=value]
+     *
+     * @ignore
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return __CLASS__.'['.
+                Util::attributesToString($this->_attributes).']';
+    }
+    /**
      * returns false if comparing object is not a Address,
-     * or is a Address with a different id
+     * or is a Address with a different id.
      *
      * @param object $other address to compare against
-     * @return boolean
+     *
+     * @return bool
      */
     public function isEqual($other)
     {
@@ -43,51 +70,28 @@ class Address extends Base
     }
 
     /**
-     * create a printable representation of the object as:
-     * ClassName[property=value, property=value]
-     * @ignore
-     * @return string
-     */
-    public function  __toString()
-    {
-        return __CLASS__ . '[' .
-                Util::attributesToString($this->_attributes) . ']';
-    }
-
-    /**
-     * sets instance properties from an array of values
+     *  factory method: returns an instance of Address
+     *  to the requesting method, with populated properties.
      *
      * @ignore
-     * @access protected
-     * @param array $addressAttribs array of address data
-     * @return void
-     */
-    protected function _initialize($addressAttribs)
-    {
-        // set the attributes
-        $this->_attributes = $addressAttribs;
-    }
-
-    /**
-     *  factory method: returns an instance of Address
-     *  to the requesting method, with populated properties
-     * @ignore
+     *
+     * @param mixed $attributes
+     *
      * @return Address
      */
     public static function factory($attributes)
     {
         $instance = new self();
         $instance->_initialize($attributes);
+
         return $instance;
-
     }
-
 
     // static methods redirecting to gateway
 
     /**
-     *
      * @param array $attribs
+     *
      * @return Address
      */
     public static function create($attribs)
@@ -96,8 +100,8 @@ class Address extends Base
     }
 
     /**
-     *
      * @param array $attribs
+     *
      * @return Address
      */
     public static function createNoValidate($attribs)
@@ -106,10 +110,11 @@ class Address extends Base
     }
 
     /**
-     *
      * @param Customer|int $customerOrId
-     * @param int $addressId
+     * @param int          $addressId
+     *
      * @throws InvalidArgumentException
+     *
      * @return Result\Successful
      */
     public static function delete($customerOrId = null, $addressId = null)
@@ -118,10 +123,11 @@ class Address extends Base
     }
 
     /**
-     *
      * @param Customer|int $customerOrId
-     * @param int $addressId
+     * @param int          $addressId
+     *
      * @throws Exception\NotFound
+     *
      * @return Address
      */
     public static function find($customerOrId, $addressId)
@@ -130,12 +136,13 @@ class Address extends Base
     }
 
     /**
-     *
      * @param Customer|int $customerOrId
-     * @param int $addressId
-     * @param array $attributes
+     * @param int          $addressId
+     * @param array        $attributes
+     *
      * @throws Exception\Unexpected
-     * @return Result\Successful|Result\Error
+     *
+     * @return Result\Error|Result\Successful
      */
     public static function update($customerOrId, $addressId, $attributes)
     {
@@ -145,5 +152,18 @@ class Address extends Base
     public static function updateNoValidate($customerOrId, $addressId, $attributes)
     {
         return Configuration::gateway()->address()->updateNoValidate($customerOrId, $addressId, $attributes);
+    }
+
+    /**
+     * sets instance properties from an array of values.
+     *
+     * @ignore
+     *
+     * @param array $addressAttribs array of address data
+     */
+    protected function _initialize($addressAttribs): void
+    {
+        // set the attributes
+        $this->_attributes = $addressAttribs;
     }
 }

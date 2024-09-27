@@ -3,6 +3,12 @@
 declare(strict_types=1);
 
 /**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -15,14 +21,10 @@ use Ergebnis\PhpCsFixer\Config\RuleSet\Php74;
 $header = <<<'HEADER'
 This file is part of the DvereCOM package
 
- https://dvere.com/
-
- (c) Vítězslav Dvořák <http://purehtml.cz>
+ (c) Šimon Formánek <mail@simonformanek.cz>
 This file is part of the MultiFlexi package
 
-https://multiflexi.eu/
-
-(c) Vítězslav Dvořák <http://vitexsoftware.com>
+https://pureosc.com/
 
 For the full copyright and license information, please view the LICENSE
 file that was distributed with this source code.

@@ -1,48 +1,51 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2020 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
-
-  $cl_box_groups[] = array(
+$cl_box_groups[] = [
     'heading' => BOX_HEADING_CATALOG,
-    'apps' => array(
-      array(
-        'code' => 'categories.php',
-        'title' => BOX_CATALOG_CATEGORIES_PRODUCTS,
-        'link' => tep_href_link('categories.php')
-      ),
-      array(
-        'code' => 'products_attributes.php',
-        'title' => BOX_CATALOG_CATEGORIES_PRODUCTS_ATTRIBUTES,
-        'link' => tep_href_link('products_attributes.php')
-      ),
-      array(
-        'code' => 'manufacturers.php',
-        'title' => BOX_CATALOG_MANUFACTURERS,
-        'link' => tep_href_link('manufacturers.php')
-      ),
-      array(
-        'code' => 'reviews.php',
-        'title' => BOX_CATALOG_REVIEWS,
-        'link' => tep_href_link('reviews.php')
-      ),
-      array(
-        'code' => 'specials.php',
-        'title' => BOX_CATALOG_SPECIALS,
-        'link' => tep_href_link('specials.php')
-      ),
-      array(
-        'code' => 'products_expected.php',
-        'title' => BOX_CATALOG_PRODUCTS_EXPECTED,
-        'link' => tep_href_link('products_expected.php')
-      )
-    )
-  );
-?>
+    'apps' => [
+        [
+            'code' => 'categories.php',
+            'title' => BOX_CATALOG_CATEGORIES_PRODUCTS,
+            'link' => tep_href_link('categories.php'),
+        ],
+        [
+            'code' => 'products_attributes.php',
+            'title' => BOX_CATALOG_CATEGORIES_PRODUCTS_ATTRIBUTES,
+            'link' => tep_href_link('products_attributes.php'),
+        ],
+        [
+            'code' => 'manufacturers.php',
+            'title' => BOX_CATALOG_MANUFACTURERS,
+            'link' => tep_href_link('manufacturers.php'),
+        ],
+        [
+            'code' => 'reviews.php',
+            'title' => BOX_CATALOG_REVIEWS,
+            'link' => tep_href_link('reviews.php'),
+        ],
+        [
+            'code' => 'specials.php',
+            'title' => BOX_CATALOG_SPECIALS,
+            'link' => tep_href_link('specials.php'),
+        ],
+        [
+            'code' => 'products_expected.php',
+            'title' => BOX_CATALOG_PRODUCTS_EXPECTED,
+            'link' => tep_href_link('products_expected.php'),
+        ],
+    ],
+];

@@ -1,4 +1,19 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree;
 
 class MerchantAccountGateway
@@ -18,36 +33,41 @@ class MerchantAccountGateway
     public function create($attribs)
     {
         Util::verifyKeys(self::createSignature(), $attribs);
+
         return $this->_doCreate('/merchant_accounts/create_via_api', ['merchant_account' => $attribs]);
     }
 
     public function find($merchant_account_id)
     {
         try {
-            $path = $this->_config->merchantPath() . '/merchant_accounts/' . $merchant_account_id;
+            $path = $this->_config->merchantPath().'/merchant_accounts/'.$merchant_account_id;
             $response = $this->_http->get($path);
+
             return MerchantAccount::factory($response['merchantAccount']);
         } catch (Exception\NotFound $e) {
-            throw new Exception\NotFound('merchant account with id ' . $merchant_account_id . ' not found');
+            throw new Exception\NotFound('merchant account with id '.$merchant_account_id.' not found');
         }
     }
 
     public function update($merchant_account_id, $attributes)
     {
         Util::verifyKeys(self::updateSignature(), $attributes);
-        return $this->_doUpdate('/merchant_accounts/' . $merchant_account_id . '/update_via_api', ['merchant_account' => $attributes]);
+
+        return $this->_doUpdate('/merchant_accounts/'.$merchant_account_id.'/update_via_api', ['merchant_account' => $attributes]);
     }
 
     public static function updateSignature()
     {
         $signature = self::createSignature();
         unset($signature['tosAccepted']);
+
         return $signature;
     }
 
     public function createForCurrency($attribs)
     {
-        $response = $this->_http->post($this->_config->merchantPath() . '/merchant_accounts/create_for_currency', ['merchant_account' => $attribs]);
+        $response = $this->_http->post($this->_config->merchantPath().'/merchant_accounts/create_for_currency', ['merchant_account' => $attribs]);
+
         return $this->_verifyGatewayResponse($response);
     }
 
@@ -57,16 +77,18 @@ class MerchantAccountGateway
             'object' => $this,
             'method' => 'fetchMerchantAccounts',
         ];
+
         return new PaginatedCollection($pager);
     }
 
     public function fetchMerchantAccounts($page)
     {
-        $response = $this->_http->get($this->_config->merchantPath() . '/merchant_accounts?page=' . $page);
+        $response = $this->_http->get($this->_config->merchantPath().'/merchant_accounts?page='.$page);
         $body = $response['merchantAccounts'];
         $merchantAccounts = Util::extractattributeasarray($body, 'merchantAccount');
         $totalItems = $body['totalItems'][0];
         $pageSize = $body['pageSize'][0];
+
         return new PaginatedResult($totalItems, $pageSize, $merchantAccounts);
     }
 
@@ -80,14 +102,14 @@ class MerchantAccountGateway
             'phone',
             'dateOfBirth',
             'ssn',
-            ['address' => $addressSignature]
+            ['address' => $addressSignature],
         ];
 
         $businessSignature = [
             'dbaName',
             'legalName',
             'taxId',
-            ['address' => $addressSignature]
+            ['address' => $addressSignature],
         ];
 
         $fundingSignature = [
@@ -105,13 +127,13 @@ class MerchantAccountGateway
             'masterMerchantAccountId',
             ['individual' => $individualSignature],
             ['funding' => $fundingSignature],
-            ['business' => $businessSignature]
+            ['business' => $businessSignature],
         ];
     }
 
     public function _doCreate($subPath, $params)
     {
-        $fullPath = $this->_config->merchantPath() . $subPath;
+        $fullPath = $this->_config->merchantPath().$subPath;
         $response = $this->_http->post($fullPath, $params);
 
         return $this->_verifyGatewayResponse($response);
@@ -119,7 +141,7 @@ class MerchantAccountGateway
 
     private function _doUpdate($subPath, $params)
     {
-        $fullPath = $this->_config->merchantPath() . $subPath;
+        $fullPath = $this->_config->merchantPath().$subPath;
         $response = $this->_http->put($fullPath, $params);
 
         return $this->_verifyGatewayResponse($response);
@@ -130,17 +152,20 @@ class MerchantAccountGateway
         if (isset($response['response'])) {
             $response = $response['response'];
         }
+
         if (isset($response['merchantAccount'])) {
             // return a populated instance of merchantAccount
             return new Result\Successful(
-                    MerchantAccount::factory($response['merchantAccount'])
-            );
-        } else if (isset($response['apiErrorResponse'])) {
-            return new Result\Error($response['apiErrorResponse']);
-        } else {
-            throw new Exception\Unexpected(
-            "Expected merchant account or apiErrorResponse"
+                MerchantAccount::factory($response['merchantAccount']),
             );
         }
+
+        if (isset($response['apiErrorResponse'])) {
+            return new Result\Error($response['apiErrorResponse']);
+        }
+
+        throw new Exception\Unexpected(
+            'Expected merchant account or apiErrorResponse',
+        );
     }
 }

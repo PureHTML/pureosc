@@ -8,9 +8,9 @@
   Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
-*/
+ */
 
-$log_query_raw = "SELECT l.id, l.customers_id, l.module, l.action, l.result, l.ip_address, UNIX_TIMESTAMP(l.date_added) AS date_added, c.customers_firstname, c.customers_lastname FROM oscom_app_paypal_log l LEFT JOIN customers c ON (l.customers_id = c.customers_id) ORDER BY l.date_added DESC";
+$log_query_raw = 'SELECT l.id, l.customers_id, l.module, l.action, l.result, l.ip_address, UNIX_TIMESTAMP(l.date_added) AS date_added, c.customers_firstname, c.customers_lastname FROM oscom_app_paypal_log l LEFT JOIN customers c ON (l.customers_id = c.customers_id) ORDER BY l.date_added DESC';
 $log_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $log_query_raw, $log_query_numrows);
 $log_query = tep_db_query($log_query_raw);
 ?>
@@ -35,34 +35,36 @@ $log_query = tep_db_query($log_query_raw);
 
   <?php
   if (tep_db_num_rows($log_query) > 0) {
-    while ($log = tep_db_fetch_array($log_query)) {
-      $customers_name = null;
+      while ($log = tep_db_fetch_array($log_query)) {
+          $customers_name = null;
 
-      if ($log['customers_id'] > 0) {
-        $customers_name = trim($log['customers_firstname'] . ' ' . $log['customers_lastname']);
+          if ($log['customers_id'] > 0) {
+              $customers_name = trim($log['customers_firstname'].' '.$log['customers_lastname']);
 
-        if (empty($customers_name)) {
-          $customers_name = '- ? -';
-        }
-      } ?>
+              if (empty($customers_name)) {
+                  $customers_name = '- ? -';
+              }
+          }
+
+ ?>
 
       <tr>
         <td style="text-align: center; width: 30px;">
-          <span class="<?php echo ($log['result'] == '1') ? 'logSuccess' : 'logError'; ?>"><?php echo $log['module']; ?></span>
+          <span class="<?php echo ($log['result'] === '1') ? 'logSuccess' : 'logError'; ?>"><?php echo $log['module']; ?></span>
         </td>
         <td><?php echo $log['action']; ?></td>
         <td><?php echo long2ip($log['ip_address']); ?></td>
-        <td><?php echo (!empty($customers_name)) ? tep_output_string_protected($customers_name) : '<i>' . $OSCOM_PayPal->getDef('guest') . '</i>'; ?></td>
+        <td><?php echo (!empty($customers_name)) ? tep_output_string_protected($customers_name) : '<i>'.$OSCOM_PayPal->getDef('guest').'</i>'; ?></td>
         <td><?php echo date(PHP_DATE_TIME_FORMAT, $log['date_added']); ?></td>
         <td class="pp-table-action">
-          <small><?php echo $OSCOM_PayPal->drawButton($OSCOM_PayPal->getDef('button_view'), tep_href_link('paypal.php', 'action=log&page=' . $_GET['page'] . '&lID=' . $log['id'] . '&subaction=view'), 'info'); ?></small>
+          <small><?php echo $OSCOM_PayPal->drawButton($OSCOM_PayPal->getDef('button_view'), tep_href_link('paypal.php', 'action=log&page='.$_GET['page'].'&lID='.$log['id'].'&subaction=view'), 'info'); ?></small>
         </td>
       </tr>
 
       <?php
-    }
+      }
   } else {
-    ?>
+      ?>
 
     <tr>
       <td colspan="6" style="padding: 10px;"><?php echo $OSCOM_PayPal->getDef('no_entries'); ?></td>
@@ -70,7 +72,8 @@ $log_query = tep_db_query($log_query_raw);
 
     <?php
   }
-  ?>
+
+?>
 
   </tbody>
 </table>

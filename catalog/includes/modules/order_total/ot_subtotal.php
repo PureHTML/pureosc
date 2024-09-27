@@ -1,56 +1,67 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2020 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
+class ot_subtotal
+{
+    public $title;
+    public $output;
 
-  class ot_subtotal {
-    var $title, $output;
+    public function __construct()
+    {
+        $this->code = 'ot_subtotal';
+        $this->title = MODULE_ORDER_TOTAL_SUBTOTAL_TITLE;
+        $this->description = MODULE_ORDER_TOTAL_SUBTOTAL_DESCRIPTION;
+        $this->enabled = \defined('MODULE_ORDER_TOTAL_SUBTOTAL_STATUS') && MODULE_ORDER_TOTAL_SUBTOTAL_STATUS === 'true' ? true : false;
+        $this->sort_order = \defined('MODULE_ORDER_TOTAL_SUBTOTAL_SORT_ORDER') ? MODULE_ORDER_TOTAL_SUBTOTAL_SORT_ORDER : 0;
 
-    function __construct() {
-      $this->code = 'ot_subtotal';
-      $this->title = MODULE_ORDER_TOTAL_SUBTOTAL_TITLE;
-      $this->description = MODULE_ORDER_TOTAL_SUBTOTAL_DESCRIPTION;
-      $this->enabled = defined('MODULE_ORDER_TOTAL_SUBTOTAL_STATUS') && MODULE_ORDER_TOTAL_SUBTOTAL_STATUS == 'true' ? true : false;
-      $this->sort_order = defined('MODULE_ORDER_TOTAL_SUBTOTAL_SORT_ORDER') ? MODULE_ORDER_TOTAL_SUBTOTAL_SORT_ORDER : 0;
-
-      $this->output = array();
+        $this->output = [];
     }
 
-    function process() {
-      global $order, $currencies;
+    public function process(): void
+    {
+        global $order, $currencies;
 
-      $this->output[] = array('title' => $this->title . ':',
-                              'text' => $currencies->format($order->info['subtotal'], true, $order->info['currency'], $order->info['currency_value']),
-                              'value' => $order->info['subtotal']);
+        $this->output[] = ['title' => $this->title.':',
+            'text' => $currencies->format($order->info['subtotal'], true, $order->info['currency'], $order->info['currency_value']),
+            'value' => $order->info['subtotal']];
     }
 
-    function check() {
-      if (!isset($this->_check)) {
-        $check_query = tep_db_query("select configuration_value from configuration where configuration_key = 'MODULE_ORDER_TOTAL_SUBTOTAL_STATUS'");
-        $this->_check = tep_db_num_rows($check_query);
-      }
+    public function check()
+    {
+        if (!isset($this->_check)) {
+            $check_query = tep_db_query("select configuration_value from configuration where configuration_key = 'MODULE_ORDER_TOTAL_SUBTOTAL_STATUS'");
+            $this->_check = tep_db_num_rows($check_query);
+        }
 
-      return $this->_check;
+        return $this->_check;
     }
 
-    function keys() {
-      return array('MODULE_ORDER_TOTAL_SUBTOTAL_STATUS', 'MODULE_ORDER_TOTAL_SUBTOTAL_SORT_ORDER');
+    public function keys()
+    {
+        return ['MODULE_ORDER_TOTAL_SUBTOTAL_STATUS', 'MODULE_ORDER_TOTAL_SUBTOTAL_SORT_ORDER'];
     }
 
-    function install() {
-      tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Display Sub-Total', 'MODULE_ORDER_TOTAL_SUBTOTAL_STATUS', 'true', 'Do you want to display the order sub-total cost?', '6', '1','tep_cfg_select_option(array(\'true\', \'false\'), ', now())");
-      tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Sort Order', 'MODULE_ORDER_TOTAL_SUBTOTAL_SORT_ORDER', '1', 'Sort order of display.', '6', '2', now())");
+    public function install(): void
+    {
+        tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Display Sub-Total', 'MODULE_ORDER_TOTAL_SUBTOTAL_STATUS', 'true', 'Do you want to display the order sub-total cost?', '6', '1','tep_cfg_select_option(array(\\'true\\', \\'false\\'), ', now())");
+        tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Sort Order', 'MODULE_ORDER_TOTAL_SUBTOTAL_SORT_ORDER', '1', 'Sort order of display.', '6', '2', now())");
     }
 
-    function remove() {
-      tep_db_query("delete from configuration where configuration_key in ('" . implode("', '", $this->keys()) . "')");
+    public function remove(): void
+    {
+        tep_db_query("delete from configuration where configuration_key in ('".implode("', '", $this->keys())."')");
     }
-  }
-?>
+}

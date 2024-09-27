@@ -1,43 +1,46 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2020 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
-
-  $cl_box_groups[] = array(
+$cl_box_groups[] = [
     'heading' => BOX_HEADING_LOCATION_AND_TAXES,
-    'apps' => array(
-      array(
-        'code' => 'countries.php',
-        'title' => BOX_TAXES_COUNTRIES,
-        'link' => tep_href_link('countries.php')
-      ),
-      array(
-        'code' => 'zones.php',
-        'title' => BOX_TAXES_ZONES,
-        'link' => tep_href_link('zones.php')
-      ),
-      array(
-        'code' => 'geo_zones.php',
-        'title' => BOX_TAXES_GEO_ZONES,
-        'link' => tep_href_link('geo_zones.php')
-      ),
-      array(
-        'code' => 'tax_classes.php',
-        'title' => BOX_TAXES_TAX_CLASSES,
-        'link' => tep_href_link('tax_classes.php')
-      ),
-      array(
-        'code' => 'tax_rates.php',
-        'title' => BOX_TAXES_TAX_RATES,
-        'link' => tep_href_link('tax_rates.php')
-      )
-    )
-  );
-?>
+    'apps' => [
+        [
+            'code' => 'countries.php',
+            'title' => BOX_TAXES_COUNTRIES,
+            'link' => tep_href_link('countries.php'),
+        ],
+        [
+            'code' => 'zones.php',
+            'title' => BOX_TAXES_ZONES,
+            'link' => tep_href_link('zones.php'),
+        ],
+        [
+            'code' => 'geo_zones.php',
+            'title' => BOX_TAXES_GEO_ZONES,
+            'link' => tep_href_link('geo_zones.php'),
+        ],
+        [
+            'code' => 'tax_classes.php',
+            'title' => BOX_TAXES_TAX_CLASSES,
+            'link' => tep_href_link('tax_classes.php'),
+        ],
+        [
+            'code' => 'tax_rates.php',
+            'title' => BOX_TAXES_TAX_RATES,
+            'link' => tep_href_link('tax_rates.php'),
+        ],
+    ],
+];

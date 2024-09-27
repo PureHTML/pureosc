@@ -8,7 +8,7 @@
   Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
-*/
+ */
 ?>
 
 <div id="appPayPalToolbar" style="padding-bottom: 15px;">
@@ -16,8 +16,8 @@
   <?php echo $OSCOM_PayPal->drawButton($OSCOM_PayPal->getDef('section_payflow'), tep_href_link('paypal.php', 'action=credentials&module=PF'), 'info', 'data-module="PF"'); ?>
 
   <?php
-  if ($current_module == 'PP') {
-    ?>
+  if ($current_module === 'PP') {
+      ?>
 
     <span style="float: right;">
     <?php echo $OSCOM_PayPal->drawButton($OSCOM_PayPal->getDef('button_retrieve_live_credentials'), tep_href_link('paypal.php', 'action=start&subaction=process&type=live'), 'warning'); ?>
@@ -26,14 +26,15 @@
 
     <?php
   }
-  ?>
+
+?>
 
 </div>
 
-<form name="paypalCredentials" action="<?php echo tep_href_link('paypal.php', 'action=credentials&subaction=process&module=' . $current_module); ?>" method="post" class="pp-form">
+<form name="paypalCredentials" action="<?php echo tep_href_link('paypal.php', 'action=credentials&subaction=process&module='.$current_module); ?>" method="post" class="pp-form">
 
   <?php
-  if ($current_module == 'PP') {
+if ($current_module === 'PP') {
     ?>
 
     <h3 class="pp-panel-header-warning"><?php echo $OSCOM_PayPal->getDef('paypal_live_title'); ?></h3>
@@ -149,7 +150,7 @@
     </div>
 
     <?php
-  } elseif ($current_module == 'PF') {
+} elseif ($current_module === 'PF') {
     ?>
 
     <h3 class="pp-panel-header-warning"><?php echo $OSCOM_PayPal->getDef('payflow_live_title'); ?></h3>
@@ -215,8 +216,9 @@
     </div>
 
     <?php
-  }
-  ?>
+}
+
+?>
 
   <p><?php echo $OSCOM_PayPal->drawButton($OSCOM_PayPal->getDef('button_save'), null, 'success'); ?></p>
 

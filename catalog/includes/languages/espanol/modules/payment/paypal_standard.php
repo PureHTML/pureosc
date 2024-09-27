@@ -1,16 +1,19 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2020 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
-
-  define('MODULE_PAYMENT_PAYPAL_STANDARD_TEXT_TITLE', 'Sitio Web de Pago PayPal Estándar');
-  define('MODULE_PAYMENT_PAYPAL_STANDARD_TEXT_PUBLIC_TITLE', 'PayPal (incluye tarjetas de crédito y de débito)');
-  define('MODULE_PAYMENT_PAYPAL_STANDARD_TEXT_DESCRIPTION', '<img src="images/icon_popup.gif" border="0">&nbsp;<a href="https://www.paypal.com/mrb/pal=PS2X9Q773CKG4" target="_blank" style="text-decoration: underline; font-weight: bold;">Visite el Sitio Web de PayPal</a>&nbsp;<a href="javascript:toggleDivBlock(\'paypalStdInfo\');">(info)</a><span id="paypalStdInfo" style="display: none;"><br /><i>Usando el enlace de arriba para registrarse en Paypal subvenciona osCommerce con un pequeño bono financiero por referir a un cliente.</i></span>');
-?>
+\define('MODULE_PAYMENT_PAYPAL_STANDARD_TEXT_TITLE', 'Sitio Web de Pago PayPal Estándar');
+\define('MODULE_PAYMENT_PAYPAL_STANDARD_TEXT_PUBLIC_TITLE', 'PayPal (incluye tarjetas de crédito y de débito)');
+\define('MODULE_PAYMENT_PAYPAL_STANDARD_TEXT_DESCRIPTION', '<img src="images/icon_popup.gif" border="0">&nbsp;<a href="https://www.paypal.com/mrb/pal=PS2X9Q773CKG4" target="_blank" style="text-decoration: underline; font-weight: bold;">Visite el Sitio Web de PayPal</a>&nbsp;<a href="javascript:toggleDivBlock(\'paypalStdInfo\');">(info)</a><span id="paypalStdInfo" style="display: none;"><br /><i>Usando el enlace de arriba para registrarse en Paypal subvenciona osCommerce con un pequeño bono financiero por referir a un cliente.</i></span>');

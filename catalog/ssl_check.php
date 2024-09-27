@@ -8,15 +8,15 @@
   Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
-*/
+ */
 
-require('includes/application_top.php');
+require 'includes/application_top.php';
 
-require('includes/languages/' . $language . '/ssl_check.php');
+require 'includes/languages/'.$language.'/ssl_check.php';
 
 $breadcrumb->add(NAVBAR_TITLE, tep_href_link('ssl_check.php'));
 
-require('includes/template_top.php');
+require 'includes/template_top.php';
 ?>
 
   <h1><?php echo HEADING_TITLE; ?></h1>
@@ -36,5 +36,6 @@ require('includes/template_top.php');
   </div>
 
 <?php
-require('includes/template_bottom.php');
-require('includes/application_bottom.php');
+require 'includes/template_bottom.php';
+
+require 'includes/application_bottom.php';

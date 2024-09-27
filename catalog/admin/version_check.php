@@ -8,78 +8,80 @@
   Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
-*/
+ */
 
-  require('includes/application_top.php');
+require 'includes/application_top.php';
 
-  $current_version = tep_get_version();
-  $major_version = (int)substr($current_version, 0, 1);
+$current_version = tep_get_version();
+$major_version = (int) substr($current_version, 0, 1);
 
-  $releases = null;
-  $new_versions = array();
-  $check_message = array();
+$releases = null;
+$new_versions = [];
+$check_message = [];
 
-  if (function_exists('curl_init')) {
+if (\function_exists('curl_init')) {
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, 'https://osclab.com/' . $major_version);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, \CURLOPT_URL, 'https://osclab.com/'.$major_version);
+    curl_setopt($ch, \CURLOPT_RETURNTRANSFER, 1);
     $response = trim(curl_exec($ch));
     curl_close($ch);
 
     if (!empty($response)) {
-      $releases = explode("\n", $response);
+        $releases = explode("\n", $response);
     }
-  } else {
+} else {
     if ($fp = @fsockopen('ssl://osclab.com', 443, $errno, $errstr, 30)) {
-      $header = 'GET /' . $major_version . ' HTTP/1.1' . "\r\n" .
-                'Host: osclab.com' . "\r\n" .
-                'Connection: close' . "\r\n\r\n";
+        $header = 'GET /'.$major_version." HTTP/1.1\r\n".
+                  "Host: osclab.com\r\n".
+                  "Connection: close\r\n\r\n";
 
-      fwrite($fp, $header);
+        fwrite($fp, $header);
 
-      $response = '';
-      while (!feof($fp)) {
-        $response .= fgets($fp, 1024);
-      }
+        $response = '';
 
-      fclose($fp);
+        while (!feof($fp)) {
+            $response .= fgets($fp, 1024);
+        }
 
-      $response = explode("\r\n\r\n", $response); // split header and content
+        fclose($fp);
 
-      if (isset($response[1]) && !empty($response[1])) {
-        $releases = explode("\n", trim($response[1]));
-      }
+        $response = explode("\r\n\r\n", $response); // split header and content
+
+        if (isset($response[1]) && !empty($response[1])) {
+            $releases = explode("\n", trim($response[1]));
+        }
     }
-  }
+}
 
-  if (is_array($releases) && !empty($releases)) {
+if (\is_array($releases) && !empty($releases)) {
     $serialized = serialize($releases);
-    if ($f = @fopen(DIR_FS_CACHE . 'oscommerce_version_check.cache', 'w')) {
-      fwrite ($f, $serialized, strlen($serialized));
-      fclose($f);
+
+    if ($f = @fopen(DIR_FS_CACHE.'oscommerce_version_check.cache', 'wb')) {
+        fwrite($f, $serialized, \strlen($serialized));
+        fclose($f);
     }
 
     foreach ($releases as $version) {
-      $version_array = explode('|', $version);
+        $version_array = explode('|', $version);
 
-      if (version_compare($current_version, $version_array[0], '<')) {
-        $new_versions[] = $version_array;
-      }
+        if (version_compare($current_version, $version_array[0], '<')) {
+            $new_versions[] = $version_array;
+        }
     }
 
     if (!empty($new_versions)) {
-      $check_message = array('class' => 'secWarning',
-                             'message' => sprintf(VERSION_UPGRADES_AVAILABLE, $new_versions[0][0]));
+        $check_message = ['class' => 'secWarning',
+            'message' => sprintf(VERSION_UPGRADES_AVAILABLE, $new_versions[0][0])];
     } else {
-      $check_message = array('class' => 'secSuccess',
-                             'message' => VERSION_RUNNING_LATEST);
+        $check_message = ['class' => 'secSuccess',
+            'message' => VERSION_RUNNING_LATEST];
     }
-  } else {
-    $check_message = array('class' => 'secError',
-                           'message' => ERROR_COULD_NOT_CONNECT);
-  }
+} else {
+    $check_message = ['class' => 'secError',
+        'message' => ERROR_COULD_NOT_CONNECT];
+}
 
-  require('includes/template_top.php');
+require 'includes/template_top.php';
 ?>
 
     <table border="0" width="100%" cellspacing="0" cellpadding="2">
@@ -92,7 +94,7 @@
         </table></td>
       </tr>
       <tr>
-        <td class="smallText"><?php echo TITLE_INSTALLED_VERSION . ' <strong>osCommerce Online Merchant v' . $current_version . '</strong>'; ?></td>
+        <td class="smallText"><?php echo TITLE_INSTALLED_VERSION.' <strong>osCommerce Online Merchant v'.$current_version.'</strong>'; ?></td>
       </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
@@ -107,7 +109,7 @@
       </tr>
 <?php
   if (!empty($new_versions)) {
-?>
+      ?>
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
@@ -119,26 +121,29 @@
               </tr>
 
 <?php
-    foreach ($new_versions as $version) {
-?>
+          foreach ($new_versions as $version) {
+              ?>
               <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)">
-                <td class="dataTableContent"><?php echo '<a href="' . $version[2] . '" target="_blank">osCommerce Online Merchant v' . $version[0] . '</a>'; ?></td>
-                <td class="dataTableContent"><?php echo tep_date_long(substr($version[1], 0, 4) . '-' . substr($version[1], 4, 2) . '-' . substr($version[1], 6, 2)); ?></td>
-                <td class="dataTableContent" align="right"><?php echo '<a href="' . $version[2] . '" target="_blank">' . tep_image('images/icon_info.gif', IMAGE_ICON_INFO) . '</a>'; ?>&nbsp;</td>
+                <td class="dataTableContent"><?php echo '<a href="'.$version[2].'" target="_blank">osCommerce Online Merchant v'.$version[0].'</a>'; ?></td>
+                <td class="dataTableContent"><?php echo tep_date_long(substr($version[1], 0, 4).'-'.substr($version[1], 4, 2).'-'.substr($version[1], 6, 2)); ?></td>
+                <td class="dataTableContent" align="right"><?php echo '<a href="'.$version[2].'" target="_blank">'.tep_image('images/icon_info.gif', IMAGE_ICON_INFO).'</a>'; ?>&nbsp;</td>
               </tr>
 <?php
-    }
-?>
+          }
+
+      ?>
             </table></td>
           </tr>
         </table></td>
       </tr>
 <?php
   }
+
 ?>
     </table>
 
 <?php
-  require('includes/template_bottom.php');
-  require('includes/application_bottom.php');
+  require 'includes/template_bottom.php';
+
+require 'includes/application_bottom.php';
 ?>

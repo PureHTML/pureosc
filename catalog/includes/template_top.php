@@ -8,7 +8,7 @@
   Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
-*/
+ */
 
 $oscTemplate->buildBlocks();
 ?>
@@ -18,7 +18,7 @@ $oscTemplate->buildBlocks();
   <meta charset="<?php echo CHARSET; ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title><?php echo tep_output_string_protected($oscTemplate->getTitle()); ?></title>
-  <base href="<?php echo ($request_type == 'SSL' ? HTTPS_SERVER : HTTP_SERVER) . DIR_WS_CATALOG; ?>">
+  <base href="<?php echo ($request_type === 'SSL' ? HTTPS_SERVER : HTTP_SERVER).DIR_WS_CATALOG; ?>">
   <link rel="shortcut icon" href="favicon.ico">
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
@@ -48,13 +48,13 @@ $oscTemplate->buildBlocks();
 
 <header class="header">
   <div class="mb-3">
-    <?php require('includes/header.php'); ?>
+    <?php require 'includes/header.php'; ?>
   </div>
 </header>
 
 <?php
 if ($messageStack->size('header') > 0) {
-  ?>
+    ?>
 
   <div class="p-1 bg-danger text-white text-center mb-3">
     <?php echo $messageStack->output('header'); ?>
@@ -64,7 +64,7 @@ if ($messageStack->size('header') > 0) {
 }
 
 if (isset($_GET['error_message']) && !empty($_GET['error_message'])) {
-  ?>
+    ?>
 
   <div class="p-3 mb-3 bg-danger text-white text-center">
     <?php echo htmlspecialchars(stripslashes(urldecode($_GET['error_message']))); ?>
@@ -74,7 +74,7 @@ if (isset($_GET['error_message']) && !empty($_GET['error_message'])) {
 }
 
 if (isset($_GET['info_message']) && !empty($_GET['info_message'])) {
-  ?>
+    ?>
 
   <div class="p-3 mb-3 bg-info text-white text-center">
     <?php echo htmlspecialchars(stripslashes(urldecode($_GET['info_message']))); ?>
@@ -82,6 +82,7 @@ if (isset($_GET['info_message']) && !empty($_GET['info_message'])) {
 
   <?php
 }
+
 ?>
 
 <main class="main">
@@ -95,7 +96,7 @@ if (isset($_GET['info_message']) && !empty($_GET['info_message'])) {
 
       <?php
       if ($oscTemplate->hasBlocks('boxes_column_left') && isset($cPath_array)) {
-        ?>
+          ?>
 
         <aside class="aside col-lg-2">
           <?php echo $oscTemplate->getBlocks('boxes_column_left'); ?>
@@ -103,7 +104,8 @@ if (isset($_GET['info_message']) && !empty($_GET['info_message'])) {
 
         <?php
       }
-      ?>
+
+?>
 
       <div class="col">
         <div class="<?php echo str_replace('_', '-', basename($PHP_SELF, '.php')); ?>">

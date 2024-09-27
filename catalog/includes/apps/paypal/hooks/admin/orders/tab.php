@@ -1,71 +1,79 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2020 osCommerce
-
-  Released under the GNU General Public License
-*/
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 if (!class_exists('OSCOM_PayPal')) {
-  include(DIR_FS_CATALOG . 'includes/apps/paypal/OSCOM_PayPal.php');
+    include DIR_FS_CATALOG.'includes/apps/paypal/OSCOM_PayPal.php';
 }
 
-class paypal_hook_admin_orders_tab {
-  public function __construct() {
-    global $OSCOM_PayPal;
+class admin_orders_tab
+{
+    public function __construct()
+    {
+        global $OSCOM_PayPal;
 
-    if (!isset($OSCOM_PayPal) || !is_object($OSCOM_PayPal) || (get_class($OSCOM_PayPal) != 'OSCOM_PayPal')) {
-      $OSCOM_PayPal = new OSCOM_PayPal();
-    }
-
-    $this->_app = $OSCOM_PayPal;
-
-    $this->_app->loadLanguageFile('hooks/admin/orders/tab.php');
-  }
-
-  public function execute() {
-    global $oID, $base_url;
-
-    if (!defined('OSCOM_APP_PAYPAL_TRANSACTIONS_ORDER_STATUS_ID')) {
-      return false;
-    }
-
-    $output = '';
-
-    $status = array();
-
-    $ppstatus_query = tep_db_query("select comments from orders_status_history where orders_id = '" . (int)$oID . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_TRANSACTIONS_ORDER_STATUS_ID . "' and comments like 'Transaction ID:%' order by date_added desc limit 1");
-    if (tep_db_num_rows($ppstatus_query)) {
-      $ppstatus = tep_db_fetch_array($ppstatus_query);
-
-      foreach (explode("\n", $ppstatus['comments']) as $s) {
-        if (!empty($s) && (strpos($s, ':') !== false)) {
-          $entry = explode(':', $s, 2);
-
-          $status[trim($entry[0])] = trim($entry[1]);
+        if (!isset($OSCOM_PayPal) || !\is_object($OSCOM_PayPal) || (\get_class($OSCOM_PayPal) !== 'OSCOM_PayPal')) {
+            $OSCOM_PayPal = new OSCOM_PayPal();
         }
-      }
 
-      if (isset($status['Transaction ID'])) {
-        $order_query = tep_db_query("select o.orders_id, o.payment_method, o.currency, o.currency_value, ot.value as total from orders o, orders_total ot where o.orders_id = '" . (int)$oID . "' and o.orders_id = ot.orders_id and ot.class = 'ot_total'");
-        $order = tep_db_fetch_array($order_query);
+        $this->_app = $OSCOM_PayPal;
 
-        $pp_server = (strpos(strtolower($order['payment_method']), 'sandbox') !== false) ? 'sandbox' : 'live';
+        $this->_app->loadLanguageFile('hooks/admin/orders/tab.php');
+    }
 
-        $info_button = $this->_app->drawButton($this->_app->getDef('button_details'), tep_href_link('orders.php', 'page=' . $_GET['page'] . '&oID=' . $oID . '&action=edit&tabaction=getTransactionDetails'), 'primary', null, true);
-        $capture_button = $this->getCaptureButton($status, $order);
-        $void_button = $this->getVoidButton($status, $order);
-        $refund_button = $this->getRefundButton($status, $order);
-        $paypal_button = $this->_app->drawButton($this->_app->getDef('button_view_at_paypal'), 'https://www.' . ($pp_server == 'sandbox' ? 'sandbox.' : '') . 'paypal.com/cgi-bin/webscr?cmd=_view-a-trans&id=' . $status['Transaction ID'], 'info', 'target="_blank"', true);
+    public function execute()
+    {
+        global $oID, $base_url;
 
-        $tab_title = addslashes($this->_app->getDef('tab_title'));
-        $tab_link = substr(tep_href_link('orders.php', tep_get_all_get_params()), strlen($base_url)) . '#section_paypal_content';
+        if (!\defined('OSCOM_APP_PAYPAL_TRANSACTIONS_ORDER_STATUS_ID')) {
+            return false;
+        }
 
-        $output = <<<EOD
+        $output = '';
+
+        $status = [];
+
+        $ppstatus_query = tep_db_query("select comments from orders_status_history where orders_id = '".(int) $oID."' and orders_status_id = '".(int) OSCOM_APP_PAYPAL_TRANSACTIONS_ORDER_STATUS_ID."' and comments like 'Transaction ID:%' order by date_added desc limit 1");
+
+        if (tep_db_num_rows($ppstatus_query)) {
+            $ppstatus = tep_db_fetch_array($ppstatus_query);
+
+            foreach (explode("\n", $ppstatus['comments']) as $s) {
+                if (!empty($s) && (strpos($s, ':') !== false)) {
+                    $entry = explode(':', $s, 2);
+
+                    $status[trim($entry[0])] = trim($entry[1]);
+                }
+            }
+
+            if (isset($status['Transaction ID'])) {
+                $order_query = tep_db_query("select o.orders_id, o.payment_method, o.currency, o.currency_value, ot.value as total from orders o, orders_total ot where o.orders_id = '".(int) $oID."' and o.orders_id = ot.orders_id and ot.class = 'ot_total'");
+                $order = tep_db_fetch_array($order_query);
+
+                $pp_server = (strpos(strtolower($order['payment_method']), 'sandbox') !== false) ? 'sandbox' : 'live';
+
+                $info_button = $this->_app->drawButton($this->_app->getDef('button_details'), tep_href_link('orders.php', 'page='.$_GET['page'].'&oID='.$oID.'&action=edit&tabaction=getTransactionDetails'), 'primary', null, true);
+                $capture_button = $this->getCaptureButton($status, $order);
+                $void_button = $this->getVoidButton($status, $order);
+                $refund_button = $this->getRefundButton($status, $order);
+                $paypal_button = $this->_app->drawButton($this->_app->getDef('button_view_at_paypal'), 'https://www.'.($pp_server === 'sandbox' ? 'sandbox.' : '').'paypal.com/cgi-bin/webscr?cmd=_view-a-trans&id='.$status['Transaction ID'], 'info', 'target="_blank"', true);
+
+                $tab_title = addslashes($this->_app->getDef('tab_title'));
+                $tab_link = substr(tep_href_link('orders.php', tep_get_all_get_params()), \strlen($base_url)).'#section_paypal_content';
+
+                $output = <<<EOD
 <script>
 $(function() {
   $('#orderTabs ul').append('<li><a href="{$tab_link}">{$tab_title}</a></li>');
@@ -76,41 +84,43 @@ $(function() {
   {$info_button} {$capture_button} {$void_button} {$refund_button} {$paypal_button}
 </div>
 EOD;
-      }
-    }
-
-    return $output;
-  }
-
-  public function getCaptureButton($status, $order) {
-    $output = '';
-
-    if (($status['Pending Reason'] == 'authorization') || ($status['Payment Status'] == 'In-Progress')) {
-      $v_query = tep_db_query("select comments from orders_status_history where orders_id = '" . (int)$order['orders_id'] . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_TRANSACTIONS_ORDER_STATUS_ID . "' and comments like '%PayPal App: Void (%' limit 1");
-
-      if (!tep_db_num_rows($v_query)) {
-        $capture_total = $this->_app->formatCurrencyRaw($order['total'], $order['currency'], $order['currency_value']);
-
-        $c_query = tep_db_query("select comments from orders_status_history where orders_id = '" . (int)$order['orders_id'] . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_TRANSACTIONS_ORDER_STATUS_ID . "' and comments like 'PayPal App: Capture (%'");
-        while ($c = tep_db_fetch_array($c_query)) {
-          if (preg_match('/^PayPal App\: Capture \(([0-9\.]+)\)\n/', $c['comments'], $c_matches)) {
-            $capture_total -= $this->_app->formatCurrencyRaw($c_matches[1], $order['currency'], 1);
-          }
+            }
         }
 
-        if ($capture_total > 0) {
-          $output .= $this->_app->drawButton($this->_app->getDef('button_dialog_capture'), '#', 'success', 'data-button="paypalButtonDoCapture"', true);
+        return $output;
+    }
 
-          $dialog_title = tep_output_string_protected($this->_app->getDef('dialog_capture_title'));
-          $dialog_body = $this->_app->getDef('dialog_capture_body');
-          $field_amount_title = $this->_app->getDef('dialog_capture_amount_field_title');
-          $field_last_capture_title = $this->_app->getDef('dialog_capture_last_capture_field_title', array('currency' => $order['currency']));
-          $capture_link = tep_href_link('orders.php', 'page=' . $_GET['page'] . '&oID=' . $order['orders_id'] . '&action=edit&tabaction=doCapture');
-          $capture_currency = $order['currency'];
-          $dialog_button_capture = addslashes($this->_app->getDef('dialog_capture_button_capture'));
-          $dialog_button_cancel = addslashes($this->_app->getDef('dialog_capture_button_cancel'));
+    public function getCaptureButton($status, $order)
+    {
+        $output = '';
 
-          $output .= <<<EOD
+        if (($status['Pending Reason'] === 'authorization') || ($status['Payment Status'] === 'In-Progress')) {
+            $v_query = tep_db_query("select comments from orders_status_history where orders_id = '".(int) $order['orders_id']."' and orders_status_id = '".(int) OSCOM_APP_PAYPAL_TRANSACTIONS_ORDER_STATUS_ID."' and comments like '%PayPal App: Void (%' limit 1");
+
+            if (!tep_db_num_rows($v_query)) {
+                $capture_total = $this->_app->formatCurrencyRaw($order['total'], $order['currency'], $order['currency_value']);
+
+                $c_query = tep_db_query("select comments from orders_status_history where orders_id = '".(int) $order['orders_id']."' and orders_status_id = '".(int) OSCOM_APP_PAYPAL_TRANSACTIONS_ORDER_STATUS_ID."' and comments like 'PayPal App: Capture (%'");
+
+                while ($c = tep_db_fetch_array($c_query)) {
+                    if (preg_match('/^PayPal App\: Capture \(([0-9\.]+)\)\n/', $c['comments'], $c_matches)) {
+                        $capture_total -= $this->_app->formatCurrencyRaw($c_matches[1], $order['currency'], 1);
+                    }
+                }
+
+                if ($capture_total > 0) {
+                    $output .= $this->_app->drawButton($this->_app->getDef('button_dialog_capture'), '#', 'success', 'data-button="paypalButtonDoCapture"', true);
+
+                    $dialog_title = tep_output_string_protected($this->_app->getDef('dialog_capture_title'));
+                    $dialog_body = $this->_app->getDef('dialog_capture_body');
+                    $field_amount_title = $this->_app->getDef('dialog_capture_amount_field_title');
+                    $field_last_capture_title = $this->_app->getDef('dialog_capture_last_capture_field_title', ['currency' => $order['currency']]);
+                    $capture_link = tep_href_link('orders.php', 'page='.$_GET['page'].'&oID='.$order['orders_id'].'&action=edit&tabaction=doCapture');
+                    $capture_currency = $order['currency'];
+                    $dialog_button_capture = addslashes($this->_app->getDef('dialog_capture_button_capture'));
+                    $dialog_button_cancel = addslashes($this->_app->getDef('dialog_capture_button_cancel'));
+
+                    $output .= <<<EOD
 <div id="paypal-dialog-capture" title="{$dialog_title}">
   <form id="ppCaptureForm" action="{$capture_link}" method="post">
     <p>{$dialog_body}</p>
@@ -151,8 +161,8 @@ $(function() {
     var ppCaptureTotal = {$capture_total};
 
     $('#ppCaptureAmount').keyup(function() {
-      if (this.value !== this.value.replace(/[^0-9\.]/g, '')) {
-        this.value = this.value.replace(/[^0-9\.]/g, '');
+      if (this.value !== this.value.replace(/[^0-9\\.]/g, '')) {
+        this.value = this.value.replace(/[^0-9\\.]/g, '');
       }
 
       if ( this.value < ppCaptureTotal ) {
@@ -166,39 +176,41 @@ $(function() {
 });
 </script>
 EOD;
+                }
+            }
         }
-      }
+
+        return $output;
     }
 
-    return $output;
-  }
+    public function getVoidButton($status, $order)
+    {
+        $output = '';
 
-  public function getVoidButton($status, $order) {
-    $output = '';
+        if ($status['Pending Reason'] === 'authorization') {
+            $v_query = tep_db_query("select comments from orders_status_history where orders_id = '".(int) $order['orders_id']."' and orders_status_id = '".(int) OSCOM_APP_PAYPAL_TRANSACTIONS_ORDER_STATUS_ID."' and comments like '%PayPal App: Void (%' limit 1");
 
-    if ($status['Pending Reason'] == 'authorization') {
-      $v_query = tep_db_query("select comments from orders_status_history where orders_id = '" . (int)$order['orders_id'] . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_TRANSACTIONS_ORDER_STATUS_ID . "' and comments like '%PayPal App: Void (%' limit 1");
+            if (!tep_db_num_rows($v_query)) {
+                $capture_total = $this->_app->formatCurrencyRaw($order['total'], $order['currency'], $order['currency_value']);
 
-      if (!tep_db_num_rows($v_query)) {
-        $capture_total = $this->_app->formatCurrencyRaw($order['total'], $order['currency'], $order['currency_value']);
+                $c_query = tep_db_query("select comments from orders_status_history where orders_id = '".(int) $order['orders_id']."' and orders_status_id = '".(int) OSCOM_APP_PAYPAL_TRANSACTIONS_ORDER_STATUS_ID."' and comments like 'PayPal App: Capture (%'");
 
-        $c_query = tep_db_query("select comments from orders_status_history where orders_id = '" . (int)$order['orders_id'] . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_TRANSACTIONS_ORDER_STATUS_ID . "' and comments like 'PayPal App: Capture (%'");
-        while ($c = tep_db_fetch_array($c_query)) {
-          if (preg_match('/^PayPal App\: Capture \(([0-9\.]+)\)\n/', $c['comments'], $c_matches)) {
-            $capture_total -= $this->_app->formatCurrencyRaw($c_matches[1], $order['currency'], 1);
-          }
-        }
+                while ($c = tep_db_fetch_array($c_query)) {
+                    if (preg_match('/^PayPal App\: Capture \(([0-9\.]+)\)\n/', $c['comments'], $c_matches)) {
+                        $capture_total -= $this->_app->formatCurrencyRaw($c_matches[1], $order['currency'], 1);
+                    }
+                }
 
-        if ($capture_total > 0) {
-          $output .= $this->_app->drawButton($this->_app->getDef('button_dialog_void'), '#', 'warning', 'data-button="paypalButtonDoVoid"', true);
+                if ($capture_total > 0) {
+                    $output .= $this->_app->drawButton($this->_app->getDef('button_dialog_void'), '#', 'warning', 'data-button="paypalButtonDoVoid"', true);
 
-          $dialog_title = tep_output_string_protected($this->_app->getDef('dialog_void_title'));
-          $dialog_body = $this->_app->getDef('dialog_void_body');
-          $void_link = tep_href_link('orders.php', 'page=' . $_GET['page'] . '&oID=' . $order['orders_id'] . '&action=edit&tabaction=doVoid');
-          $dialog_button_void = addslashes($this->_app->getDef('dialog_void_button_void'));
-          $dialog_button_cancel = addslashes($this->_app->getDef('dialog_void_button_cancel'));
+                    $dialog_title = tep_output_string_protected($this->_app->getDef('dialog_void_title'));
+                    $dialog_body = $this->_app->getDef('dialog_void_body');
+                    $void_link = tep_href_link('orders.php', 'page='.$_GET['page'].'&oID='.$order['orders_id'].'&action=edit&tabaction=doVoid');
+                    $dialog_button_void = addslashes($this->_app->getDef('dialog_void_button_void'));
+                    $dialog_button_cancel = addslashes($this->_app->getDef('dialog_void_button_cancel'));
 
-          $output .= <<<EOD
+                    $output .= <<<EOD
 <div id="paypal-dialog-void" title="{$dialog_title}">
   <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>{$dialog_body}</p>
 </div>
@@ -227,64 +239,67 @@ $(function() {
 });
 </script>
 EOD;
+                }
+            }
         }
-      }
+
+        return $output;
     }
 
-    return $output;
-  }
+    public function getRefundButton($status, $order)
+    {
+        $output = '';
 
-  public function getRefundButton($status, $order) {
-    $output = '';
+        $tids = [];
 
-    $tids = array();
+        $ppr_query = tep_db_query("select comments from orders_status_history where orders_id = '".(int) $_GET['oID']."' and orders_status_id = '".(int) OSCOM_APP_PAYPAL_TRANSACTIONS_ORDER_STATUS_ID."' and comments like 'PayPal App: %' order by date_added desc");
 
-    $ppr_query = tep_db_query("select comments from orders_status_history where orders_id = '" . (int)$_GET['oID'] . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_TRANSACTIONS_ORDER_STATUS_ID . "' and comments like 'PayPal App: %' order by date_added desc");
-    if (tep_db_num_rows($ppr_query)) {
-      while ($ppr = tep_db_fetch_array($ppr_query)) {
-        if (strpos($ppr['comments'], 'PayPal App: Refund') !== false) {
-          preg_match('/Parent ID\: ([A-Za-z0-9]+)$/', $ppr['comments'], $ppr_matches);
+        if (tep_db_num_rows($ppr_query)) {
+            while ($ppr = tep_db_fetch_array($ppr_query)) {
+                if (strpos($ppr['comments'], 'PayPal App: Refund') !== false) {
+                    preg_match('/Parent ID\: ([A-Za-z0-9]+)$/', $ppr['comments'], $ppr_matches);
 
-          $tids[$ppr_matches[1]]['Refund'] = true;
-        } elseif (strpos($ppr['comments'], 'PayPal App: Capture') !== false) {
-          preg_match('/^PayPal App\: Capture \(([0-9\.]+)\).*Transaction ID\: ([A-Za-z0-9]+)/s', $ppr['comments'], $ppr_matches);
+                    $tids[$ppr_matches[1]]['Refund'] = true;
+                } elseif (strpos($ppr['comments'], 'PayPal App: Capture') !== false) {
+                    preg_match('/^PayPal App\: Capture \(([0-9\.]+)\).*Transaction ID\: ([A-Za-z0-9]+)/s', $ppr['comments'], $ppr_matches);
 
-          $tids[$ppr_matches[2]]['Amount'] = $ppr_matches[1];
+                    $tids[$ppr_matches[2]]['Amount'] = $ppr_matches[1];
+                }
+            }
+        } elseif ($status['Payment Status'] === 'Completed') {
+            $tids[$status['Transaction ID']]['Amount'] = $this->_app->formatCurrencyRaw($order['total'], $order['currency'], $order['currency_value']);
         }
-      }
-    } elseif ($status['Payment Status'] == 'Completed') {
-      $tids[$status['Transaction ID']]['Amount'] = $this->_app->formatCurrencyRaw($order['total'], $order['currency'], $order['currency_value']);
-    }
 
-    $can_refund = false;
+        $can_refund = false;
 
-    foreach ($tids as $value) {
-      if (!isset($value['Refund'])) {
-        $can_refund = true;
-        break;
-      }
-    }
+        foreach ($tids as $value) {
+            if (!isset($value['Refund'])) {
+                $can_refund = true;
 
-    if ($can_refund === true) {
-      $output .= $this->_app->drawButton($this->_app->getDef('button_dialog_refund'), '#', 'error', 'data-button="paypalButtonRefundTransaction"', true);
+                break;
+            }
+        }
 
-      $dialog_title = tep_output_string_protected($this->_app->getDef('dialog_refund_title'));
-      $dialog_body = $this->_app->getDef('dialog_refund_body');
-      $refund_link = tep_href_link('orders.php', 'page=' . $_GET['page'] . '&oID=' . $_GET['oID'] . '&action=edit&tabaction=refundTransaction');
-      $dialog_button_refund = addslashes($this->_app->getDef('dialog_refund_button_refund'));
-      $dialog_button_cancel = addslashes($this->_app->getDef('dialog_refund_button_cancel'));
+        if ($can_refund === true) {
+            $output .= $this->_app->drawButton($this->_app->getDef('button_dialog_refund'), '#', 'error', 'data-button="paypalButtonRefundTransaction"', true);
 
-      $refund_fields = '';
+            $dialog_title = tep_output_string_protected($this->_app->getDef('dialog_refund_title'));
+            $dialog_body = $this->_app->getDef('dialog_refund_body');
+            $refund_link = tep_href_link('orders.php', 'page='.$_GET['page'].'&oID='.$_GET['oID'].'&action=edit&tabaction=refundTransaction');
+            $dialog_button_refund = addslashes($this->_app->getDef('dialog_refund_button_refund'));
+            $dialog_button_cancel = addslashes($this->_app->getDef('dialog_refund_button_cancel'));
 
-      $counter = 0;
+            $refund_fields = '';
 
-      foreach ($tids as $key => $value) {
-        $refund_fields .= '<p><input type="checkbox" name="ppRefund[]" value="' . $key . '" id="ppRefundPartial' . $counter . '"' . (isset($value['Refund']) ? ' disabled="disabled"' : '') . ' /> <label for="ppRefundPartial' . $counter . '"' . (isset($value['Refund']) ? ' style="text-decoration: line-through;"' : '') . '>' . $this->_app->getDef('dialog_refund_payment_title', array('amount' => $value['Amount'])) . '</label></p>';
+            $counter = 0;
 
-        $counter++;
-      }
+            foreach ($tids as $key => $value) {
+                $refund_fields .= '<p><input type="checkbox" name="ppRefund[]" value="'.$key.'" id="ppRefundPartial'.$counter.'"'.(isset($value['Refund']) ? ' disabled="disabled"' : '').' /> <label for="ppRefundPartial'.$counter.'"'.(isset($value['Refund']) ? ' style="text-decoration: line-through;"' : '').'>'.$this->_app->getDef('dialog_refund_payment_title', ['amount' => $value['Amount']]).'</label></p>';
 
-      $output .= <<<EOD
+                ++$counter;
+            }
+
+            $output .= <<<EOD
 <div id="paypal-dialog-refund" title="{$dialog_title}">
   <form id="ppRefundForm" action="{$refund_link}" method="post">
     <p>{$dialog_body}</p>
@@ -317,8 +332,8 @@ $(function() {
 });
 </script>
 EOD;
-    }
+        }
 
-    return $output;
-  }
+        return $output;
+    }
 }

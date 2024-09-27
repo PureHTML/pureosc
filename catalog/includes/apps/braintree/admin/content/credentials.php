@@ -8,30 +8,30 @@
   Copyright (c) 2017 osCommerce
 
   Released under the GNU General Public License
-*/
+ */
 
 if (!class_exists('currencies')) {
-  include(DIR_FS_CATALOG . 'includes/classes/currencies.php');
+    include DIR_FS_CATALOG.'includes/classes/currencies.php';
 }
 
 $ma_data = [];
 
 if (tep_not_null(OSCOM_APP_PAYPAL_BRAINTREE_CURRENCIES_MA)) {
-  foreach (explode(';', OSCOM_APP_PAYPAL_BRAINTREE_CURRENCIES_MA) as $ma) {
-    list($a, $currency) = explode(':', $ma);
+    foreach (explode(';', OSCOM_APP_PAYPAL_BRAINTREE_CURRENCIES_MA) as $ma) {
+        [$a, $currency] = explode(':', $ma);
 
-    $ma_data[$currency] = $a;
-  }
+        $ma_data[$currency] = $a;
+    }
 }
 
 $sandbox_ma_data = [];
 
 if (tep_not_null(OSCOM_APP_PAYPAL_BRAINTREE_SANDBOX_CURRENCIES_MA)) {
-  foreach (explode(';', OSCOM_APP_PAYPAL_BRAINTREE_SANDBOX_CURRENCIES_MA) as $ma) {
-    list($a, $currency) = explode(':', $ma);
+    foreach (explode(';', OSCOM_APP_PAYPAL_BRAINTREE_SANDBOX_CURRENCIES_MA) as $ma) {
+        [$a, $currency] = explode(':', $ma);
 
-    $sandbox_ma_data[$currency] = $a;
-  }
+        $sandbox_ma_data[$currency] = $a;
+    }
 }
 
 $currencies = new currencies();
@@ -68,20 +68,20 @@ $currencies = new currencies();
 
     <?php
     foreach (array_keys($currencies->currencies) as $c) {
-      ?>
+        ?>
 
       <div>
         <p>
-          <label for="live_ma<?php echo $c; ?>"><?php echo $c . ($c == DEFAULT_CURRENCY ? ' <small>(' . $OSCOM_Braintree->getDef('default') . ')</small>' : ''); ?></label>
-          <?php echo tep_draw_input_field('currency_ma[' . $c . ']', (isset($ma_data[$c]) ? $ma_data[$c] : '')); ?>
+          <label for="live_ma<?php echo $c; ?>"><?php echo $c.($c === DEFAULT_CURRENCY ? ' <small>('.$OSCOM_Braintree->getDef('default').')</small>' : ''); ?></label>
+          <?php echo tep_draw_input_field('currency_ma['.$c.']', $ma_data[$c] ?? ''); ?>
         </p>
       </div>
 
       <?php
     }
 
-    echo tep_draw_hidden_field('live_currencies_ma', OSCOM_APP_PAYPAL_BRAINTREE_CURRENCIES_MA);
-    ?>
+echo tep_draw_hidden_field('live_currencies_ma', OSCOM_APP_PAYPAL_BRAINTREE_CURRENCIES_MA);
+?>
 
   </div>
 
@@ -113,21 +113,21 @@ $currencies = new currencies();
   <div class="bt-panel bt-panel-warning">
 
     <?php
-    foreach (array_keys($currencies->currencies) as $c) {
-      ?>
+foreach (array_keys($currencies->currencies) as $c) {
+    ?>
 
       <div>
         <p>
-          <label for="sandbox_ma<?php echo $c; ?>"><?php echo $c . ($c == DEFAULT_CURRENCY ? ' <small>(' . $OSCOM_Braintree->getDef('default') . ')</small>' : ''); ?></label>
-          <?php echo tep_draw_input_field('sandbox_currency_ma[' . $c . ']', (isset($sandbox_ma_data[$c]) ? $sandbox_ma_data[$c] : '')); ?>
+          <label for="sandbox_ma<?php echo $c; ?>"><?php echo $c.($c === DEFAULT_CURRENCY ? ' <small>('.$OSCOM_Braintree->getDef('default').')</small>' : ''); ?></label>
+          <?php echo tep_draw_input_field('sandbox_currency_ma['.$c.']', $sandbox_ma_data[$c] ?? ''); ?>
         </p>
       </div>
 
       <?php
-    }
+}
 
-    echo tep_draw_hidden_field('sandbox_currencies_ma', OSCOM_APP_PAYPAL_BRAINTREE_SANDBOX_CURRENCIES_MA);
-    ?>
+echo tep_draw_hidden_field('sandbox_currencies_ma', OSCOM_APP_PAYPAL_BRAINTREE_SANDBOX_CURRENCIES_MA);
+?>
 
   </div>
 

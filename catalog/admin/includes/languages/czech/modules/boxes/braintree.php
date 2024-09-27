@@ -1,16 +1,20 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2021 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
+\define('MODULES_ADMIN_MENU_BRAINTREE_HEADING', 'Braintree');
 
-define('MODULES_ADMIN_MENU_BRAINTREE_HEADING', 'Braintree');
-
-define('MODULES_ADMIN_MENU_BRAINTREE_CONFIGURE', 'Configure');
-define('MODULES_ADMIN_MENU_BRAINTREE_MANAGE_CREDENTIALS', 'Credentials');
+\define('MODULES_ADMIN_MENU_BRAINTREE_CONFIGURE', 'Configure');
+\define('MODULES_ADMIN_MENU_BRAINTREE_MANAGE_CREDENTIALS', 'Credentials');

@@ -60,7 +60,7 @@
         <?php echo tep_draw_input_field('pto', null, 'class="form-control ms-0" placeholder="Max"'); ?>
       </div>
 
-      <?php echo tep_draw_button(IMAGE_BUTTON_SEARCH, 'triangle-1-e', null, 'btn-primary', array('params' => 'onclick="return checkFormProductFilters();"')); ?>
+      <?php echo tep_draw_button(IMAGE_BUTTON_SEARCH, 'triangle-1-e', null, 'btn-primary', ['params' => 'onclick="return checkFormProductFilters();"']); ?>
     </div>
   </div>
 </div>

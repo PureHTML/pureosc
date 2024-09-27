@@ -1,36 +1,44 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2020 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
+class sitemap_index_xml
+{
+    public $type = 'warning';
+    public $title;
 
-class securityCheck_sitemap_index_xml {
-  public $type = 'warning';
-  public $title;
+    public function __construct()
+    {
+        global $language;
 
-  public function __construct() {
-    global $language;
+        include DIR_FS_ADMIN.'includes/languages/'.$language.'/modules/security_check/sitemap_index_xml.php';
 
-    include(DIR_FS_ADMIN . 'includes/languages/' . $language . '/modules/security_check/sitemap_index_xml.php');
-
-    $this->title = MODULE_SECURITY_CHECK_SITEMAP_INDEX_XML_TITLE;
-  }
-
-  public function pass() {
-    if (!file_exists(DIR_FS_CATALOG . 'sitemap-index.xml') || filesize(DIR_FS_CATALOG . '/sitemap-index.xml') == 0) {
-      return false;
+        $this->title = MODULE_SECURITY_CHECK_SITEMAP_INDEX_XML_TITLE;
     }
 
-    return true;
-  }
+    public function pass()
+    {
+        if (!file_exists(DIR_FS_CATALOG.'sitemap-index.xml') || filesize(DIR_FS_CATALOG.'/sitemap-index.xml') === 0) {
+            return false;
+        }
 
-  public function getMessage() {
-    return '<a href="' . tep_catalog_href_link('sitemap.php') . '" target="_blank">' . WARNING_SITEMAP_INDEX_XML_EXIST . '</a>';
-  }
+        return true;
+    }
+
+    public function getMessage()
+    {
+        return '<a href="'.tep_catalog_href_link('sitemap.php').'" target="_blank">'.WARNING_SITEMAP_INDEX_XML_EXIST.'</a>';
+    }
 }

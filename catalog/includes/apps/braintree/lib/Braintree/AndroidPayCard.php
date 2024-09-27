@@ -1,46 +1,60 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree;
 
 // NEXT_MAJOR_VERSION rename to GooglePayCard
 
 /**
  * Braintree AndroidPayCard module
- * Creates and manages Braintree Android Pay cards
+ * Creates and manages Braintree Android Pay cards.
  *
  * <b>== More information ==</b>
  *
  * See {@link https://developers.braintreepayments.com/javascript+php}<br />
  *
- * @package    Braintree
  * @category   Resources
  *
- * @property-read string $bin
- * @property-read string $cardType
- * @property-read \DateTime $createdAt
- * @property-read string $customerId
- * @property-read boolean $default
- * @property-read string $expirationMonth
- * @property-read string $expirationYear
- * @property-read string $googleTransactionId
- * @property-read string $imageUrl
- * @property-read boolean $isNetworkTokenized
- * @property-read string $last4
- * @property-read string $sourceCardLast4
- * @property-read string $sourceCardType
- * @property-read string $sourceDescription
- * @property-read \Braintree\Subscription[] $subscriptions
- * @property-read string $token
- * @property-read \DateTime $updatedAt
- * @property-read string $virtualCardLast4
- * @property-read string $virtualCardType
+ * @property string                    $bin
+ * @property string                    $cardType
+ * @property \DateTime                 $createdAt
+ * @property string                    $customerId
+ * @property bool                      $default
+ * @property string                    $expirationMonth
+ * @property string                    $expirationYear
+ * @property string                    $googleTransactionId
+ * @property string                    $imageUrl
+ * @property bool                      $isNetworkTokenized
+ * @property string                    $last4
+ * @property string                    $sourceCardLast4
+ * @property string                    $sourceCardType
+ * @property string                    $sourceDescription
+ * @property \Braintree\Subscription[] $subscriptions
+ * @property string                    $token
+ * @property \DateTime                 $updatedAt
+ * @property string                    $virtualCardLast4
+ * @property string                    $virtualCardType
  */
 class AndroidPayCard extends Base
 {
     /* instance methods */
     /**
-     * returns false if default is null or false
+     * returns false if default is null or false.
      *
-     * @return boolean
+     * @return bool
      */
     public function isDefault()
     {
@@ -49,40 +63,43 @@ class AndroidPayCard extends Base
 
     /**
      *  factory method: returns an instance of AndroidPayCard
-     *  to the requesting method, with populated properties
+     *  to the requesting method, with populated properties.
      *
      * @ignore
+     *
+     * @param mixed $attributes
+     *
      * @return AndroidPayCard
      */
     public static function factory($attributes)
     {
         $defaultAttributes = [
-            'expirationMonth'    => '',
-            'expirationYear'    => '',
-            'last4'  => $attributes['virtualCardLast4'],
-            'cardType'  => $attributes['virtualCardType'],
+            'expirationMonth' => '',
+            'expirationYear' => '',
+            'last4' => $attributes['virtualCardLast4'],
+            'cardType' => $attributes['virtualCardType'],
         ];
 
         $instance = new self();
         $instance->_initialize(array_merge($defaultAttributes, $attributes));
+
         return $instance;
     }
 
     /**
-     * sets instance properties from an array of values
+     * sets instance properties from an array of values.
      *
-     * @access protected
      * @param array $androidPayCardAttribs array of Android Pay card properties
-     * @return void
      */
-    protected function _initialize($androidPayCardAttribs)
+    protected function _initialize($androidPayCardAttribs): void
     {
         // set the attributes
         $this->_attributes = $androidPayCardAttribs;
 
         $subscriptionArray = [];
+
         if (isset($androidPayCardAttribs['subscriptions'])) {
-            foreach ($androidPayCardAttribs['subscriptions'] AS $subscription) {
+            foreach ($androidPayCardAttribs['subscriptions'] as $subscription) {
                 $subscriptionArray[] = Subscription::factory($subscription);
             }
         }

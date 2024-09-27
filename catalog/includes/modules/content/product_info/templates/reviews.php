@@ -17,7 +17,7 @@
 
   <?php
   foreach ($reviews_array as $reviews) {
-    ?>
+      ?>
 
     <div class="mb-5" id="reviews-<?php echo $reviews['reviews_id']; ?>">
 
@@ -25,7 +25,7 @@
         <time datetime="<?php echo date(DateTime::ATOM, strtotime($reviews['date_added'])); ?>" title="<?php echo tep_datetime_short($reviews['date_added']); ?>">
           <small><?php echo tep_date_short($reviews['date_added']); ?></small></time>
         <span class="fw-bold"><?php echo TEXT_BY; ?><?php echo tep_output_string_protected($reviews['customers_name']); ?></span>
-        <span class="float-end"><?php echo sprintf(TEXT_OF_5_STARS, $reviews['reviews_rating']) . ' ' . tep_draw_stars($reviews['reviews_rating']); ?></span>
+        <span class="float-end"><?php echo sprintf(TEXT_OF_5_STARS, $reviews['reviews_rating']).' '.tep_draw_stars($reviews['reviews_rating']); ?></span>
       </div>
 
       <p><?php echo nl2br(tep_output_string_protected($reviews['reviews_text'])); ?></p>
@@ -34,6 +34,7 @@
 
     <?php
   }
+
   ?>
 
 </div>

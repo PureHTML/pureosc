@@ -1,4 +1,19 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree\Error;
 
 use Braintree\Util;
@@ -6,19 +21,16 @@ use Countable;
 use JsonSerializable;
 
 /**
- *
  * Error handler
- * Handles validation errors
+ * Handles validation errors.
  *
  * Contains a read-only property $error which is a ValidationErrorCollection
  *
- * @package    Braintree
- * @subpackage Errors
  * @category   Errors
  *
- * @property-read object $errors
+ * @property object $errors
  */
-class ErrorCollection implements Countable, JsonSerializable
+class ErrorCollection implements \Countable, \JsonSerializable
 {
     private $_errors;
 
@@ -29,10 +41,30 @@ class ErrorCollection implements Countable, JsonSerializable
     }
 
     /**
-     * Return count of items in collection
-     * Implements countable
+     * @ignore
      *
-     * @return integer
+     * @param mixed $name
+     */
+    public function __get($name)
+    {
+        $varName = "_{$name}";
+
+        return $this->{$varName} ?? null;
+    }
+
+    /**
+     * @ignore
+     */
+    public function __toString()
+    {
+        return sprintf('%s', $this->_errors);
+    }
+
+    /**
+     * Return count of items in collection
+     * Implements countable.
+     *
+     * @return int
      */
     public function count()
     {
@@ -56,14 +88,14 @@ class ErrorCollection implements Countable, JsonSerializable
      */
     public function deepSize()
     {
-        $size = $this->_errors->deepSize();
-        return $size;
+        return $this->_errors->deepSize();
     }
 
     /**
-     * return errors for the passed key name
+     * return errors for the passed key name.
      *
      * @param string $key
+     *
      * @return mixed
      */
     public function forKey($key)
@@ -73,20 +105,27 @@ class ErrorCollection implements Countable, JsonSerializable
 
     /**
      * return errors for the passed html field.
-     * For example, $result->errors->onHtmlField("transaction[customer][last_name]")
+     * For example, $result->errors->onHtmlField("transaction[customer][last_name]").
      *
      * @param string $field
+     *
      * @return array
      */
     public function onHtmlField($field)
     {
-        $pieces = preg_split("/[\[\]]+/", $field, 0, PREG_SPLIT_NO_EMPTY);
+        $pieces = preg_split('/[\\[\\]]+/', $field, 0, \PREG_SPLIT_NO_EMPTY);
         $errors = $this;
-        foreach(array_slice($pieces, 0, -1) as $key) {
+
+        foreach (\array_slice($pieces, 0, -1) as $key) {
             $errors = $errors->forKey(Util::delimiterToCamelCase($key));
-            if (!isset($errors)) { return []; }
+
+            if (!isset($errors)) {
+                return [];
+            }
         }
+
         $finalKey = Util::delimiterToCamelCase(end($pieces));
+
         return $errors->onAttribute($finalKey);
     }
 
@@ -104,28 +143,10 @@ class ErrorCollection implements Countable, JsonSerializable
     }
 
     /**
+     * Implementation of JsonSerializable.
      *
      * @ignore
-     */
-    public function  __get($name)
-    {
-        $varName = "_$name";
-        return isset($this->$varName) ? $this->$varName : null;
-    }
-
-    /**
      *
-     * @ignore
-     */
-    public function  __toString()
-    {
-        return sprintf('%s', $this->_errors);
-    }
-
-    /**
-     * Implementation of JsonSerializable
-     *
-     * @ignore
      * @return array
      */
     public function jsonSerialize()

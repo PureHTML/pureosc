@@ -1,38 +1,46 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree\Transaction;
 
 use Braintree\Instance;
 
 /**
- * Apple Pay card details from a transaction
- *
- * @package    Braintree
- * @subpackage Transaction
+ * Apple Pay card details from a transaction.
  */
 
 /**
- * creates an instance of ApplePayCardDetails
+ * creates an instance of ApplePayCardDetails.
  *
- *
- * @package    Braintree
- * @subpackage Transaction
- *
- * @property-read string $bin
- * @property-read string $cardType
- * @property-read string $cardholderName
- * @property-read string $commercial
- * @property-read string $country_of_issuance
- * @property-read string $debit
- * @property-read string $durbin_regulated
- * @property-read string $expirationMonth
- * @property-read string $expirationYear
- * @property-read string $healthcare
- * @property-read string $issuing_bank
- * @property-read string $paymentInstrumentName
- * @property-read string $payroll
- * @property-read string $prepaid
- * @property-read string $product_id
- * @property-read string $sourceDescription
+ * @property string $bin
+ * @property string $cardholderName
+ * @property string $cardType
+ * @property string $commercial
+ * @property string $country_of_issuance
+ * @property string $debit
+ * @property string $durbin_regulated
+ * @property string $expirationMonth
+ * @property string $expirationYear
+ * @property string $healthcare
+ * @property string $issuing_bank
+ * @property string $paymentInstrumentName
+ * @property string $payroll
+ * @property string $prepaid
+ * @property string $product_id
+ * @property string $sourceDescription
  */
 class ApplePayCardDetails extends Instance
 {
@@ -40,6 +48,8 @@ class ApplePayCardDetails extends Instance
 
     /**
      * @ignore
+     *
+     * @param mixed $attributes
      */
     public function __construct($attributes)
     {

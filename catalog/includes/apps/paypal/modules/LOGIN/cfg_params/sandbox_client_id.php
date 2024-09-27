@@ -1,32 +1,39 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2020 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
+class sandbox_client_id
+{
+    public $default = '';
+    public $title;
+    public $description;
+    public $sort_order = 400;
 
-class OSCOM_PayPal_LOGIN_Cfg_sandbox_client_id {
-  public $default = '';
-  public $title;
-  public $description;
-  public $sort_order = 400;
+    public function __construct()
+    {
+        global $OSCOM_PayPal;
 
-  public function __construct() {
-    global $OSCOM_PayPal;
+        $this->title = $OSCOM_PayPal->getDef('cfg_login_sandbox_client_id_title');
+        $this->description = $OSCOM_PayPal->getDef('cfg_login_sandbox_client_id_desc');
+    }
 
-    $this->title = $OSCOM_PayPal->getDef('cfg_login_sandbox_client_id_title');
-    $this->description = $OSCOM_PayPal->getDef('cfg_login_sandbox_client_id_desc');
-  }
+    public function getSetField()
+    {
+        $input = tep_draw_input_field('sandbox_client_id', OSCOM_APP_PAYPAL_LOGIN_SANDBOX_CLIENT_ID, 'id="inputLogInSandboxClientId"');
 
-  public function getSetField() {
-    $input = tep_draw_input_field('sandbox_client_id', OSCOM_APP_PAYPAL_LOGIN_SANDBOX_CLIENT_ID, 'id="inputLogInSandboxClientId"');
-
-    $result = <<<EOT
+        return <<<EOT
 <div>
   <p>
     <label for="inputLogInSandboxClientId">{$this->title}</label>
@@ -39,7 +46,5 @@ class OSCOM_PayPal_LOGIN_Cfg_sandbox_client_id {
   </div>
 </div>
 EOT;
-
-    return $result;
-  }
+    }
 }

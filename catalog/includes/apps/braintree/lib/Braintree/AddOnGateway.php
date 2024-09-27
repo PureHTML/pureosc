@@ -1,28 +1,30 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree;
 
 class AddOnGateway
 {
-    /**
-     *
-     * @var Gateway
-     */
-    private $_gateway;
+    private Gateway $_gateway;
+
+    private Configuration $_config;
+
+    private Http $_http;
 
     /**
-     *
-     * @var Configuration
-     */
-    private $_config;
-
-    /**
-     *
-     * @var Http
-     */
-    private $_http;
-
-    /**
-     *
      * @param Gateway $gateway
      */
     public function __construct($gateway)
@@ -34,19 +36,18 @@ class AddOnGateway
     }
 
     /**
-     *
      * @return AddOn[]
      */
     public function all()
     {
-        $path = $this->_config->merchantPath() . '/add_ons';
+        $path = $this->_config->merchantPath().'/add_ons';
         $response = $this->_http->get($path);
 
-        $addOns = ["addOn" => $response['addOns']];
+        $addOns = ['addOn' => $response['addOns']];
 
         return Util::extractAttributeAsArray(
             $addOns,
-            'addOn'
+            'addOn',
         );
     }
 }

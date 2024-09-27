@@ -1,22 +1,32 @@
 <?php
-namespace Braintree;
 
-use InvalidArgumentException;
+declare(strict_types=1);
 
 /**
- * Braintree UsBankAccountGateway module
+ * This file is part of the DvereCOM package
  *
- * @package    Braintree
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Braintree;
+
+/**
+ * Braintree UsBankAccountGateway module.
+ *
  * @category   Resources
  */
 
 /**
- * Manages Braintree UsBankAccounts
+ * Manages Braintree UsBankAccounts.
  *
  * <b>== More information ==</b>
  *
- *
- * @package    Braintree
  * @category   Resources
  */
 class UsBankAccountGateway
@@ -33,35 +43,37 @@ class UsBankAccountGateway
         $this->_http = new Http($gateway->config);
     }
 
-
     /**
-     * find a usBankAccount by token
+     * find a usBankAccount by token.
      *
-     * @access public
      * @param string $token paypal accountunique id
-     * @return UsBankAccount
+     *
      * @throws Exception\NotFound
+     *
+     * @return UsBankAccount
      */
     public function find($token)
     {
         try {
-            $path = $this->_config->merchantPath() . '/payment_methods/us_bank_account/' . $token;
+            $path = $this->_config->merchantPath().'/payment_methods/us_bank_account/'.$token;
             $response = $this->_http->get($path);
+
             return UsBankAccount::factory($response['usBankAccount']);
         } catch (Exception\NotFound $e) {
             throw new Exception\NotFound(
-                'US bank account with token ' . $token . ' not found'
+                'US bank account with token '.$token.' not found',
             );
         }
-
     }
 
     /**
-     * create a new sale for the current UsBank account
+     * create a new sale for the current UsBank account.
      *
      * @param string $token
-     * @param array $transactionAttribs
-     * @return Result\Successful|Result\Error
+     * @param array  $transactionAttribs
+     *
+     * @return Result\Error|Result\Successful
+     *
      * @see Transaction::sale()
      */
     public function sale($token, $transactionAttribs)
@@ -69,13 +81,13 @@ class UsBankAccountGateway
         return Transaction::sale(
             array_merge(
                 $transactionAttribs,
-                ['paymentMethodToken' => $token]
-            )
+                ['paymentMethodToken' => $token],
+            ),
         );
     }
 
     /**
-     * generic method for validating incoming gateway responses
+     * generic method for validating incoming gateway responses.
      *
      * creates a new UsBankAccount object and encapsulates
      * it inside a Result\Successful object, or
@@ -83,23 +95,28 @@ class UsBankAccountGateway
      * alternatively, throws an Unexpected exception if the response is invalid.
      *
      * @ignore
+     *
      * @param array $response gateway response values
-     * @return Result\Successful|Result\Error
+     *
      * @throws Exception\Unexpected
+     *
+     * @return Result\Error|Result\Successful
      */
     private function _verifyGatewayResponse($response)
     {
         if (isset($response['usBankAccount'])) {
             // return a populated instance of UsBankAccount
             return new Result\Successful(
-                    UsBankAccount::factory($response['usBankAccount'])
-            );
-        } else if (isset($response['apiErrorResponse'])) {
-            return new Result\Error($response['apiErrorResponse']);
-        } else {
-            throw new Exception\Unexpected(
-            'Expected US bank account or apiErrorResponse'
+                UsBankAccount::factory($response['usBankAccount']),
             );
         }
+
+        if (isset($response['apiErrorResponse'])) {
+            return new Result\Error($response['apiErrorResponse']);
+        }
+
+        throw new Exception\Unexpected(
+            'Expected US bank account or apiErrorResponse',
+        );
     }
 }

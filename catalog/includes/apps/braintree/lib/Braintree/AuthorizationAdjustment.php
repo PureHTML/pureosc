@@ -1,19 +1,34 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree;
 
 /**
- * Creates an instance of AuthorizationAdjustment as returned from a transaction
+ * Creates an instance of AuthorizationAdjustment as returned from a transaction.
  *
- * @package Braintree
- *
- * @property-read string $amount
- * @property-read boolean $success
- * @property-read \DateTime $timestamp
- *
+ * @property string    $amount
+ * @property bool      $success
+ * @property \DateTime $timestamp
  */
-
 class AuthorizationAdjustment extends Base
 {
+    public function __toString()
+    {
+        return __CLASS__.'['.Util::attributesToString($this->_attributes).']';
+    }
     public static function factory($attributes)
     {
         $instance = new self();
@@ -22,13 +37,8 @@ class AuthorizationAdjustment extends Base
         return $instance;
     }
 
-    protected function _initialize($authorizationAdjustmentAttribs)
+    protected function _initialize($authorizationAdjustmentAttribs): void
     {
         $this->_attributes = $authorizationAdjustmentAttribs;
-    }
-
-    public function  __toString()
-    {
-        return __CLASS__ . '[' . Util::attributesToString($this->_attributes) . ']';
     }
 }

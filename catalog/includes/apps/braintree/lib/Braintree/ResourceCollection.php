@@ -1,11 +1,24 @@
 <?php
-namespace Braintree;
 
-use Iterator;
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Braintree;
 
 /**
  * Braintree ResourceCollection
- * ResourceCollection is a container object for result data
+ * ResourceCollection is a container object for result data.
  *
  * stores and retrieves search results and aggregate data
  *
@@ -17,11 +30,8 @@ use Iterator;
  *   print_r($transaction->id);
  * }
  * </code>
- *
- * @package    Braintree
- * @subpackage Utility
  */
-class ResourceCollection implements Iterator
+class ResourceCollection implements \Iterator
 {
     private $_batchIndex;
     private $_ids;
@@ -31,22 +41,22 @@ class ResourceCollection implements Iterator
     private $_pager;
 
     /**
-     * set up the resource collection
+     * set up the resource collection.
      *
      * expects an array of attributes with literal keys
      *
      * @param array $response
      * @param array $pager
      */
-    public function  __construct($response, $pager)
+    public function __construct($response, $pager)
     {
-        $this->_pageSize = $response["searchResults"]["pageSize"];
-        $this->_ids = $response["searchResults"]["ids"];
+        $this->_pageSize = $response['searchResults']['pageSize'];
+        $this->_ids = $response['searchResults']['ids'];
         $this->_pager = $pager;
     }
 
     /**
-     * returns the current item when iterating with foreach
+     * returns the current item when iterating with foreach.
      */
     public function current()
     {
@@ -54,7 +64,7 @@ class ResourceCollection implements Iterator
     }
 
     /**
-     * returns the first item in the collection
+     * returns the first item in the collection.
      *
      * @return mixed
      */
@@ -62,6 +72,7 @@ class ResourceCollection implements Iterator
     {
         $ids = $this->_ids;
         $page = $this->_getPage([$ids[0]]);
+
         return $page[0];
     }
 
@@ -71,85 +82,84 @@ class ResourceCollection implements Iterator
     }
 
     /**
-     * advances to the next item in the collection when iterating with foreach
+     * advances to the next item in the collection when iterating with foreach.
      */
-    public function next()
+    public function next(): void
     {
         ++$this->_index;
     }
 
     /**
-     * rewinds the testIterateOverResults collection to the first item when iterating with foreach
+     * rewinds the testIterateOverResults collection to the first item when iterating with foreach.
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->_batchIndex = 0;
         $this->_getNextPage();
     }
 
     /**
-     * returns whether the current item is valid when iterating with foreach
+     * returns whether the current item is valid when iterating with foreach.
      */
     public function valid()
     {
-        if ($this->_index == count($this->_items) && $this->_batchIndex < count($this->_ids)) {
+        if ($this->_index === \count($this->_items) && $this->_batchIndex < \count($this->_ids)) {
             $this->_getNextPage();
         }
 
-        if ($this->_index < count($this->_items)) {
+        if ($this->_index < \count($this->_items)) {
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     public function maximumCount()
     {
-        return count($this->_ids);
+        return \count($this->_ids);
     }
 
-    private function _getNextPage()
+    /**
+     * returns all IDs in the collection.
+     *
+     * @return array
+     */
+    public function getIds()
     {
-        if (empty($this->_ids))
-        {
+        return $this->_ids;
+    }
+
+    private function _getNextPage(): void
+    {
+        if (empty($this->_ids)) {
             $this->_items = [];
-        }
-        else
-        {
-            $this->_items = $this->_getPage(array_slice($this->_ids, $this->_batchIndex, $this->_pageSize));
+        } else {
+            $this->_items = $this->_getPage(\array_slice($this->_ids, $this->_batchIndex, $this->_pageSize));
             $this->_batchIndex += $this->_pageSize;
             $this->_index = 0;
         }
     }
 
     /**
-     * requests the next page of results for the collection
+     * requests the next page of results for the collection.
      *
-     * @return void
+     * @param mixed $ids
      */
     private function _getPage($ids)
     {
         $object = $this->_pager['object'];
         $method = $this->_pager['method'];
         $methodArgs = [];
+
         foreach ($this->_pager['methodArgs'] as $arg) {
-            array_push($methodArgs, $arg);
+            $methodArgs[] = $arg;
         }
-        array_push($methodArgs, $ids);
 
-        return call_user_func_array(
+        $methodArgs[] = $ids;
+
+        return \call_user_func_array(
             [$object, $method],
-            $methodArgs
+            $methodArgs,
         );
-    }
-
-    /**
-     * returns all IDs in the collection
-     *
-     * @return array
-     */
-    public function getIds()
-    {
-       return $this->_ids;
     }
 }

@@ -8,11 +8,11 @@
   Copyright (c) 2021 osCommerce
 
   Released under the GNU General Public License
-*/
+ */
 
-require('includes/application_top.php');
+require 'includes/application_top.php';
 
-require(DIR_FS_CATALOG . 'includes/apps/braintree/OSCOM_Braintree.php');
+require DIR_FS_CATALOG.'includes/apps/braintree/OSCOM_Braintree.php';
 $OSCOM_Braintree = new OSCOM_Braintree();
 
 $content = 'configure.php';
@@ -21,27 +21,27 @@ $subaction = '';
 
 $OSCOM_Braintree->loadLanguageFile('admin.php');
 
-if (isset($_GET['action']) && file_exists(DIR_FS_CATALOG . 'includes/apps/braintree/admin/actions/' . basename($_GET['action']) . '.php')) {
-  $action = basename($_GET['action']);
+if (isset($_GET['action']) && file_exists(DIR_FS_CATALOG.'includes/apps/braintree/admin/actions/'.basename($_GET['action']).'.php')) {
+    $action = basename($_GET['action']);
 }
 
-$OSCOM_Braintree->loadLanguageFile('admin/' . $action . '.php');
+$OSCOM_Braintree->loadLanguageFile('admin/'.$action.'.php');
 
 if ($OSCOM_Braintree->migrate()) {
-  tep_redirect(tep_href_link('braintree.php', tep_get_all_get_params()));
+    tep_redirect(tep_href_link('braintree.php', tep_get_all_get_params()));
 }
 
-include(DIR_FS_CATALOG . 'includes/apps/braintree/admin/actions/' . $action . '.php');
+include DIR_FS_CATALOG.'includes/apps/braintree/admin/actions/'.$action.'.php';
 
-if (isset($_GET['subaction']) && file_exists(DIR_FS_CATALOG . 'includes/apps/braintree/admin/actions/' . $action . '/' . basename($_GET['subaction']) . '.php')) {
-  $subaction = basename($_GET['subaction']);
+if (isset($_GET['subaction']) && file_exists(DIR_FS_CATALOG.'includes/apps/braintree/admin/actions/'.$action.'/'.basename($_GET['subaction']).'.php')) {
+    $subaction = basename($_GET['subaction']);
 }
 
 if (!empty($subaction)) {
-  include(DIR_FS_CATALOG . 'includes/apps/braintree/admin/actions/' . $action . '/' . $subaction . '.php');
+    include DIR_FS_CATALOG.'includes/apps/braintree/admin/actions/'.$action.'/'.$subaction.'.php';
 }
 
-include(DIR_WS_INCLUDES . 'template_top.php');
+include DIR_WS_INCLUDES.'template_top.php';
 ?>
 
 <style>
@@ -338,10 +338,10 @@ include(DIR_WS_INCLUDES . 'template_top.php');
     APP: {
       BRAINTREE: {
         version: '<?php echo $OSCOM_Braintree->getVersion(); ?>',
-        versionCheckResult: <?php echo (defined('OSCOM_APP_PAYPAL_BRAINTREE_VERSION_CHECK')) ? '"' . OSCOM_APP_PAYPAL_BRAINTREE_VERSION_CHECK . '"' : 'undefined'; ?>,
+        versionCheckResult: <?php echo (\defined('OSCOM_APP_PAYPAL_BRAINTREE_VERSION_CHECK')) ? '"'.OSCOM_APP_PAYPAL_BRAINTREE_VERSION_CHECK.'"' : 'undefined'; ?>,
         action: '<?php echo $action; ?>',
         doOnlineVersionCheck: false,
-        canApplyOnlineUpdates: <?php echo class_exists('ZipArchive') && function_exists('json_encode') && function_exists('openssl_verify') ? 'true' : 'false'; ?>,
+        canApplyOnlineUpdates: <?php echo class_exists('ZipArchive') && \function_exists('json_encode') && \function_exists('openssl_verify') ? 'true' : 'false'; ?>,
         accountTypes: {
           live: <?php echo ($OSCOM_Braintree->hasApiCredentials('live') === true) ? 'true' : 'false'; ?>,
           sandbox: <?php echo ($OSCOM_Braintree->hasApiCredentials('sandbox') === true) ? 'true' : 'false'; ?>
@@ -403,23 +403,24 @@ include(DIR_WS_INCLUDES . 'template_top.php');
 <div class="bt-container">
   <div class="bt-header">
     <div id="btAppInfo" style="float: right;">
-      <?php echo $OSCOM_Braintree->getTitle() . ' v' . $OSCOM_Braintree->getVersion() . ' <a href="' . tep_href_link('braintree.php', 'action=info') . '">' . $OSCOM_Braintree->getDef('app_link_info') . '</a> <a href="' . tep_href_link('braintree.php', 'action=privacy') . '">' . $OSCOM_Braintree->getDef('app_link_privacy') . '</a>'; ?>
+      <?php echo $OSCOM_Braintree->getTitle().' v'.$OSCOM_Braintree->getVersion().' <a href="'.tep_href_link('braintree.php', 'action=info').'">'.$OSCOM_Braintree->getDef('app_link_info').'</a> <a href="'.tep_href_link('braintree.php', 'action=privacy').'">'.$OSCOM_Braintree->getDef('app_link_privacy').'</a>'; ?>
     </div>
 
-    <a href="<?php echo tep_href_link('braintree.php', 'action=' . $action); ?>"><img src="<?php echo tep_catalog_href_link('images/apps/braintree/braintree.png'); ?>"/></a>
+    <a href="<?php echo tep_href_link('braintree.php', 'action='.$action); ?>"><img src="<?php echo tep_catalog_href_link('images/apps/braintree/braintree.png'); ?>"/></a>
   </div>
 
   <div id="btAppUpdateNotice" style="padding: 0 12px 0 12px; display: none;">
     <div class="bt-panel bt-panel-success">
-      <?php echo $OSCOM_Braintree->getDef('update_available_body', array('button_view_update' => $OSCOM_Braintree->drawButton($OSCOM_Braintree->getDef('button_view_update'), tep_href_link('braintree.php', 'action=update'), 'success'))); ?>
+      <?php echo $OSCOM_Braintree->getDef('update_available_body', ['button_view_update' => $OSCOM_Braintree->drawButton($OSCOM_Braintree->getDef('button_view_update'), tep_href_link('braintree.php', 'action=update'), 'success')]); ?>
     </div>
   </div>
 
   <?php
   if ($OSCOM_Braintree->hasAlert()) {
-    echo $OSCOM_Braintree->getAlerts();
+      echo $OSCOM_Braintree->getAlerts();
   }
-  ?>
+
+?>
 
   <div style="padding: 0 10px 10px 10px;">
     <script>
@@ -429,7 +430,7 @@ include(DIR_WS_INCLUDES . 'template_top.php');
       }
     </script>
 
-    <?php include(DIR_FS_CATALOG . 'includes/apps/braintree/admin/content/' . basename($content)); ?>
+    <?php include DIR_FS_CATALOG.'includes/apps/braintree/admin/content/'.basename($content); ?>
   </div>
 </div>
 
@@ -456,5 +457,6 @@ include(DIR_WS_INCLUDES . 'template_top.php');
 </script>
 
 <?php
-include(DIR_WS_INCLUDES . 'template_bottom.php');
-require(DIR_WS_INCLUDES . 'application_bottom.php');
+include DIR_WS_INCLUDES.'template_bottom.php';
+
+require DIR_WS_INCLUDES.'application_bottom.php';

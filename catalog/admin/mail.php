@@ -8,54 +8,58 @@
   Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
-*/
+ */
 
-  require('includes/application_top.php');
+require 'includes/application_top.php';
 
-  $action = (isset($_GET['action']) ? $_GET['action'] : '');
+$action = ($_GET['action'] ?? '');
 
-  if ( ($action == 'send_email_to_user') && isset($_POST['customers_email_address']) && !isset($_POST['back_x']) ) {
+if (($action === 'send_email_to_user') && isset($_POST['customers_email_address']) && !isset($_POST['back_x'])) {
     switch ($_POST['customers_email_address']) {
-      case '***':
-        $mail_query = tep_db_query("select customers_firstname, customers_lastname, customers_email_address from customers");
-        $mail_sent_to = TEXT_ALL_CUSTOMERS;
-        break;
-      case '**D':
-        $mail_query = tep_db_query("select customers_firstname, customers_lastname, customers_email_address from customers where customers_newsletter = '1'");
-        $mail_sent_to = TEXT_NEWSLETTER_CUSTOMERS;
-        break;
-      default:
-        $customers_email_address = tep_db_prepare_input($_POST['customers_email_address']);
+        case '***':
+            $mail_query = tep_db_query('select customers_firstname, customers_lastname, customers_email_address from customers');
+            $mail_sent_to = TEXT_ALL_CUSTOMERS;
 
-        $mail_query = tep_db_query("select customers_firstname, customers_lastname, customers_email_address from customers where customers_email_address = '" . tep_db_input($customers_email_address) . "'");
-        $mail_sent_to = $_POST['customers_email_address'];
-        break;
+            break;
+        case '**D':
+            $mail_query = tep_db_query("select customers_firstname, customers_lastname, customers_email_address from customers where customers_newsletter = '1'");
+            $mail_sent_to = TEXT_NEWSLETTER_CUSTOMERS;
+
+            break;
+
+        default:
+            $customers_email_address = tep_db_prepare_input($_POST['customers_email_address']);
+
+            $mail_query = tep_db_query("select customers_firstname, customers_lastname, customers_email_address from customers where customers_email_address = '".tep_db_input($customers_email_address)."'");
+            $mail_sent_to = $_POST['customers_email_address'];
+
+            break;
     }
 
     $from = tep_db_prepare_input($_POST['from']);
     $subject = tep_db_prepare_input($_POST['subject']);
     $message = tep_db_prepare_input($_POST['message']);
 
-    $to_name = array();
+    $to_name = [];
 
     while ($mail = tep_db_fetch_array($mail_query)) {
-      $to_name[$mail['customers_email_address']] = $mail['customers_firstname'] . ' ' . $mail['customers_lastname'];
+        $to_name[$mail['customers_email_address']] = $mail['customers_firstname'].' '.$mail['customers_lastname'];
     }
 
     tep_mail($to_name, null, $subject, $message, tep_extra_emails_array($from), null);
 
-    tep_redirect(tep_href_link('mail.php', 'mail_sent_to=' . urlencode($mail_sent_to)));
-  }
+    tep_redirect(tep_href_link('mail.php', 'mail_sent_to='.urlencode($mail_sent_to)));
+}
 
-  if ( ($action == 'preview') && !isset($_POST['customers_email_address']) ) {
+if (($action === 'preview') && !isset($_POST['customers_email_address'])) {
     $messageStack->add(ERROR_NO_CUSTOMER_SELECTED, 'error');
-  }
+}
 
-  if (isset($_GET['mail_sent_to'])) {
+if (isset($_GET['mail_sent_to'])) {
     $messageStack->add(sprintf(NOTICE_EMAIL_SENT_TO, $_GET['mail_sent_to']), 'success');
-  }
+}
 
-  require('includes/template_top.php');
+require 'includes/template_top.php';
 ?>
 
     <table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -70,19 +74,24 @@
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
 <?php
-  if ( ($action == 'preview') && isset($_POST['customers_email_address']) ) {
-    switch ($_POST['customers_email_address']) {
-      case '***':
-        $mail_sent_to = TEXT_ALL_CUSTOMERS;
-        break;
-      case '**D':
-        $mail_sent_to = TEXT_NEWSLETTER_CUSTOMERS;
-        break;
-      default:
-        $mail_sent_to = htmlspecialchars(stripslashes($_POST['customers_email_address']));
-        break;
-    }
-?>
+  if (($action === 'preview') && isset($_POST['customers_email_address'])) {
+      switch ($_POST['customers_email_address']) {
+          case '***':
+              $mail_sent_to = TEXT_ALL_CUSTOMERS;
+
+              break;
+          case '**D':
+              $mail_sent_to = TEXT_NEWSLETTER_CUSTOMERS;
+
+              break;
+
+          default:
+              $mail_sent_to = htmlspecialchars(stripslashes($_POST['customers_email_address']));
+
+              break;
+      }
+
+      ?>
           <tr><?php echo tep_draw_form('mail', 'mail.php', 'action=send_email_to_user'); ?>
             <td><table border="0" width="100%" cellpadding="0" cellspacing="2">
               <tr>
@@ -115,44 +124,45 @@
               <tr>
                 <td class="smallText" align="right">
 <?php
-/* Re-Post all POST'ed variables */
-    foreach ($_POST as $key => $value) {
-      if (!is_array($_POST[$key])) {
-        echo tep_draw_hidden_field($key, htmlspecialchars(stripslashes($value)));
-      }
-    }
+      /* Re-Post all POST'ed variables */
+          foreach ($_POST as $key => $value) {
+              if (!\is_array($_POST[$key])) {
+                  echo tep_draw_hidden_field($key, htmlspecialchars(stripslashes($value)));
+              }
+          }
 
-    echo tep_draw_button(IMAGE_SEND_EMAIL, 'mail-closed', null, 'primary') . tep_draw_button(IMAGE_CANCEL, 'close', tep_href_link('mail.php'));
-?>
+      echo tep_draw_button(IMAGE_SEND_EMAIL, 'mail-closed', null, 'primary').tep_draw_button(IMAGE_CANCEL, 'close', tep_href_link('mail.php'));
+      ?>
                 </td>
               </tr>
             </table></td>
           </form></tr>
 <?php
   } else {
-?>
+      ?>
           <tr><?php echo tep_draw_form('mail', 'mail.php', 'action=preview', 'post', 'onsubmit="return check_select();"'); ?>
             <td><table border="0" cellpadding="0" cellspacing="2">
               <tr>
                 <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
               </tr>
 <?php
-    $mail_query = tep_db_query("select customers_email_address, customers_firstname, customers_lastname from customers order by customers_lastname");
-    $mail_newsletter_query = tep_db_query("select customers_firstname, customers_lastname, customers_email_address from customers where customers_newsletter = '1'");
+          $mail_query = tep_db_query('select customers_email_address, customers_firstname, customers_lastname from customers order by customers_lastname');
+      $mail_newsletter_query = tep_db_query("select customers_firstname, customers_lastname, customers_email_address from customers where customers_newsletter = '1'");
 
-    $customers = array();
-    $customers[] = array('id' => '', 'text' => TEXT_SELECT_CUSTOMER);
-    $customers[] = array('id' => '***', 'text' => TEXT_ALL_CUSTOMERS . ' (' . tep_db_num_rows($mail_query) . ')');
-    $customers[] = array('id' => '**D', 'text' => TEXT_NEWSLETTER_CUSTOMERS . ' (' . tep_db_num_rows($mail_newsletter_query) . ')');
+      $customers = [];
+      $customers[] = ['id' => '', 'text' => TEXT_SELECT_CUSTOMER];
+      $customers[] = ['id' => '***', 'text' => TEXT_ALL_CUSTOMERS.' ('.tep_db_num_rows($mail_query).')'];
+      $customers[] = ['id' => '**D', 'text' => TEXT_NEWSLETTER_CUSTOMERS.' ('.tep_db_num_rows($mail_newsletter_query).')'];
 
-    while($customers_values = tep_db_fetch_array($mail_query)) {
-      $customers[] = array('id' => $customers_values['customers_email_address'],
-                           'text' => $customers_values['customers_lastname'] . ', ' . $customers_values['customers_firstname'] . ' (' . $customers_values['customers_email_address'] . ')');
-    }
-?>
+      while ($customers_values = tep_db_fetch_array($mail_query)) {
+          $customers[] = ['id' => $customers_values['customers_email_address'],
+              'text' => $customers_values['customers_lastname'].', '.$customers_values['customers_firstname'].' ('.$customers_values['customers_email_address'].')'];
+      }
+
+      ?>
               <tr>
                 <td class="main"><?php echo TEXT_CUSTOMER; ?></td>
-                <td><?php echo tep_draw_pull_down_menu('customers_email_address', $customers, (isset($_GET['customer']) ? $_GET['customer'] : ''));?></td>
+                <td><?php echo tep_draw_pull_down_menu('customers_email_address', $customers, $_GET['customer'] ?? ''); ?></td>
               </tr>
               <tr>
                 <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
@@ -195,12 +205,14 @@
     </script>
 <?php
   }
+
 ?>
         </table></td>
       </tr>
     </table>
 
 <?php
-  require('includes/template_bottom.php');
-  require('includes/application_bottom.php');
+  require 'includes/template_bottom.php';
+
+require 'includes/application_bottom.php';
 ?>

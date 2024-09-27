@@ -1,4 +1,19 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree\Exception;
 
 use Braintree\Exception;
@@ -6,9 +21,6 @@ use Braintree\Exception;
 /**
  * Raised when an error occurs that the client library is not built to handle.
  * This shouldn't happen.
- *
- * @package    Braintree
- * @subpackage Exception
  */
 class Unexpected extends Exception
 {

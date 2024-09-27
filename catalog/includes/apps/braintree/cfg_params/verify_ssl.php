@@ -1,35 +1,42 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2021 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
+class verify_ssl
+{
+    public $default = '1';
+    public $title;
+    public $description;
+    public $sort_order = 300;
 
-class OSCOM_Braintree_Cfg_verify_ssl {
-  public $default = '1';
-  public $title;
-  public $description;
-  public $sort_order = 300;
+    public function __construct()
+    {
+        global $OSCOM_Braintree;
 
-  public function __construct() {
-    global $OSCOM_Braintree;
+        $this->title = $OSCOM_Braintree->getDef('cfg_verify_ssl_title');
+        $this->description = $OSCOM_Braintree->getDef('cfg_verify_ssl_desc');
+    }
 
-    $this->title = $OSCOM_Braintree->getDef('cfg_verify_ssl_title');
-    $this->description = $OSCOM_Braintree->getDef('cfg_verify_ssl_desc');
-  }
+    public function getSetField()
+    {
+        global $OSCOM_Braintree;
 
-  public function getSetField() {
-    global $OSCOM_Braintree;
+        $input = '<input type="radio" id="verifySslSelectionTrue" name="verify_ssl" value="1"'.(OSCOM_APP_PAYPAL_BRAINTREE_VERIFY_SSL === '1' ? ' checked="checked"' : '').'><label for="verifySslSelectionTrue">'.$OSCOM_Braintree->getDef('cfg_verify_ssl_true').'</label>'.
+                 '<input type="radio" id="verifySslSelectionFalse" name="verify_ssl" value="0"'.(OSCOM_APP_PAYPAL_BRAINTREE_VERIFY_SSL === '0' ? ' checked="checked"' : '').'><label for="verifySslSelectionFalse">'.$OSCOM_Braintree->getDef('cfg_verify_ssl_false').'</label>';
 
-    $input = '<input type="radio" id="verifySslSelectionTrue" name="verify_ssl" value="1"' . (OSCOM_APP_PAYPAL_BRAINTREE_VERIFY_SSL == '1' ? ' checked="checked"' : '') . '><label for="verifySslSelectionTrue">' . $OSCOM_Braintree->getDef('cfg_verify_ssl_true') . '</label>' .
-             '<input type="radio" id="verifySslSelectionFalse" name="verify_ssl" value="0"' . (OSCOM_APP_PAYPAL_BRAINTREE_VERIFY_SSL == '0' ? ' checked="checked"' : '') . '><label for="verifySslSelectionFalse">' . $OSCOM_Braintree->getDef('cfg_verify_ssl_false') . '</label>';
-
-    $result = <<<EOT
+        $result = <<<EOT
 <div>
   <p>
     <label>{$this->title}</label>
@@ -49,6 +56,6 @@ $(function() {
 </script>
 EOT;
 
-    return $result;
-  }
+        return $result;
+    }
 }

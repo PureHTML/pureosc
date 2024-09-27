@@ -1,24 +1,36 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree\Transaction;
 
-use Braintree\Instance;
 use Braintree\AchMandate;
+use Braintree\Instance;
 
 /**
  * US Bank Account details from a transaction
- * creates an instance of UsbankAccountDetails
+ * creates an instance of UsbankAccountDetails.
  *
- * @package    Braintree
- * @subpackage Transaction
- *
- * @property-read string $token
- * @property-read string $imageUrl
- * @property-read string $routingNumber
- * @property-read string $accountType
- * @property-read string $accountHolderName
- * @property-read string $last4
- * @property-read string $bankName
- * @property-read string $achMandate
+ * @property string $accountHolderName
+ * @property string $accountType
+ * @property string $achMandate
+ * @property string $bankName
+ * @property string $imageUrl
+ * @property string $last4
+ * @property string $routingNumber
+ * @property string $token
  */
 class UsBankAccountDetails extends Instance
 {
@@ -26,6 +38,8 @@ class UsBankAccountDetails extends Instance
 
     /**
      * @ignore
+     *
+     * @param mixed $attributes
      */
     public function __construct($attributes)
     {

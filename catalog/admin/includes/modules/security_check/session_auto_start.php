@@ -1,30 +1,37 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2020 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
+class session_auto_start
+{
+    public $type = 'warning';
 
-  class securityCheck_session_auto_start {
-    var $type = 'warning';
+    public function __construct()
+    {
+        global $language;
 
-    function __construct() {
-      global $language;
-
-      include(DIR_FS_ADMIN . 'includes/languages/' . $language . '/modules/security_check/session_auto_start.php');
+        include DIR_FS_ADMIN.'includes/languages/'.$language.'/modules/security_check/session_auto_start.php';
     }
 
-    function pass() {
-      return ((bool)ini_get('session.auto_start') == false);
+    public function pass()
+    {
+        return (bool) \ini_get('session.auto_start') === false;
     }
 
-    function getMessage() {
-      return WARNING_SESSION_AUTO_START;
+    public function getMessage()
+    {
+        return WARNING_SESSION_AUTO_START;
     }
-  }
-?>
+}

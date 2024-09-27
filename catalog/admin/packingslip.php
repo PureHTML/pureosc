@@ -8,18 +8,18 @@
   Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
-*/
+ */
 
-  require('includes/application_top.php');
+require 'includes/application_top.php';
 
-  require('includes/classes/currencies.php');
-  $currencies = new currencies();
+require 'includes/classes/currencies.php';
+$currencies = new currencies();
 
-  $oID = tep_db_prepare_input($_GET['oID']);
-  $orders_query = tep_db_query("select orders_id from orders where orders_id = '" . (int)$oID . "'");
+$oID = tep_db_prepare_input($_GET['oID']);
+$orders_query = tep_db_query("select orders_id from orders where orders_id = '".(int) $oID."'");
 
-  include('includes/classes/order.php');
-  $order = new order($oID);
+include 'includes/classes/order.php';
+$order = new order($oID);
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html <?php echo HTML_PARAMS; ?>>
@@ -35,7 +35,7 @@
     <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
         <td class="pageHeading"><?php echo nl2br(STORE_NAME_ADDRESS); ?></td>
-        <td class="pageHeading" align="right"><?php echo tep_image(HTTP_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . 'store_logo.png', STORE_NAME); ?></td>
+        <td class="pageHeading" align="right"><?php echo tep_image(HTTP_CATALOG_SERVER.DIR_WS_CATALOG_IMAGES.'store_logo.png', STORE_NAME); ?></td>
       </tr>
     </table></td>
   </tr>
@@ -59,7 +59,7 @@
             <td class="main"><?php echo $order->customer['telephone']; ?></td>
           </tr>
           <tr>
-            <td class="main"><?php echo '<a href="mailto:' . $order->customer['email_address'] . '"><u>' . $order->customer['email_address'] . '</u></a>'; ?></td>
+            <td class="main"><?php echo '<a href="mailto:'.$order->customer['email_address'].'"><u>'.$order->customer['email_address'].'</u></a>'; ?></td>
           </tr>
         </table></td>
         <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="2">
@@ -94,22 +94,23 @@
         <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_PRODUCTS_MODEL; ?></td>
       </tr>
 <?php
-    for ($i=0, $n=sizeof($order->products); $i<$n; $i++) {
-      echo '      <tr class="dataTableRow">' . "\n" .
-           '        <td class="dataTableContent" valign="top" align="right">' . $order->products[$i]['qty'] . '&nbsp;x</td>' . "\n" .
-           '        <td class="dataTableContent" valign="top">' . $order->products[$i]['name'];
+    for ($i = 0, $n = \count($order->products); $i < $n; ++$i) {
+        echo '      <tr class="dataTableRow">'."\n".
+             '        <td class="dataTableContent" valign="top" align="right">'.$order->products[$i]['qty']."&nbsp;x</td>\n".
+             '        <td class="dataTableContent" valign="top">'.$order->products[$i]['name'];
 
-      if (isset($order->products[$i]['attributes']) && (sizeof($order->products[$i]['attributes']) > 0)) {
-        for ($j=0, $k=sizeof($order->products[$i]['attributes']); $j<$k; $j++) {
-          echo '<br /><nobr><small>&nbsp;<i> - ' . $order->products[$i]['attributes'][$j]['option'] . ': ' . $order->products[$i]['attributes'][$j]['value'];
-          echo '</i></small></nobr>';
+        if (isset($order->products[$i]['attributes']) && (\count($order->products[$i]['attributes']) > 0)) {
+            for ($j = 0, $k = \count($order->products[$i]['attributes']); $j < $k; ++$j) {
+                echo '<br /><nobr><small>&nbsp;<i> - '.$order->products[$i]['attributes'][$j]['option'].': '.$order->products[$i]['attributes'][$j]['value'];
+                echo '</i></small></nobr>';
+            }
         }
-      }
 
-      echo '        </td>' . "\n" .
-           '        <td class="dataTableContent" valign="top">' . $order->products[$i]['model'] . '</td>' . "\n" .
-           '      </tr>' . "\n";
+        echo "        </td>\n".
+             '        <td class="dataTableContent" valign="top">'.$order->products[$i]['model']."</td>\n".
+             "      </tr>\n";
     }
+
 ?>
     </table></td>
   </tr>
@@ -118,4 +119,4 @@
 <br />
 </body>
 </html>
-<?php require('includes/application_bottom.php'); ?>
+<?php require 'includes/application_bottom.php'; ?>

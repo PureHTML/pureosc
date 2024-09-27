@@ -1,7 +1,20 @@
 <?php
-namespace Braintree;
 
-use InvalidArgumentException;
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Braintree;
 
 /**
  * Upload documents to Braintree in exchange for a DocumentUpload object.
@@ -13,29 +26,27 @@ use InvalidArgumentException;
  *      ]);
  *
  * For more information on DocumentUploads, see https://developers.braintreepayments.com/reference/request/document_upload/create
- * 
- * @property-read string $contentType
- * @property-read \DateTime $expiresAt
- * @property-read string $id
- * @property-read string $kind
- * @property-read string $name
- * @property-read int $size
+ *
+ * @property string    $contentType
+ * @property \DateTime $expiresAt
+ * @property string    $id
+ * @property string    $kind
+ * @property string    $name
+ * @property int       $size
  */
 class DocumentUpload extends Base
 {
     /* DocumentUpload Kind */
-    const EVIDENCE_DOCUMENT = "evidence_document";
-
-    protected function _initialize($documentUploadAttribs)
-    {
-        $this->_attributes = $documentUploadAttribs;
-    }
+    public const EVIDENCE_DOCUMENT = 'evidence_document';
 
     /**
-     * Creates a DocumentUpload object
+     * Creates a DocumentUpload object.
+     *
+     * @param mixed $params
      * @param kind The kind of document
      * @param file The open file to upload
-     * @throws InvalidArgumentException if the params are not expected
+     *
+     * @throws \InvalidArgumentException if the params are not expected
      */
     public static function create($params)
     {
@@ -46,6 +57,12 @@ class DocumentUpload extends Base
     {
         $instance = new self();
         $instance->_initialize($attributes);
+
         return $instance;
+    }
+
+    protected function _initialize($documentUploadAttribs): void
+    {
+        $this->_attributes = $documentUploadAttribs;
     }
 }

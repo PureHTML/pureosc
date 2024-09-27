@@ -1,120 +1,102 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree;
 
 /**
- * Creates an instance of Dispute as returned from a transaction
+ * Creates an instance of Dispute as returned from a transaction.
  *
- *
- * @package    Braintree
- *
- * @property-read string $amount
- * @property-read \DateTime $createdAt
- * @property-read string $currencyIsoCode
- * @property-read string $disbursementDate
- * @property-read \Braintree\Dispute\EvidenceDetails $evidence
- * @property-read string $graphQLId
- * @property-read string $id
- * @property-read string $kind
- * @property-read string $merchantAccountId
- * @property-read string $originalDisputeId
- * @property-read string $processorComments
- * @property-read string $reason
- * @property-read string $reasonCode
- * @property-read string $reasonDescription
- * @property-read \DateTime $receivedDate
- * @property-read string $referenceNumber
- * @property-read \DateTime $replyByDate
- * @property-read string $status
- * @property-read \Braintree\Dispute\StatusHistoryDetails[] $statusHistory
- * @property-read \Braintree\Dispute\TransactionDetails $transaction
- * @property-read \Braintree\Dispute\TransactionDetails $transactionDetails
- * @property-read \DateTime $updatedAt
+ * @property string                                    $amount
+ * @property \DateTime                                 $createdAt
+ * @property string                                    $currencyIsoCode
+ * @property string                                    $disbursementDate
+ * @property \Braintree\Dispute\EvidenceDetails        $evidence
+ * @property string                                    $graphQLId
+ * @property string                                    $id
+ * @property string                                    $kind
+ * @property string                                    $merchantAccountId
+ * @property string                                    $originalDisputeId
+ * @property string                                    $processorComments
+ * @property string                                    $reason
+ * @property string                                    $reasonCode
+ * @property string                                    $reasonDescription
+ * @property \DateTime                                 $receivedDate
+ * @property string                                    $referenceNumber
+ * @property \DateTime                                 $replyByDate
+ * @property string                                    $status
+ * @property \Braintree\Dispute\StatusHistoryDetails[] $statusHistory
+ * @property \Braintree\Dispute\TransactionDetails     $transaction
+ * @property \Braintree\Dispute\TransactionDetails     $transactionDetails
+ * @property \DateTime                                 $updatedAt
  */
 class Dispute extends Base
 {
-    protected $_attributes = [];
-
     /* Dispute Status */
-    const ACCEPTED = 'accepted';
-    const DISPUTED = 'disputed';
-    const EXPIRED = 'expired';
-    const OPEN  = 'open';
-    const WON  = 'won';
-    const LOST = 'lost';
+    public const ACCEPTED = 'accepted';
+    public const DISPUTED = 'disputed';
+    public const EXPIRED = 'expired';
+    public const OPEN = 'open';
+    public const WON = 'won';
+    public const LOST = 'lost';
 
     /* Dispute Reason */
-    const CANCELLED_RECURRING_TRANSACTION = "cancelled_recurring_transaction";
-    const CREDIT_NOT_PROCESSED            = "credit_not_processed";
-    const DUPLICATE                       = "duplicate";
-    const FRAUD                           = "fraud";
-    const GENERAL                         = "general";
-    const INVALID_ACCOUNT                 = "invalid_account";
-    const NOT_RECOGNIZED                  = "not_recognized";
-    const PRODUCT_NOT_RECEIVED            = "product_not_received";
-    const PRODUCT_UNSATISFACTORY          = "product_unsatisfactory";
-    const TRANSACTION_AMOUNT_DIFFERS      = "transaction_amount_differs";
-    const RETRIEVAL                       = "retrieval";
+    public const CANCELLED_RECURRING_TRANSACTION = 'cancelled_recurring_transaction';
+    public const CREDIT_NOT_PROCESSED = 'credit_not_processed';
+    public const DUPLICATE = 'duplicate';
+    public const FRAUD = 'fraud';
+    public const GENERAL = 'general';
+    public const INVALID_ACCOUNT = 'invalid_account';
+    public const NOT_RECOGNIZED = 'not_recognized';
+    public const PRODUCT_NOT_RECEIVED = 'product_not_received';
+    public const PRODUCT_UNSATISFACTORY = 'product_unsatisfactory';
+    public const TRANSACTION_AMOUNT_DIFFERS = 'transaction_amount_differs';
+    public const RETRIEVAL = 'retrieval';
 
     /* Dispute Kind */
-    const CHARGEBACK      = 'chargeback';
-    const PRE_ARBITRATION = 'pre_arbitration';
-    // RETRIEVAL for kind already defined under Dispute Reason
+    public const CHARGEBACK = 'chargeback';
+    public const PRE_ARBITRATION = 'pre_arbitration';
+    protected $_attributes = [];
 
-    protected function _initialize($disputeAttribs)
+    public function __toString()
     {
-        $this->_attributes = $disputeAttribs;
+        $display = [
+            'amount', 'reason', 'status',
+            'replyByDate', 'receivedDate', 'currencyIsoCode',
+        ];
 
-        if (isset($disputeAttribs['transaction'])) {
-            $transactionDetails = new Dispute\TransactionDetails($disputeAttribs['transaction']);
-            $this->_set('transactionDetails', $transactionDetails);
-            $this->_set('transaction', $transactionDetails);
+        $displayAttributes = [];
+
+        foreach ($display as $attrib) {
+            $displayAttributes[$attrib] = $this->{$attrib};
         }
 
-        if (isset($disputeAttribs['evidence'])) {
-            $evidenceArray = array_map(function($evidence) {
-                return new Dispute\EvidenceDetails($evidence);
-            }, $disputeAttribs['evidence']);
-            $this->_set('evidence', $evidenceArray);
-        }
-
-        if (isset($disputeAttribs['statusHistory'])) {
-            $statusHistoryArray = array_map(function($statusHistory) {
-                return new Dispute\StatusHistoryDetails($statusHistory);
-            }, $disputeAttribs['statusHistory']);
-            $this->_set('statusHistory', $statusHistoryArray);
-        }
-
-        if (isset($disputeAttribs['transaction'])) {
-            $this->_set('transaction',
-                new Dispute\TransactionDetails($disputeAttribs['transaction'])
-            );
-        }
+        return __CLASS__.'['.
+                Util::attributesToString($displayAttributes).']';
     }
 
     public static function factory($attributes)
     {
         $instance = new self();
         $instance->_initialize($attributes);
+
         return $instance;
     }
 
-    public function  __toString()
-    {
-        $display = [
-            'amount', 'reason', 'status',
-            'replyByDate', 'receivedDate', 'currencyIsoCode'
-            ];
-
-        $displayAttributes = [];
-        foreach ($display AS $attrib) {
-            $displayAttributes[$attrib] = $this->$attrib;
-        }
-        return __CLASS__ . '[' .
-                Util::attributesToString($displayAttributes) .']';
-    }
-
     /**
-     * Accepts a dispute, given a dispute ID
+     * Accepts a dispute, given a dispute ID.
      *
      * @param string $id
      */
@@ -124,7 +106,7 @@ class Dispute extends Base
     }
 
     /**
-     * Adds file evidence to a dispute, given a dispute ID and a document ID
+     * Adds file evidence to a dispute, given a dispute ID and a document ID.
      *
      * @param string $disputeId
      * @param string $documentIdOrRequest
@@ -135,14 +117,14 @@ class Dispute extends Base
     }
 
     /**
-     * Adds text evidence to a dispute, given a dispute ID and content
+     * Adds text evidence to a dispute, given a dispute ID and content.
      *
-     * @param string $id
-     * @param string|mixed $contentOrRequest If a string, $contentOrRequest is the text-based content for the dispute evidence.
-     * Alternatively, the second argument can also be an array containing:
-     *  string $content The text-based content for the dispute evidence, and
-     *  string $category The category for this piece of evidence
-     *  Note: (optional) string $tag parameter is deprecated, use $category instead.
+     * @param string       $id
+     * @param mixed|string $contentOrRequest If a string, $contentOrRequest is the text-based content for the dispute evidence.
+     *                                       Alternatively, the second argument can also be an array containing:
+     *                                       string $content The text-based content for the dispute evidence, and
+     *                                       string $category The category for this piece of evidence
+     *                                       Note: (optional) string $tag parameter is deprecated, use $category instead.
      *
      *  Example: https://developers.braintreepayments.com/reference/request/dispute/add-text-evidence/php#submitting-categorized-evidence
      */
@@ -152,7 +134,7 @@ class Dispute extends Base
     }
 
     /**
-     * Finalize a dispute, given a dispute ID
+     * Finalize a dispute, given a dispute ID.
      *
      * @param string $id
      */
@@ -162,7 +144,7 @@ class Dispute extends Base
     }
 
     /**
-     * Find a dispute, given a dispute ID
+     * Find a dispute, given a dispute ID.
      *
      * @param string $id
      */
@@ -172,7 +154,7 @@ class Dispute extends Base
     }
 
     /**
-     * Remove evidence from a dispute, given a dispute ID and evidence ID
+     * Remove evidence from a dispute, given a dispute ID and evidence ID.
      *
      * @param string $disputeId
      * @param string $evidenceId
@@ -183,12 +165,45 @@ class Dispute extends Base
     }
 
     /**
-     * Search for Disputes, given a DisputeSearch query
+     * Search for Disputes, given a DisputeSearch query.
      *
      * @param DisputeSearch $query
      */
     public static function search($query)
     {
         return Configuration::gateway()->dispute()->search($query);
+    }
+    // RETRIEVAL for kind already defined under Dispute Reason
+
+    protected function _initialize($disputeAttribs): void
+    {
+        $this->_attributes = $disputeAttribs;
+
+        if (isset($disputeAttribs['transaction'])) {
+            $transactionDetails = new Dispute\TransactionDetails($disputeAttribs['transaction']);
+            $this->_set('transactionDetails', $transactionDetails);
+            $this->_set('transaction', $transactionDetails);
+        }
+
+        if (isset($disputeAttribs['evidence'])) {
+            $evidenceArray = array_map(static function ($evidence) {
+                return new Dispute\EvidenceDetails($evidence);
+            }, $disputeAttribs['evidence']);
+            $this->_set('evidence', $evidenceArray);
+        }
+
+        if (isset($disputeAttribs['statusHistory'])) {
+            $statusHistoryArray = array_map(static function ($statusHistory) {
+                return new Dispute\StatusHistoryDetails($statusHistory);
+            }, $disputeAttribs['statusHistory']);
+            $this->_set('statusHistory', $statusHistoryArray);
+        }
+
+        if (isset($disputeAttribs['transaction'])) {
+            $this->_set(
+                'transaction',
+                new Dispute\TransactionDetails($disputeAttribs['transaction']),
+            );
+        }
     }
 }

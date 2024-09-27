@@ -8,83 +8,85 @@
   Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
-*/
+ */
 
-  require('includes/application_top.php');
+require 'includes/application_top.php';
 
-  $action = (isset($_GET['action']) ? $_GET['action'] : '');
+$action = ($_GET['action'] ?? '');
 
-  switch ($action) {
+switch ($action) {
     case 'export':
-      $info = tep_get_system_information();
-    break;
+        $info = tep_get_system_information();
 
+        break;
     case 'submit':
-      $target_host = 'usage.oscommerce.com';
-      $target_path = '/submit.php';
+        $target_host = 'usage.oscommerce.com';
+        $target_path = '/submit.php';
 
-      $encoded = base64_encode(serialize(tep_get_system_information()));
+        $encoded = base64_encode(serialize(tep_get_system_information()));
 
-      $response = false;
+        $response = false;
 
-      if (function_exists('curl_init')) {
-        $data = array('info' => $encoded);
+        if (\function_exists('curl_init')) {
+            $data = ['info' => $encoded];
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'http://' . $target_host . $target_path);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $response = trim(curl_exec($ch));
-        curl_close($ch);
-      } else {
-        if ($fp = @fsockopen($target_host, 80, $errno, $errstr, 30)) {
-          $data = 'info=' . $encoded;
+            $ch = curl_init();
+            curl_setopt($ch, \CURLOPT_URL, 'http://'.$target_host.$target_path);
+            curl_setopt($ch, \CURLOPT_POST, 1);
+            curl_setopt($ch, \CURLOPT_POSTFIELDS, $data);
+            curl_setopt($ch, \CURLOPT_RETURNTRANSFER, 1);
+            $response = trim(curl_exec($ch));
+            curl_close($ch);
+        } else {
+            if ($fp = @fsockopen($target_host, 80, $errno, $errstr, 30)) {
+                $data = 'info='.$encoded;
 
-          fputs($fp, "POST " . $target_path . " HTTP/1.1\r\n");
-          fputs($fp, "Host: " . $target_host . "\r\n");
-          fputs($fp, "Content-type: application/x-www-form-urlencoded\r\n");
-          fputs($fp, "Content-length: " . strlen($data) . "\r\n");
-          fputs($fp, "Connection: close\r\n\r\n");
-          fputs($fp, $data."\r\n\r\n");
+                fwrite($fp, 'POST '.$target_path." HTTP/1.1\r\n");
+                fwrite($fp, 'Host: '.$target_host."\r\n");
+                fwrite($fp, "Content-type: application/x-www-form-urlencoded\r\n");
+                fwrite($fp, 'Content-length: '.\strlen($data)."\r\n");
+                fwrite($fp, "Connection: close\r\n\r\n");
+                fwrite($fp, $data."\r\n\r\n");
 
-          $response = '';
+                $response = '';
 
-          while (!feof($fp)) {
-            $response .= fgets($fp, 4096);
-          }
+                while (!feof($fp)) {
+                    $response .= fgets($fp, 4096);
+                }
 
-          fclose($fp);
+                fclose($fp);
 
-          $response = trim(substr($response, strrpos($response, "\r\n\r\n")));
+                $response = trim(substr($response, strrpos($response, "\r\n\r\n")));
+            }
         }
-      }
 
-      if ($response != 'OK') {
-        $messageStack->add_session(ERROR_INFO_SUBMIT, 'error');
-      } else {
-        $messageStack->add_session(SUCCESS_INFO_SUBMIT, 'success');
-      }
+        if ($response !== 'OK') {
+            $messageStack->add_session(ERROR_INFO_SUBMIT, 'error');
+        } else {
+            $messageStack->add_session(SUCCESS_INFO_SUBMIT, 'success');
+        }
 
-      tep_redirect(tep_href_link('server_info.php'));
-    break;
+        tep_redirect(tep_href_link('server_info.php'));
 
+        break;
     case 'save':
-      $info = tep_get_system_information();
-      $info_file = 'server_info-' . date('YmdHis') . '.txt';
-      header('Content-type: text/plain');
-      header('Content-disposition: attachment; filename="' . $info_file . '"');
-      echo tep_format_system_info_array($info);
-      exit;
+        $info = tep_get_system_information();
+        $info_file = 'server_info-'.date('YmdHis').'.txt';
+        header('Content-type: text/plain');
+        header('Content-disposition: attachment; filename="'.$info_file.'"');
+        echo tep_format_system_info_array($info);
 
-    break;
+        exit;
+
+        break;
 
     default:
-      $info = tep_get_system_information();
-      break;
-  }
+        $info = tep_get_system_information();
 
-  require('includes/template_top.php');
+        break;
+}
+
+require 'includes/template_top.php';
 ?>
 
     <table border="0" width="100%" cellspacing="0" cellpadding="2">
@@ -97,8 +99,8 @@
         </table></td>
       </tr>
 <?php
-  if ($action == 'export') {
-?>
+  if ($action === 'export') {
+      ?>
       <tr>
         <td><table border="0" cellspacing="0" cellpadding="2">
           <tr>
@@ -119,27 +121,27 @@
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
       <tr>
-          <td align="right" class="smallText"><?php echo tep_draw_button(IMAGE_SEND, 'arrowreturnthick-1-n', tep_href_link('server_info.php', 'action=submit'), 'primary') . tep_draw_button(IMAGE_SAVE, 'disk', tep_href_link('server_info.php', 'action=save'), 'primary');?>
+          <td align="right" class="smallText"><?php echo tep_draw_button(IMAGE_SEND, 'arrowreturnthick-1-n', tep_href_link('server_info.php', 'action=submit'), 'primary').tep_draw_button(IMAGE_SAVE, 'disk', tep_href_link('server_info.php', 'action=save'), 'primary'); ?>
       </tr>
   <?php
   } else {
-    $server = parse_url(HTTP_SERVER);
-?>
+      $server = parse_url(HTTP_SERVER);
+      ?>
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
           <tr>
             <td><table border="0" cellspacing="0" cellpadding="3">
               <tr>
                 <td class="smallText"><strong><?php echo TITLE_SERVER_HOST; ?></strong></td>
-                <td class="smallText"><?php echo $server['host'] . ' (' . gethostbyname($server['host']) . ')'; ?></td>
+                <td class="smallText"><?php echo $server['host'].' ('.gethostbyname($server['host']).')'; ?></td>
                 <td class="smallText">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong><?php echo TITLE_DATABASE_HOST; ?></strong></td>
-                <td class="smallText"><?php echo DB_SERVER . ' (' . gethostbyname(DB_SERVER) . ')'; ?></td>
+                <td class="smallText"><?php echo DB_SERVER.' ('.gethostbyname(DB_SERVER).')'; ?></td>
               </tr>
               <tr>
                 <td class="smallText"><strong><?php echo TITLE_SERVER_OS; ?></strong></td>
-                <td class="smallText"><?php echo $info['system']['os'] . ' ' . $info['system']['kernel']; ?></td>
+                <td class="smallText"><?php echo $info['system']['os'].' '.$info['system']['kernel']; ?></td>
                 <td class="smallText">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong><?php echo TITLE_DATABASE; ?></strong></td>
-                <td class="smallText"><?php echo 'MySQL ' . $info['mysql']['version']; ?></td>
+                <td class="smallText"><?php echo 'MySQL '.$info['mysql']['version']; ?></td>
               </tr>
               <tr>
                 <td class="smallText"><strong><?php echo TITLE_SERVER_DATE; ?></strong></td>
@@ -160,7 +162,7 @@
               </tr>
               <tr>
                 <td class="smallText"><strong><?php echo TITLE_PHP_VERSION; ?></strong></td>
-                <td colspan="3" class="smallText"><?php echo $info['php']['version'] . ' (' . TITLE_ZEND_VERSION . ' ' . $info['php']['zend'] . ')'; ?></td>
+                <td colspan="3" class="smallText"><?php echo $info['php']['version'].' ('.TITLE_ZEND_VERSION.' '.$info['php']['zend'].')'; ?></td>
               </tr>
             </table></td>
           </tr>
@@ -168,7 +170,7 @@
             <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
           <tr>
-            <td class="smallText"><?php echo tep_draw_button(IMAGE_EXPORT, 'triangle-1-nw', tep_href_link('server_info.php', 'action=export'));?></td>
+            <td class="smallText"><?php echo tep_draw_button(IMAGE_EXPORT, 'triangle-1-nw', tep_href_link('server_info.php', 'action=export')); ?></td>
           </tr>
         </table></td>
       </tr>
@@ -187,27 +189,29 @@ i {color: #666666;}
 hr {display: none;}
 </style>
 <?php
-  ob_start();
-  phpinfo();
-  $phpinfo = ob_get_contents();
-  ob_end_clean();
+        ob_start();
+      phpinfo();
+      $phpinfo = ob_get_contents();
+      ob_end_clean();
 
-  $phpinfo = str_replace('border: 1px', '', $phpinfo);
-  preg_match('/<body>(.*)<\/body>/is', $phpinfo, $regs);
-  echo '<table border="1" cellpadding="3" width="600" style="border: 0px; border-color: #000000;">' .
-       '  <tr><td><a href="http://www.oscommerce.com"><img border="0" src="images/oscommerce.png" title="osCommerce Online Merchant v' . tep_get_version() . '" /></a><h1 class="p">osCommerce Online Merchant v' . tep_get_version() . '</h1></td>' .
-       '  </tr>' .
-       '</table>';
-  echo $regs[1];
-?>
+      $phpinfo = str_replace('border: 1px', '', $phpinfo);
+      preg_match('/<body>(.*)<\/body>/is', $phpinfo, $regs);
+      echo '<table border="1" cellpadding="3" width="600" style="border: 0px; border-color: #000000;">'.
+           '  <tr><td><a href="http://www.oscommerce.com"><img border="0" src="images/oscommerce.png" title="osCommerce Online Merchant v'.tep_get_version().'" /></a><h1 class="p">osCommerce Online Merchant v'.tep_get_version().'</h1></td>'.
+           '  </tr>'.
+           '</table>';
+      echo $regs[1];
+      ?>
         </td>
       </tr>
 <?php
   }
- ?>
+
+?>
     </table>
 
 <?php
-  require('includes/template_bottom.php');
-  require('includes/application_bottom.php');
+ require 'includes/template_bottom.php';
+
+require 'includes/application_bottom.php';
 ?>

@@ -1,11 +1,24 @@
 <?php
-namespace Braintree;
 
-use Iterator;
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Braintree;
 
 /**
  * Braintree PaginatedCollection
- * PaginatedCollection is a container object for paginated data
+ * PaginatedCollection is a container object for paginated data.
  *
  * retrieves and pages through large collections of results
  *
@@ -17,11 +30,8 @@ use Iterator;
  *   print_r($merchantAccount->status);
  * }
  * </code>
- *
- * @package    Braintree
- * @subpackage Utility
  */
-class PaginatedCollection implements Iterator
+class PaginatedCollection implements \Iterator
 {
     private $_pager;
     private $_pageSize;
@@ -31,13 +41,13 @@ class PaginatedCollection implements Iterator
     private $_items;
 
     /**
-     * set up the paginated collection
+     * set up the paginated collection.
      *
      * expects an array of an object and method to call on it
      *
      * @param array $pager
      */
-    public function  __construct($pager)
+    public function __construct($pager)
     {
         $this->_pager = $pager;
         $this->_pageSize = 0;
@@ -47,11 +57,11 @@ class PaginatedCollection implements Iterator
     }
 
     /**
-     * returns the current item when iterating with foreach
+     * returns the current item when iterating with foreach.
      */
     public function current()
     {
-        return $this->_items[($this->_index % $this->_pageSize)];
+        return $this->_items[$this->_index % $this->_pageSize];
     }
 
     public function key()
@@ -60,17 +70,17 @@ class PaginatedCollection implements Iterator
     }
 
     /**
-     * advances to the next item in the collection when iterating with foreach
+     * advances to the next item in the collection when iterating with foreach.
      */
-    public function next()
+    public function next(): void
     {
         ++$this->_index;
     }
 
     /**
-     * rewinds the collection to the first item when iterating with foreach
+     * rewinds the collection to the first item when iterating with foreach.
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->_index = 0;
         $this->_currentPage = 0;
@@ -80,39 +90,38 @@ class PaginatedCollection implements Iterator
     }
 
     /**
-     * returns whether the current item is valid when iterating with foreach
+     * returns whether the current item is valid when iterating with foreach.
      */
     public function valid()
     {
-        if ($this->_currentPage == 0 || $this->_index % $this->_pageSize == 0 && $this->_index < $this->_totalItems)
-        {
+        if ($this->_currentPage === 0 || $this->_index % $this->_pageSize === 0 && $this->_index < $this->_totalItems) {
             $this->_getNextPage();
         }
 
         return $this->_index < $this->_totalItems;
     }
 
-    private function _getNextPage()
+    private function _getNextPage(): void
     {
-        $this->_currentPage++;
+        ++$this->_currentPage;
         $object = $this->_pager['object'];
         $method = $this->_pager['method'];
 
         if (isset($this->_pager['query'])) {
             $query = $this->_pager['query'];
-            $result = call_user_func(
+            $result = \call_user_func(
                 [$object, $method],
                 $query,
-                $this->_currentPage
+                $this->_currentPage,
             );
         } else {
-            $result = call_user_func(
+            $result = \call_user_func(
                 [$object, $method],
-                $this->_currentPage
+                $this->_currentPage,
             );
         }
 
-        $this->_totalItems= $result->getTotalItems();
+        $this->_totalItems = $result->getTotalItems();
         $this->_pageSize = $result->getPageSize();
         $this->_items = $result->getCurrentPage();
     }

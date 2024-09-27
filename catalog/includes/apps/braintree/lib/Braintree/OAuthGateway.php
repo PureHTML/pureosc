@@ -1,11 +1,24 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree;
 
 /**
  * Braintree OAuthGateway module
- * Creates and manages Braintree Addresses
- *
- * @package   Braintree
+ * Creates and manages Braintree Addresses.
  */
 class OAuthGateway
 {
@@ -25,13 +38,15 @@ class OAuthGateway
 
     public function createTokenFromCode($params)
     {
-        $params['grantType'] = "authorization_code";
+        $params['grantType'] = 'authorization_code';
+
         return $this->_createToken($params);
     }
 
     public function createTokenFromRefreshToken($params)
     {
-        $params['grantType'] = "refresh_token";
+        $params['grantType'] = 'refresh_token';
+
         return $this->_createToken($params);
     }
 
@@ -39,56 +54,31 @@ class OAuthGateway
     {
         $params = ['token' => $accessToken];
         $response = $this->_http->post('/oauth/revoke_access_token', $params);
-        return $this->_verifyGatewayResponse($response);
-    }
 
-    private function _createToken($params)
-    {
-        $params = ['credentials' => $params];
-        $response = $this->_http->post('/oauth/access_tokens', $params);
         return $this->_verifyGatewayResponse($response);
-    }
-
-    private function _verifyGatewayResponse($response)
-    {
-        if (isset($response['credentials'])) {
-            $result =  new Result\Successful(
-                OAuthCredentials::factory($response['credentials'])
-            );
-            return $this->_mapSuccess($result);
-        } else if (isset($response['result'])) {
-            $result =  new Result\Successful(
-                OAuthResult::factory($response['result'])
-            );
-            return $this->_mapAccessTokenRevokeSuccess($result);
-        } else if (isset($response['apiErrorResponse'])) {
-            $result = new Result\Error($response['apiErrorResponse']);
-            return $this->_mapError($result);
-        } else {
-            throw new Exception\Unexpected(
-                "Expected credentials or apiErrorResponse"
-            );
-        }
     }
 
     public function _mapError($result)
     {
         $error = $result->errors->deepAll()[0];
 
-        if ($error->code == Error\Codes::OAUTH_INVALID_GRANT) {
+        if ($error->code === Error\Codes::OAUTH_INVALID_GRANT) {
             $result->error = 'invalid_grant';
-        } else if ($error->code == Error\Codes::OAUTH_INVALID_CREDENTIALS) {
+        } elseif ($error->code === Error\Codes::OAUTH_INVALID_CREDENTIALS) {
             $result->error = 'invalid_credentials';
-        } else if ($error->code == Error\Codes::OAUTH_INVALID_SCOPE) {
+        } elseif ($error->code === Error\Codes::OAUTH_INVALID_SCOPE) {
             $result->error = 'invalid_scope';
         }
+
         $result->errorDescription = explode(': ', $error->message)[1];
+
         return $result;
     }
 
     public function _mapAccessTokenRevokeSuccess($result)
     {
         $result->revocationResult = $result->success;
+
         return $result;
     }
 
@@ -99,6 +89,7 @@ class OAuthGateway
         $result->refreshToken = $credentials->refreshToken;
         $result->tokenType = $credentials->tokenType;
         $result->expiresAt = $credentials->expiresAt;
+
         return $result;
     }
 
@@ -108,6 +99,43 @@ class OAuthGateway
         $query['client_id'] = $this->_config->getClientId();
         $queryString = preg_replace('/\%5B\d+\%5D/', '%5B%5D', http_build_query($query));
 
-        return $this->_config->baseUrl() . '/oauth/connect?' . $queryString;
+        return $this->_config->baseUrl().'/oauth/connect?'.$queryString;
+    }
+
+    private function _createToken($params)
+    {
+        $params = ['credentials' => $params];
+        $response = $this->_http->post('/oauth/access_tokens', $params);
+
+        return $this->_verifyGatewayResponse($response);
+    }
+
+    private function _verifyGatewayResponse($response)
+    {
+        if (isset($response['credentials'])) {
+            $result = new Result\Successful(
+                OAuthCredentials::factory($response['credentials']),
+            );
+
+            return $this->_mapSuccess($result);
+        }
+
+        if (isset($response['result'])) {
+            $result = new Result\Successful(
+                OAuthResult::factory($response['result']),
+            );
+
+            return $this->_mapAccessTokenRevokeSuccess($result);
+        }
+
+        if (isset($response['apiErrorResponse'])) {
+            $result = new Result\Error($response['apiErrorResponse']);
+
+            return $this->_mapError($result);
+        }
+
+        throw new Exception\Unexpected(
+            'Expected credentials or apiErrorResponse',
+        );
     }
 }

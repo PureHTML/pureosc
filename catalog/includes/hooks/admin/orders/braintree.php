@@ -1,33 +1,40 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2021 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
+class admin_orders_braintree
+{
+    public function listen_orderAction()
+    {
+        if (!class_exists('braintree_hook_admin_orders_action')) {
+            include DIR_FS_CATALOG.'includes/apps/braintree/hooks/admin/orders/action.php';
+        }
 
-class hook_admin_orders_braintree {
-  function listen_orderAction() {
-    if (!class_exists('braintree_hook_admin_orders_action')) {
-      include(DIR_FS_CATALOG . 'includes/apps/braintree/hooks/admin/orders/action.php');
+        $hook = new braintree_hook_admin_orders_action();
+
+        return $hook->execute();
     }
 
-    $hook = new braintree_hook_admin_orders_action();
+    public function listen_orderTab()
+    {
+        if (!class_exists('braintree_hook_admin_orders_tab')) {
+            include DIR_FS_CATALOG.'includes/apps/braintree/hooks/admin/orders/tab.php';
+        }
 
-    return $hook->execute();
-  }
+        $hook = new braintree_hook_admin_orders_tab();
 
-  function listen_orderTab() {
-    if (!class_exists('braintree_hook_admin_orders_tab')) {
-      include(DIR_FS_CATALOG . 'includes/apps/braintree/hooks/admin/orders/tab.php');
+        return $hook->execute();
     }
-
-    $hook = new braintree_hook_admin_orders_tab();
-
-    return $hook->execute();
-  }
 }

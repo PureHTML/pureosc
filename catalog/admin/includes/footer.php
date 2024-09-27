@@ -8,7 +8,7 @@
   Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
-*/
+ */
 ?>
 <br />
 <table border="0" width="100%" cellspacing="0" cellpadding="2">

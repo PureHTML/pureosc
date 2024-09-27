@@ -1,4 +1,19 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree\Exception;
 
 use Braintree\Exception;
@@ -6,8 +21,6 @@ use Braintree\Exception;
 /**
  * Raised when the Braintree library is not completely configured.
  *
- * @package    Braintree
- * @subpackage Exception
  * @see        Configuration
  */
 class Configuration extends Exception

@@ -1,27 +1,31 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2020 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
+\define('HEADING_TITLE', 'Grabadora de acciones');
 
-define('HEADING_TITLE', 'Grabadora de acciones');
+\define('TABLE_HEADING_MODULE', 'Módulo');
+\define('TABLE_HEADING_CUSTOMER', 'Cliente');
+\define('TABLE_HEADING_DATE_ADDED', 'Fecha');
+\define('TABLE_HEADING_ACTION', 'Acción');
 
-define('TABLE_HEADING_MODULE', 'Módulo');
-define('TABLE_HEADING_CUSTOMER', 'Cliente');
-define('TABLE_HEADING_DATE_ADDED', 'Fecha');
-define('TABLE_HEADING_ACTION', 'Acción');
+\define('TEXT_FILTER_SEARCH', 'Buscar:');
+\define('TEXT_ALL_MODULES', '-- Todos los Módulos --');
+\define('TEXT_GUEST', 'Invitado');
 
-define('TEXT_FILTER_SEARCH', 'Buscar:');
-define('TEXT_ALL_MODULES', '-- Todos los Módulos --');
-define('TEXT_GUEST', 'Invitado');
+\define('TEXT_INFO_IDENTIFIER', 'Identificador:');
+\define('TEXT_INFO_DATE_ADDED', 'Fecha de Alta:');
 
-define('TEXT_INFO_IDENTIFIER', 'Identificador:');
-define('TEXT_INFO_DATE_ADDED', 'Fecha de Alta:');
-
-define('SUCCESS_EXPIRED_ENTRIES', 'Éxito: %s entradas vencidas se han eliminado.');
+\define('SUCCESS_EXPIRED_ENTRIES', 'Éxito: %s entradas vencidas se han eliminado.');

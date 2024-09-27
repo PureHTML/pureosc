@@ -1,20 +1,32 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree;
 
 /**
- * Braintree Class Instance template
- *
- * @abstract
+ * Braintree Class Instance template.
  */
 abstract class Instance
 {
     protected $_attributes = [];
 
     /**
-     *
      * @param array $attributes
      */
-    public function  __construct($attributes)
+    public function __construct($attributes)
     {
         if (!empty($attributes)) {
             $this->_initializeFromArray($attributes);
@@ -22,52 +34,57 @@ abstract class Instance
     }
 
     /**
-     * returns private/nonexistent instance properties
-     * @access public
+     * returns private/nonexistent instance properties.
+     *
      * @param string $name property name
+     *
      * @return mixed contents of instance properties
      */
     public function __get($name)
     {
-        if (array_key_exists($name, $this->_attributes)) {
+        if (\array_key_exists($name, $this->_attributes)) {
             return $this->_attributes[$name];
-        } else {
-            trigger_error('Undefined property on ' . get_class($this) . ': ' . $name, E_USER_NOTICE);
-            return null;
         }
+
+        trigger_error('Undefined property on '.\get_class($this).': '.$name, \E_USER_NOTICE);
+
+        return null;
     }
 
     /**
-     * used by isset() and empty()
-     * @access public
+     * used by isset() and empty().
+     *
      * @param string $name property name
-     * @return boolean
+     *
+     * @return bool
      */
     public function __isset($name)
     {
-        return array_key_exists($name, $this->_attributes);
+        return \array_key_exists($name, $this->_attributes);
     }
 
     /**
      * create a printable representation of the object as:
      * ClassName[property=value, property=value]
+     *
      * @return string
      */
-    public function  __toString()
+    public function __toString()
     {
         $objOutput = Util::implodeAssociativeArray($this->_attributes);
-        return get_class($this) .'[' . $objOutput . ']';
+
+        return \get_class($this).'['.$objOutput.']';
     }
     /**
-     * initializes instance properties from the keys/values of an array
+     * initializes instance properties from the keys/values of an array.
+     *
      * @ignore
-     * @access protected
+     *
+     * @param mixed $attributes
      * @param <type> $aAttribs array of properties to set - single level
-     * @return void
      */
-    private function _initializeFromArray($attributes)
+    private function _initializeFromArray($attributes): void
     {
         $this->_attributes = $attributes;
     }
-
 }

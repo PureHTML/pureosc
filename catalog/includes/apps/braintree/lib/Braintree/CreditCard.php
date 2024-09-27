@@ -1,105 +1,124 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree;
 
 /**
  * Braintree CreditCard module
- * Creates and manages Braintree CreditCards
+ * Creates and manages Braintree CreditCards.
  *
  * <b>== More information ==</b>
  *
  * For more detailed information on CreditCards, see {@link https://developers.braintreepayments.com/reference/response/credit-card/php https://developers.braintreepayments.com/reference/response/credit-card/php}<br />
  * For more detailed information on CreditCard verifications, see {@link https://developers.braintreepayments.com/reference/response/credit-card-verification/php https://developers.braintreepayments.com/reference/response/credit-card-verification/php}
  *
- * @package    Braintree
  * @category   Resources
  *
- * @property-read \Braintree\Address $billingAddress
- * @property-read string $bin
- * @property-read string $cardType
- * @property-read string $cardholderName
- * @property-read string $commercial
- * @property-read string $countryOfIssuance
- * @property-read \DateTime $createdAt
- * @property-read string $customerId
- * @property-read string $customerLocation
- * @property-read string $debit
- * @property-read boolean $default
- * @property-read string $durbinRegulated
- * @property-read string $expirationDate
- * @property-read string $expirationMonth
- * @property-read string $expirationYear
- * @property-read boolean $expired
- * @property-read boolean $healthcare
- * @property-read string $imageUrl
- * @property-read string $issuingBank
- * @property-read string $isNetworkTokenized
- * @property-read string $last4
- * @property-read string $maskedNumber
- * @property-read string $payroll
- * @property-read string $prepaid
- * @property-read string $productId
- * @property-read \Braintree\Subscription[] $subscriptions
- * @property-read string $token
- * @property-read string $uniqueNumberIdentifier
- * @property-read \DateTime $updatedAt
- * @property-read \Braintree\CreditCardVerification|null $verification
+ * @property \Braintree\Address                     $billingAddress
+ * @property string                                 $bin
+ * @property string                                 $cardholderName
+ * @property string                                 $cardType
+ * @property string                                 $commercial
+ * @property string                                 $countryOfIssuance
+ * @property \DateTime                              $createdAt
+ * @property string                                 $customerId
+ * @property string                                 $customerLocation
+ * @property string                                 $debit
+ * @property bool                                   $default
+ * @property string                                 $durbinRegulated
+ * @property string                                 $expirationDate
+ * @property string                                 $expirationMonth
+ * @property string                                 $expirationYear
+ * @property bool                                   $expired
+ * @property bool                                   $healthcare
+ * @property string                                 $imageUrl
+ * @property string                                 $isNetworkTokenized
+ * @property string                                 $issuingBank
+ * @property string                                 $last4
+ * @property string                                 $maskedNumber
+ * @property string                                 $payroll
+ * @property string                                 $prepaid
+ * @property string                                 $productId
+ * @property \Braintree\Subscription[]              $subscriptions
+ * @property string                                 $token
+ * @property string                                 $uniqueNumberIdentifier
+ * @property \DateTime                              $updatedAt
+ * @property null|\Braintree\CreditCardVerification $verification
  */
 class CreditCard extends Base
 {
     // Card Type
-    const AMEX = 'American Express';
-    const CARTE_BLANCHE = 'Carte Blanche';
-    const CHINA_UNION_PAY = 'China UnionPay';
-    const DINERS_CLUB_INTERNATIONAL = 'Diners Club';
-    const DISCOVER = 'Discover';
-    const ELO = 'Elo';
-    const JCB = 'JCB';
-    const LASER = 'Laser';
-    const MAESTRO = 'Maestro';
-    const UK_MAESTRO = 'UK Maestro';
-    const MASTER_CARD = 'MasterCard';
-    const SOLO = 'Solo';
-    const SWITCH_TYPE = 'Switch';
-    const VISA = 'Visa';
-    const UNKNOWN = 'Unknown';
+    public const AMEX = 'American Express';
+    public const CARTE_BLANCHE = 'Carte Blanche';
+    public const CHINA_UNION_PAY = 'China UnionPay';
+    public const DINERS_CLUB_INTERNATIONAL = 'Diners Club';
+    public const DISCOVER = 'Discover';
+    public const ELO = 'Elo';
+    public const JCB = 'JCB';
+    public const LASER = 'Laser';
+    public const MAESTRO = 'Maestro';
+    public const UK_MAESTRO = 'UK Maestro';
+    public const MASTER_CARD = 'MasterCard';
+    public const SOLO = 'Solo';
+    public const SWITCH_TYPE = 'Switch';
+    public const VISA = 'Visa';
+    public const UNKNOWN = 'Unknown';
 
     // Credit card origination location
-    const INTERNATIONAL = "international";
-    const US = "us";
+    public const INTERNATIONAL = 'international';
+    public const US = 'us';
+    public const PREPAID_YES = 'Yes';
+    public const PREPAID_NO = 'No';
+    public const PREPAID_UNKNOWN = 'Unknown';
+    public const PAYROLL_YES = 'Yes';
+    public const PAYROLL_NO = 'No';
+    public const PAYROLL_UNKNOWN = 'Unknown';
+    public const HEALTHCARE_YES = 'Yes';
+    public const HEALTHCARE_NO = 'No';
+    public const HEALTHCARE_UNKNOWN = 'Unknown';
+    public const DURBIN_REGULATED_YES = 'Yes';
+    public const DURBIN_REGULATED_NO = 'No';
+    public const DURBIN_REGULATED_UNKNOWN = 'Unknown';
+    public const DEBIT_YES = 'Yes';
+    public const DEBIT_NO = 'No';
+    public const DEBIT_UNKNOWN = 'Unknown';
+    public const COMMERCIAL_YES = 'Yes';
+    public const COMMERCIAL_NO = 'No';
+    public const COMMERCIAL_UNKNOWN = 'Unknown';
+    public const COUNTRY_OF_ISSUANCE_UNKNOWN = 'Unknown';
+    public const ISSUING_BANK_UNKNOWN = 'Unknown';
+    public const PRODUCT_ID_UNKNOWN = 'Unknown';
 
-    const PREPAID_YES = 'Yes';
-    const PREPAID_NO = 'No';
-    const PREPAID_UNKNOWN = 'Unknown';
-
-    const PAYROLL_YES = 'Yes';
-    const PAYROLL_NO = 'No';
-    const PAYROLL_UNKNOWN = 'Unknown';
-
-    const HEALTHCARE_YES = 'Yes';
-    const HEALTHCARE_NO = 'No';
-    const HEALTHCARE_UNKNOWN = 'Unknown';
-
-    const DURBIN_REGULATED_YES = 'Yes';
-    const DURBIN_REGULATED_NO = 'No';
-    const DURBIN_REGULATED_UNKNOWN = 'Unknown';
-
-    const DEBIT_YES = 'Yes';
-    const DEBIT_NO = 'No';
-    const DEBIT_UNKNOWN = 'Unknown';
-
-    const COMMERCIAL_YES = 'Yes';
-    const COMMERCIAL_NO = 'No';
-    const COMMERCIAL_UNKNOWN = 'Unknown';
-
-    const COUNTRY_OF_ISSUANCE_UNKNOWN = "Unknown";
-    const ISSUING_BANK_UNKNOWN = "Unknown";
-    const PRODUCT_ID_UNKNOWN = "Unknown";
+    /**
+     * create a printable representation of the object as:
+     * ClassName[property=value, property=value]
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return __CLASS__.'['.
+                Util::attributesToString($this->_attributes).']';
+    }
 
     /* instance methods */
     /**
-     * returns false if default is null or false
+     * returns false if default is null or false.
      *
-     * @return boolean
+     * @return bool
      */
     public function isDefault()
     {
@@ -107,9 +126,9 @@ class CreditCard extends Base
     }
 
     /**
-     * checks whether the card is expired based on the current date
+     * checks whether the card is expired based on the current date.
      *
-     * @return boolean
+     * @return bool
      */
     public function isExpired()
     {
@@ -117,9 +136,9 @@ class CreditCard extends Base
     }
 
     /**
-     * checks whether the card is associated with venmo sdk
+     * checks whether the card is associated with venmo sdk.
      *
-     * @return boolean
+     * @return bool
      */
     public function isVenmoSdk()
     {
@@ -127,53 +146,12 @@ class CreditCard extends Base
     }
 
     /**
-     * sets instance properties from an array of values
-     *
-     * @access protected
-     * @param array $creditCardAttribs array of creditcard data
-     * @return void
-     */
-    protected function _initialize($creditCardAttribs)
-    {
-        // set the attributes
-        $this->_attributes = $creditCardAttribs;
-
-        // map each address into its own object
-        $billingAddress = isset($creditCardAttribs['billingAddress']) ?
-            Address::factory($creditCardAttribs['billingAddress']) :
-            null;
-
-        $subscriptionArray = [];
-        if (isset($creditCardAttribs['subscriptions'])) {
-            foreach ($creditCardAttribs['subscriptions'] AS $subscription) {
-                $subscriptionArray[] = Subscription::factory($subscription);
-            }
-        }
-
-        $this->_set('subscriptions', $subscriptionArray);
-        $this->_set('billingAddress', $billingAddress);
-        $this->_set('expirationDate', $this->expirationMonth . '/' . $this->expirationYear);
-        $this->_set('maskedNumber', $this->bin . '******' . $this->last4);
-
-        if(isset($creditCardAttribs['verifications']) && count($creditCardAttribs['verifications']) > 0) {
-            $verifications = $creditCardAttribs['verifications'];
-            usort($verifications, [$this, '_compareCreatedAtOnVerifications']);
-
-            $this->_set('verification', CreditCardVerification::factory($verifications[0]));
-        }
-    }
-
-    private function _compareCreatedAtOnVerifications($verificationAttrib1, $verificationAttrib2)
-    {
-        return ($verificationAttrib2['createdAt'] < $verificationAttrib1['createdAt']) ? -1 : 1;
-    }
-
-    /**
      * returns false if comparing object is not a CreditCard,
-     * or is a CreditCard with a different id
+     * or is a CreditCard with a different id.
      *
      * @param object $otherCreditCard customer to compare against
-     * @return boolean
+     *
+     * @return bool
      */
     public function isEqual($otherCreditCard)
     {
@@ -181,37 +159,29 @@ class CreditCard extends Base
     }
 
     /**
-     * create a printable representation of the object as:
-     * ClassName[property=value, property=value]
-     * @return string
-     */
-    public function  __toString()
-    {
-        return __CLASS__ . '[' .
-                Util::attributesToString($this->_attributes) .']';
-    }
-
-    /**
      *  factory method: returns an instance of CreditCard
-     *  to the requesting method, with populated properties
+     *  to the requesting method, with populated properties.
      *
      * @ignore
+     *
+     * @param mixed $attributes
+     *
      * @return CreditCard
      */
     public static function factory($attributes)
     {
         $defaultAttributes = [
             'bin' => '',
-            'expirationMonth'    => '',
-            'expirationYear'    => '',
-            'last4'  => '',
+            'expirationMonth' => '',
+            'expirationYear' => '',
+            'last4' => '',
         ];
 
         $instance = new self();
         $instance->_initialize(array_merge($defaultAttributes, $attributes));
+
         return $instance;
     }
-
 
     // static methods redirecting to gateway
 
@@ -300,24 +270,67 @@ class CreditCard extends Base
         return Configuration::gateway()->creditCard()->delete($token);
     }
 
-    /** @return array */
+    /**
+     * @return array
+     */
     public static function allCardTypes()
     {
         return [
-            CreditCard::AMEX,
-            CreditCard::CARTE_BLANCHE,
-            CreditCard::CHINA_UNION_PAY,
-            CreditCard::DINERS_CLUB_INTERNATIONAL,
-            CreditCard::DISCOVER,
-            CreditCard::ELO,
-            CreditCard::JCB,
-            CreditCard::LASER,
-            CreditCard::MAESTRO,
-            CreditCard::MASTER_CARD,
-            CreditCard::SOLO,
-            CreditCard::SWITCH_TYPE,
-            CreditCard::VISA,
-            CreditCard::UNKNOWN
+            self::AMEX,
+            self::CARTE_BLANCHE,
+            self::CHINA_UNION_PAY,
+            self::DINERS_CLUB_INTERNATIONAL,
+            self::DISCOVER,
+            self::ELO,
+            self::JCB,
+            self::LASER,
+            self::MAESTRO,
+            self::MASTER_CARD,
+            self::SOLO,
+            self::SWITCH_TYPE,
+            self::VISA,
+            self::UNKNOWN,
         ];
+    }
+
+    /**
+     * sets instance properties from an array of values.
+     *
+     * @param array $creditCardAttribs array of creditcard data
+     */
+    protected function _initialize($creditCardAttribs): void
+    {
+        // set the attributes
+        $this->_attributes = $creditCardAttribs;
+
+        // map each address into its own object
+        $billingAddress = isset($creditCardAttribs['billingAddress']) ?
+            Address::factory($creditCardAttribs['billingAddress']) :
+            null;
+
+        $subscriptionArray = [];
+
+        if (isset($creditCardAttribs['subscriptions'])) {
+            foreach ($creditCardAttribs['subscriptions'] as $subscription) {
+                $subscriptionArray[] = Subscription::factory($subscription);
+            }
+        }
+
+        $this->_set('subscriptions', $subscriptionArray);
+        $this->_set('billingAddress', $billingAddress);
+        $this->_set('expirationDate', $this->expirationMonth.'/'.$this->expirationYear);
+        $this->_set('maskedNumber', $this->bin.'******'.$this->last4);
+
+        if (isset($creditCardAttribs['verifications']) && \count($creditCardAttribs['verifications']) > 0) {
+            $verifications = $creditCardAttribs['verifications'];
+            usort($verifications, [$this, '_compareCreatedAtOnVerifications']);
+
+            $this->_set('verification', CreditCardVerification::factory($verifications[0]));
+        }
+    }
+
+    private function _compareCreatedAtOnVerifications($verificationAttrib1, $verificationAttrib2)
+    {
+        return ($verificationAttrib2['createdAt'] < $verificationAttrib1['createdAt']) ? -1 : 1;
     }
 }

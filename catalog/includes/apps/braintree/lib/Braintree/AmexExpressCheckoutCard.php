@@ -1,41 +1,57 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree;
 
 /**
  * Braintree AmexExpressCheckoutCard module
- * Creates and manages Braintree Amex Express Checkout cards
+ * Creates and manages Braintree Amex Express Checkout cards.
  *
  * <b>== More information ==</b>
  *
  * See {@link https://developers.braintreepayments.com/javascript+php}<br />
  *
- * @package    Braintree
  * @category   Resources
  *
- * @property-read string $bin
- * @property-read string $cardMemberExpiryDate
- * @property-read string $cardMemberNumber
- * @property-read string $cardType
- * @property-read \DateTime $createdAt
- * @property-read string $customerId
- * @property-read boolean $default
- * @property-read string $expirationMonth
- * @property-read string $expirationYear
- * @property-read string $imageUrl
- * @property-read string $token
- * @property-read string $sourceDescription
- * @property-read \Braintree\Subscription[] $subscriptions
- * @property-read \DateTime $updatedAt
+ * @property string                    $bin
+ * @property string                    $cardMemberExpiryDate
+ * @property string                    $cardMemberNumber
+ * @property string                    $cardType
+ * @property \DateTime                 $createdAt
+ * @property string                    $customerId
+ * @property bool                      $default
+ * @property string                    $expirationMonth
+ * @property string                    $expirationYear
+ * @property string                    $imageUrl
+ * @property string                    $sourceDescription
+ * @property \Braintree\Subscription[] $subscriptions
+ * @property string                    $token
+ * @property \DateTime                 $updatedAt
+ *
  * @deprecated
  */
 class AmexExpressCheckoutCard extends Base
 {
     /* instance methods */
     /**
-     * returns false if default is null or false
+     * returns false if default is null or false.
      *
-     * @return boolean
      * @deprecated
+     *
+     * @return bool
      */
     public function isDefault()
     {
@@ -44,36 +60,40 @@ class AmexExpressCheckoutCard extends Base
 
     /**
      *  factory method: returns an instance of AmexExpressCheckoutCard
-     *  to the requesting method, with populated properties
+     *  to the requesting method, with populated properties.
      *
      * @ignore
-     * @return AmexExpressCheckoutCard
+     *
      * @deprecated
+     *
+     * @param mixed $attributes
+     *
+     * @return AmexExpressCheckoutCard
      */
     public static function factory($attributes)
     {
-
         $instance = new self();
         $instance->_initialize($attributes);
+
         return $instance;
     }
 
     /**
-     * sets instance properties from an array of values
+     * sets instance properties from an array of values.
      *
-     * @access protected
-     * @param array $amexExpressCheckoutCardAttribs array of Amex Express Checkout card properties
-     * @return void
      * @deprecated
+     *
+     * @param array $amexExpressCheckoutCardAttribs array of Amex Express Checkout card properties
      */
-    protected function _initialize($amexExpressCheckoutCardAttribs)
+    protected function _initialize($amexExpressCheckoutCardAttribs): void
     {
         // set the attributes
         $this->_attributes = $amexExpressCheckoutCardAttribs;
 
         $subscriptionArray = [];
+
         if (isset($amexExpressCheckoutCardAttribs['subscriptions'])) {
-            foreach ($amexExpressCheckoutCardAttribs['subscriptions'] AS $subscription) {
+            foreach ($amexExpressCheckoutCardAttribs['subscriptions'] as $subscription) {
                 $subscriptionArray[] = Subscription::factory($subscription);
             }
         }

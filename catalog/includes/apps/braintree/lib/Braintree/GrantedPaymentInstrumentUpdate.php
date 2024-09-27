@@ -1,72 +1,86 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree;
 
 /**
- * Braintree GrantedPaymentInstrumentUpdate module
+ * Braintree GrantedPaymentInstrumentUpdate module.
  *
- * @package    Braintree
  * @category   Resources
  */
 
 /**
- * Manages Braintree GrantedPaymentInstrumentUpdate 
+ * Manages Braintree GrantedPaymentInstrumentUpdate.
  *
  * <b>== More information ==</b>
  *
- *
- * @package    Braintree
  * @category   Resources
  *
- * @property-read string $grantOwnerMerchantId
- * @property-read string $grantRecipientMerchantId
- * @property-read string $paymentMethodNonce
- * @property-read string $token
- * @property-read string $updatedFields
+ * @property string $grantOwnerMerchantId
+ * @property string $grantRecipientMerchantId
+ * @property string $paymentMethodNonce
+ * @property string $token
+ * @property string $updatedFields
  */
 class GrantedPaymentInstrumentUpdate extends Base
 {
     /**
+     * create a printable representation of the object as:
+     * ClassName[property=value, property=value]
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return __CLASS__.'['.
+                Util::attributesToString($this->_attributes).']';
+    }
+    /**
      *  factory method: returns an instance of GrantedPaymentInstrumentUpdate
-     *  to the requesting method, with populated properties
+     *  to the requesting method, with populated properties.
      *
      * @ignore
+     *
+     * @param mixed $attributes
+     *
      * @return GrantedPaymentInstrumentUpdate
      */
     public static function factory($attributes)
     {
         $instance = new self();
         $instance->_initialize($attributes);
+
         return $instance;
     }
 
     /* instance methods */
 
     /**
-     * sets instance properties from an array of values
+     * sets instance properties from an array of values.
      *
-     * @access protected
-     * @param array $GrantedPaymentInstrumentAttribs array of grantedPaymentInstrumentUpdate data
-     * @return void
+     * @param mixed $grantedPaymentInstrumentUpdateAttribs
      */
-    protected function _initialize($grantedPaymentInstrumentUpdateAttribs)
+    protected function _initialize($grantedPaymentInstrumentUpdateAttribs): void
     {
         // set the attributes
         $this->_attributes = $grantedPaymentInstrumentUpdateAttribs;
 
         $paymentMethodNonce = isset($grantedPaymentInstrumentUpdateAttribs['paymentMethodNonce']) ?
-            GrantedPaymentInstrumentUpdate::factory($grantedPaymentInstrumentUpdateAttribs['paymentMethodNonce']) :
+            self::factory($grantedPaymentInstrumentUpdateAttribs['paymentMethodNonce']) :
             null;
         $this->_set('paymentMethodNonce', $paymentMethodNonce);
-    }
-
-    /**
-     * create a printable representation of the object as:
-     * ClassName[property=value, property=value]
-     * @return string
-     */
-    public function  __toString()
-    {
-        return __CLASS__ . '[' .
-                Util::attributesToString($this->_attributes) . ']';
     }
 }

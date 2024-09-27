@@ -5,28 +5,31 @@
 
     <?php
     foreach ($new_products_array as $products) {
-      ?>
+        ?>
 
       <div class="col-6 col-lg">
 
         <div class="text-center">
-          <a href="<?php echo tep_href_link('product_info.php', 'products_id=' . $products['products_id']); ?>"><?php echo tep_image('images/products/thumbs/' . $products['products_image'], $products['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 'class="img-fluid"'); ?></a>
+          <a href="<?php echo tep_href_link('product_info.php', 'products_id='.$products['products_id']); ?>"><?php echo tep_image('images/products/thumbs/'.$products['products_image'], $products['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 'class="img-fluid"'); ?></a>
 
           <div class="m-2">
-            <a href="<?php echo tep_href_link('product_info.php', 'products_id=' . $products['products_id']); ?>"><?php echo $products['products_name']; ?></a>
+            <a href="<?php echo tep_href_link('product_info.php', 'products_id='.$products['products_id']); ?>"><?php echo $products['products_name']; ?></a>
           </div>
-          <?php if(DISABLE_PRICES != 'true') { ?>
+          <?php if (DISABLE_PRICES !== 'true') { ?>
           <div class="mb-2">
             <?php echo $products['products_price']; ?>
           </div>
-          <?php } ?>
+          <?php }
+
+ ?>
         </div>
 
       </div>
 
       <?php
     }
-    ?>
+
+  ?>
 
   </div>
 </div>

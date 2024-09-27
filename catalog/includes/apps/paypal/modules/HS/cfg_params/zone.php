@@ -1,42 +1,50 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2020 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
+class zone
+{
+    public $default = '0';
+    public $title;
+    public $description;
+    public $sort_order = 500;
 
-class OSCOM_PayPal_HS_Cfg_zone {
-  public $default = '0';
-  public $title;
-  public $description;
-  public $sort_order = 500;
+    public function __construct()
+    {
+        global $OSCOM_PayPal;
 
-  public function __construct() {
-    global $OSCOM_PayPal;
-
-    $this->title = $OSCOM_PayPal->getDef('cfg_hs_zone_title');
-    $this->description = $OSCOM_PayPal->getDef('cfg_hs_zone_desc');
-  }
-
-  public function getSetField() {
-    global $OSCOM_PayPal;
-
-    $zone_class_array = array(array('id' => '0', 'text' => $OSCOM_PayPal->getDef('cfg_hs_zone_global')));
-
-    $zone_class_query = tep_db_query("SELECT geo_zone_id, geo_zone_name FROM geo_zones ORDER BY geo_zone_name");
-    while ($zone_class = tep_db_fetch_array($zone_class_query)) {
-      $zone_class_array[] = array('id' => $zone_class['geo_zone_id'],
-                                  'text' => $zone_class['geo_zone_name']);
+        $this->title = $OSCOM_PayPal->getDef('cfg_hs_zone_title');
+        $this->description = $OSCOM_PayPal->getDef('cfg_hs_zone_desc');
     }
 
-    $input = tep_draw_pull_down_menu('zone', $zone_class_array, OSCOM_APP_PAYPAL_HS_ZONE, 'id="inputHsZone"');
+    public function getSetField()
+    {
+        global $OSCOM_PayPal;
 
-    $result = <<<EOT
+        $zone_class_array = [['id' => '0', 'text' => $OSCOM_PayPal->getDef('cfg_hs_zone_global')]];
+
+        $zone_class_query = tep_db_query('SELECT geo_zone_id, geo_zone_name FROM geo_zones ORDER BY geo_zone_name');
+
+        while ($zone_class = tep_db_fetch_array($zone_class_query)) {
+            $zone_class_array[] = ['id' => $zone_class['geo_zone_id'],
+                'text' => $zone_class['geo_zone_name']];
+        }
+
+        $input = tep_draw_pull_down_menu('zone', $zone_class_array, OSCOM_APP_PAYPAL_HS_ZONE, 'id="inputHsZone"');
+
+        $result = <<<EOT
 <div>
   <p>
     <label for="inputHsZone">{$this->title}</label>
@@ -50,6 +58,6 @@ class OSCOM_PayPal_HS_Cfg_zone {
 </div>
 EOT;
 
-    return $result;
-  }
+        return $result;
+    }
 }

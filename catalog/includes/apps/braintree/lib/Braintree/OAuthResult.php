@@ -1,33 +1,48 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree;
 
 /**
- * Braintree OAuthCredentials module
+ * Braintree OAuthCredentials module.
  *
- * @package    Braintree
  * @category   Resources
  */
 class OAuthResult extends Base
 {
-    protected function _initialize($attribs)
+    /**
+     * returns a string representation of the result.
+     *
+     * @return string
+     */
+    public function __toString()
     {
-        $this->_attributes = $attribs;
+        return __CLASS__.'['.
+                Util::attributesToString($this->_attributes).']';
     }
 
     public static function factory($attributes)
     {
         $instance = new self();
         $instance->_initialize($attributes);
+
         return $instance;
     }
-
-    /**
-     * returns a string representation of the result
-     * @return string
-     */
-    public function __toString()
+    protected function _initialize($attribs): void
     {
-        return __CLASS__ . '[' .
-                Util::attributesToString($this->_attributes) .']';
+        $this->_attributes = $attribs;
     }
 }

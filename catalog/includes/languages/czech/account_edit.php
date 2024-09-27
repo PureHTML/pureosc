@@ -1,20 +1,23 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2003 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
+\define('NAVBAR_TITLE_1', 'Můj účet');
+\define('NAVBAR_TITLE_2', 'Upravit účet');
+\define('HEADING_TITLE', 'Informace o mém účtu');
 
-define('NAVBAR_TITLE_1', 'Můj účet');
-define('NAVBAR_TITLE_2', 'Upravit účet');
-define('HEADING_TITLE', 'Informace o mém účtu');
+\define('MY_ACCOUNT_TITLE', 'Můj účet');
 
-define('MY_ACCOUNT_TITLE', 'Můj účet');
-
-define('SUCCESS_ACCOUNT_UPDATED', 'Váš účet byl úspěšně aktualizován.');
-?>
+\define('SUCCESS_ACCOUNT_UPDATED', 'Váš účet byl úspěšně aktualizován.');

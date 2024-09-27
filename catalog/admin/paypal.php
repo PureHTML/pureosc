@@ -8,12 +8,12 @@
   Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
-*/
+ */
 
-  require('includes/application_top.php');
+require 'includes/application_top.php';
 
-  if ( tep_db_num_rows(tep_db_query("show tables like 'oscom_app_paypal_log'")) != 1 ) {
-    $sql = <<<EOD
+if (tep_db_num_rows(tep_db_query("show tables like 'oscom_app_paypal_log'")) !== 1) {
+    $sql = <<<'EOD'
 CREATE TABLE oscom_app_paypal_log (
   id int unsigned NOT NULL auto_increment,
   customers_id int NOT NULL,
@@ -32,40 +32,40 @@ CREATE TABLE oscom_app_paypal_log (
 EOD;
 
     tep_db_query($sql);
-  }
+}
 
-  require(DIR_FS_CATALOG . 'includes/apps/paypal/OSCOM_PayPal.php');
-  $OSCOM_PayPal = new OSCOM_PayPal();
+require DIR_FS_CATALOG.'includes/apps/paypal/OSCOM_PayPal.php';
+$OSCOM_PayPal = new OSCOM_PayPal();
 
-  $content = 'start.php';
-  $action = 'start';
-  $subaction = '';
+$content = 'start.php';
+$action = 'start';
+$subaction = '';
 
-  $OSCOM_PayPal->loadLanguageFile('admin.php');
+$OSCOM_PayPal->loadLanguageFile('admin.php');
 
-  if ( isset($_GET['action']) && file_exists(DIR_FS_CATALOG . 'includes/apps/paypal/admin/actions/' . basename($_GET['action']) . '.php') ) {
+if (isset($_GET['action']) && file_exists(DIR_FS_CATALOG.'includes/apps/paypal/admin/actions/'.basename($_GET['action']).'.php')) {
     $action = basename($_GET['action']);
-  }
+}
 
-  $OSCOM_PayPal->loadLanguageFile('admin/' . $action . '.php');
+$OSCOM_PayPal->loadLanguageFile('admin/'.$action.'.php');
 
-  if ( $action == 'start' ) {
-    if ( $OSCOM_PayPal->migrate() ) {
-      tep_redirect(tep_href_link('paypal.php', tep_get_all_get_params()));
+if ($action === 'start') {
+    if ($OSCOM_PayPal->migrate()) {
+        tep_redirect(tep_href_link('paypal.php', tep_get_all_get_params()));
     }
-  }
+}
 
-  include(DIR_FS_CATALOG . 'includes/apps/paypal/admin/actions/' . $action . '.php');
+include DIR_FS_CATALOG.'includes/apps/paypal/admin/actions/'.$action.'.php';
 
-  if ( isset($_GET['subaction']) && file_exists(DIR_FS_CATALOG . 'includes/apps/paypal/admin/actions/' . $action . '/' . basename($_GET['subaction']) . '.php') ) {
+if (isset($_GET['subaction']) && file_exists(DIR_FS_CATALOG.'includes/apps/paypal/admin/actions/'.$action.'/'.basename($_GET['subaction']).'.php')) {
     $subaction = basename($_GET['subaction']);
-  }
+}
 
-  if ( !empty($subaction) ) {
-    include(DIR_FS_CATALOG . 'includes/apps/paypal/admin/actions/' . $action . '/' . $subaction . '.php');
-  }
+if (!empty($subaction)) {
+    include DIR_FS_CATALOG.'includes/apps/paypal/admin/actions/'.$action.'/'.$subaction.'.php';
+}
 
-  include(DIR_FS_ADMIN . 'includes/template_top.php');
+include DIR_FS_ADMIN.'includes/template_top.php';
 ?>
 
 <style>
@@ -327,10 +327,10 @@ var OSCOM = {
   APP: {
     PAYPAL: {
       version: '<?php echo $OSCOM_PayPal->getVersion(); ?>',
-      versionCheckResult: <?php echo (defined('OSCOM_APP_PAYPAL_VERSION_CHECK')) ? '"' . OSCOM_APP_PAYPAL_VERSION_CHECK . '"' : 'undefined'; ?>,
+      versionCheckResult: <?php echo (\defined('OSCOM_APP_PAYPAL_VERSION_CHECK')) ? '"'.OSCOM_APP_PAYPAL_VERSION_CHECK.'"' : 'undefined'; ?>,
       action: '<?php echo $action; ?>',
       doOnlineVersionCheck: false,
-      canApplyOnlineUpdates: <?php echo class_exists('ZipArchive') && function_exists('json_encode') && function_exists('openssl_verify') ? 'true' : 'false'; ?>,
+      canApplyOnlineUpdates: <?php echo class_exists('ZipArchive') && \function_exists('json_encode') && \function_exists('openssl_verify') ? 'true' : 'false'; ?>,
       accountTypes: {
         live: <?php echo ($OSCOM_PayPal->hasApiCredentials('live') === true) ? 'true' : 'false'; ?>,
         sandbox: <?php echo ($OSCOM_PayPal->hasApiCredentials('sandbox') === true) ? 'true' : 'false'; ?>
@@ -392,22 +392,23 @@ if ( typeof OSCOM.APP.PAYPAL.versionCheckResult != 'undefined' ) {
 <div class="pp-container">
   <div class="pp-header">
     <div id="ppAppInfo" style="float: right;">
-      <?php echo $OSCOM_PayPal->getTitle() . ' v' . $OSCOM_PayPal->getVersion() . ' <a href="' . tep_href_link('paypal.php', 'action=info') . '">' . $OSCOM_PayPal->getDef('app_link_info') . '</a> <a href="' . tep_href_link('paypal.php', 'action=privacy') . '">' . $OSCOM_PayPal->getDef('app_link_privacy') . '</a>'; ?>
+      <?php echo $OSCOM_PayPal->getTitle().' v'.$OSCOM_PayPal->getVersion().' <a href="'.tep_href_link('paypal.php', 'action=info').'">'.$OSCOM_PayPal->getDef('app_link_info').'</a> <a href="'.tep_href_link('paypal.php', 'action=privacy').'">'.$OSCOM_PayPal->getDef('app_link_privacy').'</a>'; ?>
     </div>
 
-    <a href="<?php echo tep_href_link('paypal.php', 'action=' . $action); ?>"><img src="<?php echo tep_catalog_href_link('images/apps/paypal/paypal.png'); ?>" /></a>
+    <a href="<?php echo tep_href_link('paypal.php', 'action='.$action); ?>"><img src="<?php echo tep_catalog_href_link('images/apps/paypal/paypal.png'); ?>" /></a>
   </div>
 
   <div id="ppAppUpdateNotice" style="padding: 0 12px 0 12px; display: none;">
     <div class="pp-panel pp-panel-success">
-      <?php echo $OSCOM_PayPal->getDef('update_available_body', array('button_view_update' => $OSCOM_PayPal->drawButton($OSCOM_PayPal->getDef('button_view_update'), tep_href_link('paypal.php', 'action=update'), 'success'))); ?>
+      <?php echo $OSCOM_PayPal->getDef('update_available_body', ['button_view_update' => $OSCOM_PayPal->drawButton($OSCOM_PayPal->getDef('button_view_update'), tep_href_link('paypal.php', 'action=update'), 'success')]); ?>
     </div>
   </div>
 
 <?php
-  if ( $OSCOM_PayPal->hasAlert() ) {
-    echo $OSCOM_PayPal->getAlerts();
+  if ($OSCOM_PayPal->hasAlert()) {
+      echo $OSCOM_PayPal->getAlerts();
   }
+
 ?>
 
   <div style="padding: 0 10px 10px 10px;">
@@ -418,7 +419,7 @@ if ( !$.isFunction($.Deferred) ) {
 }
 </script>
 
-    <?php include(DIR_FS_CATALOG . 'includes/apps/paypal/admin/content/' . basename($content)); ?>
+    <?php include DIR_FS_CATALOG.'includes/apps/paypal/admin/content/'.basename($content); ?>
   </div>
 </div>
 
@@ -445,6 +446,7 @@ $(function() {
 </script>
 
 <?php
-  include(DIR_FS_ADMIN . 'includes/template_bottom.php');
-  require(DIR_FS_ADMIN . 'includes/application_bottom.php');
+  include DIR_FS_ADMIN.'includes/template_bottom.php';
+
+require DIR_FS_ADMIN.'includes/application_bottom.php';
 ?>

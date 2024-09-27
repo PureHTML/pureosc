@@ -1,4 +1,19 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree;
 
 /**
@@ -8,10 +23,10 @@ namespace Braintree;
  */
 class ShippingMethod
 {
-    const SAME_DAY      = 'same_day';
-    const NEXT_DAY      = 'next_day';
-    const PRIORITY      = 'priority';
-    const GROUND        = 'ground';
-    const ELECTRONIC    = 'electronic';
-    const SHIP_TO_STORE = 'ship_to_store';
+    public const SAME_DAY = 'same_day';
+    public const NEXT_DAY = 'next_day';
+    public const PRIORITY = 'priority';
+    public const GROUND = 'ground';
+    public const ELECTRONIC = 'electronic';
+    public const SHIP_TO_STORE = 'ship_to_store';
 }

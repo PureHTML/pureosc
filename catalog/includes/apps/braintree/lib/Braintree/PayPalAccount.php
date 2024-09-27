@@ -1,95 +1,88 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree;
 
 /**
- * Braintree PayPalAccount module
+ * Braintree PayPalAccount module.
  *
- * @package    Braintree
  * @category   Resources
  */
 
 /**
- * Manages Braintree PayPalAccounts
+ * Manages Braintree PayPalAccounts.
  *
  * <b>== More information ==</b>
  *
- *
- * @package    Braintree
  * @category   Resources
  *
- * @property-read string $billingAgreementId
- * @property-read \DateTime $createdAt
- * @property-read string $customerId
- * @property-read boolean $default
- * @property-read string $email
- * @property-read string $imageUrl
- * @property-read string $payerId
- * @property-read \DateTime $revokedAt
- * @property-read \Braintree\Subscription[] $subscriptions
- * @property-read string $token
- * @property-read \DateTime $updatedAt
+ * @property string                    $billingAgreementId
+ * @property \DateTime                 $createdAt
+ * @property string                    $customerId
+ * @property bool                      $default
+ * @property string                    $email
+ * @property string                    $imageUrl
+ * @property string                    $payerId
+ * @property \DateTime                 $revokedAt
+ * @property \Braintree\Subscription[] $subscriptions
+ * @property string                    $token
+ * @property \DateTime                 $updatedAt
  */
 class PayPalAccount extends Base
 {
     /**
+     * create a printable representation of the object as:
+     * ClassName[property=value, property=value]
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return __CLASS__.'['.
+                Util::attributesToString($this->_attributes).']';
+    }
+    /**
      *  factory method: returns an instance of PayPalAccount
-     *  to the requesting method, with populated properties
+     *  to the requesting method, with populated properties.
      *
      * @ignore
+     *
+     * @param mixed $attributes
+     *
      * @return PayPalAccount
      */
     public static function factory($attributes)
     {
         $instance = new self();
         $instance->_initialize($attributes);
+
         return $instance;
     }
 
     /* instance methods */
 
     /**
-     * returns false if default is null or false
+     * returns false if default is null or false.
      *
-     * @return boolean
+     * @return bool
      */
     public function isDefault()
     {
         return $this->default;
     }
-
-    /**
-     * sets instance properties from an array of values
-     *
-     * @access protected
-     * @param array $paypalAccountAttribs array of paypalAccount data
-     * @return void
-     */
-    protected function _initialize($paypalAccountAttribs)
-    {
-        // set the attributes
-        $this->_attributes = $paypalAccountAttribs;
-
-        $subscriptionArray = [];
-        if (isset($paypalAccountAttribs['subscriptions'])) {
-            foreach ($paypalAccountAttribs['subscriptions'] AS $subscription) {
-                $subscriptionArray[] = Subscription::factory($subscription);
-            }
-        }
-
-        $this->_set('subscriptions', $subscriptionArray);
-    }
-
-    /**
-     * create a printable representation of the object as:
-     * ClassName[property=value, property=value]
-     * @return string
-     */
-    public function  __toString()
-    {
-        return __CLASS__ . '[' .
-                Util::attributesToString($this->_attributes) . ']';
-    }
-
 
     // static methods redirecting to gateway
 
@@ -111,5 +104,26 @@ class PayPalAccount extends Base
     public static function sale($token, $transactionAttribs)
     {
         return Configuration::gateway()->payPalAccount()->sale($token, $transactionAttribs);
+    }
+
+    /**
+     * sets instance properties from an array of values.
+     *
+     * @param array $paypalAccountAttribs array of paypalAccount data
+     */
+    protected function _initialize($paypalAccountAttribs): void
+    {
+        // set the attributes
+        $this->_attributes = $paypalAccountAttribs;
+
+        $subscriptionArray = [];
+
+        if (isset($paypalAccountAttribs['subscriptions'])) {
+            foreach ($paypalAccountAttribs['subscriptions'] as $subscription) {
+                $subscriptionArray[] = Subscription::factory($subscription);
+            }
+        }
+
+        $this->_set('subscriptions', $subscriptionArray);
     }
 }

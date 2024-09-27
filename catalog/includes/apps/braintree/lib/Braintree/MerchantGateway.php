@@ -1,4 +1,19 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree;
 
 class MerchantGateway
@@ -19,6 +34,7 @@ class MerchantGateway
     public function create($attribs)
     {
         $response = $this->_http->post('/merchants/create_via_api', ['merchant' => $attribs]);
+
         return $this->_verifyGatewayResponse($response);
     }
 
@@ -30,12 +46,14 @@ class MerchantGateway
                 Merchant::factory($response['response']['merchant']),
                 OAuthCredentials::factory($response['response']['credentials']),
             ]);
-        } else if (isset($response['apiErrorResponse'])) {
-            return new Result\Error($response['apiErrorResponse']);
-        } else {
-            throw new Exception\Unexpected(
-            "Expected merchant or apiErrorResponse"
-            );
         }
+
+        if (isset($response['apiErrorResponse'])) {
+            return new Result\Error($response['apiErrorResponse']);
+        }
+
+        throw new Exception\Unexpected(
+            'Expected merchant or apiErrorResponse',
+        );
     }
 }

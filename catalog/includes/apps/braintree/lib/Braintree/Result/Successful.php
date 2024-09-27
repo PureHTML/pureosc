@@ -1,11 +1,26 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree\Result;
 
 use Braintree\Instance;
 use Braintree\Util;
 
 /**
- * Braintree Successful Result
+ * Braintree Successful Result.
  *
  * A Successful Result will be returned from gateway methods when
  * validations pass. It will provide access to the created resource.
@@ -22,70 +37,75 @@ use Braintree\Util;
  *     // Error
  * }
  * </code>
- *
- *
- * @package    Braintree
- * @subpackage Result
  */
 class Successful extends Instance
 {
     /**
-     *
-     * @var boolean always true
+     * @var bool always true
      */
-    public $success = true;
+    public bool $success = true;
+
     /**
-     *
      * @var string stores the internal name of the object providing access to
      */
-    private $_returnObjectNames;
+    private string $_returnObjectNames;
 
     /**
      * @ignore
-     * @param array|null $objsToReturn
-     * @param array|null $propertyNames
+     *
+     * @param null|array $objsToReturn
+     * @param null|array $propertyNames
      */
     public function __construct($objsToReturn = [], $propertyNames = [])
     {
         // Sanitize arguments (preserves backwards compatibility)
-        if (!is_array($objsToReturn)) { $objsToReturn = [$objsToReturn]; }
-        if (!is_array($propertyNames)) { $propertyNames = [$propertyNames]; }
+        if (!\is_array($objsToReturn)) {
+            $objsToReturn = [$objsToReturn];
+        }
+
+        if (!\is_array($propertyNames)) {
+            $propertyNames = [$propertyNames];
+        }
 
         $objects = $this->_mapPropertyNamesToObjsToReturn($propertyNames, $objsToReturn);
         $this->_attributes = [];
         $this->_returnObjectNames = [];
 
         foreach ($objects as $propertyName => $objToReturn) {
-
             // save the name for indirect access
-            array_push($this->_returnObjectNames, $propertyName);
+            $this->_returnObjectNames[] = $propertyName;
 
             // create the property!
-            $this->$propertyName = $objToReturn;
+            $this->{$propertyName} = $objToReturn;
         }
     }
 
-   /**
-    *
-    * @ignore
-    * @return string string representation of the object's structure
-    */
-   public function __toString()
-   {
-       $objects = [];
-       foreach ($this->_returnObjectNames as $returnObjectName) {
-           array_push($objects, $returnObjectName);
-       }
-       return __CLASS__ . '[' . implode(', ', $objects) . ']';
-   }
+    /**
+     * @ignore
+     *
+     * @return string string representation of the object's structure
+     */
+    public function __toString()
+    {
+        $objects = [];
 
-   private function _mapPropertyNamesToObjsToReturn($propertyNames, $objsToReturn) {
-       if(count($objsToReturn) != count($propertyNames)) {
-           $propertyNames = [];
-           foreach ($objsToReturn as $obj) {
-               array_push($propertyNames, Util::cleanClassName(get_class($obj)));
-           }
-       }
-       return array_combine($propertyNames, $objsToReturn);
-   }
+        foreach ($this->_returnObjectNames as $returnObjectName) {
+            $objects[] = $returnObjectName;
+        }
+
+        return __CLASS__.'['.implode(', ', $objects).']';
+    }
+
+    private function _mapPropertyNamesToObjsToReturn($propertyNames, $objsToReturn)
+    {
+        if (\count($objsToReturn) !== \count($propertyNames)) {
+            $propertyNames = [];
+
+            foreach ($objsToReturn as $obj) {
+                $propertyNames[] = Util::cleanClassName(\get_class($obj));
+            }
+        }
+
+        return array_combine($propertyNames, $objsToReturn);
+    }
 }

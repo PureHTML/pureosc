@@ -1,49 +1,58 @@
 <?php
-namespace Braintree\Result;
 
-use Braintree\RiskData;
-use Braintree\Util;
-use Braintree\UsBankAccount;
-use Braintree\Base;
+declare(strict_types=1);
 
 /**
- * Braintree US Bank Account Verification Result
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Braintree\Result;
+
+use Braintree\Base;
+use Braintree\UsBankAccount;
+use Braintree\Util;
+
+/**
+ * Braintree US Bank Account Verification Result.
  *
  * This object is returned as part of an Error Result; it provides
  * access to the credit card verification data from the gateway
  *
- *
- * @package    Braintree
- * @subpackage Result
- *
- * @property-read string $id
- * @property-read string $status
- * @property-read string $verificationMethod
- * @property-read \DateTime $verificationDeterminedAt
- * @property-read Braintree\UsBankAccount $usBankAccount
- *
+ * @property string                  $id
+ * @property string                  $status
+ * @property Braintree\UsBankAccount $usBankAccount
+ * @property \DateTime               $verificationDeterminedAt
+ * @property string                  $verificationMethod
  */
 class UsBankAccountVerification extends Base
 {
     // Status
-    const FAILED             = 'failed';
-    const GATEWAY_REJECTED   = 'gateway_rejected';
-    const PROCESSOR_DECLINED = 'processor_declined';
-    const VERIFIED           = 'verified';
-    const PENDING            = 'pending';
-
-    const TOKENIZED_CHECK   = 'tokenized_check';
-    const NETWORK_CHECK     = 'network_check';
-    const INDEPENDENT_CHECK = 'independent_check';
-    const MICRO_TRANSFERS   = 'micro_transfers';
-
+    public const FAILED = 'failed';
+    public const GATEWAY_REJECTED = 'gateway_rejected';
+    public const PROCESSOR_DECLINED = 'processor_declined';
+    public const VERIFIED = 'verified';
+    public const PENDING = 'pending';
+    public const TOKENIZED_CHECK = 'tokenized_check';
+    public const NETWORK_CHECK = 'network_check';
+    public const INDEPENDENT_CHECK = 'independent_check';
+    public const MICRO_TRANSFERS = 'micro_transfers';
     private $_gatewayRejectionReason;
     private $_status;
 
     /**
      * @ignore
+     *
+     * @param mixed $attributes
      */
-    public function  __construct($attributes)
+    public function __construct($attributes)
     {
         $this->_initializeFromArray($attributes);
 
@@ -54,58 +63,64 @@ class UsBankAccountVerification extends Base
     }
 
     /**
-     * initializes instance properties from the keys/values of an array
      * @ignore
-     * @access protected
-     * @param <type> $aAttribs array of properties to set - single level
-     * @return void
+     *
+     * @param mixed $name
      */
-    private function _initializeFromArray($attributes)
+    public function __get($name)
     {
-        $this->_attributes = $attributes;
-        foreach($attributes AS $name => $value) {
-            $varName = "_$name";
-            $this->$varName = $value;
-        }
+        $varName = "_{$name}";
+
+        return $this->{$varName} ?? null;
     }
 
     /**
-     * @ignore
-     */
-    public function  __get($name)
-    {
-        $varName = "_$name";
-        return isset($this->$varName) ? $this->$varName : null;
-    }
-
-    /**
-     * returns a string representation of the customer
+     * returns a string representation of the customer.
+     *
      * @return string
      */
-    public function  __toString()
+    public function __toString()
     {
-        return __CLASS__ . '[' .
-                Util::attributesToString($this->_attributes) . ']';
+        return __CLASS__.'['.
+                Util::attributesToString($this->_attributes).']';
     }
 
     public static function allStatuses()
     {
         return [
-            UsBankAccountVerification::FAILED,
-            UsBankAccountVerification::GATEWAY_REJECTED,
-            UsBankAccountVerification::PROCESSOR_DECLINED,
-            UsBankAccountVerification::VERIFIED,
-            UsBankAccountVerification::PENDING,
+            self::FAILED,
+            self::GATEWAY_REJECTED,
+            self::PROCESSOR_DECLINED,
+            self::VERIFIED,
+            self::PENDING,
         ];
     }
 
     public static function allVerificationMethods()
     {
         return [
-            UsBankAccountVerification::TOKENIZED_CHECK,
-            UsBankAccountVerification::NETWORK_CHECK,
-            UsBankAccountVerification::INDEPENDENT_CHECK,
-            UsBankAccountVerification::MICRO_TRANSFERS,
+            self::TOKENIZED_CHECK,
+            self::NETWORK_CHECK,
+            self::INDEPENDENT_CHECK,
+            self::MICRO_TRANSFERS,
         ];
+    }
+
+    /**
+     * initializes instance properties from the keys/values of an array.
+     *
+     * @ignore
+     *
+     * @param mixed $attributes
+     * @param <type> $aAttribs array of properties to set - single level
+     */
+    private function _initializeFromArray($attributes): void
+    {
+        $this->_attributes = $attributes;
+
+        foreach ($attributes as $name => $value) {
+            $varName = "_{$name}";
+            $this->{$varName} = $value;
+        }
     }
 }

@@ -8,56 +8,58 @@
   Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
-*/
+ */
 
-  require('includes/application_top.php');
+require 'includes/application_top.php';
 
-  function tep_opendir($path) {
-    $path = rtrim($path, '/') . '/';
+function tep_opendir($path)
+{
+    $path = rtrim($path, '/').'/';
 
-    $exclude_array = array('.', '..', '.DS_Store', 'Thumbs.db');
+    $exclude_array = ['.', '..', '.DS_Store', 'Thumbs.db'];
 
-    $result = array();
+    $result = [];
 
     if ($handle = opendir($path)) {
-      while (false !== ($filename = readdir($handle))) {
-        if (!in_array($filename, $exclude_array)) {
-          $file = array('name' => $path . $filename,
-                        'is_dir' => is_dir($path . $filename),
-                        'writable' => tep_is_writable($path . $filename));
+        while (false !== ($filename = readdir($handle))) {
+            if (!\in_array($filename, $exclude_array, true)) {
+                $file = ['name' => $path.$filename,
+                    'is_dir' => is_dir($path.$filename),
+                    'writable' => tep_is_writable($path.$filename)];
 
-          $result[] = $file;
+                $result[] = $file;
 
-          if ($file['is_dir'] == true) {
-            $result = array_merge($result, tep_opendir($path . $filename));
-          }
+                if ($file['is_dir'] === true) {
+                    $result = array_merge($result, tep_opendir($path.$filename));
+                }
+            }
         }
-      }
 
-      closedir($handle);
+        closedir($handle);
     }
 
     return $result;
-  }
+}
 
-  $whitelist_array = array();
+$whitelist_array = [];
 
-  $whitelist_query = tep_db_query("select directory from sec_directory_whitelist");
-  while ($whitelist = tep_db_fetch_array($whitelist_query)) {
+$whitelist_query = tep_db_query('select directory from sec_directory_whitelist');
+
+while ($whitelist = tep_db_fetch_array($whitelist_query)) {
     $whitelist_array[] = $whitelist['directory'];
-  }
+}
 
-  $admin_dir = basename(DIR_FS_ADMIN);
+$admin_dir = basename(DIR_FS_ADMIN);
 
-  if ($admin_dir != 'admin') {
-    for ($i=0, $n=sizeof($whitelist_array); $i<$n; $i++) {
-      if (substr($whitelist_array[$i], 0, 6) == 'admin/') {
-        $whitelist_array[$i] = $admin_dir . substr($whitelist_array[$i], 5);
-      }
+if ($admin_dir !== 'admin') {
+    for ($i = 0, $n = \count($whitelist_array); $i < $n; ++$i) {
+        if (substr($whitelist_array[$i], 0, 6) === 'admin/') {
+            $whitelist_array[$i] = $admin_dir.substr($whitelist_array[$i], 5);
+        }
     }
-  }
+}
 
-  require('includes/template_top.php');
+require 'includes/template_top.php';
 ?>
 
     <table border="0" width="100%" cellspacing="0" cellpadding="2">
@@ -80,19 +82,20 @@
               </tr>
 <?php
   foreach (tep_opendir(DIR_FS_CATALOG) as $file) {
-    if ($file['is_dir']) {
-?>
+      if ($file['is_dir']) {
+          ?>
               <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)">
-                <td class="dataTableContent"><?php echo substr($file['name'], strlen(DIR_FS_CATALOG)); ?></td>
-                <td class="dataTableContent" align="center"><?php echo tep_image('images/icons/' . (($file['writable'] == true) ? 'tick.gif' : 'cross.gif')); ?></td>
-                <td class="dataTableContent" align="center"><?php echo tep_image('images/icons/' . (in_array(substr($file['name'], strlen(DIR_FS_CATALOG)), $whitelist_array) ? 'tick.gif' : 'cross.gif')); ?></td>
+                <td class="dataTableContent"><?php echo substr($file['name'], \strlen(DIR_FS_CATALOG)); ?></td>
+                <td class="dataTableContent" align="center"><?php echo tep_image('images/icons/'.(($file['writable'] === true) ? 'tick.gif' : 'cross.gif')); ?></td>
+                <td class="dataTableContent" align="center"><?php echo tep_image('images/icons/'.(\in_array(substr($file['name'], \strlen(DIR_FS_CATALOG)), $whitelist_array, true) ? 'tick.gif' : 'cross.gif')); ?></td>
               </tr>
 <?php
-    }
+      }
   }
+
 ?>
               <tr>
-                <td colspan="3" class="smallText"><?php echo TEXT_DIRECTORY . ' ' . DIR_FS_CATALOG; ?></td>
+                <td colspan="3" class="smallText"><?php echo TEXT_DIRECTORY.' '.DIR_FS_CATALOG; ?></td>
               </tr>
             </table></td>
           </tr>
@@ -101,6 +104,7 @@
     </table>
 
 <?php
-  require('includes/template_bottom.php');
-  require('includes/application_bottom.php');
+  require 'includes/template_bottom.php';
+
+require 'includes/application_bottom.php';
 ?>

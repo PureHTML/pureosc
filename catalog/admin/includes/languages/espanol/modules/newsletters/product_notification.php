@@ -1,24 +1,27 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2020 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
+\define('TEXT_COUNT_CUSTOMERS', 'Clientes que reciben boletines: %s');
+\define('TEXT_PRODUCTS', 'Productos');
+\define('TEXT_SELECTED_PRODUCTS', 'Productos seleccionados');
 
-define('TEXT_COUNT_CUSTOMERS', 'Clientes que reciben boletines: %s');
-define('TEXT_PRODUCTS', 'Productos');
-define('TEXT_SELECTED_PRODUCTS', 'Productos seleccionados');
+\define('JS_PLEASE_SELECT_PRODUCTS', 'Por favor, seleccione algunos productos.');
 
-define('JS_PLEASE_SELECT_PRODUCTS', 'Por favor, seleccione algunos productos.');
-
-define('BUTTON_GLOBAL', 'Global');
-define('BUTTON_SELECT', '>>>');
-define('BUTTON_UNSELECT', '<<<');
-define('BUTTON_SUBMIT', 'Enviar');
-define('BUTTON_CANCEL', 'Cancelar');
-?>
+\define('BUTTON_GLOBAL', 'Global');
+\define('BUTTON_SELECT', '>>>');
+\define('BUTTON_UNSELECT', '<<<');
+\define('BUTTON_SUBMIT', 'Enviar');
+\define('BUTTON_CANCEL', 'Cancelar');

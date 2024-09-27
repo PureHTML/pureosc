@@ -8,82 +8,85 @@
   Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
-*/
+ */
 
 chdir('../../../../');
-require('includes/application_top.php');
+
+require 'includes/application_top.php';
 
 if (!isset($_SESSION['customer_id'])) {
-  tep_redirect(tep_href_link('login.php'));
+    tep_redirect(tep_href_link('login.php'));
 }
 
-if (MODULE_CONTENT_ACCOUNT_SET_PASSWORD_ALLOW_PASSWORD != 'True') {
-  tep_redirect(tep_href_link('account.php'));
+if (MODULE_CONTENT_ACCOUNT_SET_PASSWORD_ALLOW_PASSWORD !== 'True') {
+    tep_redirect(tep_href_link('account.php'));
 }
 
-$check_customer_query = tep_db_query("select customers_password from customers where customers_id = '" . (int)$customer_id . "'");
+$check_customer_query = tep_db_query("select customers_password from customers where customers_id = '".(int) $customer_id."'");
 $check_customer = tep_db_fetch_array($check_customer_query);
 
 if (!empty($check_customer['customers_password'])) {
-  tep_redirect(tep_href_link('account.php'));
+    tep_redirect(tep_href_link('account.php'));
 }
 
 // needs to be included earlier to set the success message in the messageStack
-require('includes/languages/' . $language . '/modules/content/account/cm_account_set_password.php');
+require 'includes/languages/'.$language.'/modules/content/account/cm_account_set_password.php';
 
-if (isset($_POST['action']) && $_POST['action'] == 'process' && isset($_POST['formid']) && $_POST['formid'] == $sessiontoken) {
-  $password_new = tep_db_prepare_input($_POST['password_new']);
-  $password_confirmation = tep_db_prepare_input($_POST['password_confirmation']);
+if (isset($_POST['action']) && $_POST['action'] === 'process' && isset($_POST['formid']) && $_POST['formid'] === $sessiontoken) {
+    $password_new = tep_db_prepare_input($_POST['password_new']);
+    $password_confirmation = tep_db_prepare_input($_POST['password_confirmation']);
 
-  $error = false;
+    $error = false;
 
-  if (strlen($password_new) < ENTRY_PASSWORD_MIN_LENGTH) {
-    $error = true;
+    if (\strlen($password_new) < ENTRY_PASSWORD_MIN_LENGTH) {
+        $error = true;
 
-    $messageStack->add('account_password', ENTRY_PASSWORD_NEW_ERROR);
-  } elseif ($password_new !== $password_confirmation) {
-    $error = true;
+        $messageStack->add('account_password', ENTRY_PASSWORD_NEW_ERROR);
+    } elseif ($password_new !== $password_confirmation) {
+        $error = true;
 
-    $messageStack->add('account_password', ENTRY_PASSWORD_NEW_ERROR_NOT_MATCHING);
-  }
+        $messageStack->add('account_password', ENTRY_PASSWORD_NEW_ERROR_NOT_MATCHING);
+    }
 
-  if ($error == false) {
-    tep_db_query("update customers set customers_password = '" . tep_encrypt_password($password_new) . "' where customers_id = '" . (int)$customer_id . "'");
+    if ($error === false) {
+        tep_db_query("update customers set customers_password = '".tep_encrypt_password($password_new)."' where customers_id = '".(int) $customer_id."'");
 
-    tep_db_query("update customers_info set customers_info_date_account_last_modified = now() where customers_info_id = '" . (int)$customer_id . "'");
+        tep_db_query("update customers_info set customers_info_date_account_last_modified = now() where customers_info_id = '".(int) $customer_id."'");
 
-    $messageStack->add_session('account', MODULE_CONTENT_ACCOUNT_SET_PASSWORD_SUCCESS_PASSWORD_SET, 'success');
+        $messageStack->add_session('account', MODULE_CONTENT_ACCOUNT_SET_PASSWORD_SUCCESS_PASSWORD_SET, 'success');
 
-    tep_redirect(tep_href_link('account.php'));
-  }
+        tep_redirect(tep_href_link('account.php'));
+    }
 }
 
 $breadcrumb->add(MODULE_CONTENT_ACCOUNT_SET_PASSWORD_NAVBAR_TITLE_1, tep_href_link('account.php'));
 $breadcrumb->add(MODULE_CONTENT_ACCOUNT_SET_PASSWORD_NAVBAR_TITLE_2, tep_href_link('ext/modules/content/account/set_password.php'));
 
-require('includes/template_top.php');
-require('includes/form_check.js.php');
+require 'includes/template_top.php';
+
+require 'includes/form_check.js.php';
 ?>
 
   <h1><?php echo MODULE_CONTENT_ACCOUNT_SET_PASSWORD_HEADING_TITLE; ?></h1>
 
 <?php
 if ($messageStack->size('account_password') > 0) {
-  echo $messageStack->output('account_password');
+    echo $messageStack->output('account_password');
 }
+
 ?>
 
-<?php echo tep_draw_form('account_password', tep_href_link('ext/modules/content/account/set_password.php'), 'post', 'onsubmit="return check_form(account_password);"', true) . tep_draw_hidden_field('action', 'process'); ?>
+<?php echo tep_draw_form('account_password', tep_href_link('ext/modules/content/account/set_password.php'), 'post', 'onsubmit="return check_form(account_password);"', true).tep_draw_hidden_field('action', 'process'); ?>
 
   <div class="col-lg-6 mb-5">
     <div class="text-end text-danger small"><?php echo FORM_REQUIRED_INFORMATION; ?></div>
 
     <div class="mb-3">
-      <label class="form-label" for="password_new"><?php echo ENTRY_PASSWORD_NEW . (!empty(ENTRY_PASSWORD_NEW_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_PASSWORD_NEW_TEXT . '</span>' : ''); ?></label>
+      <label class="form-label" for="password_new"><?php echo ENTRY_PASSWORD_NEW.(!empty(ENTRY_PASSWORD_NEW_TEXT) ? '<span class="text-danger ms-1">'.ENTRY_PASSWORD_NEW_TEXT.'</span>' : ''); ?></label>
       <?php echo tep_draw_password_field('password_new', null, 'id="password_new" class="form-control"'); ?>
     </div>
     <div class="mb-3">
-      <label class="form-label" for="password_confirmation"><?php echo ENTRY_PASSWORD_CONFIRMATION . (!empty(ENTRY_PASSWORD_CONFIRMATION_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_PASSWORD_CONFIRMATION_TEXT . '</span>' : ''); ?></label>
+      <label class="form-label" for="password_confirmation"><?php echo ENTRY_PASSWORD_CONFIRMATION.(!empty(ENTRY_PASSWORD_CONFIRMATION_TEXT) ? '<span class="text-danger ms-1">'.ENTRY_PASSWORD_CONFIRMATION_TEXT.'</span>' : ''); ?></label>
       <?php echo tep_draw_password_field('password_confirmation', null, 'id="password_confirmation" class="form-control"'); ?>
     </div>
     <div class="btn-toolbar justify-content-between">
@@ -96,5 +99,6 @@ if ($messageStack->size('account_password') > 0) {
   </form>
 
 <?php
-require('includes/template_bottom.php');
-require('includes/application_bottom.php');
+require 'includes/template_bottom.php';
+
+require 'includes/application_bottom.php';

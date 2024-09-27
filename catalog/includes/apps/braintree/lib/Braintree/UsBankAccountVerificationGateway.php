@@ -1,22 +1,32 @@
 <?php
-namespace Braintree;
 
-use InvalidArgumentException;
+declare(strict_types=1);
 
 /**
- * Braintree UsBankAccountVerificationGateway module
+ * This file is part of the DvereCOM package
  *
- * @package    Braintree
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Braintree;
+
+/**
+ * Braintree UsBankAccountVerificationGateway module.
+ *
  * @category   Resources
  */
 
 /**
- * Manages Braintree UsBankAccountVerifications
+ * Manages Braintree UsBankAccountVerifications.
  *
  * <b>== More information ==</b>
  *
- *
- * @package    Braintree
  * @category   Resources
  */
 class UsBankAccountVerificationGateway
@@ -34,22 +44,24 @@ class UsBankAccountVerificationGateway
     }
 
     /**
-     * find a usBankAccountVerification by token
+     * find a usBankAccountVerification by token.
      *
-     * @access public
      * @param string $token unique id
-     * @return UsBankAccountVerification
+     *
      * @throws Exception\NotFound
+     *
+     * @return UsBankAccountVerification
      */
     public function find($token)
     {
         try {
-            $path = $this->_config->merchantPath() . '/us_bank_account_verifications/' . $token;
+            $path = $this->_config->merchantPath().'/us_bank_account_verifications/'.$token;
             $response = $this->_http->get($path);
+
             return UsBankAccountVerification::factory($response['usBankAccountVerification']);
         } catch (Exception\NotFound $e) {
             throw new Exception\NotFound(
-                'US bank account with token ' . $token . ' not found'
+                'US bank account with token '.$token.' not found',
             );
         }
     }
@@ -57,47 +69,50 @@ class UsBankAccountVerificationGateway
     public function search($query)
     {
         $criteria = [];
+
         foreach ($query as $term) {
             $criteria[$term->name] = $term->toparam();
         }
 
-        $path = $this->_config->merchantPath() . '/us_bank_account_verifications/advanced_search_ids';
+        $path = $this->_config->merchantPath().'/us_bank_account_verifications/advanced_search_ids';
         $response = $this->_http->post($path, ['search' => $criteria]);
         $pager = [
             'object' => $this,
             'method' => 'fetch',
-            'methodArgs' => [$query]
+            'methodArgs' => [$query],
         ];
 
         return new ResourceCollection($response, $pager);
     }
 
     /**
-     * complete micro transfer verification by confirming the transfer amounts
+     * complete micro transfer verification by confirming the transfer amounts.
      *
-     * @access public
-     * @param string $token unique id
-     * @param array $amounts amounts deposited in micro transfer
-     * @return UsBankAccountVerification
+     * @param string $token   unique id
+     * @param array  $amounts amounts deposited in micro transfer
+     *
      * @throws Exception\Unexpected
+     *
+     * @return UsBankAccountVerification
      */
     public function confirmMicroTransferAmounts($token, $amounts)
     {
         try {
-            $path = $this->_config->merchantPath() . '/us_bank_account_verifications/' . $token . '/confirm_micro_transfer_amounts';
+            $path = $this->_config->merchantPath().'/us_bank_account_verifications/'.$token.'/confirm_micro_transfer_amounts';
             $response = $this->_http->put($path, [
-                "us_bank_account_verification" => ["deposit_amounts" => $amounts]
+                'us_bank_account_verification' => ['deposit_amounts' => $amounts],
             ]);
+
             return $this->_verifyGatewayResponse($response);
         } catch (Exception\Unexpected $e) {
             throw new Exception\Unexpected(
-                'Unexpected exception.'
+                'Unexpected exception.',
             );
         }
     }
 
     /**
-     * generic method for validating incoming gateway responses
+     * generic method for validating incoming gateway responses.
      *
      * creates a new UsBankAccountVerification object and encapsulates
      * it inside a Result\Successful object, or
@@ -105,23 +120,28 @@ class UsBankAccountVerificationGateway
      * alternatively, throws an Unexpected exception if the response is invalid.
      *
      * @ignore
+     *
      * @param array $response gateway response values
-     * @return Result\Successful|Result\Error
+     *
      * @throws Exception\Unexpected
+     *
+     * @return Result\Error|Result\Successful
      */
     private function _verifyGatewayResponse($response)
     {
         if (isset($response['apiErrorResponse'])) {
             return new Result\Error($response['apiErrorResponse']);
-        } else if (isset($response['usBankAccountVerification'])) {
+        }
+
+        if (isset($response['usBankAccountVerification'])) {
             // return a populated instance of UsBankAccountVerification
             return new Result\Successful(
-                UsBankAccountVerification::factory($response['usBankAccountVerification'])
-            );
-        } else {
-            throw new Exception\Unexpected(
-                'Expected US bank account or apiErrorResponse'
+                UsBankAccountVerification::factory($response['usBankAccountVerification']),
             );
         }
+
+        throw new Exception\Unexpected(
+            'Expected US bank account or apiErrorResponse',
+        );
     }
 }

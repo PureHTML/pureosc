@@ -8,141 +8,158 @@
   Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
-*/
+ */
 
-require('includes/application_top.php');
+require 'includes/application_top.php';
 
 // if the customer is not logged on, redirect them to the login page
 if (!isset($_SESSION['customer_id'])) {
-  $navigation->set_snapshot();
-  tep_redirect(tep_href_link('login.php'));
+    $navigation->set_snapshot();
+    tep_redirect(tep_href_link('login.php'));
 }
 
 // if there is nothing in the customers cart, redirect them to the shopping cart page
 if ($cart->count_contents() < 1) {
-  tep_redirect(tep_href_link('shopping_cart.php'));
+    tep_redirect(tep_href_link('shopping_cart.php'));
 }
 
 // if no shipping destination address was selected, use the customers own address as default
 if (!isset($_SESSION['sendto'])) {
-  tep_session_register('sendto');
-  $sendto = $customer_default_address_id;
+    tep_session_register('sendto');
+    $sendto = $customer_default_address_id;
 } else {
-// verify the selected shipping address
-  if ((is_array($sendto) && empty($sendto)) || is_numeric($sendto)) {
-    $check_address_query = tep_db_query("select count(*) as total from address_book where customers_id = '" . (int)$customer_id . "' and address_book_id = '" . (int)$sendto . "'");
-    $check_address = tep_db_fetch_array($check_address_query);
+    // verify the selected shipping address
+    if ((\is_array($sendto) && empty($sendto)) || is_numeric($sendto)) {
+        $check_address_query = tep_db_query("select count(*) as total from address_book where customers_id = '".(int) $customer_id."' and address_book_id = '".(int) $sendto."'");
+        $check_address = tep_db_fetch_array($check_address_query);
 
-    if ($check_address['total'] != '1') {
-      $sendto = $customer_default_address_id;
-      if (isset($_SESSION['shipping'])) unset($_SESSION['shipping']);
+        if ($check_address['total'] !== '1') {
+            $sendto = $customer_default_address_id;
+
+            if (isset($_SESSION['shipping'])) {
+                unset($_SESSION['shipping']);
+            }
+        }
     }
-  }
 }
 
-require('includes/classes/order.php');
-$order = new order;
+require 'includes/classes/order.php';
+$order = new order();
 
 // register a random ID in the session to check throughout the checkout procedure
 // against alterations in the shopping cart contents
 if (!isset($_SESSION['cartID'])) {
-  tep_session_register('cartID');
-} elseif (($cartID != $cart->cartID) && isset($_SESSION['shipping'])) {
-  unset($_SESSION['shipping']);
+    tep_session_register('cartID');
+} elseif (($cartID !== $cart->cartID) && isset($_SESSION['shipping'])) {
+    unset($_SESSION['shipping']);
 }
 
 $cartID = $cart->cartID = $cart->generate_cart_id();
 
 // if the order contains only virtual products, forward the customer to the billing page as
 // a shipping address is not needed
-if ($order->content_type == 'virtual') {
-  if (!isset($_SESSION['shipping'])) tep_session_register('shipping');
-  $shipping = false;
-  $sendto = false;
-  tep_redirect(tep_href_link('checkout_payment.php'));
+if ($order->content_type === 'virtual') {
+    if (!isset($_SESSION['shipping'])) {
+        tep_session_register('shipping');
+    }
+
+    $shipping = false;
+    $sendto = false;
+    tep_redirect(tep_href_link('checkout_payment.php'));
 }
 
 $total_weight = $cart->show_weight();
 $total_count = $cart->count_contents();
 
 // load all enabled shipping modules
-require('includes/classes/shipping.php');
-$shipping_modules = new shipping;
+require 'includes/classes/shipping.php';
+$shipping_modules = new shipping();
 
-if (defined('MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING') && (MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING == 'true')) {
-  $pass = false;
+if (\defined('MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING') && (MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING === 'true')) {
+    $pass = false;
 
-  switch (MODULE_ORDER_TOTAL_SHIPPING_DESTINATION) {
-    case 'national':
-      if ($order->delivery['country_id'] == STORE_COUNTRY) {
-        $pass = true;
-      }
-      break;
-    case 'international':
-      if ($order->delivery['country_id'] != STORE_COUNTRY) {
-        $pass = true;
-      }
-      break;
-    case 'both':
-      $pass = true;
-      break;
-  }
+    switch (MODULE_ORDER_TOTAL_SHIPPING_DESTINATION) {
+        case 'national':
+            if ($order->delivery['country_id'] === STORE_COUNTRY) {
+                $pass = true;
+            }
 
-  $free_shipping = false;
-  if (($pass == true) && ($order->info['total'] >= MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING_OVER)) {
-    $free_shipping = true;
+            break;
+        case 'international':
+            if ($order->delivery['country_id'] !== STORE_COUNTRY) {
+                $pass = true;
+            }
 
-    include('includes/languages/' . $language . '/modules/order_total/ot_shipping.php');
-  }
+            break;
+        case 'both':
+            $pass = true;
+
+            break;
+    }
+
+    $free_shipping = false;
+
+    if (($pass === true) && ($order->info['total'] >= MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING_OVER)) {
+        $free_shipping = true;
+
+        include 'includes/languages/'.$language.'/modules/order_total/ot_shipping.php';
+    }
 } else {
-  $free_shipping = false;
+    $free_shipping = false;
 }
 
 // process the selected shipping method
-if (isset($_POST['action']) && ($_POST['action'] == 'process') && isset($_POST['formid']) && ($_POST['formid'] == $sessiontoken)) {
-  if (!isset($_SESSION['comments'])) tep_session_register('comments');
-  if (!empty($_POST['comments'])) {
-    $comments = tep_db_prepare_input($_POST['comments']);
-  }
+if (isset($_POST['action']) && ($_POST['action'] === 'process') && isset($_POST['formid']) && ($_POST['formid'] === $sessiontoken)) {
+    if (!isset($_SESSION['comments'])) {
+        tep_session_register('comments');
+    }
 
-  if (!isset($_SESSION['shipping'])) tep_session_register('shipping');
+    if (!empty($_POST['comments'])) {
+        $comments = tep_db_prepare_input($_POST['comments']);
+    }
 
-  if ((tep_count_shipping_modules() > 0) || ($free_shipping == true)) {
-    if ((isset($_POST['shipping'])) && (strpos($_POST['shipping'], '_'))) {
-      $shipping = $_POST['shipping'];
+    if (!isset($_SESSION['shipping'])) {
+        tep_session_register('shipping');
+    }
 
-      list($module, $method) = explode('_', $shipping);
-      if (is_object($$module) || ($shipping == 'free_free')) {
-        if ($shipping == 'free_free') {
-          $quote[0]['methods'][0]['title'] = FREE_SHIPPING_TITLE;
-          $quote[0]['methods'][0]['cost'] = '0';
-        } else {
-          $quote = $shipping_modules->quote($method, $module);
+    if ((tep_count_shipping_modules() > 0) || ($free_shipping === true)) {
+        if ((isset($_POST['shipping'])) && strpos($_POST['shipping'], '_')) {
+            $shipping = $_POST['shipping'];
+
+            [$module, $method] = explode('_', $shipping);
+
+            if (\is_object(${$module}) || ($shipping === 'free_free')) {
+                if ($shipping === 'free_free') {
+                    $quote[0]['methods'][0]['title'] = FREE_SHIPPING_TITLE;
+                    $quote[0]['methods'][0]['cost'] = '0';
+                } else {
+                    $quote = $shipping_modules->quote($method, $module);
+                }
+
+                if (isset($quote['error'])) {
+                    unset($_SESSION['shipping']);
+                } else {
+                    if ((isset($quote[0]['methods'][0]['title'])) && (isset($quote[0]['methods'][0]['cost']))) {
+                        $shipping = ['id' => $shipping,
+                            'title' => (($free_shipping === true) ? $quote[0]['methods'][0]['title'] : $quote[0]['module'].' ('.$quote[0]['methods'][0]['title'].')'),
+                            'cost' => $quote[0]['methods'][0]['cost']];
+
+                        tep_redirect(tep_href_link('checkout_payment.php'));
+                    }
+                }
+            } else {
+                unset($_SESSION['shipping']);
+            }
         }
-        if (isset($quote['error'])) {
-          unset($_SESSION['shipping']);
+    } else {
+        if (\defined('SHIPPING_ALLOW_UNDEFINED_ZONES') && (SHIPPING_ALLOW_UNDEFINED_ZONES === 'False')) {
+            unset($_SESSION['shipping']);
         } else {
-          if ((isset($quote[0]['methods'][0]['title'])) && (isset($quote[0]['methods'][0]['cost']))) {
-            $shipping = array('id' => $shipping,
-                              'title' => (($free_shipping == true) ? $quote[0]['methods'][0]['title'] : $quote[0]['module'] . ' (' . $quote[0]['methods'][0]['title'] . ')'),
-                              'cost' => $quote[0]['methods'][0]['cost']);
+            $shipping = false;
 
             tep_redirect(tep_href_link('checkout_payment.php'));
-          }
         }
-      } else {
-        unset($_SESSION['shipping']);
-      }
     }
-  } else {
-    if (defined('SHIPPING_ALLOW_UNDEFINED_ZONES') && (SHIPPING_ALLOW_UNDEFINED_ZONES == 'False')) {
-      unset($_SESSION['shipping']);
-    } else {
-      $shipping = false;
-
-      tep_redirect(tep_href_link('checkout_payment.php'));
-    }
-  }
 }
 
 // get all available shipping quotes
@@ -152,20 +169,22 @@ $quotes = $shipping_modules->quote();
 // if the modules status was changed when none were available, to save on implementing
 // a javascript force-selection method, also automatically select the first shipping
 // method if more than one module is now enabled
-if (!isset($_SESSION['shipping']) || (isset($_SESSION['shipping']) && ($shipping == false) && (tep_count_shipping_modules() > 1))) $shipping = $shipping_modules->get_first();
+if (!isset($_SESSION['shipping']) || (isset($_SESSION['shipping']) && ($shipping === false) && (tep_count_shipping_modules() > 1))) {
+    $shipping = $shipping_modules->get_first();
+}
 
-require('includes/languages/' . $language . '/checkout_shipping.php');
+require 'includes/languages/'.$language.'/checkout_shipping.php';
 
-if (defined('SHIPPING_ALLOW_UNDEFINED_ZONES') && (SHIPPING_ALLOW_UNDEFINED_ZONES == 'False') && !isset($_SESSION['shipping']) && ($shipping == false)) {
-  $messageStack->add_session('checkout_address', ERROR_NO_SHIPPING_AVAILABLE_TO_SHIPPING_ADDRESS);
+if (\defined('SHIPPING_ALLOW_UNDEFINED_ZONES') && (SHIPPING_ALLOW_UNDEFINED_ZONES === 'False') && !isset($_SESSION['shipping']) && ($shipping === false)) {
+    $messageStack->add_session('checkout_address', ERROR_NO_SHIPPING_AVAILABLE_TO_SHIPPING_ADDRESS);
 
-  tep_redirect(tep_href_link('checkout_shipping_address.php'));
+    tep_redirect(tep_href_link('checkout_shipping_address.php'));
 }
 
 $breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('checkout_shipping.php'));
 $breadcrumb->add(NAVBAR_TITLE_2, tep_href_link('checkout_shipping.php'));
 
-require('includes/template_top.php');
+require 'includes/template_top.php';
 ?>
 
   <script>
@@ -215,7 +234,7 @@ require('includes/template_top.php');
     </div>
   </div>
 
-<?php echo tep_draw_form('checkout_address', tep_href_link('checkout_shipping.php'), 'post', '', true) . tep_draw_hidden_field('action', 'process'); ?>
+<?php echo tep_draw_form('checkout_address', tep_href_link('checkout_shipping.php'), 'post', '', true).tep_draw_hidden_field('action', 'process'); ?>
 
   <div class="mb-5">
     <h2><?php echo TABLE_HEADING_SHIPPING_ADDRESS; ?></h2>
@@ -236,13 +255,13 @@ require('includes/template_top.php');
 
     <?php
     if (tep_count_shipping_modules() > 0) {
-      ?>
+        ?>
 
       <h2><?php echo TABLE_HEADING_SHIPPING_METHOD; ?></h2>
 
       <?php
-      if (sizeof($quotes) > 1 && sizeof($quotes[0]) > 1) {
-        ?>
+        if (\count($quotes) > 1 && \count($quotes[0]) > 1) {
+            ?>
 
         <div class="mb-3">
           <div class="float-end fw-bold">
@@ -253,22 +272,23 @@ require('includes/template_top.php');
         </div>
 
         <?php
-      } elseif ($free_shipping == false) {
-        ?>
+        } elseif ($free_shipping === false) {
+            ?>
 
         <p><?php echo TEXT_ENTER_SHIPPING_INFORMATION; ?></p>
 
         <?php
-      }
-      ?>
+        }
+
+        ?>
 
       <div class="mb-3">
         <table class="table table-borderless table-sm">
           <tbody>
 
           <?php
-          if ($free_shipping == true) {
-            ?>
+            if ($free_shipping === true) {
+                ?>
 
             <tr>
               <td>
@@ -276,25 +296,28 @@ require('includes/template_top.php');
               </td>
             </tr>
             <tr id="defaultSelected" class="moduleRowSelected bg-light" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="selectRowEffect(this, 0)">
-              <td class="ms-3"><?php echo sprintf(FREE_SHIPPING_DESCRIPTION, $currencies->format(MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING_OVER)) . tep_draw_hidden_field('shipping', 'free_free'); ?></td>
+              <td class="ms-3"><?php echo sprintf(FREE_SHIPPING_DESCRIPTION, $currencies->format(MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING_OVER)).tep_draw_hidden_field('shipping', 'free_free'); ?></td>
             </tr>
 
             <?php
-          } else {
-            $radio_buttons = 0;
-            for ($i = 0, $n = sizeof($quotes); $i < $n; $i++) {
-              ?>
+            } else {
+                $radio_buttons = 0;
+
+                for ($i = 0, $n = \count($quotes); $i < $n; ++$i) {
+                    ?>
 
               <tr>
                 <td colspan="3">
                   <span class="fw-bold"><?php echo $quotes[$i]['module']; ?></span>&nbsp;<?php if (isset($quotes[$i]['icon']) && !empty($quotes[$i]['icon'])) {
-                    echo $quotes[$i]['icon'];
-                  } ?></td>
+                      echo $quotes[$i]['icon'];
+                  }
+
+ ?></td>
               </tr>
 
               <?php
               if (isset($quotes[$i]['error'])) {
-                ?>
+                  ?>
 
                 <tr>
                   <td colspan="3"><?php echo $quotes[$i]['error']; ?></td>
@@ -302,45 +325,48 @@ require('includes/template_top.php');
 
                 <?php
               } else {
-                for ($j = 0, $n2 = sizeof($quotes[$i]['methods']); $j < $n2; $j++) {
-// set the radio button to be checked if it is the method chosen
-                  $checked = (($quotes[$i]['id'] . '_' . $quotes[$i]['methods'][$j]['id'] == $shipping['id']) ? true : false);
+                  for ($j = 0, $n2 = \count($quotes[$i]['methods']); $j < $n2; ++$j) {
+                      // set the radio button to be checked if it is the method chosen
+                      $checked = (($quotes[$i]['id'].'_'.$quotes[$i]['methods'][$j]['id'] === $shipping['id']) ? true : false);
 
-                  if (($checked == true) || ($n == 1 && $n2 == 1)) {
-                    echo '      <tr id="defaultSelected" class="moduleRowSelected bg-light" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="selectRowEffect(this, ' . $radio_buttons . ')">' . "\n";
-                  } else {
-                    echo '      <tr class="moduleRow bg-white" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="selectRowEffect(this, ' . $radio_buttons . ')">' . "\n";
-                  }
-                  ?>
+                      if (($checked === true) || ($n === 1 && $n2 === 1)) {
+                          echo '      <tr id="defaultSelected" class="moduleRowSelected bg-light" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="selectRowEffect(this, '.$radio_buttons.')">'."\n";
+                      } else {
+                          echo '      <tr class="moduleRow bg-white" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="selectRowEffect(this, '.$radio_buttons.')">'."\n";
+                      }
+
+                      ?>
 
                   <td class="w-75 ps-3"><?php echo $quotes[$i]['methods'][$j]['title']; ?></td>
 
                   <?php
-                  if (($n > 1) || ($n2 > 1)) {
-                    ?>
+                      if (($n > 1) || ($n2 > 1)) {
+                          ?>
 
-                    <td><?php echo $currencies->format(tep_add_tax($quotes[$i]['methods'][$j]['cost'], (isset($quotes[$i]['tax']) ? $quotes[$i]['tax'] : 0))); ?></td>
-                    <td class="text-end form-check"><?php echo tep_draw_radio_field('shipping', $quotes[$i]['id'] . '_' . $quotes[$i]['methods'][$j]['id'], $checked, 'class="form-check-input float-none"'); ?></td>
-
-                    <?php
-                  } else {
-                    ?>
-
-                    <td class="text-end" colspan="2"><?php echo $currencies->format(tep_add_tax($quotes[$i]['methods'][$j]['cost'], (isset($quotes[$i]['tax']) ? $quotes[$i]['tax'] : 0))) . tep_draw_hidden_field('shipping', $quotes[$i]['id'] . '_' . $quotes[$i]['methods'][$j]['id']); ?></td>
+                    <td><?php echo $currencies->format(tep_add_tax($quotes[$i]['methods'][$j]['cost'], $quotes[$i]['tax'] ?? 0)); ?></td>
+                    <td class="text-end form-check"><?php echo tep_draw_radio_field('shipping', $quotes[$i]['id'].'_'.$quotes[$i]['methods'][$j]['id'], $checked, 'class="form-check-input float-none"'); ?></td>
 
                     <?php
-                  }
-                  ?>
+                      } else {
+                          ?>
+
+                    <td class="text-end" colspan="2"><?php echo $currencies->format(tep_add_tax($quotes[$i]['methods'][$j]['cost'], $quotes[$i]['tax'] ?? 0)).tep_draw_hidden_field('shipping', $quotes[$i]['id'].'_'.$quotes[$i]['methods'][$j]['id']); ?></td>
+
+                    <?php
+                      }
+
+                      ?>
 
                   </tr>
 
                   <?php
-                  $radio_buttons++;
-                }
+                      ++$radio_buttons;
+                  }
               }
+                }
             }
-          }
-          ?>
+
+        ?>
 
           </tbody>
         </table>
@@ -348,7 +374,8 @@ require('includes/template_top.php');
 
       <?php
     }
-    ?>
+
+?>
 
     <h2><?php echo TABLE_HEADING_COMMENTS; ?></h2>
 
@@ -363,5 +390,6 @@ require('includes/template_top.php');
   </form>
 
 <?php
-require('includes/template_bottom.php');
-require('includes/application_bottom.php');
+require 'includes/template_bottom.php';
+
+require 'includes/application_bottom.php';

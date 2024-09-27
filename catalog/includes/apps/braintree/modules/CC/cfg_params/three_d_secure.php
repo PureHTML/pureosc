@@ -1,39 +1,46 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2021 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
+class three_d_secure
+{
+    public $default = '0';
+    public $title;
+    public $description;
+    public $sort_order = 350;
 
-class OSCOM_Braintree_CC_Cfg_three_d_secure {
-  public $default = '0';
-  public $title;
-  public $description;
-  public $sort_order = 350;
+    public function __construct()
+    {
+        global $OSCOM_Braintree;
 
-  public function __construct() {
-    global $OSCOM_Braintree;
+        $this->title = $OSCOM_Braintree->getDef('cfg_cc_three_d_secure_title');
+        $this->description = $OSCOM_Braintree->getDef('cfg_cc_three_d_secure_desc');
+    }
 
-    $this->title = $OSCOM_Braintree->getDef('cfg_cc_three_d_secure_title');
-    $this->description = $OSCOM_Braintree->getDef('cfg_cc_three_d_secure_desc');
-  }
+    public function getSetField()
+    {
+        global $OSCOM_Braintree;
 
-  public function getSetField() {
-    global $OSCOM_Braintree;
+        $input = '<div id="three_d_secure_ssl_notice" class="bt-alerts ui-helper-hidden-accessible"><div class="bt-alerts-error" style="padding: 10px; margin-bottom: 10px;">'.$OSCOM_Braintree->getDef('cfg_cc_three_d_secure_ssl_check').'</div></div>'.
+                 '<input type="radio" id="threeDSecureSelectionAll" name="three_d_secure" value="1"'.(OSCOM_APP_PAYPAL_BRAINTREE_CC_THREE_D_SECURE === '1' ? ' checked="checked"' : '').'><label for="threeDSecureSelectionAll">'.$OSCOM_Braintree->getDef('cfg_cc_three_d_secure_all_cards').'</label>'.
+                 '<input type="radio" id="threeDSecureSelectionNew" name="three_d_secure" value="2"'.(OSCOM_APP_PAYPAL_BRAINTREE_CC_THREE_D_SECURE === '2' ? ' checked="checked"' : '').'><label for="threeDSecureSelectionNew">'.$OSCOM_Braintree->getDef('cfg_cc_three_d_secure_new_cards').'</label>'.
+                 '<input type="radio" id="threeDSecureSelectionDisabled" name="three_d_secure" value="0"'.(OSCOM_APP_PAYPAL_BRAINTREE_CC_THREE_D_SECURE === '0' ? ' checked="checked"' : '').'><label for="threeDSecureSelectionDisabled">'.$OSCOM_Braintree->getDef('cfg_cc_three_d_secure_disabled').'</label>';
 
-    $input = '<div id="three_d_secure_ssl_notice" class="bt-alerts ui-helper-hidden-accessible"><div class="bt-alerts-error" style="padding: 10px; margin-bottom: 10px;">' . $OSCOM_Braintree->getDef('cfg_cc_three_d_secure_ssl_check') . '</div></div>' .
-             '<input type="radio" id="threeDSecureSelectionAll" name="three_d_secure" value="1"' . (OSCOM_APP_PAYPAL_BRAINTREE_CC_THREE_D_SECURE == '1' ? ' checked="checked"' : '') . '><label for="threeDSecureSelectionAll">' . $OSCOM_Braintree->getDef('cfg_cc_three_d_secure_all_cards') . '</label>' .
-             '<input type="radio" id="threeDSecureSelectionNew" name="three_d_secure" value="2"' . (OSCOM_APP_PAYPAL_BRAINTREE_CC_THREE_D_SECURE == '2' ? ' checked="checked"' : '') . '><label for="threeDSecureSelectionNew">' . $OSCOM_Braintree->getDef('cfg_cc_three_d_secure_new_cards') . '</label>' .
-             '<input type="radio" id="threeDSecureSelectionDisabled" name="three_d_secure" value="0"' . (OSCOM_APP_PAYPAL_BRAINTREE_CC_THREE_D_SECURE == '0' ? ' checked="checked"' : '') . '><label for="threeDSecureSelectionDisabled">' . $OSCOM_Braintree->getDef('cfg_cc_three_d_secure_disabled') . '</label>';
+        $has_ssl = ((\defined('ENABLE_SSL_CATALOG') && (ENABLE_SSL_CATALOG === 'true')) || (ENABLE_SSL === true)) ? 'true' : 'false';
 
-    $has_ssl = ((defined('ENABLE_SSL_CATALOG') && (ENABLE_SSL_CATALOG == 'true')) || (ENABLE_SSL == true)) ? 'true' : 'false';
-
-    $result = <<<EOT
+        $result = <<<EOT
 <div>
   <p>
     <label>{$this->title}</label>
@@ -77,6 +84,6 @@ $(function() {
 </script>
 EOT;
 
-    return $result;
-  }
+        return $result;
+    }
 }

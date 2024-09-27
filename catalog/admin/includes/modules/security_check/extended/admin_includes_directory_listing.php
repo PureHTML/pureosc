@@ -1,64 +1,72 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2020 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
+class extended_admin_includes_directory_listing
+{
+    public $type = 'warning';
+    public $has_doc = true;
 
-  class securityCheckExtended_admin_includes_directory_listing {
-    var $type = 'warning';
-    var $has_doc = true;
+    public function __construct()
+    {
+        global $language;
 
-    function __construct() {
-      global $language;
+        include DIR_FS_ADMIN.'includes/languages/'.$language.'/modules/security_check/extended/admin_includes_directory_listing.php';
 
-      include(DIR_FS_ADMIN . 'includes/languages/' . $language . '/modules/security_check/extended/admin_includes_directory_listing.php');
-
-      $this->title = MODULE_SECURITY_CHECK_EXTENDED_ADMIN_INCLUDES_DIRECTORY_LISTING_TITLE;
+        $this->title = MODULE_SECURITY_CHECK_EXTENDED_ADMIN_INCLUDES_DIRECTORY_LISTING_TITLE;
     }
 
-    function pass() {
-      $request = $this->getHttpRequest(tep_href_link('includes/'));
+    public function pass()
+    {
+        $request = $this->getHttpRequest(tep_href_link('includes/'));
 
-      return $request['http_code'] != 200;
+        return $request['http_code'] !== 200;
     }
 
-    function getMessage() {
-      return MODULE_SECURITY_CHECK_EXTENDED_ADMIN_INCLUDES_DIRECTORY_LISTING_HTTP_200;
+    public function getMessage()
+    {
+        return MODULE_SECURITY_CHECK_EXTENDED_ADMIN_INCLUDES_DIRECTORY_LISTING_HTTP_200;
     }
 
-    function getHttpRequest($url) {
-      $server = parse_url($url);
+    public function getHttpRequest($url)
+    {
+        $server = parse_url($url);
 
-      if (isset($server['port']) === false) {
-        $server['port'] = ($server['scheme'] == 'https') ? 443 : 80;
-      }
+        if (isset($server['port']) === false) {
+            $server['port'] = ($server['scheme'] === 'https') ? 443 : 80;
+        }
 
-      if (isset($server['path']) === false) {
-        $server['path'] = '/';
-      }
+        if (isset($server['path']) === false) {
+            $server['path'] = '/';
+        }
 
-      $curl = curl_init($server['scheme'] . '://' . $server['host'] . $server['path'] . (isset($server['query']) ? '?' . $server['query'] : ''));
-      curl_setopt($curl, CURLOPT_PORT, $server['port']);
-      curl_setopt($curl, CURLOPT_HEADER, false);
-      curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-      curl_setopt($curl, CURLOPT_FORBID_REUSE, true);
-      curl_setopt($curl, CURLOPT_FRESH_CONNECT, true);
-      curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'HEAD');
-      curl_setopt($curl, CURLOPT_NOBODY, true);
+        $curl = curl_init($server['scheme'].'://'.$server['host'].$server['path'].(isset($server['query']) ? '?'.$server['query'] : ''));
+        curl_setopt($curl, \CURLOPT_PORT, $server['port']);
+        curl_setopt($curl, \CURLOPT_HEADER, false);
+        curl_setopt($curl, \CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, \CURLOPT_FORBID_REUSE, true);
+        curl_setopt($curl, \CURLOPT_FRESH_CONNECT, true);
+        curl_setopt($curl, \CURLOPT_CUSTOMREQUEST, 'HEAD');
+        curl_setopt($curl, \CURLOPT_NOBODY, true);
 
-      $result = curl_exec($curl);
+        $result = curl_exec($curl);
 
-      $info = curl_getinfo($curl);
+        $info = curl_getinfo($curl);
 
-      curl_close($curl);
+        curl_close($curl);
 
-      return $info;
+        return $info;
     }
-  }
-?>
+}

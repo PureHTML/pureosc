@@ -8,14 +8,14 @@
   Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
-*/
+ */
 
-  require('includes/application_top.php');
+require 'includes/application_top.php';
 
-  require('includes/classes/currencies.php');
-  $currencies = new currencies();
+require 'includes/classes/currencies.php';
+$currencies = new currencies();
 
-  require('includes/template_top.php');
+require 'includes/template_top.php';
 ?>
 
     <table border="0" width="100%" cellspacing="0" cellpadding="2">
@@ -37,29 +37,35 @@
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_TOTAL_PURCHASED; ?>&nbsp;</td>
               </tr>
 <?php
-  if (isset($_GET['page']) && ($_GET['page'] > 1)) $rows = $_GET['page'] * MAX_DISPLAY_SEARCH_RESULTS - MAX_DISPLAY_SEARCH_RESULTS;
-  $customers_query_raw = "select c.customers_firstname, c.customers_lastname, sum(op.products_quantity * op.final_price) as ordersum from customers c, orders_products op, orders o where c.customers_id = o.customers_id and o.orders_id = op.orders_id group by c.customers_firstname, c.customers_lastname order by ordersum DESC";
-  $customers_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $customers_query_raw, $customers_query_numrows);
+  if (isset($_GET['page']) && ($_GET['page'] > 1)) {
+      $rows = $_GET['page'] * MAX_DISPLAY_SEARCH_RESULTS - MAX_DISPLAY_SEARCH_RESULTS;
+  }
+
+$customers_query_raw = 'select c.customers_firstname, c.customers_lastname, sum(op.products_quantity * op.final_price) as ordersum from customers c, orders_products op, orders o where c.customers_id = o.customers_id and o.orders_id = op.orders_id group by c.customers_firstname, c.customers_lastname order by ordersum DESC';
+$customers_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $customers_query_raw, $customers_query_numrows);
 // fix counted customers
-  $customers_query_numrows = tep_db_query("select customers_id from orders group by customers_id");
-  $customers_query_numrows = tep_db_num_rows($customers_query_numrows);
+$customers_query_numrows = tep_db_query('select customers_id from orders group by customers_id');
+$customers_query_numrows = tep_db_num_rows($customers_query_numrows);
 
-  $rows = 0;
-  $customers_query = tep_db_query($customers_query_raw);
-  while ($customers = tep_db_fetch_array($customers_query)) {
-    $rows++;
+$rows = 0;
+$customers_query = tep_db_query($customers_query_raw);
 
-    if (strlen($rows) < 2) {
-      $rows = '0' . $rows;
+while ($customers = tep_db_fetch_array($customers_query)) {
+    ++$rows;
+
+    if (\strlen($rows) < 2) {
+        $rows = '0'.$rows;
     }
-?>
-              <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='<?php echo tep_href_link('customers.php', 'search=' . $customers['customers_lastname']); ?>'">
+
+    ?>
+              <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='<?php echo tep_href_link('customers.php', 'search='.$customers['customers_lastname']); ?>'">
                 <td class="dataTableContent"><?php echo $rows; ?>.</td>
-                <td class="dataTableContent"><?php echo '<a href="' . tep_href_link('customers.php', 'search=' . $customers['customers_lastname']) . '">' . $customers['customers_firstname'] . ' ' . $customers['customers_lastname'] . '</a>'; ?></td>
+                <td class="dataTableContent"><?php echo '<a href="'.tep_href_link('customers.php', 'search='.$customers['customers_lastname']).'">'.$customers['customers_firstname'].' '.$customers['customers_lastname'].'</a>'; ?></td>
                 <td class="dataTableContent" align="right"><?php echo $currencies->format($customers['ordersum']); ?>&nbsp;</td>
               </tr>
 <?php
-  }
+}
+
 ?>
             </table></td>
           </tr>
@@ -76,6 +82,7 @@
     </table>
 
 <?php
-  require('includes/template_bottom.php');
-  require('includes/application_bottom.php');
+  require 'includes/template_bottom.php';
+
+require 'includes/application_bottom.php';
 ?>

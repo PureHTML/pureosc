@@ -1,32 +1,39 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2020 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
+class ewp_private_key
+{
+    public $default = '';
+    public $title;
+    public $description;
+    public $sort_order = 800;
 
-class OSCOM_PayPal_PS_Cfg_ewp_private_key {
-  public $default = '';
-  public $title;
-  public $description;
-  public $sort_order = 800;
+    public function __construct()
+    {
+        global $OSCOM_PayPal;
 
-  public function __construct() {
-    global $OSCOM_PayPal;
+        $this->title = $OSCOM_PayPal->getDef('cfg_ps_ewp_private_key_title');
+        $this->description = $OSCOM_PayPal->getDef('cfg_ps_ewp_private_key_desc');
+    }
 
-    $this->title = $OSCOM_PayPal->getDef('cfg_ps_ewp_private_key_title');
-    $this->description = $OSCOM_PayPal->getDef('cfg_ps_ewp_private_key_desc');
-  }
+    public function getSetField()
+    {
+        $input = tep_draw_input_field('ewp_private_key', OSCOM_APP_PAYPAL_PS_EWP_PRIVATE_KEY, 'id="inputPsEwpPrivateKey"');
 
-  public function getSetField() {
-    $input = tep_draw_input_field('ewp_private_key', OSCOM_APP_PAYPAL_PS_EWP_PRIVATE_KEY, 'id="inputPsEwpPrivateKey"');
-
-    $result = <<<EOT
+        return <<<EOT
 <div>
   <p>
     <label for="inputPsEwpPrivateKey">{$this->title}</label>
@@ -39,7 +46,5 @@ class OSCOM_PayPal_PS_Cfg_ewp_private_key {
   </div>
 </div>
 EOT;
-
-    return $result;
-  }
+    }
 }

@@ -32,5 +32,4 @@
         "ergebnis/composer-normalize": "^2.43",
         "ergebnis/php-cs-fixer-config": "^6.34"
     }
-
 }

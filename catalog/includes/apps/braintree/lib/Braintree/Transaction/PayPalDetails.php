@@ -1,45 +1,53 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Braintree\Transaction;
 
 use Braintree\Instance;
 
 /**
- * PayPal details from a transaction
- *
- * @package    Braintree
- * @subpackage Transaction
+ * PayPal details from a transaction.
  */
 
 /**
- * creates an instance of PayPalDetails
+ * creates an instance of PayPalDetails.
  *
- *
- * @package    Braintree
- * @subpackage Transaction
- *
- * @property-read string $authorizationId
- * @property-read string $billingAgreementId
- * @property-read string $captureId
- * @property-read string $customField
- * @property-read string $description
- * @property-read string $imageUrl
- * @property-read string $implicitlyVaultedPaymentMethodGlobalId
- * @property-read string $implicitlyVaultedPaymentMethodToken
- * @property-read string $payerEmail
- * @property-read string $payerFirstName
- * @property-read string $payerId
- * @property-read string $payerLastName
- * @property-read string $payerStatus
- * @property-read string $paymentId
- * @property-read string $refundFromTransactionFeeAmount
- * @property-read string $refundFromTransactionFeeCurrencyIsoCode
- * @property-read string $refundId
- * @property-read string $sellerProtectionStatus
- * @property-read string $taxId
- * @property-read string $taxIdType
- * @property-read string $token
- * @property-read string $transactionFeeAmount
- * @property-read string $transactionFeeCurrencyIsoCode
+ * @property string $authorizationId
+ * @property string $billingAgreementId
+ * @property string $captureId
+ * @property string $customField
+ * @property string $description
+ * @property string $imageUrl
+ * @property string $implicitlyVaultedPaymentMethodGlobalId
+ * @property string $implicitlyVaultedPaymentMethodToken
+ * @property string $payerEmail
+ * @property string $payerFirstName
+ * @property string $payerId
+ * @property string $payerLastName
+ * @property string $payerStatus
+ * @property string $paymentId
+ * @property string $refundFromTransactionFeeAmount
+ * @property string $refundFromTransactionFeeCurrencyIsoCode
+ * @property string $refundId
+ * @property string $sellerProtectionStatus
+ * @property string $taxId
+ * @property string $taxIdType
+ * @property string $token
+ * @property string $transactionFeeAmount
+ * @property string $transactionFeeCurrencyIsoCode
  */
 class PayPalDetails extends Instance
 {
@@ -47,6 +55,8 @@ class PayPalDetails extends Instance
 
     /**
      * @ignore
+     *
+     * @param mixed $attributes
      */
     public function __construct($attributes)
     {

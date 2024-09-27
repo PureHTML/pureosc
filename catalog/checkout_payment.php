@@ -8,82 +8,90 @@
   Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
-*/
+ */
 
-require('includes/application_top.php');
+require 'includes/application_top.php';
 
 // if the customer is not logged on, redirect them to the login page
 if (!isset($_SESSION['customer_id'])) {
-  $navigation->set_snapshot();
-  tep_redirect(tep_href_link('login.php'));
+    $navigation->set_snapshot();
+    tep_redirect(tep_href_link('login.php'));
 }
 
 // if there is nothing in the customers cart, redirect them to the shopping cart page
 if ($cart->count_contents() < 1) {
-  tep_redirect(tep_href_link('shopping_cart.php'));
+    tep_redirect(tep_href_link('shopping_cart.php'));
 }
 
 // if no shipping method has been selected, redirect the customer to the shipping method selection page
 if (!isset($_SESSION['shipping'])) {
-  tep_redirect(tep_href_link('checkout_shipping.php'));
+    tep_redirect(tep_href_link('checkout_shipping.php'));
 }
 
 // avoid hack attempts during the checkout procedure by checking the internal cartID
-if (isset($cart->cartID) && isset($_SESSION['cartID'])) {
-  if ($cart->cartID != $cartID) {
-    tep_redirect(tep_href_link('checkout_shipping.php'));
-  }
+if (isset($cart->cartID, $_SESSION['cartID'])) {
+    if ($cart->cartID !== $cartID) {
+        tep_redirect(tep_href_link('checkout_shipping.php'));
+    }
 }
 
 // Stock Check
-if ((STOCK_CHECK == 'true') && (STOCK_ALLOW_CHECKOUT != 'true')) {
-  $products = $cart->get_products();
-  for ($i = 0, $n = sizeof($products); $i < $n; $i++) {
-    if (tep_check_stock($products[$i]['id'], $products[$i]['quantity'])) {
-      tep_redirect(tep_href_link('shopping_cart.php'));
-      break;
+if ((STOCK_CHECK === 'true') && (STOCK_ALLOW_CHECKOUT !== 'true')) {
+    $products = $cart->get_products();
+
+    for ($i = 0, $n = \count($products); $i < $n; ++$i) {
+        if (tep_check_stock($products[$i]['id'], $products[$i]['quantity'])) {
+            tep_redirect(tep_href_link('shopping_cart.php'));
+
+            break;
+        }
     }
-  }
 }
 
 // if no billing destination address was selected, use the customers own address as default
 if (!isset($_SESSION['billto'])) {
-  tep_session_register('billto');
-  $billto = $customer_default_address_id;
+    tep_session_register('billto');
+    $billto = $customer_default_address_id;
 } else {
-// verify the selected billing address
-  if ((is_array($billto) && empty($billto)) || is_numeric($billto)) {
-    $check_address_query = tep_db_query("select count(*) as total from address_book where customers_id = '" . (int)$customer_id . "' and address_book_id = '" . (int)$billto . "'");
-    $check_address = tep_db_fetch_array($check_address_query);
+    // verify the selected billing address
+    if ((\is_array($billto) && empty($billto)) || is_numeric($billto)) {
+        $check_address_query = tep_db_query("select count(*) as total from address_book where customers_id = '".(int) $customer_id."' and address_book_id = '".(int) $billto."'");
+        $check_address = tep_db_fetch_array($check_address_query);
 
-    if ($check_address['total'] != '1') {
-      $billto = $customer_default_address_id;
-      if (isset($_SESSION['payment'])) unset($_SESSION['payment']);
+        if ($check_address['total'] !== '1') {
+            $billto = $customer_default_address_id;
+
+            if (isset($_SESSION['payment'])) {
+                unset($_SESSION['payment']);
+            }
+        }
     }
-  }
 }
 
-require('includes/classes/order.php');
-$order = new order;
+require 'includes/classes/order.php';
+$order = new order();
 
-if (!isset($_SESSION['comments'])) tep_session_register('comments');
+if (!isset($_SESSION['comments'])) {
+    tep_session_register('comments');
+}
+
 if (isset($_POST['comments']) && !empty($_POST['comments'])) {
-  $comments = tep_db_prepare_input($_POST['comments']);
+    $comments = tep_db_prepare_input($_POST['comments']);
 }
 
 $total_weight = $cart->show_weight();
 $total_count = $cart->count_contents();
 
 // load all enabled payment modules
-require('includes/classes/payment.php');
-$payment_modules = new payment;
+require 'includes/classes/payment.php';
+$payment_modules = new payment();
 
-require('includes/languages/' . $language . '/checkout_payment.php');
+require 'includes/languages/'.$language.'/checkout_payment.php';
 
 $breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('checkout_shipping.php'));
 $breadcrumb->add(NAVBAR_TITLE_2, tep_href_link('checkout_payment.php'));
 
-require('includes/template_top.php');
+require 'includes/template_top.php';
 ?>
 
   <script>
@@ -139,8 +147,8 @@ require('includes/template_top.php');
   <div class="mb-5">
 
     <?php
-    if (isset($_GET['payment_error']) && is_object(${$_GET['payment_error']}) && ($error = ${$_GET['payment_error']}->get_error())) {
-      ?>
+    if (isset($_GET['payment_error']) && \is_object(${$_GET['payment_error']}) && ($error = ${$_GET['payment_error']}->get_error())) {
+        ?>
 
       <div class="alert alert-danger d-flex align-items-start" role="alert">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
@@ -154,7 +162,8 @@ require('includes/template_top.php');
 
       <?php
     }
-    ?>
+
+?>
 
     <h2><?php echo TABLE_HEADING_BILLING_ADDRESS; ?></h2>
 
@@ -175,10 +184,10 @@ require('includes/template_top.php');
     <h2><?php echo TABLE_HEADING_PAYMENT_METHOD; ?></h2>
 
     <?php
-    $selection = $payment_modules->selection();
+$selection = $payment_modules->selection();
 
-    if (sizeof($selection) > 1) {
-      ?>
+if (\count($selection) > 1) {
+    ?>
 
       <div class="mb-3">
         <div class="float-end fw-bold">
@@ -189,58 +198,62 @@ require('includes/template_top.php');
       </div>
 
       <?php
-    } else {
-      ?>
+} else {
+    ?>
 
       <p><?php echo TEXT_ENTER_PAYMENT_INFORMATION; ?></p>
 
       <?php
-    }
-    ?>
+}
+
+?>
 
     <div class="mb-3">
 
       <?php
-      $radio_buttons = 0;
-      for ($i = 0, $n = sizeof($selection); $i < $n; $i++) {
-        ?>
+  $radio_buttons = 0;
+
+for ($i = 0, $n = \count($selection); $i < $n; ++$i) {
+    ?>
 
         <table class="table table-borderless table-sm mb-0">
           <tbody>
 
           <?php
-          if (($selection[$i]['id'] == $payment) || ($n == 1)) {
-            echo '      <tr id="defaultSelected" class="moduleRowSelected bg-light" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="selectRowEffect(this, ' . $radio_buttons . ')">' . "\n";
-          } else {
-            echo '      <tr class="moduleRow bg-white" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="selectRowEffect(this, ' . $radio_buttons . ')">' . "\n";
-          }
-          ?>
+      if (($selection[$i]['id'] === $payment) || ($n === 1)) {
+          echo '      <tr id="defaultSelected" class="moduleRowSelected bg-light" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="selectRowEffect(this, '.$radio_buttons.')">'."\n";
+      } else {
+          echo '      <tr class="moduleRow bg-white" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="selectRowEffect(this, '.$radio_buttons.')">'."\n";
+      }
+
+    ?>
 
           <td class="fw-bold"><?php echo $selection[$i]['module']; ?></td>
           <td class="text-end form-check">
 
             <?php
-            if (sizeof($selection) > 1) {
-              echo tep_draw_radio_field('payment', $selection[$i]['id'], ($selection[$i]['id'] == $payment), 'class="form-check-input float-none"');
-            } else {
-              echo tep_draw_hidden_field('payment', $selection[$i]['id']);
-            }
-            ?>
+      if (\count($selection) > 1) {
+          echo tep_draw_radio_field('payment', $selection[$i]['id'], $selection[$i]['id'] === $payment, 'class="form-check-input float-none"');
+      } else {
+          echo tep_draw_hidden_field('payment', $selection[$i]['id']);
+      }
+
+    ?>
 
           </td>
           </tr>
 
           <?php
           if (isset($selection[$i]['error'])) {
-            ?>
+              ?>
 
             <tr>
               <td colspan="2"><?php echo $selection[$i]['error']; ?></td>
             </tr>
 
             <?php
-          } elseif (isset($selection[$i]['fields']) && is_array($selection[$i]['fields'])) {
-            ?>
+          } elseif (isset($selection[$i]['fields']) && \is_array($selection[$i]['fields'])) {
+              ?>
 
             <tr>
               <td colspan="2">
@@ -248,8 +261,8 @@ require('includes/template_top.php');
                   <tbody>
 
                   <?php
-                  for ($j = 0, $n2 = sizeof($selection[$i]['fields']); $j < $n2; $j++) {
-                    ?>
+                    for ($j = 0, $n2 = \count($selection[$i]['fields']); $j < $n2; ++$j) {
+                        ?>
 
                     <tr>
                       <td><?php echo $selection[$i]['fields'][$j]['title']; ?></td>
@@ -257,8 +270,9 @@ require('includes/template_top.php');
                     </tr>
 
                     <?php
-                  }
-                  ?>
+                    }
+
+              ?>
 
                   </tbody>
                 </table>
@@ -267,15 +281,17 @@ require('includes/template_top.php');
 
             <?php
           }
-          ?>
+
+    ?>
 
           </tbody>
         </table>
 
         <?php
-        $radio_buttons++;
-      }
-      ?>
+        ++$radio_buttons;
+}
+
+?>
 
     </div>
 
@@ -294,5 +310,6 @@ require('includes/template_top.php');
   </form>
 
 <?php
-require('includes/template_bottom.php');
-require('includes/application_bottom.php');
+require 'includes/template_bottom.php';
+
+require 'includes/application_bottom.php';

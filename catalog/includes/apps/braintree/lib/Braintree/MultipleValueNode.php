@@ -1,7 +1,20 @@
 <?php
-namespace Braintree;
 
-use InvalidArgumentException;
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Braintree;
 
 class MultipleValueNode
 {
@@ -9,22 +22,25 @@ class MultipleValueNode
     {
         $this->name = $name;
         $this->items = [];
-		$this->allowedValues = $allowedValues;
+        $this->allowedValues = $allowedValues;
     }
 
     public function in($values)
     {
-		$bad_values = array_diff($values, $this->allowedValues);
-		if (count($this->allowedValues) > 0 && count($bad_values) > 0) {
-			$message = 'Invalid argument(s) for ' . $this->name . ':';
-			foreach ($bad_values AS $bad_value) {
-				$message .= ' ' . $bad_value;
-			}
+        $bad_values = array_diff($values, $this->allowedValues);
 
-			throw new InvalidArgumentException($message);
-		}
+        if (\count($this->allowedValues) > 0 && \count($bad_values) > 0) {
+            $message = 'Invalid argument(s) for '.$this->name.':';
+
+            foreach ($bad_values as $bad_value) {
+                $message .= ' '.$bad_value;
+            }
+
+            throw new \InvalidArgumentException($message);
+        }
 
         $this->items = $values;
+
         return $this;
     }
 

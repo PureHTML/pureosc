@@ -1,21 +1,31 @@
 <?php
-namespace Braintree;
 
-use InvalidArgumentException;
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Braintree;
 
 /**
  * Braintree TransactionGateway processor
- * Creates and manages transactions
- *
+ * Creates and manages transactions.
  *
  * <b>== More information ==</b>
  *
  * For more detailed information on Transactions, see {@link https://developers.braintreepayments.com/reference/response/transaction/php https://developers.braintreepayments.com/reference/response/transaction/php}
  *
- * @package    Braintree
  * @category   Resources
  */
-
 class TransactionGateway
 {
     private $_gateway;
@@ -33,33 +43,8 @@ class TransactionGateway
     public function cloneTransaction($transactionId, $attribs)
     {
         Util::verifyKeys(self::cloneSignature(), $attribs);
-        return $this->_doCreate('/transactions/' . $transactionId . '/clone', ['transactionClone' => $attribs]);
-    }
 
-    /**
-     * @ignore
-     * @access private
-     * @param array $attribs (Note: $deviceSessionId and $fraudMerchantId params are deprecated. Use $deviceData instead)
-     * @return Result\Successful|Result\Error
-     */
-    private function create($attribs)
-    {
-        Util::verifyKeys(self::createSignature(), $attribs);
-        $this->_checkForDeprecatedAttributes($attribs);
-        return $this->_doCreate('/transactions', ['transaction' => $attribs]);
-    }
-
-    /**
-     * @ignore
-     * @access private
-     * @param array $attribs
-     * @return object
-     * @throws Exception\ValidationError
-     */
-    private function createNoValidate($attribs)
-    {
-        $result = $this->create($attribs);
-        return Util::returnObjectOrThrowException(__CLASS__, $result);
+        return $this->_doCreate('/transactions/'.$transactionId.'/clone', ['transactionClone' => $attribs]);
     }
 
     public static function cloneSignature()
@@ -68,7 +53,8 @@ class TransactionGateway
     }
 
     /**
-     * creates a full array signature of a valid gateway request
+     * creates a full array signature of a valid gateway request.
+     *
      * @return array gateway request signature format
      */
     public static function createSignature()
@@ -105,163 +91,146 @@ class TransactionGateway
             'discountAmount',
             'shipsFromPostalCode',
             'deviceSessionId', 'fraudMerchantId', // NEXT_MAJOR_VERSION remove deviceSessionId and fraudMerchantId
-            ['riskData' =>
-                [
-                    //NEXT_MAJOR_VERSION remove snake case parameters, PHP should only accept camel case
-                    'customerBrowser', 'customerIp', 'customer_browser', 'customer_ip',
-                    'customerDeviceId', 'customerLocationZip', 'customerTenure'],
+            ['riskData' => [
+                // NEXT_MAJOR_VERSION remove snake case parameters, PHP should only accept camel case
+                'customerBrowser', 'customerIp', 'customer_browser', 'customer_ip',
+                'customerDeviceId', 'customerLocationZip', 'customerTenure'],
             ],
-            ['creditCard' =>
-                ['token', 'cardholderName', 'cvv', 'expirationDate', 'expirationMonth', 'expirationYear', 'number'],
+            ['creditCard' => ['token', 'cardholderName', 'cvv', 'expirationDate', 'expirationMonth', 'expirationYear', 'number'],
             ],
-            ['customer' =>
-                [
-                    'id', 'company', 'email', 'fax', 'firstName',
-                    'lastName', 'phone', 'website'],
+            ['customer' => [
+                'id', 'company', 'email', 'fax', 'firstName',
+                'lastName', 'phone', 'website'],
             ],
-            ['billing' =>
-                [
-                    'firstName', 'lastName', 'company', 'countryName',
-                    'countryCodeAlpha2', 'countryCodeAlpha3', 'countryCodeNumeric',
-                    'extendedAddress', 'locality', 'phoneNumber', 'postalCode', 'region',
-                    'streetAddress'],
+            ['billing' => [
+                'firstName', 'lastName', 'company', 'countryName',
+                'countryCodeAlpha2', 'countryCodeAlpha3', 'countryCodeNumeric',
+                'extendedAddress', 'locality', 'phoneNumber', 'postalCode', 'region',
+                'streetAddress'],
             ],
-            ['shipping' =>
-                [
-                    'firstName', 'lastName', 'company', 'countryName',
-                    'countryCodeAlpha2', 'countryCodeAlpha3', 'countryCodeNumeric',
-                    'extendedAddress', 'locality', 'phoneNumber', 'postalCode', 'region',
-                    'shippingMethod', 'streetAddress'],
+            ['shipping' => [
+                'firstName', 'lastName', 'company', 'countryName',
+                'countryCodeAlpha2', 'countryCodeAlpha3', 'countryCodeNumeric',
+                'extendedAddress', 'locality', 'phoneNumber', 'postalCode', 'region',
+                'shippingMethod', 'streetAddress'],
             ],
-            ['threeDSecurePassThru' =>
-                [
-                    'eciFlag',
-                    'cavv',
-                    'xid',
-                    'threeDSecureVersion',
-                    'authenticationResponse',
-                    'directoryResponse',
-                    'cavvAlgorithm',
-                    'dsTransactionId'],
+            ['threeDSecurePassThru' => [
+                'eciFlag',
+                'cavv',
+                'xid',
+                'threeDSecureVersion',
+                'authenticationResponse',
+                'directoryResponse',
+                'cavvAlgorithm',
+                'dsTransactionId'],
             ],
-            ['options' =>
-                [
-                    'holdInEscrow',
-                    'storeInVault',
-                    'storeInVaultOnSuccess',
-                    'submitForSettlement',
-                    'addBillingAddressToPaymentMethod',
-                    'venmoSdkSession',
-                    'storeShippingAddressInVault',
+            ['options' => [
+                'holdInEscrow',
+                'storeInVault',
+                'storeInVaultOnSuccess',
+                'submitForSettlement',
+                'addBillingAddressToPaymentMethod',
+                'venmoSdkSession',
+                'storeShippingAddressInVault',
+                'payeeId',
+                'payeeEmail',
+                'skipAdvancedFraudChecking',
+                'skipAvs',
+                'skipCvv',
+                ['creditCard' => ['accountType'],
+                ],
+                ['threeDSecure' => ['required'],
+                ],
+                ['paypal' => [
                     'payeeId',
                     'payeeEmail',
-                    'skipAdvancedFraudChecking',
-                    'skipAvs',
-                    'skipCvv',
-                    ['creditCard' =>
-                        ['accountType']
-                    ],
-                    ['threeDSecure' =>
-                        ['required']
-                    ],
-                    ['paypal' =>
-                        [
-                            'payeeId',
-                            'payeeEmail',
-                            'customField',
-                            'description',
-                            ['supplementaryData' => ['_anyKey_']],
-                        ]
-                    ],
-                    ['amexRewards' =>
-                        [
-                            'requestId',
-                            'points',
-                            'currencyAmount',
-                            'currencyIsoCode'
-                        ]
-                    ],
-                    ['venmo' =>
-                        [
-                            'profileId'
-                        ]
-                    ]
+                    'customField',
+                    'description',
+                    ['supplementaryData' => ['_anyKey_']],
                 ],
+                ],
+                ['amexRewards' => [
+                    'requestId',
+                    'points',
+                    'currencyAmount',
+                    'currencyIsoCode',
+                ],
+                ],
+                ['venmo' => [
+                    'profileId',
+                ],
+                ],
+            ],
             ],
             ['customFields' => ['_anyKey_']],
             ['descriptor' => ['name', 'phone', 'url']],
             ['paypalAccount' => ['payeeId', 'payeeEmail', 'payerId', 'paymentId']],
             ['applePayCard' => ['number', 'cardholderName', 'cryptogram', 'expirationMonth', 'expirationYear', 'eciIndicator']],
-            ['industry' =>
-                ['industryType',
-                    ['data' =>
-                        [
-                            'folioNumber',
-                            'checkInDate',
-                            'checkOutDate',
-                            'travelPackage',
-                            'departureDate',
-                            'lodgingCheckInDate',
-                            'lodgingCheckOutDate',
-                            'lodgingName',
-                            'roomRate',
-                            'roomTax',
-                            'passengerFirstName',
-                            'passengerLastName',
-                            'passengerMiddleInitial',
-                            'passengerTitle',
-                            'issuedDate',
-                            'travelAgencyName',
-                            'travelAgencyCode',
-                            'ticketNumber',
-                            'issuingCarrierCode',
-                            'customerCode',
-                            'fareAmount',
-                            'feeAmount',
-                            'taxAmount',
-                            'restrictedTicket',
-                            'noShow',
-                            'advancedDeposit',
-                            'fireSafe',
-                            'propertyPhone',
-                            ['legs' =>
-                                [
-                                    'conjunctionTicket',
-                                    'exchangeTicket',
-                                    'couponNumber',
-                                    'serviceClass',
-                                    'carrierCode',
-                                    'fareBasisCode',
-                                    'flightNumber',
-                                    'departureDate',
-                                    'departureAirportCode',
-                                    'departureTime',
-                                    'arrivalAirportCode',
-                                    'arrivalTime',
-                                    'stopoverPermitted',
-                                    'fareAmount',
-                                    'feeAmount',
-                                    'taxAmount',
-                                    'endorsementOrRestrictions'
-                                ]
-                            ],
-                            ['additionalCharges' =>
-                                [
-                                    'kind',
-                                    'amount'
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
+            ['industry' => ['industryType',
+                ['data' => [
+                    'folioNumber',
+                    'checkInDate',
+                    'checkOutDate',
+                    'travelPackage',
+                    'departureDate',
+                    'lodgingCheckInDate',
+                    'lodgingCheckOutDate',
+                    'lodgingName',
+                    'roomRate',
+                    'roomTax',
+                    'passengerFirstName',
+                    'passengerLastName',
+                    'passengerMiddleInitial',
+                    'passengerTitle',
+                    'issuedDate',
+                    'travelAgencyName',
+                    'travelAgencyCode',
+                    'ticketNumber',
+                    'issuingCarrierCode',
+                    'customerCode',
+                    'fareAmount',
+                    'feeAmount',
+                    'taxAmount',
+                    'restrictedTicket',
+                    'noShow',
+                    'advancedDeposit',
+                    'fireSafe',
+                    'propertyPhone',
+                    ['legs' => [
+                        'conjunctionTicket',
+                        'exchangeTicket',
+                        'couponNumber',
+                        'serviceClass',
+                        'carrierCode',
+                        'fareBasisCode',
+                        'flightNumber',
+                        'departureDate',
+                        'departureAirportCode',
+                        'departureTime',
+                        'arrivalAirportCode',
+                        'arrivalTime',
+                        'stopoverPermitted',
+                        'fareAmount',
+                        'feeAmount',
+                        'taxAmount',
+                        'endorsementOrRestrictions',
+                    ],
+                    ],
+                    ['additionalCharges' => [
+                        'kind',
+                        'amount',
+                    ],
+                    ],
+                ],
+                ],
+            ],
             ],
             ['lineItems' => ['quantity', 'name', 'description', 'kind', 'unitAmount', 'unitTaxAmount', 'totalAmount', 'discountAmount', 'taxAmount', 'unitOfMeasure', 'productCode', 'commodityCode', 'url']],
-            ['externalVault' =>
-                ['status' , 'previousNetworkTransactionId'],
+            ['externalVault' => ['status', 'previousNetworkTransactionId'],
             ],
             // NEXT_MAJOR_VERSION rename Android Pay to Google Pay
             ['androidPayCard' => ['number', 'cryptogram', 'expirationMonth', 'expirationYear', 'eciIndicator', 'sourceCardType', 'sourceCardLastFour', 'googleTransactionId']],
-            ['installments' => ['count']]
+            ['installments' => ['count']],
         ];
     }
 
@@ -289,10 +258,9 @@ class TransactionGateway
     }
 
     /**
-     *
-     * @access public
      * @param array $attribs
-     * @return Result\Successful|Result\Error
+     *
+     * @return Result\Error|Result\Successful
      */
     public function credit($attribs)
     {
@@ -300,59 +268,69 @@ class TransactionGateway
     }
 
     /**
-     *
-     * @access public
      * @param array $attribs
-     * @return Result\Successful|Result\Error
+     *
      * @throws Exception\ValidationError
+     *
+     * @return Result\Error|Result\Successful
      */
     public function creditNoValidate($attribs)
     {
         $result = $this->credit($attribs);
+
         return Util::returnObjectOrThrowException(__CLASS__, $result);
     }
 
     /**
-     * @access public
+     * @param mixed $id
      * @param string id
+     *
      * @return Transaction
      */
     public function find($id)
     {
         $this->_validateId($id);
+
         try {
-            $path = $this->_config->merchantPath() . '/transactions/' . $id;
+            $path = $this->_config->merchantPath().'/transactions/'.$id;
             $response = $this->_http->get($path);
+
             return Transaction::factory($response['transaction']);
         } catch (Exception\NotFound $e) {
             throw new Exception\NotFound(
-            'transaction with id ' . $id . ' not found'
+                'transaction with id '.$id.' not found',
             );
         }
     }
     /**
-     * new sale
+     * new sale.
+     *
      * @param array $attribs (Note: $recurring param is deprecated. Use $transactionSource instead)
-     * @return Result\Successful|Result\Error
+     *
+     * @return Result\Error|Result\Successful
      */
     public function sale($attribs)
     {
-        if (array_key_exists('recurring', $attribs)) {
-            trigger_error('$recurring is deprecated, use $transactionSource instead', E_USER_DEPRECATED);
+        if (\array_key_exists('recurring', $attribs)) {
+            trigger_error('$recurring is deprecated, use $transactionSource instead', \E_USER_DEPRECATED);
         }
+
         return $this->create(array_merge(['type' => Transaction::SALE], $attribs));
     }
 
     /**
-     * roughly equivalent to the ruby bang method
-     * @access public
+     * roughly equivalent to the ruby bang method.
+     *
      * @param array $attribs
-     * @return array
+     *
      * @throws Exception\ValidationsFailed
+     *
+     * @return array
      */
     public function saleNoValidate($attribs)
     {
         $result = $this->sale($attribs);
+
         return Util::returnObjectOrThrowException(__CLASS__, $result);
     }
 
@@ -364,72 +342,80 @@ class TransactionGateway
      * For more detailed information and examples, see {@link https://developers.braintreepayments.com/reference/request/transaction/search/php https://developers.braintreepayments.com/reference/request/transaction/search/php}
      *
      * @param mixed $query search query
-     * @param array $options options such as page number
+     *
+     * @throws \InvalidArgumentException
+     *
      * @return ResourceCollection
-     * @throws InvalidArgumentException
      */
     public function search($query)
     {
         $criteria = [];
+
         foreach ($query as $term) {
             $criteria[$term->name] = $term->toparam();
         }
 
-        $path = $this->_config->merchantPath() . '/transactions/advanced_search_ids';
+        $path = $this->_config->merchantPath().'/transactions/advanced_search_ids';
         $response = $this->_http->post($path, ['search' => $criteria]);
-        if (array_key_exists('searchResults', $response)) {
+
+        if (\array_key_exists('searchResults', $response)) {
             $pager = [
                 'object' => $this,
                 'method' => 'fetch',
-                'methodArgs' => [$query]
-                ];
+                'methodArgs' => [$query],
+            ];
 
             return new ResourceCollection($response, $pager);
-        } else {
-            throw new Exception\RequestTimeout();
         }
+
+        throw new Exception\RequestTimeout();
     }
 
     public function fetch($query, $ids)
     {
         $criteria = [];
+
         foreach ($query as $term) {
             $criteria[$term->name] = $term->toparam();
         }
-        $criteria["ids"] = TransactionSearch::ids()->in($ids)->toparam();
-        $path = $this->_config->merchantPath() . '/transactions/advanced_search';
+
+        $criteria['ids'] = TransactionSearch::ids()->in($ids)->toparam();
+        $path = $this->_config->merchantPath().'/transactions/advanced_search';
         $response = $this->_http->post($path, ['search' => $criteria]);
 
-        if (array_key_exists('creditCardTransactions', $response)) {
+        if (\array_key_exists('creditCardTransactions', $response)) {
             return Util::extractattributeasarray(
                 $response['creditCardTransactions'],
-                'transaction'
+                'transaction',
             );
-        } else {
-            throw new Exception\RequestTimeout();
         }
+
+        throw new Exception\RequestTimeout();
     }
 
     /**
-     * void a transaction by id
+     * void a transaction by id.
      *
-     * @param string $id transaction id
-     * @return Result\Successful|Result\Error
+     * @param mixed $transactionId
+     *
+     * @return Result\Error|Result\Successful
      */
     public function void($transactionId)
     {
         $this->_validateId($transactionId);
 
-        $path = $this->_config->merchantPath() . '/transactions/'. $transactionId . '/void';
+        $path = $this->_config->merchantPath().'/transactions/'.$transactionId.'/void';
         $response = $this->_http->put($path);
+
         return $this->_verifyGatewayResponse($response);
     }
     /**
-     *
+     * @param mixed $transactionId
      */
     public function voidNoValidate($transactionId)
     {
         $result = $this->void($transactionId);
+
         return Util::returnObjectOrThrowException(__CLASS__, $result);
     }
 
@@ -439,14 +425,16 @@ class TransactionGateway
         Util::verifyKeys(self::submitForSettlementSignature(), $attribs);
         $attribs['amount'] = $amount;
 
-        $path = $this->_config->merchantPath() . '/transactions/'. $transactionId . '/submit_for_settlement';
+        $path = $this->_config->merchantPath().'/transactions/'.$transactionId.'/submit_for_settlement';
         $response = $this->_http->put($path, ['transaction' => $attribs]);
+
         return $this->_verifyGatewayResponse($response);
     }
 
     public function submitForSettlementNoValidate($transactionId, $amount = null, $attribs = [])
     {
         $result = $this->submitForSettlement($transactionId, $amount, $attribs);
+
         return Util::returnObjectOrThrowException(__CLASS__, $result);
     }
 
@@ -455,8 +443,9 @@ class TransactionGateway
         $this->_validateId($transactionId);
         Util::verifyKeys(self::updateDetailsSignature(), $attribs);
 
-        $path = $this->_config->merchantPath() . '/transactions/'. $transactionId . '/update_details';
+        $path = $this->_config->merchantPath().'/transactions/'.$transactionId.'/update_details';
         $response = $this->_http->put($path, ['transaction' => $attribs]);
+
         return $this->_verifyGatewayResponse($response);
     }
 
@@ -466,8 +455,9 @@ class TransactionGateway
         Util::verifyKeys(self::submitForSettlementSignature(), $attribs);
         $attribs['amount'] = $amount;
 
-        $path = $this->_config->merchantPath() . '/transactions/'. $transactionId . '/submit_for_partial_settlement';
+        $path = $this->_config->merchantPath().'/transactions/'.$transactionId.'/submit_for_partial_settlement';
         $response = $this->_http->post($path, ['transaction' => $attribs]);
+
         return $this->_verifyGatewayResponse($response);
     }
 
@@ -475,8 +465,9 @@ class TransactionGateway
     {
         $this->_validateId($transactionId);
 
-        $path = $this->_config->merchantPath() . '/transactions/' . $transactionId . '/hold_in_escrow';
+        $path = $this->_config->merchantPath().'/transactions/'.$transactionId.'/hold_in_escrow';
         $response = $this->_http->put($path, []);
+
         return $this->_verifyGatewayResponse($response);
     }
 
@@ -484,8 +475,9 @@ class TransactionGateway
     {
         $this->_validateId($transactionId);
 
-        $path = $this->_config->merchantPath() . '/transactions/' . $transactionId . '/release_from_escrow';
+        $path = $this->_config->merchantPath().'/transactions/'.$transactionId.'/release_from_escrow';
         $response = $this->_http->put($path, []);
+
         return $this->_verifyGatewayResponse($response);
     }
 
@@ -493,8 +485,9 @@ class TransactionGateway
     {
         $this->_validateId($transactionId);
 
-        $path = $this->_config->merchantPath() . '/transactions/' . $transactionId . '/cancel_release';
+        $path = $this->_config->merchantPath().'/transactions/'.$transactionId.'/cancel_release';
         $response = $this->_http->put($path, []);
+
         return $this->_verifyGatewayResponse($response);
     }
 
@@ -502,53 +495,93 @@ class TransactionGateway
     {
         self::_validateId($transactionId);
 
-        if(gettype($amount_or_options) == "array") {
+        if (\gettype($amount_or_options) === 'array') {
             $options = $amount_or_options;
         } else {
             $options = [
-                "amount" => $amount_or_options
+                'amount' => $amount_or_options,
             ];
         }
+
         Util::verifyKeys(self::refundSignature(), $options);
 
         $params = ['transaction' => $options];
-        $path = $this->_config->merchantPath() . '/transactions/' . $transactionId . '/refund';
+        $path = $this->_config->merchantPath().'/transactions/'.$transactionId.'/refund';
         $response = $this->_http->post($path, $params);
+
         return $this->_verifyGatewayResponse($response);
     }
 
     /**
-     * sends the create request to the gateway
+     * sends the create request to the gateway.
      *
      * @ignore
-     * @param var $subPath
+     *
+     * @param var   $subPath
      * @param array $params
-     * @return Result\Successful|Result\Error
+     *
+     * @return Result\Error|Result\Successful
      */
     public function _doCreate($subPath, $params)
     {
-        $fullPath = $this->_config->merchantPath() . $subPath;
+        $fullPath = $this->_config->merchantPath().$subPath;
         $response = $this->_http->post($fullPath, $params);
 
         return $this->_verifyGatewayResponse($response);
     }
 
     /**
-     * verifies that a valid transaction id is being used
      * @ignore
-     * @param string transaction id
-     * @throws InvalidArgumentException
+     *
+     * @param array $attribs (Note: $deviceSessionId and $fraudMerchantId params are deprecated. Use $deviceData instead)
+     *
+     * @return Result\Error|Result\Successful
      */
-    private function _validateId($id = null) {
+    private function create($attribs)
+    {
+        Util::verifyKeys(self::createSignature(), $attribs);
+        $this->_checkForDeprecatedAttributes($attribs);
+
+        return $this->_doCreate('/transactions', ['transaction' => $attribs]);
+    }
+
+    /**
+     * @ignore
+     *
+     * @param array $attribs
+     *
+     * @throws Exception\ValidationError
+     *
+     * @return object
+     */
+    private function createNoValidate($attribs)
+    {
+        $result = $this->create($attribs);
+
+        return Util::returnObjectOrThrowException(__CLASS__, $result);
+    }
+
+    /**
+     * verifies that a valid transaction id is being used.
+     *
+     * @ignore
+     *
+     * @param null|mixed $id
+     * @param string transaction id
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function _validateId($id = null): void
+    {
         if (empty($id)) {
-           throw new InvalidArgumentException(
-                   'expected transaction id to be set'
-                   );
+            throw new \InvalidArgumentException(
+                'expected transaction id to be set',
+            );
         }
     }
 
     /**
-     * generic method for validating incoming gateway responses
+     * generic method for validating incoming gateway responses.
      *
      * creates a new Transaction object and encapsulates
      * it inside a Result\Successful object, or
@@ -556,33 +589,39 @@ class TransactionGateway
      * alternatively, throws an Unexpected exception if the response is invalid.
      *
      * @ignore
+     *
      * @param array $response gateway response values
-     * @return Result\Successful|Result\Error
+     *
      * @throws Exception\Unexpected
+     *
+     * @return Result\Error|Result\Successful
      */
     private function _verifyGatewayResponse($response)
     {
         if (isset($response['transaction'])) {
             // return a populated instance of Transaction
             return new Result\Successful(
-                    Transaction::factory($response['transaction'])
-            );
-        } else if (isset($response['apiErrorResponse'])) {
-            return new Result\Error($response['apiErrorResponse']);
-        } else {
-            throw new Exception\Unexpected(
-            "Expected transaction or apiErrorResponse"
+                Transaction::factory($response['transaction']),
             );
         }
+
+        if (isset($response['apiErrorResponse'])) {
+            return new Result\Error($response['apiErrorResponse']);
+        }
+
+        throw new Exception\Unexpected(
+            'Expected transaction or apiErrorResponse',
+        );
     }
 
-    private function _checkForDeprecatedAttributes($attributes)
+    private function _checkForDeprecatedAttributes($attributes): void
     {
         if (isset($attributes['deviceSessionId'])) {
-            trigger_error('$deviceSessionId is deprecated, use $deviceData instead', E_USER_DEPRECATED);
+            trigger_error('$deviceSessionId is deprecated, use $deviceData instead', \E_USER_DEPRECATED);
         }
+
         if (isset($attributes['fraudMerchantId'])) {
-            trigger_error('$fraudMerchantId is deprecated, use $deviceData instead', E_USER_DEPRECATED);
+            trigger_error('$fraudMerchantId is deprecated, use $deviceData instead', \E_USER_DEPRECATED);
         }
     }
 }

@@ -1,27 +1,39 @@
 <?php
-namespace Braintree\Xml;
 
-use DateTime;
-use DateTimeZone;
-use DOMDocument;
-use DOMElement;
-use DOMText;
-use Braintree\Util;
+declare(strict_types=1);
 
 /**
- * Braintree XML Parser
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Braintree\Xml;
+
+use Braintree\Util;
+use DateTime;
+
+/**
+ * Braintree XML Parser.
  */
 class Parser
 {
     /**
-     * Converts an XML string into a multidimensional array
+     * Converts an XML string into a multidimensional array.
      *
      * @param string $xml
+     *
      * @return array
      */
     public static function arrayFromXml($xml)
     {
-        $document = new DOMDocument('1.0', 'UTF-8');
+        $document = new \DOMDocument('1.0', 'UTF-8');
         $document->loadXML($xml);
 
         $root = $document->documentElement->nodeName;
@@ -32,108 +44,128 @@ class Parser
     }
 
     /**
-     * Converts a node to an array of values or nodes
+     * Converts a node to an array of values or nodes.
      *
+     * @param mixed $node
      * @param DOMNode @node
+     *
      * @return mixed
      */
     private static function _nodeToArray($node)
     {
         $type = null;
-        if ($node instanceof DOMElement) {
+
+        if ($node instanceof \DOMElement) {
             $type = $node->getAttribute('type');
         }
 
-        switch($type) {
-        case 'array':
-            $array = [];
-            foreach ($node->childNodes as $child) {
-                $value = self::_nodeToValue($child);
-                if ($value !== null) {
-                    $array[] = $value;
-                }
-            }
-            return $array;
-        case 'collection':
-            $collection = [];
-            foreach ($node->childNodes as $child) {
-                $value = self::_nodetoValue($child);
-                if ($value !== null) {
-                    if (!isset($collection[$child->nodeName])) {
-                        $collection[$child->nodeName] = [];
-                    }
-                    $collection[$child->nodeName][] = self::_nodeToValue($child);
-                }
-            }
-            return $collection;
-        default:
-            $values = [];
-            if ($node->childNodes->length === 1 && $node->childNodes->item(0) instanceof DOMText) {
-                return $node->childNodes->item(0)->nodeValue;
-            } else {
+        switch ($type) {
+            case 'array':
+                $array = [];
+
                 foreach ($node->childNodes as $child) {
-                    if (!$child instanceof DOMText) {
+                    $value = self::_nodeToValue($child);
+
+                    if ($value !== null) {
+                        $array[] = $value;
+                    }
+                }
+
+                return $array;
+            case 'collection':
+                $collection = [];
+
+                foreach ($node->childNodes as $child) {
+                    $value = self::_nodetoValue($child);
+
+                    if ($value !== null) {
+                        if (!isset($collection[$child->nodeName])) {
+                            $collection[$child->nodeName] = [];
+                        }
+
+                        $collection[$child->nodeName][] = self::_nodeToValue($child);
+                    }
+                }
+
+                return $collection;
+
+            default:
+                $values = [];
+
+                if ($node->childNodes->length === 1 && $node->childNodes->item(0) instanceof \DOMText) {
+                    return $node->childNodes->item(0)->nodeValue;
+                }
+
+                foreach ($node->childNodes as $child) {
+                    if (!$child instanceof \DOMText) {
                         $values[$child->nodeName] = self::_nodeToValue($child);
                     }
                 }
+
                 return $values;
-            }
         }
     }
 
     /**
-     * Converts a node to a PHP value
+     * Converts a node to a PHP value.
      *
      * @param DOMNode $node
+     *
      * @return mixed
      */
     private static function _nodeToValue($node)
     {
         $type = null;
-        if ($node instanceof DOMElement) {
+
+        if ($node instanceof \DOMElement) {
             $type = $node->getAttribute('type');
         }
 
-        switch($type) {
-        case 'datetime':
-            return self::_timestampToUTC((string) $node->nodeValue);
-        case 'date':
-            return new DateTime((string) $node->nodeValue);
-        case 'integer':
-            return (int) $node->nodeValue;
-        case 'boolean':
-            $value =  (string) $node->nodeValue;
-            if(is_numeric($value)) {
-                return (bool) $value;
-            } else {
-                return ($value !== "true") ? false : true;
-            }
-        case 'array':
-        case 'collection':
-            return self::_nodeToArray($node);
-        default:
-            if ($node->hasChildNodes()) {
+        switch ($type) {
+            case 'datetime':
+                return self::_timestampToUTC((string) $node->nodeValue);
+            case 'date':
+                return new \DateTime((string) $node->nodeValue);
+            case 'integer':
+                return (int) $node->nodeValue;
+            case 'boolean':
+                $value = (string) $node->nodeValue;
+
+                if (is_numeric($value)) {
+                    return (bool) $value;
+                }
+
+                return ($value !== 'true') ? false : true;
+            case 'array':
+            case 'collection':
                 return self::_nodeToArray($node);
-            } elseif (trim($node->nodeValue) === '') {
-                return null;
-            } else {
+
+            default:
+                if ($node->hasChildNodes()) {
+                    return self::_nodeToArray($node);
+                }
+
+                if (trim($node->nodeValue) === '') {
+                    return null;
+                }
+
                 return $node->nodeValue;
-            }
         }
     }
 
-
     /**
-     * Converts XML timestamps into DateTime instances
+     * Converts XML timestamps into DateTime instances.
      *
      * @param string $timestamp
-     * @return DateTime
+     *
+     * @return \DateTime
      */
     private static function _timestampToUTC($timestamp)
     {
-        $tz = new DateTimeZone('UTC');
-        $dateTime = new DateTime($timestamp, $tz);
+        $tz = new \DateTimeZone('UTC');
+        $dateTime = new \DateTime($timestamp, $tz);
         $dateTime->setTimezone($tz);
+
         return $dateTime;
     }
 }

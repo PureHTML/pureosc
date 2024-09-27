@@ -1,23 +1,26 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2020 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
-
-  $cl_box_groups[] = array(
+$cl_box_groups[] = [
     'heading' => BOX_HEADING_MODULES,
-    'apps' => array()
-  );
+    'apps' => [],
+];
 
-  foreach ($cfgModules->getAll() as $m) {
-    $cl_box_groups[sizeof($cl_box_groups)-1]['apps'][] = array('code' => 'modules.php',
-                                                               'title' => $m['title'],
-                                                               'link' => tep_href_link('modules.php', 'set=' . $m['code']));
-  }
-?>
+foreach ($cfgModules->getAll() as $m) {
+    $cl_box_groups[\count($cl_box_groups) - 1]['apps'][] = ['code' => 'modules.php',
+        'title' => $m['title'],
+        'link' => tep_href_link('modules.php', 'set='.$m['code'])];
+}

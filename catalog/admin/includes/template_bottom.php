@@ -8,12 +8,12 @@
   Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
-*/
+ */
 ?>
 
 </div>
 
-<?php require('includes/footer.php'); ?>
+<?php require 'includes/footer.php'; ?>
 
 <br />
 

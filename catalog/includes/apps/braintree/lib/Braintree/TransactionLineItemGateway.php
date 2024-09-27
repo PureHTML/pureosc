@@ -1,16 +1,27 @@
 <?php
-namespace Braintree;
 
-use InvalidArgumentException;
+declare(strict_types=1);
+
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Braintree;
 
 /**
  * Braintree TransactionLineItemGateway processor
- * Creates and manages transaction line items
+ * Creates and manages transaction line items.
  *
- * @package    Braintree
  * @category   Resources
  */
-
 class TransactionLineItemGateway
 {
     private $_gateway;
@@ -26,41 +37,51 @@ class TransactionLineItemGateway
     }
 
     /**
-     * @access public
+     * @param mixed $id
      * @param string id
+     *
      * @return Transaction
      */
     public function findAll($id)
     {
         $this->_validateId($id);
+
         try {
-            $path = $this->_config->merchantPath() . '/transactions/' . $id . '/line_items';
+            $path = $this->_config->merchantPath().'/transactions/'.$id.'/line_items';
             $response = $this->_http->get($path);
 
             $lineItems = [];
+
             if (isset($response['lineItems'])) {
-                foreach ($response['lineItems'] AS $lineItem) {
+                foreach ($response['lineItems'] as $lineItem) {
                     $lineItems[] = new TransactionLineItem($lineItem);
                 }
             }
+
             return $lineItems;
         } catch (Exception\NotFound $e) {
-            throw new Exception\NotFound('transaction line items with id ' . $id . ' not found');
+            throw new Exception\NotFound('transaction line items with id '.$id.' not found');
         }
     }
 
     /**
-     * verifies that a valid transaction id is being used
+     * verifies that a valid transaction id is being used.
+     *
      * @ignore
+     *
+     * @param null|mixed $id
      * @param string transaction id
-     * @throws InvalidArgumentException
+     *
+     * @throws \InvalidArgumentException
      */
-    private function _validateId($id = null) {
+    private function _validateId($id = null): void
+    {
         if (empty($id)) {
-           throw new InvalidArgumentException('expected transaction id to be set');
+            throw new \InvalidArgumentException('expected transaction id to be set');
         }
+
         if (!preg_match('/^[0-9a-z]+$/', $id)) {
-            throw new InvalidArgumentException($id . ' is an invalid transaction id.');
+            throw new \InvalidArgumentException($id.' is an invalid transaction id.');
         }
     }
 }

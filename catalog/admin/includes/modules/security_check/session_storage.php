@@ -1,36 +1,45 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2020 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
+class session_storage
+{
+    public $type = 'warning';
 
-  class securityCheck_session_storage {
-    var $type = 'warning';
+    public function __construct()
+    {
+        global $language;
 
-    function __construct() {
-      global $language;
-
-      include(DIR_FS_ADMIN . 'includes/languages/' . $language . '/modules/security_check/session_storage.php');
+        include DIR_FS_ADMIN.'includes/languages/'.$language.'/modules/security_check/session_storage.php';
     }
 
-    function pass() {
-      return ((STORE_SESSIONS != '') || (is_dir(tep_session_save_path()) && tep_is_writable(tep_session_save_path())));
+    public function pass()
+    {
+        return (STORE_SESSIONS !== '') || (is_dir(tep_session_save_path()) && tep_is_writable(tep_session_save_path()));
     }
 
-    function getMessage() {
-      if (STORE_SESSIONS == '') {
-        if (!is_dir(tep_session_save_path())) {
-          return WARNING_SESSION_DIRECTORY_NON_EXISTENT;
-        } elseif (!tep_is_writable(tep_session_save_path())) {
-          return WARNING_SESSION_DIRECTORY_NOT_WRITEABLE;
+    public function getMessage()
+    {
+        if (STORE_SESSIONS === '') {
+            if (!is_dir(tep_session_save_path())) {
+                return WARNING_SESSION_DIRECTORY_NON_EXISTENT;
+            }
+
+            if (!tep_is_writable(tep_session_save_path())) {
+                return WARNING_SESSION_DIRECTORY_NOT_WRITEABLE;
+            }
         }
-      }
     }
-  }
-?>
+}

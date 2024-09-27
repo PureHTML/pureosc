@@ -1,34 +1,38 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2020 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
-*/
+require 'includes/application.php';
 
-  require('includes/application.php');
+$page_contents = 'install.php';
 
-  $page_contents = 'install.php';
-
-  if (isset($_GET['step']) && is_numeric($_GET['step'])) {
+if (isset($_GET['step']) && is_numeric($_GET['step'])) {
     switch ($_GET['step']) {
-      case '2':
-        $page_contents = 'install_2.php';
-        break;
+        case '2':
+            $page_contents = 'install_2.php';
 
-      case '3':
-        $page_contents = 'install_3.php';
-        break;
+            break;
+        case '3':
+            $page_contents = 'install_3.php';
 
-      case '4':
-        $page_contents = 'install_4.php';
-        break;
+            break;
+        case '4':
+            $page_contents = 'install_4.php';
+
+            break;
     }
-  }
+}
 
-  require('templates/main_page.php');
-?>
+require 'templates/main_page.php';

@@ -1,73 +1,77 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2020 osCommerce
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Released under the GNU General Public License
+class message_stack extends tableBlock
+{
+    public $size = 0;
 
-  Example usage:
+    public function __construct()
+    {
+        global $messageToStack;
 
-  $messageStack = new messageStack();
-  $messageStack->add('Error: Error 1', 'error');
-  $messageStack->add('Error: Error 2', 'warning');
-  if ($messageStack->size > 0) echo $messageStack->output();
-*/
+        parent::__construct();
 
-  class messageStack extends tableBlock {
-    var $size = 0;
+        $this->errors = [];
 
-    function __construct() {
-      global $messageToStack;
+        if (isset($_SESSION['messageToStack'])) {
+            for ($i = 0, $n = \count($messageToStack); $i < $n; ++$i) {
+                $this->add($messageToStack[$i]['text'], $messageToStack[$i]['type']);
+            }
 
-      parent::__construct();
-
-      $this->errors = array();
-
-      if (isset($_SESSION['messageToStack'])) {
-        for ($i = 0, $n = sizeof($messageToStack); $i < $n; $i++) {
-          $this->add($messageToStack[$i]['text'], $messageToStack[$i]['type']);
+            unset($_SESSION['messageToStack']);
         }
-        unset($_SESSION['messageToStack']);
-      }
     }
 
-    function add($message, $type = 'error') {
-      if ($type == 'error') {
-        $this->errors[] = array('params' => 'class="messageStackError"', 'text' => tep_image('images/icons/error.gif', ICON_ERROR) . '&nbsp;' . $message);
-      } elseif ($type == 'warning') {
-        $this->errors[] = array('params' => 'class="messageStackWarning"', 'text' => tep_image('images/icons/warning.gif', ICON_WARNING) . '&nbsp;' . $message);
-      } elseif ($type == 'success') {
-        $this->errors[] = array('params' => 'class="messageStackSuccess"', 'text' => tep_image('images/icons/success.gif', ICON_SUCCESS) . '&nbsp;' . $message);
-      } else {
-        $this->errors[] = array('params' => 'class="messageStackError"', 'text' => $message);
-      }
+    public function add($message, $type = 'error'): void
+    {
+        if ($type === 'error') {
+            $this->errors[] = ['params' => 'class="messageStackError"', 'text' => tep_image('images/icons/error.gif', ICON_ERROR).'&nbsp;'.$message];
+        } elseif ($type === 'warning') {
+            $this->errors[] = ['params' => 'class="messageStackWarning"', 'text' => tep_image('images/icons/warning.gif', ICON_WARNING).'&nbsp;'.$message];
+        } elseif ($type === 'success') {
+            $this->errors[] = ['params' => 'class="messageStackSuccess"', 'text' => tep_image('images/icons/success.gif', ICON_SUCCESS).'&nbsp;'.$message];
+        } else {
+            $this->errors[] = ['params' => 'class="messageStackError"', 'text' => $message];
+        }
 
-      $this->size++;
+        ++$this->size;
     }
 
-    function add_session($message, $type = 'error') {
-      global $messageToStack;
+    public function add_session($message, $type = 'error'): void
+    {
+        global $messageToStack;
 
-      if (!isset($_SESSION['messageToStack'])) {
-        tep_session_register('messageToStack');
-        $messageToStack = array();
-      }
+        if (!isset($_SESSION['messageToStack'])) {
+            tep_session_register('messageToStack');
+            $messageToStack = [];
+        }
 
-      $messageToStack[] = array('text' => $message, 'type' => $type);
+        $messageToStack[] = ['text' => $message, 'type' => $type];
     }
 
-    function reset() {
-      $this->errors = array();
-      $this->size = 0;
+    public function reset(): void
+    {
+        $this->errors = [];
+        $this->size = 0;
     }
 
-    function output() {
-      $this->table_data_parameters = 'class="messageBox"';
-      return $this->tableBlock($this->errors);
+    public function output()
+    {
+        $this->table_data_parameters = 'class="messageBox"';
+
+        return $this->tableBlock($this->errors);
     }
-  }
-?>
+}

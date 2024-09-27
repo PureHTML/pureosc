@@ -1,30 +1,34 @@
 <?php
-/*
-  $Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+declare(strict_types=1);
 
-  Copyright (c) 2020 osCommerce
-
-  Released under the GNU General Public License
-*/
+/**
+ * This file is part of the DvereCOM package
+ *
+ *  (c) Šimon Formánek <mail@simonformanek.cz>
+ * This file is part of the MultiFlexi package
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 $curl_info = curl_version();
 
-$result = array(
-  'rpcStatus' => 1,
-  'curl_version' => isset($curl_info['version']) ? $curl_info['version'] : '',
-  'curl_ssl_version' => isset($curl_info['ssl_version']) ? $curl_info['ssl_version'] : ''
-);
+$result = [
+    'rpcStatus' => 1,
+    'curl_version' => $curl_info['version'] ?? '',
+    'curl_ssl_version' => $curl_info['ssl_version'] ?? '',
+];
 
-$test = $OSCOM_PayPal->makeApiCall('https://www.howsmyssl.com/a/check', null, null, array('returnFull' => true, 'sslVersion' => 0));
+$test = $OSCOM_PayPal->makeApiCall('https://www.howsmyssl.com/a/check', null, null, ['returnFull' => true, 'sslVersion' => 0]);
 
-$result['default'] = (isset($test['info']['http_code']) && ((int)$test['info']['http_code'] === 200));
+$result['default'] = (isset($test['info']['http_code']) && ((int) $test['info']['http_code'] === 200));
 
-$test = $OSCOM_PayPal->makeApiCall('https://www.howsmyssl.com/a/check', null, null, array('returnFull' => true, 'sslVersion' => 6));
+$test = $OSCOM_PayPal->makeApiCall('https://www.howsmyssl.com/a/check', null, null, ['returnFull' => true, 'sslVersion' => 6]);
 
-$result['tlsv12'] = (isset($test['info']['http_code']) && ((int)$test['info']['http_code'] === 200));
+$result['tlsv12'] = (isset($test['info']['http_code']) && ((int) $test['info']['http_code'] === 200));
 
 echo json_encode($result);
 

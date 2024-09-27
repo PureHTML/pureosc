@@ -8,15 +8,15 @@
   Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
-*/
+ */
 
-require('includes/application_top.php');
+require 'includes/application_top.php';
 
-require('includes/languages/' . $language . '/advanced_search.php');
+require 'includes/languages/'.$language.'/advanced_search.php';
 
 $breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('advanced_search.php'));
 
-require('includes/template_top.php');
+require 'includes/template_top.php';
 ?>
 
   <script>
@@ -80,17 +80,18 @@ require('includes/template_top.php');
 
 <?php
 if ($messageStack->size('search') > 0) {
-  echo $messageStack->output('search');
+    echo $messageStack->output('search');
 }
+
 ?>
 
-<?php echo tep_draw_form('advanced_search', tep_href_link('advanced_search_result.php', '', 'SSL', false), 'get', 'onsubmit="return check_form(this);"') . tep_hide_session_id(); ?>
+<?php echo tep_draw_form('advanced_search', tep_href_link('advanced_search_result.php', '', 'SSL', false), 'get', 'onsubmit="return check_form(this);"').tep_hide_session_id(); ?>
 
   <div class="col-lg-6 mb-5">
     <h2><?php echo HEADING_SEARCH_CRITERIA; ?></h2>
 
     <div class="mb-3">
-      <?php echo tep_draw_input_field('keywords', '', 'class="form-control"') . tep_draw_hidden_field('search_in_description', '1'); ?>
+      <?php echo tep_draw_input_field('keywords', '', 'class="form-control"').tep_draw_hidden_field('search_in_description', '1'); ?>
     </div>
 
     <div class="btn-toolbar justify-content-between mb-3">
@@ -116,7 +117,7 @@ if ($messageStack->size('search') > 0) {
 
     <div class="mb-3">
       <label for="categories_id" class="form-label"><?php echo ENTRY_CATEGORIES; ?></label>
-      <?php echo tep_draw_pull_down_menu('categories_id', tep_get_categories(array(array('id' => '', 'text' => TEXT_ALL_CATEGORIES))), '', 'class="form-select" id="categories_id"'); ?>
+      <?php echo tep_draw_pull_down_menu('categories_id', tep_get_categories([['id' => '', 'text' => TEXT_ALL_CATEGORIES]]), '', 'class="form-select" id="categories_id"'); ?>
     </div>
     <div class="form-check mb-3">
       <?php echo tep_draw_checkbox_field('inc_subcat', '1', true, 'class="form-check-input" id="inc_subcat"'); ?>
@@ -124,7 +125,7 @@ if ($messageStack->size('search') > 0) {
     </div>
     <div class="mb-3">
       <label for="manufacturers_id" class="form-label"><?php echo ENTRY_MANUFACTURERS; ?></label>
-      <?php echo tep_draw_pull_down_menu('manufacturers_id', tep_get_manufacturers(array(array('id' => '', 'text' => TEXT_ALL_MANUFACTURERS))), '', 'class="form-select" id="manufacturers_id"'); ?>
+      <?php echo tep_draw_pull_down_menu('manufacturers_id', tep_get_manufacturers([['id' => '', 'text' => TEXT_ALL_MANUFACTURERS]]), '', 'class="form-select" id="manufacturers_id"'); ?>
     </div>
     <div class="row mb-3">
       <div class="col">
@@ -141,5 +142,6 @@ if ($messageStack->size('search') > 0) {
   </form>
 
 <?php
-require('includes/template_bottom.php');
-require('includes/application_bottom.php');
+require 'includes/template_bottom.php';
+
+require 'includes/application_bottom.php';

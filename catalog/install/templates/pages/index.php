@@ -8,7 +8,7 @@
   Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
-*/
+ */
 ?>
 
 <div class="mainBlock">
@@ -26,16 +26,16 @@
       <table border="0" width="100%" cellspacing="0" cellpadding="2">
         <tr>
           <td><strong>PHP Version</strong></td>
-          <td align="right"><?php echo PHP_VERSION; ?></td>
+          <td align="right"><?php echo \PHP_VERSION; ?></td>
           <td align="right" width="25">
-            <img src="images/<?php echo((PHP_VERSION >= 4) ? 'success.gif' : 'failed.gif'); ?>" width="16" height="16"/>
+            <img src="images/<?php echo (\PHP_VERSION >= 4) ? 'success.gif' : 'failed.gif'; ?>" width="16" height="16"/>
           </td>
         </tr>
       </table>
 
       <?php
-      if (function_exists('ini_get')) {
-        ?>
+      if (\function_exists('ini_get')) {
+          ?>
 
         <br/>
 
@@ -45,23 +45,23 @@
           </tr>
           <tr>
             <td>file_uploads</td>
-            <td align="right"><?php echo(((int)ini_get('file_uploads') == 0) ? 'Off' : 'On'); ?></td>
+            <td align="right"><?php echo ((int) \ini_get('file_uploads') === 0) ? 'Off' : 'On'; ?></td>
             <td align="right">
-              <img src="images/<?php echo(((int)ini_get('file_uploads') == 1) ? 'success.gif' : 'failed.gif'); ?>" width="16" height="16"/>
+              <img src="images/<?php echo ((int) \ini_get('file_uploads') === 1) ? 'success.gif' : 'failed.gif'; ?>" width="16" height="16"/>
             </td>
           </tr>
           <tr>
             <td>session.auto_start</td>
-            <td align="right"><?php echo(((int)ini_get('session.auto_start') == 0) ? 'Off' : 'On'); ?></td>
+            <td align="right"><?php echo ((int) \ini_get('session.auto_start') === 0) ? 'Off' : 'On'; ?></td>
             <td align="right">
-              <img src="images/<?php echo(((int)ini_get('session.auto_start') == 0) ? 'success.gif' : 'failed.gif'); ?>" width="16" height="16"/>
+              <img src="images/<?php echo ((int) \ini_get('session.auto_start') === 0) ? 'success.gif' : 'failed.gif'; ?>" width="16" height="16"/>
             </td>
           </tr>
           <tr>
             <td>session.use_trans_sid</td>
-            <td align="right"><?php echo(((int)ini_get('session.use_trans_sid') == 0) ? 'Off' : 'On'); ?></td>
+            <td align="right"><?php echo ((int) \ini_get('session.use_trans_sid') === 0) ? 'Off' : 'On'; ?></td>
             <td align="right">
-              <img src="images/<?php echo(((int)ini_get('session.use_trans_sid') == 0) ? 'success.gif' : 'failed.gif'); ?>" width="16" height="16"/>
+              <img src="images/<?php echo ((int) \ini_get('session.use_trans_sid') === 0) ? 'success.gif' : 'failed.gif'; ?>" width="16" height="16"/>
             </td>
           </tr>
         </table>
@@ -75,7 +75,7 @@
           <tr>
             <td>MySQLi</td>
             <td align="right">
-              <img src="images/<?php echo(extension_loaded('mysqli') ? 'success.gif' : 'failed.gif'); ?>" width="16" height="16"/>
+              <img src="images/<?php echo \extension_loaded('mysqli') ? 'success.gif' : 'failed.gif'; ?>" width="16" height="16"/>
             </td>
           </tr>
         </table>
@@ -89,26 +89,27 @@
           <tr>
             <td>GD</td>
             <td align="right">
-              <img src="images/<?php echo(extension_loaded('gd') ? 'success.gif' : 'failed.gif'); ?>" width="16" height="16"/>
+              <img src="images/<?php echo \extension_loaded('gd') ? 'success.gif' : 'failed.gif'; ?>" width="16" height="16"/>
             </td>
           </tr>
           <tr>
             <td>cURL</td>
             <td align="right">
-              <img src="images/<?php echo(extension_loaded('curl') ? 'success.gif' : 'failed.gif'); ?>" width="16" height="16"/>
+              <img src="images/<?php echo \extension_loaded('curl') ? 'success.gif' : 'failed.gif'; ?>" width="16" height="16"/>
             </td>
           </tr>
           <tr>
             <td>OpenSSL</td>
             <td align="right">
-              <img src="images/<?php echo(extension_loaded('openssl') ? 'success.gif' : 'failed.gif'); ?>" width="16" height="16"/>
+              <img src="images/<?php echo \extension_loaded('openssl') ? 'success.gif' : 'failed.gif'; ?>" width="16" height="16"/>
             </td>
           </tr>
         </table>
 
         <?php
       }
-      ?>
+
+?>
 
     </div>
   </div>
@@ -117,84 +118,88 @@
     <h2>New Installation</h2>
 
     <?php
-    $path_array = array('includes' => 'configure.php',
-                        'admin/includes' => 'configure.php');
+    $path_array = ['includes' => 'configure.php',
+  'admin/includes' => 'configure.php'];
 
-    $configfile_array = check_permissions($path_array);
+$configfile_array = check_permissions($path_array);
 
-    $warning_array = array();
+$warning_array = [];
 
-    if (!extension_loaded('mysqli')) {
-      $warning_array['mysql'] = 'The MySQLi or older MySQL extension is required but is not installed. Please enable either to continue installation.';
-    }
+if (!\extension_loaded('mysqli')) {
+    $warning_array['mysql'] = 'The MySQLi or older MySQL extension is required but is not installed. Please enable either to continue installation.';
+}
 
-    if ((sizeof($configfile_array) > 0) || (sizeof($warning_array) > 0)) {
-      ?>
+if ((\count($configfile_array) > 0) || (\count($warning_array) > 0)) {
+    ?>
 
       <div class="noticeBox">
 
         <?php
-        if (sizeof($warning_array) > 0) {
+      if (\count($warning_array) > 0) {
           ?>
 
           <table border="0" width="100%" cellspacing="0" cellpadding="2" style="background: #fffbdf; border: 1px solid #ffc20b; padding: 2px;">
 
             <?php
             foreach ($warning_array as $key => $value) {
-              echo '        <tr>' . "\n" .
-                   '          <td valign="top"><strong>' . $key . '</strong></td>' . "\n" .
-                   '          <td valign="top">' . $value . '</td>' . "\n" .
-                   '        </tr>' . "\n";
+                echo "        <tr>\n".
+                     '          <td valign="top"><strong>'.$key."</strong></td>\n".
+                     '          <td valign="top">'.$value."</td>\n".
+                     "        </tr>\n";
             }
-            ?>
+
+          ?>
 
           </table>
           <?php
-        }
+      }
 
-        if (sizeof($configfile_array) > 0) {
-          ?>
+    if (\count($configfile_array) > 0) {
+        ?>
 
           <p>The webserver is not able to save the installation parameters to its configuration files.</p>
           <p>The following files need to have their file permissions set to world-writeable (chmod 777):</p>
           <p>
 
             <?php
-            for ($i = 0, $n = sizeof($configfile_array); $i < $n; $i++) {
+          for ($i = 0, $n = \count($configfile_array); $i < $n; ++$i) {
               echo $configfile_array[$i];
 
               if (isset($configfile_array[$i + 1])) {
-                echo '<br />';
+                  echo '<br />';
               }
-            }
-            ?>
+          }
+
+        ?>
 
           </p>
 
           <?php
-        }
-        ?>
+    }
+
+    ?>
 
       </div>
 
       <?php
-    }
+}
 
-    if ((sizeof($configfile_array) > 0) || (sizeof($warning_array) > 0)) {
-      ?>
+if ((\count($configfile_array) > 0) || (\count($warning_array) > 0)) {
+    ?>
 
       <p>Please correct the above errors and retry the installation procedure with the changes in place.</p>
 
       <?php
-      if (sizeof($warning_array) > 0) {
-        echo '    <p><i>Changing webserver configuration parameters may require the webserver service to be restarted before the changes take affect.</i></p>' . "\n";
-      }
-      ?>
+    if (\count($warning_array) > 0) {
+        echo "    <p><i>Changing webserver configuration parameters may require the webserver service to be restarted before the changes take affect.</i></p>\n";
+    }
+
+    ?>
 
       <p><?php echo osc_draw_button('Retry', 'arrowrefresh-1-e', 'index.php', 'primary'); ?></p>
 
     <?php
-    } else {
+} else {
     ?>
 
       <p>The webserver environment has been verified to proceed with a successful installation and configuration of your online store.</p>
@@ -203,7 +208,7 @@
         <form name="install" id="installForm" action="install.php" method="post">
           <div class="mainBlock inputDescription">
             <p>In order to use HTTPS, you need to obtain an SSL certificate and bind it to the website that hosts. Each web server has its own procedure for loading a certificate and binding it to a website.</p>
-            <p><?php echo osc_draw_input_field('HTTPS', 'on', (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? 'checked' : ''), true, 'checkbox'); ?> Enable HTTPS</p>
+            <p><?php echo osc_draw_input_field('HTTPS', 'on', isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'checked' : '', true, 'checkbox'); ?> Enable HTTPS</p>
           </div>
           <p>Please continue to start the installation procedure.</p>
           <p><?php echo osc_draw_button('Start', 'triangle-1-e', null, 'primary'); ?></p>
@@ -223,8 +228,9 @@
       </script>
 
       <?php
-    }
-    ?>
+}
+
+?>
 
   </div>
 
@@ -234,7 +240,7 @@
     <p>The webserver environment has been verified to proceed with a successful installation and configuration of your online store.</p>
     <p>Please continue to start the installation procedure.</p>
 
-    <p><?php /*echo osc_draw_button('Start', 'triangle-1-e', 'upgrade.php', 'primary'); */ ?></p>
+    <p><?php /* echo osc_draw_button('Start', 'triangle-1-e', 'upgrade.php', 'primary'); */ ?></p>
 
   </div>-->
 </div>
