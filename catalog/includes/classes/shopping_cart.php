@@ -412,13 +412,15 @@
     }
 
     function update_content() {
-      foreach (array_keys($this->contents) as $products_id) {
-        $products_query = tep_db_query("select 1 from products where products_id = '" . (int)$products_id . "' and products_status = 1");
-
-        if (!tep_db_num_rows($products_query)) {
-          $this->remove($products_id);
+      if($this->contents){
+          foreach (array_keys($this->contents) as $products_id) {
+            $products_query = tep_db_query("select 1 from products where products_id = '" . (int)$products_id . "' and products_status = 1");
+            
+            if (!tep_db_num_rows($products_query)) {
+                $this->remove($products_id);
+            }
         }
       }
     }
   }
-?>
+
