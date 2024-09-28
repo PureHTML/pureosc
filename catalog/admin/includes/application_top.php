@@ -17,13 +17,6 @@ declare(strict_types=1);
 // Start the clock for the page parse time log
 \define('PAGE_PARSE_START_TIME', microtime());
 
-// Set the level of error reporting
-error_reporting(\E_ALL & ~\E_NOTICE);
-
-if (\defined('E_DEPRECATED')) {
-    error_reporting(\E_ALL & ~\E_NOTICE & ~\E_DEPRECATED);
-}
-
 // load server configuration parameters
 if (file_exists('includes/local/configure.php')) { // for developers
     include 'includes/local/configure.php';

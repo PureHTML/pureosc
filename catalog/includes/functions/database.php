@@ -57,7 +57,10 @@ function tep_db_query($query, $link = 'db_link')
         error_log('QUERY: '.$query."\n", 3, STORE_PAGE_PARSE_TIME_LOG);
     }
 
-    $result = mysqli_query(${$link}, $query) || tep_db_error($query, mysqli_errno(${$link}), mysqli_error(${$link}));
+    $result = mysqli_query(${$link}, $query);
+    if(is_bool($result) && $result === false ){
+        $result = tep_db_error($query, mysqli_errno(${$link}), mysqli_error(${$link}));        
+    }
 
     return $result;
 }
@@ -160,7 +163,7 @@ function tep_db_input($string, $link = 'db_link')
 {
     global ${$link};
 
-    return mysqli_real_escape_string(${$link}, $string);
+    return mysqli_real_escape_string(${$link}, (string)$string);
 }
 
 function tep_db_prepare_input($string)

@@ -17,7 +17,7 @@ declare(strict_types=1);
 /**
  * Set up all needed parameters and settings.
  */
-class bootstrap
+class Usu5_Bootstrap
 {
     private static $_singleton;
     /**

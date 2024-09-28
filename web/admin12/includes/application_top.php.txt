@@ -1,5 +1,0 @@
-  define('FILENAME_POLLS', 'polls.php');
-
-
-// entry/item info classes
-  require(DIR_WS_CLASSES . 'poll_info.php');

@@ -1,5 +1,0 @@
-// banners box text in includes/boxes/polls.php
-define('BOX_HEADING_POLLS', 'Polls');
-define('BOX_POLLS_POLLS', 'Poll Manager');
-define('BOX_POLLS_CONFIG','Poll Configuration');
-

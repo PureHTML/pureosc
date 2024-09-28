@@ -259,7 +259,7 @@ if (SESSION_CHECK_IP_ADDRESS === 'True') {
 // create the shopping cart
 if (!isset($_SESSION['cart']) || !\is_object($cart)) {
     tep_session_register('cart');
-    $cart = new shoppingCart();
+    $cart = new shopping_cart();
 }
 
 $cart->update_content();
@@ -333,7 +333,7 @@ if (!isset($_SESSION['currency']) || isset($_GET['currency']) || ((USE_DEFAULT_L
 // navigation history
 if (!isset($_SESSION['navigation']) || !\is_object($navigation)) {
     tep_session_register('navigation');
-    $navigation = new navigationHistory();
+    $navigation = new navigation_history();
 }
 
 $navigation->add_current_page();
@@ -380,7 +380,7 @@ require 'includes/functions/specials.php';
 tep_expire_specials();
 
 require 'includes/classes/osc_template.php';
-$oscTemplate = new oscTemplate();
+$oscTemplate = new osc_template();
 
 // calculate category path
 if (isset($_GET['cPath'])) {
@@ -429,7 +429,7 @@ if (isset($cPath_array)) {
 
 // initialize the message stack for output messages
 require 'includes/classes/message_stack.php';
-$messageStack = new messageStack();
+$messageStack = new message_stack();
 
 require DIR_FS_CATALOG.'includes/classes/hooks.php';
 $OSCOM_Hooks = new hooks('shop');

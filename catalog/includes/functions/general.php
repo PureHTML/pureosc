@@ -41,7 +41,7 @@ function tep_exit(): void
  *
  * @param mixed $url
  */
-function tep_redirect($url): void
+function tep_redirect(string $url): void
 {
     if ((strstr($url, "\n") !== false) || (strstr($url, "\r") !== false)) {
         tep_redirect(tep_href_link(FILENAME_DEFAULT, '', 'NONSSL', false));
@@ -358,7 +358,7 @@ function tep_get_zone_code($country_id, $zone_id, $default_zone)
 // Wrapper function for round()
 function tep_round($number, $precision)
 {
-    if (strpos($number, '.') && (\strlen(substr($number, strpos($number, '.') + 1)) > $precision)) {
+    if (strpos((string)$number, '.') && (\strlen(substr((string)$number, strpos((string)$number, '.') + 1)) > $precision)) {
         $number = substr($number, 0, strpos($number, '.') + 1 + $precision + 1);
 
         if (substr($number, -1) >= 5) {
@@ -1536,9 +1536,9 @@ function tep_rand($min = null, $max = null)
     return mt_rand();
 }
 
-function tep_setcookie($name, $value = '', $expire = 0, $path = '/', $domain = '', $secure = 0): void
+function tep_setcookie($name, $value = '', $expire = 0, $path = '/', $domain = '', $secure = false): void
 {
-    setcookie($name, $value, $expire, $path, !empty($domain) ? $domain : '', $secure);
+    setcookie($name, $value, $expire, $path, !empty($domain) ? $domain : '', (bool)$secure);
 }
 
 function tep_validate_ip_address($ip_address)

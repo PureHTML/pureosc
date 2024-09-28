@@ -1,1 +1,0 @@
-//Translated by Vlad Savitsky (http://solti.com.ua)// banners box text in includes/boxes/polls.phpdefine('BOX_HEADING_POLLS', 'Опросы');define('BOX_POLLS_POLLS', 'Менеджер опросов');define('BOX_POLLS_CONFIG','Настройка опросов');

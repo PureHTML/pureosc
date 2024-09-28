@@ -1,30 +1,34 @@
 {
-  "name": "purehtml/pureosc",
-  "description": "Vanilla osCommerce fork osCommerce v2.3.5.",
-  "config": {
-    "vendor-dir": "includes/vendor",
-    "allow-plugins": {
-      "ergebnis/composer-normalize": true
-    }
-  },
-  "require": {
-    "ext-json": "*",
-    "ext-mysqli": "*",
-    "ext-curl": "*",
-    "ext-gd": "*",
-    "ext-openssl": "*",
-    "ext-zip": "*",
-    "doctrine/lexer": "1.2.1",
-    "egulias/email-validator": "3.1.1",
-    "swiftmailer/swiftmailer": "v6.2.7",
-    "symfony/polyfill-iconv": "v1.23.0",
-    "symfony/polyfill-intl-idn": "v1.23.0",
-    "symfony/polyfill-intl-normalizer": "v1.23.0",
-    "symfony/polyfill-mbstring": "*",
-    "symfony/polyfill-php72": "v1.23.0",
-    "robmorgan/phinx": "^0.16.1"
-
-  },
+    "name": "purehtml/pureosc",
+    "description": "Vanilla osCommerce fork osCommerce v2.3.5.",
+    "config": {
+        "vendor-dir": "includes/vendor",
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true
+        }
+    },
+    "autoload": {
+        "psr-0": {
+            "\\": "catalog/includes/classes/"
+        }
+    },
+    "require": {
+        "ext-json": "*",
+        "ext-mysqli": "*",
+        "ext-curl": "*",
+        "ext-gd": "*",
+        "ext-openssl": "*",
+        "ext-zip": "*",
+        "doctrine/lexer": "1.2.1",
+        "egulias/email-validator": "3.1.1",
+        "swiftmailer/swiftmailer": "v6.2.7",
+        "symfony/polyfill-iconv": "v1.23.0",
+        "symfony/polyfill-intl-idn": "v1.23.0",
+        "symfony/polyfill-intl-normalizer": "v1.23.0",
+        "symfony/polyfill-mbstring": "*",
+        "symfony/polyfill-php72": "v1.23.0",
+        "robmorgan/phinx": "^0.16.1"
+    },
     "require-dev": {
         "phpunit/phpunit": "*",
         "phpstan/phpstan": "*",

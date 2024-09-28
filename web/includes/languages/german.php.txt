@@ -1,9 +1,0 @@
-// Translation by Peter Fürsicht [mailto:peter@fuersicht.de]
-
-// Poll Box Text
-define('_RESULTS', 'Trend');
-define('_POLLS','Polls');
-define('_VOTE', 'Abstimmen');
-define('_VOTES', 'abgegebene Stimmen');
-define('_NOPOLLS','Derzeit keine Abstimmung möglich');
-define('_NOPOLLSCONTENT','Derzeit ist keine Abstimmung aktiv, schmökern Sie durch unser Voting-Atchiv<br><br><a href="pollbooth.php">['._POLLS.']');

@@ -37,7 +37,7 @@ require_once DIR_WS_MODULES.'ultimate_seo_urls5/main/registry.php';
 /**
  * Main USU5 PRO class.
  */
-class usu5
+class Usu_Main
 {
     public static $version = 'version 1.1';
 
