@@ -345,7 +345,7 @@ function popupImageWindow(url) {
                           </tr>
                           <?php
                         $banners_query_raw = 'select banners_id, banners_title, banners_image, banners_group, status, expires_date, expires_impressions, date_status_change, date_scheduled, date_added from '.TABLE_BANNERS.' order by banners_title, banners_group';
-            $banners_split = new splitPageResults($HTTP_GET_VARS['page'], MAX_DISPLAY_SEARCH_RESULTS, $banners_query_raw, $banners_query_numrows);
+            $banners_split = new split_page_results($HTTP_GET_VARS['page'], MAX_DISPLAY_SEARCH_RESULTS, $banners_query_raw, $banners_query_numrows);
             $banners_query = tep_db_query($banners_query_raw);
 
             while ($banners = tep_db_fetch_array($banners_query)) {

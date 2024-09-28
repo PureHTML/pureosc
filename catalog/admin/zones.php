@@ -72,7 +72,7 @@ require 'includes/template_top.php';
               </tr>
 <?php
   $zones_query_raw = 'select z.zone_id, c.countries_id, c.countries_name, z.zone_name, z.zone_code, z.zone_country_id from zones z, countries c where z.zone_country_id = c.countries_id order by c.countries_name, z.zone_name';
-$zones_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $zones_query_raw, $zones_query_numrows);
+$zones_split = new split_page_results($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $zones_query_raw, $zones_query_numrows);
 $zones_query = tep_db_query($zones_query_raw);
 
 while ($zones = tep_db_fetch_array($zones_query)) {

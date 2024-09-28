@@ -68,7 +68,7 @@ require 'includes/template_top.php';
               </tr>
 <?php
   $classes_query_raw = 'select tax_class_id, tax_class_title, tax_class_description, last_modified, date_added from tax_class order by tax_class_title';
-$classes_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $classes_query_raw, $classes_query_numrows);
+$classes_split = new split_page_results($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $classes_query_raw, $classes_query_numrows);
 $classes_query = tep_db_query($classes_query_raw);
 
 while ($classes = tep_db_fetch_array($classes_query)) {

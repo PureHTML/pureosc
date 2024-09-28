@@ -226,7 +226,7 @@ $base_url = ($request_type === 'SSL') ? HTTPS_SERVER.DIR_WS_HTTPS_ADMIN : HTTP_S
             </tr>
 <?php
           $information_query_raw = "select ip.*, ipc.* from information_pages ip, information_pages_content ipc where ip.pages_id = ipc.pages_id and ipc.language_id = '".(int) $languages_id."' order by ipc.pages_name";
-      $information_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $information_query_raw, $information_query_numrows);
+      $information_split = new split_page_results($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $information_query_raw, $information_query_numrows);
       $information_query = tep_db_query($information_query_raw);
 
       while ($information = tep_db_fetch_array($information_query)) {

@@ -124,7 +124,7 @@ require 'includes/template_top.php';
               </tr>
 <?php
   $orders_status_query_raw = "select * from orders_status where language_id = '".(int) $languages_id."' order by orders_status_id";
-$orders_status_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $orders_status_query_raw, $orders_status_query_numrows);
+$orders_status_split = new split_page_results($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $orders_status_query_raw, $orders_status_query_numrows);
 $orders_status_query = tep_db_query($orders_status_query_raw);
 
 while ($orders_status = tep_db_fetch_array($orders_status_query)) {

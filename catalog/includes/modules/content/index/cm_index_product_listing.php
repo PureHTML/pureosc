@@ -55,7 +55,7 @@ class cm_index_product_listing
 
         $sort_blocks = $oscTemplate->getBlocks('sort_by');
 
-        $listing_split = new splitPageResults($listing_sql.($oscTemplate->_data[$this->group]['order_by_str'] ?? ''), MAX_DISPLAY_SEARCH_RESULTS, 'p.products_id');
+        $listing_split = new split_page_results($listing_sql.($oscTemplate->_data[$this->group]['order_by_str'] ?? ''), MAX_DISPLAY_SEARCH_RESULTS, 'p.products_id');
 
         ob_start();
 

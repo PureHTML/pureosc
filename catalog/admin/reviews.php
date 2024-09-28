@@ -249,7 +249,7 @@ require 'includes/template_top.php';
                   </tr>
                   <?php
                     $reviews_query_raw = 'SELECT reviews_id, products_id, date_added, last_modified, reviews_rating, reviews_status FROM reviews ORDER BY date_added DESC';
-        $reviews_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $reviews_query_raw, $reviews_query_numrows);
+        $reviews_split = new split_page_results($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $reviews_query_raw, $reviews_query_numrows);
         $reviews_query = tep_db_query($reviews_query_raw);
 
         while ($reviews = tep_db_fetch_array($reviews_query)) {

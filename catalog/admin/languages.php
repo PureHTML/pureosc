@@ -176,7 +176,7 @@ require 'includes/template_top.php';
               </tr>
 <?php
   $languages_query_raw = 'select languages_id, name, code, image, directory, sort_order from languages order by sort_order';
-$languages_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $languages_query_raw, $languages_query_numrows);
+$languages_split = new split_page_results($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $languages_query_raw, $languages_query_numrows);
 $languages_query = tep_db_query($languages_query_raw);
 
 while ($languages = tep_db_fetch_array($languages_query)) {

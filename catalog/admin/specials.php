@@ -171,7 +171,7 @@ $('#expdate').datepicker({
               </tr>
 <?php
           $specials_query_raw = "select p.products_id, pd.products_name, p.products_price, s.specials_id, s.specials_new_products_price, s.specials_date_added, s.specials_last_modified, s.expires_date, s.date_status_change, s.status from products p, specials s, products_description pd where p.products_id = pd.products_id and pd.language_id = '".(int) $languages_id."' and p.products_id = s.products_id order by pd.products_name";
-      $specials_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $specials_query_raw, $specials_query_numrows);
+      $specials_split = new split_page_results($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $specials_query_raw, $specials_query_numrows);
       $specials_query = tep_db_query($specials_query_raw);
 
       while ($specials = tep_db_fetch_array($specials_query)) {

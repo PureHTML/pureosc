@@ -134,7 +134,7 @@ require 'includes/template_top.php';
               </tr>
 <?php
   $manufacturers_query_raw = 'select manufacturers_id, manufacturers_name, manufacturers_image, date_added, last_modified from manufacturers order by manufacturers_name';
-$manufacturers_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $manufacturers_query_raw, $manufacturers_query_numrows);
+$manufacturers_split = new split_page_results($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $manufacturers_query_raw, $manufacturers_query_numrows);
 $manufacturers_query = tep_db_query($manufacturers_query_raw);
 
 while ($manufacturers = tep_db_fetch_array($manufacturers_query)) {

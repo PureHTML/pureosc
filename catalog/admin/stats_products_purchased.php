@@ -39,7 +39,7 @@ require 'includes/template_top.php';
   }
 
 $products_query_raw = "select p.products_id, p.products_ordered, pd.products_name from products p, products_description pd where pd.products_id = p.products_id and pd.language_id = '".(int) $languages_id."' and p.products_ordered > 0 group by pd.products_id order by p.products_ordered DESC, pd.products_name";
-$products_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $products_query_raw, $products_query_numrows);
+$products_split = new split_page_results($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $products_query_raw, $products_query_numrows);
 
 $rows = 0;
 $products_query = tep_db_query($products_query_raw);

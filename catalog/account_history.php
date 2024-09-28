@@ -34,7 +34,7 @@ require 'includes/template_top.php';
 
 if ($orders_total > 0) {
     $history_query_raw = "select o.orders_id, o.date_purchased, o.delivery_name, o.billing_name, ot.text as order_total, s.orders_status_name from orders o, orders_total ot, orders_status s where o.customers_id = '".(int) $customer_id."' and o.orders_id = ot.orders_id and ot.class = 'ot_total' and o.orders_status = s.orders_status_id and s.language_id = '".(int) $languages_id."' and s.public_flag = '1' order by orders_id DESC";
-    $history_split = new splitPageResults($history_query_raw, (int) MAX_DISPLAY_SEARCH_RESULTS);
+    $history_split = new split_page_results($history_query_raw, (int) MAX_DISPLAY_SEARCH_RESULTS);
     $history_query = tep_db_query($history_split->sql_query);
     ?>
 

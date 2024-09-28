@@ -374,7 +374,7 @@ $(function() {
             $orders_query_raw = "select o.orders_id, o.customers_name, o.payment_method, o.date_purchased, o.last_modified, o.currency, o.currency_value, s.orders_status_name, ot.text as order_total from orders o left join orders_total ot on (o.orders_id = ot.orders_id), orders_status s where o.orders_status = s.orders_status_id and s.language_id = '".(int) $languages_id."' and ot.class = 'ot_total' order by o.orders_id DESC";
         }
 
-    $orders_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $orders_query_raw, $orders_query_numrows);
+    $orders_split = new split_page_results($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $orders_query_raw, $orders_query_numrows);
     $orders_query = tep_db_query($orders_query_raw);
 
     while ($orders = tep_db_fetch_array($orders_query)) {

@@ -77,7 +77,7 @@ require 'includes/template_top.php';
               </tr>
 <?php
   $rates_query_raw = 'select r.tax_rates_id, z.geo_zone_id, z.geo_zone_name, tc.tax_class_title, tc.tax_class_id, r.tax_priority, r.tax_rate, r.tax_description, r.date_added, r.last_modified from tax_class tc, tax_rates r left join geo_zones z on r.tax_zone_id = z.geo_zone_id where r.tax_class_id = tc.tax_class_id';
-$rates_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $rates_query_raw, $rates_query_numrows);
+$rates_split = new split_page_results($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $rates_query_raw, $rates_query_numrows);
 $rates_query = tep_db_query($rates_query_raw);
 
 while ($rates = tep_db_fetch_array($rates_query)) {

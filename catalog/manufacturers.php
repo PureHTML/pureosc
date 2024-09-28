@@ -52,7 +52,7 @@ require 'includes/template_top.php';
 if (isset($_GET['manufacturer_id'])) {
     $listing_sql = "select p.*, pd.*, if(s.status, s.specials_new_products_price, null) as specials_new_products_price, if(s.status, s.specials_new_products_price, p.products_price) as final_price from products p left join specials s on p.products_id = s.products_id, products_description pd, manufacturers m where p.products_status = '1' and pd.products_id = p.products_id and pd.language_id = '".(int) $languages_id."' and p.manufacturers_id = m.manufacturers_id and m.manufacturers_id = '".(int) $_GET['manufacturer_id']."'";
 
-    $listing_split = new splitPageResults($listing_sql, MAX_DISPLAY_SEARCH_RESULTS, 'p.products_id');
+    $listing_split = new split_page_results($listing_sql, MAX_DISPLAY_SEARCH_RESULTS, 'p.products_id');
 
     require 'includes/modules/product_listing.php';
 } else {

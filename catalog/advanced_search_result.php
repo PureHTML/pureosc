@@ -205,7 +205,7 @@ require 'includes/template_top.php';
   <h1><?php echo HEADING_TITLE_2; ?></h1>
 
 <?php
-$listing_split = new splitPageResults($listing_sql, MAX_DISPLAY_SEARCH_RESULTS, 'p.products_id');
+$listing_split = new split_page_results($listing_sql, MAX_DISPLAY_SEARCH_RESULTS, 'p.products_id');
 
 require 'includes/modules/product_listing.php';
 

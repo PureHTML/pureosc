@@ -73,7 +73,7 @@ require 'includes/template_top.php';
               </tr>
 <?php
   $countries_query_raw = 'select countries_id, countries_name, countries_iso_code_2, countries_iso_code_3, address_format_id from countries order by countries_name';
-$countries_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $countries_query_raw, $countries_query_numrows);
+$countries_split = new split_page_results($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $countries_query_raw, $countries_query_numrows);
 $countries_query = tep_db_query($countries_query_raw);
 
 while ($countries = tep_db_fetch_array($countries_query)) {

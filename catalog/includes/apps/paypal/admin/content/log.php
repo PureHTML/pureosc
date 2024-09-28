@@ -11,7 +11,7 @@
  */
 
 $log_query_raw = 'SELECT l.id, l.customers_id, l.module, l.action, l.result, l.ip_address, UNIX_TIMESTAMP(l.date_added) AS date_added, c.customers_firstname, c.customers_lastname FROM oscom_app_paypal_log l LEFT JOIN customers c ON (l.customers_id = c.customers_id) ORDER BY l.date_added DESC';
-$log_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $log_query_raw, $log_query_numrows);
+$log_split = new split_page_results($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $log_query_raw, $log_query_numrows);
 $log_query = tep_db_query($log_query_raw);
 ?>
 

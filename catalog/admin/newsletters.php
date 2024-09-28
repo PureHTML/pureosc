@@ -330,7 +330,7 @@ require 'includes/template_top.php';
               </tr>
 <?php
           $newsletters_query_raw = 'select newsletters_id, title, length(content) as content_length, module, date_added, date_sent, status, locked from newsletters order by date_added desc';
-      $newsletters_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $newsletters_query_raw, $newsletters_query_numrows);
+      $newsletters_split = new split_page_results($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $newsletters_query_raw, $newsletters_query_numrows);
       $newsletters_query = tep_db_query($newsletters_query_raw);
 
       while ($newsletters = tep_db_fetch_array($newsletters_query)) {

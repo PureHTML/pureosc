@@ -244,7 +244,7 @@ require 'includes/template_top.php';
                 <td colspan="3" class="smallText" align="right">
 <?php
           $options = "select * from products_options where language_id = '".(int) $languages_id."' order by products_options_id";
-      $options_split = new splitPageResults($option_page, MAX_ROW_LISTS_OPTIONS, $options, $options_query_numrows);
+      $options_split = new split_page_results($option_page, MAX_ROW_LISTS_OPTIONS, $options, $options_query_numrows);
 
       echo $options_split->display_links($options_query_numrows, MAX_ROW_LISTS_OPTIONS, MAX_DISPLAY_PAGE_LINKS, $option_page, 'value_page='.$value_page.'&attribute_page='.$attribute_page, 'option_page');
       ?>
@@ -412,7 +412,7 @@ require 'includes/template_top.php';
                 <td colspan="4" class="smallText" align="right">
 <?php
           $values = "select pov.products_options_values_id, pov.products_options_values_name, pov2po.products_options_id from products_options_values pov left join products_options_values_to_products_options pov2po on pov.products_options_values_id = pov2po.products_options_values_id where pov.language_id = '".(int) $languages_id."' order by pov.products_options_values_id";
-      $values_split = new splitPageResults($value_page, MAX_ROW_LISTS_OPTIONS, $values, $values_query_numrows);
+      $values_split = new split_page_results($value_page, MAX_ROW_LISTS_OPTIONS, $values, $values_query_numrows);
 
       echo $values_split->display_links($values_query_numrows, MAX_ROW_LISTS_OPTIONS, MAX_DISPLAY_PAGE_LINKS, $value_page, 'option_page='.$option_page.'&attribute_page='.$attribute_page, 'value_page');
       ?>
@@ -561,7 +561,7 @@ require 'includes/template_top.php';
             <td class="smallText" align="right">
 <?php
   $attributes = "select pa.* from products_attributes pa left join products_description pd on pa.products_id = pd.products_id and pd.language_id = '".(int) $languages_id."' order by pd.products_name";
-$attributes_split = new splitPageResults($attribute_page, MAX_ROW_LISTS_OPTIONS, $attributes, $attributes_query_numrows);
+$attributes_split = new split_page_results($attribute_page, MAX_ROW_LISTS_OPTIONS, $attributes, $attributes_query_numrows);
 
 echo $attributes_split->display_links($attributes_query_numrows, MAX_ROW_LISTS_OPTIONS, MAX_DISPLAY_PAGE_LINKS, $attribute_page, 'option_page='.$option_page.'&value_page='.$value_page, 'attribute_page');
 ?>
