@@ -101,6 +101,7 @@ class Usu5_Bootstrap
     public function getRequestUri(): void
     {
         $rawpath = '';
+        $original_request_uri = '/';
         $finduri = new ArrayIterator(['HTTP_X_ORIGINAL_URL', 'HTTP_X_REWRITE_URL', 'REQUEST_URI', 'ORIG_PATH_INFO']);
 
         while ($finduri->valid()) {
