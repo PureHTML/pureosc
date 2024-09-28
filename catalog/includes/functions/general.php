@@ -67,7 +67,7 @@ function tep_redirect(string $url): void
 // Parse the data used in the html tags to ensure the tags will not break
 function tep_parse_input_field_data($data, $parse)
 {
-    return strtr(trim($data), $parse);
+    return strtr(trim((string)$data), $parse);
 }
 
 function tep_output_string($string, $translate = false, $protected = false)
