@@ -37,7 +37,7 @@ if (DB_SERVER === '') {
 require 'includes/functions/compatibility.php';
 
 // set the type of request (secure or not)
-$request_type = ((array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER) && $_SERVER['HTTP_X_FORWARDED_FOR'] == 'https') ||  (getenv('HTTPS') === 'on')) ? 'SSL' : 'NONSSL';
+$request_type = ((array_key_exists('HTTP_X_FORWARDED_PROTO', $_SERVER) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') ||  (getenv('HTTPS') === 'on')) ? 'SSL' : 'NONSSL';
 
 // set php_self in the local scope
 // orig: $req = parse_url($_SERVER['SCRIPT_NAME']);
