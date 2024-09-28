@@ -38,7 +38,7 @@ class hooks
                     if (!is_dir($directory.'/'.$file)) {
                         if (substr($file, strrpos($file, '.')) === '.php') {
                             $code = substr($file, 0, strrpos($file, '.'));
-                            $class = 'hook_'.$this->_site.'_'.$group.'_'.$code;
+                            $class = $code;
 
                             include $directory.'/'.$file;
                             $GLOBALS[$class] = new $class();

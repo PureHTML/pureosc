@@ -14,7 +14,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-class shop_product_info_RecentlyViewedProduct
+class recentlyViewedProduct
 {
     public function __construct()
     {

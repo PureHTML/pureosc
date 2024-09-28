@@ -11,8 +11,8 @@
         "psr-0": {
             "\\": "catalog/includes/classes/"
         }
-    },
-    "require": {
+    }, 
+   "require": {
         "ext-json": "*",
         "ext-mysqli": "*",
         "ext-curl": "*",
