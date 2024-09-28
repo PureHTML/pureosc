@@ -18,7 +18,6 @@ $oscTemplate->buildBlocks();
   <meta charset="<?php echo CHARSET; ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title><?php echo tep_output_string_protected($oscTemplate->getTitle()); ?></title>
-  <base href="<?php echo ($request_type === 'SSL' ? HTTPS_SERVER : HTTP_SERVER).DIR_WS_CATALOG; ?>">
   <link rel="shortcut icon" href="favicon.ico">
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
