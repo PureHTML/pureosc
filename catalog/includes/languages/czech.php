@@ -325,3 +325,9 @@ EOD);
 \define('TEXT_CCVAL_ERROR_UNKNOWN_CARD', 'První čtyři zadaná čísla kreditní karty jsou: %s<br>Pokud jsou tato čísla správně, nepřijímáme tento typ kreditní (platební) karty .<br>Pokud je špatné, prosím opravte ho a zkuste to znovu.');
 
 \define('FOOTER_TEXT_BODY', 'Copyright &copy; '.date('Y').' <a href="'.tep_href_link(FILENAME_DEFAULT).'">'.STORE_NAME.'</a>');
+
+\define('ENTRY_LEGAL_AGREEMENTS_ERROR', 'Musíte souhlasit s právními podmínkami.');
+
+\define('ENTRY_LEGAL_AGREEMENTS', 'I have read and accept the <a href="%s" target="_blank"><u>Terms & Conditions</u></a> and <a href="%s" target="_blank"><u>Privacy Policy</u></a>');
+\define('ENTRY_LEGAL_AGREEMENTS_ERROR', 'Please select Legal Agreements.');
+\define('ENTRY_LEGAL_AGREEMENTS_TEXT', '');

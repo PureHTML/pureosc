@@ -497,7 +497,7 @@ if (\defined('ACCOUNT_LEGAL_AGREEMENTS') && ACCOUNT_LEGAL_AGREEMENTS === 'true')
     ?>
 
       <div class="mb-3 form-check">
-        <?php echo tep_draw_checkbox_field('legal_agreements', 'on', false, 'class="form-check-input" id="legal-agreements"').(!empty(ENTRY_LEGAL_AGREEMENTS_TEXT) ? '<span class="text-danger ms-1">'.ENTRY_LEGAL_AGREEMENTS_TEXT.'</span>' : ''); ?>
+        <?php echo tep_draw_checkbox_field('legal_agreements', 'on', false, 'class="form-check-input" id="legal-agreements"').(defined('ENTRY_LEGAL_AGREEMENTS_TEXT')&&!empty(ENTRY_LEGAL_AGREEMENTS_TEXT) ? '<span class="text-danger ms-1">'.ENTRY_LEGAL_AGREEMENTS_TEXT.'</span>' : ''); ?>
         <label class="form-check-label" for="legal-agreements"><?php echo sprintf(ENTRY_LEGAL_AGREEMENTS, tep_href_link('information.php', 'pages_id=3'), tep_href_link('information.php', 'pages_id=2')); ?></label>
       </div>
 

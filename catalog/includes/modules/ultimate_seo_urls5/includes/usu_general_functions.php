@@ -124,7 +124,7 @@ function osc_href_link($page = '', $parameters = '', $connection = 'NONSSL', $ad
 
     switch (\defined('USU5_USE_W3C_VALID') && (USU5_USE_W3C_VALID === 'true')) {
         case true:
-            return htmlspecialchars(utf8_encode($link));
+            return htmlspecialchars(mb_convert_encoding($link, 'UTF-8', 'auto'));
 
             break;
 
