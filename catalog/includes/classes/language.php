@@ -88,7 +88,7 @@ class language
 
     public function get_browser_language(): void
     {
-        $this->browser_languages = explode(',', getenv('HTTP_ACCEPT_LANGUAGE'));
+        $this->browser_languages = explode(',', empty(getenv('HTTP_ACCEPT_LANGUAGE')) ? 'cs' : getenv('HTTP_ACCEPT_LANGUAGE'));
 
         for ($i = 0, $n = \count($this->browser_languages); $i < $n; ++$i) {
             foreach ($this->languages as $key => $value) {
