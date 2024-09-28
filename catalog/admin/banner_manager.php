@@ -32,21 +32,21 @@ if (tep_not_null($action)) {
             break;
         case 'insert':
         case 'update':
-            if (isset($HTTP_POST_VARS['banners_id'])) {
-                $banners_id = tep_db_prepare_input($HTTP_POST_VARS['banners_id']);
+            if (isset($_POST['banners_id'])) {
+                $banners_id = tep_db_prepare_input($_POST['banners_id']);
             }
 
-            $banners_title = tep_db_prepare_input($HTTP_POST_VARS['banners_title']);
-            $banners_url = tep_db_prepare_input($HTTP_POST_VARS['banners_url']);
-            $new_banners_group = tep_db_prepare_input($HTTP_POST_VARS['new_banners_group']);
-            $banners_group = (empty($new_banners_group)) ? tep_db_prepare_input($HTTP_POST_VARS['banners_group']) : $new_banners_group;
-            $banners_html_text = tep_db_prepare_input($HTTP_POST_VARS['banners_html_text']);
-            $banners_image_local = tep_db_prepare_input($HTTP_POST_VARS['banners_image_local']);
-            $banners_image_target = tep_db_prepare_input($HTTP_POST_VARS['banners_image_target']);
+            $banners_title = tep_db_prepare_input($_POST['banners_title']);
+            $banners_url = tep_db_prepare_input($_POST['banners_url']);
+            $new_banners_group = tep_db_prepare_input($_POST['new_banners_group']);
+            $banners_group = (empty($new_banners_group)) ? tep_db_prepare_input($_POST['banners_group']) : $new_banners_group;
+            $banners_html_text = tep_db_prepare_input($_POST['banners_html_text']);
+            $banners_image_local = tep_db_prepare_input($_POST['banners_image_local']);
+            $banners_image_target = tep_db_prepare_input($_POST['banners_image_target']);
             $db_image_location = '';
-            $expires_date = tep_db_prepare_input($HTTP_POST_VARS['expires_date']);
-            $expires_impressions = tep_db_prepare_input($HTTP_POST_VARS['expires_impressions']);
-            $date_scheduled = tep_db_prepare_input($HTTP_POST_VARS['date_scheduled']);
+            $expires_date = tep_db_prepare_input($_POST['expires_date']);
+            $expires_impressions = tep_db_prepare_input($_POST['expires_impressions']);
+            $date_scheduled = tep_db_prepare_input($_POST['date_scheduled']);
 
             $banner_error = false;
 
@@ -126,7 +126,7 @@ if (tep_not_null($action)) {
         case 'deleteconfirm':
             $banners_id = tep_db_prepare_input($HTTP_GET_VARS['bID']);
 
-            if (isset($HTTP_POST_VARS['delete_image']) && ($HTTP_POST_VARS['delete_image'] === 'on')) {
+            if (isset($_POST['delete_image']) && ($_POST['delete_image'] === 'on')) {
                 $banner_query = tep_db_query('select banners_image from '.TABLE_BANNERS." where banners_id = '".(int) $banners_id."'");
                 $banner = tep_db_fetch_array($banner_query);
 
@@ -235,8 +235,8 @@ function popupImageWindow(url) {
                 $banner = tep_db_fetch_array($banner_query);
 
                 $bInfo->objectInfo($banner);
-            } elseif (tep_not_null($HTTP_POST_VARS)) {
-                $bInfo->objectInfo($HTTP_POST_VARS);
+            } elseif (tep_not_null($_POST)) {
+                $bInfo->objectInfo($_POST);
             }
 
             $groups_array = [];
