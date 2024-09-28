@@ -31,7 +31,7 @@ if (file_exists('includes/local/configure.php')) { // for developers
 require DIR_FS_CATALOG.'includes/functions/compatibility.php';
 
 // set the type of request (secure or not)
-$request_type = ((array_key_exists('HTTP_X_FORWARDED_PROTO', $_SERVER) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') ||  (getenv('HTTPS') === 'on')) ? 'SSL' : 'NONSSL';
+$request_type = (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] === 'on')) || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') ? 'SSL' : 'NONSSL';
 
 // set php_self in the local scope
 $req = parse_url($_SERVER['SCRIPT_NAME']);
