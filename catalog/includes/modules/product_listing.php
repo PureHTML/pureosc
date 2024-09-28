@@ -30,7 +30,9 @@
             <div class="m-2">
               <a href="<?php echo tep_href_link('product_info.php', 'products_id='.$listing['products_id']); ?>"><?php echo $listing['products_name']; ?></a>
             </div>
-<?php if (DISABLE_PRICES !== 'true') { ?>
+<?php 
+if ( defined('DISABLE_PRICES') && constant('DISABLE_PRICES')  !== 'true') { 
+?>
             <div class="mb-2">
 
               <?php
