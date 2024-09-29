@@ -13,7 +13,7 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-class message_stack extends table_block {
+class messageStack extends table_block {
 
     public $size = 0;
     public array $errors = [];

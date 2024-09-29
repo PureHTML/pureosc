@@ -27,9 +27,6 @@ if (file_exists('includes/local/configure.php')) { // for developers
 // Define the project version --- obsolete, now retrieved with tep_get_version()
 \define('PROJECT_VERSION', 'osCommerce Online Merchant v2.3.5');
 
-// some code to solve compatibility issues
-require DIR_FS_CATALOG.'includes/functions/compatibility.php';
-
 // set the type of request (secure or not)
 $request_type = (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] === 'on')) || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') ? 'SSL' : 'NONSSL';
 
@@ -193,7 +190,7 @@ require 'includes/classes/table_block.php';
 require 'includes/classes/box.php';
 
 // initialize the message stack for output messages
-require 'includes/classes/message_stack.php';
+require 'includes/classes/messageStack.php';
 $messageStack = new messageStack();
 
 // split-page-results
@@ -210,7 +207,7 @@ require 'includes/classes/object_info.php';
 require 'includes/classes/upload.php';
 
 // action recorder
-require 'includes/classes/action_recorder.php';
+require 'includes/classes/actionRecorderAdmin.php';
 
 // calculate category path
 if (isset($_GET['cPath'])) {
