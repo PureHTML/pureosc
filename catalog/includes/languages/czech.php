@@ -328,6 +328,6 @@ EOD);
 
 \define('ENTRY_LEGAL_AGREEMENTS_ERROR', 'Musíte souhlasit s právními podmínkami.');
 
-\define('ENTRY_LEGAL_AGREEMENTS', 'I have read and accept the <a href="%s" target="_blank"><u>Terms & Conditions</u></a> and <a href="%s" target="_blank"><u>Privacy Policy</u></a>');
-\define('ENTRY_LEGAL_AGREEMENTS_ERROR', 'Please select Legal Agreements.');
+\define('ENTRY_LEGAL_AGREEMENTS', 'Přečetl(a) jsem si a souhlasím s <a href="%s" target="_blank"><u>Obchodními podmínkami</u></a> a <a href="%s" target="_blank"><u>Zásadami ochrany osobních údajů</u></a>');
+\define('ENTRY_LEGAL_AGREEMENTS_ERROR', 'Prosím, vyberte Právní podmínky.');
 \define('ENTRY_LEGAL_AGREEMENTS_TEXT', '');

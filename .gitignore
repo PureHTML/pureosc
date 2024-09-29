@@ -2,3 +2,4 @@
 /nbproject/
 /.build/
 /catalog/includes/local/
+catalog/includes/local/configure.php
