@@ -28,7 +28,7 @@ class table_block
     {
     }
 
-    public function tableBlock($contents)
+    public function table_block($contents)
     {
         $tableBox_string = '';
 

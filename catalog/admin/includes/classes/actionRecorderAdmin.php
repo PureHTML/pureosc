@@ -16,7 +16,7 @@ declare(strict_types=1);
 
 require DIR_FS_CATALOG.'includes/classes/action_recorder.php';
 
-class action_recorder extends actionRecorder
+class actionRecorderAdmin extends action_recorder
 {
     public function __construct($module, $user_id = null, $user_name = null)
     {

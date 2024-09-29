@@ -28,7 +28,7 @@ function tep_db_connect($server = DB_SERVER, $username = DB_SERVER_USERNAME, $pa
         mysqli_set_charset(${$link}, 'utf8mb4');
     }
 
-    @mysqli_query(${$link}, 'set session sql_mode=""');
+    mysqli_query(${$link}, 'set session sql_mode=""');
 
     return ${$link};
 }
@@ -63,7 +63,11 @@ function tep_db_query($query, $link = 'db_link')
         $logger->write($query, 'QUERY');
     }
 
-    $result = mysqli_query(${$link}, $query) || tep_db_error($query, mysqli_errno(${$link}), mysqli_error(${$link}));
+    $result = mysqli_query(${$link}, $query);
+    
+    if(is_bool($result) && !$result){
+        $result = tep_db_error($query, mysqli_errno(${$link}), mysqli_error(${$link}));               
+    }
 
     return $result;
 }
@@ -125,9 +129,9 @@ function tep_db_perform($table, $data, $action = 'insert', $parameters = '', $li
     return tep_db_query($query, $link);
 }
 
-function tep_db_fetch_array($db_query)
+function tep_db_fetch_array(mysqli_result $db_query): array
 {
-    return mysqli_fetch_array($db_query, \MYSQLI_ASSOC);
+    return empty($db_query) ? [] : (array)mysqli_fetch_array($db_query, \MYSQLI_ASSOC);
 }
 
 function tep_db_result($result, $row, $field = '')
@@ -178,7 +182,7 @@ function tep_db_input($string, $link = 'db_link')
 {
     global ${$link};
 
-    return mysqli_real_escape_string(${$link}, $string);
+    return mysqli_real_escape_string(${$link}, (string)$string);
 }
 
 function tep_db_prepare_input($string)
