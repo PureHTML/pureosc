@@ -15,7 +15,7 @@
 ?>
 <style>
 .container{  max-width:100%;}
-.banner{ position: relative;top:-1.4em}
+.banner{ position: relative;top:-1.4em;left:0}
 .banner img{width:100%;height:auto}
 .banner a{
   display: block;
@@ -46,12 +46,10 @@ EOD;
 
 ?>
 </style>
-<div class="container col-sm-<?php echo $content_width; ?> tpl_cm_carousel_rotator">
    <div class="banner">
 <?php
 echo tep_image('images/rotator.webp');
 echo $carousel; ?>
-</div>
 </div>
 
 

@@ -114,7 +114,7 @@ if (tep_not_null($action)) {
                 }
 
                 if ($action === 'insert' || $action === 'update') {
-                    shell_exec('img2webp -d 3300 -loop 0 -lossy -q 50 ../images/IMG_* -o ../images/rotator.webp');
+                    shell_exec('img2webp -d 3300 -loop 0 -lossy -q 70 ../images/IMG_* -o ../images/rotator.webp');
                 }
 
                 tep_redirect(tep_href_link(FILENAME_BANNER_MANAGER, (isset($HTTP_GET_VARS['page']) ? 'page='.$HTTP_GET_VARS['page'].'&' : '').'bID='.$banners_id));

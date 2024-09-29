@@ -39,7 +39,7 @@ declare(strict_types=1);
 \define('DB_SERVER', 'localhost');
 \define('DB_SERVER_USERNAME', 'dvere');
 \define('DB_SERVER_PASSWORD', 'dvere');
-\define('DB_DATABASE', 'dvere');
+\define('DB_DATABASE', 'dvere1');
 \define('USE_PCONNECT', 'false');
 \define('STORE_SESSIONS', 'mysql');
 // define('SESSION_WRITE_DIRECTORY', '/home/f/git/vanilla-oscommerce/.sessions/');
