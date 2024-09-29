@@ -15,9 +15,6 @@ declare(strict_types=1);
  */
 
 // don't display errors
-ini_set('display_errors', false);
-ini_set('html_errors', false);
-ini_set('ignore_repeated_errors', true);
 
 // log errors
 if (is_dir(DIR_FS_CATALOG.'includes/work') && is_writable(DIR_FS_CATALOG.'includes/work')) {
