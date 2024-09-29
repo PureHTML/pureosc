@@ -11,8 +11,19 @@ fi
 [[ $5 ]] && GID="$5" || GID=1
 [[ $6 ]] && ORD="$5" || ORD=9999
 
-mysql -h${H} -u${U} -p"${P}" $D -e "
-insert into configuration 
+cd ..
+upper=`echo $1|tr   '[:upper:]' '[:lower:]'|sed 's/_//g'`
+vendor/bin/phinx create NewConstantX${upper} -c ./phinx-adapter.php 
+F=`ls db/migrations/*${upper}*.php`
+echo F:$F
+sed '$d' -i $F;sed '$d' -i $F;
+#exit
+#mysql -h${H} -u${U} -p"${P}" $D -e 
+echo "
+\"insert into configuration 
 			 (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function ) 
 values ('${CT}',              '${1}',            '${2}',              '${CD}',                     '${GID}',                    '${ORD}', NOW(), NOW(), NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
-"
+\";
+    }
+}
+" >> ${F}

@@ -39,6 +39,31 @@
 
   <link rel="stylesheet" href="includes/stylesheet.css">
   <script src="includes/general.js"></script>
+   <?php
+     if (!defined('USE_CKEDITOR_ADMIN_TEXTAREA')) {
+       tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_id, configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added, set_function) values ('', 'Use CKEditor', 'USE_CKEDITOR_ADMIN_TEXTAREA','true','Use CKEditor for WYSIWYG editing of textarea fields in admin',1,99,now(),'tep_cfg_select_option(array(\'true\', \'false\'),' )");
+       define ('USE_CKEDITOR_ADMIN_TEXTAREA','true');
+     }
+     if (USE_CKEDITOR_ADMIN_TEXTAREA == "true") {
+   ?>
+   <script type="text/javascript" src="<?php echo tep_href_link('ext/ckeditor/ckeditor.js'); ?>"></script>
+   <script type="text/javascript" src="<?php echo tep_href_link('ext/ckeditor/adapters/jquery.js'); ?>"></script>
+   <script type="text/javascript">
+   $(function() {
+     var $editors = $('textarea');
+     if ($editors.length) {
+       $editors.each(function() {
+         var editorID = $(this).attr("id");
+         var instance = CKEDITOR.instances[editorID];
+         if (instance) { CKEDITOR.remove(instance); }
+         CKEDITOR.replace(editorID);
+       });
+     }
+   });
+   </script>
+   <?php
+     }
+   ?>
 </head>
 <body>
 

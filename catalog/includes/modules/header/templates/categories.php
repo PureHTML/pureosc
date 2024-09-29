@@ -36,7 +36,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false">
+    <button class="navbar-toggler <?php echo (defined('COLOR_SCHEMA') && (COLOR_SCHEMA ==='dark')) ? 'navbar-dark' : '';?> type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false">
       <span class="navbar-toggler-icon"></span>
     </button>
 

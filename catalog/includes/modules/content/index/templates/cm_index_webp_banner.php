@@ -15,8 +15,8 @@
 ?>
 <style>
 .container{  max-width:100%;}
-.banner{ position: relative;}
-.banner img{max-width:100%}
+.banner{ position: relative;top:-1.4em}
+.banner img{width:100%;height:auto}
 .banner a{
   display: block;
   position: absolute;

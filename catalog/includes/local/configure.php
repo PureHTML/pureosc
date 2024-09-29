@@ -14,8 +14,8 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-\define('HTTP_SERVER', 'http://'.$_SERVER['HTTP_HOST']);
-\define('HTTPS_SERVER', 'https://'.$_SERVER['HTTP_HOST']);
+\define('HTTP_SERVER', 'http://' . array_key_exists('HTTP_HOST', $_SERVER) ? $_SERVER['HTTP_HOST'] : 'localhost');
+\define('HTTPS_SERVER', 'http://' . array_key_exists('HTTP_HOST', $_SERVER) ? $_SERVER['HTTP_HOST'] : 'localhost');
 \define('ENABLE_SSL', false);
 \define('HTTP_COOKIE_DOMAIN', '');
 \define('HTTPS_COOKIE_DOMAIN', '');
