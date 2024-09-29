@@ -16,10 +16,9 @@ declare(strict_types=1);
 
 class message_stack
 {
+    public array $messages = [];
     public function __construct()
     {
-        $this->messages = [];
-
         if (isset($_SESSION['messageToStack'])) {
             for ($i = 0, $n = \count($_SESSION['messageToStack']); $i < $n; ++$i) {
                 $this->add($_SESSION['messageToStack'][$i]['class'], $_SESSION['messageToStack'][$i]['text'], $_SESSION['messageToStack'][$i]['type']);
