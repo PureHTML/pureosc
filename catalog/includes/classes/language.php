@@ -74,7 +74,7 @@ class language
         $this->browser_languages = '';
         $this->language = '';
 
-        $this->set_language($lng);
+        $this->set_language(empty($lng) ? 'en' : $lng);
     }
 
     public function set_language($language): void
@@ -82,7 +82,7 @@ class language
         if ((!empty($language)) && (isset($this->catalog_languages[$language]))) {
             $this->language = $this->catalog_languages[$language];
         } else {
-            $this->language = $this->catalog_languages[DEFAULT_LANGUAGE];
+            $this->language = $this->catalog_languages[defined('DEFAULT_LANGUAGE') ? DEFAULT_LANGUAGE:'cs'];
         }
     }
 
