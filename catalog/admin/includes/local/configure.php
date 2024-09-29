@@ -14,23 +14,23 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-\define('HTTP_SERVER', 'http://dvere.local');
+\define('HTTP_SERVER', 'http://localhost');
 \define('HTTPS_SERVER', '');
 \define('ENABLE_SSL', false);
 \define('HTTP_COOKIE_DOMAIN', '');
 \define('HTTPS_COOKIE_DOMAIN', '');
-\define('HTTP_COOKIE_PATH', '/admin');
-\define('HTTPS_COOKIE_PATH', '/admin');
-\define('HTTP_CATALOG_SERVER', 'http://dvere.local');
+\define('HTTP_COOKIE_PATH', '/dverecom/catalog/admin');
+\define('HTTPS_COOKIE_PATH', '/dverecom/catalog/admin');
+\define('HTTP_CATALOG_SERVER', 'http://localhost');
 \define('HTTPS_CATALOG_SERVER', '');
 \define('ENABLE_SSL_CATALOG', 'false');
-\define('DIR_FS_DOCUMENT_ROOT', __DIR__ . '/../catalog/');
-\define('DIR_WS_ADMIN', '/admin/');
-\define('DIR_WS_HTTPS_ADMIN', '/admin/');
+\define('DIR_FS_DOCUMENT_ROOT', '/home/vitex/Projects/PureHtml/dverecom/catalog/');
+\define('DIR_WS_ADMIN', '/dverecom/catalog/admin/');
+\define('DIR_WS_HTTPS_ADMIN', '/dverecom/catalog/admin/');
 \define('DIR_FS_ADMIN', __DIR__ . '/../catalog/admin/');
 \define('DIR_WS_CATALOG', '/');
 \define('DIR_WS_HTTPS_CATALOG', '/');
-\define('DIR_FS_CATALOG', __DIR__ . '/../catalog/');
+\define('DIR_FS_CATALOG', '/home/vitex/Projects/PureHtml/dverecom/catalog/');
 \define('DIR_WS_IMAGES', 'images/');
 \define('DIR_WS_ICONS', DIR_WS_IMAGES.'icons/');
 \define('DIR_WS_CATALOG_IMAGES', DIR_WS_CATALOG.'images/');

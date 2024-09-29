@@ -14,7 +14,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-class message_stack
+class messageStack
 {
     public array $messages = [];
     public function __construct()

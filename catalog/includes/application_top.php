@@ -429,7 +429,7 @@ if (isset($cPath_array)) {
 
 // initialize the message stack for output messages
 require 'includes/classes/message_stack.php';
-$messageStack = new message_stack();
+$messageStack = new messageStack();
 
 require DIR_FS_CATALOG.'includes/classes/hooks.php';
 $OSCOM_Hooks = new hooks('shop');
