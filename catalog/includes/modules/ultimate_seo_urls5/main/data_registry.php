@@ -17,7 +17,7 @@ declare(strict_types=1);
 /**
  * Data registry.
  */
-final class registry
+final class data_registry
 {
     private static $_singleton;
     private $vars = [];
@@ -52,11 +52,11 @@ final class registry
     /**
      * Returns a singleton instance of the class.
      *
-     * @return Data_Registry
+     * @return data_registry
      */
     public static function i()
     {
-        if (!self::$_singleton instanceof Data_Registry) {
+        if (!self::$_singleton instanceof data_registry) {
             self::$_singleton = new self();
         }
 

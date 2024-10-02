@@ -17,7 +17,7 @@ declare(strict_types=1);
   /**
  * File based cache system.
  */
-final class file implements iCache_System
+final class file implements cache_system
 {
     private static $_singleton;
     private static $cache_name;
@@ -41,7 +41,7 @@ final class file implements iCache_System
         self::$cache_on = (\defined('USU5_CACHE_ON') && (USU5_CACHE_ON === 'true')) ? true : false;
 
         if (!self::$_singleton instanceof File_Cache_Module) {
-            if (Usu_Main::i()->getVar('page_modules', substr(Usu_Main::i()->getVar('filename'), 0, -4)) instanceof aPage_Modules) {
+            if (Usu_Main::i()->getVar('page_modules', substr(Usu_Main::i()->getVar('filename'), 0, -4)) instanceof page_modules) {
                 self::$cache_name = Usu_Main::i()->getVar('page_modules', substr(Usu_Main::i()
                     ->getVar('filename'), 0, -4))
                     ->buildCacheName();

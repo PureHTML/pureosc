@@ -19,7 +19,7 @@ declare(strict_types=1);
  *
  * @see http://memcached.org/
  */
-final class memcache extends Memcache implements iCache_System
+final class memcache extends Memcache implements cache_system
 {
     private static $_singleton;
     private static $cache_name;
@@ -48,7 +48,7 @@ final class memcache extends Memcache implements iCache_System
     public static function i()
     {
         if (!self::$_singleton instanceof Memcache_Cache_Module) {
-            if (Usu_Main::i()->getVar('page_modules', substr(Usu_Main::i()->getVar('filename'), 0, -4)) instanceof aPage_Modules) {
+            if (Usu_Main::i()->getVar('page_modules', substr(Usu_Main::i()->getVar('filename'), 0, -4)) instanceof page_modules) {
                 self::$cache_on = (\defined('USU5_CACHE_ON') && (USU5_CACHE_ON === 'true')) ? true : false;
                 self::$cache_name = self::$memcache_prefix.md5(HTTP_SERVER.Usu_Main::i()->getVar('page_modules', substr(Usu_Main::i()
                     ->getVar('filename'), 0, -4))

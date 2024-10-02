@@ -17,7 +17,7 @@ declare(strict_types=1);
 /**
  * Cache system using a SQLite database.
  */
-final class sqlite implements iCache_System
+final class sqlite implements cache_system
 {
     public static $db;
     public $extract_query = "SELECT * FROM usu_cache WHERE cache_name = ':cache_name'";
@@ -51,7 +51,7 @@ final class sqlite implements iCache_System
     public static function i()
     {
         if (!self::$_singleton instanceof Sqlite_Cache_Module) {
-            if (Usu_Main::i()->getVar('page_modules', substr(Usu_Main::i()->getVar('filename'), 0, -4)) instanceof aPage_Modules) {
+            if (Usu_Main::i()->getVar('page_modules', substr(Usu_Main::i()->getVar('filename'), 0, -4)) instanceof page_modules) {
                 self::$cache_on = (\defined('USU5_CACHE_ON') && (USU5_CACHE_ON === 'true')) ? true : false;
                 self::$cache_name = md5(Usu_Main::i()->getVar('page_modules', substr(Usu_Main::i()
                     ->getVar('filename'), 0, -4))

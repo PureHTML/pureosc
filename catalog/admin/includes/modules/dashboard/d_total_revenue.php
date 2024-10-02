@@ -52,7 +52,7 @@ class d_total_revenue
         $js_array = '';
 
         foreach ($days as $date => $total) {
-            $js_array .= '['.(mktime(0, 0, 0, substr($date, 5, 2), substr($date, 8, 2), substr($date, 0, 4)) * 1000).', '.$total.'],';
+            $js_array .= '['.(mktime(0, 0, 0, (int) substr($date, 5, 2), (int) substr($date, 8, 2), (int) substr($date, 0, 4)) * 1000).', '.$total.'],';
         }
 
         if (!empty($js_array)) {

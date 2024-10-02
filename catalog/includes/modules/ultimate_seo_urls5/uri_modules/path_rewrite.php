@@ -19,7 +19,7 @@ declare(strict_types=1);
  *
  * @example something-here/my-great-product-p-47
  */
-class path_rewrite extends aUri_Modules
+class path_rewrite extends uri_modules
 {
     /**
      * Class constructor.

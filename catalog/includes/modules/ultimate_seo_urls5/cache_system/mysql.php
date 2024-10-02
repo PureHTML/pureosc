@@ -17,7 +17,7 @@ declare(strict_types=1);
 /**
  * Cache system using a MySQL database.
  */
-final class mysql implements iCache_System
+final class mysql implements cache_system
 {
     public $extract_query = "SELECT * FROM `usu_cache` WHERE cache_name = ':cache_name'";
     private static $_singleton;
@@ -47,7 +47,7 @@ final class mysql implements iCache_System
         self::$cache_on = (\defined('USU5_CACHE_ON') && (USU5_CACHE_ON === 'true')) ? true : false;
 
         if (!self::$_singleton instanceof Mysql_Cache_Module) {
-            if (Usu_Main::i()->getVar('page_modules', substr(Usu_Main::i()->getVar('filename'), 0, -4)) instanceof aPage_Modules) {
+            if (Usu_Main::i()->getVar('page_modules', substr(Usu_Main::i()->getVar('filename'), 0, -4)) instanceof page_modules) {
                 self::$cache_name = md5(Usu_Main::i()->getVar('page_modules', substr(Usu_Main::i()
                     ->getVar('filename'), 0, -4))
                     ->buildCacheName());

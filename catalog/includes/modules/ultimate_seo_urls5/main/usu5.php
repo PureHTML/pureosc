@@ -30,9 +30,9 @@ require_once DIR_WS_MODULES.'ultimate_seo_urls5/main/bootstrap.php';
 require_once DIR_WS_MODULES.'ultimate_seo_urls5/main/validator.php';
 
 /**
- * @see Data_Registry
+ * @see data_registry
  */
-require_once DIR_WS_MODULES.'ultimate_seo_urls5/main/registry.php';
+require_once DIR_WS_MODULES.'ultimate_seo_urls5/main/data_registry.php';
 
 /**
  * Main USU5 PRO class.
@@ -243,7 +243,7 @@ class Usu_Main
      * Factory to extract data from the various cache strategies.
      *
      * @see Usu_Main::getVar()
-     * @see Data_Registry::load()
+     * @see data_registry::load()
      *
      * @uses base64_decode()
      * @uses file_get_contents()
@@ -257,11 +257,11 @@ class Usu_Main
      *
      * @param string $cache_name - cache name to extract
      * @param string $cache_type - e.g. mysql, file etc.
-     * @param object $object     iCache_System
+     * @param object $object     cache_system
      *
      * @return bool
      */
-    public function extractCacheData($cache_name, $cache_type, iCache_System $object)
+    public function extractCacheData($cache_name, $cache_type, cache_system $object)
     {
         $cache_seconds = ((int) USU5_CACHE_DAYS * 24 * 60 * 60);
         $timestart = microtime(true);

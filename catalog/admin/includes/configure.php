@@ -58,7 +58,7 @@ declare(strict_types=1);
 // define('DB_SERVER_ROOT_USERNAME', 'vanilla');
 // define('DB_SERVER_ROOT_PASSWORD', 'osc');
 
-\define('DB_DATABASE', 'dvere');
+\define('DB_DATABASE', 'dvere2');
 \define('USE_PCONNECT', 'false');
 \define('STORE_SESSIONS', 'mysql');
 \define('CFG_TIME_ZONE', 'Europe/Prague');

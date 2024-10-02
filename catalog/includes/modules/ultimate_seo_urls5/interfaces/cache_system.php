@@ -33,7 +33,7 @@ declare(strict_types=1);
    *
    * @Id $Id:: cache_interface.php 196 2010-12-21 22:45:02Z Rob          $:  Full Details
    */
-interface cache_interface
+interface cache_system
 {
     public static function i();
 

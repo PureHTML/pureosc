@@ -1641,3 +1641,7 @@ function tep_convert_linefeeds($from, $to, $string)
 {
     return str_replace($from, $to, $string);
 }
+
+    function tep_utf8_encode($item){
+        return mb_convert_encoding($item, "UTF-8", mb_detect_encoding($item));
+    }

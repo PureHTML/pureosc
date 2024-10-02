@@ -19,7 +19,7 @@ declare(strict_types=1);
  *
  * @example my-great-product-p-47.html
  */
-class rewrite extends aUri_Modules
+class rewrite extends uri_modules
 {
     /**
      * Class constructor.

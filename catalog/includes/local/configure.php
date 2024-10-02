@@ -14,15 +14,18 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-\define('HTTP_SERVER', 'http://' . array_key_exists('HTTP_HOST', $_SERVER) ? $_SERVER['HTTP_HOST'] : 'localhost');
-\define('HTTPS_SERVER', 'http://' . array_key_exists('HTTP_HOST', $_SERVER) ? $_SERVER['HTTP_HOST'] : 'localhost');
+//\define('HTTP_SERVER', 'http://' . array_key_exists('HTTP_HOST', $_SERVER) ? $_SERVER['HTTP_HOST'] : 'localhost');
+//\define('HTTPS_SERVER', 'http://' . array_key_exists('HTTP_HOST', $_SERVER) ? $_SERVER['HTTP_HOST'] : 'localhost');
+\define('HTTP_SERVER', 'http://'.$_SERVER['HTTP_HOST']);
+\define('HTTPS_SERVER', 'https://'.$_SERVER['HTTP_HOST']);
+
 \define('ENABLE_SSL', false);
 \define('HTTP_COOKIE_DOMAIN', '');
 \define('HTTPS_COOKIE_DOMAIN', '');
 \define('HTTP_COOKIE_PATH', '/');
 \define('HTTPS_COOKIE_PATH', '/');
-\define('DIR_WS_HTTP_CATALOG', '/dverecom/catalog/');
-\define('DIR_WS_HTTPS_CATALOG', '/dverecom/catalog/');
+\define('DIR_WS_HTTP_CATALOG', '/');
+\define('DIR_WS_HTTPS_CATALOG', '/');
 \define('DIR_WS_IMAGES', 'images/');
 \define('DIR_WS_ICONS', DIR_WS_IMAGES.'icons/');
 \define('DIR_WS_INCLUDES', 'includes/');
@@ -32,6 +35,7 @@ declare(strict_types=1);
 \define('DIR_WS_LANGUAGES', DIR_WS_INCLUDES.'languages/');
 
 \define('DIR_WS_DOWNLOAD_PUBLIC', 'pub/');
+//\define('DIR_FS_CATALOG', '/home/f/git/dvere.local/dverecom/catalog/');
 \define('DIR_FS_CATALOG', __DIR__ .  '/../../../catalog/');
 \define('DIR_FS_DOWNLOAD', DIR_FS_CATALOG.'download/');
 \define('DIR_FS_DOWNLOAD_PUBLIC', DIR_FS_CATALOG.'pub/');

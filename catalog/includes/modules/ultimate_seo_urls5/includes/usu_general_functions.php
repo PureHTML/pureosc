@@ -360,7 +360,7 @@ function usu5_multi_language($separator = false)
  */
 function module_naming_convention($filename, $module_suffix)
 {
-    return str_replace(' ', '_', ucwords(str_replace('_', ' ', strtolower($filename)))).$module_suffix;
+    return str_replace(' ', '_', str_replace('_', ' ', strtolower($filename))).$module_suffix;
 }
 /**
  * Attempt to make a path writeable.

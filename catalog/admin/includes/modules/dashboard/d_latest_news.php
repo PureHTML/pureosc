@@ -38,7 +38,8 @@ class d_latest_news
         if (!class_exists('lastRSS')) {
             include 'includes/classes/rss.php';
         }
-
+        
+//        class RSS extends lastRSS {}
         $rss = new lastRSS();
         $rss->items_limit = 5;
         $rss->cache_dir = DIR_FS_CACHE;

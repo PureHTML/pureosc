@@ -85,7 +85,7 @@ class Usu5_Bootstrap
         $this->cacheSystem();
         $this->setRegistry();
         Usu_Main::i()->setVar('initiated', true);
-        Usu_Validator::i()->initiate();
+        validator::i()->initiate();
     } // end method
     /**
      * Attempt to extract or replicate (Windows) REQUEST_URI ( strips seo url to e.g. de/my-great-category-c-32.html ).
@@ -425,7 +425,7 @@ class Usu5_Bootstrap
 
         foreach ($modules as $index => $module) {
             $basename = str_replace('.php', '', $module);
-            $class = module_naming_convention($basename, '_Page_Module');
+            $class = module_naming_convention($basename, '');
 
             if ((substr($module, -4, 4) === '.php') && is_readable(Usu_Main::i()->getVar('page_modules_path').$module)) {
                 include_once Usu_Main::i()->getVar('page_modules_path').$module;
@@ -458,7 +458,7 @@ class Usu5_Bootstrap
 
         foreach ($modules as $index => $module) {
             $basename = str_replace('.php', '', $module);
-            $class = module_naming_convention($basename, '_Uri_Module');
+            $class = module_naming_convention($basename, '');
 
             if ((substr($module, -4, 4) === '.php') && is_readable(Usu_Main::i()->getVar('uri_modules_path').$module)) {
                 include_once Usu_Main::i()->getVar('uri_modules_path').$module;
@@ -558,11 +558,11 @@ class Usu5_Bootstrap
      */
     private function cacheSystem()
     {
-        include_once Usu_Main::i()->getVar('interfaces_path').'cache_interface.php';
+        include_once Usu_Main::i()->getVar('interfaces_path').'cache_system.php';
 
         if (is_readable(Usu_Main::i()->getVar('cache_system_path').USU5_CACHE_SYSTEM.'.php')) {
             include_once Usu_Main::i()->getVar('cache_system_path').USU5_CACHE_SYSTEM.'.php';
-            $class_name = module_naming_convention(USU5_CACHE_SYSTEM, '_Cache_Module');
+            $class_name = module_naming_convention(USU5_CACHE_SYSTEM, '');
             Usu_Main::$performance['cache_system'] = $class_name;
             $cache_object = \call_user_func([$class_name, 'i']);
 
@@ -580,7 +580,7 @@ class Usu5_Bootstrap
      */
     private function setRegistry(): void
     {
-        Usu_Main::i()->setVar('registry', Data_Registry::i());
+        Usu_Main::i()->setVar('registry', data_registry::i());
         Usu_Main::i()->getVar('cache')->retrieve();
     }
 } // end class

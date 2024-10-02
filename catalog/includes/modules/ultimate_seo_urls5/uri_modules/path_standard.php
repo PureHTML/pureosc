@@ -19,7 +19,7 @@ declare(strict_types=1);
  *
  * @example product_info.php/something-here/my-great-product-p-47
  */
-class path_standard extends aUri_Modules
+class path_standard extends uri_modules
 {
     /**
      * Class constructor.

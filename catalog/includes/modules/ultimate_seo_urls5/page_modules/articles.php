@@ -17,7 +17,7 @@ declare(strict_types=1);
 /**
  * Page module for the articles contribution.
  */
-class articles extends aPage_Modules
+class articles extends page_modules
 {
     /**
      * Array of _GET key dependencies for this page
@@ -39,7 +39,7 @@ class articles extends aPage_Modules
      *
      * @var string - dependency key
      */
-    protected string $key = null;
+    protected string $key = '';
 
     /**
      * extracts the key => value pairs from the querystring in order to build a unique cache name for the loaded page.
@@ -80,13 +80,13 @@ class articles extends aPage_Modules
      *
      * @see Usu_Main::getVar()
      * @see Usu_Main::setVar()
-     * @see aPage_Modules::stripPathToLastNumber()
-     * @see aPage_Modules::setQuery()
-     * @see aPage_Modules::unsetProperties()
-     * @see aPage_Modules::getDependencyKey()
-     * @see aPage_Modules::setAllParams()
-     * @see aPage_Modules::validRequest()
-     * @see aPage_Modules::returnFinalLink()
+     * @see page_modules::stripPathToLastNumber()
+     * @see page_modules::setQuery()
+     * @see page_modules::unsetProperties()
+     * @see page_modules::getDependencyKey()
+     * @see page_modules::setAllParams()
+     * @see page_modules::validRequest()
+     * @see page_modules::returnFinalLink()
      *
      * @uses trigger_error()
      *
@@ -181,7 +181,7 @@ class articles extends aPage_Modules
         $final_text_array = [];
 
         foreach ($text_array as $key => $text) {
-            if (tep_not_null(trim($text))) {
+            if (tep_not_null(trim((string) $text))) {
                 $final_text_array[$key] = $text;
             }
         }

@@ -33,7 +33,7 @@ function OSCOM_PayPal_LOGIN_Api_RefreshToken($OSCOM_PayPal, $server, $extra_para
     $post_string = '';
 
     foreach ($params as $key => $value) {
-        $post_string .= $key.'='.urlencode(utf8_encode(trim($value))).'&';
+        $post_string .= $key.'='.urlencode(tep_utf8_encode(trim($value))).'&';
     }
 
     $post_string = substr($post_string, 0, -1);

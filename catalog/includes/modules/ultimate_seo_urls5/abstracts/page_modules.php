@@ -118,7 +118,7 @@ abstract class page_modules
      * @uses implode()
      * @uses is_array()
      * @uses strpos()
-     * @uses utf8_encode()
+     * @uses tep_utf8_encode()
      *
      * @param string $uri - base uri prior to adding the scheme the domain and the querystring
      *
@@ -154,7 +154,7 @@ abstract class page_modules
 
         switch (\defined('USU5_USE_W3C_VALID') && (USU5_USE_W3C_VALID === 'true')) {
             case true:
-                return htmlspecialchars(utf8_encode($link));
+                return htmlspecialchars(tep_utf8_encode($link));
 
                 break;
 
@@ -200,7 +200,7 @@ abstract class page_modules
     /**
      * Ensure that the _GET value is either numeric or at least an underscored numeric path ( e.g. 3_34_57 ).
      *
-     * @see aPage_Modules::cleanParams()
+     * @see page_modules::cleanParams()
      *
      * @param mixed string/int $value -passed by reference
      */
@@ -269,7 +269,7 @@ abstract class page_modules
     /**
      * Iterate an array of text strings passing to a method to format correctly.
      *
-     * @see aPage_Modules::linkTextParts()
+     * @see page_modules::linkTextParts()
      *
      * @param mixed $array_of_texts
      *
@@ -318,11 +318,8 @@ abstract class page_modules
         $pattern = (\defined('SEO_REMOVE_ALL_SPEC_CHARS') && SEO_REMOVE_ALL_SPEC_CHARS === 'true') ? '@[^\\sa-z0-9]@i' : "@[!#\$%&'\"()\\*\\+,\\-\\./:;<=>\\?\\@\\[\\]\\^_`\\{|\\}~]+@";
         $link_text = preg_replace($pattern, '', strtolower($string));
 
-        if (version_compare(\PHP_VERSION, '5.2.4' === -1)) {
-            $link_text = preg_replace('@[\\s]+@', '-', $link_text);
-        } else {
             $link_text = preg_replace("@[\\s\v]+@", '-', $link_text);
-        }
+        
 
         // No short words so return the base text
         if (false === strpos($link_text, '-')) {
@@ -380,8 +377,8 @@ abstract class page_modules
     /**
      * Cleans the keys and values of the querystring as used internally.
      *
-     * @see  aPage_Modules::usu_cleanse()
-     * @see aPage_Modules::rationaliseGetValue()
+     * @see  page_modules::usu_cleanse()
+     * @see page_modules::rationaliseGetValue()
      *
      * @uses array_key_exists()
      * @uses explode()
