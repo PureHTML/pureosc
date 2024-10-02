@@ -45,7 +45,7 @@ h2 {
 /********************/
 /*body redefine*/
 body {
-margin: 0 2%;
+margin: 0;
   color:#c9c9c9;
   background:#3f2424;
 }
@@ -81,8 +81,9 @@ p{
 }
 */
 /*utilities*/
+.clb{clear:both}
 .fr {float:right}
-.fl {float:left}
+.fl {float:left !important}
 .mt1 {margin-top:1em}
 /*
 #navbarNavDropdown{background:#381e1e;margin-left:-.5%;}
