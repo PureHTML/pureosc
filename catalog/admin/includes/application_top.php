@@ -91,7 +91,7 @@ tep_session_save_path(SESSION_WRITE_DIRECTORY);
 // set the session cookie parameters
 session_set_cookie_params(0, $cookie_path, $cookie_domain, $request_type === 'SSL');
 
-@ini_set('session.use_only_cookies', (SESSION_FORCE_COOKIE_USE === 'True') ? 1 : 0);
+@ini_set('session.use_only_cookies', (SESSION_FORCE_COOKIE_USE === 'True') ? '1' : '0');
 
 if (version_compare(\PHP_VERSION, '7.3.0', '>=')) {
     @ini_set('session.cookie_samesite', 'Lax');

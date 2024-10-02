@@ -13,8 +13,8 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-class admin_categories_sitemapXml
+//TODO:neponjal orig:admin_categories_sitemapXml
+class sitemapXml
 {
     public function __construct()
     {

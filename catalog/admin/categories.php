@@ -468,8 +468,10 @@ if ($action === 'new_product') {
     if (isset($_GET['pID']) && empty($_POST)) {
         $product_query = tep_db_query("select pd.products_name, pd.products_description, pd.products_url, p.products_id, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status, p.products_tax_class_id, p.manufacturers_id from products p, products_description pd where p.products_id = '".(int) $_GET['pID']."' and p.products_id = pd.products_id and pd.language_id = '".(int) $languages_id."'");
         $product = tep_db_fetch_array($product_query);
+      class pInfo_objectInfo extends objectInfo {}
+            $pInfo = new pInfo_objectInfo($product); //TODO!
 
-        $pInfo->objectInfo($product);
+//        $pInfo->pInfo_objectInfo($product);
 
         $product_images_query = tep_db_query("select id, image, htmlcontent, sort_order from products_images where products_id = '".(int) $product['products_id']."' order by sort_order");
 
@@ -925,7 +927,8 @@ $('#products_date_available').datepicker({
             $category_products = ['products_count' => tep_products_in_category_count($categories['categories_id'])];
 
             $cInfo_array = array_merge($categories, $category_childs, $category_products);
-            $cInfo = new objectInfo($cInfo_array);
+              class cInfo_objectInfo extends objectInfo {}
+            $cInfo = new cInfo_objectInfo($cInfo_array); //TODO!
         }
 
         if (isset($cInfo) && \is_object($cInfo) && ($categories['categories_id'] === $cInfo->categories_id)) {

@@ -13,19 +13,28 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+ class objectInfo { 
+ public function __construct($object_array) { 
+ foreach ($object_array as $key => $value) { $this->$key = $value; 
+     } } }
+/*
+use \AllowDynamicProperties;
 
+#[AllowDynamicProperties]
 class object_info
+//class object_info extends stdClass
 {
     // class constructor
-    public function __construct($object_array)
+function __construct($object_array)
     {
         $this->objectInfo($object_array);
     }
 
-    public function objectInfo($object_array): void
+function objectInfo($object_array): void
     {
         foreach ($object_array as $key => $value) {
             $this->{$key} = tep_db_prepare_input($value);
         }
     }
 }
+*/
