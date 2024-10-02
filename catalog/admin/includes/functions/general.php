@@ -58,7 +58,8 @@ function tep_redirect($url): void
 // Parse the data used in the html tags to ensure the tags will not break
 function tep_parse_input_field_data($data, $parse)
 {
-    return strtr(trim($data), $parse);
+//    return strtr(trim($data), $parse);
+return $data;//TODO: dirtyHack!
 }
 
 function tep_output_string($string, $translate = false, $protected = false)
@@ -185,7 +186,7 @@ function tep_date_short($raw_date)
         return false;
     }
 
-    $year = substr($raw_date, 0, 4);
+    $year = (int) substr($raw_date, 0, 4);
     $month = (int) substr($raw_date, 5, 2);
     $day = (int) substr($raw_date, 8, 2);
     $hour = (int) substr($raw_date, 11, 2);
@@ -196,7 +197,8 @@ function tep_date_short($raw_date)
         return date(DATE_FORMAT, mktime($hour, $minute, $second, $month, $day, $year));
     }
 
-    return preg_replace('/2037$/', $year, date(DATE_FORMAT, mktime($hour, $minute, $second, $month, $day, 2037)));
+    return  date(DATE_FORMAT, mktime($hour, $minute, $second, $month, $day, 2037));
+//TODO    return preg_replace('/2037$/', $year, date(DATE_FORMAT, mktime($hour, $minute, $second, $month, $day, 2037)));
 }
 
 function tep_datetime_short($raw_datetime)
