@@ -324,7 +324,7 @@ EOD);
 \define('TEXT_CCVAL_ERROR_INVALID_NUMBER', 'Vložené číslo kreditní karty je chybné.<br>Prosím, zkontrolujte ho a zkuste to znovu.');
 \define('TEXT_CCVAL_ERROR_UNKNOWN_CARD', 'První čtyři zadaná čísla kreditní karty jsou: %s<br>Pokud jsou tato čísla správně, nepřijímáme tento typ kreditní (platební) karty .<br>Pokud je špatné, prosím opravte ho a zkuste to znovu.');
 
-\define('FOOTER_TEXT_BODY', 'Copyright &copy; '.date('Y').' <a href="'.tep_href_link(FILENAME_DEFAULT).'">'.STORE_NAME.'</a>');
+\define('FOOTER_TEXT_BODY', 'Copyright &copy; '.date('Y').' <a href="/">'.STORE_NAME.'</a>');
 
 \define('ENTRY_LEGAL_AGREEMENTS_ERROR', 'Musíte souhlasit s právními podmínkami.');
 

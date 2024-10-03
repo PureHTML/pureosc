@@ -17,7 +17,7 @@ declare(strict_types=1);
 //\define('HTTP_SERVER', 'http://' . array_key_exists('HTTP_HOST', $_SERVER) ? $_SERVER['HTTP_HOST'] : 'localhost');
 //\define('HTTPS_SERVER', 'http://' . array_key_exists('HTTP_HOST', $_SERVER) ? $_SERVER['HTTP_HOST'] : 'localhost');
 \define('HTTP_SERVER', 'http://'.$_SERVER['HTTP_HOST']);
-\define('HTTPS_SERVER', 'https://'.$_SERVER['HTTP_HOST']);
+\define('HTTPS_SERVER', 'http://'.$_SERVER['HTTP_HOST']);
 
 \define('ENABLE_SSL', false);
 \define('HTTP_COOKIE_DOMAIN', '');

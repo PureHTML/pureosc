@@ -2,6 +2,7 @@
 /nbproject/
 /.build/
 /catalog/includes/local/
-catalog/includes/local/configure.php
+/catalog/includes/local/configure.php
 composer.lock
 composer.lock
+/catalog/includes/modules/ultimate_seo_urls5/cache_system/cache/
