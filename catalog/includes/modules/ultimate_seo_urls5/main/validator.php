@@ -20,6 +20,8 @@ declare(strict_types=1);
 final class validator
 {
     private static $_singleton;
+    private $current_seo_marker;
+
     /**
      * Constructor.
      */

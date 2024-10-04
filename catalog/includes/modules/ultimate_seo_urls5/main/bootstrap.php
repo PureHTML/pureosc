@@ -190,7 +190,7 @@ class Usu5_Bootstrap
         $get_array = ($_SERVER['QUERY_STRING'] !== '') ? explode('&', $_SERVER['QUERY_STRING']) : false;
 
         if (false !== $get_array) {
-            $get_array = array_shift($get_array); //TODO:DirtyHack !!!
+            array_shift($get_array); //TODO:DirtyHack !!!
             foreach ($get_array as $index => $stringpair) {
                 if (false === strpos($stringpair, tep_session_name())) { // Leave out the osCsid
                     $pair = explode('=', $stringpair);
