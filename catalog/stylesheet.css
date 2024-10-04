@@ -63,7 +63,10 @@ margin: 0;
   background: #ddd0bd;
 }
 /*dropdown*/
-.dropdown-menu a {color:#000 !important}
+.dropdown-menu {background:#ddd0bd;}
+.dropdown-menu a {color:#000 !important;}
+a.dropdown-item:hover {color:#000 !important;background:#ddd0bd;}
+
 /* span.navbar-toggler-icon {color:#fff !important}*/
 
 /*dropdown END*/
