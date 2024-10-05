@@ -204,7 +204,7 @@ class product_info extends page_modules
      */
     private function linkTextOrder(array $details = [])
     {
-        $text_types = ['p' => $details['products_name'], 'c' => $details['categories_name'], 'm' => $details['products_model']];
+        $text_types = ['p' => $details['products_name'], 'c' => $details['categories_name'], 'm' => $details['products_model'] ?? null];
         //      $text_types = array( 'p' => $details['products_name']);
         // manufacturers_name is gained through a left join and may not exist
         \array_key_exists('manufacturers_name', $details) ? $text_types['b'] = $details['manufacturers_name'] : null;
