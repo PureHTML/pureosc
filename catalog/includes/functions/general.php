@@ -1161,7 +1161,7 @@ function tep_get_uprid($prid, $params)
 // Return a product ID from a product ID with attributes
 function tep_get_prid($uprid)
 {
-    $pieces = explode('{', $uprid);
+    $pieces = explode('{', (string) $uprid);
 
     if (is_numeric($pieces[0])) {
         return (int) $pieces[0];

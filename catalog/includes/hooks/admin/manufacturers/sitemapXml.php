@@ -14,7 +14,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-class admin_manufacturers_sitemapXml
+class sitemapXml
 {
     public function __construct()
     {

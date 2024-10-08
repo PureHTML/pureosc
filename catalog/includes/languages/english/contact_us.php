@@ -24,3 +24,4 @@ declare(strict_types=1);
 \define('ENTRY_ENQUIRY', 'Enquiry:');
 
 \define('ERROR_ACTION_RECORDER', 'Error: An enquiry has already been sent. Please try again in %s minutes.');
+\define('PRODUCTS_TITLE_ENQUIRY', 'Products Enquiry:');

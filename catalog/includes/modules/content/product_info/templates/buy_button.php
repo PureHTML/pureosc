@@ -1,5 +1,16 @@
-<span class="mb-3 me-2">
+<?php
 
-  <?php echo tep_draw_hidden_field('products_id', $product_info['products_id']).tep_draw_button(IMAGE_BUTTON_IN_CART, 'cart', null, 'btn-primary'); ?>
-
-</span>
+$price_show = 0;
+if ($product_info['products_quantity'] > (int) constant('STOCK_REORDER_LEVEL')) {
+    $products_price = $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id']));
+    $pattern = '/[a-zč $]*/i';
+    $replacement = '';
+    if (preg_replace($pattern, $replacement, $products_price) != '0') {
+        $price_show = 1;
+    }
+}
+if ($price_show == 1) {
+    echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_draw_button(IMAGE_BUTTON_IN_CART, 'cart', null, 'btn-primary');
+} else {
+    echo '<a href="' . tep_href_link("contact_us.php?products_id=" . $product_info['products_id']) . '">poptavka</a>';
+}

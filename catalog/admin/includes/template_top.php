@@ -16,7 +16,7 @@
   <meta charset="<?php echo CHARSET; ?>">
   <meta name="robots" content="noindex,nofollow">
   <title><?php echo TITLE; ?></title>
-  <base href="<?php echo ($request_type === 'SSL') ? HTTPS_SERVER.DIR_WS_HTTPS_ADMIN : HTTP_SERVER.DIR_WS_ADMIN; ?>"/>
+  <base href="<?php echo constant('HTTPS_SERVER') . constant('DIR_WS_HTTPS_ADMIN') ?>"/>
   <link rel="shortcut icon" href="<?php echo tep_catalog_href_link('favicon.ico'); ?>"/>
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/redmond/jquery-ui.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <!--
-Copyright (c) 2003-2017, CKSource - Frederico Knabben. All rights reserved.
-For licensing, see LICENSE.md or http://ckeditor.com/license
+Copyright (c) 2003-2023, CKSource Holding sp. z o.o. All rights reserved.
+CKEditor 4 LTS ("Long Term Support") is available under the terms of the Extended Support Model.
 -->
-<html>
+<html lang="en">
 <head>
 	<meta charset="utf-8">
 	<title>Using Magicline plugin &mdash; CKEditor Sample</title>
@@ -12,13 +12,14 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 	<meta name="ckeditor-sample-name" content="Magicline plugin">
 	<meta name="ckeditor-sample-group" content="Plugins">
 	<meta name="ckeditor-sample-description" content="Using the Magicline plugin to access difficult focus spaces.">
+	<meta name="description" content="Try the latest sample of CKEditor 4 and learn more about customizing your WYSIWYG editor with endless possibilities.">
 </head>
 <body>
 	<h1 class="samples">
 		<a href="../../../samples/old/index.html">CKEditor Samples</a> &raquo; Using Magicline plugin
 	</h1>
 	<div class="warning deprecated">
-		This sample is not maintained anymore. Check out its <a href="http://sdk.ckeditor.com/samples/magicline.html">brand new version in CKEditor SDK</a>.
+		This sample is not maintained anymore. Check out its <a href="https://ckeditor.com/docs/ckeditor4/latest/examples/magicline.html">brand new version in CKEditor Examples</a>.
 	</div>
 	<div class="description">
 		<p>
@@ -105,9 +106,31 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 			// window.onload event handler.
 
 			CKEDITOR.replace( 'editor1', {
+				plugins: [
+					'wysiwygarea',
+					'sourcearea',
+					'clipboard',
+					'basicstyles',
+					'pastefromword',
+					'pastefromlibreoffice',
+					'pastefromgdocs',
+					'undo',
+					'stylescombo',
+					'format',
+					'font',
+					'colorbutton',
+					'removeformat',
+					'link',
+					'list',
+					'justify',
+					'blockquote',
+					'table',
+					'tabletools',
+					'image',
+					'horizontalrule'
+				],
 				extraPlugins: 'magicline',	// Ensure that magicline plugin, which is required for this sample, is loaded.
-				allowedContent: true		// Switch off the ACF, so very complex content created to
-											// show magicline's power isn't filtered.
+				extraAllowedContent: 'div{*}'
 			} );
 
 		</script>
@@ -187,10 +210,32 @@ CKEDITOR.replace( 'editor2', {
 			// window.onload event handler.
 
 			CKEDITOR.replace( 'editor2', {
+				plugins: [
+					'wysiwygarea',
+					'sourcearea',
+					'clipboard',
+					'basicstyles',
+					'pastefromword',
+					'pastefromlibreoffice',
+					'pastefromgdocs',
+					'undo',
+					'stylescombo',
+					'format',
+					'font',
+					'colorbutton',
+					'removeformat',
+					'link',
+					'list',
+					'justify',
+					'blockquote',
+					'table',
+					'tabletools',
+					'image',
+					'horizontalrule'
+				],
 				extraPlugins: 'magicline',	// Ensure that magicline plugin, which is required for this sample, is loaded.
 				magicline_color: 'blue',	// Blue line
-				allowedContent: true		// Switch off the ACF, so very complex content created to
-											// show magicline's power isn't filtered.
+				extraAllowedContent: 'div{*}'
 			});
 
 		</script>
@@ -198,11 +243,10 @@ CKEDITOR.replace( 'editor2', {
 	<div id="footer">
 		<hr>
 		<p>
-			CKEditor - The text editor for the Internet - <a class="samples" href="http://ckeditor.com/">http://ckeditor.com</a>
+			CKEditor - The text editor for the Internet - <a class="samples" href="https://ckeditor.com/">https://ckeditor.com</a>
 		</p>
 		<p id="copy">
-			Copyright &copy; 2003-2017, <a class="samples" href="http://cksource.com/">CKSource</a> - Frederico
-			Knabben. All rights reserved.
+			Copyright &copy; 2003-2023, <a class="samples" href="https://cksource.com/">CKSource</a> Holding sp. z o.o. All rights reserved.
 		</p>
 	</div>
 </body>

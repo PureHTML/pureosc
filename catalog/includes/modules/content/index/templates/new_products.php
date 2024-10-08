@@ -1,5 +1,4 @@
-<div class="container dark-bg">
-<div class="fl-lg">
+<div class="col2">
 <?php
   $info_query = tep_db_query("SELECT products_description FROM products_description WHERE products_name='Homepage' AND language_id=" . $languages_id);
 //  $info_query = tep_db_query("SELECT products_description FROM products, products_description WHERE products.products_id=products_description.products_id AND products_description.products_name='Homepage' AND language_id=" . $languages_id);
@@ -7,7 +6,7 @@
   echo is_array($info) ? $info['products_description'] : '';
 ?>
 </div>
-<div class="fl-lg">
+<div class="col2">
   <h2><?php echo sprintf(MODULE_CONTENT_INDEX_NEW_PRODUCTS_BOX_TITLE, (new DateTime())->format('F')); ?></h2>
 
 <div class="row">

@@ -14,7 +14,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-class shop_shopping_cart_alternative_checkout_buttons
+class alternative_checkout_buttons
 {
     public function listen_displayAlternativeCheckoutButtons()
     {

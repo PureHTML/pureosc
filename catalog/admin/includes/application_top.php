@@ -197,7 +197,7 @@ $messageStack = new messageStack();
 require 'includes/classes/split_page_results.php';
 
 // entry/item info classes
-require 'includes/classes/object_info.php';
+require 'includes/classes/objectInfo.php';
 
 // email classes
 //  require(DIR_FS_CATALOG . 'includes/classes/mime.php');

@@ -40,7 +40,7 @@ require 'includes/languages/'.$language.'/checkout_confirmation.php';
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
-<base href="<?php echo (($request_type === 'SSL') ? HTTPS_SERVER : HTTP_SERVER).DIR_WS_CATALOG; ?>">
+<base href="<?php echo constant('HTTPS_SERVER') . constant('DIR_WS_CATALOG'); ?>"/>
 <link rel="stylesheet" type="text/css" href="stylesheet.css">
 </head>
 <body>

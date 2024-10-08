@@ -6,7 +6,7 @@ read -p "Enter DB name: " D
 read -p "Enter RootDB username (dbname_admin): " RU
 read -p "Enter RootDB password: " RP
 
-mysql -e  "GRANT ALL on *.* to ${D}_admin@${H} identified by '${RP}' WITH GRANT OPTION"
+mariadb -e  "GRANT ALL on *.* to ${D}_admin@${H} identified by '${RP}' WITH GRANT OPTION"
 
 if [[ ! -f ../catalog/admin/includes/configure.php ]];then
   echo 'Missing admin/configure.php, creating!'

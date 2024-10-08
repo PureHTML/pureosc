@@ -9,6 +9,7 @@ becomebot
 beslistbot
 bimbot
 bingbot
+commandline_php
 dataparksearch
 dotbot
 envolk[its]spider

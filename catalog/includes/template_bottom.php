@@ -11,10 +11,6 @@
  */
 ?>
 
-        </div>
-      </div>
-    </div>
-  </div>
 </main>
 
 <footer class="footer">
@@ -26,7 +22,7 @@
 <?php
 if (\defined('ACCOUNT_DOB') && ACCOUNT_DOB === 'true' && \in_array($PHP_SELF, ['create_account.php', 'account_edit.php'], true)) {
     ?>
-
+<!-- TODO:disable -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.1/dist/css/datepicker-bs4.min.css">
   <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.1/dist/js/datepicker.min.js"></script>
 
@@ -52,7 +48,7 @@ if (\defined('ACCOUNT_DOB') && ACCOUNT_DOB === 'true' && \in_array($PHP_SELF, ['
         });
       }
     </script>
-
+<!--TODO:disable END-->
     <?php
     }
 }

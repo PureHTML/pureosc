@@ -12,7 +12,7 @@
 
 require 'includes/application_top.php';
 
-require 'includes/languages/'.$language.'/contact_us.php';
+require 'includes/languages/' . $language . '/contact_us.php';
 
 if (isset($_GET['action']) && ($_GET['action'] === 'send') && isset($_POST['formid']) && ($_POST['formid'] === $sessiontoken)) {
     $error = false;
@@ -51,7 +51,7 @@ $breadcrumb->add(NAVBAR_TITLE, tep_href_link('contact_us.php'));
 require 'includes/template_top.php';
 ?>
 
-  <h1><?php echo HEADING_TITLE; ?></h1>
+<h1><?php echo HEADING_TITLE; ?></h1>
 
 <?php
 if ($messageStack->size('contact') > 0) {
@@ -61,41 +61,49 @@ if ($messageStack->size('contact') > 0) {
 if (isset($_GET['action']) && ($_GET['action'] === 'success')) {
     ?>
 
-  <p><?php echo TEXT_SUCCESS; ?></p>
+    <p><?php echo TEXT_SUCCESS; ?></p>
 
-  <div class="text-end mb-3">
-    <?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', tep_href_link('index.php')); ?>
-  </div>
+    <div class="text-end mb-3">
+        <?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', tep_href_link('index.php')); ?>
+    </div>
 
-  <?php
+    <?php
 } else {
     ?>
 
-  <?php echo tep_draw_form('contact_us', tep_href_link('contact_us.php', 'action=send'), 'post', '', true); ?>
+    <?php echo tep_draw_form('contact_us', tep_href_link('contact_us.php', 'action=send'), 'post', '', true); ?>
 
-  <div class="col-lg-6 mb-5">
+    <div class="col-lg-6 mb-5">
 
-    <div class="mb-3">
-      <label for="name"><?php echo ENTRY_NAME; ?></label>
-      <?php echo tep_draw_input_field('name', null, 'id="name" class="form-control" required'); ?>
+        <div class="mb-3">
+            <label for="name"><?php echo ENTRY_NAME; ?></label>
+            <?php echo tep_draw_input_field('name', null, 'id="name" class="form-control" required'); ?>
+        </div>
+        <div class="mb-3">
+            <label for="email"><?php echo ENTRY_EMAIL; ?></label>
+            <?php echo tep_draw_input_field('email', null, 'id="email" class="form-control" required'); ?>
+        </div>
+        <div class="mb-3">
+            <label for="enquiry"><?php echo ENTRY_ENQUIRY; ?></label>
+            <?php
+            $enquiry = '';
+            if ($_GET['products_id']) {
+            $enquiry_data_query = tep_db_query("SELECT products_name FROM products_description WHERE products_id = " . $_GET['products_id'] . "  AND language_id = " . (int)$languages_id);
+            $enquiry_data = tep_db_fetch_array($enquiry_data_query);
+            $enquiry = PRODUCTS_TITLE_ENQUIRY . ' ' . $enquiry_data['products_name'];
+            }
+            echo tep_draw_textarea_field('enquiry', $enquiry, 'id="enquiry" class="form-control" rows="5"');
+            ?>
+        </div>
+        <div class="text-end">
+    <?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', null, 'btn-primary'); ?>
+        </div>
+
     </div>
-    <div class="mb-3">
-      <label for="email"><?php echo ENTRY_EMAIL; ?></label>
-      <?php echo tep_draw_input_field('email', null, 'id="email" class="form-control" required'); ?>
-    </div>
-    <div class="mb-3">
-      <label for="enquiry"><?php echo ENTRY_ENQUIRY; ?></label>
-      <?php echo tep_draw_textarea_field('enquiry', null, 'id="enquiry" class="form-control" rows="5"'); ?>
-    </div>
-    <div class="text-end">
-      <?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', null, 'btn-primary'); ?>
-    </div>
 
-  </div>
+    </form>
 
-  </form>
-
-  <?php
+    <?php
 }
 
 require 'includes/template_bottom.php';

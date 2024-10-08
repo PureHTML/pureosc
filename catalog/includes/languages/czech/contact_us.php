@@ -22,3 +22,4 @@ declare(strict_types=1);
 \define('ENTRY_EMAIL', 'E-Mail:');
 \define('ENTRY_ENQUIRY', 'Dotaz:');
 \define('ERROR_ACTION_RECORDER', 'Chyba: dotaz již byla odeslána. Zkuste to prosím znovu za %s minut.');
+\define('PRODUCTS_TITLE_ENQUIRY', 'Poptávka produktu:');

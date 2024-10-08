@@ -2,4 +2,4 @@
 # LongName: search for configuration_values FROM table 'configuration'
 source ./dbconnect.sh
 
-echo mysql -h${H} -u${U} -p${P} $D -e "SELECT configuration_key, configuration_value FROM configuration WHERE configuration_key like '%${1}%'"
+mariadb -h${H} -u${U} -p${P} $D -e "SELECT configuration_key, configuration_value FROM configuration WHERE configuration_key like '%${1}%'"

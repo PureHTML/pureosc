@@ -39,11 +39,11 @@ class cm_pi_price
 
     public function execute(): void
     {
-        global $oscTemplate, $product_info, $currencies;
+        global $oscTemplate, $product_info, $currencies, $quantity, $products_id;
 
         $specials_new_products_price = null;
         $products_price = $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id']));
-
+        
         if (!empty($product_info['specials_new_products_price'])) {
             $specials_new_products_price = $currencies->display_price($product_info['specials_new_products_price'], tep_get_tax_rate($product_info['products_tax_class_id']));
         }

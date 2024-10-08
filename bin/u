@@ -1,4 +1,4 @@
 #!/bin/bash
 . ./dbconnect.sh
 
-mysql -h${H} -u${U} -p${P} $D -e "update configuration set configuration_value='$2' where configuration_key='${1}'"
+mariadb -h${H} -u${U} -p${P} $D -e "update configuration set configuration_value='$2' where configuration_key='${1}'"

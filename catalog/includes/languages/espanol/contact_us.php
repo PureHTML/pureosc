@@ -24,3 +24,4 @@ declare(strict_types=1);
 \define('ENTRY_ENQUIRY', 'Consulta:');
 
 \define('ERROR_ACTION_RECORDER', 'Error: Una consulta ya ha sido enviada. Por favor vuelva a intentarlo en %s minutos.');
+\define('PRODUCTS_TITLE_ENQUIRY', 'Products Enquiry:');

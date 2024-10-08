@@ -14,15 +14,8 @@
  */
 ?>
 <style>
-.container{  max-width:100%;}
-.banner{ position: relative;top:-1.4em;left:0}
+.banner {padding-top:20px}
 .banner img{width:100%;height:auto}
-.banner a{
-  display: block;
-  position: absolute;
-  top: 0%;
-  height: 100%;
-}
 <?php
 if ($counter === 1) {
     echo '.banner a:nth-of-type(1){width:100%;left:0}';
@@ -45,7 +38,7 @@ EOD;
 }
 
 ?>
-</style>
+</style><!--TODO:css -->
    <div class="banner">
 <?php
 echo tep_image('images/rotator.webp');

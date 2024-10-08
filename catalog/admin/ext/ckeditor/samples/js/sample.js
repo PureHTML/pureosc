@@ -1,6 +1,6 @@
 ﻿/**
- * Copyright (c) 2003-2017, CKSource - Frederico Knabben. All rights reserved.
- * For licensing, see LICENSE.md or http://ckeditor.com/license
+ * Copyright (c) 2003-2024, CKSource Holding sp. z o.o. All rights reserved.
+ * CKEditor 4 LTS ("Long Term Support") is available under the terms of the Extended Support Model.
  */
 
 /* exported initSample */
@@ -24,16 +24,40 @@ var initSample = ( function() {
 		if ( isBBCodeBuiltIn ) {
 			editorElement.setHtml(
 				'Hello world!\n\n' +
-				'I\'m an instance of [url=http://ckeditor.com]CKEditor[/url].'
+				'I\'m an instance of [url=https://ckeditor.com]CKEditor[/url].'
 			);
 		}
 
-		// Depending on the wysiwygare plugin availability initialize classic or inline editor.
+		// Depending on the wysiwygarea plugin availability initialize classic or inline editor.
 		if ( wysiwygareaAvailable ) {
-			CKEDITOR.replace( 'editor' );
+			CKEDITOR.replace( 'editor', {
+				on: {
+					contentPreview: function( evt ) {
+						evt.data.dataValue = '<div style="padding: 1.5em;border: 3px #f00 solid">' +
+								'<h1>Content Preview was blocked</h1>' +
+								'<p>To ensure the highest security, the content preview in samples was blocked.</p>' +
+								'<p>Please refer to our ' +
+									'<a href="https://ckeditor.com/docs/ckeditor4/latest/guide/dev_best_practices.html#validate-preview-content">' +
+									'best practices on security</a> to learn more how to properly configure and secure the content preview.</p>' +
+							'</div>';
+					}
+				}
+			} );
 		} else {
 			editorElement.setAttribute( 'contenteditable', 'true' );
-			CKEDITOR.inline( 'editor' );
+			CKEDITOR.inline( 'editor', {
+				on: {
+					contentPreview: function( evt ) {
+						evt.data.dataValue = '<div style="padding: 1.5em;border: 3px #f00 solid">' +
+								'<h1>Content Preview was blocked</h1>' +
+								'<p>To ensure the highest security, the content preview in samples was blocked.</p>' +
+								'<p>Please refer to our ' +
+									'<a href="https://ckeditor.com/docs/ckeditor4/latest/guide/dev_best_practices.html#validate-preview-content">' +
+									'best practices on security</a> to learn more how to properly configure and secure the content preview.</p>' +
+							'</div>';
+					}
+				}
+			} );
 
 			// TODO we can consider displaying some info box that
 			// without wysiwygarea the classic editor may not work.

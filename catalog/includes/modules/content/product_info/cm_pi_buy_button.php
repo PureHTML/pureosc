@@ -39,7 +39,7 @@ class cm_pi_buy_button
 
     public function execute(): void
     {
-        global $oscTemplate, $product_info;
+        global $oscTemplate, $product_info, $currencies;
 
         ob_start();
 
