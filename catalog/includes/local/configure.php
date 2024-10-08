@@ -3,10 +3,16 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the DvereCOM package
+ * osCommerce, Open Source E-Commerce Solutions
+ * http://www.oscommerce.com
  *
- *  (c) Šimon Formánek <mail@simonformanek.cz>
- * This file is part of the MultiFlexi package
+ * Copyright (c) 2020 osCommerce
+ *
+ * Released under the GNU General Public License
+ *
+ * This file is part of the PureOSC package
+ *
+ *  (c) 2024 Šimon Formánek <mail@simonformanek.cz>
  *
  * https://pureosc.com/
  *
@@ -14,16 +20,16 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-//commandline_php usage need:
-//if (! array_key_exists('HTTP_USER_AGENT', $_SERVER)) {
-  define('HTTP_USER_AGENT','commandline_php');
-//}
+// commandline_php usage need:
+// if (! array_key_exists('HTTP_USER_AGENT', $_SERVER)) {
+\define('HTTP_USER_AGENT', 'commandline_php');
+// }
 \define('HTTP_SERVER', 'http://pureosc.local');
 \define('HTTPS_SERVER', 'http://pureosc.local');
-//\define('HTTP_SERVER', 'http://' . array_key_exists('HTTP_HOST', $_SERVER) ? $_SERVER['HTTP_HOST'] : 'localhost');
-//\define('HTTPS_SERVER', 'http://' . array_key_exists('HTTP_HOST', $_SERVER) ? $_SERVER['HTTP_HOST'] : 'localhost');
-//\define('HTTP_SERVER', 'http://'.$_SERVER['HTTP_HOST']);
-//\define('HTTPS_SERVER', 'http://'.$_SERVER['HTTP_HOST']);
+// \define('HTTP_SERVER', 'http://' . array_key_exists('HTTP_HOST', $_SERVER) ? $_SERVER['HTTP_HOST'] : 'localhost');
+// \define('HTTPS_SERVER', 'http://' . array_key_exists('HTTP_HOST', $_SERVER) ? $_SERVER['HTTP_HOST'] : 'localhost');
+// \define('HTTP_SERVER', 'http://'.$_SERVER['HTTP_HOST']);
+// \define('HTTPS_SERVER', 'http://'.$_SERVER['HTTP_HOST']);
 
 \define('ENABLE_SSL', false);
 \define('HTTP_COOKIE_DOMAIN', '');
@@ -42,7 +48,7 @@ declare(strict_types=1);
 
 \define('DIR_WS_DOWNLOAD_PUBLIC', 'pub/');
 \define('DIR_FS_CATALOG', '/home/f/git/pureosc.local/osc/catalog/');
-//\define('DIR_FS_CATALOG', __DIR__ .  '/../../../catalog/');
+// \define('DIR_FS_CATALOG', __DIR__ .  '/../../../catalog/');
 \define('DIR_FS_DOWNLOAD', DIR_FS_CATALOG.'download/');
 \define('DIR_FS_DOWNLOAD_PUBLIC', DIR_FS_CATALOG.'pub/');
 
@@ -52,7 +58,7 @@ declare(strict_types=1);
 \define('DB_DATABASE', 'pureosc');
 \define('USE_PCONNECT', 'false');
 \define('STORE_SESSIONS', 'mysql');
-//\define('SESSION_WRITE_DIRECTORY', '/home/f/git/vanilla-oscommerce/.sessions/');
+// \define('SESSION_WRITE_DIRECTORY', '/home/f/git/vanilla-oscommerce/.sessions/');
 \define('CFG_TIME_ZONE', 'Europe/Prague');
 
 // new

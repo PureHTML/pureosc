@@ -19,28 +19,35 @@ $oscTemplate->buildBlocks();
   <title><?php echo tep_output_string_protected($oscTemplate->getTitle()); ?></title>
   <link rel="shortcut icon" href="favicon.ico">
 <?php
-if (SERVER_INSTANCE === 'admin') { //then compilation
-//if (SERVER_INSTANCE === 'admin' && $_SERVER['REMOTE_USER'] != 'wget'){ //then compilation
+if (SERVER_INSTANCE === 'admin') { // then compilation
+    // if (SERVER_INSTANCE === 'admin' && $_SERVER['REMOTE_USER'] != 'wget'){ //then compilation
     cssgenerator();
     cssgenerator_index_top();
     cssgenerator_index_products();
 }
-$header = '<link href=s.css rel=stylesheet>';
-//media
-//echo '<link rel="stylesheet" data-media="screen and (min-width: 980px)" data-href="98">';
-//from php templates like index.php
-$css_file = preg_replace('/\.php$/', '', basename($_SERVER['PHP_SELF']));
-if ($css_file == 'index') {
-    $css_file = 'index_' . $category_depth;
-}
-if (file_exists($css_file . '.css')) {
-    $header .=  "\n" . '        <link href="' . $css_file . '.css" rel="stylesheet">' . "\n";
-} /*elseif (file_exists(preg_replace('/_[a-z].*$/','', $css_file).'.css')){
-  $header.= '        <link href="' . preg_replace('/_[a-z].*$/','', $css_file) . '.css" rel="stylesheet">' . "\n";
-} */
 
-//echo header oneliner:
-echo str_replace("\n", '', $header) . "\n";
+$header = '<link href=s.css rel=stylesheet>';
+// media
+// echo '<link rel="stylesheet" data-media="screen and (min-width: 980px)" data-href="98">';
+// from php templates like index.php
+$css_file = preg_replace('/\.php$/', '', basename($_SERVER['PHP_SELF']));
+
+if ($css_file === 'index') {
+    $css_file = 'index_'.$category_depth;
+}
+
+if (file_exists($css_file.'.css')) {
+    $header .= "\n".'        <link href="'.$css_file.'.css" rel="stylesheet">'."\n";
+}
+
+ /*
+  * elseif (file_exists(preg_replace('/_[a-z].*$/','', $css_file).'.css')){
+  $header.= '        <link href="' . preg_replace('/_[a-z].*$/','', $css_file) . '.css" rel="stylesheet">' . "\n";
+}
+  */
+
+// echo header oneliner:
+echo str_replace("\n", '', $header)."\n";
 
 echo $oscTemplate->getBlocks('header_tags'); ?>
 <header>

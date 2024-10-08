@@ -12,7 +12,7 @@
 
 require 'includes/application_top.php';
 
-require 'includes/languages/' . $language . '/contact_us.php';
+require 'includes/languages/'.$language.'/contact_us.php';
 
 if (isset($_GET['action']) && ($_GET['action'] === 'send') && isset($_POST['formid']) && ($_POST['formid'] === $sessiontoken)) {
     $error = false;
@@ -87,13 +87,15 @@ if (isset($_GET['action']) && ($_GET['action'] === 'success')) {
             <label for="enquiry"><?php echo ENTRY_ENQUIRY; ?></label>
             <?php
             $enquiry = '';
-            if ($_GET['products_id']) {
-            $enquiry_data_query = tep_db_query("SELECT products_name FROM products_description WHERE products_id = " . $_GET['products_id'] . "  AND language_id = " . (int)$languages_id);
-            $enquiry_data = tep_db_fetch_array($enquiry_data_query);
-            $enquiry = PRODUCTS_TITLE_ENQUIRY . ' ' . $enquiry_data['products_name'];
-            }
-            echo tep_draw_textarea_field('enquiry', $enquiry, 'id="enquiry" class="form-control" rows="5"');
-            ?>
+
+    if ($_GET['products_id']) {
+        $enquiry_data_query = tep_db_query('SELECT products_name FROM products_description WHERE products_id = '.$_GET['products_id'].'  AND language_id = '.(int) $languages_id);
+        $enquiry_data = tep_db_fetch_array($enquiry_data_query);
+        $enquiry = PRODUCTS_TITLE_ENQUIRY.' '.$enquiry_data['products_name'];
+    }
+
+    echo tep_draw_textarea_field('enquiry', $enquiry, 'id="enquiry" class="form-control" rows="5"');
+    ?>
         </div>
         <div class="text-end">
     <?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', null, 'btn-primary'); ?>

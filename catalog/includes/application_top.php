@@ -3,10 +3,16 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the DvereCOM package
+ * osCommerce, Open Source E-Commerce Solutions
+ * http://www.oscommerce.com
  *
- *  (c) Šimon Formánek <mail@simonformanek.cz>
- * This file is part of the MultiFlexi package
+ * Copyright (c) 2020 osCommerce
+ *
+ * Released under the GNU General Public License
+ *
+ * This file is part of the PureOSC package
+ *
+ *  (c) 2024 Šimon Formánek <mail@simonformanek.cz>
  *
  * https://pureosc.com/
  *
@@ -73,7 +79,7 @@ function usu5_base_filename()
     }
 
     // Return the standard RC3 code
-    return ((((\ini_get('cgi.fix_pathinfo')) !== '') && ((bool) \ini_get('cgi.fix_pathinfo') === false)) || !isset($_SERVER['SCRIPT_NAME'])) ? basename($_SERVER['PHP_SELF']) : basename($_SERVER['SCRIPT_NAME']);
+    return (((\ini_get('cgi.fix_pathinfo') !== '') && ((bool) \ini_get('cgi.fix_pathinfo') === false)) || !isset($_SERVER['SCRIPT_NAME'])) ? basename($_SERVER['PHP_SELF']) : basename($_SERVER['SCRIPT_NAME']);
 } // End function
 // set php_self in the local scope
 $PHP_SELF = usu5_base_filename();

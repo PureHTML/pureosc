@@ -68,7 +68,7 @@ EOD.TABLE_BANNERS.<<<'EOD'
 EOD.MODULE_CAROUSEL_ROTATOR_GROUP.<<<'EOD'
 '
                     and status
-                  order by banners_title 
+                  order by banners_title
 EOD.MODULE_CAROUSEL_ROTATOR_BANNER_ORDER.<<<'EOD'
 
                   limit
@@ -153,7 +153,7 @@ EOD.MODULE_CAROUSEL_ROTATOR_MAX_DISPLAY;
 
         return 'data: image/png;base64,'.$imgData;
     }
-  }
+}
 
 ?>
 

@@ -93,14 +93,14 @@ while ($configuration = tep_db_fetch_array($configuration_query)) {
 
     ?>
                 <td class="dataTableContent"><?php echo $configuration['configuration_title']; ?></td>
-                <td class="dataTableContent"><?php echo htmlspecialchars((string)$cfgValue); ?></td>
+                <td class="dataTableContent"><?php echo htmlspecialchars((string) $cfgValue); ?></td>
                 <td class="dataTableContent" align="right"><?php if ((isset($cInfo) && \is_object($cInfo)) && ($configuration['configuration_id'] === $cInfo->configuration_id)) {
                     echo tep_image('images/icon_arrow_right.gif', '');
                 } else {
                     echo '<a href="'.tep_href_link('configuration.php', 'gID='.$_GET['gID'].'&cID='.$configuration['configuration_id']).'">'.tep_image('images/icon_info.gif', IMAGE_ICON_INFO).'</a>';
                 }
 
- ?>&nbsp;</td>
+    ?>&nbsp;</td>
               </tr>
 <?php
 }

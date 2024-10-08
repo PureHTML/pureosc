@@ -30,22 +30,22 @@
             <div class="m-2">
               <a href="<?php echo tep_href_link('product_info.php', 'products_id='.$listing['products_id']); ?>"><?php echo $listing['products_name']; ?></a>
             </div>
-<?php 
-if ( defined('DISABLE_PRICES') && constant('DISABLE_PRICES')  !== 'true') { 
-?>
+<?php
+if (\defined('DISABLE_PRICES') && \constant('DISABLE_PRICES') !== 'true') {
+    ?>
             <div class="mb-2">
 
               <?php
-                  if (empty($listing['specials_new_products_price'])) {
-                      echo $currencies->display_price($listing['products_price'], tep_get_tax_rate($listing['products_tax_class_id']));
-                  } else {
-                      ?>
+                      if (empty($listing['specials_new_products_price'])) {
+                          echo $currencies->display_price($listing['products_price'], tep_get_tax_rate($listing['products_tax_class_id']));
+                      } else {
+                          ?>
 
                 <del class="text-muted"><?php echo $currencies->display_price($listing['products_price'], tep_get_tax_rate($listing['products_tax_class_id'])); ?></del>
                 <span class="text-danger"><?php echo $currencies->display_price($listing['specials_new_products_price'], tep_get_tax_rate($listing['products_tax_class_id'])); ?></span>
 
                 <?php
-                  }
+                      }
 
     ?>
 
@@ -56,7 +56,7 @@ if ( defined('DISABLE_PRICES') && constant('DISABLE_PRICES')  !== 'true') {
             </div>
 <?php }
 
- ?>
+?>
  </div>
 
         </div>

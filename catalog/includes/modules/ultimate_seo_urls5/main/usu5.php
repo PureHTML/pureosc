@@ -3,10 +3,16 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the DvereCOM package
+ * osCommerce, Open Source E-Commerce Solutions
+ * http://www.oscommerce.com
  *
- *  (c) Šimon Formánek <mail@simonformanek.cz>
- * This file is part of the MultiFlexi package
+ * Copyright (c) 2020 osCommerce
+ *
+ * Released under the GNU General Public License
+ *
+ * This file is part of the PureOSC package
+ *
+ *  (c) 2024 Šimon Formánek <mail@simonformanek.cz>
  *
  * https://pureosc.com/
  *
@@ -37,7 +43,7 @@ require_once DIR_WS_MODULES.'ultimate_seo_urls5/main/data_registry.php';
 /**
  * Main USU5 PRO class.
  */
-class Usu_Main
+class usu5
 {
     public static $version = 'version 1.1';
 
@@ -230,7 +236,7 @@ class Usu_Main
     {
         $time = microtime(true);
         $result = tep_db_query($sql);
-        $end_time = number_format(microtime(true) - $time , 4);
+        $end_time = number_format(microtime(true) - $time, 4);
 
         if (self::monitorPerformance()) {
             ++self::$performance['querycount'];
@@ -274,7 +280,7 @@ class Usu_Main
                 tep_db_free_result($result);
 
                 if (false === $row) {
-                    self::$performance['time_extracting_cache'] = number_format(microtime(true) - $timestart , 4);
+                    self::$performance['time_extracting_cache'] = number_format(microtime(true) - $timestart, 4);
 
                     // return insert = true as there is nothing in the database
                     return true;
@@ -282,18 +288,18 @@ class Usu_Main
 
                 if (time() > (strtotime($row['cache_date']) + $cache_seconds)) { // If the cache has expired
                     $object->gc(); // Clear the cache
-                    self::$performance['time_extracting_cache'] = number_format(microtime(true) - $timestart , 4);
+                    self::$performance['time_extracting_cache'] = number_format(microtime(true) - $timestart, 4);
 
                     // return insert = true as there is nothing in the database
                     return true;
                 }
 
-   // the cache hasn't expired so we retrieve it and set the registry
+                // the cache hasn't expired so we retrieve it and set the registry
                 $cache_file_size = number_format(\strlen($row['cache_data']) / 1024, 2).' kb';
                 $rawdata = gzinflate(base64_decode($row['cache_data'], true));
                 $this->getVar('registry')
                     ->load(unserialize($rawdata));
-                self::$performance['time_extracting_cache'] = number_format(microtime(true) - $timestart , 4);
+                self::$performance['time_extracting_cache'] = number_format(microtime(true) - $timestart, 4);
                 self::$performance['cache_loaded'] = 'true';
 
                 // return insert = false as we have extracted data from the database
@@ -306,19 +312,19 @@ class Usu_Main
                         ->load(unserialize(gzinflate(file_get_contents($this
                             ->getVar('cache_system_path').'cache/'.$cache_name.'.cache'))));
                     self::$performance['cache_loaded'] = 'true';
-                    self::$performance['time_extracting_cache'] = number_format(microtime(true) - $timestart , 4);
+                    self::$performance['time_extracting_cache'] = number_format(microtime(true) - $timestart, 4);
 
                     return false;
                 }
 
-                self::$performance['time_extracting_cache'] = number_format(microtime(true) - $timestart , 4);
+                self::$performance['time_extracting_cache'] = number_format(microtime(true) - $timestart, 4);
 
                 return true;
 
                 break;
             case $cache_type === 'memcache':
                 if (false === ($rawdata = $object->get($cache_name))) {
-                    self::$performance['time_extracting_cache'] = number_format(microtime(true) - $timestart , 4);
+                    self::$performance['time_extracting_cache'] = number_format(microtime(true) - $timestart, 4);
 
                     // return insert = true as there is nothing in the database
                     return true;
@@ -327,7 +333,7 @@ class Usu_Main
                 $rawdata = gzinflate(base64_decode($rawdata, true));
                 $this->getVar('registry')
                     ->load(unserialize($rawdata));
-                self::$performance['time_extracting_cache'] = number_format(microtime(true) - $timestart , 4);
+                self::$performance['time_extracting_cache'] = number_format(microtime(true) - $timestart, 4);
                 self::$performance['cache_loaded'] = 'true';
 
                 // return insert = false as we have extracted data from the database
@@ -340,7 +346,7 @@ class Usu_Main
                 $row = $result->fetch();
 
                 if (empty($row)) {
-                    self::$performance['time_extracting_cache'] = number_format(microtime(true) - $timestart , 4);
+                    self::$performance['time_extracting_cache'] = number_format(microtime(true) - $timestart, 4);
 
                     // return insert = true as there is nothing in the database
                     return true;
@@ -348,18 +354,18 @@ class Usu_Main
 
                 if (time() > (strtotime($row['cache_date']) + $cache_seconds)) { // If the cache has expired
                     $object->gc(); // Clear the cache
-                    self::$performance['time_extracting_cache'] = number_format(microtime(true) - $timestart , 4);
+                    self::$performance['time_extracting_cache'] = number_format(microtime(true) - $timestart, 4);
 
                     // return insert = true as there is nothing in the database
                     return true;
                 }
 
-   // the cache hasn't expired so we retrieve it and set the registry
+                // the cache hasn't expired so we retrieve it and set the registry
                 $cache_file_size = number_format(\strlen($row['cache_data']) / 1024, 2).' kb';
                 $rawdata = gzinflate(base64_decode($row['cache_data'], true));
                 $this->getVar('registry')
                     ->load(unserialize($rawdata));
-                self::$performance['time_extracting_cache'] = number_format(microtime(true) - $timestart , 4);
+                self::$performance['time_extracting_cache'] = number_format(microtime(true) - $timestart, 4);
                 self::$performance['cache_loaded'] = 'true';
 
                 // return insert = false as we have extracted data from the database

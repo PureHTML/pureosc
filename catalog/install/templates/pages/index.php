@@ -119,7 +119,7 @@
 
     <?php
     $path_array = ['includes' => 'configure.php',
-  'admin/includes' => 'configure.php'];
+        'admin/includes' => 'configure.php'];
 
 $configfile_array = check_permissions($path_array);
 

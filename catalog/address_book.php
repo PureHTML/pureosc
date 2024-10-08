@@ -57,7 +57,7 @@ while ($addresses = tep_db_fetch_array($addresses_query)) {
               echo '<span class="badge bg-danger ms-2">'.PRIMARY_ADDRESS.'</span>';
           }
 
- ?></div>
+    ?></div>
 
           <p><?php echo tep_address_format($format_id, $addresses, true, ' ', '<br />'); ?></p>
 

@@ -3,10 +3,16 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the DvereCOM package
+ * osCommerce, Open Source E-Commerce Solutions
+ * http://www.oscommerce.com
  *
- *  (c) Šimon Formánek <mail@simonformanek.cz>
- * This file is part of the MultiFlexi package
+ * Copyright (c) 2020 osCommerce
+ *
+ * Released under the GNU General Public License
+ *
+ * This file is part of the PureOSC package
+ *
+ *  (c) 2024 Šimon Formánek <mail@simonformanek.cz>
  *
  * https://pureosc.com/
  *
@@ -58,8 +64,8 @@ function tep_redirect($url): void
 // Parse the data used in the html tags to ensure the tags will not break
 function tep_parse_input_field_data($data, $parse)
 {
-//    return strtr(trim($data), $parse);
-return $data;//TODO: dirtyHack!
+    //    return strtr(trim($data), $parse);
+    return $data; // TODO: dirtyHack!
 }
 
 function tep_output_string($string, $translate = false, $protected = false)
@@ -197,8 +203,8 @@ function tep_date_short($raw_date)
         return date(DATE_FORMAT, mktime($hour, $minute, $second, $month, $day, $year));
     }
 
-    return  date(DATE_FORMAT, mktime($hour, $minute, $second, $month, $day, 2037));
-//TODO    return preg_replace('/2037$/', $year, date(DATE_FORMAT, mktime($hour, $minute, $second, $month, $day, 2037)));
+    return date(DATE_FORMAT, mktime($hour, $minute, $second, $month, $day, 2037));
+    // TODO    return preg_replace('/2037$/', $year, date(DATE_FORMAT, mktime($hour, $minute, $second, $month, $day, 2037)));
 }
 
 function tep_datetime_short($raw_datetime)

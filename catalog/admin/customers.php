@@ -257,12 +257,12 @@ function check_form() {
     echo "var entry_company = document.customers.entry_company.value;\n";
 }
 
- ?>
+    ?>
 <?php if (ACCOUNT_DOB === 'true') {
-    echo "var customers_dob = document.customers.customers_dob.value;\n";
-}
+        echo "var customers_dob = document.customers.customers_dob.value;\n";
+    }
 
- ?>
+    ?>
   var customers_email_address = document.customers.customers_email_address.value;
   var entry_street_address = document.customers.entry_street_address.value;
   var entry_postcode = document.customers.entry_postcode.value;
@@ -277,7 +277,7 @@ function check_form() {
   }
 <?php }
 
- ?>
+?>
 
   if (customers_firstname.length < <?php echo ENTRY_FIRST_NAME_MIN_LENGTH; ?>) {
     error_message = error_message + "<?php echo JS_FIRST_NAME; ?>";
@@ -296,7 +296,7 @@ function check_form() {
   }
 <?php }
 
- ?>
+?>
 
   if (customers_email_address.length < <?php echo ENTRY_EMAIL_ADDRESS_MIN_LENGTH; ?>) {
     error_message = error_message + "<?php echo JS_EMAIL_ADDRESS; ?>";
@@ -319,8 +319,8 @@ function check_form() {
   }
 
 <?php
-  if (ACCOUNT_STATE === 'true') {
-      ?>
+ if (ACCOUNT_STATE === 'true') {
+     ?>
   if (document.customers.elements['entry_state'].type != "hidden") {
     if (document.customers.entry_state.value.length < <?php echo ENTRY_STATE_MIN_LENGTH; ?>) {
        error_message = error_message + "<?php echo JS_STATE; ?>";
@@ -328,7 +328,7 @@ function check_form() {
     }
   }
 <?php
-  }
+ }
 
     ?>
 
@@ -779,7 +779,7 @@ function check_form() {
                     echo '<a href="'.tep_href_link('customers.php', tep_get_all_get_params(['cID']).'cID='.$customers['customers_id']).'">'.tep_image('images/icon_info.gif', IMAGE_ICON_INFO).'</a>';
                 }
 
- ?>&nbsp;</td>
+          ?>&nbsp;</td>
               </tr>
 <?php
       }

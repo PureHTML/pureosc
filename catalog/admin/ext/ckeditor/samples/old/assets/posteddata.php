@@ -3,7 +3,7 @@
 /*
 Copyright (c) 2003-2024, CKSource Holding sp. z o.o. All rights reserved.
 CKEditor 4 LTS ("Long Term Support") is available under the terms of the Extended Support Model.
-*/
+ */
 ?>
 <html lang="en">
 <head>
@@ -26,25 +26,27 @@ CKEditor 4 LTS ("Long Term Support") is available under the terms of the Extende
 		</thead>
 <?php
 
-if (!empty($_POST))
-{
-	foreach ( $_POST as $key => $value )
-	{
-		if ( ( !is_string($value) && !is_numeric($value) ) || !is_string($key) )
-			continue;
+if (!empty($_POST)) {
+    foreach ($_POST as $key => $value) {
+        if ((!\is_string($value) && !is_numeric($value)) || !\is_string($key)) {
+            continue;
+        }
 
-		if ( get_magic_quotes_gpc() )
-			$value = htmlspecialchars( stripslashes((string)$value) );
-		else
-			$value = htmlspecialchars( (string)$value );
-?>
+        if (get_magic_quotes_gpc()) {
+            $value = htmlspecialchars(stripslashes((string) $value));
+        } else {
+            $value = htmlspecialchars((string) $value);
+        }
+
+        ?>
 		<tr>
-			<th style="vertical-align: top"><?php echo htmlspecialchars( (string)$key ); ?></th>
+			<th style="vertical-align: top"><?php echo htmlspecialchars((string) $key); ?></th>
 			<td><pre class="samples"><?php echo $value; ?></pre></td>
 		</tr>
 	<?php
-	}
+    }
 }
+
 ?>
 	</table>
 	<div id="footer">

@@ -3,7 +3,25 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the DvereCOM package
+ * osCommerce, Open Source E-Commerce Solutions
+ * http://www.oscommerce.com
+ *
+ * Copyright (c) 2020 osCommerce
+ *
+ * Released under the GNU General Public License
+ *
+ * This file is part of the PureOSC package
+ *
+ *  (c) 2024 Šimon Formánek <mail@simonformanek.cz>
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+/**
+ * This file is part of the DvereCOM package.
  *
  *  (c) Šimon Formánek <mail@simonformanek.cz>
  * This file is part of the MultiFlexi package
@@ -12,8 +30,13 @@ declare(strict_types=1);
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
+ *
+ * @param mixed $server
+ * @param mixed $username
+ * @param mixed $password
+ * @param mixed $database
+ * @param mixed $link
  */
-
 function tep_db_connect($server = DB_SERVER, $username = DB_SERVER_USERNAME, $password = DB_SERVER_PASSWORD, $database = DB_DATABASE, $link = 'db_link')
 {
     global ${$link};
@@ -58,8 +81,9 @@ function tep_db_query($query, $link = 'db_link')
     }
 
     $result = mysqli_query(${$link}, $query);
-    if(is_bool($result) && $result === false ){
-        $result = tep_db_error($query, mysqli_errno(${$link}), mysqli_error(${$link}));        
+
+    if (\is_bool($result) && $result === false) {
+        $result = tep_db_error($query, mysqli_errno(${$link}), mysqli_error(${$link}));
     }
 
     return $result;
@@ -163,7 +187,7 @@ function tep_db_input($string, $link = 'db_link')
 {
     global ${$link};
 
-    return mysqli_real_escape_string(${$link}, (string)$string);
+    return mysqli_real_escape_string(${$link}, (string) $string);
 }
 
 function tep_db_prepare_input($string)

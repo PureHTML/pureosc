@@ -302,7 +302,7 @@ while ($admins = tep_db_fetch_array($admins_query)) {
                     echo '<a href="'.tep_href_link('administrators.php', 'aID='.$admins['id']).'">'.tep_image('images/icon_info.gif', IMAGE_ICON_INFO).'</a>';
                 }
 
- ?>&nbsp;</td>
+    ?>&nbsp;</td>
               </tr>
 <?php
 }

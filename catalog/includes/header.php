@@ -9,7 +9,7 @@
 
   Released under the GNU General Public License
  */
-//icons TODO css compile mimify
+// icons TODO css compile mimify
 
 if ($oscTemplate->hasBlocks('header_top')) {
     ?>

@@ -256,7 +256,7 @@ function popupImageWindow(url) {
                 echo tep_draw_hidden_field('banners_id', $bID);
             }
 
- ?>
+            ?>
             <td><table border="0" cellspacing="0" cellpadding="2">
                 <tr>
                   <td class="main"><?php echo TEXT_BANNERS_TITLE; ?></td>
@@ -387,7 +387,7 @@ function popupImageWindow(url) {
                     echo '<a href="'.tep_href_link(FILENAME_BANNER_MANAGER, 'page='.$HTTP_GET_VARS['page'].'&bID='.$banners['banners_id']).'">'.tep_image(DIR_WS_IMAGES.'icon_info.gif', IMAGE_ICON_INFO).'</a>';
                 }
 
- ?>&nbsp;</td>
+                ?>&nbsp;</td>
                       </tr>
     <?php
             }

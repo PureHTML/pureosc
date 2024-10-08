@@ -3,7 +3,25 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the DvereCOM package
+ * osCommerce, Open Source E-Commerce Solutions
+ * http://www.oscommerce.com
+ *
+ * Copyright (c) 2020 osCommerce
+ *
+ * Released under the GNU General Public License
+ *
+ * This file is part of the PureOSC package
+ *
+ *  (c) 2024 Šimon Formánek <mail@simonformanek.cz>
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+/**
+ * This file is part of the DvereCOM package.
  *
  *  (c) Šimon Formánek <mail@simonformanek.cz>
  * This file is part of the MultiFlexi package
@@ -13,7 +31,6 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 class cm_index_new_products
 {
     public $code;
@@ -41,7 +58,7 @@ class cm_index_new_products
     {
         global $oscTemplate, $currencies, $languages_id, $current_category_id;
 
-        if (!isset($current_category_id) || $current_category_id == 0) {
+        if (!isset($current_category_id) || $current_category_id === 0) {
             $new_products_query = tep_db_query("select p.*, pd.*, if(s.status, s.specials_new_products_price, p.products_price) as products_price from products p left join specials s on p.products_id = s.products_id, products_description pd where p.products_status = '1' and p.products_id = pd.products_id and pd.language_id = '".(int) $languages_id."' order by p.products_date_added desc limit ".(int) MODULE_CONTENT_INDEX_NEW_PRODUCTS_MAX_DISPLAY_PRODUCTS);
         } else {
             $new_products_query = tep_db_query("select distinct p.*, pd.*, if(s.status, s.specials_new_products_price, p.products_price) as products_price from products p left join specials s on p.products_id = s.products_id, products_description pd, products_to_categories p2c, categories c where p.products_id = p2c.products_id and p2c.categories_id = c.categories_id and c.parent_id = '".(int) $current_category_id."' and p.products_status = '1' and p.products_id = pd.products_id and pd.language_id = '".(int) $languages_id."' order by p.products_date_added desc limit ".(int) MODULE_CONTENT_INDEX_NEW_PRODUCTS_MAX_DISPLAY_PRODUCTS);

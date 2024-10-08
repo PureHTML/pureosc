@@ -153,7 +153,7 @@ while ($orders_status = tep_db_fetch_array($orders_status_query)) {
                     echo '<a href="'.tep_href_link('orders_status.php', 'page='.$_GET['page'].'&oID='.$orders_status['orders_status_id']).'">'.tep_image('images/icon_info.gif', IMAGE_ICON_INFO).'</a>';
                 }
 
- ?>&nbsp;</td>
+    ?>&nbsp;</td>
               </tr>
 <?php
 }

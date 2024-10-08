@@ -1,16 +1,23 @@
-<?php /* <body><pre>
+<?php
 
--------------------------------------------------------------------------------------------
-  CKEditor - Posted Data
+declare(strict_types=1);
 
-  We are sorry, but your Web server does not support the PHP language used in this script.
+/**
+ * osCommerce, Open Source E-Commerce Solutions
+ * http://www.oscommerce.com
+ *
+ * Copyright (c) 2020 osCommerce
+ *
+ * Released under the GNU General Public License
+ *
+ * This file is part of the PureOSC package
+ *
+ *  (c) 2024 Šimon Formánek <mail@simonformanek.cz>
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  Please note that CKEditor can be used with any other server-side language than just PHP.
-  To save the content created with CKEditor you need to read the POST data on the server
-  side and write it to a file or the database.
-
-  Copyright (c) 2003-2024, CKSource Holding sp. z o.o. All rights reserved.
-  CKEditor 4 LTS ("Long Term Support") is available under the terms of the Extended Support Model.
--------------------------------------------------------------------------------------------
-
-</pre><div style="display:none"></body> */ include "assets/posteddata.php"; ?>
+ include 'assets/posteddata.php';

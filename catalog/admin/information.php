@@ -134,7 +134,7 @@ $base_url = ($request_type === 'SSL') ? HTTPS_SERVER.DIR_WS_HTTPS_ADMIN : HTTP_S
           echo tep_draw_hidden_field('pID', $_GET['pID']);
       }
 
- ?>
+      ?>
 
         <div id="informationTabs" style="overflow: auto;">
           <ul id="informationTabsMain">
@@ -147,9 +147,9 @@ $base_url = ($request_type === 'SSL') ? HTTPS_SERVER.DIR_WS_HTTPS_ADMIN : HTTP_S
               <ul>
 
                 <?php
-                for ($i = 0, $n = \count($languages); $i < $n; ++$i) {
-                    echo '<li><a href="'.substr(tep_href_link('information.php', tep_get_all_get_params()), \strlen($base_url)).'#section_general_content_'.$languages[$i]['directory'].'">'.$languages[$i]['name'].'</a></li>';
-                }
+                     for ($i = 0, $n = \count($languages); $i < $n; ++$i) {
+                         echo '<li><a href="'.substr(tep_href_link('information.php', tep_get_all_get_params()), \strlen($base_url)).'#section_general_content_'.$languages[$i]['directory'].'">'.$languages[$i]['name'].'</a></li>';
+                     }
 
       ?>
 
@@ -258,7 +258,7 @@ $base_url = ($request_type === 'SSL') ? HTTPS_SERVER.DIR_WS_HTTPS_ADMIN : HTTP_S
                   echo '<a href="'.tep_href_link('information.php', 'page='.$_GET['page'].'&pID='.$information['pages_id']).'">'.tep_image('images/icon_info.gif', IMAGE_ICON_INFO).'</a>';
               }
 
- ?>&nbsp;</td>
+          ?>&nbsp;</td>
       </tr>
 <?php
       }

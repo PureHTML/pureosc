@@ -145,7 +145,7 @@ require 'includes/template_top.php';
                     echo tep_draw_button(IMAGE_BACK, 'arrow-1-w', tep_href_link('define_language.php', 'lngdir='.$_GET['lngdir']));
                 }
 
- ?></td>
+          ?></td>
               </tr>
             </table></td>
           </form></tr>
