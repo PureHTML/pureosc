@@ -103,7 +103,7 @@ function osc_is_writable($file)
 // Parse the data used in the html tags to ensure the tags will not break
 function osc_parse_input_field_data($data, $parse)
 {
-    return strtr(trim($data), $parse);
+    return strtr(trim((string)$data), $parse);
 }
 
 function osc_output_string($string, $translate = false, $protected = false)
