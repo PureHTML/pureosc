@@ -3,10 +3,10 @@
 declare(strict_types=1);
 
 /**
- * osCommerce, Open Source E-Commerce Solutions
- * http://www.oscommerce.com
+ * PureOSC, Open Source E-Commerce Solutions
+ * https://pureosc.com
  *
- * Copyright (c) 2020 osCommerce
+ * Copyright (c) 2024 PureOSC
  *
  * Released under the GNU General Public License
  *
@@ -20,4 +20,4 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
- include 'assets/posteddata.php';
+include 'assets/posteddata.php';

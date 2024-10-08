@@ -40,11 +40,11 @@ if (file_exists($css_file.'.css')) {
     $header .= "\n".'        <link href="'.$css_file.'.css" rel="stylesheet">'."\n";
 }
 
- /*
-  * elseif (file_exists(preg_replace('/_[a-z].*$/','', $css_file).'.css')){
-  $header.= '        <link href="' . preg_replace('/_[a-z].*$/','', $css_file) . '.css" rel="stylesheet">' . "\n";
+/*
+ * elseif (file_exists(preg_replace('/_[a-z].*$/','', $css_file).'.css')){
+ $header.= '        <link href="' . preg_replace('/_[a-z].*$/','', $css_file) . '.css" rel="stylesheet">' . "\n";
 }
-  */
+ */
 
 // echo header oneliner:
 echo str_replace("\n", '', $header)."\n";
