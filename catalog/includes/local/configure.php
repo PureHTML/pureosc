@@ -24,7 +24,7 @@ declare(strict_types=1);
 // if (! array_key_exists('HTTP_USER_AGENT', $_SERVER)) {
 \define('HTTP_USER_AGENT', 'commandline_php');
 // }
-\define('HTTP_SERVER', 'http://pureosc.local');
+\define('HTTP_SERVER', 'http://localhost:8000');
 \define('HTTPS_SERVER', 'http://pureosc.local');
 // \define('HTTP_SERVER', 'http://' . array_key_exists('HTTP_HOST', $_SERVER) ? $_SERVER['HTTP_HOST'] : 'localhost');
 // \define('HTTPS_SERVER', 'http://' . array_key_exists('HTTP_HOST', $_SERVER) ? $_SERVER['HTTP_HOST'] : 'localhost');

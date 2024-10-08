@@ -178,7 +178,7 @@ if (SESSION_FORCE_COOKIE_USE === 'True') {
         $session_started = true;
     }
 } elseif (SESSION_BLOCK_SPIDERS === 'True') {
-    $user_agent = strtolower(getenv('HTTP_USER_AGENT'));
+    $user_agent = strtolower((string)getenv('HTTP_USER_AGENT'));
     $spider_flag = false;
 
     if (!empty($user_agent)) {
