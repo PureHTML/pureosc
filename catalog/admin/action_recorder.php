@@ -178,7 +178,7 @@ while ($actions = tep_db_fetch_array($actions_query)) {
                     echo '<a href="'.tep_href_link('action_recorder.php', tep_get_all_get_params(['aID']).'aID='.$actions['id']).'">'.tep_image('images/icon_info.gif', IMAGE_ICON_INFO).'</a>';
                 }
 
- ?>&nbsp;</td>
+    ?>&nbsp;</td>
               </tr>
 <?php
 }

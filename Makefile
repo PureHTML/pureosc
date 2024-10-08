@@ -21,7 +21,7 @@ vendor: composer.json composer.lock ## Installs composer dependencies
 
 .PHONY: cs
 cs: ## Update Coding Standards
-	includes/vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --diff --verbose
+	vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --diff --verbose
 
 clean:
 	rm -rf vendor composer.lock db/cephoenix.sqlite src/*/*dataTables*

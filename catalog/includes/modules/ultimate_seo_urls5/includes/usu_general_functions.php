@@ -269,14 +269,14 @@ function do_homepage_redirect($url = false)
                                               && (USU5_ENABLED === 'true')) {
         if (false === $url) {
             $original_request_uri = remove_querystring(Usu_Main::i()->getVar('original_request_uri'));
-            $possible_file = substr($original_request_uri,  \strlen($original_request_uri) - \strlen(FILENAME_DEFAULT) , \strlen(FILENAME_DEFAULT));
+            $possible_file = substr($original_request_uri, \strlen($original_request_uri) - \strlen(FILENAME_DEFAULT), \strlen(FILENAME_DEFAULT));
 
             if (!tep_not_null(Usu_Main::i()->getVar('request_uri')) && ($possible_file === FILENAME_DEFAULT)) {
                 return true;
             }
         } else {
             $url = remove_querystring($url);
-            $possible_file = substr($url,  \strlen($url) - \strlen(FILENAME_DEFAULT) , \strlen(FILENAME_DEFAULT));
+            $possible_file = substr($url, \strlen($url) - \strlen(FILENAME_DEFAULT), \strlen(FILENAME_DEFAULT));
 
             if ($possible_file === FILENAME_DEFAULT) {
                 return true;
@@ -395,7 +395,7 @@ function usu5_make_writeable($path)
         return false;
     }
 
-return true;
+    return true;
 } // end function
 /**
  * Performance reporting.

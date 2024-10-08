@@ -3,10 +3,16 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the DvereCOM package
+ * osCommerce, Open Source E-Commerce Solutions
+ * http://www.oscommerce.com
  *
- *  (c) Šimon Formánek <mail@simonformanek.cz>
- * This file is part of the MultiFlexi package
+ * Copyright (c) 2020 osCommerce
+ *
+ * Released under the GNU General Public License
+ *
+ * This file is part of the PureOSC package
+ *
+ *  (c) 2024 Šimon Formánek <mail@simonformanek.cz>
  *
  * https://pureosc.com/
  *
@@ -19,9 +25,9 @@ declare(strict_types=1);
 \define('TEXT_ORIGIN_LOGIN', '<font color="#FF0000"><small><b>INFO:</b></font></small> Pokud zde již máte vytvořen účet, prosím přihlašte se <a href="%s"><u>zde</u></a>.');
 
 \define('EMAIL_SUBJECT', 'Vítejte v '.STORE_NAME);
-\define('EMAIL_GREET_MR', 'Vážený pane. '.filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_STRING).",\n\n");
-\define('EMAIL_GREET_MS', 'Vážená paní. '.filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_STRING).",\n\n");
-\define('EMAIL_GREET_NONE', 'Vážený(á) '.filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_STRING).",\n\n");
+\define('EMAIL_GREET_MR', 'Vážený pane. '.filter_input(\INPUT_POST, 'lastname', \FILTER_SANITIZE_STRING).",\n\n");
+\define('EMAIL_GREET_MS', 'Vážená paní. '.filter_input(\INPUT_POST, 'lastname', \FILTER_SANITIZE_STRING).",\n\n");
+\define('EMAIL_GREET_NONE', 'Vážený(á) '.filter_input(\INPUT_POST, 'firstname', \FILTER_SANITIZE_STRING).",\n\n");
 \define('EMAIL_WELCOME', 'Vítáme vás v <b>'.STORE_NAME."</b>.\n\n");
 \define('EMAIL_TEXT', "Nyní můžete využívat <b>různé služby</b>, které vám nabízíme. Některé z těchtoslužeb jsou:\n\n<li><b>Zákaznický košík</b> - Veškeré zboží vložené do košíku je vněm uloženo dokud se neodstraní z košíku, nebo nedokončí nákup.\n<li><b>Adresář</b> - Můžeme doručit zboží i na jiné adresy, než kterou uvedete v registraci! Toto je skvělé například pro zaslání dárku k narozeninám přímo osobě, kterou chcete obdarovat.\n<li><b>Historie objednávek</b> - Zobrazení veškerých objednávek provedených v našem obchodě.\n<li><b>Hodnocení produktů</b> - Podělte se o své zkušenosti s nabízeným zbožím i s ostatními návštěvníky.\n\n");
 \define('EMAIL_CONTACT', 'Pro pomoc s čímkoliv na našem on=line obchodě prosím kontaktujte provozovatele: '.STORE_OWNER_EMAIL_ADDRESS.".\n\n");

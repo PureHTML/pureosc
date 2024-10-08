@@ -298,7 +298,7 @@ if (!isset($_GET['delete'])) {
       echo HEADING_TITLE_ADD_ENTRY;
   }
 
- ?></h1>
+?></h1>
 
 <?php
 if ($messageStack->size('addressbook') > 0) {

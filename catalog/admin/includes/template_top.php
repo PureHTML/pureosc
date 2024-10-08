@@ -16,7 +16,7 @@
   <meta charset="<?php echo CHARSET; ?>">
   <meta name="robots" content="noindex,nofollow">
   <title><?php echo TITLE; ?></title>
-  <base href="<?php echo constant('HTTPS_SERVER') . constant('DIR_WS_HTTPS_ADMIN') ?>"/>
+  <base href="<?php echo \constant('HTTPS_SERVER').\constant('DIR_WS_HTTPS_ADMIN'); ?>"/>
   <link rel="shortcut icon" href="<?php echo tep_catalog_href_link('favicon.ico'); ?>"/>
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/redmond/jquery-ui.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -40,12 +40,13 @@
   <link rel="stylesheet" href="includes/stylesheet.css">
   <script src="includes/general.js"></script>
    <?php
-     if (!defined('USE_CKEDITOR_ADMIN_TEXTAREA')) {
-       tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_id, configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added, set_function) values ('', 'Use CKEditor', 'USE_CKEDITOR_ADMIN_TEXTAREA','true','Use CKEditor for WYSIWYG editing of textarea fields in admin',1,99,now(),'tep_cfg_select_option(array(\'true\', \'false\'),' )");
-       define ('USE_CKEDITOR_ADMIN_TEXTAREA','true');
+     if (!\defined('USE_CKEDITOR_ADMIN_TEXTAREA')) {
+         tep_db_query('insert into '.TABLE_CONFIGURATION." (configuration_id, configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added, set_function) values ('', 'Use CKEditor', 'USE_CKEDITOR_ADMIN_TEXTAREA','true','Use CKEditor for WYSIWYG editing of textarea fields in admin',1,99,now(),'tep_cfg_select_option(array(\\'true\\', \\'false\\'),' )");
+         \define('USE_CKEDITOR_ADMIN_TEXTAREA', 'true');
      }
-     if (USE_CKEDITOR_ADMIN_TEXTAREA == "true") {
-   ?>
+
+if (USE_CKEDITOR_ADMIN_TEXTAREA === 'true') {
+    ?>
    <script type="text/javascript" src="<?php echo tep_href_link('ext/ckeditor/ckeditor.js'); ?>"></script>
    <script type="text/javascript" src="<?php echo tep_href_link('ext/ckeditor/adapters/jquery.js'); ?>"></script>
    <script type="text/javascript">
@@ -62,8 +63,9 @@
    });
    </script>
    <?php
-     }
-   ?>
+}
+
+?>
 </head>
 <body>
 

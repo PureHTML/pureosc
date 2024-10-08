@@ -399,7 +399,7 @@ $(function() {
                     echo '<a href="'.tep_href_link('orders.php', tep_get_all_get_params(['oID']).'oID='.$orders['orders_id']).'">'.tep_image('images/icon_info.gif', IMAGE_ICON_INFO).'</a>';
                 }
 
- ?>&nbsp;</td>
+        ?>&nbsp;</td>
               </tr>
 <?php
     }

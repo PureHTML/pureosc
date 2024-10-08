@@ -3,10 +3,16 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the DvereCOM package
+ * osCommerce, Open Source E-Commerce Solutions
+ * http://www.oscommerce.com
  *
- *  (c) Šimon Formánek <mail@simonformanek.cz>
- * This file is part of the MultiFlexi package
+ * Copyright (c) 2020 osCommerce
+ *
+ * Released under the GNU General Public License
+ *
+ * This file is part of the PureOSC package
+ *
+ *  (c) 2024 Šimon Formánek <mail@simonformanek.cz>
  *
  * https://pureosc.com/
  *
@@ -318,8 +324,7 @@ abstract class page_modules
         $pattern = (\defined('SEO_REMOVE_ALL_SPEC_CHARS') && SEO_REMOVE_ALL_SPEC_CHARS === 'true') ? '@[^\\sa-z0-9]@i' : "@[!#\$%&'\"()\\*\\+,\\-\\./:;<=>\\?\\@\\[\\]\\^_`\\{|\\}~]+@";
         $link_text = preg_replace($pattern, '', strtolower($string));
 
-            $link_text = preg_replace("@[\\s\v]+@", '-', $link_text);
-        
+        $link_text = preg_replace("@[\\s\v]+@", '-', $link_text);
 
         // No short words so return the base text
         if (false === strpos($link_text, '-')) {
@@ -337,7 +342,7 @@ abstract class page_modules
                 }
             }
 
- // end foreach
+            // end foreach
 
             return implode('-', $parts);
         }

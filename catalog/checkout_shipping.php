@@ -312,57 +312,57 @@ require 'includes/template_top.php';
                       echo $quotes[$i]['icon'];
                   }
 
- ?></td>
+                    ?></td>
               </tr>
 
               <?php
-              if (isset($quotes[$i]['error'])) {
-                  ?>
+                                 if (isset($quotes[$i]['error'])) {
+                                     ?>
 
                 <tr>
                   <td colspan="3"><?php echo $quotes[$i]['error']; ?></td>
                 </tr>
 
                 <?php
-              } else {
-                  for ($j = 0, $n2 = \count($quotes[$i]['methods']); $j < $n2; ++$j) {
-                      // set the radio button to be checked if it is the method chosen
-                      $checked = (($quotes[$i]['id'].'_'.$quotes[$i]['methods'][$j]['id'] === $shipping['id']) ? true : false);
+                                 } else {
+                                     for ($j = 0, $n2 = \count($quotes[$i]['methods']); $j < $n2; ++$j) {
+                                         // set the radio button to be checked if it is the method chosen
+                                         $checked = (($quotes[$i]['id'].'_'.$quotes[$i]['methods'][$j]['id'] === $shipping['id']) ? true : false);
 
-                      if (($checked === true) || ($n === 1 && $n2 === 1)) {
-                          echo '      <tr id="defaultSelected" class="moduleRowSelected bg-light" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="selectRowEffect(this, '.$radio_buttons.')">'."\n";
-                      } else {
-                          echo '      <tr class="moduleRow bg-white" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="selectRowEffect(this, '.$radio_buttons.')">'."\n";
-                      }
+                                         if (($checked === true) || ($n === 1 && $n2 === 1)) {
+                                             echo '      <tr id="defaultSelected" class="moduleRowSelected bg-light" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="selectRowEffect(this, '.$radio_buttons.')">'."\n";
+                                         } else {
+                                             echo '      <tr class="moduleRow bg-white" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="selectRowEffect(this, '.$radio_buttons.')">'."\n";
+                                         }
 
-                      ?>
+                                         ?>
 
                   <td class="w-75 ps-3"><?php echo $quotes[$i]['methods'][$j]['title']; ?></td>
 
                   <?php
-                      if (($n > 1) || ($n2 > 1)) {
-                          ?>
+                                         if (($n > 1) || ($n2 > 1)) {
+                                             ?>
 
                     <td><?php echo $currencies->format(tep_add_tax($quotes[$i]['methods'][$j]['cost'], $quotes[$i]['tax'] ?? 0)); ?></td>
                     <td class="text-end form-check"><?php echo tep_draw_radio_field('shipping', $quotes[$i]['id'].'_'.$quotes[$i]['methods'][$j]['id'], $checked, 'class="form-check-input float-none"'); ?></td>
 
                     <?php
-                      } else {
-                          ?>
+                                         } else {
+                                             ?>
 
                     <td class="text-end" colspan="2"><?php echo $currencies->format(tep_add_tax($quotes[$i]['methods'][$j]['cost'], $quotes[$i]['tax'] ?? 0)).tep_draw_hidden_field('shipping', $quotes[$i]['id'].'_'.$quotes[$i]['methods'][$j]['id']); ?></td>
 
                     <?php
-                      }
+                                         }
 
-                      ?>
+                                         ?>
 
                   </tr>
 
                   <?php
-                      ++$radio_buttons;
-                  }
-              }
+                                         ++$radio_buttons;
+                                     }
+                                 }
                 }
             }
 

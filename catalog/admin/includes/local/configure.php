@@ -3,10 +3,16 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the DvereCOM package
+ * osCommerce, Open Source E-Commerce Solutions
+ * http://www.oscommerce.com
  *
- *  (c) Šimon Formánek <mail@simonformanek.cz>
- * This file is part of the MultiFlexi package
+ * Copyright (c) 2020 osCommerce
+ *
+ * Released under the GNU General Public License
+ *
+ * This file is part of the PureOSC package
+ *
+ *  (c) 2024 Šimon Formánek <mail@simonformanek.cz>
  *
  * https://pureosc.com/
  *
@@ -49,8 +55,6 @@ declare(strict_types=1);
 \define('DIR_FS_DOWNLOAD', DIR_FS_CATALOG.'download/');
 \define('DIR_FS_DOWNLOAD_PUBLIC', DIR_FS_CATALOG.'pub/');
 
-
-
 // define('DB_SERVER_ROOT_USERNAME', 'vanilla');
 // define('DB_SERVER_ROOT_PASSWORD', 'osc');
 \define('DB_SERVER', 'localhost');
@@ -61,5 +65,5 @@ declare(strict_types=1);
 \define('DB_DATABASE', 'pureosc');
 \define('USE_PCONNECT', 'false');
 \define('STORE_SESSIONS', 'mysql');
-//\define('SESSION_WRITE_DIRECTORY', '/home/f/git/vanilla-oscommerce/.sessions/');
+// \define('SESSION_WRITE_DIRECTORY', '/home/f/git/vanilla-oscommerce/.sessions/');
 \define('CFG_TIME_ZONE', 'Europe/Prague');

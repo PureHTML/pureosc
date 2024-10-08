@@ -407,7 +407,7 @@ require 'includes/template_top.php';
                         echo '<a href="'.tep_href_link('backup.php', 'file='.$entry).'">'.tep_image('images/icon_info.gif', IMAGE_ICON_INFO).'</a>';
                     }
 
- ?>&nbsp;
+                        ?>&nbsp;
                     </td>
                     </tr>
                     <?php
@@ -427,16 +427,16 @@ if (($action !== 'restorelocal') && isset($dir)) {
     echo tep_draw_button(IMAGE_RESTORE, 'arrowrefresh-1-w', tep_href_link('backup.php', 'action=restorelocal'));
 }
 
- ?></td>
+?></td>
                 </tr>
                 <?php
-                if (\defined('DB_LAST_RESTORE')) {
-                    ?>
+               if (\defined('DB_LAST_RESTORE')) {
+                   ?>
                   <tr>
                     <td class="smallText" colspan="4"><?php echo TEXT_LAST_RESTORATION.' '.DB_LAST_RESTORE.' <a href="'.tep_href_link('backup.php', 'action=forget').'">'.TEXT_FORGET.'</a>'; ?></td>
                   </tr>
                   <?php
-                }
+               }
 
 ?>
               </table>

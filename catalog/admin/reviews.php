@@ -296,7 +296,7 @@ require 'includes/template_top.php';
                         echo '<a href="'.tep_href_link('reviews.php', 'page='.$_GET['page'].'&rID='.$reviews['reviews_id']).'">'.tep_image('images/icon_info.gif', IMAGE_ICON_INFO).'</a>';
                     }
 
- ?>&nbsp;
+            ?>&nbsp;
                     </td>
                     </tr>
                     <?php

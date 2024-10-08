@@ -3,7 +3,25 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the DvereCOM package
+ * osCommerce, Open Source E-Commerce Solutions
+ * http://www.oscommerce.com
+ *
+ * Copyright (c) 2020 osCommerce
+ *
+ * Released under the GNU General Public License
+ *
+ * This file is part of the PureOSC package
+ *
+ *  (c) 2024 Šimon Formánek <mail@simonformanek.cz>
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+/**
+ * This file is part of the DvereCOM package.
  *
  *  (c) Šimon Formánek <mail@simonformanek.cz>
  * This file is part of the MultiFlexi package
@@ -12,8 +30,9 @@ declare(strict_types=1);
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
+ *
+ * @param mixed $products_id
  */
-
 function tep_get_reviews_rating($products_id)
 {
     return tep_db_fetch_array(tep_db_query("SELECT round(avg(reviews_rating) + 0.0, 1) AS rating, count(*) AS `count` FROM reviews WHERE products_id = '".(int) $products_id."' AND reviews_status = 1"));

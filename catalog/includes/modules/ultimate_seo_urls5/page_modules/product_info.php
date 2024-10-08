@@ -3,10 +3,16 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the DvereCOM package
+ * osCommerce, Open Source E-Commerce Solutions
+ * http://www.oscommerce.com
  *
- *  (c) Šimon Formánek <mail@simonformanek.cz>
- * This file is part of the MultiFlexi package
+ * Copyright (c) 2020 osCommerce
+ *
+ * Released under the GNU General Public License
+ *
+ * This file is part of the PureOSC package
+ *
+ *  (c) 2024 Šimon Formánek <mail@simonformanek.cz>
  *
  * https://pureosc.com/
  *
@@ -14,7 +20,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-  /**
+/**
  * Page module for product_info.
  */
 class product_info extends page_modules
@@ -127,7 +133,7 @@ class product_info extends page_modules
                 break;
         }
 
- // end switch
+        // end switch
         $link_text = $this->acquireLinkText();
         // If the query returned no results then we return false forcing the use of the standard osCommerce link wrapper
         Usu_Main::i()->setVar('page_not_found', false);
@@ -204,7 +210,7 @@ class product_info extends page_modules
      */
     private function linkTextOrder(array $details = [])
     {
-        $text_types = ['p' => $details['products_name'], 'c' => $details['categories_name'], 'm' => array_key_exists('products_model', $details) ? $details['products_model'] : ''];
+        $text_types = ['p' => $details['products_name'], 'c' => $details['categories_name'], 'm' => \array_key_exists('products_model', $details) ? $details['products_model'] : ''];
         //      $text_types = array( 'p' => $details['products_name']);
         // manufacturers_name is gained through a left join and may not exist
         \array_key_exists('manufacturers_name', $details) ? $text_types['b'] = $details['manufacturers_name'] : null;
