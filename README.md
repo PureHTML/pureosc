@@ -1,4 +1,4 @@
-Modern fork of oScommerce, based on [vanilla-oscommerce](https://github.com/ruden/vanilla-oscommerce/)
+Modern fork of osCommerce, based on [vanilla-oscommerce](https://github.com/ruden/vanilla-oscommerce/)
 
 Compatibility
 -------------
