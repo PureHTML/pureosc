@@ -130,7 +130,7 @@ $cookie_domain = (($request_type === 'NONSSL') ? HTTP_COOKIE_DOMAIN : HTTPS_COOK
 $cookie_path = (($request_type === 'NONSSL') ? HTTP_COOKIE_PATH : HTTPS_COOKIE_PATH);
 
 // include cache functions if enabled
-if (USE_CACHE === 'true') {
+if (defined('USE_CACHE') && constant('USE_CACHE') == 'true') {
     include 'includes/functions/cache.php';
 }
 
