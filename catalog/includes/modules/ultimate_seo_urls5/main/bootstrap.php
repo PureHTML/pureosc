@@ -3,10 +3,16 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the DvereCOM package
+ * osCommerce, Open Source E-Commerce Solutions
+ * http://www.oscommerce.com
  *
- *  (c) Šimon Formánek <mail@simonformanek.cz>
- * This file is part of the MultiFlexi package
+ * Copyright (c) 2020 osCommerce
+ *
+ * Released under the GNU General Public License
+ *
+ * This file is part of the PureOSC package
+ *
+ *  (c) 2024 Šimon Formánek <mail@simonformanek.cz>
  *
  * https://pureosc.com/
  *
@@ -17,7 +23,7 @@ declare(strict_types=1);
 /**
  * Set up all needed parameters and settings.
  */
-class Usu5_Bootstrap
+class bootstrap
 {
     private static $_singleton;
     /**
@@ -115,7 +121,7 @@ class Usu5_Bootstrap
 
                 // set the original_request_uri adding back ( if it was there ) the querystring
                 $querystring = $this->getRequestQueryString();
-                Usu_Main::i()->setVar('original_request_uri',  $original_request_uri.(tep_not_null($querystring) ? ('?'.$querystring) : ''));
+                Usu_Main::i()->setVar('original_request_uri', $original_request_uri.(tep_not_null($querystring) ? ('?'.$querystring) : ''));
 
                 break;
             }
@@ -190,7 +196,8 @@ class Usu5_Bootstrap
         $get_array = ($_SERVER['QUERY_STRING'] !== '') ? explode('&', $_SERVER['QUERY_STRING']) : false;
 
         if (false !== $get_array) {
-            array_shift($get_array); //TODO:DirtyHack !!!
+            array_shift($get_array); // TODO:DirtyHack !!!
+
             foreach ($get_array as $index => $stringpair) {
                 if (false === strpos($stringpair, tep_session_name())) { // Leave out the osCsid
                     $pair = explode('=', $stringpair);

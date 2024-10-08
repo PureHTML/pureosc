@@ -3,10 +3,16 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the DvereCOM package
+ * osCommerce, Open Source E-Commerce Solutions
+ * http://www.oscommerce.com
  *
- *  (c) Šimon Formánek <mail@simonformanek.cz>
- * This file is part of the MultiFlexi package
+ * Copyright (c) 2020 osCommerce
+ *
+ * Released under the GNU General Public License
+ *
+ * This file is part of the PureOSC package
+ *
+ *  (c) 2024 Šimon Formánek <mail@simonformanek.cz>
  *
  * https://pureosc.com/
  *
@@ -449,142 +455,156 @@ function tep_draw_button($title = null, $icon = null, $link = null, $priority = 
     return $button;
 }
 
-////
+// //
 // PureHTML Css generator
-//nested fiter:
+// nested fiter:
 function css_compile($data)
 {
-    $data =  preg_replace('/}}}}}}/', '}', preg_replace('/}}}}/', '}}', str_replace(': ', ':', str_replace('; }', '}', str_replace('} ', '}', preg_replace('/\s+/', ' ', preg_replace('/\t/', ' ', preg_replace('/\n/', ' ', preg_replace(':/\*.*\*/:', '', $data)))))))), 1);
-    return $data;
+    return preg_replace('/}}}}}}/', '}', preg_replace('/}}}}/', '}}', str_replace(': ', ':', str_replace('; }', '}', str_replace('} ', '}', preg_replace('/\s+/', ' ', preg_replace('/\t/', ' ', preg_replace('/\n/', ' ', preg_replace(':/\*.*\*/:', '', $data)))))))), 1);
 }
 function cssquery($max = 0, $min = 0, $template = '', $tag = '', $status = 1, $inline = 0)
 {
-//nejprve jedeme max
-    if ($max == 0 && $min == 0) {
+    // nejprve jedeme max
+    if ($max === 0 && $min === 0) {
         $min_max = 'min';
-    } elseif ($max == 0 && $min > 0) {
+    } elseif ($max === 0 && $min > 0) {
         $min_max = 'min';
     } else {
         $min_max = 'max';
     }
+
     $data = '';
     $old = 0;
     $current = 0;
     $counter = 0;
-    $css_query = tep_db_query("SELECT * from " . TABLE_CSS . " WHERE max=" . $max . " AND min=" . $min . " AND template='" . $template . "' AND status=1 AND inline=0 ORDER BY " . $min_max . ", sort_order");
+    $css_query = tep_db_query('SELECT * from '.TABLE_CSS.' WHERE max='.$max.' AND min='.$min." AND template='".$template."' AND status=1 AND inline=0 ORDER BY ".$min_max.', sort_order');
+
     while ($css = tep_db_fetch_array($css_query)) {
-    /*
-    //na zacatek
-    if ($counter == 0){
-        $old = $css[$min_max];
-        if ($old > 0) {
-        $data .= '}' . "\n" . '@media (' . $min_max . '-width: ' . $css[$min_max] . 'px){' . "\n"; //}
+        /*
+        //na zacatek
+        if ($counter == 0){
+            $old = $css[$min_max];
+            if ($old > 0) {
+            $data .= '}' . "\n" . '@media (' . $min_max . '-width: ' . $css[$min_max] . 'px){' . "\n"; //}
+            }
         }
-    }*/
+         */
         $current = $css[$min_max];
-        if ($css[$min_max] == $old) {
-            $data .= $css['name'] . '{' . $css['value']  . '}' . "\n";
-        } else { //{
-    //      $data .= 'xxx}' . "\n" . '@media (' . $min_max . '-width: ' . $css[$min_max] . 'px){' . $css['name'] . '{' . $css['value'] .'}' . "\n"; //}
-            $data .= "\n" . '@media (' . $min_max . '-width: ' . $css[$min_max] . 'px){' . $css['name'] . '{' . $css['value'] . '}' . "\n"; //}
+
+        if ($css[$min_max] === $old) {
+            $data .= $css['name'].'{'.$css['value']."}\n";
+        } else { // {
+            //      $data .= 'xxx}' . "\n" . '@media (' . $min_max . '-width: ' . $css[$min_max] . 'px){' . $css['name'] . '{' . $css['value'] .'}' . "\n"; //}
+            $data .= "\n@media (".$min_max.'-width: '.$css[$min_max].'px){'.$css['name'].'{'.$css['value']."}\n"; // }
         }
+
         $old = $current;
-        $counter++;
+        ++$counter;
     }
+
     if ($max > 0 || $min > 0) {
         $data .= '}';
     }
 
     return $data;
 }
-function cssgenerator()
+function cssgenerator(): void
 {
-
     $data = '';
-//1. WHERE max > 0 AND min=0 AND template='' AND subtemplate='' AND inline=0 AND status=1
-    $cssmain_query = tep_db_query("SELECT max AS init from " . TABLE_CSS . " WHERE max > 0 AND min=0 AND template='' AND subtemplate='' AND inline=0 AND status=1 ORDER BY max");
+    // 1. WHERE max > 0 AND min=0 AND template='' AND subtemplate='' AND inline=0 AND status=1
+    $cssmain_query = tep_db_query('SELECT max AS init from '.TABLE_CSS." WHERE max > 0 AND min=0 AND template='' AND subtemplate='' AND inline=0 AND status=1 ORDER BY max");
+
     while ($cssmain = tep_db_fetch_array($cssmain_query)) {
         $data .= cssquery($cssmain['init']);
     }
-// remove first bracket:
+
+    // remove first bracket:
     $data = preg_replace('/^}/', '', $data, 1);
-//css_compile
+    // css_compile
     $data = css_compile($data);
 
-//2. default values
+    // 2. default values
     $data .= css_compile(cssquery(0, 0, '', '', '', 1, 0));
 
-//3. WHERE max = 0 AND min > 0 AND template='' AND subtemplate='' AND inline=0 AND status=1
-    $cssmain_query = tep_db_query("SELECT DISTINCT min AS init from " . TABLE_CSS . " WHERE max = 0 AND min > 0 AND template='' AND subtemplate='' AND inline=0 AND status=1 ORDER BY min");
+    // 3. WHERE max = 0 AND min > 0 AND template='' AND subtemplate='' AND inline=0 AND status=1
+    $cssmain_query = tep_db_query('SELECT DISTINCT min AS init from '.TABLE_CSS." WHERE max = 0 AND min > 0 AND template='' AND subtemplate='' AND inline=0 AND status=1 ORDER BY min");
+
     while ($cssmain = tep_db_fetch_array($cssmain_query)) {
         $data .= cssquery(0, $cssmain['init']);
     }
+
     $data = css_compile($data);
-    file_put_contents(DIR_FS_CATALOG . 's.css.gz', gzencode($data, 9), 644);
-//working file:
-    file_put_contents(DIR_FS_CATALOG . 's.css', $data, 644);
-//debug file
-    $data = str_replace("{", "\n{", str_replace("}", "}\n", $data));
-    file_put_contents(DIR_FS_CATALOG . 's_debug.css', $data, 644);
+    file_put_contents(DIR_FS_CATALOG.'s.css.gz', gzencode($data, 9), 644);
+    // working file:
+    file_put_contents(DIR_FS_CATALOG.'s.css', $data, 644);
+    // debug file
+    $data = str_replace('{', "\n{", str_replace('}', "}\n", $data));
+    file_put_contents(DIR_FS_CATALOG.'s_debug.css', $data, 644);
 }
 
-function cssgenerator_index_top()
+function cssgenerator_index_top(): void
 {
-
     $data = '';
-//1. WHERE max > 0 AND min=0 AND template='index_top' AND  inline=0 AND status=1
-    $cssmain_query = tep_db_query("SELECT max AS init from " . TABLE_CSS . " WHERE max > 0 AND min=0 AND template='index_top' AND  inline=0 AND status=1 ORDER BY max");
+    // 1. WHERE max > 0 AND min=0 AND template='index_top' AND  inline=0 AND status=1
+    $cssmain_query = tep_db_query('SELECT max AS init from '.TABLE_CSS." WHERE max > 0 AND min=0 AND template='index_top' AND  inline=0 AND status=1 ORDER BY max");
+
     while ($cssmain = tep_db_fetch_array($cssmain_query)) {
         $data .= cssquery($cssmain['init'], 0, 'index_top');
     }
-// remove first bracket:
+
+    // remove first bracket:
     $data = preg_replace('/^}/', '', $data, 1);
-//css_compile
+    // css_compile
     $data = css_compile($data);
 
-//2. default values
+    // 2. default values
     $data .= css_compile(cssquery(0, 0, 'index_top', '', 1, 0));
 
-//3. WHERE max = 0 AND min > 0 AND template='index_top' AND  inline=0 AND status=1
-    $cssmain_query = tep_db_query("SELECT DISTINCT min AS init from " . TABLE_CSS . " WHERE max = 0 AND min > 0 AND template='index_top' AND  inline=0 AND status=1 ORDER BY min");
+    // 3. WHERE max = 0 AND min > 0 AND template='index_top' AND  inline=0 AND status=1
+    $cssmain_query = tep_db_query('SELECT DISTINCT min AS init from '.TABLE_CSS." WHERE max = 0 AND min > 0 AND template='index_top' AND  inline=0 AND status=1 ORDER BY min");
+
     while ($cssmain = tep_db_fetch_array($cssmain_query)) {
         $data .= cssquery(0, $cssmain['init'], 'index_top');
     }
-    $data = css_compile($data);
-    file_put_contents(DIR_FS_CATALOG . 'index_top.css.gz', gzencode($data, 9), 644);
-//working file:
-    file_put_contents(DIR_FS_CATALOG . 'index_top.css', $data, 644);
-//debug file
-    $data = str_replace("{", "\n{", str_replace("}", "}\n", $data));
-    file_put_contents(DIR_FS_CATALOG . 'index_top_debug.css', $data, 644);
-}
-function cssgenerator_index_products()
-{
 
+    $data = css_compile($data);
+    file_put_contents(DIR_FS_CATALOG.'index_top.css.gz', gzencode($data, 9), 644);
+    // working file:
+    file_put_contents(DIR_FS_CATALOG.'index_top.css', $data, 644);
+    // debug file
+    $data = str_replace('{', "\n{", str_replace('}', "}\n", $data));
+    file_put_contents(DIR_FS_CATALOG.'index_top_debug.css', $data, 644);
+}
+function cssgenerator_index_products(): void
+{
     $data = '';
-//1. WHERE max > 0 AND min=0 AND template='index_products' AND  inline=0 AND status=1
-    $cssmain_query = tep_db_query("SELECT max AS init from " . TABLE_CSS . " WHERE max > 0 AND min=0 AND template='index_products' AND  inline=0 AND status=1 ORDER BY max");
+    // 1. WHERE max > 0 AND min=0 AND template='index_products' AND  inline=0 AND status=1
+    $cssmain_query = tep_db_query('SELECT max AS init from '.TABLE_CSS." WHERE max > 0 AND min=0 AND template='index_products' AND  inline=0 AND status=1 ORDER BY max");
+
     while ($cssmain = tep_db_fetch_array($cssmain_query)) {
         $data .= cssquery($cssmain['init'], 0, 'index_products');
     }
-// remove first bracket:
+
+    // remove first bracket:
     $data = preg_replace('/^}/', '', $data, 1);
-//css_compile
+    // css_compile
     $data = css_compile($data);
 
-//2. default values
+    // 2. default values
     $data .= css_compile(cssquery(0, 0, 'index_products', '', 1, 0));
 
-//3. WHERE max = 0 AND min > 0 AND template='index_products' AND  inline=0 AND status=1
-    $cssmain_query = tep_db_query("SELECT DISTINCT min AS init from " . TABLE_CSS . " WHERE max = 0 AND min > 0 AND template='index_products' AND  inline=0 AND status=1 ORDER BY min");
+    // 3. WHERE max = 0 AND min > 0 AND template='index_products' AND  inline=0 AND status=1
+    $cssmain_query = tep_db_query('SELECT DISTINCT min AS init from '.TABLE_CSS." WHERE max = 0 AND min > 0 AND template='index_products' AND  inline=0 AND status=1 ORDER BY min");
+
     while ($cssmain = tep_db_fetch_array($cssmain_query)) {
         $data .= cssquery(0, $cssmain['init'], 'index_products');
     }
+
     $data = css_compile($data);
-    file_put_contents(DIR_FS_CATALOG . 'index_products.css.gz', gzencode($data, 9), 644);
-//working file:
-    file_put_contents(DIR_FS_CATALOG . 'index_products.css', $data, 644);
-//debug file
-    $data = str_replace("{", "\n{", str_replace("}", "}\n", $data));
-    file_put_contents(DIR_FS_CATALOG . 'index_products_debug.css', $data, 644);
+    file_put_contents(DIR_FS_CATALOG.'index_products.css.gz', gzencode($data, 9), 644);
+    // working file:
+    file_put_contents(DIR_FS_CATALOG.'index_products.css', $data, 644);
+    // debug file
+    $data = str_replace('{', "\n{", str_replace('}', "}\n", $data));
+    file_put_contents(DIR_FS_CATALOG.'index_products_debug.css', $data, 644);
 }

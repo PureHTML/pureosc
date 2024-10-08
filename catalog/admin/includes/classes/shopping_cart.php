@@ -3,7 +3,25 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the DvereCOM package
+ * osCommerce, Open Source E-Commerce Solutions
+ * http://www.oscommerce.com
+ *
+ * Copyright (c) 2020 osCommerce
+ *
+ * Released under the GNU General Public License
+ *
+ * This file is part of the PureOSC package
+ *
+ *  (c) 2024 Šimon Formánek <mail@simonformanek.cz>
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+/**
+ * This file is part of the DvereCOM package.
  *
  *  (c) Šimon Formánek <mail@simonformanek.cz>
  * This file is part of the MultiFlexi package
@@ -13,7 +31,6 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 class shopping_cart
 {
     public $contents;
@@ -97,7 +114,7 @@ class shopping_cart
                 $qty = '1';
             }
 
- // if no quantity is supplied, then add '1' to the customers basket
+            // if no quantity is supplied, then add '1' to the customers basket
 
             $this->contents[] = [$products_id];
             $this->contents[$products_id] = ['qty' => $qty];
@@ -133,7 +150,7 @@ class shopping_cart
             return true;
         }
 
- // nothing needs to be updated if theres no quantity, so we return true..
+        // nothing needs to be updated if theres no quantity, so we return true..
 
         $this->contents[$products_id] = ['qty' => $quantity];
 
@@ -172,7 +189,8 @@ class shopping_cart
     }
 
     public function count_contents()  // get total number of items in cart
-    {$total_items = 0;
+    {
+        $total_items = 0;
 
         if (\is_array($this->contents)) {
             foreach (array_keys($this->contents) as $products_id) {

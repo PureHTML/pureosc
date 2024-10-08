@@ -46,7 +46,7 @@ $log_query = tep_db_query($log_query_raw);
               }
           }
 
- ?>
+          ?>
 
       <tr>
         <td style="text-align: center; width: 30px;">

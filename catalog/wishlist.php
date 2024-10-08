@@ -116,7 +116,7 @@ if ($wishlist->count_list() > 0) {
           } else {
               ?>
 
-          <p class="text-danger text-center"><?php //TODO:error:DirtyHack //echo OUT_OF_STOCK_CANT_CHECKOUT; ?></p>
+          <p class="text-danger text-center"><?php // TODO:error:DirtyHack //echo OUT_OF_STOCK_CANT_CHECKOUT;?></p>
 
           <?php
           }

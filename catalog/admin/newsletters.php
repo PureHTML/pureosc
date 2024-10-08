@@ -181,7 +181,7 @@ require 'includes/template_top.php';
           echo tep_draw_hidden_field('newsletter_id', $nID);
       }
 
- ?>
+      ?>
         <td><table border="0" cellspacing="0" cellpadding="2">
           <tr>
             <td class="main"><?php echo TEXT_NEWSLETTER_MODULE; ?></td>
@@ -253,7 +253,7 @@ require 'includes/template_top.php';
             echo $module->confirm();
         }
 
- ?></td>
+      ?></td>
       </tr>
 <?php
   } elseif ($action === 'confirm') {
@@ -354,21 +354,21 @@ require 'includes/template_top.php';
                     echo tep_image('images/icons/cross.gif', ICON_CROSS);
                 }
 
- ?></td>
+          ?></td>
                 <td class="dataTableContent" align="center"><?php if ($newsletters['locked'] > 0) {
                     echo tep_image('images/icons/locked.gif', ICON_LOCKED);
                 } else {
                     echo tep_image('images/icons/unlocked.gif', ICON_UNLOCKED);
                 }
 
- ?></td>
+          ?></td>
                 <td class="dataTableContent" align="right"><?php if (isset($nInfo) && \is_object($nInfo) && ($newsletters['newsletters_id'] === $nInfo->newsletters_id)) {
                     echo tep_image('images/icon_arrow_right.gif', '');
                 } else {
                     echo '<a href="'.tep_href_link('newsletters.php', 'page='.$_GET['page'].'&nID='.$newsletters['newsletters_id']).'">'.tep_image('images/icon_info.gif', IMAGE_ICON_INFO).'</a>';
                 }
 
- ?>&nbsp;</td>
+          ?>&nbsp;</td>
               </tr>
 <?php
       }

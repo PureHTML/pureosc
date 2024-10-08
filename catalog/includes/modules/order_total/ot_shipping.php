@@ -3,7 +3,25 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the DvereCOM package
+ * osCommerce, Open Source E-Commerce Solutions
+ * http://www.oscommerce.com
+ *
+ * Copyright (c) 2020 osCommerce
+ *
+ * Released under the GNU General Public License
+ *
+ * This file is part of the PureOSC package
+ *
+ *  (c) 2024 Šimon Formánek <mail@simonformanek.cz>
+ *
+ * https://pureosc.com/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+/**
+ * This file is part of the DvereCOM package.
  *
  *  (c) Šimon Formánek <mail@simonformanek.cz>
  * This file is part of the MultiFlexi package
@@ -13,7 +31,6 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 class ot_shipping
 {
     public $title;
@@ -41,13 +58,13 @@ class ot_shipping
                         $pass = true;
                     }
 
-break;
+                    break;
                 case 'international':
                     if ($order->delivery['country_id'] !== STORE_COUNTRY) {
                         $pass = true;
                     }
 
-break;
+                    break;
                 case 'both':
                     $pass = true;
 

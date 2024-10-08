@@ -231,7 +231,7 @@ while ($currency = tep_db_fetch_array($currency_query)) {
                     echo '<a href="'.tep_href_link('currencies.php', 'page='.$_GET['page'].'&cID='.$currency['currencies_id']).'">'.tep_image('images/icon_info.gif', IMAGE_ICON_INFO).'</a>';
                 }
 
- ?>&nbsp;</td>
+    ?>&nbsp;</td>
               </tr>
 <?php
 }
@@ -251,7 +251,7 @@ while ($currency = tep_db_fetch_array($currency_query)) {
                         echo tep_draw_button(IMAGE_UPDATE_CURRENCIES, 'refresh', tep_href_link('currencies.php', 'page='.$_GET['page'].'&cID='.$cInfo->currencies_id.'&action=update'));
                     }
 
- ?></td>
+      ?></td>
                     <td class="smallText" align="right"><?php echo tep_draw_button(IMAGE_NEW_CURRENCY, 'plus', tep_href_link('currencies.php', 'page='.$_GET['page'].'&cID='.$cInfo->currencies_id.'&action=new')); ?></td>
                   </tr>
 <?php

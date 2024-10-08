@@ -78,7 +78,7 @@ if ($OSCOM_PayPal->isInstalled($current_module) || ($current_module === 'G')) {
         }
     }
 
- ?>
+    ?>
 
   <form name="paypalConfigure" action="<?php echo tep_href_link('paypal.php', 'action=configure&subaction=process&module='.$current_module); ?>" method="post" class="pp-form">
 
@@ -86,32 +86,32 @@ if ($OSCOM_PayPal->isInstalled($current_module) || ($current_module === 'G')) {
     <div class="pp-panel pp-panel-info" style="padding-bottom: 15px;">
 
       <?php
-        foreach ($OSCOM_PayPal->getInputParameters($current_module) as $cfg) {
-            echo $cfg;
-        }
+           foreach ($OSCOM_PayPal->getInputParameters($current_module) as $cfg) {
+               echo $cfg;
+           }
 
- ?>
+    ?>
 
     </div>
 
     <p>
 
       <?php
-        echo $OSCOM_PayPal->drawButton($OSCOM_PayPal->getDef('button_save'), null, 'success');
+           echo $OSCOM_PayPal->drawButton($OSCOM_PayPal->getDef('button_save'), null, 'success');
 
     if ($current_module !== 'G') {
         echo '  <span style="float: right;">'.$OSCOM_PayPal->drawButton($OSCOM_PayPal->getDef('button_dialog_uninstall'), '#', 'warning', 'data-button="paypalButtonUninstallModule"').'</span>';
     }
 
- ?>
+    ?>
 
     </p>
 
   </form>
 
   <?php
-  if ($current_module !== 'G') {
-      ?>
+     if ($current_module !== 'G') {
+         ?>
 
     <div id="paypal-dialog-uninstall" title="<?php echo tep_output_string_protected($OSCOM_PayPal->getDef('dialog_uninstall_title')); ?>">
       <p>
@@ -144,7 +144,7 @@ if ($OSCOM_PayPal->isInstalled($current_module) || ($current_module === 'G')) {
     </script>
 
     <?php
-  }
+     }
 } else {
     ?>
 

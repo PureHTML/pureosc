@@ -775,7 +775,7 @@ if ($action !== 'update_attribute') {
 <?php
           }
 
- // end of DOWNLOAD_ENABLED section
+    // end of DOWNLOAD_ENABLED section
     ?>
 <?php
 }

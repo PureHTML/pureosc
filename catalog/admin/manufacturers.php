@@ -160,7 +160,7 @@ while ($manufacturers = tep_db_fetch_array($manufacturers_query)) {
                     echo '<a href="'.tep_href_link('manufacturers.php', 'page='.$_GET['page'].'&mID='.$manufacturers['manufacturers_id']).'">'.tep_image('images/icon_info.gif', IMAGE_ICON_INFO).'</a>';
                 }
 
- ?>&nbsp;</td>
+    ?>&nbsp;</td>
               </tr>
 <?php
 }

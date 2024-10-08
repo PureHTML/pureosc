@@ -60,7 +60,7 @@ while ($products = tep_db_fetch_array($products_query)) {
                     echo '<a href="'.tep_href_link('products_expected.php', 'page='.$_GET['page'].'&pID='.$products['products_id']).'">'.tep_image('images/icon_info.gif', IMAGE_ICON_INFO).'</a>';
                 }
 
- ?>&nbsp;</td>
+    ?>&nbsp;</td>
               </tr>
 <?php
 }

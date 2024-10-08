@@ -222,7 +222,7 @@ require 'includes/template_top.php';
                     echo '<a href="'.tep_href_link('modules_content.php', 'action=list_new&module='.$module->code).'">'.tep_image('images/icon_info.gif', IMAGE_ICON_INFO).'</a>';
                 }
 
- ?>&nbsp;</td>
+              ?>&nbsp;</td>
               </tr>
 <?php
           }
@@ -284,7 +284,7 @@ require 'includes/template_top.php';
                     echo '<a href="'.tep_href_link('modules_content.php', 'module='.$module->code).'">'.tep_image('images/icon_info.gif', IMAGE_ICON_INFO).'</a>';
                 }
 
- ?>&nbsp;</td>
+              ?>&nbsp;</td>
               </tr>
 <?php
           }

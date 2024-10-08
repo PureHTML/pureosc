@@ -217,14 +217,14 @@ for ($i = 0, $n = \count($directory_array); $i < $n; ++$i) {
                     echo $module->sort_order;
                 }
 
- ?></td>
+        ?></td>
                 <td class="dataTableContent" align="right"><?php if (isset($mInfo) && \is_object($mInfo) && ($class === $mInfo->code)) {
                     echo tep_image('images/icon_arrow_right.gif');
                 } else {
                     echo '<a href="'.tep_href_link('modules.php', 'set='.$set.(isset($_GET['list']) ? '&list=new' : '').'&module='.$class).'">'.tep_image('images/icon_info.gif', IMAGE_ICON_INFO).'</a>';
                 }
 
- ?>&nbsp;</td>
+        ?>&nbsp;</td>
               </tr>
 <?php
     }

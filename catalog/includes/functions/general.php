@@ -3,10 +3,16 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the DvereCOM package
+ * osCommerce, Open Source E-Commerce Solutions
+ * http://www.oscommerce.com
  *
- *  (c) Šimon Formánek <mail@simonformanek.cz>
- * This file is part of the MultiFlexi package
+ * Copyright (c) 2020 osCommerce
+ *
+ * Released under the GNU General Public License
+ *
+ * This file is part of the PureOSC package
+ *
+ *  (c) 2024 Šimon Formánek <mail@simonformanek.cz>
  *
  * https://pureosc.com/
  *
@@ -67,7 +73,7 @@ function tep_redirect(string $url): void
 // Parse the data used in the html tags to ensure the tags will not break
 function tep_parse_input_field_data($data, $parse)
 {
-    return strtr(trim((string)$data), $parse);
+    return strtr(trim((string) $data), $parse);
 }
 
 function tep_output_string($string, $translate = false, $protected = false)
@@ -358,7 +364,7 @@ function tep_get_zone_code($country_id, $zone_id, $default_zone)
 // Wrapper function for round()
 function tep_round($number, $precision)
 {
-    if (strpos((string)$number, '.') && (\strlen(substr((string)$number, strpos((string)$number, '.') + 1)) > $precision)) {
+    if (strpos((string) $number, '.') && (\strlen(substr((string) $number, strpos((string) $number, '.') + 1)) > $precision)) {
         $number = substr($number, 0, strpos($number, '.') + 1 + $precision + 1);
 
         if (substr($number, -1) >= 5) {
@@ -1538,7 +1544,7 @@ function tep_rand($min = null, $max = null)
 
 function tep_setcookie($name, $value = '', $expire = 0, $path = '/', $domain = '', $secure = false): void
 {
-    setcookie($name, $value, $expire, $path, !empty($domain) ? $domain : '', (bool)$secure);
+    setcookie($name, $value, $expire, $path, !empty($domain) ? $domain : '', (bool) $secure);
 }
 
 function tep_validate_ip_address($ip_address)
@@ -1642,6 +1648,7 @@ function tep_convert_linefeeds($from, $to, $string)
     return str_replace($from, $to, $string);
 }
 
-    function tep_utf8_encode($item){
-        return mb_convert_encoding($item, "UTF-8", mb_detect_encoding($item));
-    }
+function tep_utf8_encode($item)
+{
+    return mb_convert_encoding($item, 'UTF-8', mb_detect_encoding($item, mb_detect_order(), true));
+}

@@ -123,7 +123,7 @@ require 'includes/template_top.php';
           echo tep_draw_hidden_field('specials_id', $_GET['sID']);
       }
 
- ?>
+      ?>
         <td><br /><table border="0" cellspacing="0" cellpadding="2">
           <tr>
             <td class="main"><?php echo TEXT_SPECIALS_PRODUCT; ?>&nbsp;</td>
@@ -206,7 +206,7 @@ $('#expdate').datepicker({
                     echo '<a href="'.tep_href_link('specials.php', 'page='.$_GET['page'].'&sID='.$specials['specials_id']).'">'.tep_image('images/icon_info.gif', IMAGE_ICON_INFO).'</a>';
                 }
 
- ?>&nbsp;</td>
+          ?>&nbsp;</td>
       </tr>
 <?php
       }

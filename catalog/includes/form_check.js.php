@@ -104,7 +104,7 @@ function check_form(form_name) {
     echo '  check_radio("gender", "'.ENTRY_GENDER_ERROR.'");'."\n";
 }
 
- ?>
+?>
 
   check_input("firstname", <?php echo ENTRY_FIRST_NAME_MIN_LENGTH; ?>, "<?php echo ENTRY_FIRST_NAME_ERROR; ?>");
   check_input("lastname", <?php echo ENTRY_LAST_NAME_MIN_LENGTH; ?>, "<?php echo ENTRY_LAST_NAME_ERROR; ?>");
@@ -113,7 +113,7 @@ function check_form(form_name) {
     echo '  check_input("dob", '.ENTRY_DOB_MIN_LENGTH.', "'.ENTRY_DATE_OF_BIRTH_ERROR.'");'."\n";
 }
 
- ?>
+?>
 
   check_input("email_address", <?php echo ENTRY_EMAIL_ADDRESS_MIN_LENGTH; ?>, "<?php echo ENTRY_EMAIL_ADDRESS_ERROR; ?>");
   check_input("street_address", <?php echo ENTRY_STREET_ADDRESS_MIN_LENGTH; ?>, "<?php echo ENTRY_STREET_ADDRESS_ERROR; ?>");
@@ -124,7 +124,7 @@ function check_form(form_name) {
     echo '  check_input("state", '.ENTRY_STATE_MIN_LENGTH.', "'.ENTRY_STATE_ERROR.'");'."\n";
 }
 
- ?>
+?>
 
   check_select("country", "", "<?php echo ENTRY_COUNTRY_ERROR; ?>");
 
@@ -137,7 +137,7 @@ function check_form(form_name) {
     echo '  check_checkbox("legal-agreements", "'.ENTRY_LEGAL_AGREEMENTS_ERROR.'");'."\n";
 }
 
- ?>
+?>
 
   if (error == true) {
     alert(error_message);
