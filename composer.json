@@ -1,10 +1,12 @@
 {
     "name": "purehtml/pureosc",
     "description": "Vanilla osCommerce fork osCommerce v2.3.5.",
+    "license": "GPL-2.0-or-later",
     "config": {
         "allow-plugins": {
             "ergebnis/composer-normalize": true
-        }
+        },
+        "platform-check": false
     },
     "autoload": {
         "psr-0": {
@@ -33,10 +35,6 @@
         "friendsofphp/php-cs-fixer": "^3.61",
         "ergebnis/composer-normalize": "^2.43",
         "ergebnis/php-cs-fixer-config": "^6.34"
-    },
-    "config": {
-
-        "platform-check": false
     }
 
 
