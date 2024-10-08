@@ -1,1 +1,1 @@
-pureosc_empty_db-24-10-05-21_13_32.sql.gz
+oscommerce_data_sample.sql
