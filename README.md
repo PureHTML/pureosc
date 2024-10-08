@@ -22,19 +22,36 @@ Lightweight, extremely fast HTML rendering engine:
 1. create webp animated banners
 2. extermely fast loading big advert graphicks in sigle HTTP request.
 
+### Czech language translation
+Frontend and admin.
+
+External Contributions
+---------------------------
 ### SEO URLs
 1. Dynamic SEO URLs based on [Ultimate SEO URLs](https://old.oscommerce.com/36rDo&ultimate-seo-urls).
 2. Updated to PHP 8x;
 3. Tested on Apache, Nginx, Haproxy.
 
-### Czech language translation
-Frontend and admin.
+### GPWEBPAY Payment Gateway integration
+Using [Platiti.cz Oscommerce](https://www.platiti.cz/ZenCart-a.php).
+1. Free for Raifaisen Bank clients;
+2. Possible integration with Česká Spořitelna and Komerřní banka.
+
 
 Comming soon
 ------------------
+### CSOB Payment Gateway integration
+As free module.
+
+### Flexibee integration
+1. Orders sync with accounting;
+2. Catalog can be gebrated from accounting system.
+
 ### Row level security for Mariadb
 
-### SEO URLs chached
+### SEO URLs caching system
+1. Faster pages loading from static files;
+2. Web still work as catalog with dead database.
 
 ### Ai serch suggestion engine
 1. Based on  [mcfly](https://github.com/cantino/mcfly), cli small neural network writen in Rust;
