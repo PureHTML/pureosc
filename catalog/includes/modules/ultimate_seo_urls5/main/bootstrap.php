@@ -193,7 +193,7 @@ class bootstrap
         }
 
         $qs = '';
-        $get_array = ($_SERVER['QUERY_STRING'] !== '') ? explode('&', $_SERVER['QUERY_STRING']) : false;
+        $get_array = array_key_exists('QUERY_STRING',$_SERVER) && ($_SERVER['QUERY_STRING'] !== '') ? explode('&', $_SERVER['QUERY_STRING']) : false;
 
         if (false !== $get_array) {
             array_shift($get_array); // TODO:DirtyHack !!!
