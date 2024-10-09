@@ -313,9 +313,15 @@ require 'includes/languages/'.$language.'.php';
 setlocale(\LC_NUMERIC, $_system_locale_numeric); // Prevent LC_ALL from setting LC_NUMERIC to a locale with 1,0 float/decimal values instead of 1.0 (see bug #634)
 
 /**
+ * ULTIMATE Seo Urls 5 PRO by FWR Media
+ * Replacement for osCommerce href link wrapper function.
+ */
+require_once DIR_WS_MODULES.'ultimate_seo_urls5/main/usu5.php';
+
+/**
  * ULTIMATE Seo Urls 5 PRO by FWR Media.
  */
-Usu_Main::i()->setVar('languages_id', $languages_id)
+usu5::i()->setVar('languages_id', $languages_id)
     ->setVar('request_type', $request_type)
     ->setVar('session_started', $session_started)
     ->setVar('sid', $SID)
@@ -434,7 +440,7 @@ if (isset($cPath_array)) {
 }
 
 // initialize the message stack for output messages
-require 'includes/classes/message_stack.php';
+require 'includes/classes/messageStack.php';
 $messageStack = new messageStack();
 
 require DIR_FS_CATALOG.'includes/classes/hooks.php';

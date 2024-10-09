@@ -85,23 +85,23 @@ class rewrite extends uri_modules
      * @uses substr()
      *
      * @see aUri_Modules::withoutLanguage()
-     * @see Usu_Main::getvar()
+     * @see usu5::getvar()
      *
      * @return bool - true ( not identified as another uri type ) false ( identified as a different uri type )
      */
     public function isValidUri()
     {
-        $dependencies = Usu_Main::i()->getVar('page_modules', substr(Usu_Main::i()->getVar('filename'), 0, -4))->retrieveDependencies();
+        $dependencies = usu5::i()->getVar('page_modules', substr(usu5::i()->getVar('filename'), 0, -4))->retrieveDependencies();
         $validated = false;
 
         foreach ($dependencies as $dep => $dummy) {
             // osC experimental urls
-            if (false !== strpos(Usu_Main::i()->getVar('request_uri'), $dep.'/')) {
+            if (false !== strpos(usu5::i()->getVar('request_uri'), $dep.'/')) {
                 return false;
             }
         }
 
-        if (false === strpos(Usu_Main::i()->getVar('request_uri'), '.html')) { // rewrite seo url must have .html
+        if (false === strpos(usu5::i()->getVar('request_uri'), '.html')) { // rewrite seo url must have .html
             return false;
         }
 
@@ -125,18 +125,18 @@ class rewrite extends uri_modules
     public function parsePath()
     {
         global $HTTP_GET_VARS;
-        Usu_Main::i()->setVar('parsing_module', __CLASS__);
-        $dependencies = Usu_Main::i()->getVar('page_modules', substr(Usu_Main::i()->getVar('filename'), 0, -4))->retrieveDependencies();
+        usu5::i()->setVar('parsing_module', __CLASS__);
+        $dependencies = usu5::i()->getVar('page_modules', substr(usu5::i()->getVar('filename'), 0, -4))->retrieveDependencies();
 
         foreach ($dependencies as $get_key => $detail) {
-            if (false !== strpos(Usu_Main::i()->getVar('request_uri'), $detail['marker'])) {
+            if (false !== strpos(usu5::i()->getVar('request_uri'), $detail['marker'])) {
                 // Found an seo marker so explode into two component parts
-                $tmp = explode($detail['marker'], Usu_Main::i()->getVar('request_uri'));
+                $tmp = explode($detail['marker'], usu5::i()->getVar('request_uri'));
                 // assign the key=>value pair to _GET
                 $value = (false !== strpos($tmp[1], '.html')) ? usu_cleanse(str_replace('.html', '', $tmp[1])) : usu_cleanse($tmp[1]);
                 $_GET[$get_key] = $value;
                 $HTTP_GET_VARS[$get_key] = $value;
-                Usu_Main::i()->setVar('request_querystring', http_build_query($_GET));
+                usu5::i()->setVar('request_querystring', http_build_query($_GET));
 
                 return $get_key.'='.$value;
             }

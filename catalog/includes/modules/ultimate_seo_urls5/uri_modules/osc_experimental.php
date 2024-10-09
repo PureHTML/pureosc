@@ -54,19 +54,19 @@ class osc_experimental
     public function isValidUri()
     {
         // Check for an seo url marker, if there it is not an experimental uri
-        $dependencies = Usu_Main::i()->getVar('page_modules', substr(Usu_Main::i()->getVar('filename'), 0, -4))->retrieveDependencies();
+        $dependencies = usu5::i()->getVar('page_modules', substr(usu5::i()->getVar('filename'), 0, -4))->retrieveDependencies();
 
         foreach ($dependencies as $dep => $dummy) {
-            if (false !== strpos(Usu_Main::i()->getVar('request_uri'), $dependencies[$dep]['marker'])) {
+            if (false !== strpos(usu5::i()->getVar('request_uri'), $dependencies[$dep]['marker'])) {
                 return false;
             }
         }
 
-        if (false !== strpos(Usu_Main::i()->getVar('request_uri'), '.html')) { // uri should not have .html
+        if (false !== strpos(usu5::i()->getVar('request_uri'), '.html')) { // uri should not have .html
             return false;
         }
 
-        if (false === strpos(Usu_Main::i()->getVar('request_uri'), '/')) { // uri must have / in the uri
+        if (false === strpos(usu5::i()->getVar('request_uri'), '/')) { // uri must have / in the uri
             return false;
         }
 
@@ -80,8 +80,8 @@ class osc_experimental
      * @uses explode()
      * @uses http_build_query(
      *
-     * @see Usu_Main::setVar()
-     * @see Usu_Main::getVar()
+     * @see usu5::setVar()
+     * @see usu5::getVar()
      * @see includes/usu_general_functions.php usu_cleanse()
      *
      * @return string - querystring
@@ -89,8 +89,8 @@ class osc_experimental
     public function parsePath()
     {
         global $HTTP_GET_VARS;
-        Usu_Main::i()->setVar('parsing_module', __CLASS__);
-        $tmp = explode('/', Usu_Main::i()->getVar('request_uri'));
+        usu5::i()->setVar('parsing_module', __CLASS__);
+        $tmp = explode('/', usu5::i()->getVar('request_uri'));
         $count = \count($tmp);
 
         for ($i = 0; $i < $count; $i += 2) {
@@ -100,7 +100,7 @@ class osc_experimental
             $HTTP_GET_VARS[usu_cleanse($tmp[$i])] = usu_cleanse($tmp[$i + 1]);
         }
 
-        Usu_Main::i()->setVar('request_querystring', http_build_query($_GET));
+        usu5::i()->setVar('request_querystring', http_build_query($_GET));
 
         // Newly created _GET array added to the querystring and converted to _GET string
         return http_build_query($newget);

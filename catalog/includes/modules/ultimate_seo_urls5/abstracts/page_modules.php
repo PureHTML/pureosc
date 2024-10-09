@@ -56,7 +56,7 @@ abstract class page_modules
      */
     public function buildCacheName()
     {
-        $cachename = Usu_Main::i()->getVar('languages_id').'_'.substr(Usu_Main::i()->getVar('filename'), 0, -4);
+        $cachename = usu5::i()->getVar('languages_id').'_'.substr(usu5::i()->getVar('filename'), 0, -4);
 
         foreach ($this->cache_name_builder as $get_key => $dummy) {
             if (\array_key_exists($get_key, $_GET)) {
@@ -83,7 +83,7 @@ abstract class page_modules
      */
     protected function setAllParams($page, $parameters, $add_session_id, $connection, $extract): void
     {
-        $this->urlInitial = $connection === 'NONSSL' ? Usu_Main::i()->getVar('base_url') : Usu_Main::i()->getVar('base_url_ssl');
+        $this->urlInitial = $connection === 'NONSSL' ? usu5::i()->getVar('base_url') : usu5::i()->getVar('base_url_ssl');
         $this->cleanParams(explode('&', $parameters));
         $this->add_session_id = $add_session_id;
         $this->setSid($connection);
@@ -98,10 +98,10 @@ abstract class page_modules
     protected function setSid($connection): void
     {
         // Add the session ID when moving from different HTTP and HTTPS servers, or when SID is defined
-        if (($this->add_session_id === true) && (Usu_Main::i()->getVar('session_started') === true) && (SESSION_FORCE_COOKIE_USE === 'False')) {
-            if (tep_not_null(Usu_Main::i()->getVar('sid'))) {
-                $_sid = Usu_Main::i()->getVar('sid');
-            } elseif (((Usu_Main::i()->getVar('request_type') === 'NONSSL') && ($connection === 'SSL') && (ENABLE_SSL === true)) || ((Usu_Main::i()->getVar('request_type') === 'SSL') && ($connection === 'NONSSL'))) {
+        if (($this->add_session_id === true) && (usu5::i()->getVar('session_started') === true) && (SESSION_FORCE_COOKIE_USE === 'False')) {
+            if (tep_not_null(usu5::i()->getVar('sid'))) {
+                $_sid = usu5::i()->getVar('sid');
+            } elseif (((usu5::i()->getVar('request_type') === 'NONSSL') && ($connection === 'SSL') && (ENABLE_SSL === true)) || ((usu5::i()->getVar('request_type') === 'SSL') && ($connection === 'NONSSL'))) {
                 if (HTTP_COOKIE_DOMAIN !== HTTPS_COOKIE_DOMAIN) {
                     $_sid = tep_session_name().'='.tep_session_id();
                 }
@@ -315,8 +315,8 @@ abstract class page_modules
     protected function linkTextParts($string)
     {
         // Action character conversions
-        if (\is_array(Usu_Main::i()->getVar('character_conversion'))) {
-            $string = strtr($string, Usu_Main::i()->getVar('character_conversion'));
+        if (\is_array(usu5::i()->getVar('character_conversion'))) {
+            $string = strtr($string, usu5::i()->getVar('character_conversion'));
         }
 
         $string = str_replace('-', ' ', $string); // some strings will already have -(hyphen) so we convert them to spaces

@@ -117,9 +117,9 @@ function osc_href_link($page = '', $parameters = '', $connection = 'NONSSL', $ad
         $link = str_replace(FILENAME_DEFAULT, '', $link);
     }
 
-    if (Usu_Main::monitorPerformance()) {
-        ++Usu_Main::$performance['std_urls'];
-        Usu_Main::$performance['std_url_array'][] = $link;
+    if (usu5::monitorPerformance()) {
+        ++usu5::$performance['std_urls'];
+        usu5::$performance['std_url_array'][] = $link;
     }
 
     switch (\defined('USU5_USE_W3C_VALID') && (USU5_USE_W3C_VALID === 'true')) {
@@ -268,10 +268,10 @@ function do_homepage_redirect($url = false)
     if (\defined('USU5_HOME_PAGE_REDIRECT') && (USU5_HOME_PAGE_REDIRECT === 'true')
                                               && (USU5_ENABLED === 'true')) {
         if (false === $url) {
-            $original_request_uri = remove_querystring(Usu_Main::i()->getVar('original_request_uri'));
+            $original_request_uri = remove_querystring(usu5::i()->getVar('original_request_uri'));
             $possible_file = substr($original_request_uri, \strlen($original_request_uri) - \strlen(FILENAME_DEFAULT), \strlen(FILENAME_DEFAULT));
 
-            if (!tep_not_null(Usu_Main::i()->getVar('request_uri')) && ($possible_file === FILENAME_DEFAULT)) {
+            if (!tep_not_null(usu5::i()->getVar('request_uri')) && ($possible_file === FILENAME_DEFAULT)) {
                 return true;
             }
         } else {
@@ -323,27 +323,27 @@ function usu5_multi_language($separator = false)
     if (!\defined('USU5_ENABLED') || (USU5_ENABLED !== 'true')
                                     || !\defined('USU5_MULTI_LANGUAGE_SEO_SUPPORT')
                                     || (USU5_MULTI_LANGUAGE_SEO_SUPPORT !== 'true')
-                                    || (false === Usu_Main::i()->getVar('current_language', 'code'))
-                                    || (DEFAULT_LANGUAGE === Usu_Main::i()->getVar('current_language', 'code'))) {
+                                    || (false === usu5::i()->getVar('current_language', 'code'))
+                                    || (DEFAULT_LANGUAGE === usu5::i()->getVar('current_language', 'code'))) {
         return false;
     }
 
     switch (true) {
         case $separator === 'left':
-            return '/'.Usu_Main::i()->getVar('current_language', 'code');
+            return '/'.usu5::i()->getVar('current_language', 'code');
 
             break;
         case $separator === 'right':
-            return Usu_Main::i()->getVar('current_language', 'code').'/';
+            return usu5::i()->getVar('current_language', 'code').'/';
 
             break;
         case $separator === 'both':
-            return '/'.Usu_Main::i()->getVar('current_language', 'code').'/';
+            return '/'.usu5::i()->getVar('current_language', 'code').'/';
 
             break;
 
         default:
-            return Usu_Main::i()->getVar('current_language', 'code');
+            return usu5::i()->getVar('current_language', 'code');
 
             break;
     }
@@ -408,11 +408,11 @@ function performance()
         return false;
     }
 
-    $cache_loaded_colour = Usu_Main::$performance['cache_loaded'] === 'true' ? 'green' : 'red';
+    $cache_loaded_colour = usu5::$performance['cache_loaded'] === 'true' ? 'green' : 'red';
     (USU5_CACHE_ON === 'true') ? $status = '<span style="color: green; font-weight: bold;">On</span>' : $status = '<span style="color: red; font-weight: bold;">Off</span>';
     $total_query_time = 0;
 
-    foreach (Usu_Main::$performance['queries'] as $index => $query) {
+    foreach (usu5::$performance['queries'] as $index => $query) {
         $total_query_time += $query['time'];
     }
 
@@ -421,20 +421,20 @@ function performance()
   <div style="width: 100%; background-color: #ffffdd; border: 1px solid #1659AC; font-size: 10pt;">
     <div style="background-color: #2E8FCA; font-size: 12pt; font-weight: bold; padding: 0.5em; color: #00598E;">
       <div style="float: right; color: #0073BA; font-weight: bold; font-size: 16pt; margin-top: -0.2em;">FWR MEDIA</div>
-        ULTIMATE Seo Urls <span style="color: #CC3300;">5</span> PRO <span style="font-size: xx-small; color: #dddddd; font-style: italic;"> ( <?php echo Usu_Main::$version; ?> )</span> - Performance
+        ULTIMATE Seo Urls <span style="color: #CC3300;">5</span> PRO <span style="font-size: xx-small; color: #dddddd; font-style: italic;"> ( <?php echo usu5::$version; ?> )</span> - Performance
     </div>
-    <div style="padding: 0.5em; background-color: #CCE3F1; color: #027AC6; font-size: 10pt;">Standard URI produced: <?php echo Usu_Main::$performance['std_urls']; ?></div>
-    <div style="padding: 0.5em; color: #027AC6; font-size: 10pt;">SEO URI produced: <?php echo Usu_Main::$performance['seo_urls']; ?></div>
-    <div style="padding: 0.5em; background-color: #CCE3F1; color: #027AC6; font-size: 10pt;">Query Count: <?php echo Usu_Main::$performance['querycount']; ?></div>
-    <div style="padding: 0.5em; color: #027AC6; font-size: 10pt;">Queries Saved: <?php echo Usu_Main::$performance['queries_saved']; ?></div>
-    <div style="padding: 0.5em; background-color: #CCE3F1; color: #027AC6; font-size: 10pt;">Cache load time: <?php echo Usu_Main::$performance['time_extracting_cache']; ?> seconds <span style=" font-size: x-small; font-style: italic;">( includes gzinflate/base64_decode/unserialize )</span></div>
-    <div style="padding: 0.5em; color: #027AC6; font-size: 10pt;">Data loaded from cache: <span style="font-weight: bold; color: <?php echo $cache_loaded_colour; ?>;"><?php echo Usu_Main::$performance['cache_loaded']; ?></span> <span style=" font-size: x-small; font-style: italic;">( Cache System: <?php echo Usu_Main::$performance['cache_system']; ?> )</span></div>
+    <div style="padding: 0.5em; background-color: #CCE3F1; color: #027AC6; font-size: 10pt;">Standard URI produced: <?php echo usu5::$performance['std_urls']; ?></div>
+    <div style="padding: 0.5em; color: #027AC6; font-size: 10pt;">SEO URI produced: <?php echo usu5::$performance['seo_urls']; ?></div>
+    <div style="padding: 0.5em; background-color: #CCE3F1; color: #027AC6; font-size: 10pt;">Query Count: <?php echo usu5::$performance['querycount']; ?></div>
+    <div style="padding: 0.5em; color: #027AC6; font-size: 10pt;">Queries Saved: <?php echo usu5::$performance['queries_saved']; ?></div>
+    <div style="padding: 0.5em; background-color: #CCE3F1; color: #027AC6; font-size: 10pt;">Cache load time: <?php echo usu5::$performance['time_extracting_cache']; ?> seconds <span style=" font-size: x-small; font-style: italic;">( includes gzinflate/base64_decode/unserialize )</span></div>
+    <div style="padding: 0.5em; color: #027AC6; font-size: 10pt;">Data loaded from cache: <span style="font-weight: bold; color: <?php echo $cache_loaded_colour; ?>;"><?php echo usu5::$performance['cache_loaded']; ?></span> <span style=" font-size: x-small; font-style: italic;">( Cache System: <?php echo usu5::$performance['cache_system']; ?> )</span></div>
     <div style="padding: 0.5em; background-color: #CCE3F1; color: #027AC6; font-size: 10pt;">Total query time: <?php echo $total_query_time; ?> seconds</div>
     <div style="padding: 0.5em; color: #027AC6; font-size: 10pt;">Cache system is <?php echo $status; ?></div>
     <div style="padding: 0.5em; background-color: #CCE3F1; color: #027AC6; font-size: 10pt;"><div style="padding: 0.5em;"><span style="font-weight: bold; text-decoration: underline;">Standard Urls:</span></div>
       <div>
 <?php
-          foreach (Usu_Main::$performance['std_url_array'] as $index => $url) {
+          foreach (usu5::$performance['std_url_array'] as $index => $url) {
               echo '          '.$url.'<br />'.\PHP_EOL;
           }
 
@@ -444,7 +444,7 @@ function performance()
     <div style="padding: 0.5em; color: #027AC6; font-size: 10pt;"><div style="padding: 0.5em;"><span style="font-weight: bold; text-decoration: underline;">Seo Urls:</span></div>
       <div>
 <?php
-          foreach (Usu_Main::$performance['seo_url_array'] as $index => $url) {
+          foreach (usu5::$performance['seo_url_array'] as $index => $url) {
               echo '        '.$url.'<br />'.\PHP_EOL;
           }
 
@@ -453,7 +453,7 @@ function performance()
     </div>
     <div style="background-color: #fff; padding: 0.5em; color: #737373; font-size: 10pt;"><div style="padding: 0.5em;"><span style="font-weight: bold; text-decoration: underline;">Queries:</span></div>
 <?php
-          foreach (Usu_Main::$performance['queries'] as $index => $query) {
+          foreach (usu5::$performance['queries'] as $index => $query) {
               echo '      <div style="padding: 0.2em; font-family: tahoma; font-size: 7pt;"><b>Time:</b> '.$query['time'].' seconds<br /><b>Query:</b> '.$query['query'].'</div>'.\PHP_EOL;
           }
 

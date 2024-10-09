@@ -57,17 +57,17 @@ final class sqlite implements cache_system
     public static function i()
     {
         if (!self::$_singleton instanceof Sqlite_Cache_Module) {
-            if (Usu_Main::i()->getVar('page_modules', substr(Usu_Main::i()->getVar('filename'), 0, -4)) instanceof page_modules) {
+            if (usu5::i()->getVar('page_modules', substr(usu5::i()->getVar('filename'), 0, -4)) instanceof page_modules) {
                 self::$cache_on = (\defined('USU5_CACHE_ON') && (USU5_CACHE_ON === 'true')) ? true : false;
-                self::$cache_name = md5(Usu_Main::i()->getVar('page_modules', substr(Usu_Main::i()
+                self::$cache_name = md5(usu5::i()->getVar('page_modules', substr(usu5::i()
                     ->getVar('filename'), 0, -4))
                     ->buildCacheName());
-                Usu_Main::i()->setVar('cache_name', self::$cache_name);
+                usu5::i()->setVar('cache_name', self::$cache_name);
             } else { // No module so we set the cache name as the language id plus the called file
-                self::$cache_name = Usu_Main::i()->getVar('languages_id').'_'.substr(Usu_Main::i()->getVar('filename'), 0, -4);
+                self::$cache_name = usu5::i()->getVar('languages_id').'_'.substr(usu5::i()->getVar('filename'), 0, -4);
             }
 
-            self::$sqlite_db_file = Usu_Main::i()->getVar('cache_system_path').'sqlite/usu_cache.db';
+            self::$sqlite_db_file = usu5::i()->getVar('cache_system_path').'sqlite/usu_cache.db';
             self::createDatabase();
             self::$_singleton = new self();
         }
@@ -92,9 +92,9 @@ final class sqlite implements cache_system
         return self::$_singleton;
     }
     /**
-     * Stores the current cache on the destruction of the Usu_Main class.
+     * Stores the current cache on the destruction of the usu5 class.
      *
-     * @see Usu_Main::__destruct()
+     * @see usu5::__destruct()
      *
      * @uses base64_encode()
      * @uses date()
@@ -123,12 +123,12 @@ final class sqlite implements cache_system
      *
      * If $insert becomes bool true then we insert data when storing, bool false we don't save as the cache already exists
      *
-     * @see Usu_Main::extractCacheData()
+     * @see usu5::extractCacheData()
      */
     public function retrieve(): void
     {
         if (false !== self::$cache_on) {
-            $this->insert = Usu_Main::i()->extractCacheData(self::$cache_name, 'sqlite', $this);
+            $this->insert = usu5::i()->extractCacheData(self::$cache_name, 'sqlite', $this);
         }
     }
     /**

@@ -26,7 +26,7 @@ declare(strict_types=1);
 require_once DIR_WS_MODULES.'ultimate_seo_urls5/includes/usu_general_functions.php';
 
 /**
- * @see Usu5_Bootstrap
+ * @see bootstrap
  */
 require_once DIR_WS_MODULES.'ultimate_seo_urls5/main/bootstrap.php';
 
@@ -93,11 +93,11 @@ class usu5
     /**
      * Return a singleton instance of the class.
      *
-     * @return Usu_Main
+     * @return usu5
      */
     public static function i()
     {
-        if (!self::$_singleton instanceof Usu_Main) {
+        if (!self::$_singleton instanceof usu5) {
             self::$_singleton = new self();
         }
 
@@ -113,7 +113,7 @@ class usu5
      * @param string $language       - passed by reference as USU5 may reset this value in multi language mode
      * @param        $force_language - force links to be produced for a particular language
      *
-     * @see Usu5_Bootstrap::bootStrapper()
+     * @see bootstrap::bootStrapper()
      */
     public function initiate($lng, &$languages_id, &$language, $force_language = false)
     {
@@ -121,10 +121,10 @@ class usu5
             $this->vars['languages_id'] = $languages_id;
             $this->vars['language'] = $language;
 
-            return Usu5_Bootstrap::i()->loadLanguageData([]);
+            return bootstrap::i()->loadLanguageData([]);
         }
 
-        Usu5_Bootstrap::i()->bootStrapper($lng);
+        bootstrap::i()->bootStrapper($lng);
         $languages_id = $this->vars['languages_id'];
         $language = $this->vars['language'];
     } // end method
@@ -132,8 +132,8 @@ class usu5
      * USU5 link wrapper, defaults to the standard osCommerce tep_href_link() wrapper if not a valid seo url request.
      *
      * @see includes/usu_general_functions.php - osc_href_link() - this is the standard osC tep_href_link() wrapper
-     * @see Usu_Main::getVar()
-     * @see Usu_Main::monitorPerformance()
+     * @see usu5::getVar()
+     * @see usu5::monitorPerformance()
      *
      * @uses array_key_exists()
      * @uses is_readable()
@@ -186,7 +186,7 @@ class usu5
      * @param mixed $var_name - variable key
      * @param mixed $value    - variable value
      *
-     * @return Usu_Main - chaining
+     * @return usu5 - chaining
      */
     public function setVar($var_name, $value)
     {
@@ -226,7 +226,7 @@ class usu5
      * @uses microtime()
      * @uses number_format()
      *
-     * @see Usu_Main::monitorPerformance()
+     * @see usu5::monitorPerformance()
      *
      * @param string $sql - The query
      *
@@ -248,7 +248,7 @@ class usu5
     /**
      * Factory to extract data from the various cache strategies.
      *
-     * @see Usu_Main::getVar()
+     * @see usu5::getVar()
      * @see data_registry::load()
      *
      * @uses base64_decode()

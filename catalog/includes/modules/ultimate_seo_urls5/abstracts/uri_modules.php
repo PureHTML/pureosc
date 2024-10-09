@@ -97,12 +97,12 @@ abstract class uri_modules
      */
     protected function withoutLanguage()
     {
-        preg_match('@^[a-z]{2}/@', Usu_Main::i()->getVar('request_uri'), $matches);
+        preg_match('@^[a-z]{2}/@', usu5::i()->getVar('request_uri'), $matches);
 
         if (\array_key_exists(0, $matches)) {
-            return str_replace($matches[0], '', Usu_Main::i()->getVar('request_uri'));
+            return str_replace($matches[0], '', usu5::i()->getVar('request_uri'));
         }
 
-        return Usu_Main::i()->getVar('request_uri');
+        return usu5::i()->getVar('request_uri');
     } // end method
 } // end class
