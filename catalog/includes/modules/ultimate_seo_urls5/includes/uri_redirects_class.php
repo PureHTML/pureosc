@@ -51,7 +51,7 @@ final class uri_redirects_class
     public static function i()
     {
         if (!self::$_singleton instanceof Uri_Redirects) {
-            include_once Usu_Main::i()->getVar('includes_path').'uri_redirects_array.php';
+            include_once usu5::i()->getVar('includes_path').'uri_redirects_array.php';
 
             if (isset($usu5_uri_redirects) && \is_array($usu5_uri_redirects) && !empty($usu5_uri_redirects)) {
                 self::$redirects = $usu5_uri_redirects;
@@ -73,7 +73,7 @@ final class uri_redirects_class
     {
         if (!empty(self::$redirects)) {
             foreach (self::$redirects as $target => $uri_data) {
-                if (Usu_Main::i()->getVar('request_uri') === $target) {
+                if (usu5::i()->getVar('request_uri') === $target) {
                     return htmlspecialchars_decode(tep_href_link($uri_data[0], $uri_data[1]));
                 }
             }

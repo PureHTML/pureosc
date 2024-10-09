@@ -59,7 +59,7 @@ final class validator
      * Do we have a page module for the request? If not return false allowing the standard osCommerce link wrapper to take over.
      * Is it an seo url request? If not return false allowing the standard osCommerce link wrapper to take over.
      *
-     * @see Usu_Main::getVar()
+     * @see usu5::getVar()
      * @see Usu_Validator::isSeoUrlRequest()
      * @see Usu_Validator::homePageRedirect()
      * @see Usu_Validator::validate()
@@ -71,7 +71,7 @@ final class validator
     public function initiate()
     {
         // Confirm we have a page module if not return false
-        if (false === is_readable(Usu_Main::i()->getVar('page_modules_path').Usu_Main::i()->getVar('filename'))) {
+        if (false === is_readable(usu5::i()->getVar('page_modules_path').usu5::i()->getVar('filename'))) {
             return false; // This means that the request will not be handled by USU5
         }
 
@@ -90,13 +90,13 @@ final class validator
      * @uses strpos()
      * @uses substr()
      *
-     * @see Usu_Main::getVar()
+     * @see usu5::getVar()
      *
      * @return bool $validated
      */
     private function isSeoUrlRequest()
     {
-        $dependencies = Usu_Main::i()->getVar('page_modules', substr(Usu_Main::i()->getVar('filename'), 0, -4))->retrieveDependencies();
+        $dependencies = usu5::i()->getVar('page_modules', substr(usu5::i()->getVar('filename'), 0, -4))->retrieveDependencies();
         $validated = false;
 
         // Check if a dependency can be found in the superglobal _GET array
@@ -106,12 +106,12 @@ final class validator
             }
 
             // Check for osC experimental urls
-            if (false !== strpos(Usu_Main::i()->getVar('request_uri'), $dep.'/')) {
+            if (false !== strpos(usu5::i()->getVar('request_uri'), $dep.'/')) {
                 $validated = true;
             }
 
             // Check if an seo marker can be found in the uri
-            if (false !== strpos(Usu_Main::i()->getVar('request_uri'), $dependencies[$dep]['marker'])) {
+            if (false !== strpos(usu5::i()->getVar('request_uri'), $dependencies[$dep]['marker'])) {
                 $this->current_seo_marker = $dependencies[$dep]['marker'];
                 $validated = true;
             }
@@ -125,8 +125,8 @@ final class validator
      *
      * @see Usu_Validator::pageNotFound()
      * @see includes/notfound_404.php
-     * @see Usu_Main::setVar()
-     * @see Usu_Main::getVar()
+     * @see usu5::setVar()
+     * @see usu5::getVar()
      * @see includes/usu_general_functions.php -  remove_session_id()
      * @see Usu_Validator::redirect()
      *
@@ -136,29 +136,29 @@ final class validator
     private function validate(): void
     {
         // Get the incoming seo uri minus the session id
-        Usu_Main::i()->setVar('request_compare_in', remove_session_id(htmlspecialchars_decode(Usu_Main::i()->getVar('original_request_uri'))));
+        usu5::i()->setVar('request_compare_in', remove_session_id(htmlspecialchars_decode(usu5::i()->getVar('original_request_uri'))));
         // Get a brand new url based on the querystring
-        $new_url = htmlspecialchars_decode(tep_href_link(Usu_Main::i()->getVar('filename'), Usu_Main::i()->getVar('request_querystring')));
+        $new_url = htmlspecialchars_decode(tep_href_link(usu5::i()->getVar('filename'), usu5::i()->getVar('request_querystring')));
         // Strip the new url of domain name and session id to arrive at a comparible uri
-        Usu_Main::i()->setVar('request_compare_new', remove_session_id(str_replace([HTTPS_SERVER, HTTP_SERVER], '', $new_url)));
+        usu5::i()->setVar('request_compare_new', remove_session_id(str_replace([HTTPS_SERVER, HTTP_SERVER], '', $new_url)));
 
         /**
          * If $page_not_found has been set to bool true then the page module returned a result of bool false from the database
          * this means that the product/category etc does not exist so we need to show 404 headers and page.
          */
-        if (false !== Usu_Main::i()->getVar('page_not_found')) {
+        if (false !== usu5::i()->getVar('page_not_found')) {
             $this->pageNotFound();
         }
 
         // If the incoming uri and the newly created uri do not match then we need to 301 redirect to the new.
-        if (Usu_Main::i()->getVar('request_compare_in') !== Usu_Main::i()->getVar('request_compare_new')) {
+        if (usu5::i()->getVar('request_compare_in') !== usu5::i()->getVar('request_compare_new')) {
             $this->redirect($new_url);
         }
     } // end method
     /**
      * The page does not exist so we will show our custom 404 error page and header.
      *
-     * @see Usu_Main::getVar()
+     * @see usu5::getVar()
      * @see Uri_Redirects::needsRedirect()
      * @see Usu_Validator::redirect()
      *
@@ -168,7 +168,7 @@ final class validator
      */
     private function pageNotFound(): void
     {
-        include_once Usu_Main::i()->getVar('includes_path').'uri_redirects_class.php';
+        include_once usu5::i()->getVar('includes_path').'uri_redirects_class.php';
 
         if (false !== ($url = Uri_Redirects::i()->needsRedirect())) {
             $this->redirect($url);
@@ -177,7 +177,7 @@ final class validator
         session_write_close();
         header('HTTP/1.0 404 Not Found');
 
-        include_once Usu_Main::i()->getVar('includes_path').'notfound_404.php';
+        include_once usu5::i()->getVar('includes_path').'notfound_404.php';
 
         exit;
     }

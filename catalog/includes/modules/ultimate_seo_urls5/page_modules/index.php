@@ -82,8 +82,8 @@ class index extends page_modules
      * The main method of this class that receives input needed to build a link
      * then finally returns a fully built seo link if it has not previousluy returned false.
      *
-     * @see Usu_Main::getVar()
-     * @see Usu_Main::setVar()
+     * @see usu5::getVar()
+     * @see usu5::setVar()
      * @see page_modules::stripPathToLastNumber()
      * @see page_modules::setQuery()
      * @see page_modules::unsetProperties()
@@ -128,7 +128,7 @@ class index extends page_modules
         switch (true) {
             case $this->key === 'cPath':
                 // This array contains replacements for the to_replace array
-                $this->setQuery([TABLE_CATEGORIES_DESCRIPTION, TABLE_CATEGORIES, (int) Usu_Main::i()->getVar('languages_id'), $this->stripPathToLastNumber($this->keys_index[$this->key])]);
+                $this->setQuery([TABLE_CATEGORIES_DESCRIPTION, TABLE_CATEGORIES, (int) usu5::i()->getVar('languages_id'), $this->stripPathToLastNumber($this->keys_index[$this->key])]);
 
                 break;
             case $this->key === 'manufacturers_id':
@@ -146,18 +146,18 @@ class index extends page_modules
         // end switch
         $link_text = $this->acquireLinkText();
         // If the query returned no results then we return false forcing the use of the standard osCommerce link wrapper
-        Usu_Main::i()->setVar('page_not_found', false);
+        usu5::i()->setVar('page_not_found', false);
 
         if (false === $link_text) {
-            Usu_Main::i()->setVar('page_not_found', true);
+            usu5::i()->setVar('page_not_found', true);
             $this->unsetProperties();
 
             return;
         }
 
-        return $this->returnFinalLink(Usu_Main::i()
+        return $this->returnFinalLink(usu5::i()
             ->getVar('uri_modules', USU5_URLS_TYPE)
-            ->createLinkString($this->page, Usu_Main::i()
+            ->createLinkString($this->page, usu5::i()
                 ->getVar('uri_modules', USU5_URLS_TYPE)
                 ->separateUriText($this->linktext($link_text)), $this->dependencies[$this->key]['marker'], $this->keys_index[$this->key]));
     } // end method
@@ -165,11 +165,11 @@ class index extends page_modules
      * Acquire an array of single or multiple link texts from the query
      * this will be cached for later retrieval.
      *
-     * @see Usu_Main::query()
-     * @see Usu_Main::getVar()
+     * @see usu5::query()
+     * @see usu5::getVar()
      * @see data_registry::retrieve()
      * @see data_registry::attach()
-     * @see Usu_Main::monitorPerformance()
+     * @see usu5::monitorPerformance()
      *
      * @uses array_key_exists()
      * @uses defined()
@@ -179,16 +179,16 @@ class index extends page_modules
      */
     protected function acquireLinkText()
     {
-        if (false !== $final_text_array = Usu_Main::i()->getVar('registry')
+        if (false !== $final_text_array = usu5::i()->getVar('registry')
             ->retrieve($this->key, $this->keys_index[$this->key])) {
-            if (Usu_Main::monitorPerformance()) {
-                ++Usu_Main::$performance['queries_saved'];
+            if (usu5::monitorPerformance()) {
+                ++usu5::$performance['queries_saved'];
             }
 
             return $final_text_array;
         }
 
-        $result = Usu_Main::i()->query($this->query);
+        $result = usu5::i()->query($this->query);
         $text_array = [];
         $text_array = tep_db_fetch_array($result);
         tep_db_free_result($result);
@@ -211,7 +211,7 @@ class index extends page_modules
         }
 
         // We will cache this result
-        Usu_Main::i()->getVar('registry')->attach($this->key, $this->keys_index[$this->key], $final_text_array);
+        usu5::i()->getVar('registry')->attach($this->key, $this->keys_index[$this->key], $final_text_array);
 
         return $final_text_array;
     }

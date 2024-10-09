@@ -76,7 +76,7 @@ function tep_db_query($query, $link = 'db_link')
 {
     global ${$link};
 
-    if (\defined('STORE_DB_TRANSACTIONS') && (STORE_DB_TRANSACTIONS === 'true')) {
+    if (\defined('STORE_DB_TRANSACTIONS') && (constant('STORE_DB_TRANSACTIONS') === 'true')) {
         error_log('QUERY: '.$query."\n", 3, STORE_PAGE_PARSE_TIME_LOG);
     }
 

@@ -78,7 +78,7 @@ function osc_draw_select_menu($name, $values, $default = null, $parameters = nul
 
     $field = '<select name="'.osc_output_string($name).'"';
 
-    if (strpos($parameters, 'id=') === false) {
+    if (strpos((string)$parameters, 'id=') === false) {
         $field .= ' id="'.osc_output_string($name).'"';
     }
 

@@ -84,8 +84,8 @@ class articles extends page_modules
      * The main method of this class that receives input needed to build a link
      * then finally returns a fully built seo link if it has not previousluy returned false.
      *
-     * @see Usu_Main::getVar()
-     * @see Usu_Main::setVar()
+     * @see usu5::getVar()
+     * @see usu5::setVar()
      * @see page_modules::stripPathToLastNumber()
      * @see page_modules::setQuery()
      * @see page_modules::unsetProperties()
@@ -130,7 +130,7 @@ class articles extends page_modules
         switch (true) {
             case $this->key === 'tPath': // xxx = _GET key ( e.g. cPath )
                 // This array contains replacements for the to_replace array ( see the $dependencies array )
-                $this->setQuery([TABLE_TOPICS_DESCRIPTION, $this->stripPathToLastNumber($this->keys_index[$this->key]), Usu_Main::i()->getVar('languages_id')]);
+                $this->setQuery([TABLE_TOPICS_DESCRIPTION, $this->stripPathToLastNumber($this->keys_index[$this->key]), usu5::i()->getVar('languages_id')]);
 
                 break;
             case $this->key === 'authors_id': // xxx = _GET key ( e.g. cPath )
@@ -148,19 +148,19 @@ class articles extends page_modules
         // end switch
         $link_text = $this->acquireLinkText();
         // If the query returned false then we return nothing and set $page_not_found to true forcing a 404 page
-        Usu_Main::i()->setVar('page_not_found', false);
+        usu5::i()->setVar('page_not_found', false);
 
         if (false === $link_text) {
-            Usu_Main::i()->setVar('page_not_found', true);
+            usu5::i()->setVar('page_not_found', true);
             $this->unsetProperties();
 
             return;
         }
 
         // Return a fully built seo url
-        return $this->returnFinalLink(Usu_Main::i()
+        return $this->returnFinalLink(usu5::i()
             ->getVar('uri_modules', USU5_URLS_TYPE)
-            ->createLinkString($this->page, Usu_Main::i()
+            ->createLinkString($this->page, usu5::i()
                 ->getVar('uri_modules', USU5_URLS_TYPE)
                 ->separateUriText($this->linktext($link_text)), $this->dependencies[$this->key]['marker'], $this->keys_index[$this->key]));
     } // end method
@@ -168,7 +168,7 @@ class articles extends page_modules
      * Acquire an array of single or multiple link texts from the query
      * this will be cached for later retrieval.
      *
-     * @see Usu_Main::query()
+     * @see usu5::query()
      *
      * @uses trim()
      *
@@ -176,7 +176,7 @@ class articles extends page_modules
      */
     protected function acquireLinkText()
     {
-        $result = Usu_Main::i()->query($this->query);
+        $result = usu5::i()->query($this->query);
         $text_array = tep_db_fetch_array($result);
         tep_db_free_result($result);
 

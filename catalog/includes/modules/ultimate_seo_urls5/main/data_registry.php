@@ -130,7 +130,7 @@ final class data_registry
     /**
      * Re populate the registry from the cache system.
      *
-     * @see USU_Main::extractCacheData()
+     * @see usu5::extractCacheData()
      *
      * @param mixed $cached_registry_data
      */

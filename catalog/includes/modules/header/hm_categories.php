@@ -121,30 +121,34 @@ class hm_categories
     {
         if (empty($tree) && empty($categories_list)) {
             $tree = $this->getCategories();
-            $parent_array = $tree[0];
+            if(array_key_exists(0, $tree)){
+                $parent_array = $tree[0];
+            }
         }
 
-        foreach ($parent_array as $categories) {
-            $li_dropdown = '';
-            $a_dropdown = '';
+        if (is_array($parent_array)) {
+            foreach ($parent_array as $categories) {
+                $li_dropdown = '';
+                $a_dropdown = '';
 
-            if (isset($tree[$categories['categories_id']])) {
-                $li_dropdown = 'dropdown';
-                $a_dropdown = 'dropdown-toggle';
-            }
+                if (isset($tree[$categories['categories_id']])) {
+                    $li_dropdown = 'dropdown';
+                    $a_dropdown = 'dropdown-toggle';
+                }
 
-            $cPath[\count($parent_array).$categories['parent_id']] = $categories['categories_id'];
+                $cPath[\count($parent_array) . $categories['parent_id']] = $categories['categories_id'];
 
-            if ($categories['parent_id'] === 0) {
-                $categories_list .= '<li class="nav-item '.$li_dropdown.'"><a class="nav-link fw-bold '.$a_dropdown.'" href="'.tep_href_link('index.php', 'cPath='.implode('_', $cPath), 'SSL', false).'">'.$categories['categories_name'].'</a>'.(isset($tree[$categories['categories_id']]) ? '' : '</li>');
-            } else {
-                $categories_list .= '<li class="'.$li_dropdown.' dropdown-submenu"><a class="dropdown-item '.$a_dropdown.'" href="'.tep_href_link('index.php', 'cPath='.implode('_', $cPath), 'SSL', false).'">'.$categories['categories_name'].'</a>';
-            }
+                if ($categories['parent_id'] === 0) {
+                    $categories_list .= '<li class="nav-item ' . $li_dropdown . '"><a class="nav-link fw-bold ' . $a_dropdown . '" href="' . tep_href_link('index.php', 'cPath=' . implode('_', $cPath), 'SSL', false) . '">' . $categories['categories_name'] . '</a>' . (isset($tree[$categories['categories_id']]) ? '' : '</li>');
+                } else {
+                    $categories_list .= '<li class="' . $li_dropdown . ' dropdown-submenu"><a class="dropdown-item ' . $a_dropdown . '" href="' . tep_href_link('index.php', 'cPath=' . implode('_', $cPath), 'SSL', false) . '">' . $categories['categories_name'] . '</a>';
+                }
 
-            if (isset($tree[$categories['categories_id']])) {
-                $categories_list .= '<ul class="dropdown-menu">';
-                $this->showCategories($tree, $tree[$categories['categories_id']], $categories_list, $cPath);
-                $categories_list .= '</li></ul>';
+                if (isset($tree[$categories['categories_id']])) {
+                    $categories_list .= '<ul class="dropdown-menu">';
+                    $this->showCategories($tree, $tree[$categories['categories_id']], $categories_list, $cPath);
+                    $categories_list .= '</li></ul>';
+                }
             }
         }
 

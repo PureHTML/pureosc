@@ -35,37 +35,37 @@ class bootstrap
     /**
      * Singleton instance of the class.
      *
-     * @return Usu5_Bootstrap
+     * @return bootstrap
      */
     public static function i()
     {
-        if (!self::$_singleton instanceof Usu5_Bootstrap) {
+        if (!self::$_singleton instanceof bootstrap) {
             self::$_singleton = new self();
         }
 
         return self::$_singleton;
     } // end method
     /**
-     * Initiate the main bootstrapper methods, called by Usu_Main::initiate().
+     * Initiate the main bootstrapper methods, called by usu5::initiate().
      *
      * @param mixed $lng - instance of language / empty array
      *
-     * @see Usu_Main::initiate()
-     * @see Usu5_Bootstrap::getRequestUri()
-     * @see Usu5_Bootstrap::setPaths()
-     * @see Usu5_Bootstrap::getConfigConstants()
-     * @see Usu5_Bootstrap::adminInstalled()
-     * @see Usu5_Bootstrap::turnOffBrokenUrls()
-     * @see Usu5_Bootstrap::loadLanguageData()
-     * @see Usu5_Bootstrap::actionMultiLanguageSupport()
-     * @see Usu5_Bootstrap::loadCharacterConversions()
-     * @see Usu5_Bootstrap::loadPageModules()
-     * @see Usu5_Bootstrap::loadUriModules()
-     * @see Usu5_Bootstrap::uriModulesParsePath()
-     * @see Usu5_Bootstrap::cacheSystem()
-     * @see Usu5_Bootstrap::setRegistry()
-     * @see Usu_Main::getVar()
-     * @see Usu_Main::setVar()
+     * @see usu5::initiate()
+     * @see bootstrap::getRequestUri()
+     * @see bootstrap::setPaths()
+     * @see bootstrap::getConfigConstants()
+     * @see bootstrap::adminInstalled()
+     * @see bootstrap::turnOffBrokenUrls()
+     * @see bootstrap::loadLanguageData()
+     * @see bootstrap::actionMultiLanguageSupport()
+     * @see bootstrap::loadCharacterConversions()
+     * @see bootstrap::loadPageModules()
+     * @see bootstrap::loadUriModules()
+     * @see bootstrap::uriModulesParsePath()
+     * @see bootstrap::cacheSystem()
+     * @see bootstrap::setRegistry()
+     * @see usu5::getVar()
+     * @see usu5::setVar()
      * @see Usu_Validator::initiate();
      */
     public function bootStrapper($lng)
@@ -74,11 +74,11 @@ class bootstrap
         $this->setPaths();
         $this->getConfigConstants();
         $this->adminInstalled(); // Dependent on getConfigConstants()
-        Usu_Main::i()->setVar('enabled', USU5_ENABLED); // dependent on adminInstalled()
+        usu5::i()->setVar('enabled', USU5_ENABLED); // dependent on adminInstalled()
 
         // No point in loading a load of functions that will not be used
-        if (Usu_Main::i()->getVar('enabled') === 'false') {
-            return Usu_Main::i()->setVar('initiated', false);
+        if (usu5::i()->getVar('enabled') === 'false') {
+            return usu5::i()->setVar('initiated', false);
         }
 
         $this->turnOffBrokenUrls();
@@ -90,7 +90,7 @@ class bootstrap
         $this->uriModulesParsePath();
         $this->cacheSystem();
         $this->setRegistry();
-        Usu_Main::i()->setVar('initiated', true);
+        usu5::i()->setVar('initiated', true);
         validator::i()->initiate();
     } // end method
     /**
@@ -121,7 +121,7 @@ class bootstrap
 
                 // set the original_request_uri adding back ( if it was there ) the querystring
                 $querystring = $this->getRequestQueryString();
-                Usu_Main::i()->setVar('original_request_uri', $original_request_uri.(tep_not_null($querystring) ? ('?'.$querystring) : ''));
+                usu5::i()->setVar('original_request_uri', $original_request_uri.(tep_not_null($querystring) ? ('?'.$querystring) : ''));
 
                 break;
             }
@@ -135,8 +135,8 @@ class bootstrap
             $rawpath = str_replace(DIR_WS_CATALOG, '/', $rawpath);
         }
 
-        $rawpath = trim(str_replace(Usu_Main::i()->getVar('filename'), '', $rawpath), '/'); // Remove the filename and any remaining / from left or right
-        Usu_Main::i()->setVar('request_uri', $rawpath);
+        $rawpath = trim(str_replace(usu5::i()->getVar('filename'), '', $rawpath), '/'); // Remove the filename and any remaining / from left or right
+        usu5::i()->setVar('request_uri', $rawpath);
     } // End Method
     /**
      * Extract language data from the osCommerce language class.
@@ -158,7 +158,7 @@ class bootstrap
             $catalog_languages = $lng->catalog_languages;
 
             foreach ($catalog_languages as $code => $detail) {
-                if ($detail['directory'] === Usu_Main::i()->getVar('language')) {
+                if ($detail['directory'] === usu5::i()->getVar('language')) {
                     $current_code = $code;
                 }
             }
@@ -174,7 +174,7 @@ class bootstrap
                     'image' => $languages['image'],
                     'directory' => $languages['directory']];
 
-                if ($languages['directory'] === Usu_Main::i()->getVar('language')) {
+                if ($languages['directory'] === usu5::i()->getVar('language')) {
                     $current_language = $catalog_languages[$languages['code']];
                     $current_code = $languages['code'];
                 }
@@ -182,13 +182,13 @@ class bootstrap
         }
 
         $current_language = array_merge((array) $current_language, ['code' => $current_code]);
-        Usu_Main::i()->setVar('catalog_languages', $catalog_languages)
+        usu5::i()->setVar('catalog_languages', $catalog_languages)
             ->setVar('current_language', $current_language);
     } // End method
 
     private function getRequestQueryString()
     {
-        if (false !== ($qs = Usu_Main::i()->getVar('request_querystring'))) {
+        if (false !== ($qs = usu5::i()->getVar('request_querystring'))) {
             return $qs;
         }
 
@@ -213,21 +213,21 @@ class bootstrap
             }
         }
 
-        Usu_Main::i()->setVar('request_querystring', ltrim($qs, '&'));
+        usu5::i()->setVar('request_querystring', ltrim($qs, '&'));
 
-        return Usu_Main::i()->getVar('request_querystring');
+        return usu5::i()->getVar('request_querystring');
     } // end method
     /**
      * Set all paths used by USU5 PRO.
      *
-     * @see Usu_Main::setVar()
-     * @see Usu5_Bootstrap::getRealPath()
+     * @see usu5::setVar()
+     * @see bootstrap::getRealPath()
      */
     private function setPaths(): void
     {
         $real_path = $this->getRealPath();
         $usu_path = $real_path.'includes/modules/ultimate_seo_urls5/';
-        Usu_Main::i()->setVar('real_path', $real_path)
+        usu5::i()->setVar('real_path', $real_path)
             ->setVar('usu_path', $usu_path)
             ->setVar('db_install_path', $usu_path.'database_install/')
             ->setVar('abstracts_path', $usu_path.'abstracts/')
@@ -275,7 +275,7 @@ class bootstrap
     /**
      * Set the array of constants used in the USU5 PRO configuration.
      *
-     * @see Usu_Main::setVar()
+     * @see usu5::setVar()
      */
     private function getConfigConstants(): void
     {
@@ -283,7 +283,7 @@ class bootstrap
             'USU5_CHAR_CONVERT_SET', 'USU5_FILTER_SHORT_WORDS', 'USU5_REMOVE_ALL_SPEC_CHARS', 'USU5_CACHE_DAYS',
             'USU5_USE_W3C_VALID', 'USU5_ADD_CPATH_TO_PRODUCT_URLS', 'USU5_OUPUT_PERFORMANCE', 'USU5_ADD_CAT_PARENT',
             'USU5_DEBUG_OUPUT_VARS', 'USU5_CACHE_SYSTEM', 'USU5_PRODUCTS_LINK_TEXT_ORDER', 'USU5_MULTI_LANGUAGE_SEO_SUPPORT'];
-        Usu_Main::i()->setVar('config_settings', $constants);
+        usu5::i()->setVar('config_settings', $constants);
     } // end method
     /**
      * Load the language based character conversions.
@@ -296,19 +296,19 @@ class bootstrap
      * @uses is_readable()
      * @uses trim()
      *
-     * @see Usu_Main::getVar()
-     * @see Usu_Main::setVar()
+     * @see usu5::getVar()
+     * @see usu5::setVar()
      */
     private function loadCharacterConversions()
     {
         // Check to see if there is a character conversion language file before trying the admin settings
-        $character_conv_filepath = Usu_Main::i()->getVar('includes_path').'character_conversion/'.Usu_Main::i()->getVar('language').'.php';
+        $character_conv_filepath = usu5::i()->getVar('includes_path').'character_conversion/'.usu5::i()->getVar('language').'.php';
 
         if (is_readable($character_conv_filepath)) {
             include_once $character_conv_filepath;
 
             if (isset($char_convert) && \is_array($char_convert) && !empty($char_convert)) {
-                return Usu_Main::i()->setVar('character_conversion', $char_convert);
+                return usu5::i()->setVar('character_conversion', $char_convert);
             }
         }
 
@@ -321,17 +321,17 @@ class bootstrap
                 $char_convert[trim($pairs[0])] = trim($pairs[1]);
             }
 
-            return Usu_Main::i()->setVar('character_conversion', $char_convert);
+            return usu5::i()->setVar('character_conversion', $char_convert);
         }
 
-        Usu_Main::i()->setVar('character_conversion', false);
+        usu5::i()->setVar('character_conversion', false);
     } // End method
     /**
      * Ensure the admin database entries are installed.
      *
      * If all the required database entries are not installed remove all entries for series 2 seo urls and USU5 and USU5 PRO then install fresh
      *
-     * @see Usu_Main::getVar()
+     * @see usu5::getVar()
      * @see Installer_Class::setConfigConstants()
      * @see Installer_Class::setConfigArray()
      * @see Installer_Class::removeConfigurationGroup()
@@ -351,7 +351,7 @@ class bootstrap
     {
         $needs_install = false;
 
-        foreach (Usu_Main::i()->getVar('config_settings') as $index => $define) {
+        foreach (usu5::i()->getVar('config_settings') as $index => $define) {
             if (false === \defined($define)) {
                 $needs_install = true;
 
@@ -360,15 +360,15 @@ class bootstrap
         }
 
         // System is not set to uninstall and all the constants are defined so all is well we just return out
-        if ((false === Usu_Main::$uninstall_db_settings) && (false === $needs_install)) {
+        if ((false === usu5::$uninstall_db_settings) && (false === $needs_install)) {
             return;
         }
 
         // If $uninstall_db_settings is true and $needs_install is false we are ready to delete the database entries for USU5
-        if ((false !== Usu_Main::$uninstall_db_settings) && (false === $needs_install)) {
-            include_once Usu_Main::i()->getVar('db_install_path').'installer_class.php';
+        if ((false !== usu5::$uninstall_db_settings) && (false === $needs_install)) {
+            include_once usu5::i()->getVar('db_install_path').'installer_class.php';
 
-            include_once Usu_Main::i()->getVar('db_install_path').'installer_constants.php';
+            include_once usu5::i()->getVar('db_install_path').'installer_constants.php';
             // deletions
             Installer_Class::i()->setConfigConstants($usu51)
                 ->setConfigConstants($usu5)
@@ -382,15 +382,15 @@ class bootstrap
             // Set to uninstall but $needs_install is true so the database entries are not present, we do nothing
         }
 
-        if ((false !== Usu_Main::$uninstall_db_settings) && (false !== $needs_install)) {
+        if ((false !== usu5::$uninstall_db_settings) && (false !== $needs_install)) {
             return;
             // If $uninstall_db_settings is false and $needs_install is true we are ready to install the database entries for USU5
         }
 
-        if ((false !== $needs_install) && (false === Usu_Main::$uninstall_db_settings)) {
-            include_once Usu_Main::i()->getVar('db_install_path').'installer_class.php';
+        if ((false !== $needs_install) && (false === usu5::$uninstall_db_settings)) {
+            include_once usu5::i()->getVar('db_install_path').'installer_class.php';
 
-            include_once Usu_Main::i()->getVar('db_install_path').'installer_constants.php';
+            include_once usu5::i()->getVar('db_install_path').'installer_constants.php';
 
             // deletions
             Installer_Class::i()->setConfigConstants($usu51)
@@ -427,21 +427,21 @@ class bootstrap
      */
     private function loadPageModules()
     {
-        include_once Usu_Main::i()->getVar('abstracts_path').'page_modules.php';
-        $modules = usu_dir_iterator(Usu_Main::i()->getVar('page_modules_path'));
+        include_once usu5::i()->getVar('abstracts_path').'page_modules.php';
+        $modules = usu_dir_iterator(usu5::i()->getVar('page_modules_path'));
         $page_modules = [];
 
         foreach ($modules as $index => $module) {
             $basename = str_replace('.php', '', $module);
             $class = module_naming_convention($basename, '');
 
-            if ((substr($module, -4, 4) === '.php') && is_readable(Usu_Main::i()->getVar('page_modules_path').$module)) {
-                include_once Usu_Main::i()->getVar('page_modules_path').$module;
+            if ((substr($module, -4, 4) === '.php') && is_readable(usu5::i()->getVar('page_modules_path').$module)) {
+                include_once usu5::i()->getVar('page_modules_path').$module;
                 $page_modules[$basename] = \call_user_func([$class, 'i']);
             }
         }
 
-        return Usu_Main::i()->setVar('page_modules', $page_modules);
+        return usu5::i()->setVar('page_modules', $page_modules);
     } // End method
     /**
      * Load uri modules.
@@ -454,27 +454,27 @@ class bootstrap
      * @uses str_replace()
      * @uses substr()
      *
-     * @see Usu_Main::getVar()
-     * @see Usu_Main::setVar()
+     * @see usu5::getVar()
+     * @see usu5::setVar()
      * @see includes/usu_general_functions.php - module_naming_convention()
      */
     private function loadUriModules()
     {
-        include_once Usu_Main::i()->getVar('abstracts_path').'uri_modules.php';
-        $modules = usu_dir_iterator(Usu_Main::i()->getVar('uri_modules_path'));
+        include_once usu5::i()->getVar('abstracts_path').'uri_modules.php';
+        $modules = usu_dir_iterator(usu5::i()->getVar('uri_modules_path'));
         $uri_modules = [];
 
         foreach ($modules as $index => $module) {
             $basename = str_replace('.php', '', $module);
             $class = module_naming_convention($basename, '');
 
-            if ((substr($module, -4, 4) === '.php') && is_readable(Usu_Main::i()->getVar('uri_modules_path').$module)) {
-                include_once Usu_Main::i()->getVar('uri_modules_path').$module;
+            if ((substr($module, -4, 4) === '.php') && is_readable(usu5::i()->getVar('uri_modules_path').$module)) {
+                include_once usu5::i()->getVar('uri_modules_path').$module;
                 $uri_modules[$basename] = new $class();
             }
         }
 
-        return Usu_Main::i()->setVar('uri_modules', $uri_modules);
+        return usu5::i()->setVar('uri_modules', $uri_modules);
     } // End method
     /**
      * Turn off the experimental seo urls of osCommerce.
@@ -496,11 +496,11 @@ class bootstrap
      */
     private function uriModulesParsePath()
     {
-        if (!is_readable(Usu_Main::i()->getVar('page_modules_path').Usu_Main::i()->getVar('filename'))) {
+        if (!is_readable(usu5::i()->getVar('page_modules_path').usu5::i()->getVar('filename'))) {
             return false;
         }
 
-        $uri_modules = Usu_Main::i()->getVar('uri_modules');
+        $uri_modules = usu5::i()->getVar('uri_modules');
 
         foreach ($uri_modules as $object) {
             if (false !== $object->isValidUri()) {
@@ -522,11 +522,11 @@ class bootstrap
 
         $possible_lang = false;
 
-        preg_match('@^[a-z]{2}/@', Usu_Main::i()->getVar('request_uri'), $matches); // Try to find de/ at the front of the request
-        $catalog_languages = Usu_Main::i()->getVar('catalog_languages');
+        preg_match('@^[a-z]{2}/@', usu5::i()->getVar('request_uri'), $matches); // Try to find de/ at the front of the request
+        $catalog_languages = usu5::i()->getVar('catalog_languages');
 
-        if (\strlen(Usu_Main::i()->getVar('request_uri')) === 2) { // Possibly a language name ( like de ) if two characters
-            $possible_lang = Usu_Main::i()->getVar('request_uri');
+        if (\strlen(usu5::i()->getVar('request_uri')) === 2) { // Possibly a language name ( like de ) if two characters
+            $possible_lang = usu5::i()->getVar('request_uri');
         } elseif (!empty($matches) && ctype_alpha(rtrim($matches[0], '/'))) { // did we get a regex match?
             $possible_lang = rtrim($matches[0], '/');
         }
@@ -534,8 +534,8 @@ class bootstrap
         if (false !== $possible_lang) { // We have some sort of match so iterate through the language array
             foreach ($catalog_languages as $lang_code => $lang_detail) {
                 if ($possible_lang === $lang_code) { // We have a match
-                    Usu_Main::i()->setVar('languages_id', $lang_detail['id']); // Reset $languages_id to the new value
-                    Usu_Main::i()->setVar('language', $lang_detail['directory']); // Reset $language to the new value
+                    usu5::i()->setVar('languages_id', $lang_detail['id']); // Reset $languages_id to the new value
+                    usu5::i()->setVar('language', $lang_detail['directory']); // Reset $language to the new value
                     $this->loadLanguageData([]);
 
                     return; // Job done so exit the method
@@ -543,12 +543,12 @@ class bootstrap
             }
         }
 
-        $current_language = Usu_Main::i()->getVar('current_language');
+        $current_language = usu5::i()->getVar('current_language');
 
         // We have no language markers to use so we really should be using the default langiage
         if (DEFAULT_LANGUAGE !== $current_language['code']) { // We are not using the default language so need to change to it
-            Usu_Main::i()->setVar('languages_id', $catalog_languages[DEFAULT_LANGUAGE]['id']); // Reset $languages_id to the new value
-            Usu_Main::i()->setVar('language', $catalog_languages[DEFAULT_LANGUAGE]['directory']); // Reset $language to the new value
+            usu5::i()->setVar('languages_id', $catalog_languages[DEFAULT_LANGUAGE]['id']); // Reset $languages_id to the new value
+            usu5::i()->setVar('language', $catalog_languages[DEFAULT_LANGUAGE]['directory']); // Reset $language to the new value
             $this->loadLanguageData([]);
         }
     } // End method
@@ -559,26 +559,26 @@ class bootstrap
      * @uses is_readable()
      * @uses trigger_error()
      *
-     * @see Usu_Main::getVar()
-     * @see Usu_Main::setVar()
+     * @see usu5::getVar()
+     * @see usu5::setVar()
      *
      * @throws - triggers an error of type E_USER_WARNING if the cache system cannot be found
      */
     private function cacheSystem()
     {
-        include_once Usu_Main::i()->getVar('interfaces_path').'cache_system.php';
+        include_once usu5::i()->getVar('interfaces_path').'cache_system.php';
 
-        if (is_readable(Usu_Main::i()->getVar('cache_system_path').USU5_CACHE_SYSTEM.'.php')) {
-            include_once Usu_Main::i()->getVar('cache_system_path').USU5_CACHE_SYSTEM.'.php';
+        if (is_readable(usu5::i()->getVar('cache_system_path').USU5_CACHE_SYSTEM.'.php')) {
+            include_once usu5::i()->getVar('cache_system_path').USU5_CACHE_SYSTEM.'.php';
             $class_name = module_naming_convention(USU5_CACHE_SYSTEM, '');
-            Usu_Main::$performance['cache_system'] = $class_name;
+            usu5::$performance['cache_system'] = $class_name;
             $cache_object = \call_user_func([$class_name, 'i']);
 
             if ($cache_object instanceof Memcache) {
                 $cache_object->initiate();
             }
 
-            return Usu_Main::i()->setVar('cache', $cache_object);
+            return usu5::i()->setVar('cache', $cache_object);
         }
 
         trigger_error('Can not find cache system: <b>'.USU5_CACHE_SYSTEM.'</b>', \E_USER_WARNING);
@@ -588,7 +588,7 @@ class bootstrap
      */
     private function setRegistry(): void
     {
-        Usu_Main::i()->setVar('registry', data_registry::i());
-        Usu_Main::i()->getVar('cache')->retrieve();
+        usu5::i()->setVar('registry', data_registry::i());
+        usu5::i()->getVar('cache')->retrieve();
     }
 } // end class

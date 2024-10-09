@@ -62,7 +62,7 @@ final class installer_class
     /**
      * Add configuration constants, these are configuration keys in the osCommerce database.
      *
-     * @see Usu5_Bootstrap::adminInstalled()
+     * @see bootstrap::adminInstalled()
      *
      * @param array $array - array of configuration keys
      *
@@ -77,7 +77,7 @@ final class installer_class
     /**
      * Iterate the constants container adding them to the constants array if not already present.
      *
-     * @see Usu5_Bootstrap::adminInstalled()
+     * @see bootstrap::adminInstalled()
      *
      * @uses in_array()
      */
@@ -98,7 +98,7 @@ final class installer_class
      *
      * @uses str_replace()
      *
-     * @see Usu5_Bootstrap::adminInstalled()
+     * @see bootstrap::adminInstalled()
      *
      * @return Installer_Class - chaining
      */
@@ -115,7 +115,7 @@ final class installer_class
      *
      * @uses str_replace()
      *
-     * @see Usu5_Bootstrap::adminInstalled()
+     * @see bootstrap::adminInstalled()
      *
      * @return Installer_Class - chaining
      */

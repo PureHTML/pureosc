@@ -28,7 +28,7 @@ require_once DIR_WS_MODULES.'ultimate_seo_urls5/main/usu5.php';
 
 function tep_href_link($page = '', $parameters = '', $connection = 'NONSSL', $add_session_id = true, $search_engine_safe = true)
 {
-    return Usu_Main::i()->hrefLink($page, $parameters, $connection, $add_session_id, $search_engine_safe);
+    return usu5::i()->hrefLink($page, $parameters, $connection, $add_session_id, $search_engine_safe);
 }
 
 // The HTML image wrapper function
