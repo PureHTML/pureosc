@@ -167,9 +167,6 @@ CREATE TABLE `banners` (
 
 LOCK TABLES `banners` WRITE;
 /*!40000 ALTER TABLE `banners` DISABLE KEYS */;
-INSERT INTO `banners` VALUES
-(2,'1sapeli','index.php?cPath=362_243_32','IMG_1_sapeli_big.jpg','rotator','',0,NULL,NULL,'2024-09-25 22:21:33',NULL,1),
-(3,'2loprais','index.php?cPath=362_241_52','IMG_2_loprais-celek.jpg','rotator','',0,NULL,NULL,'2024-09-25 22:22:48',NULL,1);
 /*!40000 ALTER TABLE `banners` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2384,4 +2381,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-09  0:22:46
+-- Dump completed on 2024-10-09  2:14:19
