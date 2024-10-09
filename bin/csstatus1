@@ -1,0 +1,9 @@
+#!/bin/bash
+. ./dbconnect.sh
+if [[ ! $1 ]];then
+	echo 'Usage: ./csstatus1 $id = show css by id'
+	exit
+fi
+#if [[ ! $9 ]];then STATUS=1;fi
+
+mariadb -h${H} -u${U} -p${P} $D -e "UPDATE css SET status=1 WHERE id=$1"

@@ -1,0 +1,16 @@
+#!/bin/bash
+. ./dbconnect.sh
+LEFT=120 #chars s from value
+
+if [[ $1 == '--help' ]];then
+	echo 'Usage: ./csprint [breakpoint min] [breakpoint max]'
+	exit
+fi
+if [[ $1 ]];then MIN="=$1";else MIN='>=0';fi
+if [[ $2 ]];then MAX="=$2";else MAX='>=0';fi
+mariadb -h${H} -u${U} -p${P} $D -e "select id, name, LEFT(value, ${LEFT}) as value, min, max, status FROM css WHERE min${MIN} AND max${MAX}"
+
+#if [[ ! $9 ]];then STATUS=1;fi
+#echo select id, name, LEFT(value, ${LEFT}) as value, min, max, status FROM css WHERE min=${MIN} AND max=${MAX}
+#exit
+#mariadb -h${H} -u${U} -p${P} $D -e "select id, name, min, max, status FROM css"

@@ -1,4 +1,11 @@
 #!/bin/bash
 . ./dbconnect.sh
+if [[ ! $1 ]];then
+	echo -e '
+	Configuration table updater
+	Required: $1 = KEY_TO_UPDATE, $2 = 'value'
+	Usage: ./u KEY_TO_UPDATE "Some value or true/false"'
+	exit
+fi
 
 mariadb -h${H} -u${U} -p${P} $D -e "update configuration set configuration_value='$2' where configuration_key='${1}'"

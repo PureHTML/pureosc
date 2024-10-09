@@ -1,0 +1,37 @@
+#!/bin/bash
+. ./dbconnect.sh
+if [[ ! $1 || ! $2 ]];then
+	echo 'Usage: ./cssupd $1=id (eq 2, required) $2=value (font-size:2rem, required)'
+  echo '$3 = sort order'
+  echo '$4 = min px'
+  echo '$5 = max px'
+	exit
+fi
+#value
+if [[ ! ${3} ]];then
+  mariadb -h${H} -u${U} -p${P} $D -e "update css set value='${2}' where id=${1}"
+fi
+exit
+#sort_order
+if [[ ! ${4} ]];then
+  mariadb -h${H} -u${U} -p${P} $D -e "update css set value='${2}' where id=${1}"
+  mariadb -h${H} -u${U} -p${P} $D -e "update css set sort_order=${3} where id=${1}"
+fi
+
+
+# min
+if [[ ! ${5} ]];then
+  mariadb -h${H} -u${U} -p${P} $D -e "update css set value='${2}' where id=${1}"
+  mariadb -h${H} -u${U} -p${P} $D -e "update css set sort_order=${3} where id=${1}"
+  mariadb -h${H} -u${U} -p${P} $D -e "update css set min=${4} where id=${1}"
+fi
+
+# max
+if [[ ! ${5} ]];then
+  mariadb -h${H} -u${U} -p${P} $D -e "update css set value='${2}' where id=${1}"
+  mariadb -h${H} -u${U} -p${P} $D -e "update css set sort_order=${3} where id=${1}"
+  mariadb -h${H} -u${U} -p${P} $D -e "update css set min=${4} where id=${1}"
+  mariadb -h${H} -u${U} -p${P} $D -e "update css set max=${5} where id=${1}"
+  
+fi
+

@@ -1,0 +1,9 @@
+#!/bin/bash
+. ./dbconnect.sh
+if [[ ! $1 ]];then
+	echo -e 'Configuration table cleaner.
+	Required: $1 = KEY_TO_DELETE
+	Usage: ./conf-del KEY_TO_DELETE'
+	exit
+fi
+mariadb -h${H} -u${U} -p${P} $D -e "DELETE FROM configuration WHERE configuration_key='${1}'"

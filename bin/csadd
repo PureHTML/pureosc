@@ -1,0 +1,43 @@
+#!/bin/bash
+. ./dbconnect.sh
+if [[ ! $1 || ! $2 ]];then
+	echo 'Usage: ./cssadd $1=name (h1 REQUIRED) 
+	$2=value (font-size:2rem, REQUIRED) 
+	$3=sort_order 
+	$4=min 	(min breakpoint default=0) $5=max (max breakpoint default=0) 
+	$6=template $7=subtemplate (index.css=temlate, subtemplates: top/nested/products)
+	$8=tag (cart, customer, form)
+	$9=status (default=1 active)
+
+	TODO: 
+	--------------
+	Possible optimisation to boost "first impression load time", we can check compile 
+	template contents into subtemplate files 
+	(index_top.css, index_nested.css, index_products.css)
+	but side effect of reducing HTTP request is its own css file size.
+'
+	exit
+fi
+if [[ ! $9 ]];then STATUS=1; else STATUS=${9};fi
+#if [[ ! $10 ]];then INLINE=0; else INLINE=${10};fi
+if [[ ! $3 ]];then ORDER=0; else ORDER=${3};fi
+if [[ ! $4 ]];then MIN=0; else MIN=${4};fi
+if [[ ! $5 ]];then MAX=0; else MAX=${5};fi
+
+mariadb -h${H} -u${U} -p${P} $D -e "
+insert into css set name='${1}', value='${2}', sort_order=${ORDER}, min=${MIN}, max=${MAX}, template='${6}', subtemplate='${7}', tag='${8}', status=$STATUS
+"
+ID=`mariadb -h${H} -u${U} -p${P} $D --column-names=0 -e "SELECT id FROM css ORDER BY id DESC LIMIT 1"`
+#ID=`echo $ID|sed -s '/id//'`
+echo HELP: Use 
+echo ./csupd $ID \'${2}\' 
+echo to change css value
+exit
+
+mariadb -h${H} -u${U} -p${P} $D -e "
+
+insert into css (name, value, sort_order, min, max, group,  template, tag, status)
+values ('${1}', '${2}', '${3}','${4}', '${5}', '${6}', '${7}', '${8}', $STATUS  );
+"
+#values ('${1}', '${2}', '${3}','${4}', '${5}', '${6}', '${7}', '${8}');
+#			 (key,    value, group,  template, tag, sort_order, min, max) 
