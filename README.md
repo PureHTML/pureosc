@@ -1,4 +1,8 @@
-Modern fork of osCommerce, based on [vanilla-oscommerce](https://github.com/ruden/vanilla-oscommerce/)
+PureOSC is a eCommerce and general publishing engine.
+
+History
+------------
+PureOSC is a fork from osCommerce, based on this version: [vanilla-oscommerce](https://github.com/ruden/vanilla-oscommerce/)
 
 Compatibility
 -------------
