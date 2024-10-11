@@ -1,0 +1,5 @@
+#!/bin/sh
+# longname: Xclip
+#shift
+echo "$@"|xclip -selection clipboard 
+

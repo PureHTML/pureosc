@@ -1,0 +1,7 @@
+#!/bin/bash
+. ./dbconnect.sh
+if [[ ! $1 ]];then
+	echo 'Usage: ./csfind h1'
+	exit
+fi
+mariadb --skip-column-names -h${H} -u${RU} -p${RP} $D -e "SELECT * from css where name like'%${1}%'"

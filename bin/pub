@@ -1,0 +1,37 @@
+#!/bin/bash
+# LongName: osCommerce insert markdown article as product -- osCommerce -- (c) pureosc.com
+# config TODO: executable /usr/local/bin
+source ./config.txt
+echo ll: $LANGUAGE_ID
+echo m: $MANUF_ID;
+echo categoryID: $CAT_ID
+
+if [[ "${?}" > 0 ]];then
+  echo 'ERROR: need "cp root/example-dir/config.txt . from McFly'
+  exit
+fi
+#LANGUAGE_ID=`mariadb --column-names=FALSE -h${H} -u${RU} -p${RP} $D -e "SELECT products_id from products ORDER BY products_id DESC LIMIT 1"`
+
+
+ls *.md | while read -r file; do
+  PRODUCTS_NAME=`cat ${file}|sed -n '1p'|sed 's/# //'|sed 's/#//'`
+  PRODUCTS_DESCRIPTION=`cat ${file} |sed -n '2,$p'|Markdown.pl`
+
+    EXISTS=`mariadb --column-names=FALSE -h${H} -u${RU} -p${RP} $D -e "SELECT DISTINCT products.products_id FROM products, products_description, products_to_categories WHERE products_name=\"${PRODUCTS_NAME}\" AND language_id=${LANGUAGE_ID} AND products_to_categories.categories_id = ${CAT_ID} AND products.products_id=products_description.products_id"`
+echo EXISTS: $EXISTS
+#    if [[ -f "./.hash/${EXISTS}" ]];then
+    if [[ ! -z ${EXISTS} ]];then
+      echo Checking for updates ...
+#      sha256sum csadd > csadd.sum
+#      sha256sum -c csadd.sum 
+#
+      mariadb -h${H} -u${RU} -p${RP} $D -e "UPDATE products_description SET products_description = '${PRODUCTS_DESCRIPTION}' WHERE products_id=${EXISTS} AND language_id=${LANGUAGE_ID}"
+    else
+      echo New product, inserting ...
+      mariadb -h${H} -u${RU} -p${RP} $D -e "INSERT INTO products (products_status, authors_id, manufacturers_id,products_quantity, products_price, products_date_added, products_weight,products_tax_class_id) VALUES (1,${MANUF_ID}, ${MANUF_ID},1,0.000,'1970:01:01',0,0)"
+      LAST_ID=`mariadb --column-names=FALSE -h${H} -u${RU} -p${RP} $D -e "SELECT products_id from products ORDER BY products_id DESC LIMIT 1"`
+      echo LAST_ID: ${LAST_ID}
+      mariadb -h${H} -u${RU} -p${RP} $D -e "INSERT INTO products_description (products_id, language_id, products_name, products_description) VALUES (${LAST_ID},${LANGUAGE_ID},\"${PRODUCTS_NAME}\",'${PRODUCTS_DESCRIPTION}')"
+      mariadb -h${H} -u${RU} -p${RP} $D -e "INSERT INTO products_to_categories (products_id, categories_id, canonical) VALUES (${LAST_ID}, ${CAT_ID}, 1)"
+    fi
+done

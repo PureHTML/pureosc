@@ -1,0 +1,13 @@
+#!/bin/bash
+. ./dbconnect.sh
+if [[ ! $1 || ! $2 ]];then
+	echo 'Usage: ./cssupd $1=id (eq 2, required) $2=tag (font-size:2rem, required)'
+	exit
+fi
+
+#if [[ ! $9 ]];then STATUS=1;fi
+#[[ $4 ]] && CD="$4" || CD=$1
+#[[ $5 ]] && GID="$5" || GID=1
+#[[ $6 ]] && ORD="$5" || ORD=9999
+
+mariadb -h${H} -u${RU} -p${RP} $D -e "update css set tag='${2}' where id='${1}'"

@@ -32,12 +32,5 @@ ID=`mariadb -h${H} -u${U} -p${P} $D --column-names=0 -e "SELECT id FROM css ORDE
 echo HELP: Use 
 echo ./csupd $ID \'${2}\' 
 echo to change css value
-exit
 
-mariadb -h${H} -u${U} -p${P} $D -e "
-
-insert into css (name, value, sort_order, min, max, group,  template, tag, status)
-values ('${1}', '${2}', '${3}','${4}', '${5}', '${6}', '${7}', '${8}', $STATUS  );
-"
-#values ('${1}', '${2}', '${3}','${4}', '${5}', '${6}', '${7}', '${8}');
-#			 (key,    value, group,  template, tag, sort_order, min, max) 
+./csscompiler.php
