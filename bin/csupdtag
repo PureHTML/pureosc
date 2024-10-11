@@ -10,4 +10,4 @@ fi
 #[[ $5 ]] && GID="$5" || GID=1
 #[[ $6 ]] && ORD="$5" || ORD=9999
 
-mariadb -h${H} -u${RU} -p${RP} $D -e "update css set tag='${2}' where id='${1}'"
+mariadb -h${H} -u${U} -p${P} $D -e "UPDATE css SET tag='${2}' WHERE id='${1}'"

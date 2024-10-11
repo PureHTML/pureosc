@@ -14,4 +14,4 @@ if [ $2 ]; then T=$2;else T='varchar';fi
 if [ $3 ]; then C=\($3\);else C=\(8\);fi
 if [ $4 ]; then F="$4";else F=null;fi
 if [ $5 ]; then A=$5;else A='';fi
-echo mysql -h${H} -u${RU} -p${RP} $D -e "ALTER TABLE css add ${N} ${T}${C} ${F} ${A}"
+echo mysql -h${H} -u${U} -p${P} $D -e "ALTER TABLE css add ${N} ${T}${C} ${F} ${A}"

@@ -4,4 +4,4 @@ if [[ ! $1 ]];then
 	echo 'Usage: ./csfindtpl index_top'
 	exit
 fi
-mariadb --skip-column-names -h${H} -u${RU} -p${RP} $D -e "SELECT * from css where template like'%${1}%'"
+mariadb --skip-column-names -h${H} -u${U} -p${P} $D -e "SELECT * from css where template like'%${1}%'"

@@ -6,4 +6,4 @@ if [[ ! $1 ]];then
 fi
 #if [[ ! $9 ]];then STATUS=1;fi
 
-mariadb -h${H} -u${RU} -p${RP} $D -e "DELETE FROM css WHERE id=${1}"
+mariadb -h${H} -u${U} -p${P} $D -e "DELETE FROM css WHERE id=${1}"

@@ -1,7 +1,7 @@
 H='localhost'
 D='ruzky'
-RU='ruzkyAdmin'
-RP='ruzky'
+U='ruzkyAdmin'
+P='ruzky'
 MANUF_ID=1 #SF
 #MANUF_NAME=''
 CAT_ID=50 #blog

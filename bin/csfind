@@ -4,4 +4,4 @@ if [[ ! $1 ]];then
 	echo 'Usage: ./csfind h1'
 	exit
 fi
-mariadb --skip-column-names -h${H} -u${RU} -p${RP} $D -e "SELECT * from css where name like'%${1}%'"
+mariadb --skip-column-names -h${H} -u${U} -p${P} $D -e "SELECT * from css where name like'%${1}%'"

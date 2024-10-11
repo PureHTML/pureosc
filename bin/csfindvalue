@@ -4,4 +4,4 @@ if [[ ! $1 ]];then
 	echo 'Usage: ./csssel $1 like %name% (h1)'
 	exit
 fi
-mysql -h${H} -u${RU} -p${RP} $D -e "SELECT * from css where value like'%${1}%'"
+mysql -h${H} -u${U} -p${P} $D -e "SELECT * from css where value like'%${1}%'"
