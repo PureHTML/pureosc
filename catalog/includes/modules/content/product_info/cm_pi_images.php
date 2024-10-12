@@ -57,7 +57,7 @@ class cm_pi_images
     public function execute(): void
     {
         global $oscTemplate, $product_info;
-
+if ($product_info['products_id']) { //TODO:bugfix ok (if products_status!=1)?
         $products_name = addslashes($product_info['products_name']);
         $products_images_array = [];
 
@@ -73,14 +73,14 @@ class cm_pi_images
                 }
             }
         }
-
+    
         ob_start();
 
         include 'includes/modules/content/'.$this->group.'/templates/images.php';
 
         $oscTemplate->addContent(ob_get_clean(), 'product_info_left');
     }
-
+}
     public function isEnabled()
     {
         return $this->enabled;
