@@ -600,15 +600,15 @@ function updateNet() {
         <table border="0" cellspacing="0" cellpadding="2">
           <tr>
             <td class="main"><?php echo TEXT_PRODUCTS_NAME; ?></td>
-            <td class="main"><?php echo tep_draw_input_field('products_name['.$languages[$i]['id'].']', empty($pInfo->products_id) ? '' : tep_get_products_name($pInfo->products_id, $languages[$i]['id'])); ?></td>
+            <td class="main"><?php echo tep_draw_input_field('products_name['.$languages[$i]['id'].']', ($pInfo->products_id < 1) ? '' : tep_get_products_name($pInfo->products_id, $languages[$i]['id'])); ?></td>
           </tr>
           <tr>
             <td class="main" valign="top"><?php echo TEXT_PRODUCTS_DESCRIPTION; ?></td>
-            <td class="main"><?php echo tep_draw_textarea_field('products_description['.$languages[$i]['id'].']', 'soft', '70', '15', empty($pInfo->products_id) ? '' : tep_get_products_description($pInfo->products_id, $languages[$i]['id'])); ?></td>
+            <td class="main"><?php echo tep_draw_textarea_summernote('products_description['.$languages[$i]['id'].']', 'soft', '70', '15', ($pInfo->products_id < 1) ? '' : tep_get_products_description($pInfo->products_id, $languages[$i]['id'])); ?></td>
           </tr>
           <tr>
             <td class="main"><?php echo TEXT_PRODUCTS_URL.'<br /><small>'.TEXT_PRODUCTS_URL_WITHOUT_HTTP.'</small>'; ?></td>
-            <td class="main"><?php echo tep_draw_input_field('products_url['.$languages[$i]['id'].']', empty($pInfo->products_id) ? '' : tep_get_products_url($pInfo->products_id, $languages[$i]['id'])); ?></td>
+            <td class="main"><?php echo tep_draw_input_field('products_url['.$languages[$i]['id'].']', ($pInfo->products_id < 1) ? '' : tep_get_products_url($pInfo->products_id, $languages[$i]['id'])); ?></td>
           </tr>
         </table>
       </div>
@@ -1055,7 +1055,7 @@ $('#products_date_available').datepicker({
 
             for ($i = 0, $n = \count($languages); $i < $n; ++$i) {
                 $category_inputs_string .= '<br />'.tep_image(tep_catalog_href_link('includes/languages/'.$languages[$i]['directory'].'/images/'.$languages[$i]['image']), $languages[$i]['name']).'&nbsp;'.tep_draw_input_field('categories_name['.$languages[$i]['id'].']');
-                $category_description_string .= '<br />'.tep_image(tep_catalog_href_link('includes/languages/'.$languages[$i]['directory'].'/images/'.$languages[$i]['image']), $languages[$i]['name'], '', '', 'style="vertical-align: top;"').'&nbsp;'.tep_draw_textarea_field('categories_description['.$languages[$i]['id'].']', null, '80', '10');
+                $category_description_string .= '<br />'.tep_image(tep_catalog_href_link('includes/languages/'.$languages[$i]['directory'].'/images/'.$languages[$i]['image']), $languages[$i]['name'], '', '', 'style="vertical-align: top;"').'&nbsp;'.tep_draw_textarea_summernote('categories_description['.$languages[$i]['id'].']', null, '80', '10');
             }
 
             $contents[] = ['text' => '<br />'.TEXT_CATEGORIES_NAME.$category_inputs_string];
@@ -1076,7 +1076,7 @@ $('#products_date_available').datepicker({
 
             for ($i = 0, $n = \count($languages); $i < $n; ++$i) {
                 $category_inputs_string .= '<br />'.tep_image(tep_catalog_href_link('includes/languages/'.$languages[$i]['directory'].'/images/'.$languages[$i]['image']), $languages[$i]['name']).'&nbsp;'.tep_draw_input_field('categories_name['.$languages[$i]['id'].']', tep_get_category_name($cInfo->categories_id, $languages[$i]['id']));
-                $category_description_string .= '<br />'.tep_image(tep_catalog_href_link('includes/languages/'.$languages[$i]['directory'].'/images/'.$languages[$i]['image']), $languages[$i]['name']).'&nbsp;'.tep_draw_textarea_field('categories_description['.$languages[$i]['id'].']', null, '', '10', tep_get_category_description($cInfo->categories_id, $languages[$i]['id']), 'style="width: 98%;"');
+                $category_description_string .= '<br />'.tep_image(tep_catalog_href_link('includes/languages/'.$languages[$i]['directory'].'/images/'.$languages[$i]['image']), $languages[$i]['name']).'&nbsp;' . tep_draw_textarea_summernote('categories_description['.$languages[$i]['id'].']', null, '', '10', tep_get_category_description($cInfo->categories_id, $languages[$i]['id']), 'style="width: 98%;"');
             }
 
             $contents[] = ['text' => '<br />'.TEXT_EDIT_CATEGORIES_NAME.$category_inputs_string];
