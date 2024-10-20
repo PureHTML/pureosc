@@ -1,4 +1,8 @@
-Modern fork of osCommerce, based on [vanilla-oscommerce](https://github.com/ruden/vanilla-oscommerce/)
+PureOSC is a eCommerce and general publishing engine.
+
+History
+------------
+PureOSC is a fork from osCommerce, based on this version: [vanilla-oscommerce](https://github.com/ruden/vanilla-oscommerce/)
 
 Compatibility
 -------------
@@ -17,6 +21,13 @@ PureOSC key Features
 Lightweight, extremely fast HTML rendering engine:
 1. no classes, only sematic tag childrens;
 2. Stored in single DB table, many cli tools for efficient managing and filtering rules.
+
+### 100% browser compatibility
+A commercial website cannot afford to lose visitors because it does not respect the philosophy of progressive enhancement PureOSC support:
+
+1. All old Firefox rendering engine browsers like Seamonkey;
+2. Javscript/cookies disabled browsers;
+3. text browsers like Lynx, w3m.
 
 ### PureHTML BannerManager
 1. create webp animated banners
