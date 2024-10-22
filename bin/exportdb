@@ -1,0 +1,14 @@
+#!/bin/bash
+# LongName: osCommerce insert markdown article as product -- osCommerce -- (c) pureosc.com
+# config TODO: executable /usr/local/bin
+source ./dbconnect.sh
+if [[ ! $1 ]];then 
+  $DEST =''
+else 
+  $DEST=$1
+fi
+echo DB: $D
+    mariadb-dump  -h${H} -u${U} -p${P} $D > ../catalog/install/oscommerce.sql
+git add ../catalog/install/oscommerce.sql
+git ci -m 'DbUpdate'
+git push $DEST
