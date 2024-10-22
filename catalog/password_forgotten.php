@@ -82,7 +82,7 @@ if ($password_reset_initiated === true) {
 
     <div class="mb-3">
       <label class="form-label" for="email-address"><?php echo ENTRY_EMAIL_ADDRESS; ?></label>
-      <?php echo tep_draw_input_field('email_address', null, 'id="email-address" class="form-control"', 'email'); ?>
+      <?php echo tep_draw_input_field('email_address', null, 'id="email-address" autofocus', 'email'); ?>
     </div>
     <div class="btn-toolbar justify-content-between">
       <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link('login.php'), 'btn-light'); ?>

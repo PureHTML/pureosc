@@ -8,6 +8,11 @@ if [[ ! $1 || ! $2 ]];then
 	$6=template $7=subtemplate (index.css=temlate, subtemplates: top/nested/products)
 	$8=tag (cart, customer, form)
 	$9=status (default=1 active)
+	$10=inline default=0
+	
+	-------
+	
+	exampe inline $10: ./csadd "#hamburger" "display:none" 0 0 0 "" "" "" 1 1
 
 	TODO: 
 	--------------

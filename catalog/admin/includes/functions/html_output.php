@@ -346,6 +346,35 @@ function tep_draw_textarea_field($name, $wrap, $width, $height, $text = '', $par
 }
 
 // //
+// output Summernote specialID textarea
+// The $wrap parameter is no longer used in the core xhtml template
+function tep_draw_textarea_summernote($name, $wrap, $width, $height, $text = '', $parameters = '', $reinsert_value = true)
+{
+    $field = '<textarea id="summernote" name="'.tep_output_string($name).'" cols="'.tep_output_string($width).'" rows="'.tep_output_string($height).'"';
+
+    if (!empty($parameters)) {
+        $field .= ' '.$parameters;
+    }
+
+    $field .= '>';
+
+    if (($reinsert_value === true) && ((isset($_GET[$name]) && \is_string($_GET[$name])) || (isset($_POST[$name]) && \is_string($_POST[$name])))) {
+        if (isset($_GET[$name]) && \is_string($_GET[$name])) {
+            $field .= tep_output_string_protected(stripslashes($_GET[$name]));
+        } elseif (isset($_POST[$name]) && \is_string($_POST[$name])) {
+            $field .= tep_output_string_protected(stripslashes($_POST[$name]));
+        }
+    } elseif (!empty($text)) {
+        $field .= tep_output_string_protected($text);
+    }
+
+    $field .= '</textarea>';
+
+    return $field;
+}
+
+
+// //
 // Output a form hidden field
 function tep_draw_hidden_field($name, $value = '', $parameters = '')
 {
@@ -499,4 +528,7 @@ function tep_draw_button($title = null, $icon = null, $link = null, $priority = 
     ++$button_counter;
 
     return $button;
+}
+function fix_editor_output($txt){
+    return str_replace(' class=""', '', $txt);
 }

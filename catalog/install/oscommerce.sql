@@ -1,6 +1,6 @@
 -- MariaDB dump 10.19  Distrib 10.11.6-MariaDB, for debian-linux-gnu (x86_64)
 --
--- Host: localhost    Database: work
+-- Host: localhost    Database: pureosc
 -- ------------------------------------------------------
 -- Server version	10.11.6-MariaDB-0+deb12u1
 
@@ -35,7 +35,7 @@ CREATE TABLE `action_recorder` (
   KEY `idx_action_recorder_user_id` (`user_id`),
   KEY `idx_action_recorder_identifier` (`identifier`),
   KEY `idx_action_recorder_date_added` (`date_added`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,6 +44,14 @@ CREATE TABLE `action_recorder` (
 
 LOCK TABLES `action_recorder` WRITE;
 /*!40000 ALTER TABLE `action_recorder` DISABLE KEYS */;
+INSERT INTO `action_recorder` VALUES
+(1,'ar_admin_login',1,'pureosc','127.0.0.1','1','2024-10-05 21:26:27'),
+(2,'ar_admin_login',1,'pureosc','127.0.0.1','1','2024-10-08 05:37:37'),
+(3,'ar_admin_login',1,'pureosc','127.0.0.1','1','2024-10-08 07:12:14'),
+(4,'ar_admin_login',0,'osc','127.0.0.1','0','2024-10-08 07:45:32'),
+(5,'ar_admin_login',0,'osc','127.0.0.1','0','2024-10-08 07:55:25'),
+(6,'ar_admin_login',1,'pureosc','127.0.0.1','1','2024-10-09 06:40:04'),
+(7,'ar_admin_login',1,'pureosc','127.0.0.1','1','2024-10-09 08:25:21');
 /*!40000 ALTER TABLE `action_recorder` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -124,7 +132,7 @@ CREATE TABLE `administrators` (
   `user_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `user_password` varchar(60) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -133,6 +141,8 @@ CREATE TABLE `administrators` (
 
 LOCK TABLES `administrators` WRITE;
 /*!40000 ALTER TABLE `administrators` DISABLE KEYS */;
+INSERT INTO `administrators` VALUES
+(1,'pureosc','$P$DaVeYrni87r.USYWNtBf4Em2/dxNJi0');
 /*!40000 ALTER TABLE `administrators` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -167,6 +177,9 @@ CREATE TABLE `banners` (
 
 LOCK TABLES `banners` WRITE;
 /*!40000 ALTER TABLE `banners` DISABLE KEYS */;
+INSERT INTO `banners` VALUES
+(2,'1sapeli','index.php?cPath=362_243_32','IMG_1_sapeli_big.jpg','rotator','',0,NULL,NULL,'2024-09-25 22:21:33',NULL,1),
+(3,'2loprais','index.php?cPath=362_241_52','IMG_2_loprais-celek.jpg','rotator','',0,NULL,NULL,'2024-09-25 22:22:48',NULL,1);
 /*!40000 ALTER TABLE `banners` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -271,7 +284,7 @@ CREATE TABLE `configuration` (
   `use_function` varchar(255) DEFAULT NULL,
   `set_function` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`configuration_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=439 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=441 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -345,7 +358,7 @@ INSERT INTO `configuration` VALUES
 (62,'Shipping Zone','MODULE_SHIPPING_FLAT_ZONE','0','If a zone is selected, only enable this shipping method for that zone.',6,0,NULL,'2024-06-07 04:52:42','tep_get_zone_class_title','tep_cfg_pull_down_zone_classes('),
 (63,'Sort Order','MODULE_SHIPPING_FLAT_SORT_ORDER','0','Sort order of display.',6,0,NULL,'2024-06-07 04:52:42',NULL,NULL),
 (64,'Default Currency','DEFAULT_CURRENCY','USD','Default Currency',6,0,NULL,'2024-06-07 04:52:42',NULL,NULL),
-(65,'Default Language','DEFAULT_LANGUAGE','cs','Default Language',6,0,NULL,'2024-06-07 04:52:42',NULL,NULL),
+(65,'Default Language','DEFAULT_LANGUAGE','en','Default Language',6,0,NULL,'2024-06-07 04:52:42',NULL,NULL),
 (66,'Default Order Status For New Orders','DEFAULT_ORDERS_STATUS_ID','1','When a new order is created, this order status will be assigned to it.',6,0,NULL,'2024-06-07 04:52:42',NULL,NULL),
 (67,'Display Shipping','MODULE_ORDER_TOTAL_SHIPPING_STATUS','true','Do you want to display the order shipping cost?',6,1,NULL,'2024-06-07 04:52:42',NULL,'tep_cfg_select_option(array(\'true\', \'false\'), '),
 (68,'Sort Order','MODULE_ORDER_TOTAL_SHIPPING_SORT_ORDER','2','Sort order of display.',6,2,NULL,'2024-06-07 04:52:43',NULL,NULL),
@@ -386,10 +399,10 @@ INSERT INTO `configuration` VALUES
 (103,'Mark product out of stock','STOCK_MARK_PRODUCT_OUT_OF_STOCK','***','Display something on screen so customer can see which product has insufficient stock',9,4,NULL,'2024-06-07 04:52:43',NULL,NULL),
 (104,'Stock Re-order level','STOCK_REORDER_LEVEL','5','Define when stock needs to be re-ordered',9,5,NULL,'2024-06-07 04:52:43',NULL,NULL),
 (105,'Store Page Parse Time','STORE_PAGE_PARSE_TIME','false','Store the time it takes to parse a page',10,1,NULL,'2024-06-07 04:52:43',NULL,'tep_cfg_select_option(array(\'true\', \'false\'), '),
-(106,'Log Destination','STORE_PAGE_PARSE_TIME_LOG','../page_parse_time.log','Directory and filename of the page parse time log',10,2,NULL,'2024-06-07 04:52:43',NULL,NULL),
+(106,'Log Destination','STORE_PAGE_PARSE_TIME_LOG','/var/log/www/tep/page_parse_time.log','Directory and filename of the page parse time log',10,2,NULL,'2024-06-07 04:52:43',NULL,NULL),
 (107,'Log Date Format','STORE_PARSE_DATE_TIME_FORMAT','%d/%m/%Y %H:%M:%S','The date format',10,3,NULL,'2024-06-07 04:52:43',NULL,NULL),
 (108,'Display The Page Parse Time','DISPLAY_PAGE_PARSE_TIME','true','Display the page parse time (store page parse time must be enabled)',10,4,NULL,'2024-06-07 04:52:43',NULL,'tep_cfg_select_option(array(\'true\', \'false\'), '),
-(109,'Store Database Queries','STORE_DB_TRANSACTIONS','false','Store the database queries in the page parse time log',10,5,NULL,'2024-06-07 04:52:43',NULL,'tep_cfg_select_option(array(\'true\', \'false\'), '),
+(109,'Store Database Queries','STORE_DB_TRANSACTIONS','true','Store the database queries in the page parse time log',10,5,NULL,'2024-06-07 04:52:43',NULL,'tep_cfg_select_option(array(\'true\', \'false\'), '),
 (110,'Use Cache','USE_CACHE','false','Use caching features',11,1,NULL,'2024-06-07 04:52:43',NULL,'tep_cfg_select_option(array(\'true\', \'false\'), '),
 (111,'Cache Directory','DIR_FS_CACHE','/tmp/','The directory where the cached files are saved',11,2,NULL,'2024-06-07 04:52:43',NULL,NULL),
 (112,'E-Mail Transport Method','EMAIL_TRANSPORT','sendmail','Defines if this server uses a local connection to sendmail or uses an SMTP connection via TCP/IP. Servers running on Windows and MacOS should change this setting to SMTP.',12,1,NULL,'2024-06-07 04:52:43',NULL,'tep_cfg_select_option(array(\'sendmail\', \'smtp\'),'),
@@ -517,17 +530,7 @@ INSERT INTO `configuration` VALUES
 (252,'Sort Order','MODULE_CONTENT_PRODUCT_INFO_MANUFACTURER_SORT_ORDER','2','Sort order of display. Lowest is displayed first.',6,0,NULL,'2024-06-07 04:52:43',NULL,NULL),
 (253,'Enable Module','MODULE_CONTENT_PRODUCT_INFO_MODEL_STATUS','True','Do you want to add the module to your shop?',6,1,NULL,'2024-06-07 04:52:43',NULL,'tep_cfg_select_option(array(\'True\', \'False\'), '),
 (254,'Sort Order','MODULE_CONTENT_PRODUCT_INFO_MODEL_SORT_ORDER','1','Sort order of display. Lowest is displayed first.',6,0,NULL,'2024-06-07 04:52:43',NULL,NULL),
-(266,'Installed Modules','MODULE_FOOTER_INSTALLED','fm_all_manufacturers.php;fm_recently_viewed_products.php;fm_copyright.php;fm_back_to_top.php','This is automatically updated. No need to edit.',6,0,'2024-09-18 03:51:48','2024-06-07 04:52:43',NULL,NULL),
-(269,'Enable Module','MODULE_FOOTER_ALL_MANUFACTURERS_STATUS','True','Do you want to add the module to your shop?',6,1,NULL,'2024-06-07 04:52:44',NULL,'tep_cfg_select_option(array(\'True\', \'False\'), '),
-(270,'Sort Order','MODULE_FOOTER_ALL_MANUFACTURERS_SORT_ORDER','10','Sort order of display. Lowest is displayed first.',6,0,NULL,'2024-06-07 04:52:44',NULL,NULL),
-(271,'Enable Module','MODULE_FOOTER_BACK_TO_TOP_STATUS','True','Do you want to add the module to your shop?',6,1,NULL,'2024-06-07 04:52:44',NULL,'tep_cfg_select_option(array(\'True\', \'False\'), '),
-(272,'Sort Order','MODULE_FOOTER_BACK_TO_TOP_SORT_ORDER','100','Sort order of display. Lowest is displayed first.',6,0,NULL,'2024-06-07 04:52:44',NULL,NULL),
-(282,'Enable Module','MODULE_FOOTER_RECENTLY_VIEWED_PRODUCTS_STATUS','True','Do you want to add the module to your shop?',6,1,NULL,'2024-06-07 04:52:44',NULL,'tep_cfg_select_option(array(\'True\', \'False\'), '),
-(283,'Max number products to display','MODULE_FOOTER_RECENTLY_VIEWED_PRODUCTS_MAX_DISPLAY_PRODUCTS','5','Maximum number of recently viewed products to display in page.',6,0,NULL,'2024-06-07 04:52:44',NULL,NULL),
-(284,'Show box on pages','MODULE_FOOTER_RECENTLY_VIEWED_PRODUCTS_PAGES','index.php;product_info.php','The pages on which box is shown.',8,0,NULL,'2024-06-07 04:52:44','tep_cfg_show_pages','tep_cfg_edit_pages('),
-(285,'Image Width','MODULE_FOOTER_RECENTLY_VIEWED_PRODUCTS_IMAGE_WIDTH','0','The pixel width of images.',6,0,NULL,'2024-06-07 04:52:44',NULL,NULL),
-(286,'Image Height','MODULE_FOOTER_RECENTLY_VIEWED_PRODUCTS_IMAGE_HEIGHT','96','The pixel height of images.',6,0,NULL,'2024-06-07 04:52:44',NULL,NULL),
-(287,'Sort Order','MODULE_FOOTER_RECENTLY_VIEWED_PRODUCTS_SORT_ORDER','11','Sort order of display. Lowest is displayed first.',6,0,NULL,'2024-06-07 04:52:44',NULL,NULL),
+(266,'Installed Modules','MODULE_FOOTER_INSTALLED','fm_copyright.php','This is automatically updated. No need to edit.',6,0,'2024-09-18 03:51:48','2024-06-07 04:52:43',NULL,NULL),
 (290,'Installed Modules','MODULE_HEADER_INSTALLED','hm_store_logo.php;hm_quick_search.php;hm_account.php;hm_wishlist.php;hm_shopping_cart.php;hm_categories.php','This is automatically updated. No need to edit.',6,0,'2024-10-08 02:25:27','2024-06-07 04:52:44',NULL,NULL),
 (293,'Enable Module','MODULE_HEADER_CATEGORIES_STATUS','True','Do you want to add the module to your shop?',6,1,NULL,'2024-06-07 04:52:44',NULL,'tep_cfg_select_option(array(\'True\', \'False\'), '),
 (294,'Sort Order','MODULE_HEADER_CATEGORIES_SORT_ORDER','14000','Sort order of display. Lowest is displayed first.',6,0,NULL,'2024-06-07 04:52:44',NULL,NULL),
@@ -549,7 +552,7 @@ INSERT INTO `configuration` VALUES
 (322,'Enable Module','MODULE_CONTENT_INDEX_NEW_PRODUCTS_STATUS','True','Do you want to add the module to your shop?',6,1,NULL,'2024-09-18 05:40:29',NULL,'tep_cfg_select_option(array(\'True\', \'False\'), '),
 (323,'Max number products to display','MODULE_CONTENT_INDEX_NEW_PRODUCTS_MAX_DISPLAY_PRODUCTS','8','Maximum number of recently viewed products to display in a index page and category.',6,0,NULL,'2024-09-18 05:40:29',NULL,NULL),
 (324,'Sort Order','MODULE_CONTENT_INDEX_NEW_PRODUCTS_SORT_ORDER','200','Sort order of display. Lowest is displayed first.',6,0,NULL,'2024-09-18 05:40:29',NULL,NULL),
-(325,'Enable SEO URLs 5?','USU5_ENABLED','true','Turn Seo Urls 5 on',8,1,'2024-10-03 23:50:34','2024-09-20 14:32:17',NULL,'tep_cfg_select_option(array(\'true\', \'false\'), '),
+(325,'Enable SEO URLs 5?','USU5_ENABLED','false','Turn Seo Urls 5 on',8,1,'2024-10-03 23:50:34','2024-09-20 14:32:17',NULL,'tep_cfg_select_option(array(\'true\', \'false\'), '),
 (326,'Enable the cache?','USU5_CACHE_ON','true','Turn the cache system on',8,2,'2024-10-03 07:53:13','2024-09-20 14:32:17',NULL,'tep_cfg_select_option(array(\'true\', \'false\'), '),
 (327,'Enable multi language support?','USU5_MULTI_LANGUAGE_SEO_SUPPORT','false','Enable the multi language functionality',8,3,'2024-09-20 14:32:17','2024-09-20 14:32:17',NULL,'tep_cfg_select_option(array(\'true\', \'false\'), '),
 (328,'Output W3C valid URLs?','USU5_USE_W3C_VALID','true','This setting will output W3C valid URLs.',8,4,'2024-09-20 14:32:17','2024-09-20 14:32:17',NULL,'tep_cfg_select_option(array(\'true\', \'false\'), '),
@@ -580,7 +583,6 @@ INSERT INTO `configuration` VALUES
 (402,'Banner Order','MODULE_CAROUSEL_ROTATOR_BANNER_ORDER','Asc','Order that the Banner Rotator uses to show the banners.',6,0,NULL,'2024-09-26 04:12:14',NULL,'tep_cfg_select_option(array(\'Asc\', \'Desc\'), '),
 (403,'Banner Rotator Group','MODULE_CAROUSEL_ROTATOR_GROUP','rotator','Name of the banner group that the Banner Rotator uses to show the banners.',6,0,NULL,'2024-09-26 04:12:14',NULL,NULL),
 (404,'Banner Rotator Max Banners','MODULE_CAROUSEL_ROTATOR_MAX_DISPLAY','4','Maximum number of banners that the Banner Rotator will show',6,0,NULL,'2024-09-26 04:12:14',NULL,NULL),
-(405,'Use CKEditor','USE_CKEDITOR_ADMIN_TEXTAREA','true','Use CKEditor for WYSIWYG editing of textarea fields in admin',1,99,NULL,'2024-09-28 02:22:06',NULL,'tep_cfg_select_option(array(\'true\', \'false\'),'),
 (406,'DISPLAY_PRICES','DISPLAY_PRICES','false','DISPLAY_PRICES',1,9999,'2024-09-28 03:18:51','2024-09-28 03:18:51',NULL,'tep_cfg_select_option(array(\'true\', \'false\'),'),
 (407,'Braintree App Parameter','OSCOM_APP_PAYPAL_BRAINTREE_CC_STATUS','-1','A parameter for the Braintree Application.',6,0,NULL,'2024-09-28 04:36:00',NULL,NULL),
 (408,'Create Tokens','OSCOM_APP_PAYPAL_BRAINTREE_CC_CC_TOKENS','0','Create and store tokens for card payments customers can use on their next purchase?',6,0,NULL,'2024-09-28 04:36:00',NULL,NULL),
@@ -607,7 +609,8 @@ INSERT INTO `configuration` VALUES
 (431,'Enable Module','MODULE_CONTENT_PRODUCT_INFO_BUY_BUTTON_STATUS','True','Do you want to add the module to your shop?',6,1,NULL,'2024-10-08 00:13:24',NULL,'tep_cfg_select_option(array(\'True\', \'False\'), '),
 (432,'Sort Order','MODULE_CONTENT_PRODUCT_INFO_BUY_BUTTON_SORT_ORDER','2','Sort order of display. Lowest is displayed first.',6,0,NULL,'2024-10-08 00:13:24',NULL,NULL),
 (435,'Enable Module','MODULE_CONTENT_PRODUCT_INFO_PRICE_STATUS','True','Do you want to add the module to your shop?',6,1,NULL,'2024-10-08 01:02:06',NULL,'tep_cfg_select_option(array(\'True\', \'False\'), '),
-(436,'Sort Order','MODULE_CONTENT_PRODUCT_INFO_PRICE_SORT_ORDER','1','Sort order of display. Lowest is displayed first.',6,0,NULL,'2024-10-08 01:02:06',NULL,NULL);
+(436,'Sort Order','MODULE_CONTENT_PRODUCT_INFO_PRICE_SORT_ORDER','1','Sort order of display. Lowest is displayed first.',6,0,NULL,'2024-10-08 01:02:06',NULL,NULL),
+(440,'Use SummerNote','USE_SUMMERNOTE_ADMIN_TEXTAREA','true','Use SummerNote for WYSIWYG editing of textarea fields in admin',1,99,NULL,'2024-10-09 06:39:41',NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 /*!40000 ALTER TABLE `configuration` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -940,7 +943,7 @@ CREATE TABLE `css` (
   `status` int(1) NOT NULL DEFAULT 1,
   `inline` int(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=215 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=216 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -954,16 +957,16 @@ INSERT INTO `css` VALUES
 (2,'html','box-sizing: border-box',0,0,0,'','','',1,0),
 (3,'*, *:before, *:after','box-sizing:inherit',0,0,0,'','','',1,0),
 (8,'body','width:94vw;margin:auto;',0,0,0,'','','',1,0),
-(186,'form:first-of-type','display:inline;vertical-align:top',0,0,0,'','','',1,0),
+(186,'form:first-of-type','display:inline',0,0,0,'','','',1,0),
 (190,'header > div:nth-child(1) > form > button:first-of-type','border:0;width:30px;height:30px;background:url(\"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEwLDE4YzEuODQ2LDAsMy41NDMtMC42MzUsNC44OTctMS42ODhsNC4zOTYsNC4zOTZsMS40MTQtMS40MTRsLTQuMzk2LTQuMzk2QzE3LjM2NSwxMy41NDMsMTgsMTEuODQ2LDE4LDEwIGMwLTQuNDExLTMuNTg5LTgtOC04cy04LDMuNTg5LTgsOFM1LjU4OSwxOCwxMCwxOHogTTEwLDRjMy4zMDksMCw2LDIuNjkxLDYsNnMtMi42OTEsNi02LDZzLTYtMi42OTEtNi02UzYuNjkxLDQsMTAsNHoiLz48L3N2Zz4K\")\r\n',0,0,0,'',NULL,NULL,1,0),
 (191,'header > div:nth-child(1)  > a, header > div:nth-child(1)  > form','float:left',0,0,0,'',NULL,'logo',1,0),
-(192,'div:nth-child(1)','margin-top:5em;margin-bottom: 2em',0,0,0,'',NULL,'header information',1,0),
+(192,'div:nth-child(1)','margin-top:5em',0,0,0,'',NULL,'header information',1,0),
 (193,'input,button','border-radius:0; border:1px solid #ccc',0,0,0,'',NULL,NULL,1,0),
-(194,'input[name=\"keywords\"]','font-size:110%;width:40vw;margin-top:0.5em;margin-left: 10em',0,0,0,'',NULL,NULL,1,0),
+(194,'input[name=\"keywords\"]','font-size:110%;width:40vw;margin-left: 10em;margin-top:24px !important',0,0,0,'',NULL,NULL,1,0),
 (195,'a','text-decoration:none',0,0,0,'',NULL,NULL,1,0),
 (196,'p a','text-decoration:underline',0,0,0,'',NULL,NULL,1,0),
 (198,'a[href$=\"account.php\"]','mergin-left:5em',0,0,0,'',NULL,NULL,1,0),
-(202,'a[href$=\"#nav\"],a[href$=\"account.php\"],a[href$=\"wishlist.php\"],a[href$=\"shopping_cart.php\"]','float: right !important;margin-right:1em;display:block;width:30px;height:30px',0,0,0,'',NULL,NULL,1,0),
+(202,'a[href$=\"#nav\"],a[href$=\"account.php\"],a[href$=\"wishlist.php\"],a[href$=\"shopping_cart.php\"]','float: right !important;margin-left:1em;display:block;width:30px;height:30px;margin-top:40px !important',0,0,0,'',NULL,NULL,1,0),
 (203,'a[href$=\"account.php\"]','background:url(\"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgZmlsbD0ibm9uZSIgY3g9IjEyIiBjeT0iNyIgcj0iMyIvPjxwYXRoIGQ9Ik0xMiAyQzkuMjQzIDIgNyA0LjI0MyA3IDdzMi4yNDMgNSA1IDUgNS0yLjI0MyA1LTVTMTQuNzU3IDIgMTIgMnpNMTIgMTBjLTEuNjU0IDAtMy0xLjM0Ni0zLTNzMS4zNDYtMyAzLTMgMyAxLjM0NiAzIDNTMTMuNjU0IDEwIDEyIDEwek0yMSAyMXYtMWMwLTMuODU5LTMuMTQxLTctNy03aC00Yy0zLjg2IDAtNyAzLjE0MS03IDd2MWgydi0xYzAtMi43NTcgMi4yNDMtNSA1LTVoNGMyLjc1NyAwIDUgMi4yNDMgNSA1djFIMjF6Ii8+Cjwvc3ZnPg==\")\r\n',0,0,0,'',NULL,NULL,1,0),
 (204,'a[href$=\"shopping_cart.php\"]','background:url(\"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0yMS44MjIsNy40MzFDMjEuNjM1LDcuMTYxLDIxLjMyOCw3LDIxLDdINy4zMzNMNi4xNzksNC4yM0M1Ljg2NywzLjQ4Miw1LjE0MywzLDQuMzMzLDNIMnYyaDIuMzMzbDQuNzQ0LDExLjM4NSBDOS4yMzIsMTYuNzU3LDkuNTk2LDE3LDEwLDE3aDhjMC40MTcsMCwwLjc5LTAuMjU5LDAuOTM3LTAuNjQ4bDMtOEMyMi4wNTIsOC4wNDQsMjIuMDA5LDcuNywyMS44MjIsNy40MzF6IE0xNy4zMDcsMTVoLTYuNjQgbC0yLjUtNmgxMS4zOUwxNy4zMDcsMTV6Ii8+PGNpcmNsZSBjeD0iMTAuNSIgY3k9IjE5LjUiIHI9IjEuNSIvPjxjaXJjbGUgY3g9IjE3LjUiIGN5PSIxOS41IiByPSIxLjUiLz4KPC9zdmc+Cg==\")\r\n',0,0,0,'',NULL,NULL,1,0),
 (205,'a[href$=\"wishlist.php\"]','background:url(\"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0xMiw0LjU5NWMtMS4xMDQtMS4wMDYtMi41MTItMS41NTgtMy45OTYtMS41NThjLTEuNTc4LDAtMy4wNzIsMC42MjMtNC4yMTMsMS43NThjLTIuMzUzLDIuMzYzLTIuMzUyLDYuMDU5LDAuMDAyLDguNDEyIGw3LjMzMiw3LjMzMmMwLjE3LDAuMjk5LDAuNDk4LDAuNDkyLDAuODc1LDAuNDkyYzAuMzIyLDAsMC42MDktMC4xNjMsMC43OTItMC40MDlsNy40MTUtNy40MTUgYzIuMzU0LTIuMzU0LDIuMzU0LTYuMDQ5LTAuMDAyLTguNDE2Yy0xLjEzNy0xLjEzMS0yLjYzMS0xLjc1NC00LjIwOS0xLjc1NEMxNC41MTMsMy4wMzcsMTMuMTA0LDMuNTg5LDEyLDQuNTk1eiBNMTguNzkxLDYuMjA1IGMxLjU2MywxLjU3MSwxLjU2NCw0LjAyNSwwLjAwMiw1LjU4OEwxMiwxOC41ODZsLTYuNzkzLTYuNzkzQzMuNjQ1LDEwLjIzLDMuNjQ2LDcuNzc2LDUuMjA1LDYuMjA5IGMwLjc2LTAuNzU2LDEuNzU0LTEuMTcyLDIuNzk5LTEuMTcyczIuMDM1LDAuNDE2LDIuNzg5LDEuMTdsMC41LDAuNWMwLjM5MSwwLjM5MSwxLjAyMywwLjM5MSwxLjQxNCwwbDAuNS0wLjUgQzE0LjcxOSw0LjY5OCwxNy4yODEsNC43MDIsMTguNzkxLDYuMjA1eiIvPgo8L3N2Zz4=\")\r\n',0,0,0,'',NULL,NULL,1,0),
@@ -1298,11 +1301,11 @@ CREATE TABLE `information_pages_content` (
 LOCK TABLES `information_pages_content` WRITE;
 /*!40000 ALTER TABLE `information_pages_content` DISABLE KEYS */;
 INSERT INTO `information_pages_content` VALUES
-(1,1,'Shipping & Returns','Put here your Shipping & Returns information.'),
-(2,1,'Privacy Notice','Put here your Privacy Notice information. '),
-(3,1,'Conditions of Use','Put here your Conditions of Use information.'),
-(4,1,'Returns & Refunds','Put here your Returns & Refunds information.'),
-(5,1,'Cookie Policy','Put here your Cookie Policy information.');
+(1,2,'Shipping & Returns','Put here your Shipping & Returns information.'),
+(2,2,'Privacy Notice','Put here your Privacy Notice information. '),
+(3,2,'Conditions of Use','Put here your Conditions of Use information.'),
+(4,2,'Returns & Refunds','Put here your Returns & Refunds information.'),
+(5,2,'Cookie Policy','Put here your Cookie Policy information.');
 /*!40000 ALTER TABLE `information_pages_content` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1322,7 +1325,7 @@ CREATE TABLE `languages` (
   `sort_order` int(3) DEFAULT NULL,
   PRIMARY KEY (`languages_id`),
   KEY `IDX_LANGUAGES_NAME` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1332,7 +1335,7 @@ CREATE TABLE `languages` (
 LOCK TABLES `languages` WRITE;
 /*!40000 ALTER TABLE `languages` DISABLE KEYS */;
 INSERT INTO `languages` VALUES
-(1,'Czech','cs','icon.gif','czech',1);
+(2,'english','en','icon.gif','english',1);
 /*!40000 ALTER TABLE `languages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1351,7 +1354,7 @@ CREATE TABLE `manufacturers` (
   `last_modified` datetime DEFAULT NULL,
   PRIMARY KEY (`manufacturers_id`),
   KEY `IDX_MANUFACTURERS_NAME` (`manufacturers_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1360,6 +1363,8 @@ CREATE TABLE `manufacturers` (
 
 LOCK TABLES `manufacturers` WRITE;
 /*!40000 ALTER TABLE `manufacturers` DISABLE KEYS */;
+INSERT INTO `manufacturers` VALUES
+(1,'Šimon Formánek',NULL,'2024-10-09 07:38:59','2024-10-09 07:38:59');
 /*!40000 ALTER TABLE `manufacturers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1386,6 +1391,8 @@ CREATE TABLE `manufacturers_info` (
 
 LOCK TABLES `manufacturers_info` WRITE;
 /*!40000 ALTER TABLE `manufacturers_info` DISABLE KEYS */;
+INSERT INTO `manufacturers_info` VALUES
+(1,2,'',0,NULL);
 /*!40000 ALTER TABLE `manufacturers_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1596,11 +1603,11 @@ CREATE TABLE `orders_status` (
 LOCK TABLES `orders_status` WRITE;
 /*!40000 ALTER TABLE `orders_status` DISABLE KEYS */;
 INSERT INTO `orders_status` VALUES
-(1,1,'Pending',1,0),
-(2,1,'Processing',1,1),
-(3,1,'Delivered',1,1),
-(4,1,'PayPal [Transactions]',0,0),
-(5,1,'Braintree [Transactions]',0,0);
+(1,2,'Pending',1,0),
+(2,2,'Processing',1,1),
+(3,2,'Delivered',1,1),
+(4,2,'PayPal [Transactions]',0,0),
+(5,2,'Braintree [Transactions]',0,0);
 /*!40000 ALTER TABLE `orders_status` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2014,8 +2021,6 @@ CREATE TABLE `sessions` (
 
 LOCK TABLES `sessions` WRITE;
 /*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
-INSERT INTO `sessions` VALUES
-('pv2ube02deuv6bbn4hs558juea',1728426046,'sessiontoken|s:32:\"828808608af1db95d759d76c336667a1\";SESSION_USER_AGENT|s:101:\"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36\";SESSION_IP_ADDRESS|s:9:\"127.0.0.1\";cart|O:13:\"shopping_cart\":5:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:6:\"cartID\";N;s:12:\"content_type\";b:0;}wishlist|O:8:\"wishlist\":1:{s:4:\"list\";a:0:{}}language|s:5:\"czech\";languages_id|s:1:\"1\";currency|s:3:\"CZK\";navigation|O:18:\"navigation_history\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}');
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2148,7 +2153,7 @@ CREATE TABLE `zones` (
   `zone_name` varchar(255) NOT NULL,
   PRIMARY KEY (`zone_id`),
   KEY `idx_zones_country_id` (`zone_country_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=182 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4316 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2158,187 +2163,20 @@ CREATE TABLE `zones` (
 LOCK TABLES `zones` WRITE;
 /*!40000 ALTER TABLE `zones` DISABLE KEYS */;
 INSERT INTO `zones` VALUES
-(1,223,'AL','Alabama'),
-(2,223,'AK','Alaska'),
-(3,223,'AS','American Samoa'),
-(4,223,'AZ','Arizona'),
-(5,223,'AR','Arkansas'),
-(6,223,'AF','Armed Forces Africa'),
-(7,223,'AA','Armed Forces Americas'),
-(8,223,'AC','Armed Forces Canada'),
-(9,223,'AE','Armed Forces Europe'),
-(10,223,'AM','Armed Forces Middle East'),
-(11,223,'AP','Armed Forces Pacific'),
-(12,223,'CA','California'),
-(13,223,'CO','Colorado'),
-(14,223,'CT','Connecticut'),
-(15,223,'DE','Delaware'),
-(16,223,'DC','District of Columbia'),
-(17,223,'FM','Federated States Of Micronesia'),
-(18,223,'FL','Florida'),
-(19,223,'GA','Georgia'),
-(20,223,'GU','Guam'),
-(21,223,'HI','Hawaii'),
-(22,223,'ID','Idaho'),
-(23,223,'IL','Illinois'),
-(24,223,'IN','Indiana'),
-(25,223,'IA','Iowa'),
-(26,223,'KS','Kansas'),
-(27,223,'KY','Kentucky'),
-(28,223,'LA','Louisiana'),
-(29,223,'ME','Maine'),
-(30,223,'MH','Marshall Islands'),
-(31,223,'MD','Maryland'),
-(32,223,'MA','Massachusetts'),
-(33,223,'MI','Michigan'),
-(34,223,'MN','Minnesota'),
-(35,223,'MS','Mississippi'),
-(36,223,'MO','Missouri'),
-(37,223,'MT','Montana'),
-(38,223,'NE','Nebraska'),
-(39,223,'NV','Nevada'),
-(40,223,'NH','New Hampshire'),
-(41,223,'NJ','New Jersey'),
-(42,223,'NM','New Mexico'),
-(43,223,'NY','New York'),
-(44,223,'NC','North Carolina'),
-(45,223,'ND','North Dakota'),
-(46,223,'MP','Northern Mariana Islands'),
-(47,223,'OH','Ohio'),
-(48,223,'OK','Oklahoma'),
-(49,223,'OR','Oregon'),
-(50,223,'PW','Palau'),
-(51,223,'PA','Pennsylvania'),
-(52,223,'PR','Puerto Rico'),
-(53,223,'RI','Rhode Island'),
-(54,223,'SC','South Carolina'),
-(55,223,'SD','South Dakota'),
-(56,223,'TN','Tennessee'),
-(57,223,'TX','Texas'),
-(58,223,'UT','Utah'),
-(59,223,'VT','Vermont'),
-(60,223,'VI','Virgin Islands'),
-(61,223,'VA','Virginia'),
-(62,223,'WA','Washington'),
-(63,223,'WV','West Virginia'),
-(64,223,'WI','Wisconsin'),
-(65,223,'WY','Wyoming'),
-(66,38,'AB','Alberta'),
-(67,38,'BC','British Columbia'),
-(68,38,'MB','Manitoba'),
-(69,38,'NF','Newfoundland'),
-(70,38,'NB','New Brunswick'),
-(71,38,'NS','Nova Scotia'),
-(72,38,'NT','Northwest Territories'),
-(73,38,'NU','Nunavut'),
-(74,38,'ON','Ontario'),
-(75,38,'PE','Prince Edward Island'),
-(76,38,'QC','Quebec'),
-(77,38,'SK','Saskatchewan'),
-(78,38,'YT','Yukon Territory'),
-(79,81,'NDS','Niedersachsen'),
-(80,81,'BAW','Baden-Württemberg'),
-(81,81,'BAY','Bayern'),
-(82,81,'BER','Berlin'),
-(83,81,'BRG','Brandenburg'),
-(84,81,'BRE','Bremen'),
-(85,81,'HAM','Hamburg'),
-(86,81,'HES','Hessen'),
-(87,81,'MEC','Mecklenburg-Vorpommern'),
-(88,81,'NRW','Nordrhein-Westfalen'),
-(89,81,'RHE','Rheinland-Pfalz'),
-(90,81,'SAR','Saarland'),
-(91,81,'SAS','Sachsen'),
-(92,81,'SAC','Sachsen-Anhalt'),
-(93,81,'SCN','Schleswig-Holstein'),
-(94,81,'THE','Thüringen'),
-(95,14,'WI','Wien'),
-(96,14,'NO','Niederösterreich'),
-(97,14,'OO','Oberösterreich'),
-(98,14,'SB','Salzburg'),
-(99,14,'KN','Kärnten'),
-(100,14,'ST','Steiermark'),
-(101,14,'TI','Tirol'),
-(102,14,'BL','Burgenland'),
-(103,14,'VB','Voralberg'),
-(104,204,'AG','Aargau'),
-(105,204,'AI','Appenzell Innerrhoden'),
-(106,204,'AR','Appenzell Ausserrhoden'),
-(107,204,'BE','Bern'),
-(108,204,'BL','Basel-Landschaft'),
-(109,204,'BS','Basel-Stadt'),
-(110,204,'FR','Freiburg'),
-(111,204,'GE','Genf'),
-(112,204,'GL','Glarus'),
-(113,204,'JU','Graubünden'),
-(114,204,'JU','Jura'),
-(115,204,'LU','Luzern'),
-(116,204,'NE','Neuenburg'),
-(117,204,'NW','Nidwalden'),
-(118,204,'OW','Obwalden'),
-(119,204,'SG','St. Gallen'),
-(120,204,'SH','Schaffhausen'),
-(121,204,'SO','Solothurn'),
-(122,204,'SZ','Schwyz'),
-(123,204,'TG','Thurgau'),
-(124,204,'TI','Tessin'),
-(125,204,'UR','Uri'),
-(126,204,'VD','Waadt'),
-(127,204,'VS','Wallis'),
-(128,204,'ZG','Zug'),
-(129,204,'ZH','Zürich'),
-(130,195,'A Coruña','A Coruña'),
-(131,195,'Alava','Alava'),
-(132,195,'Albacete','Albacete'),
-(133,195,'Alicante','Alicante'),
-(134,195,'Almeria','Almeria'),
-(135,195,'Asturias','Asturias'),
-(136,195,'Avila','Avila'),
-(137,195,'Badajoz','Badajoz'),
-(138,195,'Baleares','Baleares'),
-(139,195,'Barcelona','Barcelona'),
-(140,195,'Burgos','Burgos'),
-(141,195,'Caceres','Caceres'),
-(142,195,'Cadiz','Cadiz'),
-(143,195,'Cantabria','Cantabria'),
-(144,195,'Castellon','Castellon'),
-(145,195,'Ceuta','Ceuta'),
-(146,195,'Ciudad Real','Ciudad Real'),
-(147,195,'Cordoba','Cordoba'),
-(148,195,'Cuenca','Cuenca'),
-(149,195,'Girona','Girona'),
-(150,195,'Granada','Granada'),
-(151,195,'Guadalajara','Guadalajara'),
-(152,195,'Guipuzcoa','Guipuzcoa'),
-(153,195,'Huelva','Huelva'),
-(154,195,'Huesca','Huesca'),
-(155,195,'Jaen','Jaen'),
-(156,195,'La Rioja','La Rioja'),
-(157,195,'Las Palmas','Las Palmas'),
-(158,195,'Leon','Leon'),
-(159,195,'Lleida','Lleida'),
-(160,195,'Lugo','Lugo'),
-(161,195,'Madrid','Madrid'),
-(162,195,'Malaga','Malaga'),
-(163,195,'Melilla','Melilla'),
-(164,195,'Murcia','Murcia'),
-(165,195,'Navarra','Navarra'),
-(166,195,'Ourense','Ourense'),
-(167,195,'Palencia','Palencia'),
-(168,195,'Pontevedra','Pontevedra'),
-(169,195,'Salamanca','Salamanca'),
-(170,195,'Santa Cruz de Tenerife','Santa Cruz de Tenerife'),
-(171,195,'Segovia','Segovia'),
-(172,195,'Sevilla','Sevilla'),
-(173,195,'Soria','Soria'),
-(174,195,'Tarragona','Tarragona'),
-(175,195,'Teruel','Teruel'),
-(176,195,'Toledo','Toledo'),
-(177,195,'Valencia','Valencia'),
-(178,195,'Valladolid','Valladolid'),
-(179,195,'Vizcaya','Vizcaya'),
-(180,195,'Zamora','Zamora'),
-(181,195,'Zaragoza','Zaragoza');
+(908,56,'US','Ústecký'),
+(909,56,'JC','Jihočeský'),
+(910,56,'JM','Jihomoravský'),
+(911,56,'KA','Karlovarský'),
+(912,56,'KR','Královéhradecký'),
+(913,56,'LI','Liberecký'),
+(914,56,'MO','Moravskoslezský'),
+(915,56,'OL','Olomoucký'),
+(916,56,'PA','Pardubický'),
+(917,56,'PL','Plzeňský'),
+(918,56,'PR','Hlavní město Praha'),
+(919,56,'ST','Středočeský'),
+(920,56,'VY','Vysočina'),
+(921,56,'ZL','Zlínský');
 /*!40000 ALTER TABLE `zones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2381,4 +2219,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-09  2:14:19
+-- Dump completed on 2024-10-11  0:11:21

@@ -34,7 +34,7 @@ require 'includes/template_top.php';
 if (!isset($product_info['products_id'])) {
     ?>
 
-  <div class="mb-5">
+  <div>
     <?php echo TEXT_PRODUCT_NOT_FOUND; ?>
   </div>
 
@@ -42,11 +42,11 @@ if (!isset($product_info['products_id'])) {
 } else {
     ?>
 
-  <div class="row">
-    <div class="col-lg">
+  <table>
+    <tr>
+    <td>
       <?php echo $oscTemplate->getContent('product_info_left'); ?>
-    </div>
-    <div class="col-lg">
+    <td>
       <h1><?php echo $product_info['products_name']; ?></h1>
 
       <?php echo $oscTemplate->getContent('product_info_right'); ?>
@@ -59,7 +59,7 @@ if (!isset($product_info['products_id'])) {
 
       </form>
 
-    </div>
+    </table>
 
     <div class="col-12">
       <?php echo $page_content; ?>

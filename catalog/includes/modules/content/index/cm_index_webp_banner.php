@@ -40,7 +40,7 @@ class cm_index_webp_banner
 
     public function execute(): void
     {
-        global $PHP_SELF, $oscTemplate, $cPath;
+        global $PHP_SELF, $oscTemplate, $cPath, $languages_id;
 
         $content_width = (int) MODULE_CAROUSEL_ROTATOR_CONTENT_WIDTH;
 

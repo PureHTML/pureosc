@@ -31,7 +31,7 @@ if (ACCOUNT_GENDER === 'true') {
     <label class="form-check-label me-2" for="gender"><?php echo ENTRY_GENDER.(!empty(ENTRY_GENDER_TEXT) ? '<span class="text-danger ms-1">'.ENTRY_GENDER_TEXT.'</span>' : ''); ?></label>
     <div class="form-check-inline">
       <label class="form-check-label">
-        <?php echo tep_draw_radio_field('gender', 'm', $male, 'class="form-check-input"').' '.MALE; ?>
+        <?php echo tep_draw_radio_field('gender', 'm', $male, 'autofocus').' '.MALE; ?>
       </label>
     </div>
     <div class="form-check-inline">
@@ -48,7 +48,13 @@ if (ACCOUNT_GENDER === 'true') {
 
 <div class="mb-3">
   <label class="form-label" for="firstname"><?php echo ENTRY_FIRST_NAME.(!empty(ENTRY_FIRST_NAME_TEXT) ? '<span class="text-danger ms-1">'.ENTRY_FIRST_NAME_TEXT.'</span>' : ''); ?></label>
-  <?php echo tep_draw_input_field('firstname', $entry['entry_firstname'] ?? '', 'id="firstname" class="form-control"'); ?>
+  <?php 
+  if (ACCOUNT_GENDER === 'true') {
+  echo tep_draw_input_field('firstname', $entry['entry_firstname'] ?? '', 'id="firstname"'); 
+  } else {
+    echo tep_draw_input_field('firstname', $entry['entry_firstname'] ?? '', 'id="firstname" autofocus'); 
+  }
+  ?>
 </div>
 <div class="mb-3">
   <label class="form-label" for="lastname"><?php echo ENTRY_LAST_NAME.(!empty(ENTRY_LAST_NAME_TEXT) ? '<span class="text-danger ms-1">'.ENTRY_LAST_NAME_TEXT.'</span>' : ''); ?></label>

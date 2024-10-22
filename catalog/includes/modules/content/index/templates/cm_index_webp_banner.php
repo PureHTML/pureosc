@@ -14,8 +14,7 @@
  */
 ?>
 <style>
-.banner {padding-top:20px}
-.banner img{width:100%;height:auto}
+.banner img{width:100%;height:auto;}
 <?php
 if ($counter === 1) {
     echo '.banner a:nth-of-type(1){width:100%;left:0}';
@@ -39,12 +38,9 @@ EOD;
 
 ?>
 </style><!--TODO:css -->
-   <div class="banner">
+<tr>
+   <td class="banner" colspan="3">
 <?php
 echo tep_image('images/rotator.webp');
 echo $carousel; ?>
 </div>
-
-
-
-

@@ -164,7 +164,7 @@ if (tep_db_num_rows($admins_check_query) > 0) {
     $heading[] = ['text' => '<strong>'.HEADING_TITLE.'</strong>'];
 
     $contents = ['form' => tep_draw_form('login', 'login.php', 'action=process')];
-    $contents[] = ['text' => TEXT_USERNAME.'<br />'.tep_draw_input_field('username')];
+    $contents[] = ['text' => TEXT_USERNAME.'<br />'.tep_draw_input_field('username','', 'autofocus')];
     $contents[] = ['text' => '<br />'.TEXT_PASSWORD.'<br />'.tep_draw_password_field('password')];
     $contents[] = ['align' => 'center', 'text' => '<br />'.tep_draw_button(BUTTON_LOGIN, 'key')];
 } else {

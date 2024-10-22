@@ -1,1 +1,2 @@
-<a href="<?php echo tep_href_link('index.php'); ?>"><?php echo tep_image('images/store_logo.png', STORE_NAME); ?></a>
+<td>
+<a href="<?php echo tep_href_link('index.php'); ?>"><u><?php echo STORE_NAME; ?></u></a>

@@ -11,13 +11,16 @@
  */
 ?>
 
-</main>
+</table>
 
-<footer class="footer">
+<table width=96%>
+<tr>
+  <td id=f><center>
   <?php require 'includes/footer.php'; ?>
-</footer>
+</center>
+</table>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+<script src="bootstrap.min.js"></script>
 
 <?php
 if (\defined('ACCOUNT_DOB') && ACCOUNT_DOB === 'true' && \in_array($PHP_SELF, ['create_account.php', 'account_edit.php'], true)) {

@@ -11,3 +11,4 @@ fi
 #[[ $6 ]] && ORD="$5" || ORD=9999
 
 mariadb -h${H} -u${U} -p${P} $D -e "update css set name='${2}' where id='${1}'"
+  ./csscompiler.php  

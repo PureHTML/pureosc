@@ -40,3 +40,6 @@ declare(strict_types=1);
 \define('TEXT_NOW', '\' nyní');
 \define('TEXT_ALL_CATEGORIES', 'Všechny kategorie');
 \define('TEXT_ALL_MANUFACTURERS', 'Všichni výrobci');
+\define('TEXTBROWSER_SUBCATEGORIES','Podkategorie:');
+\define('TEXTBROWSER_NO_SUBCATEGORIES','Pro tuto kategorii neexistují podkategorie');
+

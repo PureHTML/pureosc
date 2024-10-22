@@ -34,69 +34,77 @@ if (file_exists($css_file.'.css')) {
  $header.= '        <link href="' . preg_replace('/_[a-z].*$/','', $css_file) . '.css" rel="stylesheet">' . "\n";
 }
  */
-
-// echo header oneliner:
+// echo header css output:
 echo str_replace("\n", '', $header)."\n";
 
+//include inline css
+echo '<style>';
+include('inline.css');
+echo '</style>';
 echo $oscTemplate->getBlocks('header_tags'); ?>
-<header>
+<br>
+<center>
+<table width=96%>
     <?php require 'includes/header.php'; ?>
-</header>
+</table>
 
-<?php
+<?php if ($oscTemplate->hasBlocks('header_menu')) {  ?>
+<!-- navigation  BEGIN -->
+<table width=96%>
+  <tr>
+    <td id=m>
+<?php echo $oscTemplate->getBlocks('header_menu'); ?>
+<?php } ?>
+</table><?php
 if ($messageStack->size('header') > 0) {
     ?>
-
-  <div class="p-1 bg-danger text-white text-center mb-3">
+<table width=96%>
+<tr>
+  <td>
     <?php echo $messageStack->output('header'); ?>
-  </div>
-
-  <?php
+</table><?php
 }
 
 if (isset($_GET['error_message']) && !empty($_GET['error_message'])) {
     ?>
-
-  <div class="p-3 mb-3 bg-danger text-white text-center">
+<table width=96%>
+<tr>
+  <td>
     <?php echo htmlspecialchars(stripslashes(urldecode($_GET['error_message']))); ?>
-  </div>
+</table>
 
   <?php
 }
 
 if (isset($_GET['info_message']) && !empty($_GET['info_message'])) {
     ?>
-
-  <div class="p-3 mb-3 bg-info text-white text-center">
+<table width=96%>
+<tr>
+  <td>
     <?php echo htmlspecialchars(stripslashes(urldecode($_GET['info_message']))); ?>
-  </div>
-
-  <?php
+</table><?php
 }
 
-?>
-
-<main>
-  <div>
-
-    <ul class="list-inline">
+?><table width=96%>
+<?php
+  //diable breadcrumb on HomePage
+  if (($_SERVER['SCRIPT_NAME'] != '/index.php') || (array_key_exists('cPath', $_GET))) { ?>
+<tr>
+  <td>
+    <ul>
       <?php echo $breadcrumb->trail('&#47;'); ?>
     </ul>
-
-    <div class="row">
+<?php } ?>
 
       <?php
       if ($oscTemplate->hasBlocks('boxes_column_left') && isset($cPath_array)) {
           ?>
 
-        <aside class="aside col-lg-2">
+        <td>
           <?php echo $oscTemplate->getBlocks('boxes_column_left'); ?>
-        </aside>
+        </td>
 
         <?php
       }
 
 ?>
-
-      <div class="col">
-        <div class="<?php echo str_replace('_', '-', basename($PHP_SELF, '.php')); ?>">

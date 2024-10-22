@@ -1,5 +1,3 @@
-<nav id=nav>
-  <ul>
      <?php
         if ($special_products) {
             ?>
@@ -10,5 +8,3 @@
 
      ?>
   <?php echo $categories_list; ?>
-  </ul>
-</nav>

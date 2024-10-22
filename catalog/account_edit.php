@@ -207,7 +207,7 @@ if (ACCOUNT_DOB === 'true') {
 
     <div class="mb-3">
       <label class="form-label" for="email-address"><?php echo ENTRY_EMAIL_ADDRESS.(!empty(ENTRY_EMAIL_ADDRESS_TEXT) ? '<span class="text-danger ms-1">'.ENTRY_EMAIL_ADDRESS_TEXT.'</span>' : ''); ?></label>
-      <?php echo tep_draw_input_field('email_address', $account['customers_email_address'], 'id="email-address" class="form-control"', 'email'); ?>
+      <?php echo tep_draw_input_field('email_address', $account['customers_email_address'], 'id="email-address" class="form-control" autofocus', 'email'); ?>
     </div>
     <div class="mb-3">
       <label class="form-label" for="telephone"><?php echo ENTRY_TELEPHONE_NUMBER.(!empty(ENTRY_TELEPHONE_NUMBER_TEXT) ? '<span class="text-danger ms-1">'.ENTRY_TELEPHONE_NUMBER_TEXT.'</span>' : ''); ?></label>

@@ -33,7 +33,7 @@ declare(strict_types=1);
 \define('TEXT_DATE_ADDED', 'Datum přidání:');
 \define('TEXT_LAST_MODIFIED', 'Datum změny:');
 \define('TEXT_PRODUCTS', 'Zboží:');
-\define('TEXT_IMAGE_NONEXISTENT', 'Logo chybí');
+//\define('TEXT_IMAGE_NONEXISTENT', 'Logo chybí');
 
 \define('TEXT_NEW_INTRO', 'Zadej informace o nevém výrobci');
 \define('TEXT_EDIT_INTRO', 'Proveď potřebné změny');

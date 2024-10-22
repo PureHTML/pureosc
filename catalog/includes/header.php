@@ -14,26 +14,15 @@
 if ($oscTemplate->hasBlocks('header_top')) {
     ?>
 
-  <div>
+<tr>
         <?php echo $oscTemplate->getBlocks('header_top'); ?>
-  </div>
 
   <?php
 }
 
 ?>
 
-  <div>
+  <tr valign=bottom>
+
       <?php echo $oscTemplate->getBlocks('header'); ?>
-  </div>
-
 <?php
-if ($oscTemplate->hasBlocks('header_menu')) {
-    ?>
-
-  <div>
-      <?php echo $oscTemplate->getBlocks('header_menu'); ?>
-  </div>
-
-  <?php
-}

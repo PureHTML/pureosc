@@ -56,7 +56,7 @@ class cm_index_customer_greeting
 
     public function execute(): void
     {
-        global $oscTemplate;
+        global $oscTemplate, $languages_id;
 
         ob_start();
 

@@ -33,3 +33,5 @@ declare(strict_types=1);
 \define('TEXT_NOW', '\' now');
 \define('TEXT_ALL_CATEGORIES', 'All Categories');
 \define('TEXT_ALL_MANUFACTURERS', 'All Manufacturers');
+\define('TEXTBROWSER_SUBCATEGORIES','Subcategories:');
+\define('TEXTBROWSER_NO_SUBCATEGORIES','No Subcategories for this category');

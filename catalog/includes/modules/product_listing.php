@@ -66,7 +66,7 @@ if (\defined('DISABLE_PRICES') && \constant('DISABLE_PRICES') !== 'true') {
     } else {
         ?>
 
-      <p><?php echo TEXT_NO_PRODUCTS; ?></p>
+      <p><?php //echo TEXT_NO_PRODUCTS; ?></p>
 
       <?php
     }

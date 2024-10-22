@@ -604,7 +604,7 @@ function updateNet() {
           </tr>
           <tr>
             <td class="main" valign="top"><?php echo TEXT_PRODUCTS_DESCRIPTION; ?></td>
-            <td class="main"><?php echo tep_draw_textarea_summernote('products_description['.$languages[$i]['id'].']', 'soft', '70', '15', ($pInfo->products_id < 1) ? '' : tep_get_products_description($pInfo->products_id, $languages[$i]['id'])); ?></td>
+            <td class="main"><?php echo tep_draw_textarea_summernote('products_description['.$languages[$i]['id'].']', 'soft', '70', '15', ($pInfo->products_id < 1) ? '' : fix_editor_output(tep_get_products_description($pInfo->products_id, $languages[$i]['id']))); ?></td>
           </tr>
           <tr>
             <td class="main"><?php echo TEXT_PRODUCTS_URL.'<br /><small>'.TEXT_PRODUCTS_URL_WITHOUT_HTTP.'</small>'; ?></td>
@@ -876,7 +876,7 @@ $('#products_date_available').datepicker({
                 <td class="smallText" align="right">
 <?php
         echo tep_draw_form('search', 'categories.php', '', 'get');
-    echo HEADING_TITLE_SEARCH.' '.tep_draw_input_field('search');
+    echo HEADING_TITLE_SEARCH.' '.tep_draw_input_field('search','', 'autofocus');
     echo tep_hide_session_id().'</form>';
     ?>
                 </td>

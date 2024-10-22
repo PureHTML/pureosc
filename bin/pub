@@ -6,8 +6,9 @@ echo ll: $LANGUAGE_ID
 echo m: $MANUF_ID;
 echo categoryID: $CAT_ID
 
+
 if [[ "${?}" > 0 ]];then
-  echo 'ERROR: need "cp root/example-dir/config.txt . from McFly'
+  echo 'ERROR: need "cp /example-dir/config.txt'
   exit
 fi
 #LANGUAGE_ID=`mariadb --column-names=FALSE -h${H} -u${U} -p${P} $D -e "SELECT products_id from products ORDER BY products_id DESC LIMIT 1"`
@@ -17,7 +18,7 @@ ls *.md | while read -r file; do
   PRODUCTS_NAME=`cat ${file}|sed -n '1p'|sed 's/# //'|sed 's/#//'`
   PRODUCTS_DESCRIPTION=`cat ${file} |sed -n '2,$p'|Markdown.pl`
 
-    EXISTS=`mariadb --column-names=FALSE -h${H} -u${U} -p${P} $D -e "SELECT DISTINCT products.products_id FROM products, products_description, products_to_categories WHERE products_name=\"${PRODUCTS_NAME}\" AND language_id=${LANGUAGE_ID} AND products_to_categories.categories_id = ${CAT_ID} AND products.products_id=products_description.products_id"`
+    EXISTS=`mariadb --column-names=FALSE -h${H} -u${U} -p${P} $D -e "SELECT DISTINCT products.products_id FROM products, products_description, products_to_categories WHERE products_name=\"${PRODUCTS_NAME}\" AND language_id=${LANGUAGE_ID} AND products_to_categories.categories_id = ${CAT_ID} AND products.products_id=products_description.products_id AND products_to_categories.products_id=products.products_id"`
 echo EXISTS: $EXISTS
 #    if [[ -f "./.hash/${EXISTS}" ]];then
     if [[ ! -z ${EXISTS} ]];then
