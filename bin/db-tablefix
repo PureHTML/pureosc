@@ -32,4 +32,4 @@ echo HELP: Use
 echo ./csupd $ID \'${2}\' 
 echo to change css value
 
-./csscompiler.php
+./cscompile.php

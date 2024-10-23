@@ -12,4 +12,4 @@ echo HELP: Use
 #echo ./csupd $ID \'${2}\' 
 echo to change products values
 
-./csscompiler.php
+./cscompile.php

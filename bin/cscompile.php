@@ -25,7 +25,11 @@ echo 'configuration loaded id Store name:' . constant('STORE_NAME') . "\n";
 // PureHTML Css generator
 //nested fiter:
 function css_compile($data) {
+  if (!empty($data)) {
     $data = preg_replace('/}}}}}}/', '}', preg_replace('/}}}}/', '}}', str_replace(': ', ':', str_replace('; }', '}', str_replace('} ', '}', preg_replace('/\s+/', ' ', preg_replace('/\t/', ' ', preg_replace('/\n/', ' ', preg_replace(':/\*.*\*/:', '', $data)))))))), 1);
+  } else {
+      $data = '';
+  }
     return $data;
 }
 
@@ -64,7 +68,11 @@ function cssquery($max = 0, $min = 0, $template = '', $tag = '', $status = 1, $i
     if ($max > 0 || $min > 0) {
         $data .= '}';
     }
-
+ if (!empty($data)) {
+    return $data;
+ } else {
+      $data = '';
+  }
     return $data;
 }
 
@@ -93,8 +101,10 @@ function cssgenerator() {
 //working file:
     file_put_contents(DIR_FS_CATALOG . 's.css', $data, 644);
 //debug file
+  if (DBG == 'true') {
     $data = str_replace("{", "\n{", str_replace("}", "}\n", $data));
     file_put_contents(DIR_FS_CATALOG . 's_debug.css', $data, 644);
+  }
 }
 
 function cssgenerator_inline() {
@@ -122,8 +132,10 @@ function cssgenerator_inline() {
 //working file:
     file_put_contents(DIR_FS_CATALOG . 'inline.css', $data, 644);
 //debug file
-    $data = str_replace("{", "\n{", str_replace("}", "}\n", $data));
+  if (DBG == 'true') {
+  $data = str_replace("{", "\n{", str_replace("}", "}\n", $data));
     file_put_contents(DIR_FS_CATALOG . 'inline_debug.css', $data, 644);
+  }
 }
 
 function cssgenerator_index_top() {
@@ -152,8 +164,10 @@ function cssgenerator_index_top() {
 //working file:
     file_put_contents(DIR_FS_CATALOG . 'index_top.css', $data, 644);
 //debug file
+  if (DBG == 'true') {
     $data = str_replace("{", "\n{", str_replace("}", "}\n", $data));
     file_put_contents(DIR_FS_CATALOG . 'index_top_debug.css', $data, 644);
+  }
 }
 
 function cssgenerator_index_products() {
@@ -182,12 +196,14 @@ function cssgenerator_index_products() {
 //working file:
     file_put_contents(DIR_FS_CATALOG . 'index_products.css', $data, 644);
 //debug file
+  if (DBG == 'true') {
     $data = str_replace("{", "\n{", str_replace("}", "}\n", $data));
     file_put_contents(DIR_FS_CATALOG . 'index_products_debug.css', $data, 644);
     echo '$data:' . $data . "\n";
+  }
 }
 
 cssgenerator();
-//cssgenerator_inline();
-//cssgenerator_index_top();
-//cssgenerator_index_products();
+cssgenerator_inline();
+cssgenerator_index_top();
+cssgenerator_index_products();

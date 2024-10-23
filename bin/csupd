@@ -10,14 +10,14 @@ fi
 #value
 if [[ ! ${3} ]];then
   mariadb -h${H} -u${U} -p${P} $D -e "update css set value='${2}' where id=${1}"
-  ./csscompiler.php  
+  ./cscompile.php  
   exit
 fi
 #sort_order
 if [[ ! ${4} ]];then
 echo  mariadb -h${H} -u${U} -p${P} $D -e "update css set value='${2}' where id=${1}"
 echo  mariadb -h${H} -u${U} -p${P} $D -e "update css set sort_order=${3} where id=${1}"
-  ./csscompiler.php  
+  ./cscompile.php  
   exit
 fi
 
@@ -27,7 +27,7 @@ if [[ ! ${5} ]];then
   mariadb -h${H} -u${U} -p${P} $D -e "update css set value='${2}' where id=${1}"
   mariadb -h${H} -u${U} -p${P} $D -e "update css set sort_order=${3} where id=${1}"
   mariadb -h${H} -u${U} -p${P} $D -e "update css set min=${4} where id=${1}"
-  ./csscompiler.php  
+  ./cscompile.php  
   exit
 fi
 
@@ -37,7 +37,7 @@ if [[ ! ${6} ]];then
   mariadb -h${H} -u${U} -p${P} $D -e "update css set sort_order=${3} where id=${1}"
   mariadb -h${H} -u${U} -p${P} $D -e "update css set min=${4} where id=${1}"
   mariadb -h${H} -u${U} -p${P} $D -e "update css set max=${5} where id=${1}"
-  ./csscompiler.php  
+  ./cscompile.php  
   exit
   
 fi
