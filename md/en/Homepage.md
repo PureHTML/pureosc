@@ -1,6 +1,6 @@
-Homepage
-
-Pure OSC is a modern fork of osCommerce, based on [vanilla-oscommerce](https://github.com/ruden/vanilla-oscommerce/)
+homepage
+# Pure OSC
+is a modern fork of osCommerce, based on [vanilla-oscommerce](https://github.com/ruden/vanilla-oscommerce/)
 
 Compatibility
 -------------
