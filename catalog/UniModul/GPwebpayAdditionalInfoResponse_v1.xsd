@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://gpe.cz/gpwebpay/additionalInfo/response/v1" targetNamespace="http://gpe.cz/gpwebpay/additionalInfo/response/v1" elementFormDefault="qualified" version="1.0">
+		<xs:element name="additionalInfoResponse" type="additionalInfoResponse"/>
+	<xs:complexType name="additionalInfoResponse">
+		<xs:sequence>
+			<xs:element name="walletDetails" type="textValue" minOccurs="0"/>
+			<xs:element name="contact" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="firstName" type="textValue"/>
+						<xs:element name="lastName" type="textValue"/>
+						<xs:element name="country" type="textValue" minOccurs="0"/>
+						<xs:element name="phone" type="phoneValue" minOccurs="0"/>
+						<xs:element name="email" type="emailValue" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="billingDetails" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="name" type="textValue" minOccurs="0"/>
+						<xs:element name="address1" type="textValue"/>
+						<xs:element name="address2" type="textValue" minOccurs="0"/>
+						<xs:element name="address3" type="textValue" minOccurs="0"/>
+						<xs:element name="city" type="textValue" minOccurs="0"/>
+						<xs:element name="postalCode" type="textValue" minOccurs="0"/>
+						<xs:element name="country" type="textValue" minOccurs="0"/>
+						<xs:element name="countrySubdivision" type="textValue" minOccurs="0"/>
+						<xs:element name="phone" type="phoneValue" minOccurs="0"/>
+						<xs:element name="email" type="emailValue" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="shippingDetails" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="name" type="textValue" minOccurs="0"/>
+						<xs:element name="address1" type="textValue"/>
+						<xs:element name="address2" type="textValue" minOccurs="0"/>
+						<xs:element name="address3" type="textValue" minOccurs="0"/>
+						<xs:element name="city" type="textValue" minOccurs="0"/>
+						<xs:element name="postalCode" type="textValue" minOccurs="0"/>
+						<xs:element name="country" type="textValue" minOccurs="0"/>
+						<xs:element name="countrySubdivision" type="textValue" minOccurs="0"/>
+						<xs:element name="phone" type="phoneValue" minOccurs="0"/>
+						<xs:element name="email" type="emailValue" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="cardsDetails" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="cardDetail" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="brandId" type="textValue" minOccurs="0"/>
+									<xs:element name="brandName" type="textValue"/>
+									<xs:element name="cardHolderName" type="textValue" minOccurs="0"/>
+									<xs:element name="expiryMonth" type="month" minOccurs="0"/>
+									<xs:element name="expiryYear" type="year" minOccurs="0"/>
+									<xs:element name="cardId" type="textValue" minOccurs="0"/>
+									<xs:element name="lastFour" type="textValue"/>
+									<xs:element name="cardAlias" type="textValue" minOccurs="0"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="loyaltyProgramDetails" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="programNumber" type="textValue" minOccurs="0"/>
+						<xs:element name="programId" type="textValue" minOccurs="0"/>
+						<xs:element name="programName" type="textValue"/>
+						<xs:element name="programExpiryMonth" type="month" minOccurs="0"/>
+						<xs:element name="programExpiryYear" type="year" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="eetRegistrationData" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<!-- Tax identification number -->
+						<xs:element name="taxId" type="czTaxIdValue"/>
+						<!-- Business premises ID -->
+						<xs:element name="businessPremisesId" type="businessPremisesIdValue"/>
+						<!-- Cash register ID -->
+						<xs:element name="cashRegisterId" type="cashRegisterIdValue"/>
+						<!-- Serial number of receipt -->
+						<xs:element name="receiptNumber" type="receiptNumberValue"/>
+						<!-- Date and time of sale -->
+						<xs:element name="saleDateTime" type="textValue"/>
+						<!-- Total amount of sale -->
+						<xs:element name="totalSaleAmount" type="amountValue"/>
+						<!-- Sale regime -->
+						<xs:element name="regime" type="regimeValue"/>
+						<!-- Fiscal Identification Code (FIK) -->
+						<xs:element name="fiscalCode" type="fiscalCodeValue" minOccurs="0"/>
+						<!-- Taxpayer's Security Code (BKP) -->
+						<xs:element name="securityCode" type="securityCodeValue" minOccurs="0"/>
+						<!-- Taxpayer's Signature Code (PKP) -->
+						<xs:element name="signatureCode" type="signatureCodeValue" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="version" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:pattern value="\d+\.\d+"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:simpleType name="textValue">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="phoneValue">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="emailValue">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="month">
+		<xs:restriction base="xs:unsignedByte">
+			<xs:minInclusive value="1"/>
+			<xs:maxInclusive value="12"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="year">
+		<xs:restriction base="xs:unsignedShort">
+			<xs:minInclusive value="2010"/>
+			<xs:pattern value="\d{4}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="czTaxIdValue">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="CZ[0-9]{8,10}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="businessPremisesIdValue">
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="1"/>
+			<xs:maxInclusive value="999999"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="cashRegisterIdValue">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9a-zA-Z\.,:;/#\-_ ]{1,20}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="receiptNumberValue">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9a-zA-Z\.,:;/#\-_ ]{1,25}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="amountValue">
+		<xs:restriction base="xs:unsignedLong">
+			<xs:totalDigits value="12"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="regimeValue">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="regular"/>
+			<xs:enumeration value="simplified"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="fiscalCodeValue">
+		<xs:restriction base="xs:string">
+			<xs:length value="39"/>
+			<xs:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}-[0-9a-fA-F]{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="securityCodeValue">
+		<xs:restriction base="xs:string">
+			<xs:length value="44"/>
+			<xs:whiteSpace value="collapse"/>
+			<xs:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{8}-[0-9a-fA-F]{8}-[0-9a-fA-F]{8}-[0-9a-fA-F]{8}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="signatureCodeValue">
+		<xs:restriction base="xs:string">
+			<xs:length value="512"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

@@ -1,0 +1,2355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="Processing-WS" targetNamespace="http://gpe.cz/pay/pay-ws/proc/v1" xmlns:tns="http://gpe.cz/pay/pay-ws/proc/v1/type" xmlns:ns="http://gpe.cz/pay/pay-ws/proc/v1" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsi="http://ws-i.org/profiles/basic/1.1/xsd">
+  <wsdl:documentation>
+    <ns:build-info>
+      <ns:implementation-version>APPLICATION_VERSION</ns:implementation-version>
+      <ns:implementation-build>IMPLEMENTATION_BUILD</ns:implementation-build>
+      <ns:implementation-created>IMPLEMENTATION_CREATED</ns:implementation-created>
+    </ns:build-info>
+  </wsdl:documentation>
+  <wsdl:types>
+    <xsd:schema xmlns:wsi="http://ws-i.org/profiles/basic/1.1/xsd" targetNamespace="http://gpe.cz/pay/pay-ws/proc/v1/type" xmlns:tns="http://gpe.cz/pay/pay-ws/proc/v1/type" xmlns="http://gpe.cz/pay/pay-ws/proc/v1/type" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ai="http://gpe.cz/gpwebpay/additionalInfo/response/v1" elementFormDefault="qualified">
+      <!-- http://ws-i.org/profiles/basic/1.1/swaref.xsd -->
+      <xsd:import namespace="http://ws-i.org/profiles/basic/1.1/xsd" schemaLocation="swaref.xsd" />
+      <xsd:import namespace="http://gpe.cz/gpwebpay/additionalInfo/response/v1" schemaLocation="GPwebpayAdditionalInfoResponse_v1.xsd" />
+      <xsd:simpleType name="ReturnCode">
+        <xsd:restriction base="xsd:int">
+          <xsd:minInclusive value="0" />
+          <xsd:maxInclusive value="9999" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="CaptureFlag">
+        <xsd:restriction base="xsd:int">
+          <xsd:enumeration value="0" />
+          <xsd:enumeration value="1" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="PaymentStatus">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="SUCCESS" />
+          <xsd:enumeration value="FAIL" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="BooleanType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="true" />
+          <xsd:enumeration value="false" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="EchoFaultDetail">
+        <xsd:sequence>
+          <xsd:element name="primaryReturnCode" minOccurs="1" maxOccurs="1" type="ReturnCode" />
+          <xsd:element name="secondaryReturnCode" minOccurs="1" maxOccurs="1" type="ReturnCode" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="FaultDetail">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:element name="primaryReturnCode" minOccurs="1" maxOccurs="1" type="ReturnCode" />
+          <xsd:element name="secondaryReturnCode" minOccurs="1" maxOccurs="1" type="ReturnCode" />
+          <xsd:element name="signature" minOccurs="1" maxOccurs="1" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PaymentFaultDetail">
+        <xsd:complexContent>
+          <xsd:extension base="FaultDetail">
+            <xsd:sequence>
+              <xsd:element name="authCode" minOccurs="0" maxOccurs="1" type="AuthCode" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="CardOnFilePaymentFaultDetail">
+        <xsd:complexContent>
+          <xsd:extension base="FaultDetail">
+            <xsd:sequence>
+              <xsd:element name="authenticationLink" minOccurs="0" maxOccurs="1" type="xsd:string" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:simpleType name="MessageId">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="16" />
+          <xsd:maxLength value="256" />
+          <xsd:pattern value="[A-Za-z0-9+/=]+" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="BatchId">
+        <xsd:restriction base="xsd:long">
+          <xsd:minInclusive value="0" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="CurrencyCode">
+        <xsd:restriction base="xsd:string">
+          <xsd:pattern value="[0-9A-Z]{3}" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="Email">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="6" />
+          <xsd:maxLength value="255" />
+          <xsd:pattern value="[a-zA-Z0-9!#$%'*+/=?^_`{|}~-]+(\.[a-zA-Z0-9!#$%'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9!#$%'*+/=?^_`{|}~-]+(\.[a-zA-Z0-9!#$%'*+/=?^_`{|}~-]+)*|\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\]" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="OrderNumber">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="1" />
+          <xsd:maxLength value="30" />
+          <xsd:pattern value="[0-9]*" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="ReferenceNumber">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="1" />
+          <xsd:maxLength value="20" />
+          <xsd:pattern value="[&#x20;-&#x7E;]*" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="MerchantNumber">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="1" />
+          <xsd:maxLength value="10" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="PaymentNumber">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="1" />
+          <xsd:maxLength value="15" />
+          <xsd:pattern value="[0-9]*" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="Provider">
+        <xsd:restriction base="xsd:string">
+          <xsd:pattern value="[0-9]{4}" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="Signature">
+        <xsd:restriction base="xsd:base64Binary">
+          <xsd:minLength value="1" />
+          <xsd:maxLength value="1024" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="AuthCode">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="1" />
+          <xsd:maxLength value="6" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="Amount">
+        <xsd:restriction base="xsd:long">
+          <xsd:minExclusive value="0" />
+          <xsd:maxInclusive value="999999999999999" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="Amount12">
+        <xsd:restriction base="xsd:long">
+          <xsd:minExclusive value="0" />
+          <xsd:maxInclusive value="999999999999" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="Url">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="1" />
+          <xsd:maxLength value="300" />
+          <xsd:pattern value="http(s{0,1})://.*" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="Description">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="1" />
+          <xsd:maxLength value="255" />
+          <xsd:pattern value="[&#x20;-&#x7E;]*" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="MerchantData">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="1" />
+          <xsd:maxLength value="255" />
+          <xsd:pattern value="[&#x20;-&#x7E;]*" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="Language">
+        <xsd:restriction base="xsd:string">
+          <xsd:length value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="PayMethod">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="1" />
+          <xsd:maxLength value="255" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="TextValue">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="1" />
+          <xsd:maxLength value="255" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="PhoneValue">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="1" />
+          <xsd:maxLength value="20" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="ItemType">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="1" />
+          <xsd:maxLength value="20" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="IpValue">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="1" />
+          <xsd:maxLength value="255" />
+          <xsd:pattern value="(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}" />
+          <xsd:pattern
+            value="([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.{3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])" />
+          <!-- IPv4Pattern -->
+          <!-- IPv6Pattern -->
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="TokenData">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="1" />
+          <xsd:maxLength value="64" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="CzTaxId">
+        <xsd:restriction base="xsd:string">
+          <xsd:pattern value="CZ[0-9]{8,10}" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="BusinessPremisesId">
+        <xsd:restriction base="xsd:int">
+          <xsd:minInclusive value="1" />
+          <xsd:maxInclusive value="999999" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="CashRegisterId">
+        <xsd:restriction base="xsd:string">
+          <xsd:pattern value="[0-9a-zA-Z\.,:;/#\-_ ]{1,20}" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="ReceiptNumber">
+        <xsd:restriction base="xsd:string">
+          <xsd:pattern value="[0-9a-zA-Z\.,:;/#\-_ ]{1,25}" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="Regime">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="regular" />
+          <xsd:enumeration value="simplified" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="FiscalCode">
+        <xsd:restriction base="xsd:string">
+          <xsd:length value="39" />
+          <xsd:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}-[0-9a-fA-F]{2}" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="SecurityCode">
+        <xsd:restriction base="xsd:string">
+          <xsd:length value="44" />
+          <xsd:whiteSpace value="collapse" />
+          <xsd:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{8}-[0-9a-fA-F]{8}-[0-9a-fA-F]{8}-[0-9a-fA-F]{8}" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="SignatureCode">
+        <xsd:restriction base="xsd:string">
+          <xsd:length value="512" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="LoginTypeValue">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="01" />
+          <xsd:enumeration value="02" />
+          <xsd:enumeration value="03" />
+          <xsd:enumeration value="04" />
+          <xsd:enumeration value="05" />
+          <xsd:enumeration value="06" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="LoginTimeValue">
+        <xsd:restriction base="xsd:string">
+          <xsd:length value="12" />
+          <xsd:pattern value="([1-2]\d{3})(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])(0[0-9]|1[0-9]|2[0-3])(0[0-9]|[1-5][0-9])" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="UserAccountIdValue">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="DateTypeValue">
+        <xsd:restriction base="xsd:string">
+          <xsd:length value="8" />
+          <xsd:pattern value="([1-2]\d{3})(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="UserAccountAgeValue">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="01" />
+          <xsd:enumeration value="02" />
+          <xsd:enumeration value="03" />
+          <xsd:enumeration value="04" />
+          <xsd:enumeration value="05" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="UserAccountLastChangeAgeValue">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="01" />
+          <xsd:enumeration value="02" />
+          <xsd:enumeration value="03" />
+          <xsd:enumeration value="04" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="UserAccountPasswordChangeAgeValue">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="01" />
+          <xsd:enumeration value="02" />
+          <xsd:enumeration value="03" />
+          <xsd:enumeration value="04" />
+          <xsd:enumeration value="05" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="PhoneCountryValue">
+        <xsd:restriction base="xsd:string">
+          <xsd:pattern value="\d{1,3}" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="AddressMatchValue">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Y" />
+          <xsd:enumeration value="N" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="TransactionTypeValue">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="01" />
+          <xsd:enumeration value="03" />
+          <xsd:enumeration value="10" />
+          <xsd:enumeration value="11" />
+          <xsd:enumeration value="28" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="ShippingIndicatorValue">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="01" />
+          <xsd:enumeration value="02" />
+          <xsd:enumeration value="03" />
+          <xsd:enumeration value="04" />
+          <xsd:enumeration value="05" />
+          <xsd:enumeration value="06" />
+          <xsd:enumeration value="07" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="PreOrderPurchaseIndValue">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="01" />
+          <xsd:enumeration value="02" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="ReorderItemsIndValue">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="01" />
+          <xsd:enumeration value="02" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="DeliveryTimeframeValue">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="01" />
+          <xsd:enumeration value="02" />
+          <xsd:enumeration value="03" />
+          <xsd:enumeration value="04" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="GiftCardCountValue">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="1" />
+          <xsd:maxLength value="2" />
+          <xsd:pattern value="\d+" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="GiftCardAmountValue">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="1" />
+          <xsd:maxLength value="15" />
+          <xsd:pattern value="\d+" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="GiftCardCurrencyValue">
+        <xsd:restriction base="xsd:string">
+          <xsd:length value="3" />
+          <xsd:pattern value="\d+" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="RecurringFrequencyValue">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="1" />
+          <xsd:maxLength value="4" />
+          <xsd:pattern value="\d+" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="RemmitanceInfoValue">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="140" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="NameValue">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="2" />
+          <xsd:maxLength value="45" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="AddressValue">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="50" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="CityValue">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="50" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="PostalCodeValue">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="16" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="CountryValue">
+        <xsd:restriction base="xsd:string">
+          <xsd:pattern value="\d{1,3}" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="CountrySubdivisionValue">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="1" />
+          <xsd:maxLength value="3" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:group name="merchantKey">
+        <xsd:sequence>
+          <xsd:element name="provider" type="Provider" />
+          <xsd:element name="merchantNumber" type="MerchantNumber" />
+        </xsd:sequence>
+      </xsd:group>
+      <xsd:group name="paymentKey">
+        <xsd:sequence>
+          <xsd:group ref="merchantKey" />
+          <xsd:element name="paymentNumber" type="PaymentNumber" />
+        </xsd:sequence>
+      </xsd:group>
+      <xsd:complexType name="PaymentStatusRequest">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:group ref="paymentKey" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PaymentStatusResponse">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:element name="state" type="xsd:int" />
+          <xsd:element name="status" type="xsd:string" minOccurs="0" />
+          <xsd:element name="subStatus" type="xsd:string" minOccurs="0" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="MasterPaymentStatusResponse">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:element name="status" type="xsd:string" minOccurs="0" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="RevokePaymentLinkResponse">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:element name="status" type="xsd:string" minOccurs="0" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="SimpleValueHolder">
+        <xsd:sequence>
+          <xsd:element name="name" type="xsd:string" />
+          <xsd:element name="value" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PaymentDetailResponse">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:element name="state" type="xsd:int" />
+          <xsd:element name="status" type="xsd:string" minOccurs="0" />
+          <xsd:element name="subStatus" type="xsd:string" minOccurs="0" />
+          <xsd:element name="paymentMethod" type="xsd:string" minOccurs="0" />
+          <xsd:element name="panMasked" type="xsd:string" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="brandName" type="xsd:string" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="paymentAmount" type="xsd:long" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="approveAmount" type="xsd:long" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="captureAmount" type="xsd:long" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="refundAmount" type="xsd:long" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="approveCode" type="xsd:string" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="paymentTime" type="xsd:string" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="approveTime" type="xsd:string" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="lastCaptureTime" type="xsd:string" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="additionalInfoResponse" type="ai:additionalInfoResponse" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="simpleValueHolder" type="SimpleValueHolder" minOccurs="0" maxOccurs="unbounded" />
+          <xsd:element name="panToken" type="xsd:string" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="panPattern" type="xsd:string" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="panExpiry" type="xsd:string" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="acsResult" type="xsd:string" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="dayToCapture" type="xsd:string" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="AuthorizationReverseRequest">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:group ref="paymentKey" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="AuthorizationReverseResponse">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:element name="state" type="xsd:int" />
+          <xsd:element name="status" type="xsd:string" minOccurs="0" />
+          <xsd:element name="subStatus" type="xsd:string" minOccurs="0" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BatchCloseRequest">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:group ref="merchantKey" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BatchCloseResponse">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="RefundRequest">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:group ref="paymentKey" />
+          <xsd:element name="amount" type="Amount" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="RefundResponse">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:element name="state" type="xsd:int" />
+          <xsd:element name="status" type="xsd:string" minOccurs="0" />
+          <xsd:element name="subStatus" type="xsd:string" minOccurs="0" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="RefundReverseRequest">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:group ref="paymentKey" />
+          <xsd:element name="refundNumber">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:int">
+                <xsd:minInclusive value="0" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="RefundReverseResponse">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:element name="state" type="xsd:int" />
+          <xsd:element name="status" type="xsd:string" minOccurs="0" />
+          <xsd:element name="subStatus" type="xsd:string" minOccurs="0" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PaymentDeleteRequest">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:group ref="paymentKey" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PaymentDeleteResponse">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:element name="state" type="xsd:int" />
+          <xsd:element name="status" type="xsd:string" minOccurs="0" />
+          <xsd:element name="subStatus" type="xsd:string" minOccurs="0" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="CaptureRequest">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:group ref="paymentKey" />
+          <xsd:element name="amount" type="Amount" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="CaptureResponse">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:element name="state" type="xsd:int" />
+          <xsd:element name="status" type="xsd:string" minOccurs="0" />
+          <xsd:element name="subStatus" type="xsd:string" minOccurs="0" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="CaptureReverseRequest">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:group ref="paymentKey" />
+          <xsd:element name="captureNumber">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:int">
+                <xsd:minInclusive value="0" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="CaptureReverseResponse">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:element name="state" type="xsd:int" />
+          <xsd:element name="status" type="xsd:string" minOccurs="0" />
+          <xsd:element name="subStatus" type="xsd:string" minOccurs="0" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PaymentCloseRequest">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:group ref="paymentKey" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PaymentCloseResponse">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:element name="state" type="xsd:int" />
+          <xsd:element name="status" type="xsd:string" minOccurs="0" />
+          <xsd:element name="subStatus" type="xsd:string" minOccurs="0" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="RecurringPaymentRequest">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:group ref="paymentKey" />
+          <xsd:element name="masterPaymentNumber" type="PaymentNumber" />
+          <xsd:element name="orderNumber" type="OrderNumber" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="referenceNumber" minOccurs="0" maxOccurs="1" type="ReferenceNumber" />
+          <xsd:element name="amount" type="Amount" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="currencyCode" type="CurrencyCode" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="captureFlag" type="CaptureFlag" />
+          <xsd:element name="cardHolderData" minOccurs="0" maxOccurs="1" type="CardHolderData" />
+          <xsd:element name="altTerminalData" minOccurs="0" maxOccurs="1" type="AltTerminalData" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="RecurringPaymentResponse">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:element name="authCode" type="AuthCode" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PaymentLinkRequest">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:group ref="paymentKey" />
+          <xsd:element name="amount" type="Amount" />
+          <xsd:element name="currencyCode" type="CurrencyCode" />
+          <xsd:element name="captureFlag" type="CaptureFlag" />
+          <xsd:element name="orderNumber" type="OrderNumber" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="referenceNumber" minOccurs="0" maxOccurs="1" type="ReferenceNumber" />
+          <xsd:element name="url" type="Url" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="description" type="Description" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="merchantData" type="MerchantData" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="fastPayId" type="PaymentNumber" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="defaultPayMethod" type="PayMethod" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="disabledPayMethods" type="PayMethod" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="email" type="Email" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="merchantEmail" type="Email" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="paymentExpiry" type="xsd:date" minOccurs="1" maxOccurs="1" />
+          <xsd:element name="language" type="Language" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="registerRecurring" minOccurs="0" maxOccurs="1" type="BooleanType" />
+          <xsd:element name="registerToken" minOccurs="0" maxOccurs="1" type="BooleanType" />
+          <xsd:element name="signature" type="Signature" minOccurs="1" maxOccurs="1" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PaymentLinkResponse">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:element name="paymentNumber" type="PaymentNumber" />
+          <xsd:element name="paymentLink" type="xsd:string" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="MpsAddress">
+        <xsd:sequence>
+          <xsd:element name="city" type="xsd:string" />
+          <xsd:element name="country" type="xsd:string" />
+          <xsd:element name="countrySubdivision" type="xsd:string" minOccurs="0" />
+          <xsd:element name="address1" type="xsd:string" />
+          <xsd:element name="address2" type="xsd:string" minOccurs="0" />
+          <xsd:element name="address3" type="xsd:string" minOccurs="0" />
+          <xsd:element name="postalCode" type="xsd:string" minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="MpsPreCheckoutShippingAddress">
+        <xsd:complexContent>
+          <xsd:extension base="MpsAddress">
+            <xsd:sequence>
+              <xsd:element name="recipientName" type="xsd:string" />
+              <xsd:element name="recipientPhoneNumber" type="xsd:string" />
+              <xsd:element name="addressId" type="xsd:string" />
+              <xsd:element name="selectedAsDefault" type="xsd:boolean" />
+              <xsd:element name="shippingAlias" type="xsd:string" minOccurs="0" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="MpsContact">
+        <xsd:sequence>
+          <xsd:element name="firstName" type="xsd:string" />
+          <xsd:element name="middleName" minOccurs="0">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="1" />
+                <xsd:maxLength value="150" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="lastName" type="xsd:string" />
+          <xsd:element name="country" type="xsd:string" />
+          <xsd:element name="emailAddress" type="xsd:string" />
+          <xsd:element name="phoneNumber" type="xsd:string" />
+          <xsd:element name="simpleValueHolder" type="SimpleValueHolder" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="MpsPreCheckoutCard">
+        <xsd:sequence>
+          <xsd:element name="brandId" type="xsd:string" />
+          <xsd:element name="brandName" type="xsd:string" />
+          <xsd:element name="billingAddress" type="MpsAddress" minOccurs="0" />
+          <xsd:element name="cardHolderName" type="xsd:string" />
+          <xsd:element name="expiryMonth" type="xsd:int" minOccurs="0" />
+          <xsd:element name="expiryYear" type="xsd:int" minOccurs="0" />
+          <xsd:element name="cardId" type="xsd:string" />
+          <xsd:element name="lastFour" type="xsd:string" />
+          <xsd:element name="cardAlias" type="xsd:string" minOccurs="0" />
+          <xsd:element name="selectedAsDefault" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="MpsPreCheckoutRewardProgram">
+        <xsd:sequence>
+          <xsd:element name="rewardNumber" type="xsd:string" />
+          <xsd:element name="rewardId" type="xsd:string" />
+          <xsd:element name="rewardName" type="xsd:string" minOccurs="0" />
+          <xsd:element name="expiryMonth" type="xsd:int" minOccurs="0" />
+          <xsd:element name="expiryYear" type="xsd:int" minOccurs="0" />
+          <xsd:element name="rewardProgramId" type="xsd:string" />
+          <xsd:element name="rewardLogoUrl" type="xsd:string" minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="MpsPreCheckoutData">
+        <xsd:sequence>
+          <xsd:element name="cards" type="MpsPreCheckoutCard" maxOccurs="unbounded" />
+          <xsd:element name="contact" type="MpsContact" minOccurs="0" />
+          <xsd:element name="shippingAddresses" type="MpsPreCheckoutShippingAddress" maxOccurs="unbounded" />
+          <xsd:element name="rewardPrograms" type="MpsPreCheckoutRewardProgram" maxOccurs="unbounded" />
+          <xsd:element name="walletName" type="xsd:string" />
+          <xsd:element name="simpleValueHolder" type="SimpleValueHolder" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="MpsPreCheckoutRequest">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:group ref="merchantKey" />
+          <xsd:element name="pairingNumber" type="PaymentNumber" />
+          <xsd:element name="requestCardDetails" type="BooleanType" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="requestShippingDetails" type="BooleanType" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="requestRewardPrograms" type="BooleanType" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="MpsPreCheckoutResponse">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:element name="preCheckoutData" type="MpsPreCheckoutData" />
+          <xsd:element name="walletPartnerLogoUrl" type="xsd:anyURI" />
+          <xsd:element name="masterpassLogoUrl" type="xsd:anyURI" />
+          <xsd:element name="simpleValueHolder" type="SimpleValueHolder" minOccurs="0" maxOccurs="unbounded" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="MpsExpressCheckoutRequest">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:group ref="paymentKey" />
+          <xsd:element name="orderNumber" type="OrderNumber" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="referenceNumber" minOccurs="0" maxOccurs="1" type="ReferenceNumber" />
+          <xsd:element name="amount" type="Amount" />
+          <xsd:element name="currencyCode" type="CurrencyCode" />
+          <xsd:element name="captureFlag" type="CaptureFlag" />
+          <xsd:element name="pairingNumber" type="PaymentNumber" />
+          <xsd:element name="cardId" type="TextValue" />
+          <xsd:element name="shippingAddressId" type="TextValue" minOccurs="0" />
+          <xsd:element name="cardHolderData" minOccurs="0" maxOccurs="1" type="CardHolderData" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="MpsExpressCheckoutResponse">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:element name="authCode" type="AuthCode" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="CardHolderData">
+        <xsd:sequence>
+          <xsd:element name="cardholderDetails" minOccurs="0">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="name" type="NameValue" minOccurs="1" />
+                <xsd:element name="loginId" type="TextValue" minOccurs="0" />
+                <xsd:element name="loginType" type="LoginTypeValue" minOccurs="0" />
+                <xsd:element name="loginTime" type="LoginTimeValue" minOccurs="0" />
+                <xsd:element name="userAccountId" type="UserAccountIdValue" minOccurs="0" />
+                <xsd:element name="userAccountCreatedDate" type="DateTypeValue" minOccurs="0" />
+                <xsd:element name="userAccountAge" type="UserAccountAgeValue" minOccurs="0" />
+                <xsd:element name="userAccountLastChangeDate" type="DateTypeValue" minOccurs="0" />
+                <xsd:element name="userAccountLastChangeAge" type="UserAccountLastChangeAgeValue" minOccurs="0" />
+                <xsd:element name="userAccountPasswordChangeDate" type="DateTypeValue" minOccurs="0" />
+                <xsd:element name="userAccountPasswordChangeAge" type="UserAccountPasswordChangeAgeValue" minOccurs="0" />
+                <xsd:element name="socialNetworkId" type="TextValue" minOccurs="0" />
+                <xsd:element name="email" type="Email" minOccurs="1" />
+                <xsd:element name="phoneCountry" type="PhoneCountryValue" minOccurs="0" />
+                <xsd:element name="phone" type="PhoneValue" minOccurs="0" />
+                <xsd:element name="mobilePhoneCountry" type="PhoneCountryValue" minOccurs="0" />
+                <xsd:element name="mobilePhone" type="PhoneValue" minOccurs="0" />
+                <xsd:element name="workPhoneCountry" type="PhoneCountryValue" minOccurs="0" />
+                <xsd:element name="workPhone" type="PhoneValue" minOccurs="0" />
+                <xsd:element name="clientIpAddress" type="IpValue" minOccurs="0" />
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="addressMatch" type="AddressMatchValue" minOccurs="0" />
+          <xsd:element name="billingDetails" minOccurs="0">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="name" type="TextValue" />
+                <xsd:element name="address1" type="AddressValue" />
+                <xsd:element name="address2" type="AddressValue" minOccurs="0" />
+                <xsd:element name="address3" type="AddressValue" minOccurs="0" />
+                <xsd:element name="city" type="CityValue" />
+                <xsd:element name="postalCode" type="PostalCodeValue" />
+                <xsd:element name="country" type="CountryValue" />
+                <xsd:element name="countrySubdivision" type="CountrySubdivisionValue" minOccurs="0" />
+                <xsd:element name="phone" type="PhoneValue" minOccurs="0" />
+                <xsd:element name="email" type="Email" minOccurs="0" />
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="shippingDetails" minOccurs="0">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="name" type="TextValue" />
+                <xsd:element name="address1" type="AddressValue" />
+                <xsd:element name="address2" type="AddressValue" minOccurs="0" />
+                <xsd:element name="address3" type="AddressValue" minOccurs="0" />
+                <xsd:element name="city" type="CityValue" />
+                <xsd:element name="postalCode" type="PostalCodeValue" />
+                <xsd:element name="country" type="CountryValue" />
+                <xsd:element name="countrySubdivision" type="CountrySubdivisionValue" minOccurs="0" />
+                <xsd:element name="phone" type="PhoneValue" minOccurs="0" />
+                <xsd:element name="email" type="Email" minOccurs="0" />
+                <xsd:element name="method" type="TextValue" minOccurs="0" />
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ResolvePaymentStatusRequest">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:group ref="paymentKey" />
+          <xsd:element name="paymentStatus" type="xsd:string" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TokenStatusRequest">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:group ref="merchantKey" />
+          <xsd:element name="tokenData" type="TokenData" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TokenStatusResponse">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:element name="status" type="xsd:string" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TokenRevokeRequest">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:group ref="merchantKey" />
+          <xsd:element name="tokenData" type="TokenData" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TokenRevokeResponse">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:element name="status" type="xsd:string" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TokenPaymentRequest">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:group ref="paymentKey" />
+          <xsd:element name="orderNumber" type="OrderNumber" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="referenceNumber" minOccurs="0" maxOccurs="1" type="ReferenceNumber" />
+          <xsd:element name="amount" type="Amount" />
+          <xsd:element name="currencyCode" type="CurrencyCode" />
+          <xsd:element name="captureFlag" type="CaptureFlag" />
+          <xsd:element name="subMerchantData" minOccurs="0" maxOccurs="1" type="SubMerchantData" />
+          <xsd:element name="tokenData" type="TokenData" />
+          <xsd:element name="cardHolderData" minOccurs="0" maxOccurs="1" type="CardHolderData" />
+          <xsd:element name="altTerminalData" minOccurs="0" maxOccurs="1" type="AltTerminalData" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TokenPaymentResponse">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:element name="authCode" type="AuthCode" />
+          <xsd:element name="tokenData" type="TokenData" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="AltTerminalData">
+        <xsd:sequence>
+          <xsd:element name="terminalId" minOccurs="0">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="1" />
+                <xsd:maxLength value="8" />
+                <xsd:pattern value="[&#x20;-&#x7E;]*" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="terminalOwner" minOccurs="0">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="1" />
+                <xsd:maxLength value="22" />
+                <xsd:pattern value="[&#x20;-&#x7E;]*" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="terminalCity" minOccurs="0">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="1" />
+                <xsd:maxLength value="13" />
+                <xsd:pattern value="[&#x20;-&#x7E;]*" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="SubMerchantData">
+        <xsd:sequence>
+          <xsd:element name="merchantId">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="1" />
+                <xsd:maxLength value="15" />
+                <xsd:pattern value="[&#x20;-&#x7E;]*" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <!-- MCC code -->
+          <xsd:element name="merchantType">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:length value="4" />
+                <xsd:pattern value="\d{4}" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="merchantName">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="1" />
+                <xsd:maxLength value="22" />
+                <xsd:pattern value="[&#x20;-&#x7E;]*" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="merchantStreet">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="1" />
+                <xsd:maxLength value="25" />
+                <xsd:pattern value="[&#x20;-&#x7E;]*" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="merchantCity">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="1" />
+                <xsd:maxLength value="13" />
+                <xsd:pattern value="[&#x20;-&#x7E;]*" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="merchantPostalCode">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="1" />
+                <xsd:maxLength value="10" />
+                <xsd:pattern value="[a-zA-Z0-9 ]+" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="merchantState" minOccurs="0">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:pattern value="\w{1,3}" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <!-- ISO 3166-1 Alpha-2 country code -->
+          <xsd:element name="merchantCountry">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:length value="2" />
+                <xsd:pattern value="[a-zA-Z]{2}" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <!-- Merchant/shop web pages - www.merchant.com -->
+          <xsd:element name="merchantWeb">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="1" />
+                <xsd:maxLength value="25" />
+                <xsd:pattern value="[&#x20;-&#x7E;]*" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <!-- Merchant's customer support phone -->
+          <xsd:element name="merchantServiceNumber">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="1" />
+                <xsd:maxLength value="13" />
+                <xsd:pattern value="\d+" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <!-- Merchant MC Assigned ID -->
+          <xsd:element name="merchantMcAssignedId" minOccurs="0">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="1" />
+                <xsd:maxLength value="15" />
+                <xsd:pattern value="[a-zA-Z0-9]+" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+
+
+      <xsd:group name="recPaymentType1">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:group ref="paymentKey" />
+          <xsd:element name="masterPaymentNumber" type="PaymentNumber" />
+          <xsd:element name="orderNumber" type="OrderNumber" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="referenceNumber" minOccurs="0" maxOccurs="1" type="ReferenceNumber" />
+          <xsd:element name="amount" type="Amount" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="currencyCode" type="CurrencyCode" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="captureFlag" type="CaptureFlag" />
+          <xsd:element name="subMerchantData" minOccurs="0" maxOccurs="1" type="SubMerchantData" />
+          <xsd:element name="cardHolderData" minOccurs="0" maxOccurs="1" type="CardHolderData" />
+          <xsd:element name="paymentInfo" minOccurs="0" maxOccurs="1" type="PaymentInfo" />
+          <xsd:element name="shoppingCartInfo" minOccurs="0" maxOccurs="1" type="ShoppingCartInfo" />
+          <xsd:element name="altTerminalData" minOccurs="0" maxOccurs="1" type="AltTerminalData" />
+        </xsd:sequence>
+      </xsd:group>
+
+      <xsd:group name="recPaymentType2">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:group ref="paymentKey" />
+          <xsd:element name="masterPaymentNumber" type="PaymentNumber" />
+          <xsd:element name="orderNumber" type="OrderNumber" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="referenceNumber" minOccurs="0" maxOccurs="1" type="ReferenceNumber" />
+          <xsd:element name="subscriptionAmount" type="Amount" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="captureFlag" type="CaptureFlag" />
+          <xsd:element name="subMerchantData" minOccurs="0" maxOccurs="1" type="SubMerchantData" />
+          <xsd:element name="cardHolderData" minOccurs="0" maxOccurs="1" type="CardHolderData" />
+          <xsd:element name="paymentInfo" minOccurs="0" maxOccurs="1" type="PaymentInfo" />
+          <xsd:element name="shoppingCartInfo" minOccurs="0" maxOccurs="1" type="ShoppingCartInfo" />
+          <xsd:element name="altTerminalData" minOccurs="0" maxOccurs="1" type="AltTerminalData" />
+        </xsd:sequence>
+      </xsd:group>
+
+      <xsd:complexType name="CardOnFilePaymentRequest">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:group ref="paymentKey" />
+          <xsd:element name="orderNumber" type="OrderNumber" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="referenceNumber" minOccurs="0" maxOccurs="1" type="ReferenceNumber" />
+          <xsd:element name="amount" type="Amount" />
+          <xsd:element name="currencyCode" type="CurrencyCode" />
+          <xsd:element name="captureFlag" type="CaptureFlag" />
+          <xsd:element name="subMerchantData" minOccurs="0" maxOccurs="1" type="SubMerchantData" />
+          <xsd:element name="tokenData" type="TokenData" />
+          <xsd:element name="cardHolderData" minOccurs="0" maxOccurs="1" type="CardHolderData" />
+          <xsd:element name="paymentInfo" minOccurs="0" maxOccurs="1" type="PaymentInfo" />
+          <xsd:element name="shoppingCartInfo" minOccurs="0" maxOccurs="1" type="ShoppingCartInfo" />
+          <xsd:element name="altTerminalData" minOccurs="0" maxOccurs="1" type="AltTerminalData" />
+          <xsd:element name="returnUrl" maxOccurs="1">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:anyURI">
+                <xsd:minLength value="1" />
+                <xsd:maxLength value="2047" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="UsageBasedSubscriptionPaymentRequest">
+        <xsd:sequence>
+          <xsd:group ref="recPaymentType1" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="RegularSubscriptionPaymentRequest">
+        <xsd:sequence>
+          <xsd:group ref="recPaymentType2" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="PrepaidPaymentRequest">
+        <xsd:sequence>
+          <xsd:group ref="recPaymentType2" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="UsageBasedPaymentResponse">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:element name="authCode" type="AuthCode" />
+          <xsd:element name="tokenData" type="TokenData" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="UsageBasedSubscriptionPaymentResponse">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:element name="authCode" type="AuthCode" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="RegularSubscriptionPaymentResponse">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:element name="authCode" type="AuthCode" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="PrepaidPaymentResponse">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:element name="authCode" type="AuthCode" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="CardOnFilePaymentResponse">
+        <xsd:sequence>
+          <xsd:element name="messageId" minOccurs="1" maxOccurs="1" type="MessageId" />
+          <xsd:element name="authCode" type="AuthCode" />
+          <xsd:element name="tokenData" type="TokenData" />
+          <xsd:element name="signature" type="Signature" />
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="PaymentInfo">
+        <xsd:sequence>
+          <xsd:element name="transactionType" type="TransactionTypeValue" minOccurs="0" />
+          <xsd:element name="shippingIndicator" type="ShippingIndicatorValue" minOccurs="0" />
+          <xsd:element name="preOrderPurchaseInd" type="PreOrderPurchaseIndValue" minOccurs="0" />
+          <xsd:element name="preOrderDate" type="DateTypeValue" minOccurs="0" />
+          <xsd:element name="reorderItemsInd" type="ReorderItemsIndValue" minOccurs="0" />
+          <xsd:element name="deliveryTimeframe" type="DeliveryTimeframeValue" minOccurs="0" />
+          <xsd:element name="deliveryEmailAddress" type="Email" minOccurs="0" />
+          <xsd:element name="giftCardCount" type="GiftCardCountValue" minOccurs="0" />
+          <xsd:element name="giftCardAmount" type="GiftCardAmountValue" minOccurs="0" />
+          <xsd:element name="giftCardCurrency" type="GiftCardCurrencyValue" minOccurs="0" />
+          <xsd:element name="recurringExpiry" type="DateTypeValue" minOccurs="0" />
+          <xsd:element name="recurringFrequency" type="RecurringFrequencyValue" minOccurs="0" />
+          <xsd:element name="remmitanceInfo1" type="RemmitanceInfoValue" minOccurs="0" />
+          <xsd:element name="remmitanceInfo2" type="RemmitanceInfoValue" minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <!-- ShoppingCartItem -->
+      <xsd:complexType name="ShoppingCartItem">
+        <xsd:sequence>
+          <xsd:element name="itemCode" minOccurs="0" maxOccurs="1" type="ItemType" />
+          <xsd:element name="itemDescription" minOccurs="1" maxOccurs="1">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="1" />
+                <xsd:maxLength value="50" />
+                <xsd:pattern value=".*" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="itemQuantity" minOccurs="1" maxOccurs="1">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:long">
+                <xsd:minExclusive value="0" />
+                <xsd:maxInclusive value="999999999999" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="itemUnitPrice" minOccurs="1" maxOccurs="1" type="Amount" />
+          <xsd:element name="itemClass" minOccurs="0" maxOccurs="1" type="ItemType" />
+          <xsd:element name="itemType" minOccurs="0" maxOccurs="1" type="ItemType" />
+          <xsd:element name="itemImageUrl" minOccurs="0" maxOccurs="1">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:anyURI">
+                <xsd:minLength value="1" />
+                <xsd:maxLength value="2000" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <!-- shoppingCartInfo -->
+      <xsd:complexType name="ShoppingCartInfo">
+        <xsd:sequence>
+          <xsd:element name="taxAmount" minOccurs="0" maxOccurs="1" type="Amount" />
+          <xsd:element name="shippingAmount" minOccurs="0" maxOccurs="1" type="Amount12" />
+          <xsd:element name="handlingAmount" minOccurs="0" maxOccurs="1" type="Amount12" />
+          <xsd:element name="cartAmount" minOccurs="0" maxOccurs="1" type="Amount12" />
+          <xsd:element name="shoppingCartItem" minOccurs="1" maxOccurs="unbounded" type="ShoppingCartItem" />
+        </xsd:sequence>
+      </xsd:complexType>
+
+
+    </xsd:schema>
+    <xsd:schema targetNamespace="http://gpe.cz/pay/pay-ws/proc/v1" elementFormDefault="qualified" xmlns:tns="http://gpe.cz/pay/pay-ws/proc/v1/type" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import namespace="http://gpe.cz/pay/pay-ws/proc/v1/type" />
+      <xsd:element name="echo">
+        <xsd:complexType>
+          <xsd:sequence />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="echoResponse">
+        <xsd:complexType>
+          <xsd:sequence />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="echoServiceException" type="tns:EchoFaultDetail" />
+      <xsd:element name="serviceException" type="tns:FaultDetail" />
+      <xsd:element name="paymentServiceException" type="tns:PaymentFaultDetail" />
+      <xsd:element name="cardOnFilePaymentServiceException" type="tns:CardOnFilePaymentFaultDetail" />
+      <xsd:element name="getPaymentStatus">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="paymentStatusRequest" type="tns:PaymentStatusRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getPaymentStatusResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="paymentStatusResponse" type="tns:PaymentStatusResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getMasterPaymentStatus">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="masterPaymentStatusRequest" type="tns:PaymentStatusRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getMasterPaymentStatusResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="masterPaymentStatusResponse" type="tns:MasterPaymentStatusResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processMasterPaymentRevoke">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="masterPaymentStatusRequest" type="tns:PaymentStatusRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processMasterPaymentRevokeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="masterPaymentStatusResponse" type="tns:MasterPaymentStatusResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="revokePaymentLink">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="revokePaymentLinkRequest" type="tns:PaymentStatusRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="revokePaymentLinkResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="revokePaymentLinkResponse" type="tns:RevokePaymentLinkResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getPaymentDetail">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="paymentDetailRequest" type="tns:PaymentStatusRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getPaymentDetailResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="paymentDetailResponse" type="tns:PaymentDetailResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processAuthorizationReverse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="authorizationReverseRequest" type="tns:AuthorizationReverseRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processAuthorizationReverseResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="authorizationReverseResponse" type="tns:AuthorizationReverseResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processBatchClose">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="batchClose" type="tns:BatchCloseRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processBatchCloseResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="batchCloseResponse" type="tns:BatchCloseResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processRefund">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="refundRequest" type="tns:RefundRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processRefundResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="refundRequestResponse" type="tns:RefundResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processRefundReverse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="refundReverseRequest" type="tns:RefundReverseRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processRefundReverseResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="refundReverseResponse" type="tns:RefundReverseResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processPaymentDelete">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="paymentDeleteRequest" type="tns:PaymentDeleteRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processPaymentDeleteResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="paymentDeleteResponse" type="tns:PaymentDeleteResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processCapture">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="captureRequest" type="tns:CaptureRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processCaptureResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="captureResponse" type="tns:CaptureResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processCaptureReverse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="captureReverseRequest" type="tns:CaptureReverseRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processCaptureReverseResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="captureReverseResponse" type="tns:CaptureReverseResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processPaymentClose">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="paymentCloseRequest" type="tns:PaymentCloseRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processPaymentCloseResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="paymentCloseResponse" type="tns:PaymentCloseResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processRecurringPayment">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="recurringPaymentRequest" type="tns:RecurringPaymentRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processRecurringPaymentResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="recurringPaymentResponse" type="tns:RecurringPaymentResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+
+      <xsd:element name="processUsageBasedPayment">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="usageBasedPaymentRequest" type="tns:CardOnFilePaymentRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processUsageBasedPaymentResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="usageBasedPaymentResponse" type="tns:UsageBasedPaymentResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processRegularSubscriptionPayment">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="regularSubscriptionPaymentRequest" type="tns:RegularSubscriptionPaymentRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processRegularSubscriptionPaymentResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="regularSubscriptionPaymentResponse" type="tns:RegularSubscriptionPaymentResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processUsageBasedSubscriptionPayment">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="usageBasedSubscriptionPaymentRequest" type="tns:UsageBasedSubscriptionPaymentRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processUsageBasedSubscriptionPaymentResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="usageBasedSubscriptionPaymentResponse" type="tns:UsageBasedSubscriptionPaymentResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processPrepaidPayment">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="prepaidPaymentRequest" type="tns:PrepaidPaymentRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processPrepaidPaymentResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="prepaidPaymentResponse" type="tns:PrepaidPaymentResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processCardOnFilePayment">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="cardOnFilePaymentRequest" type="tns:CardOnFilePaymentRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processCardOnFilePaymentResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="cardOnFilePaymentResponse" type="tns:CardOnFilePaymentResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+
+      <xsd:element name="createPaymentLink">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="paymentLinkRequest" type="tns:PaymentLinkRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="createPaymentLinkResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="paymentLinkResponse" type="tns:PaymentLinkResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="mpsPreCheckout">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="mpsPreCheckoutRequest" type="tns:MpsPreCheckoutRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="mpsPreCheckoutResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="mpsPreCheckoutResponse" type="tns:MpsPreCheckoutResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="mpsExpressCheckout">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="mpsExpressCheckoutRequest" type="tns:MpsExpressCheckoutRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="mpsExpressCheckoutResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="mpsExpressCheckoutResponse" type="tns:MpsExpressCheckoutResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="resolvePaymentStatus">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="resolvePaymentStatusRequest" type="tns:ResolvePaymentStatusRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="resolvePaymentStatusResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="paymentStatusResponse" type="tns:PaymentStatusResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getTokenStatus">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="tokenStatusRequest" type="tns:TokenStatusRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getTokenStatusResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="tokenStatusResponse" type="tns:TokenStatusResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processTokenRevoke">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="tokenRevokeRequest" type="tns:TokenRevokeRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processTokenRevokeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="tokenRevokeResponse" type="tns:TokenRevokeResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processTokenPayment">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="tokenPaymentRequest" type="tns:TokenPaymentRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processTokenPaymentResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="tokenPaymentResponse" type="tns:TokenPaymentResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="echoServiceException">
+    <wsdl:part name="parameters" element="ns:echoServiceException" />
+  </wsdl:message>
+  <wsdl:message name="serviceException">
+    <wsdl:part name="parameters" element="ns:serviceException" />
+  </wsdl:message>
+  <wsdl:message name="paymentServiceException">
+    <wsdl:part name="parameters" element="ns:paymentServiceException" />
+  </wsdl:message>
+  <wsdl:message name="cardOnFilePaymentServiceException">
+    <wsdl:part name="parameters" element="ns:cardOnFilePaymentServiceException" />
+  </wsdl:message>
+  <wsdl:message name="echoRequest">
+    <wsdl:part element="ns:echo" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="echoResponse">
+    <wsdl:part element="ns:echoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPaymentStatusRequest">
+    <wsdl:part element="ns:getPaymentStatus" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPaymentStatusResponse">
+    <wsdl:part element="ns:getPaymentStatusResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getMasterPaymentStatusRequest">
+    <wsdl:part element="ns:getMasterPaymentStatus" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getMasterPaymentStatusResponse">
+    <wsdl:part element="ns:getMasterPaymentStatusResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processMasterPaymentRevokeRequest">
+    <wsdl:part element="ns:processMasterPaymentRevoke" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processMasterPaymentRevokeResponse">
+    <wsdl:part element="ns:processMasterPaymentRevokeResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="revokePaymentLinkRequest">
+    <wsdl:part element="ns:revokePaymentLink" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="revokePaymentLinkResponse">
+    <wsdl:part element="ns:revokePaymentLinkResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPaymentDetailRequest">
+    <wsdl:part element="ns:getPaymentDetail" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPaymentDetailResponse">
+    <wsdl:part element="ns:getPaymentDetailResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processAuthorizationReverseRequest">
+    <wsdl:part element="ns:processAuthorizationReverse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processAuthorizationReverseResponse">
+    <wsdl:part element="ns:processAuthorizationReverseResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processBatchCloseRequest">
+    <wsdl:part element="ns:processBatchClose" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processBatchCloseResponse">
+    <wsdl:part element="ns:processBatchCloseResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processRefundRequest">
+    <wsdl:part element="ns:processRefund" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processRefundResponse">
+    <wsdl:part element="ns:processRefundResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processRefundReverseRequest">
+    <wsdl:part element="ns:processRefundReverse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processRefundReverseResponse">
+    <wsdl:part element="ns:processRefundReverseResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processPaymentDeleteRequest">
+    <wsdl:part element="ns:processPaymentDelete" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processPaymentDeleteResponse">
+    <wsdl:part element="ns:processPaymentDeleteResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processCaptureRequest">
+    <wsdl:part element="ns:processCapture" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processCaptureResponse">
+    <wsdl:part element="ns:processCaptureResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processCaptureReverseRequest">
+    <wsdl:part element="ns:processCaptureReverse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processCaptureReverseResponse">
+    <wsdl:part element="ns:processCaptureReverseResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processPaymentCloseRequest">
+    <wsdl:part element="ns:processPaymentClose" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processPaymentCloseResponse">
+    <wsdl:part element="ns:processPaymentCloseResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processRecurringPaymentRequest">
+    <wsdl:part element="ns:processRecurringPayment" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processRecurringPaymentResponse">
+    <wsdl:part element="ns:processRecurringPaymentResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+
+
+  <wsdl:message name="processUsageBasedPaymentRequest">
+    <wsdl:part element="ns:processUsageBasedPayment" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processUsageBasedPaymentResponse">
+    <wsdl:part element="ns:processUsageBasedPaymentResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processUsageBasedSubscriptionPaymentRequest">
+    <wsdl:part element="ns:processUsageBasedSubscriptionPayment" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processUsageBasedSubscriptionPaymentResponse">
+    <wsdl:part element="ns:processUsageBasedSubscriptionPaymentResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processRegularSubscriptionPaymentRequest">
+    <wsdl:part element="ns:processRegularSubscriptionPayment" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processRegularSubscriptionPaymentResponse">
+    <wsdl:part element="ns:processRegularSubscriptionPaymentResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processPrepaidPaymentRequest">
+    <wsdl:part element="ns:processPrepaidPayment" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processPrepaidPaymentResponse">
+    <wsdl:part element="ns:processPrepaidPaymentResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processCardOnFilePaymentRequest">
+    <wsdl:part element="ns:processCardOnFilePayment" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processCardOnFilePaymentResponse">
+    <wsdl:part element="ns:processCardOnFilePaymentResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+
+  <wsdl:message name="createPaymentLinkRequest">
+    <wsdl:part element="ns:createPaymentLink" name="parameters" />
+  </wsdl:message>
+  <wsdl:message name="createPaymentLinkResponse">
+    <wsdl:part element="ns:createPaymentLinkResponse" name="parameters" />
+  </wsdl:message>
+  <wsdl:message name="mpsPreCheckoutRequest">
+    <wsdl:part element="ns:mpsPreCheckout" name="parameters" />
+  </wsdl:message>
+  <wsdl:message name="mpsPreCheckoutResponse">
+    <wsdl:part element="ns:mpsPreCheckoutResponse" name="parameters" />
+  </wsdl:message>
+  <wsdl:message name="mpsExpressCheckoutRequest">
+    <wsdl:part element="ns:mpsExpressCheckout" name="parameters" />
+  </wsdl:message>
+  <wsdl:message name="mpsExpressCheckoutResponse">
+    <wsdl:part element="ns:mpsExpressCheckoutResponse" name="parameters" />
+  </wsdl:message>
+  <wsdl:message name="resolvePaymentStatusRequest">
+    <wsdl:part element="ns:resolvePaymentStatus" name="parameters" />
+  </wsdl:message>
+  <wsdl:message name="resolvePaymentStatusResponse">
+    <wsdl:part element="ns:resolvePaymentStatusResponse" name="parameters" />
+  </wsdl:message>
+  <wsdl:message name="getTokenStatusRequest">
+    <wsdl:part element="ns:getTokenStatus" name="parameters" />
+  </wsdl:message>
+  <wsdl:message name="getTokenStatusResponse">
+    <wsdl:part element="ns:getTokenStatusResponse" name="parameters" />
+  </wsdl:message>
+  <wsdl:message name="processTokenRevokeRequest">
+    <wsdl:part element="ns:processTokenRevoke" name="parameters" />
+  </wsdl:message>
+  <wsdl:message name="processTokenRevokeResponse">
+    <wsdl:part element="ns:processTokenRevokeResponse" name="parameters" />
+  </wsdl:message>
+  <wsdl:message name="processTokenPaymentRequest">
+    <wsdl:part element="ns:processTokenPayment" name="parameters" />
+  </wsdl:message>
+  <wsdl:message name="processTokenPaymentResponse">
+    <wsdl:part element="ns:processTokenPaymentResponse" name="parameters" />
+  </wsdl:message>
+  <wsdl:portType name="PaymentPort">
+    <wsdl:operation name="echo">
+      <wsdl:input message="ns:echoRequest" name="echoRequest" />
+      <wsdl:output message="ns:echoResponse" name="echoResponse" />
+      <wsdl:fault message="ns:echoServiceException" name="EchoServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getPaymentStatus">
+      <wsdl:input message="ns:getPaymentStatusRequest" name="getPaymentStatusRequest" />
+      <wsdl:output message="ns:getPaymentStatusResponse" name="getPaymentStatusResponse" />
+      <wsdl:fault message="ns:serviceException" name="ServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getMasterPaymentStatus">
+      <wsdl:input message="ns:getMasterPaymentStatusRequest" name="getMasterPaymentStatusRequest" />
+      <wsdl:output message="ns:getMasterPaymentStatusResponse" name="getMasterPaymentStatusResponse" />
+      <wsdl:fault message="ns:serviceException" name="ServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="processMasterPaymentRevoke">
+      <wsdl:input message="ns:processMasterPaymentRevokeRequest" name="processMasterPaymentRevokeRequest" />
+      <wsdl:output message="ns:processMasterPaymentRevokeResponse" name="processMasterPaymentRevokeResponse" />
+      <wsdl:fault message="ns:serviceException" name="ServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="revokePaymentLink">
+      <wsdl:input message="ns:revokePaymentLinkRequest" name="revokePaymentLinkRequest" />
+      <wsdl:output message="ns:revokePaymentLinkResponse" name="revokePaymentLinkResponse" />
+      <wsdl:fault message="ns:serviceException" name="ServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getPaymentDetail">
+      <wsdl:input message="ns:getPaymentDetailRequest" name="getPaymentDetailRequest" />
+      <wsdl:output message="ns:getPaymentDetailResponse" name="getPaymentDetailResponse" />
+      <wsdl:fault message="ns:serviceException" name="ServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="processAuthorizationReverse">
+      <wsdl:input message="ns:processAuthorizationReverseRequest" name="processAuthorizationReverseRequest" />
+      <wsdl:output message="ns:processAuthorizationReverseResponse" name="processAuthorizationReverseResponse" />
+      <wsdl:fault message="ns:serviceException" name="ServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="processBatchClose">
+      <wsdl:input message="ns:processBatchCloseRequest" name="processBatchCloseRequest" />
+      <wsdl:output message="ns:processBatchCloseResponse" name="processBatchCloseResponse" />
+      <wsdl:fault message="ns:serviceException" name="ServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="processRefund">
+      <wsdl:input message="ns:processRefundRequest" name="processRefundRequest" />
+      <wsdl:output message="ns:processRefundResponse" name="processRefundResponse" />
+      <wsdl:fault message="ns:serviceException" name="ServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="processRefundReverse">
+      <wsdl:input message="ns:processRefundReverseRequest" name="processRefundReverseRequest" />
+      <wsdl:output message="ns:processRefundReverseResponse" name="processRefundReverseResponse" />
+      <wsdl:fault message="ns:serviceException" name="ServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="processPaymentDelete">
+      <wsdl:input message="ns:processPaymentDeleteRequest" name="processPaymentDeleteRequest" />
+      <wsdl:output message="ns:processPaymentDeleteResponse" name="processPaymentDeleteResponse" />
+      <wsdl:fault message="ns:serviceException" name="ServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="processCapture">
+      <wsdl:input message="ns:processCaptureRequest" name="processCaptureRequest" />
+      <wsdl:output message="ns:processCaptureResponse" name="processCaptureResponse" />
+      <wsdl:fault message="ns:serviceException" name="ServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="processCaptureReverse">
+      <wsdl:input message="ns:processCaptureReverseRequest" name="processCaptureReverseRequest" />
+      <wsdl:output message="ns:processCaptureReverseResponse" name="processCaptureReverseResponse" />
+      <wsdl:fault message="ns:serviceException" name="ServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="processPaymentClose">
+      <wsdl:input message="ns:processPaymentCloseRequest" name="processPaymentCloseRequest" />
+      <wsdl:output message="ns:processPaymentCloseResponse" name="processPaymentCloseResponse" />
+      <wsdl:fault message="ns:serviceException" name="ServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="processRecurringPayment">
+      <wsdl:input message="ns:processRecurringPaymentRequest" name="processRecurringPaymentRequest" />
+      <wsdl:output message="ns:processRecurringPaymentResponse" name="processRecurringPaymentResponse" />
+      <wsdl:fault message="ns:paymentServiceException" name="ServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="createPaymentLink">
+      <wsdl:input message="ns:createPaymentLinkRequest" name="createPaymentLinkRequest" />
+      <wsdl:output message="ns:createPaymentLinkResponse" name="createPaymentLinkResponse" />
+      <wsdl:fault message="ns:serviceException" name="ServiceException" />
+    </wsdl:operation>
+
+    <wsdl:operation name="processUsageBasedPayment">
+      <wsdl:input message="ns:processUsageBasedPaymentRequest" name="processUsageBasedPaymentRequest" />
+      <wsdl:output message="ns:processUsageBasedPaymentResponse" name="processUsageBasedPaymentResponse" />
+      <wsdl:fault message="ns:paymentServiceException" name="ServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="processUsageBasedSubscriptionPayment">
+      <wsdl:input message="ns:processUsageBasedSubscriptionPaymentRequest" name="processUsageBasedSubscriptionPaymentRequest" />
+      <wsdl:output message="ns:processUsageBasedSubscriptionPaymentResponse" name="processUsageBasedSubscriptionPaymentResponse" />
+      <wsdl:fault message="ns:paymentServiceException" name="ServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="processRegularSubscriptionPayment">
+      <wsdl:input message="ns:processRegularSubscriptionPaymentRequest" name="processRegularSubscriptionPaymentRequest" />
+      <wsdl:output message="ns:processRegularSubscriptionPaymentResponse" name="processRegularSubscriptionPaymentResponse" />
+      <wsdl:fault message="ns:paymentServiceException" name="ServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="processPrepaidPayment">
+      <wsdl:input message="ns:processPrepaidPaymentRequest" name="processPrepaidPaymentRequest" />
+      <wsdl:output message="ns:processPrepaidPaymentResponse" name="processPrepaidPaymentResponse" />
+      <wsdl:fault message="ns:paymentServiceException" name="ServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="processCardOnFilePayment">
+      <wsdl:input message="ns:processCardOnFilePaymentRequest" name="processCardOnFilePaymentRequest" />
+      <wsdl:output message="ns:processCardOnFilePaymentResponse" name="processCardOnFilePaymentResponse" />
+      <wsdl:fault message="ns:cardOnFilePaymentServiceException" name="ServiceException" />
+    </wsdl:operation>
+
+    <wsdl:operation name="mpsPreCheckout">
+      <wsdl:input message="ns:mpsPreCheckoutRequest" name="mpsPreCheckoutRequest" />
+      <wsdl:output message="ns:mpsPreCheckoutResponse" name="mpsPreCheckoutResponse" />
+      <wsdl:fault message="ns:serviceException" name="ServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="mpsExpressCheckout">
+      <wsdl:input message="ns:mpsExpressCheckoutRequest" name="mpsExpressCheckoutRequest" />
+      <wsdl:output message="ns:mpsExpressCheckoutResponse" name="mpsExpressCheckoutResponse" />
+      <wsdl:fault message="ns:serviceException" name="ServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="resolvePaymentStatus">
+      <wsdl:input message="ns:resolvePaymentStatusRequest" name="resolvePaymentStatusRequest" />
+      <wsdl:output message="ns:resolvePaymentStatusResponse" name="resolvePaymentStatusResponse" />
+      <wsdl:fault message="ns:serviceException" name="ServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getTokenStatus">
+      <wsdl:input message="ns:getTokenStatusRequest" name="getTokenStatusRequest" />
+      <wsdl:output message="ns:getTokenStatusResponse" name="getTokenStatusResponse" />
+      <wsdl:fault message="ns:serviceException" name="ServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="processTokenRevoke">
+      <wsdl:input message="ns:processTokenRevokeRequest" name="processTokenRevokeRequest" />
+      <wsdl:output message="ns:processTokenRevokeResponse" name="processTokenRevokeResponse" />
+      <wsdl:fault message="ns:serviceException" name="ServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="processTokenPayment">
+      <wsdl:input message="ns:processTokenPaymentRequest" name="processTokenPaymentRequest" />
+      <wsdl:output message="ns:processTokenPaymentResponse" name="processTokenPaymentResponse" />
+      <wsdl:fault message="ns:paymentServiceException" name="ServiceException" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PaymentServiceSoap" type="ns:PaymentPort">
+    <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="echo">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="echoRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="echoResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="EchoServiceException">
+        <wsdlsoap:fault use="literal" name="EchoServiceException" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPaymentStatus">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getPaymentStatusRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getPaymentStatusResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <wsdlsoap:fault use="literal" name="ServiceException" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getMasterPaymentStatus">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getMasterPaymentStatusRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getMasterPaymentStatusResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <wsdlsoap:fault use="literal" name="ServiceException" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="processMasterPaymentRevoke">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="processMasterPaymentRevokeRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="processMasterPaymentRevokeResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <wsdlsoap:fault use="literal" name="ServiceException" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="revokePaymentLink">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="revokePaymentLinkRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="revokePaymentLinkResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <wsdlsoap:fault use="literal" name="ServiceException" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPaymentDetail">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getPaymentDetailRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getPaymentDetailResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <wsdlsoap:fault use="literal" name="ServiceException" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="processAuthorizationReverse">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="processAuthorizationReverseRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="processAuthorizationReverseResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <wsdlsoap:fault use="literal" name="ServiceException" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="processBatchClose">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="processBatchCloseRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="processBatchCloseResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <wsdlsoap:fault use="literal" name="ServiceException" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="processRefund">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="processRefundRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="processRefundResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <wsdlsoap:fault use="literal" name="ServiceException" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="processRefundReverse">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="processRefundReverseRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="processRefundReverseResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <wsdlsoap:fault use="literal" name="ServiceException" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="processPaymentDelete">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="processPaymentDeleteRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="processPaymentDeleteResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <wsdlsoap:fault use="literal" name="ServiceException" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="processCapture">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="processCaptureRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="processCaptureResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <wsdlsoap:fault use="literal" name="ServiceException" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="processCaptureReverse">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="processCaptureReverseRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="processCaptureReverseResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <wsdlsoap:fault use="literal" name="ServiceException" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="processPaymentClose">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="processPaymentCloseRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="processPaymentCloseResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <wsdlsoap:fault use="literal" name="ServiceException" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="processRecurringPayment">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="processRecurringPaymentRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="processRecurringPaymentResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <wsdlsoap:fault use="literal" name="ServiceException" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="processUsageBasedPayment">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="processUsageBasedPaymentRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="processUsageBasedPaymentResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <wsdlsoap:fault use="literal" name="ServiceException" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="processUsageBasedSubscriptionPayment">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="processUsageBasedSubscriptionPaymentRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="processUsageBasedSubscriptionPaymentResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <wsdlsoap:fault use="literal" name="ServiceException" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="processRegularSubscriptionPayment">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="processRegularSubscriptionPaymentRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="processRegularSubscriptionPaymentResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <wsdlsoap:fault use="literal" name="ServiceException" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="processPrepaidPayment">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="processPrepaidPaymentRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="processPrepaidPaymentResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <wsdlsoap:fault use="literal" name="ServiceException" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="processCardOnFilePayment">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="processCardOnFilePaymentRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="processCardOnFilePaymentResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <wsdlsoap:fault use="literal" name="ServiceException" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="createPaymentLink">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="createPaymentLinkRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="createPaymentLinkResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <wsdlsoap:fault use="literal" name="ServiceException" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="mpsPreCheckout">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="mpsPreCheckoutRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="mpsPreCheckoutResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <wsdlsoap:fault use="literal" name="ServiceException" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="mpsExpressCheckout">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="mpsExpressCheckoutRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="mpsExpressCheckoutResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <wsdlsoap:fault use="literal" name="ServiceException" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="resolvePaymentStatus">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="resolvePaymentStatusRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="resolvePaymentStatusResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <wsdlsoap:fault use="literal" name="ServiceException" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getTokenStatus">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getTokenStatusRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getTokenStatusResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <wsdlsoap:fault use="literal" name="ServiceException" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="processTokenRevoke">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="processTokenRevokeRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="processTokenRevokeResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <wsdlsoap:fault use="literal" name="ServiceException" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="processTokenPayment">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="processTokenPaymentRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="processTokenPaymentResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <wsdlsoap:fault use="literal" name="ServiceException" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+  </wsdl:binding>
+  <wsdl:service name="PaymentService">
+    <wsdl:port name="PaymentPortV1" binding="ns:PaymentServiceSoap">
+      <wsdlsoap:address location="file:///PaymentService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
