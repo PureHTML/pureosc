@@ -99,8 +99,12 @@ class osc_template
     public function getBlocks($group)
     {
         if ($this->hasBlocks($group)) {
+          if (DBG == 'true') {
             return '<!-- block '.$group." -->\n".implode("\n", $this->_blocks[$group])."\n<!-- end block ".$group." -->\n";
+        } else {
+          return implode("\n", $this->_blocks[$group]);
         }
+      }
     }
 
     public function buildBlocks(): void
@@ -191,10 +195,14 @@ class osc_template
         }
 
         if ($this->hasContent($group)) {
+          if (DBG == 'true') {
             return '<!-- block '.$group." -->\n".implode("\n", $this->_content[$group])."\n<!-- end block ".$group." -->\n";
+        } else {
+          return implode("\n", $this->_content[$group]);
         }
+        
     }
-
+}
     public function getContentModules($group)
     {
         $result = [];

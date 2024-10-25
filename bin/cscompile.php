@@ -97,13 +97,13 @@ function cssgenerator() {
         $data .= cssquery(0, $cssmain['init']);
     }
     $data = css_compile($data);
-    file_put_contents(DIR_FS_CATALOG . 's.css.gz', gzencode($data, 9), 644);
+    file_put_contents(DIR_FS_CATALOG . 's/s.css.gz', gzencode($data, 9), 644);
 //working file:
-    file_put_contents(DIR_FS_CATALOG . 's.css', $data, 644);
+    file_put_contents(DIR_FS_CATALOG . 's/s.css', $data, 644);
 //debug file
   if (DBG == 'true') {
     $data = str_replace("{", "\n{", str_replace("}", "}\n", $data));
-    file_put_contents(DIR_FS_CATALOG . 's_debug.css', $data, 644);
+    file_put_contents(DIR_FS_CATALOG . 's/s_debug.css', $data, 644);
   }
 }
 
@@ -130,11 +130,11 @@ function cssgenerator_inline() {
     }
     $data = css_compile($data);
 //working file:
-    file_put_contents(DIR_FS_CATALOG . 'inline.css', $data, 644);
+    file_put_contents(DIR_FS_CATALOG . 's/inline_css.inc', $data, 644);
 //debug file
   if (DBG == 'true') {
   $data = str_replace("{", "\n{", str_replace("}", "}\n", $data));
-    file_put_contents(DIR_FS_CATALOG . 'inline_debug.css', $data, 644);
+    file_put_contents(DIR_FS_CATALOG . 's/inline_debug.css', $data, 644);
   }
 }
 
@@ -160,13 +160,13 @@ function cssgenerator_index_top() {
         $data .= cssquery(0, $cssmain['init'], 'index_top');
     }
     $data = css_compile($data);
-    file_put_contents(DIR_FS_CATALOG . 'index_top.css.gz', gzencode($data, 9), 644);
+    file_put_contents(DIR_FS_CATALOG . 's/index_top.css.gz', gzencode($data, 9), 644);
 //working file:
-    file_put_contents(DIR_FS_CATALOG . 'index_top.css', $data, 644);
+    file_put_contents(DIR_FS_CATALOG . 's/index_top.css', $data, 644);
 //debug file
   if (DBG == 'true') {
     $data = str_replace("{", "\n{", str_replace("}", "}\n", $data));
-    file_put_contents(DIR_FS_CATALOG . 'index_top_debug.css', $data, 644);
+    file_put_contents(DIR_FS_CATALOG . 's/index_top_debug.css', $data, 644);
   }
 }
 
@@ -192,13 +192,13 @@ function cssgenerator_index_products() {
         $data .= cssquery(0, $cssmain['init'], 'index_products');
     }
     $data = css_compile($data);
-    file_put_contents(DIR_FS_CATALOG . 'index_products.css.gz', gzencode($data, 9), 644);
+    file_put_contents(DIR_FS_CATALOG . 's/index_products.css.gz', gzencode($data, 9), 644);
 //working file:
-    file_put_contents(DIR_FS_CATALOG . 'index_products.css', $data, 644);
+    file_put_contents(DIR_FS_CATALOG . 's/index_products.css', $data, 644);
 //debug file
   if (DBG == 'true') {
     $data = str_replace("{", "\n{", str_replace("}", "}\n", $data));
-    file_put_contents(DIR_FS_CATALOG . 'index_products_debug.css', $data, 644);
+    file_put_contents(DIR_FS_CATALOG . 's/index_products_debug.css', $data, 644);
     echo '$data:' . $data . "\n";
   }
 }

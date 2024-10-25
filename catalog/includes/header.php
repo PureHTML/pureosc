@@ -22,7 +22,7 @@ if ($oscTemplate->hasBlocks('header_top')) {
 
 ?>
 
-  <tr valign=bottom>
+  <tr>
 
       <?php echo $oscTemplate->getBlocks('header'); ?>
 <?php

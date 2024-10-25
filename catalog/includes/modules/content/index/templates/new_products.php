@@ -1,4 +1,4 @@
-<div class="flc">
+<td valign=top>
   <h2><?php echo sprintf(MODULE_CONTENT_INDEX_NEW_PRODUCTS_BOX_TITLE, (new DateTime())->format('F')); ?></h2>
 
 

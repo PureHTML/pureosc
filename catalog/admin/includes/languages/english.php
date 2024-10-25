@@ -311,3 +311,5 @@ function tep_date_raw($date, $reverse = false)
 \define('ERROR_FILETYPE_NOT_ALLOWED', 'Error: File upload type not allowed.');
 \define('SUCCESS_FILE_SAVED_SUCCESSFULLY', 'Success: File upload saved successfully.');
 \define('WARNING_NO_FILE_UPLOADED', 'Warning: No file uploaded.');
+\define('BOX_TOOLS_CSPURGE', 'CSS purge'); 
+\define('BOX_TOOLS_CSCOMPILE', 'CSS Recompile'); // We need execute script ALWAYS after manual database changes, or after executing Purge CSS debug command.

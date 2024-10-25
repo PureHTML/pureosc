@@ -19,7 +19,7 @@ $oscTemplate->buildBlocks();
   <title><?php echo tep_output_string_protected($oscTemplate->getTitle()); ?></title>
   <link rel="shortcut icon" href="favicon.ico">
 <?php
-$header = '<link href=s.css rel=stylesheet>';
+$header = "<link href=/s/s.css rel=stylesheet media=print onload=\"this.media='all'; this.onload=null;\">";
 //TODO: media // echo '<link rel="stylesheet" data-media="screen and (min-width: 980px)" data-href="98">';
 // from php templates like index.php
 $css_file = preg_replace('/\.php$/', '', basename($_SERVER['PHP_SELF']));
@@ -27,7 +27,7 @@ if ($css_file === 'index') {
     $css_file = 'index_'.$category_depth;
 }
 if (file_exists($css_file.'.css')) {
-    $header .= "\n".'        <link href="'.$css_file.'.css" rel="stylesheet">'."\n";
+    $header .= "\n".'        <link href="/s/'.$css_file.'.css" rel="stylesheet">'."\n";
 }
 /*
  * elseif (file_exists(preg_replace('/_[a-z].*$/','', $css_file).'.css')){
@@ -39,7 +39,7 @@ echo str_replace("\n", '', $header)."\n";
 
 //include inline css
 echo '<style>';
-include('inline.css');
+include('s/inline_css.inc');
 echo '</style>';
 echo $oscTemplate->getBlocks('header_tags'); ?>
 <br>
@@ -48,8 +48,10 @@ echo $oscTemplate->getBlocks('header_tags'); ?>
     <?php require 'includes/header.php'; ?>
 </table>
 
-<?php if ($oscTemplate->hasBlocks('header_menu')) {  ?>
-<!-- navigation  BEGIN -->
+<?php if ($oscTemplate->hasBlocks('header_menu')) {  
+  if (DBG == 'true') {echo '<!-- navigation  BEGIN -->';
+}
+?>
 <table width=96%>
   <tr>
     <td id=m>

@@ -1,0 +1,8 @@
+ @media (max-width:768px)
+{ td
+{display:block; width:100%}
+}
+a
+{text-decoration:none}
+p a
+{text-decoration:underline}

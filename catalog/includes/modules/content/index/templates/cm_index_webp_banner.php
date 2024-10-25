@@ -43,4 +43,4 @@ EOD;
 <?php
 echo tep_image('images/rotator.webp');
 echo $carousel; ?>
-</div>
+

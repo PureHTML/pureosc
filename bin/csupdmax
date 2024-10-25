@@ -1,0 +1,14 @@
+#!/bin/bash
+. ./dbconnect.sh
+if [[ ! $1 || ! $2 ]];then
+	echo 'Usage: ./cssupdmax $1=id (eq 2, required) $2=max (eq 768 required)'
+	exit
+fi
+
+#if [[ ! $9 ]];then STATUS=1;fi
+#[[ $4 ]] && CD="$4" || CD=$1
+#[[ $5 ]] && GID="$5" || GID=1
+#[[ $6 ]] && ORD="$5" || ORD=9999
+
+mariadb -h${H} -u${U} -p${P} $D -e "UPDATE css SET max='${2}' WHERE id='${1}'"
+  ./cscompile.php  

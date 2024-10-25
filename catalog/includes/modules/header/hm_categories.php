@@ -139,10 +139,10 @@ class hm_categories
                 $cPath[\count($parent_array) . $categories['parent_id']] = $categories['categories_id'];
 
                 if ($categories['parent_id'] === 0) {
-                    $categories_list .= '<a href="' . tep_href_link('index.php', 'cPath=' . implode('_', $cPath), 'SSL', false) . '">' . $categories['categories_name'] . '</a>' . (isset($tree[$categories['categories_id']]) ? '' : '');
+                    $categories_list .= '<a href="' . tep_href_link('index.php', 'cPath=' . implode('_', $cPath), 'SSL', false) . '">' . $categories['categories_name'] . '</a>&nbsp; ' . (isset($tree[$categories['categories_id']]) ? '' : '');
 //TODO: ORIG                    $categories_list .= '<li class="nav-item ' . $li_dropdown . '"><a class="nav-link fw-bold ' . $a_dropdown . '" href="' . tep_href_link('index.php', 'cPath=' . implode('_', $cPath), 'SSL', false) . '">' . $categories['categories_name'] . '</a>' . (isset($tree[$categories['categories_id']]) ? '' : '');
                 } else {
-                    $categories_list .= '<a href="' . tep_href_link('index.php', 'cPath=' . implode('_', $cPath), 'SSL', false) . '">' . $categories['categories_name'] . '</a>';
+                    $categories_list .= '<a href="' . tep_href_link('index.php', 'cPath=' . implode('_', $cPath), 'SSL', false) . '">' . $categories['categories_name'] . '</a>&nbsp; ';
 //TODO: ORIG                    $categories_list .= '<li class="' . $li_dropdown . ' dropdown-submenu"><a class="dropdown-item ' . $a_dropdown . '" href="' . tep_href_link('index.php', 'cPath=' . implode('_', $cPath), 'SSL', false) . '">' . $categories['categories_name'] . '</a>';
                 }
 
@@ -164,7 +164,7 @@ class hm_categories
         $category_tree = [];
 
         $categories_query = tep_db_query("select c.*, cd.categories_name from categories c, categories_description cd where c.categories_id = cd.categories_id and cd.language_id = '".(int) $languages_id."' AND parent_id=0 order by c.sort_order, cd.categories_name");
-//TODO: all        $categories_query = tep_db_query("select c.*, cd.categories_name from categories c, categories_description cd where c.categories_id = cd.categories_id and cd.language_id = '".(int) $languages_id."' order by c.sort_order, cd.categories_name");
+//TODO: all subcat        $categories_query = tep_db_query("select c.*, cd.categories_name from categories c, categories_description cd where c.categories_id = cd.categories_id and cd.language_id = '".(int) $languages_id."' order by c.sort_order, cd.categories_name");
 
         while ($categories = tep_db_fetch_array($categories_query)) {
             $category_tree[$categories['parent_id']][] = $categories;

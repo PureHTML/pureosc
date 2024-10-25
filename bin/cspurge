@@ -1,5 +1,5 @@
 #!/bin/bash
 . ./dbconnect.sh
-cd ../catalog
+cd ../catalog/s
 rm *.css
 rm *.css.gz

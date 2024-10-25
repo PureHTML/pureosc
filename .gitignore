@@ -6,3 +6,5 @@
 composer.lock
 composer.lock
 /catalog/includes/modules/ultimate_seo_urls5/cache_system/cache/
+/catalog/includes/work/error_logs/
+/catalog/includes/work/error_logs/mail_logs/

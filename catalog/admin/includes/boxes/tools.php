@@ -68,5 +68,15 @@ $cl_box_groups[] = [
             'title' => BOX_TOOLS_VERSION_CHECK,
             'link' => tep_href_link('version_check.php'),
         ],
+        [
+            'code' => 'cspurge.php',
+            'title' => BOX_TOOLS_CSPURGE,
+            'link' => tep_href_link('cspurge.php'),
+        ],
+        [
+            'code' => 'cscompile.php',
+            'title' => BOX_TOOLS_CSCOMPILE,
+            'link' => tep_href_link('cscompile.php'),
+        ],
     ],
 ];

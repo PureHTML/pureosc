@@ -312,3 +312,5 @@ function tep_date_raw($date, $reverse = false)
 \define('WARNING_NO_FILE_UPLOADED', 'Varování: No file uploaded.');
 
 \define('TEXT_IMAGE_NONEXISTENT', 'IMAGE DOES NOT EXIST');
+\define('BOX_TOOLS_CSPURGE', 'Purge CSS files for debugging slow connection page rendering (no css loaded yet). <br>Use Cscopile to recompile css!');
+\define('BOX_TOOLS_CSCOMPILE', 'Recompile css files from DB. We need execute script ALWAYS after manual database changes, or after executing Purge CSS debug command.');
