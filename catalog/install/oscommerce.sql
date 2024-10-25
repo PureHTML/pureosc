@@ -35,7 +35,7 @@ CREATE TABLE `action_recorder` (
   KEY `idx_action_recorder_user_id` (`user_id`),
   KEY `idx_action_recorder_identifier` (`identifier`),
   KEY `idx_action_recorder_date_added` (`date_added`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -59,7 +59,9 @@ INSERT INTO `action_recorder` VALUES
 (12,'ar_admin_login',1,'pureosc','127.0.0.1','1','2024-10-21 16:18:57'),
 (13,'ar_admin_login',0,'pureosc','127.0.0.1','0','2024-10-21 16:45:46'),
 (14,'ar_admin_login',1,'pureosc','127.0.0.1','1','2024-10-21 16:45:48'),
-(15,'ar_admin_login',1,'pureosc','127.0.0.1','1','2024-10-21 21:50:52');
+(15,'ar_admin_login',1,'pureosc','127.0.0.1','1','2024-10-21 21:50:52'),
+(16,'ar_admin_login',1,'pureosc','127.0.0.1','1','2024-10-23 21:20:01'),
+(17,'ar_admin_login',1,'pureosc','127.0.0.1','1','2024-10-25 04:23:45');
 /*!40000 ALTER TABLE `action_recorder` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -152,7 +154,7 @@ CREATE TABLE `administrators` (
 LOCK TABLES `administrators` WRITE;
 /*!40000 ALTER TABLE `administrators` DISABLE KEYS */;
 INSERT INTO `administrators` VALUES
-(1,'pureosc','$P$DaVeYrni87r.USYWNtBf4Em2/dxNJi0');
+(1,'pureosc','$P$Doy6qMnN6jMnTnohFjlhUbZwafGA0r.');
 /*!40000 ALTER TABLE `administrators` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -236,7 +238,7 @@ CREATE TABLE `categories` (
   `last_modified` datetime DEFAULT NULL,
   PRIMARY KEY (`categories_id`),
   KEY `idx_categories_parent_id` (`parent_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -255,7 +257,8 @@ INSERT INTO `categories` VALUES
 (7,'ic_crypto.jpg',5,0,'2024-10-18 19:56:35','2024-10-19 03:11:26'),
 (8,NULL,0,0,'2024-10-20 05:07:51',NULL),
 (9,NULL,8,0,'2024-10-20 05:08:06',NULL),
-(10,NULL,8,0,'2024-10-20 07:45:38','2024-10-21 17:23:51');
+(10,NULL,8,0,'2024-10-20 07:45:38','2024-10-21 17:23:51'),
+(11,NULL,0,0,'2024-10-23 05:03:28',NULL);
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -292,7 +295,8 @@ INSERT INTO `categories_description` VALUES
 (7,2,'pureCSS vs Botstrap',''),
 (8,2,'technology',''),
 (9,2,'git',''),
-(10,2,'all visitors matters','');
+(10,2,'all visitors matters',''),
+(11,2,'blog','');
 /*!40000 ALTER TABLE `categories_description` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -316,7 +320,7 @@ CREATE TABLE `configuration` (
   `use_function` varchar(255) DEFAULT NULL,
   `set_function` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`configuration_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=445 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=461 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -433,7 +437,7 @@ INSERT INTO `configuration` VALUES
 (105,'Store Page Parse Time','STORE_PAGE_PARSE_TIME','false','Store the time it takes to parse a page',10,1,NULL,'2024-06-07 04:52:43',NULL,'tep_cfg_select_option(array(\'true\', \'false\'), '),
 (106,'Log Destination','STORE_PAGE_PARSE_TIME_LOG','/var/log/www/tep/page_parse_time.log','Directory and filename of the page parse time log',10,2,NULL,'2024-06-07 04:52:43',NULL,NULL),
 (107,'Log Date Format','STORE_PARSE_DATE_TIME_FORMAT','%d/%m/%Y %H:%M:%S','The date format',10,3,NULL,'2024-06-07 04:52:43',NULL,NULL),
-(108,'Display The Page Parse Time','DISPLAY_PAGE_PARSE_TIME','true','Display the page parse time (store page parse time must be enabled)',10,4,NULL,'2024-06-07 04:52:43',NULL,'tep_cfg_select_option(array(\'true\', \'false\'), '),
+(108,'Display The Page Parse Time','DISPLAY_PAGE_PARSE_TIME','false','Display the page parse time (store page parse time must be enabled)',10,4,NULL,'2024-06-07 04:52:43',NULL,'tep_cfg_select_option(array(\'true\', \'false\'), '),
 (109,'Store Database Queries','STORE_DB_TRANSACTIONS','true','Store the database queries in the page parse time log',10,5,NULL,'2024-06-07 04:52:43',NULL,'tep_cfg_select_option(array(\'true\', \'false\'), '),
 (110,'Use Cache','USE_CACHE','false','Use caching features',11,1,NULL,'2024-06-07 04:52:43',NULL,'tep_cfg_select_option(array(\'true\', \'false\'), '),
 (111,'Cache Directory','DIR_FS_CACHE','/tmp/','The directory where the cached files are saved',11,2,NULL,'2024-06-07 04:52:43',NULL,NULL),
@@ -493,23 +497,13 @@ INSERT INTO `configuration` VALUES
 (165,'Enable Robot NoIndex Module','MODULE_HEADER_TAGS_ROBOT_NOINDEX_STATUS','True','Do you want to enable the Robot NoIndex module?',6,1,NULL,'2024-06-07 04:52:43',NULL,'tep_cfg_select_option(array(\'True\', \'False\'), '),
 (166,'Pages','MODULE_HEADER_TAGS_ROBOT_NOINDEX_PAGES','account.php;account_edit.php;account_history.php;account_history_info.php;account_newsletters.php;account_notifications.php;account_password.php;address_book.php;address_book_process.php;checkout_confirmation.php;checkout_payment.php;checkout_payment_address.php;checkout_process.php;checkout_shipping.php;checkout_shipping_address.php;checkout_success.php;cookie_usage.php;create_account.php;create_account_success.php;login.php;logoff.php;password_forgotten.php;password_reset.php;product_reviews_write.php;shopping_cart.php;ssl_check.php;tell_a_friend.php','The pages to add the meta robot noindex tag to.',6,0,NULL,'2024-06-07 04:52:43','ht_robot_noindex_show_pages','ht_robot_noindex_edit_pages('),
 (167,'Sort Order','MODULE_HEADER_TAGS_ROBOT_NOINDEX_SORT_ORDER','500','Sort order of display. Lowest is displayed first.',6,0,NULL,'2024-06-07 04:52:43',NULL,NULL),
-(168,'Installed Modules','MODULE_ADMIN_DASHBOARD_INSTALLED','','List of Administration Tool Dashboard module filenames separated by a semi-colon. This is automatically updated. No need to edit.',6,0,'2024-09-21 02:24:05','2024-06-07 04:52:43',NULL,NULL),
+(168,'Installed Modules','MODULE_ADMIN_DASHBOARD_INSTALLED','d_customers.php;d_orders.php;d_total_customers.php;d_total_revenue.php','List of Administration Tool Dashboard module filenames separated by a semi-colon. This is automatically updated. No need to edit.',6,0,'2024-10-23 20:28:34','2024-06-07 04:52:43',NULL,NULL),
 (169,'Enable Administrator Logins Module','MODULE_ADMIN_DASHBOARD_ADMIN_LOGINS_STATUS','False','Do you want to show the latest administrator logins on the dashboard?',6,1,NULL,'2024-06-07 04:52:43',NULL,'tep_cfg_select_option(array(\'True\', \'False\'), '),
 (170,'Sort Order','MODULE_ADMIN_DASHBOARD_ADMIN_LOGINS_SORT_ORDER','500','Sort order of display. Lowest is displayed first.',6,0,NULL,'2024-06-07 04:52:43',NULL,NULL),
-(171,'Enable Customers Module','MODULE_ADMIN_DASHBOARD_CUSTOMERS_STATUS','False','Do you want to show the newest customers on the dashboard?',6,1,NULL,'2024-06-07 04:52:43',NULL,'tep_cfg_select_option(array(\'True\', \'False\'), '),
-(172,'Sort Order','MODULE_ADMIN_DASHBOARD_CUSTOMERS_SORT_ORDER','400','Sort order of display. Lowest is displayed first.',6,0,NULL,'2024-06-07 04:52:43',NULL,NULL),
 (173,'Enable Latest Add-Ons Module','MODULE_ADMIN_DASHBOARD_LATEST_ADDONS_STATUS','False','Do you want to show the latest osCommerce Add-Ons on the dashboard?',6,1,NULL,'2024-06-07 04:52:43',NULL,'tep_cfg_select_option(array(\'True\', \'False\'), '),
 (174,'Sort Order','MODULE_ADMIN_DASHBOARD_LATEST_ADDONS_SORT_ORDER','800','Sort order of display. Lowest is displayed first.',6,0,NULL,'2024-06-07 04:52:43',NULL,NULL),
 (175,'Enable Latest News Module','MODULE_ADMIN_DASHBOARD_LATEST_NEWS_STATUS','False','Do you want to show the latest osCommerce News on the dashboard?',6,1,NULL,'2024-06-07 04:52:43',NULL,'tep_cfg_select_option(array(\'True\', \'False\'), '),
 (176,'Sort Order','MODULE_ADMIN_DASHBOARD_LATEST_NEWS_SORT_ORDER','700','Sort order of display. Lowest is displayed first.',6,0,NULL,'2024-06-07 04:52:43',NULL,NULL),
-(177,'Enable Orders Module','MODULE_ADMIN_DASHBOARD_ORDERS_STATUS','False','Do you want to show the latest orders on the dashboard?',6,1,NULL,'2024-06-07 04:52:43',NULL,'tep_cfg_select_option(array(\'True\', \'False\'), '),
-(178,'Sort Order','MODULE_ADMIN_DASHBOARD_ORDERS_SORT_ORDER','300','Sort order of display. Lowest is displayed first.',6,0,NULL,'2024-06-07 04:52:43',NULL,NULL),
-(179,'Enable Security Checks Module','MODULE_ADMIN_DASHBOARD_SECURITY_CHECKS_STATUS','False','Do you want to run the security checks for this installation?',6,1,NULL,'2024-06-07 04:52:43',NULL,'tep_cfg_select_option(array(\'True\', \'False\'), '),
-(180,'Sort Order','MODULE_ADMIN_DASHBOARD_SECURITY_CHECKS_SORT_ORDER','600','Sort order of display. Lowest is displayed first.',6,0,NULL,'2024-06-07 04:52:43',NULL,NULL),
-(181,'Enable Total Customers Module','MODULE_ADMIN_DASHBOARD_TOTAL_CUSTOMERS_STATUS','False','Do you want to show the total customers chart on the dashboard?',6,1,NULL,'2024-06-07 04:52:43',NULL,'tep_cfg_select_option(array(\'True\', \'False\'), '),
-(182,'Sort Order','MODULE_ADMIN_DASHBOARD_TOTAL_CUSTOMERS_SORT_ORDER','200','Sort order of display. Lowest is displayed first.',6,0,NULL,'2024-06-07 04:52:43',NULL,NULL),
-(183,'Enable Total Revenue Module','MODULE_ADMIN_DASHBOARD_TOTAL_REVENUE_STATUS','False','Do you want to show the total revenue chart on the dashboard?',6,1,NULL,'2024-06-07 04:52:43',NULL,'tep_cfg_select_option(array(\'True\', \'False\'), '),
-(184,'Sort Order','MODULE_ADMIN_DASHBOARD_TOTAL_REVENUE_SORT_ORDER','100','Sort order of display. Lowest is displayed first.',6,0,NULL,'2024-06-07 04:52:43',NULL,NULL),
 (185,'Enable Version Check Module','MODULE_ADMIN_DASHBOARD_VERSION_CHECK_STATUS','False','Do you want to show the version check results on the dashboard?',6,1,NULL,'2024-06-07 04:52:43',NULL,'tep_cfg_select_option(array(\'True\', \'False\'), '),
 (186,'Sort Order','MODULE_ADMIN_DASHBOARD_VERSION_CHECK_SORT_ORDER','900','Sort order of display. Lowest is displayed first.',6,0,NULL,'2024-06-07 04:52:43',NULL,NULL),
 (187,'Enable Latest Reviews Module','MODULE_ADMIN_DASHBOARD_REVIEWS_STATUS','False','Do you want to show the latest reviews on the dashboard?',6,1,NULL,'2024-06-07 04:52:43',NULL,'tep_cfg_select_option(array(\'True\', \'False\'), '),
@@ -563,11 +557,11 @@ INSERT INTO `configuration` VALUES
 (253,'Enable Module','MODULE_CONTENT_PRODUCT_INFO_MODEL_STATUS','True','Do you want to add the module to your shop?',6,1,NULL,'2024-06-07 04:52:43',NULL,'tep_cfg_select_option(array(\'True\', \'False\'), '),
 (254,'Sort Order','MODULE_CONTENT_PRODUCT_INFO_MODEL_SORT_ORDER','1','Sort order of display. Lowest is displayed first.',6,0,NULL,'2024-06-07 04:52:43',NULL,NULL),
 (266,'Installed Modules','MODULE_FOOTER_INSTALLED','fm_information.php;fm_copyright.php','This is automatically updated. No need to edit.',6,0,'2024-10-13 09:59:41','2024-06-07 04:52:43',NULL,NULL),
-(290,'Installed Modules','MODULE_HEADER_INSTALLED','hm_store_logo.php;hm_quick_search.php;hm_shopping_cart.php;hm_wishlist.php;hm_account.php;hm_categories.php','This is automatically updated. No need to edit.',6,0,'2024-10-21 22:03:51','2024-06-07 04:52:44',NULL,NULL),
+(290,'Installed Modules','MODULE_HEADER_INSTALLED','hm_store_logo.php;hm_shopping_cart.php;hm_wishlist.php;hm_account.php;hm_quick_search.php;hm_categories.php','This is automatically updated. No need to edit.',6,0,'2024-10-25 00:32:23','2024-06-07 04:52:44',NULL,NULL),
 (293,'Enable Module','MODULE_HEADER_CATEGORIES_STATUS','True','Do you want to add the module to your shop?',6,1,NULL,'2024-06-07 04:52:44',NULL,'tep_cfg_select_option(array(\'True\', \'False\'), '),
 (294,'Sort Order','MODULE_HEADER_CATEGORIES_SORT_ORDER','1400','Sort order of display. Lowest is displayed first.',6,0,NULL,'2024-06-07 04:52:44',NULL,NULL),
 (301,'Enable Module','MODULE_HEADER_QUICK_SEARCH_STATUS','True','Do you want to add the module to your shop?',6,1,NULL,'2024-06-07 04:52:44',NULL,'tep_cfg_select_option(array(\'True\', \'False\'), '),
-(302,'Sort Order','MODULE_HEADER_QUICK_SEARCH_SORT_ORDER','2','Sort order of display. Lowest is displayed first.',6,0,NULL,'2024-06-07 04:52:44',NULL,NULL),
+(302,'Sort Order','MODULE_HEADER_QUICK_SEARCH_SORT_ORDER','20','Sort order of display. Lowest is displayed first.',6,0,NULL,'2024-06-07 04:52:44',NULL,NULL),
 (305,'Enable Module','MODULE_HEADER_STORE_LOGO_STATUS','True','Do you want to add the module to your shop?',6,1,NULL,'2024-06-07 04:52:44',NULL,'tep_cfg_select_option(array(\'True\', \'False\'), '),
 (306,'Sort Order','MODULE_HEADER_STORE_LOGO_SORT_ORDER','1','Sort order of display. Lowest is displayed first.',6,0,NULL,'2024-06-07 04:52:44',NULL,NULL),
 (309,'Installed Modules','MODULE_LISTING_SORT_INSTALLED','ls_date_added.php;ls_price.php','This is automatically updated. No need to edit.',6,0,NULL,'2024-06-07 04:52:44',NULL,NULL),
@@ -646,7 +640,17 @@ INSERT INTO `configuration` VALUES
 (441,'Enable Module','MODULE_CONTENT_INDEX_CUSTOMER_GREETING_STATUS','True','Do you want to add the module to your shop?',6,1,NULL,'2024-10-12 06:31:40',NULL,'tep_cfg_select_option(array(\'True\', \'False\'), '),
 (442,'Sort Order','MODULE_CONTENT_INDEX_CUSTOMER_GREETING_SORT_ORDER','100','Sort order of display. Lowest is displayed first.',6,0,NULL,'2024-10-12 06:31:40',NULL,NULL),
 (443,'Enable Module','MODULE_FOOTER_INFORMATION_STATUS','True','Do you want to add the module to your shop?',6,1,NULL,'2024-10-13 09:59:41',NULL,'tep_cfg_select_option(array(\'True\', \'False\'), '),
-(444,'Sort Order','MODULE_FOOTER_INFORMATION_SORT_ORDER','40','Sort order of display. Lowest is displayed first.',6,0,NULL,'2024-10-13 09:59:41',NULL,NULL);
+(444,'Sort Order','MODULE_FOOTER_INFORMATION_SORT_ORDER','40','Sort order of display. Lowest is displayed first.',6,0,NULL,'2024-10-13 09:59:41',NULL,NULL),
+(445,'DBG','DBG','true','DBG',1,9999,'2024-10-23 04:39:37','2024-10-23 04:39:37',NULL,'tep_cfg_select_option(array(\'true\', \'false\'),'),
+(450,'Enable Total Customers Module','MODULE_ADMIN_DASHBOARD_TOTAL_CUSTOMERS_STATUS','True','Do you want to show the total customers chart on the dashboard?',6,1,NULL,'2024-10-23 20:26:20',NULL,'tep_cfg_select_option(array(\'True\', \'False\'), '),
+(451,'Sort Order','MODULE_ADMIN_DASHBOARD_TOTAL_CUSTOMERS_SORT_ORDER','0','Sort order of display. Lowest is displayed first.',6,0,NULL,'2024-10-23 20:26:20',NULL,NULL),
+(452,'Enable Total Revenue Module','MODULE_ADMIN_DASHBOARD_TOTAL_REVENUE_STATUS','True','Do you want to show the total revenue chart on the dashboard?',6,1,NULL,'2024-10-23 20:26:26',NULL,'tep_cfg_select_option(array(\'True\', \'False\'), '),
+(453,'Sort Order','MODULE_ADMIN_DASHBOARD_TOTAL_REVENUE_SORT_ORDER','0','Sort order of display. Lowest is displayed first.',6,0,NULL,'2024-10-23 20:26:26',NULL,NULL),
+(456,'Enable Orders Module','MODULE_ADMIN_DASHBOARD_ORDERS_STATUS','True','Do you want to show the latest orders on the dashboard?',6,1,NULL,'2024-10-23 20:28:29',NULL,'tep_cfg_select_option(array(\'True\', \'False\'), '),
+(457,'Sort Order','MODULE_ADMIN_DASHBOARD_ORDERS_SORT_ORDER','4','Sort order of display. Lowest is displayed first.',6,0,NULL,'2024-10-23 20:28:29',NULL,NULL),
+(458,'Enable Customers Module','MODULE_ADMIN_DASHBOARD_CUSTOMERS_STATUS','True','Do you want to show the newest customers on the dashboard?',6,1,NULL,'2024-10-23 20:28:34',NULL,'tep_cfg_select_option(array(\'True\', \'False\'), '),
+(459,'Sort Order','MODULE_ADMIN_DASHBOARD_CUSTOMERS_SORT_ORDER','3','Sort order of display. Lowest is displayed first.',6,0,NULL,'2024-10-23 20:28:34',NULL,NULL),
+(460,'STORE_LOGO_TXT','STORE_LOGO_TXT','< PureOSC >','STORE_LOGO_TXT',1,9999,'2024-10-25 02:53:08','2024-10-25 02:53:08',NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 /*!40000 ALTER TABLE `configuration` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -976,10 +980,10 @@ CREATE TABLE `css` (
   `template` varchar(64) NOT NULL DEFAULT '',
   `subtemplate` varchar(64) NOT NULL DEFAULT '',
   `tag` varchar(256) NOT NULL DEFAULT '',
-  `status` int(1) NOT NULL DEFAULT 1,
+  `status` int(11) NOT NULL DEFAULT 1,
   `inline` int(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=273 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=299 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -993,40 +997,41 @@ INSERT INTO `css` VALUES
 (2,'html','box-sizing: border-box',0,0,0,'','','',1,0),
 (3,'*, *:before, *:after','box-sizing:inherit',0,0,0,'','','',1,0),
 (8,'body','width:94vw;margin:auto;',0,0,0,'','','',1,0),
-(186,'form:first-of-type','display:inline',0,0,0,'','','',1,0),
-(190,'form:first-of-type > button:first-of-type','vertical-align: bottom;opacity: 0.85 !important;\r\nborder:0;width:30px;height:30px;background:url(\"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEwLDE4YzEuODQ2LDAsMy41NDMtMC42MzUsNC44OTctMS42ODhsNC4zOTYsNC4zOTZsMS40MTQtMS40MTRsLTQuMzk2LTQuMzk2QzE3LjM2NSwxMy41NDMsMTgsMTEuODQ2LDE4LDEwIGMwLTQuNDExLTMuNTg5LTgtOC04cy04LDMuNTg5LTgsOFM1LjU4OSwxOCwxMCwxOHogTTEwLDRjMy4zMDksMCw2LDIuNjkxLDYsNnMtMi42OTEsNi02LDZzLTYtMi42OTEtNi02UzYuNjkxLDQsMTAsNHoiLz48L3N2Zz4K\")',0,0,0,'','','',1,0),
+(186,'form:first-of-type','display:inline;',0,0,0,'','','',1,0),
+(190,'form:first-of-type > button:first-of-type','float:right;z-index:1;opacity: 0.85 !important;\r\nborder:0;max-width: 4%; width:30px;height:30px;background:url(\"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEwLDE4YzEuODQ2LDAsMy41NDMtMC42MzUsNC44OTctMS42ODhsNC4zOTYsNC4zOTZsMS40MTQtMS40MTRsLTQuMzk2LTQuMzk2QzE3LjM2NSwxMy41NDMsMTgsMTEuODQ2LDE4LDEwIGMwLTQuNDExLTMuNTg5LTgtOC04cy04LDMuNTg5LTgsOFM1LjU4OSwxOCwxMCwxOHogTTEwLDRjMy4zMDksMCw2LDIuNjkxLDYsNnMtMi42OTEsNi02LDZzLTYtMi42OTEtNi02UzYuNjkxLDQsMTAsNHoiLz48L3N2Zz4K\")',0,0,0,'','','',1,0),
 (193,'input,button','border-radius:0; border:1px solid #ccc',0,0,0,'','','',1,0),
-(194,'input[name=\"keywords\"]','font-size:110%;width:30vw;margin-left: 4vw;position:relative;top:-8px',0,0,0,'','','',1,0),
-(195,'a','text-decoration:none',0,0,0,'','','',1,0),
-(196,'p a','text-decoration:underline',0,0,0,'','','',1,0),
-(203,'a[href$=\"account.php\"]','background:url(\"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgZmlsbD0ibm9uZSIgY3g9IjEyIiBjeT0iNyIgcj0iMyIvPjxwYXRoIGQ9Ik0xMiAyQzkuMjQzIDIgNyA0LjI0MyA3IDdzMi4yNDMgNSA1IDUgNS0yLjI0MyA1LTVTMTQuNzU3IDIgMTIgMnpNMTIgMTBjLTEuNjU0IDAtMy0xLjM0Ni0zLTNzMS4zNDYtMyAzLTMgMyAxLjM0NiAzIDNTMTMuNjU0IDEwIDEyIDEwek0yMSAyMXYtMWMwLTMuODU5LTMuMTQxLTctNy03aC00Yy0zLjg2IDAtNyAzLjE0MS03IDd2MWgydi0xYzAtMi43NTcgMi4yNDMtNSA1LTVoNGMyLjc1NyAwIDUgMi4yNDMgNSA1djFIMjF6Ii8+Cjwvc3ZnPg==\")\r\n',0,0,0,'','','',0,0),
-(204,'a[href$=\"shopping_cart.php\"]','background:url(\"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0yMS44MjIsNy40MzFDMjEuNjM1LDcuMTYxLDIxLjMyOCw3LDIxLDdINy4zMzNMNi4xNzksNC4yM0M1Ljg2NywzLjQ4Miw1LjE0MywzLDQuMzMzLDNIMnYyaDIuMzMzbDQuNzQ0LDExLjM4NSBDOS4yMzIsMTYuNzU3LDkuNTk2LDE3LDEwLDE3aDhjMC40MTcsMCwwLjc5LTAuMjU5LDAuOTM3LTAuNjQ4bDMtOEMyMi4wNTIsOC4wNDQsMjIuMDA5LDcuNywyMS44MjIsNy40MzF6IE0xNy4zMDcsMTVoLTYuNjQgbC0yLjUtNmgxMS4zOUwxNy4zMDcsMTV6Ii8+PGNpcmNsZSBjeD0iMTAuNSIgY3k9IjE5LjUiIHI9IjEuNSIvPjxjaXJjbGUgY3g9IjE3LjUiIGN5PSIxOS41IiByPSIxLjUiLz4KPC9zdmc+Cg==\")\r\n',0,0,0,'','','',0,0),
-(205,'a[href$=\"wishlist.php\"]','background:url(\"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0xMiw0LjU5NWMtMS4xMDQtMS4wMDYtMi41MTItMS41NTgtMy45OTYtMS41NThjLTEuNTc4LDAtMy4wNzIsMC42MjMtNC4yMTMsMS43NThjLTIuMzUzLDIuMzYzLTIuMzUyLDYuMDU5LDAuMDAyLDguNDEyIGw3LjMzMiw3LjMzMmMwLjE3LDAuMjk5LDAuNDk4LDAuNDkyLDAuODc1LDAuNDkyYzAuMzIyLDAsMC42MDktMC4xNjMsMC43OTItMC40MDlsNy40MTUtNy40MTUgYzIuMzU0LTIuMzU0LDIuMzU0LTYuMDQ5LTAuMDAyLTguNDE2Yy0xLjEzNy0xLjEzMS0yLjYzMS0xLjc1NC00LjIwOS0xLjc1NEMxNC41MTMsMy4wMzcsMTMuMTA0LDMuNTg5LDEyLDQuNTk1eiBNMTguNzkxLDYuMjA1IGMxLjU2MywxLjU3MSwxLjU2NCw0LjAyNSwwLjAwMiw1LjU4OEwxMiwxOC41ODZsLTYuNzkzLTYuNzkzQzMuNjQ1LDEwLjIzLDMuNjQ2LDcuNzc2LDUuMjA1LDYuMjA5IGMwLjc2LTAuNzU2LDEuNzU0LTEuMTcyLDIuNzk5LTEuMTcyczIuMDM1LDAuNDE2LDIuNzg5LDEuMTdsMC41LDAuNWMwLjM5MSwwLjM5MSwxLjAyMywwLjM5MSwxLjQxNCwwbDAuNS0wLjUgQzE0LjcxOSw0LjY5OCwxNy4yODEsNC43MDIsMTguNzkxLDYuMjA1eiIvPgo8L3N2Zz4=\")\r\n',0,0,0,'','','',0,0),
+(194,'input[name=\"keywords\"]','font-size:110%;width:30vw; max-width:700px',0,0,0,'','','',1,0),
+(195,'a','text-decoration:none',0,0,0,'','','',1,1),
+(196,'p a','text-decoration:underline',0,0,0,'','','',1,1),
+(203,'a[href$=\"account.php\"]','background:url(\"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgZmlsbD0ibm9uZSIgY3g9IjEyIiBjeT0iNyIgcj0iMyIvPjxwYXRoIGQ9Ik0xMiAyQzkuMjQzIDIgNyA0LjI0MyA3IDdzMi4yNDMgNSA1IDUgNS0yLjI0MyA1LTVTMTQuNzU3IDIgMTIgMnpNMTIgMTBjLTEuNjU0IDAtMy0xLjM0Ni0zLTNzMS4zNDYtMyAzLTMgMyAxLjM0NiAzIDNTMTMuNjU0IDEwIDEyIDEwek0yMSAyMXYtMWMwLTMuODU5LTMuMTQxLTctNy03aC00Yy0zLjg2IDAtNyAzLjE0MS03IDd2MWgydi0xYzAtMi43NTcgMi4yNDMtNSA1LTVoNGMyLjc1NyAwIDUgMi4yNDMgNSA1djFIMjF6Ii8+Cjwvc3ZnPg==\")\r\n',0,0,0,'','','devel',0,0),
+(204,'a[href$=\"shopping_cart.php\"]','background:url(\"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0yMS44MjIsNy40MzFDMjEuNjM1LDcuMTYxLDIxLjMyOCw3LDIxLDdINy4zMzNMNi4xNzksNC4yM0M1Ljg2NywzLjQ4Miw1LjE0MywzLDQuMzMzLDNIMnYyaDIuMzMzbDQuNzQ0LDExLjM4NSBDOS4yMzIsMTYuNzU3LDkuNTk2LDE3LDEwLDE3aDhjMC40MTcsMCwwLjc5LTAuMjU5LDAuOTM3LTAuNjQ4bDMtOEMyMi4wNTIsOC4wNDQsMjIuMDA5LDcuNywyMS44MjIsNy40MzF6IE0xNy4zMDcsMTVoLTYuNjQgbC0yLjUtNmgxMS4zOUwxNy4zMDcsMTV6Ii8+PGNpcmNsZSBjeD0iMTAuNSIgY3k9IjE5LjUiIHI9IjEuNSIvPjxjaXJjbGUgY3g9IjE3LjUiIGN5PSIxOS41IiByPSIxLjUiLz4KPC9zdmc+Cg==\")\r\n',0,0,0,'','','devel',0,0),
+(205,'a[href$=\"wishlist.php\"]','background:url(\"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0xMiw0LjU5NWMtMS4xMDQtMS4wMDYtMi41MTItMS41NTgtMy45OTYtMS41NThjLTEuNTc4LDAtMy4wNzIsMC42MjMtNC4yMTMsMS43NThjLTIuMzUzLDIuMzYzLTIuMzUyLDYuMDU5LDAuMDAyLDguNDEyIGw3LjMzMiw3LjMzMmMwLjE3LDAuMjk5LDAuNDk4LDAuNDkyLDAuODc1LDAuNDkyYzAuMzIyLDAsMC42MDktMC4xNjMsMC43OTItMC40MDlsNy40MTUtNy40MTUgYzIuMzU0LTIuMzU0LDIuMzU0LTYuMDQ5LTAuMDAyLTguNDE2Yy0xLjEzNy0xLjEzMS0yLjYzMS0xLjc1NC00LjIwOS0xLjc1NEMxNC41MTMsMy4wMzcsMTMuMTA0LDMuNTg5LDEyLDQuNTk1eiBNMTguNzkxLDYuMjA1IGMxLjU2MywxLjU3MSwxLjU2NCw0LjAyNSwwLjAwMiw1LjU4OEwxMiwxOC41ODZsLTYuNzkzLTYuNzkzQzMuNjQ1LDEwLjIzLDMuNjQ2LDcuNzc2LDUuMjA1LDYuMjA5IGMwLjc2LTAuNzU2LDEuNzU0LTEuMTcyLDIuNzk5LTEuMTcyczIuMDM1LDAuNDE2LDIuNzg5LDEuMTdsMC41LDAuNWMwLjM5MSwwLjM5MSwxLjAyMywwLjM5MSwxLjQxNCwwbDAuNS0wLjUgQzE0LjcxOSw0LjY5OCwxNy4yODEsNC43MDIsMTguNzkxLDYuMjA1eiIvPgo8L3N2Zz4=\")\r\n',0,0,0,'','','devel',0,0),
 (206,'a:visited','color:#666',0,0,0,'','','',1,0),
 (207,'a:link','color:#333',0,0,0,'','','',1,0),
-(208,'body > center > table:nth-child(1) > tbody  > tr > td:nth-child(1)  > a:nth-child(1)','display:none',0,768,0,'','','',1,0),
-(209,'#nav:target{ display: block; }',NULL,0,0,0,'','','',1,0),
-(211,'.col2','width:48%;\r\nfloat:left',0,0,0,'','','',1,0),
-(213,'.col2','background:red;overflow:auto;\r\ndisplay:table-row',0,0,0,'','','',0,0),
 (214,'a:active','color: red',0,0,0,'','','',1,0),
-(216,'input[name=\"keywords\"]','margin-left: 0 !important; width:90% !important',0,0,768,'','','',1,0),
-(230,'body > center > table:nth-child(1) > tbody > tr:nth-child(1) > td:nth-child(1) > a:nth-child(1)','display:inline-block;width:21vw;height:50px; background-size:contain !important; background: url(\"data:image/gif;base64,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\") no-repeat;background-position: left bottom',0,0,0,'','','',1,0),
+(216,'input[name=\"keywords\"]','width:95% !important;z-index: 0',0,0,768,'','','',1,0),
+(230,'a[href$=\"index.php\"]','color: #ccc;font-size:2em;font-weight:700; background: #000;  padding: 0 .3em;',0,0,0,'','','',1,0),
 (252,'h3','margin-bottom:0',0,0,0,'','','',1,0),
 (253,'.flc a','float:left;margin-right:1em',0,0,0,'','','',1,0),
 (255,'td','display:block; width:100%',0,0,768,'','','',1,1),
 (256,'table','border:1px solid #555 !important',0,0,0,'','','debug',0,0),
 (257,'#m:target','display: table-cell',0,0,0,'','','',1,0),
 (261,'#m > a','color: #fff; display: inline-block; margin-right:2em',0,0,0,'','','',1,0),
-(262,'u','display:none',0,0,0,'','','',1,0),
-(264,'body > center >  table:nth-child(1) > tbody > tr:nth-child(1) > td:nth-child(3) > a','margin-left: 0.4vw;font-size:130%;font-weight:bold',0,0,0,'','','',1,0),
+(262,'b','display:none',0,0,0,'','','',1,0),
 (265,'#cim > a > img, #cim > a','float:left; margin-right:1em',0,0,0,'','','',1,0),
 (266,'body > center > table:last-of-type > tbody >  tr > td ','text-align:center',0,0,0,'','','',1,0),
 (267,'#f','border-top: 2px dashed gray;1em;padding-top:.6em',0,0,0,'','','footer',1,0),
-(268,'body > center > table:last-of-type','margin-top:1em !important',0,0,0,'','','',1,0),
+(268,'body > center > table:last-of-type, body > center > table:nth-child(2)','margin-top:1em !important',0,0,0,'','','',1,0),
 (269,'#m','display: none',0,0,768,'','','',1,0),
-(270,'#m','background: #000\r\n\r\n',0,0,0,'','','',1,0),
-(271,'a[href$=\"m\"]','display: none',0,768,0,'','','',1,0),
-(272,'table','border-spacing: 0px',0,0,0,'','','',1,0);
+(272,'table','border-spacing: 0px',0,0,0,'','','',0,0),
+(273,'body > center > table','max-width:1680px',0,0,0,'','','',1,0),
+(282,'table','border-spacing:0px',0,0,0,'','','',1,0),
+(283,'#m','background:#000',0,0,0,'','','',1,0),
+(287,'body > center > table:nth-child(1) > tbody > tr:nth-child(1) > td:nth-child(n+2)','float:right',0,0,0,'','','',1,0),
+(290,'body > center > table:nth-child(1) > tbody > tr:nth-child(1) > td:nth-child(-n+2)','display: inline-block !important; width:49%',0,0,768,'','','',1,0),
+(292,'a[href=\"#m\"]','display:none',0,768,0,'','','',1,0),
+(293,'a[href=\"#m\"], a[href$=\"account.php\"], a[href$=\"shopping_cart.php\"], a[href$=\"wishlist.php\"]','font-size:150%',0,0,0,'','','',1,0),
+(298,'a[href$=\"index.php\"]','font-size:1.2em !important;position:relative; top:-4px;left:1em',0,0,768,'','','',1,0);
 /*!40000 ALTER TABLE `css` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1746,7 +1751,7 @@ CREATE TABLE `products` (
   PRIMARY KEY (`products_id`),
   KEY `idx_products_model` (`products_model`),
   KEY `idx_products_date_added` (`products_date_added`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1758,7 +1763,10 @@ LOCK TABLES `products` WRITE;
 INSERT INTO `products` VALUES
 (2,1,'',NULL,1.0000,'1970-01-01 00:00:00','2024-10-13 10:55:06',NULL,0.00,0,1,1,0,1,1),
 (3,0,'','ic_crypto.jpg',0.0000,'2024-10-12 02:58:23','2024-10-13 11:04:43',NULL,0.00,1,0,0,0,1,1),
-(7,1,'',NULL,0.0000,'1970-01-01 00:00:00','2024-10-20 06:14:28',NULL,0.00,1,0,1,0,1,1);
+(7,1,'',NULL,0.0000,'1970-01-01 00:00:00','2024-10-20 06:14:28',NULL,0.00,1,0,1,0,1,1),
+(8,1,NULL,NULL,0.0000,'1970-01-01 00:00:00',NULL,NULL,0.00,1,0,1,0,1,1),
+(9,1,NULL,NULL,0.0000,'1970-01-01 00:00:00',NULL,NULL,0.00,1,0,1,0,1,1),
+(10,1,NULL,NULL,0.0000,'1970-01-01 00:00:00',NULL,NULL,0.00,1,0,1,0,1,1);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1831,7 +1839,7 @@ CREATE TABLE `products_description` (
   `products_viewed` int(5) DEFAULT 0,
   PRIMARY KEY (`products_id`,`language_id`),
   KEY `products_name` (`products_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1843,7 +1851,10 @@ LOCK TABLES `products_description` WRITE;
 INSERT INTO `products_description` VALUES
 (2,2,'Homepage','<p>Pure OSC is a modern fork of osCommerce, based on <a href=\"https://github.com/ruden/vanilla-oscommerce/\">vanilla-oscommerce</a></p>\n\n<h2>Compatibility</h2>\n\n<ul>\n<li>PHP  8.2+</li>\n<li>MariaDB 10.2.7+</li>\n</ul>\n\n<h2>Bugs and Feature Requests</h2>\n\n<p>Found a bug or have a feature request? <a href=\"https://github.com/PureHTML/pureosc/issues/new\">Please open a new issue</a>.</p>\n\n<h2>PureOSC key Features</h2>\n\n<h3>PureHTML Css</h3>\n\n<p>Lightweight, extremely fast HTML rendering engine:</p>\n\n<ol>\n<li>no classes, only sematic tag childrens;</li>\n<li>Stored in single DB table, many cli tools for efficient managing and filtering rules.</li>\n</ol>\n\n<h3>PureHTML BannerManager</h3>\n\n<ol>\n<li>create webp animated banners</li>\n<li>extermely fast loading big advert graphicks in sigle HTTP request.</li>\n</ol>\n\n<h3>Czech language translation</h3>\n\n<p>Frontend and admin.</p>\n\n<h2>External Contributions</h2>\n\n<h3>SEO URLs</h3>\n\n<ol>\n<li>Dynamic SEO URLs based on <a href=\"https://old.oscommerce.com/36rDo&amp;ultimate-seo-urls\">Ultimate SEO URLs</a>.</li>\n<li>Updated to PHP 8x;</li>\n<li>Tested on Apache, Nginx, Haproxy.</li>\n</ol>\n\n<h3>GPWEBPAY Payment Gateway integration</h3>\n\n<p>Using <a href=\"https://www.platiti.cz/ZenCart-a.php\">Platiti.cz Oscommerce</a>.</p>\n\n<ol>\n<li>Free for Raifaisen Bank clients;</li>\n<li>Possible integration with Česká Spořitelna and Komerřní banka.</li>\n</ol>\n\n<h2>Comming soon</h2>\n\n<h3>CSOB Payment Gateway integration</h3>\n\n<p>As free module.</p>\n\n<h3>Flexibee integration</h3>\n\n<ol>\n<li>Orders sync with accounting;</li>\n<li>Catalog can be gebrated from accounting system.</li>\n</ol>\n\n<h3>Row level security for Mariadb</h3>\n\n<h3>SEO URLs caching system</h3>\n\n<ol>\n<li>Faster pages loading from static files;</li>\n<li>Web still work as catalog with dead database.</li>\n</ol>\n\n<h3>Ai serch suggestion engine</h3>\n\n<ol>\n<li>Based on  <a href=\"https://github.com/cantino/mcfly\">mcfly</a>, cli small neural network writen in Rust;</li>\n<li>PHP integration.</li>\n</ol>','',0),
 (3,2,'row level security','<p>\r\n	def<br />\r\n</p>','',0),
-(7,2,'git storage','<p>Git file storage and versioning capabilities are used not only for php/css source files,\nbut for all articles and products. Markdown source files are part of git backup as md directory.</p>\n\n<p>TODO: ! Add git add to catalog/admin/categories.php</p>','',0);
+(7,2,'git storage','<p>Git file storage and versioning capabilities are used not only for php/css source files,\nbut for all articles and products. Markdown source files are part of git backup as md directory.</p>\n\n<p>TODO: ! Add git add to catalog/admin/categories.php</p>','',0),
+(8,2,'cspurge: tool for debugging slow connection','<p>USE: admin -> tools -> CSS purge or cli ./cspurge\nto simulate slow connection before loading external css files.</p>',NULL,0),
+(9,2,'debug mode added','<p>For all debug outputs, new constant DBG turn on/off template comments and \"_debug\" css files.</p>',NULL,0),
+(10,2,'exportdb','<p>./exportdb is CLI command to export current devel database to production via Ansible.</p>\n\n<p>Warning: You need to drop target DB.</p>',NULL,0);
 /*!40000 ALTER TABLE `products_description` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1996,7 +2007,10 @@ LOCK TABLES `products_to_categories` WRITE;
 INSERT INTO `products_to_categories` VALUES
 (2,0,NULL),
 (3,1,NULL),
-(7,9,1);
+(7,9,1),
+(8,11,1),
+(9,11,1),
+(10,11,1);
 /*!40000 ALTER TABLE `products_to_categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2097,17 +2111,21 @@ INSERT INTO `sessions` VALUES
 ('60j5dg1r7hc0r4d62pa7kb7ar6',1729282359,'sessiontoken|s:32:\"3a3f6fa90b12599bcbc1bef52e5b112e\";SESSION_USER_AGENT|s:101:\"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36\";SESSION_IP_ADDRESS|s:9:\"127.0.0.1\";cart|O:13:\"shopping_cart\":5:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:6:\"cartID\";N;s:12:\"content_type\";b:0;}wishlist|O:8:\"wishlist\":1:{s:4:\"list\";a:0:{}}language|s:7:\"english\";languages_id|s:1:\"2\";currency|s:3:\"USD\";navigation|O:18:\"navigation_history\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}'),
 ('6coehr86fcljvlp5q4druie712',1728366864,'language|s:5:\"czech\";languages_id|s:1:\"1\";redirect_origin|a:2:{s:4:\"page\";s:9:\"index.php\";s:3:\"get\";a:0:{}}'),
 ('6ej82utfcslbo9u706m2f80qq0',1728428807,'language|s:5:\"czech\";languages_id|s:1:\"1\";redirect_origin|a:2:{s:4:\"page\";s:14:\"categories.php\";s:3:\"get\";a:3:{s:5:\"cPath\";s:0:\"\";s:3:\"pID\";s:1:\"1\";s:6:\"action\";s:11:\"new_product\";}}'),
+('81s8k41uvd9og9civa5e5kolo8',1729823025,'language|s:7:\"english\";languages_id|s:1:\"2\";admin|a:2:{s:2:\"id\";s:1:\"1\";s:8:\"username\";s:7:\"pureosc\";}'),
 ('8668bvc4p9r16f36jou5e943ad',1728364377,'language|s:5:\"czech\";languages_id|s:1:\"1\";admin|a:2:{s:2:\"id\";s:1:\"1\";s:8:\"username\";s:7:\"pureosc\";}'),
 ('8vad98mvu393todhlld9mbb1r0',1729281589,'sessiontoken|s:32:\"d26db41d78ff93d96b624ad3610325bd\";SESSION_USER_AGENT|s:21:\"w3m/0.5.3+git20230121\";SESSION_IP_ADDRESS|s:9:\"127.0.0.1\";cart|O:13:\"shopping_cart\":5:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:6:\"cartID\";N;s:12:\"content_type\";b:0;}wishlist|O:8:\"wishlist\":1:{s:4:\"list\";a:0:{}}language|s:7:\"english\";languages_id|s:1:\"2\";currency|s:3:\"USD\";navigation|O:18:\"navigation_history\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}'),
 ('atuqok64vcl72gegmiokga3oku',1729543841,'sessiontoken|s:32:\"330be85549d5d1e10f2dd94e71a5b711\";SESSION_USER_AGENT|s:21:\"w3m/0.5.3+git20230121\";SESSION_IP_ADDRESS|s:9:\"127.0.0.1\";cart|O:13:\"shopping_cart\":5:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:6:\"cartID\";N;s:12:\"content_type\";b:0;}wishlist|O:8:\"wishlist\":1:{s:4:\"list\";a:0:{}}language|s:7:\"english\";languages_id|s:1:\"2\";currency|s:3:\"USD\";navigation|O:18:\"navigation_history\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:1:{s:5:\"cPath\";s:1:\"2\";}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}'),
+('b4t5s9jg15fb8rjjpu0q6hvg35',1729832168,'sessiontoken|s:32:\"aeb2f44a1cd5db502cb66b537c89a74c\";SESSION_USER_AGENT|s:86:\"Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0 SeaMonkey/2.53.19\";SESSION_IP_ADDRESS|s:9:\"127.0.0.1\";cart|O:13:\"shopping_cart\":5:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:6:\"cartID\";N;s:12:\"content_type\";b:0;}wishlist|O:8:\"wishlist\":1:{s:4:\"list\";a:0:{}}language|s:7:\"english\";languages_id|s:1:\"2\";currency|s:3:\"USD\";navigation|O:18:\"navigation_history\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}'),
 ('bgmo5si9ti1ql9b33k40obon5m',1729535214,'sessiontoken|s:32:\"acf3ebbc7bd21be65f0919195c2662bd\";SESSION_USER_AGENT|s:86:\"Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0 SeaMonkey/2.53.19\";SESSION_IP_ADDRESS|s:9:\"127.0.0.1\";cart|O:13:\"shopping_cart\":5:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:6:\"cartID\";N;s:12:\"content_type\";b:0;}wishlist|O:8:\"wishlist\":1:{s:4:\"list\";a:0:{}}language|s:7:\"english\";languages_id|s:1:\"2\";currency|s:3:\"USD\";navigation|O:18:\"navigation_history\":2:{s:4:\"path\";a:3:{i:0;a:4:{s:4:\"page\";s:24:\"address_book_process.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}i:1;a:4:{s:4:\"page\";s:9:\"login.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}i:2;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:4:{s:4:\"page\";s:11:\"account.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}'),
-('dk4rllvvp9gkfbhiqsoe24meec',1729620023,'language|s:7:\"english\";languages_id|s:1:\"2\";admin|a:2:{s:2:\"id\";s:1:\"1\";s:8:\"username\";s:7:\"pureosc\";}'),
+('bq0lj6t60mtmuse0drj26b23ms',1729816412,'sessiontoken|s:32:\"3b445c1422e5b1836ccd513a141d2f5f\";SESSION_USER_AGENT|s:21:\"w3m/0.5.3+git20230121\";SESSION_IP_ADDRESS|s:9:\"127.0.0.1\";cart|O:13:\"shopping_cart\":5:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:6:\"cartID\";N;s:12:\"content_type\";b:0;}wishlist|O:8:\"wishlist\":1:{s:4:\"list\";a:0:{}}language|s:7:\"english\";languages_id|s:1:\"2\";currency|s:3:\"USD\";navigation|O:18:\"navigation_history\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}'),
+('dk4rllvvp9gkfbhiqsoe24meec',1729809143,'language|s:7:\"english\";languages_id|s:1:\"2\";admin|a:2:{s:2:\"id\";s:1:\"1\";s:8:\"username\";s:7:\"pureosc\";}'),
 ('dqqereaqef080thahvb5uj1alj',1729544091,'sessiontoken|s:32:\"a7a9ba7427108773e024bd95ec19c851\";SESSION_USER_AGENT|s:21:\"w3m/0.5.3+git20230121\";SESSION_IP_ADDRESS|s:9:\"127.0.0.1\";cart|O:13:\"shopping_cart\":5:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:6:\"cartID\";N;s:12:\"content_type\";b:0;}wishlist|O:8:\"wishlist\":1:{s:4:\"list\";a:0:{}}language|s:7:\"english\";languages_id|s:1:\"2\";currency|s:3:\"USD\";navigation|O:18:\"navigation_history\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:1:{s:5:\"cPath\";s:1:\"2\";}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}'),
-('h225hfv29hjc7pm4f29ionitre',1729625113,'sessiontoken|s:32:\"53555f98970d51de8e127a6309c59485\";SESSION_USER_AGENT|s:86:\"Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0 SeaMonkey/2.53.19\";SESSION_IP_ADDRESS|s:9:\"127.0.0.1\";cart|O:13:\"shopping_cart\":5:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:6:\"cartID\";N;s:12:\"content_type\";b:0;}wishlist|O:8:\"wishlist\":1:{s:4:\"list\";a:0:{}}language|s:7:\"english\";languages_id|s:1:\"2\";currency|s:3:\"USD\";navigation|O:18:\"navigation_history\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}'),
+('h225hfv29hjc7pm4f29ionitre',1729822397,'sessiontoken|s:32:\"53555f98970d51de8e127a6309c59485\";SESSION_USER_AGENT|s:86:\"Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0 SeaMonkey/2.53.19\";SESSION_IP_ADDRESS|s:9:\"127.0.0.1\";cart|O:13:\"shopping_cart\":5:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:6:\"cartID\";N;s:12:\"content_type\";b:0;}wishlist|O:8:\"wishlist\":1:{s:4:\"list\";a:0:{}}language|s:7:\"english\";languages_id|s:1:\"2\";currency|s:3:\"USD\";navigation|O:18:\"navigation_history\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:4:{s:4:\"page\";s:11:\"account.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}'),
 ('hv019jl33fj3ijmpf6ob0bif1j',1728885716,'sessiontoken|s:32:\"f5e5cc022963d92761be554cc9e71fe8\";SESSION_USER_AGENT|s:101:\"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36\";SESSION_IP_ADDRESS|s:9:\"127.0.0.1\";cart|O:13:\"shopping_cart\":5:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:6:\"cartID\";N;s:12:\"content_type\";b:0;}wishlist|O:8:\"wishlist\":1:{s:4:\"list\";a:0:{}}language|s:7:\"english\";languages_id|s:1:\"2\";currency|s:3:\"USD\";navigation|O:18:\"navigation_history\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}'),
 ('iiu45v3ko4q113vdqvav7utvu8',1728368509,'sessiontoken|s:32:\"0f2190d7a5735217f1ae1a4f6e61a7ec\";SESSION_USER_AGENT|s:86:\"Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0 SeaMonkey/2.53.19\";SESSION_IP_ADDRESS|s:9:\"127.0.0.1\";cart|O:13:\"shopping_cart\":5:{s:8:\"contents\";a:1:{i:2;a:1:{s:3:\"qty\";i:4;}}s:5:\"total\";d:4000;s:6:\"weight\";d:0;s:6:\"cartID\";s:5:\"79879\";s:12:\"content_type\";b:0;}wishlist|O:8:\"wishlist\":1:{s:4:\"list\";a:0:{}}language|s:5:\"czech\";languages_id|s:1:\"1\";currency|s:3:\"CZK\";navigation|O:18:\"navigation_history\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:4:{s:4:\"page\";s:21:\"checkout_shipping.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}recently_viewed_products|a:1:{i:0;i:2;}new_products_id_in_cart|i:2;'),
 ('jtecjbeg2tktp4jp42aqap8989',1729274255,'language|s:7:\"english\";languages_id|s:1:\"2\";admin|a:2:{s:2:\"id\";s:1:\"1\";s:8:\"username\";s:7:\"pureosc\";}'),
 ('koa77f1u4gsj6417ll3c9n2j1p',1729512038,'sessiontoken|s:32:\"b12a06909bf6944f33339ea678adb315\";SESSION_USER_AGENT|s:21:\"w3m/0.5.3+git20230121\";SESSION_IP_ADDRESS|s:9:\"127.0.0.1\";cart|O:13:\"shopping_cart\":5:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:6:\"cartID\";N;s:12:\"content_type\";b:0;}wishlist|O:8:\"wishlist\":1:{s:4:\"list\";a:0:{}}language|s:7:\"english\";languages_id|s:1:\"2\";currency|s:3:\"USD\";navigation|O:18:\"navigation_history\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}'),
+('liuc78jvgolca5diebocc67g7c',1729811012,'sessiontoken|s:32:\"219694414626ec1e9ab0a49c0e8c25eb\";SESSION_USER_AGENT|s:21:\"w3m/0.5.3+git20230121\";SESSION_IP_ADDRESS|s:9:\"127.0.0.1\";cart|O:13:\"shopping_cart\":5:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:6:\"cartID\";N;s:12:\"content_type\";b:0;}wishlist|O:8:\"wishlist\":1:{s:4:\"list\";a:0:{}}language|s:7:\"english\";languages_id|s:1:\"2\";currency|s:3:\"USD\";navigation|O:18:\"navigation_history\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}'),
 ('ln8euvochjv1vcimco83a8rusc',1729278416,'sessiontoken|s:32:\"8f3139911a11bf41d4cb9a2f02429f36\";SESSION_USER_AGENT|s:86:\"Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0 SeaMonkey/2.53.19\";SESSION_IP_ADDRESS|s:9:\"127.0.0.1\";cart|O:13:\"shopping_cart\":5:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:6:\"cartID\";N;s:12:\"content_type\";b:0;}wishlist|O:8:\"wishlist\":1:{s:4:\"list\";a:0:{}}language|s:7:\"english\";languages_id|s:1:\"2\";currency|s:3:\"USD\";navigation|O:18:\"navigation_history\":2:{s:4:\"path\";a:2:{i:0;a:4:{s:4:\"page\";s:16:\"product_info.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:2:{s:11:\"products_id\";s:1:\"2\";s:20:\"XDEBUG_SESSION_START\";s:15:\"netbeans-xdebug\";}s:4:\"post\";a:0:{}}i:1;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:4:{s:4:\"page\";s:11:\"account.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}'),
 ('n2npaa62vsghfdan8p814q2635',1729537592,'sessiontoken|s:32:\"7b4868fa021279cf0ddb361434e367c9\";SESSION_USER_AGENT|s:101:\"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36\";SESSION_IP_ADDRESS|s:9:\"127.0.0.1\";cart|O:13:\"shopping_cart\":5:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:6:\"cartID\";N;s:12:\"content_type\";b:0;}wishlist|O:8:\"wishlist\":1:{s:4:\"list\";a:0:{}}language|s:7:\"english\";languages_id|s:1:\"2\";currency|s:3:\"USD\";navigation|O:18:\"navigation_history\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}'),
 ('nf80fgsv1cg9p5psejniqumgt4',1729290170,'sessiontoken|s:32:\"404c259b2a4a8f772c1a8cea5fb4c1f9\";SESSION_USER_AGENT|s:21:\"w3m/0.5.3+git20230121\";SESSION_IP_ADDRESS|s:9:\"127.0.0.1\";cart|O:13:\"shopping_cart\":5:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:6:\"cartID\";N;s:12:\"content_type\";b:0;}wishlist|O:8:\"wishlist\":1:{s:4:\"list\";a:0:{}}language|s:7:\"english\";languages_id|s:1:\"2\";currency|s:3:\"USD\";navigation|O:18:\"navigation_history\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}'),
@@ -2115,6 +2133,7 @@ INSERT INTO `sessions` VALUES
 ('o5qiknsbpmlq8jjr8s7g8c3foq',1728620700,'language|s:7:\"english\";languages_id|s:1:\"2\";admin|a:2:{s:2:\"id\";s:1:\"1\";s:8:\"username\";s:7:\"pureosc\";}'),
 ('o7k4p6ch0vs8is154cvfip74dm',1729520050,'sessiontoken|s:32:\"5da77b9298658d1026e70c6dbe699d90\";SESSION_USER_AGENT|s:86:\"Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0 SeaMonkey/2.53.19\";SESSION_IP_ADDRESS|s:9:\"127.0.0.1\";cart|O:13:\"shopping_cart\":5:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:6:\"cartID\";s:5:\"18072\";s:12:\"content_type\";b:0;}wishlist|O:8:\"wishlist\":1:{s:4:\"list\";a:0:{}}language|s:7:\"english\";languages_id|s:1:\"2\";currency|s:3:\"USD\";navigation|O:18:\"navigation_history\":2:{s:4:\"path\";a:4:{i:0;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}i:1;a:4:{s:4:\"page\";s:11:\"account.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}i:2;a:4:{s:4:\"page\";s:16:\"address_book.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}i:3;a:4:{s:4:\"page\";s:24:\"address_book_process.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}legal_agreements_consents|s:19:\"2024-10-21 15:16:49\";customer_id|i:1;customer_default_address_id|s:1:\"1\";customer_first_name|s:6:\"Šimon\";customer_country_id|s:3:\"223\";customer_zone_id|s:1:\"0\";'),
 ('pj7iqd69l596ev1hgoj96htru5',1728982184,'sessiontoken|s:32:\"14f251dfd8cb8dd952347236d148d987\";SESSION_USER_AGENT|s:21:\"w3m/0.5.3+git20230121\";SESSION_IP_ADDRESS|s:9:\"127.0.0.1\";cart|O:13:\"shopping_cart\":5:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:6:\"cartID\";N;s:12:\"content_type\";b:0;}wishlist|O:8:\"wishlist\":1:{s:4:\"list\";a:0:{}}language|s:7:\"english\";languages_id|s:1:\"2\";currency|s:3:\"USD\";navigation|O:18:\"navigation_history\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}'),
+('poipfiovsmukdi444jhv7ciu2f',1729709346,'sessiontoken|s:32:\"a3a4f5e29afc44b040daacef4a8398fd\";SESSION_USER_AGENT|s:21:\"w3m/0.5.3+git20230121\";SESSION_IP_ADDRESS|s:9:\"127.0.0.1\";cart|O:13:\"shopping_cart\":5:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:6:\"cartID\";N;s:12:\"content_type\";b:0;}wishlist|O:8:\"wishlist\":1:{s:4:\"list\";a:0:{}}language|s:7:\"english\";languages_id|s:1:\"2\";currency|s:3:\"USD\";navigation|O:18:\"navigation_history\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}'),
 ('pr51li6m5eh1kdlto2vh7jeofc',1729491220,'sessiontoken|s:32:\"1c47442bbbd4bf3a48f13d640fdaf08e\";SESSION_USER_AGENT|s:21:\"w3m/0.5.3+git20230121\";SESSION_IP_ADDRESS|s:9:\"127.0.0.1\";cart|O:13:\"shopping_cart\":5:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:6:\"cartID\";N;s:12:\"content_type\";b:0;}wishlist|O:8:\"wishlist\":1:{s:4:\"list\";a:0:{}}language|s:7:\"english\";languages_id|s:1:\"2\";currency|s:3:\"USD\";navigation|O:18:\"navigation_history\":2:{s:4:\"path\";a:2:{i:0;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}i:1;a:4:{s:4:\"page\";s:12:\"wishlist.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}'),
 ('pv2ube02deuv6bbn4hs558juea',1728809329,'sessiontoken|s:32:\"73ec4ddbb9e1b3413cffc57d40910b21\";SESSION_USER_AGENT|s:101:\"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36\";SESSION_IP_ADDRESS|s:9:\"127.0.0.1\";cart|O:13:\"shopping_cart\":5:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:6:\"cartID\";N;s:12:\"content_type\";b:0;}wishlist|O:8:\"wishlist\":1:{s:4:\"list\";a:0:{}}language|s:5:\"czech\";languages_id|s:1:\"1\";currency|s:3:\"CZK\";navigation|O:18:\"navigation_history\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}'),
 ('qdusg0tt6t6jrgf17qd7abnepp',1728366925,'language|s:5:\"czech\";languages_id|s:1:\"1\";redirect_origin|a:2:{s:4:\"page\";s:9:\"index.php\";s:3:\"get\";a:0:{}}'),
@@ -2317,4 +2336,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-22 21:47:00
+-- Dump completed on 2024-10-25  6:59:28
