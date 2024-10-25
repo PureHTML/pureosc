@@ -1,0 +1,10 @@
+# use pub in this directory to git & publish articles 
+# TODO: price MACRO for products, you need to do it manually in admin for now
+H='localhost'
+D='pureosc'
+U='pureosc'
+P='osc'
+MANUF_ID=1 #SF
+#MANUF_NAME=''
+CAT_ID=10  # !!! create category BEFORE publishing, look at it's ID
+LANGUAGE_ID=2 #czech
